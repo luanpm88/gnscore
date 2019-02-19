@@ -1,3 +1,3 @@
 GnsCore::Engine.routes.draw do
-  root to: "dashboard#index"  
+    root to: "backend/dashboard#index"
 end
