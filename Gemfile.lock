@@ -1,4 +1,10 @@
 PATH
+  remote: engines/gns_contact
+  specs:
+    gns_contact (0.1.0)
+      rails (~> 5.2.2)
+
+PATH
   remote: engines/gns_core
   specs:
     gns_core (0.1.0)
@@ -233,6 +239,7 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   deface
+  gns_contact!
   gns_core!
   gns_ux!
   jbuilder (~> 2.5)
