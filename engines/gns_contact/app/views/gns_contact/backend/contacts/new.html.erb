@@ -1,0 +1,40 @@
+<% content_for :title do %>
+    New Contact
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+    <a href="#" class="breadcrumb-item">Contacts</a>
+    <span class="breadcrumb-item active">Create</span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Contact</span> - Creating</h4>
+<% end %>
+
+<% content_for :page_toolbar do %>
+  
+<% end %>
+
+<div class="row">
+    <div class="col-md-12">
+        
+        <div class="card">
+            <div class="card-header header-elements-inline">
+                <h5 class="card-title">Details</h5>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                        <a class="list-icons-item" data-action="reload"></a>
+                        <a class="list-icons-item" data-action="remove"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <%= render 'form', contact: @contact %>
+            </div>
+        </div>
+        
+    </div>
+</div>
