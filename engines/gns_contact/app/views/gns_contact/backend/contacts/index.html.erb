@@ -34,23 +34,7 @@
         <div class="datalist-filters">
             <form action="#">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Full name</label>
-                            <select multiple="multiple" data-placeholder="Select a name..." class="form-control select" data-fouc>
-                                <option></option>
-                                <option value="AZ">Arizona</option>
-                                <option value="CO">Colorado</option>
-                                <option value="ID">Idaho</option>
-                                <option value="WY">Wyoming</option>
-                                <option value="AL">Alabama</option>
-                                <option value="IA">Iowa</option>
-                                <option value="KS">Kansas</option>
-                                <option value="KY">Kentucky</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label>Area (State/City/District)</label>
                             <select data-placeholder="Select a State..." class="form-control select-search" data-fouc>
@@ -66,7 +50,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label>Contact types</label>
                             <select class="form-control multiselect" multiple="multiple" data-button-width="auto" data-fouc>
@@ -76,9 +60,23 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <div class="text-right pt-4">
-                            <button type="submit" class="btn btn-primary ml-3">Search <i class="icon-search4 ml-2"></i></button>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Sort By</label>
+                            <select class="form-control select" data-fouc>
+                                <option value="sort_by_code">Code</option>
+                                <option value="sort_by_name">Name</option>
+                                <option value="sort_by_created_at">Created At</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Sort Direction</label>
+                            <select class="form-control select" data-fouc>
+                                <option value="ASC">ASC</option>
+                                <option value="DESC">DESC</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -86,7 +84,7 @@
         </div>
     </div>
     
-    <div class="card-body">    
+    <div class="card-body">
         <div class="datalist-header">
             <div class="keyword-search">
                 <label>
@@ -168,18 +166,14 @@
             </tbody>
         </table>
         
-        <div class="datatable-footer">
-            <div class="dataTables_info">Showing 1 to 10 of 19 entries</div>
+        <div class="pagination-area">
+            <div class="page_entries_info">
+                <!-- Showing 1 to 10 of 19 entries -->
+                <%= page_entries_info @contacts %>
+            </div>
         
-            <div class="dataTables_paginate paging_simple_numbers">
-                <ul class="pagination align-self-center">
-                    <li class="page-item"><a href="#" class="page-link">Prev</a></li>
-                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item disabled"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                </ul>
+            <div class="pagination_style paging_simple_numbers">
+                <%= will_paginate @contacts, previous_label: 'Prev'.html_safe, next_label: 'Next'.html_safe, renderer: BootstrapPagination::Rails, class: 'align-self-center' %>
             </div>
         </div>
     </div>

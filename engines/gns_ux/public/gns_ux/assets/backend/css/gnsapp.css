@@ -56,3 +56,72 @@
 .datalist-header .show-length .select2 {
     width: auto !important;
 }
+.pagination-area {
+    border-top: 1px solid #b7b7b7;
+    padding: 1.25rem 1.25rem 0 1.25rem;
+}
+.pagination-area::after {
+    display: block;
+    clear: both;
+    content: "";
+}
+.pagination-area>div:first-child {
+    margin-left: 0;
+}
+.page_entries_info {
+    float: left;
+    padding: .4375rem 0;
+    margin-bottom: 1.25rem;
+}
+.pagination_style {
+    float: right;
+    text-align: right;
+    margin: 0 0 1.25rem 1.25rem;
+}
+.pagination-area .pagination li:first-child > a, .pagination-area .pagination li:first-child > span {
+    margin-left: 0;
+    border-top-left-radius: .1875rem;
+    border-bottom-left-radius: .1875rem;
+}
+.pagination-area .pagination li:last-child > a, .pagination-area .pagination li:last-child > span {
+    border-top-right-radius: .1875rem;
+    border-bottom-right-radius: .1875rem;
+}
+.pagination-area .pagination li.active > span, .pagination-area .pagination li.active > a {
+    position: relative;
+    display: block;
+    padding: .4375rem .875rem;
+    margin-left: -1px;
+    line-height: 1.5385;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.pagination-area .pagination li.active > span {
+    z-index: 1;
+    color: #fff;
+    background-color: #2196f3;
+    border-color: #2196f3;
+}
+.pagination-area .pagination li > a {
+    text-align: center;
+    min-width: 2.25003rem;
+    transition: all ease-in-out .15s;
+}
+.pagination-area .pagination li > a, .pagination-area .pagination li > span {
+    position: relative;
+    display: block;
+    padding: .4375rem .875rem;
+    margin-left: -1px;
+    line-height: 1.5385;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.pagination-area .pagination li.disabled a, .pagination-area .pagination li.disabled span {
+    color: #999;
+    pointer-events: none;
+    cursor: auto;
+    background-color: #fff;
+    border-color: #eee;
+}

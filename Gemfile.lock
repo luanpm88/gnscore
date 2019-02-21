@@ -10,14 +10,14 @@ PATH
     gns_core (0.1.0)
       devise
       rails (~> 5.2.2)
-      will_paginate
-      will_paginate-bootstrap
 
 PATH
   remote: engines/gns_ux
   specs:
     gns_ux (0.1.0)
       rails (~> 5.2.2)
+      will_paginate
+      will_paginate-bootstrap
 
 GEM
   remote: https://rubygems.org/

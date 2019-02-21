@@ -4,7 +4,7 @@ module GnsContact::Backend
 
     # GET /contacts
     def index
-      @contacts = GnsContact::Contact.all
+      @contacts = GnsContact::Contact.all.paginate(:page => params[:page], :per_page => 10)
     end
 
     # GET /contacts/1
@@ -42,11 +42,9 @@ module GnsContact::Backend
 
     # DELETE /contacts/1
     def destroy
-      hhhhhhhhhhhhhhhhhhhhhhhhhh
-      #dd
-      #@contact.destroy
-      #
-      #redirect_to gns_contact.backend_contacts_path, notice: 'Contact was successfully destroyed.'
+      @contact.destroy
+      
+      redirect_to gns_contact.backend_contacts_path, notice: 'Contact was successfully destroyed.'
     end
 
     private
