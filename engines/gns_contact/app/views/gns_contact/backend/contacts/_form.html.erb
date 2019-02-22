@@ -1,203 +1,210 @@
 <%= form_for([gns_contact, :backend, contact], html: {multipart: true}) do |f| %>
-    
-    <div class="row">
-      
-        <div class="col-md-6">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <div class="card-img-actions mx-1 mt-1" style="width: 143px; height: 143px;">
-                            <img class="card-img img-fluid" src="/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg" alt="">
-                            <div class="card-img-actions-overlay card-img">
-                                <a href="#" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round">
-                                    <i class="icon-plus3"></i>
-                                </a>
-            
-                                <a href="#" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round ml-2">
-                                    <i class="icon-link"></i>
-                                </a>
-                            </div>
+
+    <fieldset>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="card-img-actions mx-1 mt-1">
+                        <img class="card-img img-fluid" src="/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg" alt="">
+                        <div class="card-img-actions-overlay card-img">
+                            <a href="#" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round">
+                                <i class="icon-plus3"></i>
+                            </a>
+        
+                            <a href="#" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round ml-2">
+                                <i class="icon-link"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8">
-                    <div class="form-group">
-                        <label class="d-block font-weight-semibold">Code <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" placeholder="Enter code (or Generate code automatically)">
-                    </div>
+            </div>
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="d-block font-weight-semibold">Code <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="Enter code (or Generate code automatically)">
+                </div>
+                
+                <div class="form-group">
+                    <label class="d-block font-weight-semibold">Contact type</label>
                     
-                    <div class="form-group">
-                        <label class="d-block font-weight-semibold">Contact type</label>
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" id="is_customer" name="contact[is_customer]">
-                            <label class="custom-control-label" for="is_customer">Customer</label>
-                        </div>
-        
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" id="is_supplier" name="contact[is_supplier]">
-                            <label class="custom-control-label" for="is_supplier">Supplier</label>
-                        </div>
-        
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" id="is_agent" name="contact[is_agent]">
-                            <label class="custom-control-label" for="is_agent">Agent</label>
-                        </div>
+                    <div class="custom-control custom-checkbox custom-control-inline mb-1 mr-3">
+                        <input type="checkbox" class="custom-control-input" id="is_customer" name="contact[is_customer]">
+                        <label class="custom-control-label" for="is_customer">Customer</label>
                     </div>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label class="d-block font-weight-semibold">Full Name <span class="text-danger">*</span></label>
-                <input type="text" class="form-control <%= 'border-danger' if contact.errors.full_messages_for(:full_name).present? %>" placeholder="Enter full name"
-                    name="contact[full_name]"
-                    value="<%= contact.full_name %>"
-                >
-                <% if contact.errors.full_messages_for(:full_name).present? %>
-                    <span class="form-text text-danger"><%= contact.errors.full_messages_for(:full_name).join('<br/>').html_safe %></span>
-                <% end %>
-            </div>
-            
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="d-block font-weight-semibold">Phone</label>
-                        <input type="text" class="form-control" placeholder="+84-99-9999-9999"
-                            name="contact[phone]"
-                            value="<%= contact.phone %>"
-                        >
-                    </div>
-                </div>
-                
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="d-block font-weight-semibold">Email</label>
-                        <input type="text" class="form-control" placeholder="username@sao-ee.vn"
-                            name="contact[email]"
-                            value="<%= contact.email %>"
-                        >
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-        
-        <div class="col-md-6">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="d-block font-weight-semibold">Birthday</label>
-                        <div class="input-group">
-                            <span class="input-group-prepend">
-                                <span class="input-group-text"><i class="icon-calendar22"></i></span>
-                            </span>
-                            <input type="text" class="form-control daterange-single" value="" name="contact[birthday]">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="d-block font-weight-semibold">Gender <span class="text-danger">*</span></label>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                                <input type="radio" class="form-input-styled" name="contact[gender]" value="male" checked data-fouc>
-                                Male
-                            </label>
-                        </div>
     
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                                <input type="radio" class="form-input-styled" name="contact[gender]" value="female" data-fouc>
-                                Female
-                            </label>
-                        </div>
+                    <div class="custom-control custom-checkbox custom-control-inline mb-1 mr-3">
+                        <input type="checkbox" class="custom-control-input" id="is_supplier" name="contact[is_supplier]">
+                        <label class="custom-control-label" for="is_supplier">Supplier</label>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="d-block font-weight-semibold">Country</label>
-                        <select name="contact[country_id]" data-placeholder="Select country" class="form-control form-control-select2" data-fouc>
-                            <option></option>
-                            <option value="1">Canada</option> 
-                            <option value="2">USA</option> 
-                            <option value="3">Australia</option> 
-                            <option value="4">Germany</option> 
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="d-block font-weight-semibold">State/Province</label>
-                        <select name="contact[state_id]" data-placeholder="Select state/province" class="form-control form-control-select2" data-fouc>
-                            <option></option>
-                            <option value="1">Canada</option> 
-                            <option value="2">USA</option> 
-                            <option value="3">Australia</option> 
-                            <option value="4">Germany</option> 
-                        </select>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="d-block font-weight-semibold">District/Town/City</label>
-                        <select name="contact[district_id]" data-placeholder="Select district/town/city" class="form-control form-control-select2" data-fouc>
-                            <option></option>
-                            <option value="1">Canada</option> 
-                            <option value="2">USA</option> 
-                            <option value="3">Australia</option> 
-                            <option value="4">Germany</option> 
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="d-block font-weight-semibold">Address</label>
-                        <input type="text" class="form-control" placeholder="Enter address"
-                            name="contact[address]"
-                            value="<%= contact.address %>"
-                        >
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">                    
-                    <div class="form-group">
-                        <label class="d-block font-weight-semibold">Contact group <span class="text-danger">*</span></label>
-                        <select name="contact[contact_group_id]" data-placeholder="Select contact group" class="form-control form-control-select2" data-fouc>
-                            <option></option>
-                            <option value="1">Canada</option> 
-                            <option value="2">USA</option> 
-                            <option value="3">Australia</option> 
-                            <option value="4">Germany</option> 
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="d-block font-weight-semibold">Parent contact</label>
-                        <select name="contact[parent_id]" data-placeholder="Select parent contact" class="form-control form-control-select2" data-fouc>
-                            <option></option>
-                            <option value="1">Canada</option> 
-                            <option value="2">USA</option> 
-                            <option value="3">Australia</option> 
-                            <option value="4">Germany</option> 
-                        </select>
+    
+                    <div class="custom-control custom-checkbox custom-control-inline mb-1 mr-3">
+                        <input type="checkbox" class="custom-control-input" id="is_agent" name="contact[is_agent]">
+                        <label class="custom-control-label" for="is_agent">Agent</label>
                     </div>
                 </div>
             </div>
         </div>
-      
-    </div>
-  
+        
+        <div class="form-group">
+            <label class="d-block font-weight-semibold">Full Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control <%= 'border-danger' if contact.errors.full_messages_for(:full_name).present? %>" placeholder="Enter full name"
+                name="contact[full_name]"
+                value="<%= contact.full_name %>"
+            >
+            <% if contact.errors.full_messages_for(:full_name).present? %>
+                <span class="form-text text-danger"><%= contact.errors.full_messages_for(:full_name).join('<br/>').html_safe %></span>
+            <% end %>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-block font-weight-semibold">Phone</label>
+                    <input type="text" class="form-control" placeholder="+84-99-9999-9999"
+                        name="contact[phone]"
+                        value="<%= contact.phone %>"
+                    >
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-block font-weight-semibold">Email</label>
+                    <input type="text" class="form-control" placeholder="username@sao-ee.vn"
+                        name="contact[email]"
+                        value="<%= contact.email %>"
+                    >
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    
+    <fieldset>
+        <legend class="font-weight-semibold text-uppercase font-size-sm">Other Information</legend>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-block font-weight-semibold">Birthday</label>
+                    <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-calendar22"></i></span>
+                        </span>
+                        <input type="text" class="form-control daterange-single" value="" name="contact[birthday]">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-block font-weight-semibold">Gender <span class="text-danger">*</span></label>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-input-styled" name="contact[gender]" value="male" checked data-fouc>
+                            Male
+                        </label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-input-styled" name="contact[gender]" value="female" data-fouc>
+                            Female
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-block font-weight-semibold">Country</label>
+                    <select name="contact[country_id]" data-placeholder="Select country" class="form-control form-control-select2" data-fouc>
+                        <option></option>
+                        <option value="1">Canada</option> 
+                        <option value="2">USA</option> 
+                        <option value="3">Australia</option> 
+                        <option value="4">Germany</option> 
+                    </select>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-block font-weight-semibold">State/Province</label>
+                    <select name="contact[state_id]" data-placeholder="Select state/province" class="form-control form-control-select2" data-fouc>
+                        <option></option>
+                        <option value="1">Canada</option> 
+                        <option value="2">USA</option> 
+                        <option value="3">Australia</option> 
+                        <option value="4">Germany</option> 
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-block font-weight-semibold">District/Town/City</label>
+                    <select name="contact[district_id]" data-placeholder="Select district/town/city" class="form-control form-control-select2" data-fouc>
+                        <option></option>
+                        <option value="1">Canada</option> 
+                        <option value="2">USA</option> 
+                        <option value="3">Australia</option> 
+                        <option value="4">Germany</option> 
+                    </select>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-block font-weight-semibold">Address</label>
+                    <input type="text" class="form-control" placeholder="Enter address"
+                        name="contact[address]"
+                        value="<%= contact.address %>"
+                    >
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">                    
+                <div class="form-group">
+                    <label class="d-block font-weight-semibold">Contact group <span class="text-danger">*</span></label>
+                    <select name="contact[contact_group_id]" data-placeholder="Select contact group" class="form-control form-control-select2" data-fouc>
+                        <option></option>
+                        <option value="1">Canada</option> 
+                        <option value="2">USA</option> 
+                        <option value="3">Australia</option> 
+                        <option value="4">Germany</option> 
+                    </select>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-block font-weight-semibold">Parent contact</label>
+                    <select name="contact[parent_id]" data-placeholder="Select parent contact" class="form-control form-control-select2" data-fouc>
+                        <option></option>
+                        <option value="1">Canada</option> 
+                        <option value="2">USA</option> 
+                        <option value="3">Australia</option> 
+                        <option value="4">Germany</option> 
+                    </select>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <hr class="mt-0">
     <div class="text-left">
-        <button type="submit" class="btn btn-primary"><i class="icon-floppy-disk mr-2"></i>Save</button>
-        <a class="btn btn-danger" href="<%= gns_contact.backend_contacts_path %>"><i class="icon-cancel-circle2 mr-2"></i>Cancel</a>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a class="btn btn-light ml-1" href="<%= gns_contact.backend_contacts_path %>">
+            Cancel
+        </a>
     </div>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        
+    </script>
 <% end %>
