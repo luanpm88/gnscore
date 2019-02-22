@@ -4,7 +4,14 @@ module GnsContact::Backend
 
     # GET /contacts
     def index
+    end
+    
+    # POST /contacts/list
+    def list
       @contacts = GnsContact::Contact.all.paginate(:page => params[:page], :per_page => 10)
+      sleep 0.5
+      
+      render :layout => false
     end
 
     # GET /contacts/1

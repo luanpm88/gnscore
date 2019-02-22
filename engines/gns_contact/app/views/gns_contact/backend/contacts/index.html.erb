@@ -18,7 +18,9 @@
 <% end %>
 
 <!-- Datatable -->
-<div class="card">
+<div class="card datalist"
+    data-url="<%= gns_contact.list_backend_contacts_path %>"
+>
     <div class="card-header header-elements-inline">
         <h5 class="card-title">Contact list</h5>
         <div class="header-elements">
@@ -30,152 +32,70 @@
         </div>
     </div>
     
-    <div class="card-body">
-        <div class="datalist-filters">
-            <form action="#">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Area (State/City/District)</label>
-                            <select data-placeholder="Select a State..." class="form-control select-search select" data-fouc>
-                                <option></option>
-                                <option value="AZ">Arizona</option>
-                                <option value="CO">Colorado</option>
-                                <option value="ID">Idaho</option>
-                                <option value="WY">Wyoming</option>
-                                <option value="AL">Alabama</option>
-                                <option value="IA">Iowa</option>
-                                <option value="KS">Kansas</option>
-                                <option value="KY">Kentucky</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Contact types</label>
-                            <select class="form-control multiselect" multiple="multiple" data-fouc>
-                                <option value="cheese">Customer</option>
-                                <option value="tomatoes">Supplier</option>
-                                <option value="mozarella">Agent</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Sort By</label>
-                            <select class="form-control select" data-fouc>
-                                <option value="sort_by_code">Code</option>
-                                <option value="sort_by_name">Name</option>
-                                <option value="sort_by_created_at">Created At</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Sort Direction</label>
-                            <select class="form-control select" data-fouc>
-                                <option value="ASC">ASC</option>
-                                <option value="DESC">DESC</option>
-                            </select>
-                        </div>
+    <form class="datalist-filters">
+        <div class="card-body pb-0">    
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select name="state_id" data-placeholder="Select a State..." class="form-control select-search select" data-fouc>
+                            <option></option>
+                            <option value="AZ">Arizona</option>
+                            <option value="CO">Colorado</option>
+                            <option value="ID">Idaho</option>
+                            <option value="WY">Wyoming</option>
+                            <option value="AL">Alabama</option>
+                            <option value="IA">Iowa</option>
+                            <option value="KS">Kansas</option>
+                            <option value="KY">Kentucky</option>
+                        </select>
                     </div>
                 </div>
-            </form>
-        </div>
-    </div>
-    
-    <div class="card-body">
-        <div class="datalist-header">
-            <div class="keyword-search">
-                <label>
-                    <span>Filter:</span>
-                    <input type="search" class="" placeholder="Type to filter...">
-                </label>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select name="types[]" data-placeholder="Select types..." class="form-control select" multiple="multiple" data-fouc>
+                            <option value="customer">Customer</option>
+                            <option value="supplier">Supplier</option>
+                            <option value="agent">Agent</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div name="sort_by" class="form-group flex">                            
+                        <select data-placeholder="Sort by..." class="form-control select" data-fouc>
+                            <option></option>
+                            <option value="code">Sort by Code</option>
+                            <option value="name">Sort by name</option>
+                            <option value="created_at">Sort by Created at</option>
+                        </select>
+                        <input class="sort-direction" type="hidden" name="sort_direction" value="asc" />
+                    </div>
+                </div>
+                <div class="col-md-3 text-right">
+                    <span class="btn btn-primary mb-3 datalist-search-button">Go</span>
+                </div>
             </div>
-            <div class="show-length">
-                <label>
-                    <span>Show:</span>
-                    <select class="select">
+        </div>
+        <div class="card-body">
+            <div class="datalist-header flex space-between">
+                <div class="keyword-search">
+                    <label>
+                        <input class="form-control keyword-input" name="keyword" type="search" placeholder="Type to filter...">
+                    </label>
+                </div>
+                <div class="show-length text-right text-nowrap flex align-center">
+                    <span class="mr-2">Per page:</span>
+                    <select name="per_page" class="form-control select per-page-select">
                         <option value="10">10</option>
                         <option value="25">25</option>
                         <option value="50">50</option>
                         <option value="100">100</option>
                     </select>
-                </label>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="table-responsive">
-        <table class="table table-hover">
-            <thead>
-                <tr class="bg-info-700">
-                    <th>Code</th>
-                    <th>Full Name</th>
-                    <th>Email</th>
-                    <th>Phone Number</th>
-                    <th>Address</th>
-                    <th>Created At</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% @contacts.each_with_index do |contact,index| %>
-                    <tr>
-                        <td>#CUS<%= index + 1 %></td>
-                        <td><%= contact.full_name %></td>
-                        <td><%= contact.email %></td>
-                        <td><%= contact.phone %></td>
-                        <td><%= contact.address %></td>
-                        <td title="<%= contact.created_at.strftime("%d/%m/%Y - %T") %>">
-                            <%= contact.created_at.strftime("%d/%m/%Y") %>
-                        </td>
-                        <td>
-                            <span class="badge badge-success">Active</span>
-                        </td>
-                        <td class="text-center">
-                            <div class="list-icons">
-                                <div class="dropdown">
-                                    <a href="#" class="list-icons-item" data-toggle="dropdown">
-                                        <i class="icon-menu9"></i>
-                                    </a>
     
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a href="#" class="dropdown-item">
-                                            <i class="icon-file-eye"></i> View
-                                        </a>
-                                        <a class="dropdown-item"
-                                            href="<%= gns_contact.edit_backend_contact_path(contact) %>">
-                                            <i class="icon-pencil7"></i> Update
-                                        </a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item"
-                                            href="<%= gns_contact.backend_contact_path(contact) %>"
-                                            data-method="DELETE"
-                                            data-confirm="Are you sure?"
-                                        >
-                                            <i class="icon-bin"></i> Delete
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                <% end %>
-            </tbody>
-        </table>
-        
-        <div class="pagination-area">
-            <div class="page_entries_info">
-                <!-- Showing 1 to 10 of 19 entries -->
-                <%= page_entries_info @contacts %>
-            </div>
-        
-            <div class="pagination_style paging_simple_numbers">
-                <%= will_paginate @contacts, previous_label: 'Prev'.html_safe, next_label: 'Next'.html_safe, renderer: BootstrapPagination::Rails, class: 'align-self-center' %>
-            </div>
+        <div class="table-responsive datalist-content">
+            
         </div>
-    </div>
+    </form>
 </div>
-<!-- /datatable -->

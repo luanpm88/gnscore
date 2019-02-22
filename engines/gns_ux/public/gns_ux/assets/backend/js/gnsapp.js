@@ -4,6 +4,9 @@ function applyJs(container) {
     
     // Multi select initialization
     container.find('.multiselect').multiselect();
+    
+    // Datalist
+    container.find('.datalist').datalist();
 }
 
 $(document).ready(function() {

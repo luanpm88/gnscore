@@ -1,61 +1,6 @@
 .content {
     background: #f0f0f0;
 }
-.datalist-header .keyword-search {
-    position: relative;
-    display: block;
-    float: left;
-}
-.datalist-header .keyword-search > label {
-    margin-bottom: 0;
-    position: relative;
-}
-.datalist-header .keyword-search > label > span {
-    float: left;
-    margin: .5rem .83333rem;
-    margin-left: 0;
-}
-.datalist-header .keyword-search input {
-    outline: 0;
-    width: 12.5rem;
-    padding: .4375rem .875rem;
-    padding-right: 2rem;
-    font-size: .8125rem;
-    line-height: 1.5385;
-    color: #333;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: .1875rem;
-}
-.datalist-header .keyword-search > label:after {
-    content: "\e98e";
-    font-family: icomoon;
-    font-size: .75rem;
-    display: inline-block;
-    position: absolute;
-    top: 50%;
-    right: .875rem;
-    margin-top: -.375rem;
-    line-height: 1;
-    opacity: .5;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-.datalist-header .show-length {
-    float: right;
-    display: inline-block;
-}
-.datalist-header .show-length > label {
-    margin-bottom: 0;
-}
-.datalist-header .show-length > label > span:first-child {
-    float: left;
-    margin: .5rem .83333rem;
-    margin-left: 0;
-}
-.datalist-header .show-length .select2 {
-    width: auto !important;
-}
 .pagination-area {
     border-top: 1px solid #b7b7b7;
     padding: 1.25rem 1.25rem 0 1.25rem;
@@ -124,4 +69,26 @@
     cursor: auto;
     background-color: #fff;
     border-color: #eee;
+}
+.datalist-content {
+    min-height: 130px;
+    position: relative;
+}
+.datalist-loading-overlay {
+    text-align: center;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.6);
+    padding-top: 50px;
+}
+.flex {
+    display: flex;
+}
+.flex.space-between {
+    justify-content: space-between;
+}
+.flex.align-center {
+    align-items: center;
 }
