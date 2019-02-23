@@ -14,7 +14,7 @@ $.fn.datalist = function() {
         box.sort_direction_input = box.datalist.find('.sort-direction');
         box.sort_direction_value = function() {
             return box.sort_direction_input.val();
-        };
+        };        
         
         // append security token
         box.form.append('<input type="hidden" name="authenticity_token" value="'+$('meta[name="csrf-token"]').attr('content')+'" />');
@@ -25,7 +25,12 @@ $.fn.datalist = function() {
         box.sort_direction_icon  = box.sort_direction_button.find('i');
         
         // Load list
-        box.load = function() {
+        box.load = function(url) {
+            // get url
+            if(typeof(url) === 'undefined') {
+                url = box.url;
+            }
+            
             // Add loading icon spinner
             box.content.prepend('<div class="datalist-loading-overlay"><i class="icon-spinner4 spinner mr-2"></i></div>');
             
@@ -37,11 +42,14 @@ $.fn.datalist = function() {
                 box.xhr.abort();
             }
             box.xhr = $.ajax({
-                url: box.url,
+                url: url,
                 method: 'POST',
                 data: data
             }).done(function(response) {
                 box.content.html(response);
+                
+                // After list loaded
+                box.afterLoad();
             });
         };
         
@@ -75,5 +83,21 @@ $.fn.datalist = function() {
                 box.sort_direction_icon.addClass('icon-sort-amount-asc');
             }
         });
+        
+        // After list loaded
+        box.afterLoad = function() {
+            // pagination click
+            box.datalist.find('.pagination a').click(function(e) {
+                e.preventDefault();
+                var url = $(this).attr('href');
+                
+                box.load(url);                
+            });
+            
+            // scroll top top of list
+            $('html, body').animate({
+                scrollTop: box.datalist.offset().top
+            }, 200);
+        };
     }); 
 };
