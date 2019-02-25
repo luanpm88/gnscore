@@ -18,6 +18,7 @@ $.fn.datalist = function() {
             return box.sort_direction_input.val();
         };
         box.datalist_action = box.datalist.find('[datalist-action="ajax"]');
+        box.sort_by_select = box.datalist.find('.sort-by-select');
         
         // append security token
         box.form.append('<input type="hidden" name="authenticity_token" value="'+$('meta[name="csrf-token"]').attr('content')+'" />');
@@ -82,6 +83,11 @@ $.fn.datalist = function() {
             box.load();
         });
         
+        // sort_by select change
+        box.sort_by_select.change(function() {
+            box.load();
+        });
+        
         // Click on sort direction
         box.sort_direction_button.click(function() {
             if (box.sort_direction_value() == 'asc') {
@@ -93,6 +99,8 @@ $.fn.datalist = function() {
                 box.sort_direction_icon.removeClass('icon-sort-amount-desc');
                 box.sort_direction_icon.addClass('icon-sort-amount-asc');
             }
+            
+            box.load();
         });
         
         // After list loaded
