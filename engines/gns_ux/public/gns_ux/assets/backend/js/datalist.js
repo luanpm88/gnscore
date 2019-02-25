@@ -1,4 +1,6 @@
-$.fn.datalist = function() { 
+var datalists = [];
+
+$.fn.datalist = function() {    
     return this.each(function() {
         var box = {};
         box.datalist = $(this);
@@ -14,7 +16,8 @@ $.fn.datalist = function() {
         box.sort_direction_input = box.datalist.find('.sort-direction');
         box.sort_direction_value = function() {
             return box.sort_direction_input.val();
-        };        
+        };
+        box.datalist_action = box.datalist.find('[datalist-action="ajax"]');
         
         // append security token
         box.form.append('<input type="hidden" name="authenticity_token" value="'+$('meta[name="csrf-token"]').attr('content')+'" />');
@@ -30,6 +33,9 @@ $.fn.datalist = function() {
             if(typeof(url) === 'undefined') {
                 url = box.url;
             }
+            
+            // set current url
+            box.current_url = url;
             
             // Add loading icon spinner
             box.content.prepend('<div class="datalist-loading-overlay"><i class="icon-spinner4 spinner mr-2"></i></div>');
@@ -51,6 +57,11 @@ $.fn.datalist = function() {
                 // After list loaded
                 box.afterLoad();
             });
+        };
+        
+        // Load list
+        box.refresh = function() {
+            box.load(box.current_url);
         };
         
         // load first time
@@ -99,5 +110,14 @@ $.fn.datalist = function() {
                 scrollTop: box.datalist.offset().top
             }, 200);
         };
+        
+        // datalist action
+        box.datalist_action.click(function(e) {
+            
+        });
+        
+        datalists.push(box);
+        
+        return box;
     }); 
 };
