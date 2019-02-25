@@ -2,8 +2,24 @@ function applyJs(container) {
     // Select initialization
     container.find('.select').select2();
     
+    // Infinity search field of select
+    container.find('select.select-not-search-field').select2({
+        minimumResultsForSearch: Infinity
+    });
+    
+    // Initialize
+    container.find('.radio-button').uniform();
+    
     // Multi select initialization
     container.find('.multiselect').multiselect();
+    
+    // Single picker
+    container.find('.daterange-single').daterangepicker({ 
+        singleDatePicker: true,
+        locale: {
+            format: 'DD/MM/YYYY'
+        }
+    });
     
     // Datalist
     container.find('.datalist').datalist();
@@ -106,8 +122,7 @@ $(document).ready(function() {
     // Grap link with data-method attribute
     $(document).on('click', 'a[data-method]', function(e) {
         e.preventDefault();
-    
-        var link = $(this);
+        
         var method = $(this).attr("data-method");
         var action = $(this).attr("href");
     
