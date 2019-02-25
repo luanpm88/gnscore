@@ -3,13 +3,13 @@
 <% end %>
 
 <% content_for :breadcrumb do %>
-    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-    <a href="#" class="breadcrumb-item">Contacts</a>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+    <a href="<%= gns_contact.backend_contacts_path %>" class="breadcrumb-item">Contacts</a>
     <span class="breadcrumb-item active">Edit</span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Contact</span> - Editing: <%= @contact.full_name %></h4>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Contact</span> - Edit: <%= @contact.full_name %></h4>
 <% end %>
 
 <% content_for :page_toolbar do %>

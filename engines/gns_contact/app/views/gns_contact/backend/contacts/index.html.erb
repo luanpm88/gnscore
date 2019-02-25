@@ -3,7 +3,7 @@
 <% end %>
 
 <% content_for :breadcrumb do %>
-    <a href="#" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
     <span class="breadcrumb-item active">Contacts</span>
 <% end %>
 
@@ -59,34 +59,36 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="form-group flex">                            
-                        <select name="sort_by" data-placeholder="Sort by..." class="form-control select select-not-search-field" data-fouc>
-                            <option value="created_at">Created at</option>
-                            <option value="full_name">Contact code</option>
-                            <option value="full_name">Contact name</option>
-                        </select>
-                        <input class="sort-direction" type="hidden" name="sort_direction" value="desc" />
-                    </div>
-                </div>
-                <div class="col-md-1 text-right">
+                <div class="col-md-4 text-right">
                     <span class="btn btn-primary mb-3 datalist-search-button">Go</span>
                 </div>
             </div>
         </div>
+        
         <div class="card-body">
             <div class="datalist-header flex space-between">
-                <div class="keyword-search">
+                <div class="keyword-search mr-2">
                     <input class="form-control keyword-input" name="keyword" type="search" placeholder="Type to filter...">
                 </div>
-                <div class="show-per-page text-right text-nowrap flex align-center">
-                    <span class="mr-2">Per page:</span>
-                    <select name="per_page" class="form-control select select-not-search-field per-page-select">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>
+                <div class="text-right text-nowrap flex">
+                    <div class="sort-by-box flex align-center mr-3">
+                        <span class="mr-1">Sort by:</span>
+                        <select name="sort_by" data-placeholder="Sort by..." class="form-control select select-not-search-field sort-by-select" data-fouc>
+                            <option value="created_at">Created At</option>
+                            <option value="full_name">Code</option>
+                            <option value="full_name">Full name</option>
+                        </select>
+                        <input class="sort-direction" type="hidden" name="sort_direction" value="desc" />
+                    </div>
+                    <div class="show-per-page flex align-center">
+                        <span class="mr-1">Per page:</span>
+                        <select name="per_page" class="form-control select select-not-search-field per-page-select">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
