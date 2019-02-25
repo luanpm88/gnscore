@@ -35,7 +35,7 @@
     <form class="datalist-filters">
         <div class="card-body pb-0">    
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <select name="state_id" data-placeholder="Select a State..." class="form-control select-search select" data-fouc>
                             <option></option>
@@ -50,7 +50,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <select name="types[]" data-placeholder="Select types..." class="form-control select" multiple="multiple" data-fouc>
                             <option value="customer">Customer</option>
@@ -60,17 +60,16 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div name="sort_by" class="form-group flex">                            
-                        <select data-placeholder="Sort by..." class="form-control select" data-fouc>
-                            <option></option>
-                            <option value="code">Sort by Code</option>
-                            <option value="name">Sort by name</option>
-                            <option value="created_at">Sort by Created at</option>
+                    <div class="form-group flex">                            
+                        <select name="sort_by" data-placeholder="Sort by..." class="form-control select select-not-search-field" data-fouc>
+                            <option value="created_at">Created at</option>
+                            <option value="full_name">Contact code</option>
+                            <option value="full_name">Contact name</option>
                         </select>
-                        <input class="sort-direction" type="hidden" name="sort_direction" value="asc" />
+                        <input class="sort-direction" type="hidden" name="sort_direction" value="desc" />
                     </div>
                 </div>
-                <div class="col-md-3 text-right">
+                <div class="col-md-1 text-right">
                     <span class="btn btn-primary mb-3 datalist-search-button">Go</span>
                 </div>
             </div>
@@ -78,13 +77,11 @@
         <div class="card-body">
             <div class="datalist-header flex space-between">
                 <div class="keyword-search">
-                    <label>
-                        <input class="form-control keyword-input" name="keyword" type="search" placeholder="Type to filter...">
-                    </label>
+                    <input class="form-control keyword-input" name="keyword" type="search" placeholder="Type to filter...">
                 </div>
-                <div class="show-length text-right text-nowrap flex align-center">
+                <div class="show-per-page text-right text-nowrap flex align-center">
                     <span class="mr-2">Per page:</span>
-                    <select name="per_page" class="form-control select per-page-select">
+                    <select name="per_page" class="form-control select select-not-search-field per-page-select">
                         <option value="10">10</option>
                         <option value="25">25</option>
                         <option value="50">50</option>

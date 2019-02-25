@@ -12,9 +12,9 @@
         </tr>
     </thead>
     <tbody>
-        <% @contacts.each_with_index do |contact,index| %>
+        <% @contacts.each do |contact| %>
             <tr>
-                <td>#CUS<%= index + 1 %></td>
+                <td>KH#<%= contact.id %></td>
                 <td><%= contact.full_name %></td>
                 <td><%= contact.email %></td>
                 <td><%= contact.phone %></td>

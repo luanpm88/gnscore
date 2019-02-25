@@ -92,3 +92,26 @@
 .flex.align-center {
     align-items: center;
 }
+.datalist-header .keyword-search {
+    position: relative;
+}
+.datalist-header .keyword-search input {
+    padding-right: 2rem;
+}
+.datalist-header .keyword-search:after {
+    content: "\e98e";
+    font-family: icomoon;
+    position: absolute;
+    top: 50%;
+    right: .875rem;
+    margin-top: -.375rem;
+    line-height: 1;
+    opacity: .5;
+}
+.navbar-brand img {
+    height: 2rem;
+}
+.navbar-brand {
+    padding: 0.52rem 0;
+    margin-right: 0;
+}

@@ -60,9 +60,11 @@ $(document).ready(function() {
             });
         }
     });
+    // Grap link with data-confirm
+    // ------------------------------
     
     // ------------------------------
-    // Grap link with data-method attribute
+    // Grap link with a.ajax class
     $(document).on('click', 'a.ajax', function(e) {
         e.preventDefault(); // stop link click event
         e.stopImmediatePropagation(); // stop below events
@@ -97,7 +99,7 @@ $(document).ready(function() {
             }
         });
     });
-    // Grap link with data-method
+    // Grap link with a.ajax class
     // ------------------------------
     
     // ------------------------------

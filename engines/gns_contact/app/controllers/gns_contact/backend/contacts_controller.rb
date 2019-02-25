@@ -8,10 +8,9 @@ module GnsContact::Backend
     
     # POST /contacts/list
     def list
-      @contacts = GnsContact::Contact.all.paginate(:page => params[:page], :per_page => 10)
-      sleep 0.5
+      @contacts = GnsContact::Contact.search(params).paginate(:page => params[:page], :per_page => params[:per_page])
       
-      render :layout => false
+      render layout: nil
     end
 
     # GET /contacts/1
