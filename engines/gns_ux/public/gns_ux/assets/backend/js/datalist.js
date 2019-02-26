@@ -20,6 +20,11 @@ $.fn.datalist = function() {
         box.datalist_action = box.datalist.find('[datalist-action="ajax"]');
         box.sort_by_select = box.datalist.find('.sort-by-select');
         
+        // prvent form submit
+        box.form.submit(function() {
+            return false;
+        });        
+        
         // append security token
         box.form.append('<input type="hidden" name="authenticity_token" value="'+$('meta[name="csrf-token"]').attr('content')+'" />');
         
@@ -48,6 +53,7 @@ $.fn.datalist = function() {
             if(box.xhr && box.xhr.readyState != 4){
                 box.xhr.abort();
             }
+            
             box.xhr = $.ajax({
                 url: url,
                 method: 'POST',
@@ -74,7 +80,10 @@ $.fn.datalist = function() {
         });
         
         // keyword search change
-        box.keyword_input.change(function() {
+        box.keyword_input.keyup(function(e) {
+            if (e.keyCode === 13) {
+                return false;
+            }
             box.load();
         });
         
