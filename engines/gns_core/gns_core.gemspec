@@ -30,4 +30,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pg"
   
   spec.add_dependency 'devise'
+  spec.add_dependency 'unidecoder'
 end
