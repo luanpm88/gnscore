@@ -56,7 +56,7 @@ $(document).ready(function() {
     
                         '<div class="modal-footer">' +
                             '<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>' +
-                            '<button type="button" class="btn bg-primary data-confirm-ok">OK</button>' +
+                            '<button type="button" class="btn bg-primary data-confirm-ok">Okay</button>' +
                         '</div>' +
                     '</div>' +
                 '</div>' +
