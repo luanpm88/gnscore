@@ -67,3 +67,4 @@ gem 'gns_core', path: 'engines/gns_core'
 
 gem 'gns_ux', path: 'engines/gns_ux'
 gem 'gns_contact', path: 'engines/gns_contact'
+gem 'gns_project', path: 'engines/gns_project'

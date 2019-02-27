@@ -1,0 +1,60 @@
+<table class="table table-hover">
+    <thead>
+        <tr class="bg-info-700">
+            <th>Code</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th class="text-center">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @projects.each do |project| %>
+            <tr>
+                <td><%= project.code %></td>
+                <td><%= project.name %></td>
+                <td>
+                    <span class="badge badge-success">Active</span>
+                </td>
+                <td title="<%= project.created_at.strftime("%d/%m/%Y - %T") %>">
+                    <%= project.created_at.strftime("%d/%m/%Y") %>
+                </td>
+                <td class="text-center">
+                    <div class="list-icons">
+                        <div class="dropdown">
+                            <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                <i class="icon-menu9"></i>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item"
+                                    href="<%= gns_project.edit_backend_project_path(project) %>">
+                                    <i class="icon-pencil7"></i> Update
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item ajax"
+                                    href="<%= gns_project.backend_project_path(project) %>"
+                                    data-method="DELETE"
+                                    data-confirm="You are about to delete a project"
+                                >
+                                    <i class="icon-bin"></i> Delete
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<div class="pagination-area">
+    <div class="page_entries_info">
+        <!-- Showing 1 to 10 of 19 entries -->
+        <%= page_entries_info @projects %>
+    </div>
+
+    <div class="pagination_style paging_simple_numbers">
+        <%= will_paginate @projects, previous_label: 'Prev'.html_safe, next_label: 'Next'.html_safe, renderer: BootstrapPagination::Rails, class: 'align-self-center' %>
+    </div>
+</div>
