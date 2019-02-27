@@ -61,8 +61,6 @@ module GnsContact::Backend
           }
         }
       end
-      
-
     end
 
     private
