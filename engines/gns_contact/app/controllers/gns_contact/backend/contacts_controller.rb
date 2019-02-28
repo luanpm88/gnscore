@@ -62,6 +62,10 @@ module GnsContact::Backend
         }
       end
     end
+    
+    def select2
+      render json: GnsContact::Contact.select2(params)
+    end
 
     private
       # Use callbacks to share common setup or constraints between actions.

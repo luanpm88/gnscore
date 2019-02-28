@@ -36,5 +36,30 @@ module GnsContact
 
       return query
     end
+    
+    def self.select2(params)
+      per_page = 10
+      page = 1      
+      data = {results: [], pagination: {more: false}}
+      
+      query = self.all
+      
+      # keyword
+      if params[:q].present?
+        query = query.where('LOWER(gns_contact_contacts.full_name) LIKE ?', '%'+params[:q].to_ascii.downcase+'%')
+      end
+      
+      # pagination
+      page = params[:page].to_i if params[:page].present?
+      query = self.limit(per_page).offset(per_page*(page-1))      
+      data[:pagination][:more] = true if query.count > 0
+      
+      # render items
+      query.each do |c|
+        data[:results] << {id: c.id, text: c.full_name}
+      end
+      
+      return data
+    end
   end
 end

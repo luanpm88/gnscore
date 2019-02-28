@@ -23,6 +23,19 @@ function applyJs(container) {
     
     // Datalist
     container.find('.datalist').datalist();
+    
+    // Select2 ajax
+    container.find('.select-ajax').each(function() {
+        var url = $(this).attr('data-url');
+        
+        $(this).select2({
+            ajax: {
+              url: url,
+              dataType: 'json'
+              // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+            }
+        }); 
+    });
 }
 
 $(document).ready(function() {

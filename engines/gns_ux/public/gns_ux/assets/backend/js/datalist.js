@@ -44,7 +44,9 @@ $.fn.datalist = function() {
             box.current_url = url;
             
             // Add loading icon spinner
-            box.content.prepend('<div class="datalist-loading-overlay"><i class="icon-spinner4 spinner mr-2"></i></div>');
+            if (box.content.find('.datalist-loading-overlay').length === 0) {
+                box.content.prepend('<div class="datalist-loading-overlay"><i class="icon-spinner4 spinner mr-2"></i></div>');
+            }
             
             // form data
             data = box.form.serialize();
@@ -80,10 +82,7 @@ $.fn.datalist = function() {
         });
         
         // keyword search change
-        box.keyword_input.keyup(function(e) {
-            if (e.keyCode === 13) {
-                return false;
-            }
+        box.keyword_input.change(function() {
             box.load();
         });
         
