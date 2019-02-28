@@ -1,8 +1,9 @@
-var datalists = [];
+var datalists = {};
 
 $.fn.datalist = function() {    
     return this.each(function() {
         var box = {};
+        box.id = uniqueId();
         box.datalist = $(this);
         box.content = box.datalist.find('.datalist-content');
         box.url = box.datalist.attr('data-url');
@@ -17,13 +18,15 @@ $.fn.datalist = function() {
         box.sort_direction_value = function() {
             return box.sort_direction_input.val();
         };
-        box.datalist_action = box.datalist.find('[datalist-action="ajax"]');
         box.sort_by_select = box.datalist.find('.sort-by-select');
         
         // prvent form submit
         box.form.submit(function() {
             return false;
-        });        
+        });
+        
+        // add id to datalist
+        box.datalist.attr('data-id', box.id);
         
         // append security token
         box.form.append('<input type="hidden" name="authenticity_token" value="'+$('meta[name="csrf-token"]').attr('content')+'" />');
@@ -45,7 +48,7 @@ $.fn.datalist = function() {
             
             // Add loading icon spinner
             if (box.content.find('.datalist-loading-overlay').length === 0) {
-                box.content.prepend('<div class="datalist-loading-overlay"><i class="icon-spinner4 spinner mr-2"></i></div>');
+                box.content.html('<div class="datalist-loading-overlay"><i class="icon-spinner4 spinner mr-2"></i></div>');
             }
             
             // form data
@@ -127,12 +130,7 @@ $.fn.datalist = function() {
             }, 200);
         };
         
-        // datalist action
-        box.datalist_action.click(function(e) {
-            
-        });
-        
-        datalists.push(box);
+        datalists[box.id] = box;
         
         return box;
     }); 

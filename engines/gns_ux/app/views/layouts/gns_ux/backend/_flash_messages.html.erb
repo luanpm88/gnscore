@@ -1,40 +1,8 @@
 <% if !flash.empty? %>
-    <% titles = {
-        "success" => "Success",
-        "alert" => "Warning",
-        "notice" => "Success",
-        "warning" => "Warning",
-        "error" => "Error",
-        "info" => "Info"
-    } %>
-    
-    <% classes = {
-        "success" => "success",
-        "alert" => "warning",
-        "notice" => "success",
-        "warning" => "warning",
-        "error" => "error",
-        "info" => "info"
-    } %>
-    
-    <% icons = {
-        "success" => "icon-checkmark3",
-        "alert" => "icon-warning",
-        "notice" => "icon-checkmark3",
-        "warning" => "icon-warning",
-        "error" => "icon-blocked",
-        "info" => "icon-info22"
-    } %>
-    
-    <% flash.each do |key, value| %>
+    <% flash.each do |key, message| %>
         <script>
             $(document).ready(function() {
-                new PNotify({
-                    icon: '<%= icons[key] %>',
-                    title: '<%= titles[key] %>',
-                    text: '<%= value %>',
-                    type: '<%= classes[key] %>'
-                });
+                showNotification('<%= key %>', '<%= message %>');
             });
         </script>
     <% end %>

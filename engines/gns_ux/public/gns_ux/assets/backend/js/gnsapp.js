@@ -1,3 +1,77 @@
+function showNotification(status, message) {
+    //    <% titles = {
+    //    "success" => "Success",
+    //    "notice" => "Info",
+    //    "warning" => "Warning",
+    //    "error" => "Error",
+    //} %>
+    //
+    //<% classes = {
+    //    "success" => "success",
+    //    "alert" => "warning",
+    //    "notice" => "success",
+    //    "warning" => "warning",
+    //    "error" => "error",
+    //    "info" => "info"
+    //} %>
+    //
+    //<% icons = {
+    //    "success" => "icon-checkmark3",
+    //    "alert" => "icon-warning",
+    //    "notice" => "icon-checkmark3",
+    //    "warning" => "icon-warning",
+    //    "error" => "icon-blocked",
+    //    "info" => "icon-info22"
+    //} %>
+    //
+    switch(status) {
+        case 'success':
+            new PNotify({
+                icon: 'icon-checkmark3',
+                title: 'Success',
+                text: message,
+                type: 'success'
+            });
+            break;
+        case 'notice':
+            new PNotify({
+                icon: 'icon-info22',
+                title: 'Notice',
+                text: message,
+                type: 'info'
+            });
+            break;
+        case 'warning':
+            new PNotify({
+                icon: 'icon-warning',
+                title: 'Warning',
+                text: message,
+                type: 'warning'
+            });
+            break;
+        case 'error':
+            new PNotify({
+                icon: 'icon-blocked',
+                title: 'Error',
+                text: message,
+                type: 'error'
+            });
+            break;
+        case 'info':
+          // code block
+          break;
+        default:
+          // code block
+    }
+}
+
+function uniqueId() {
+    return 'id-xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+
 function applyJs(container) {
     // Select initialization
     container.find('.select').select2();
@@ -110,21 +184,15 @@ $(document).ready(function() {
                 format: 'json',
             }
         }).done(function(response) {
+            // check message
+            if (typeof(response.message) !== 'undefined') {
+                showNotification(response.status, response.message);
+            }
+            
             // Check if link from datalist
             if (link.closest('.datalist').length) {
-                new PNotify({
-                    title: 'Success',
-                    text: response.message,
-                    icon: 'icon-checkmark3',
-                    type: 'success'
-                });
-                
-                // refresh all datalist
-                if (datalists.length) {
-                    datalists.forEach(function(datalist) {
-                        datalist.refresh();
-                    });
-                }
+                // refresh the datalist with id
+                datalists[link.closest('.datalist').attr('data-id')].refresh();
             }
         });
     });

@@ -4,11 +4,7 @@ module GnsCore::Backend
     
     private
 			def set_layout
-				if request.xhr?
-					nil
-				else
-					"gns_ux/backend/main"
-				end
+				"gns_ux/backend/index"
 			end
   end
 end

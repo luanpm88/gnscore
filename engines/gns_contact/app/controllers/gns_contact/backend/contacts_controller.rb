@@ -31,7 +31,8 @@ module GnsContact::Backend
       @contact = GnsContact::Contact.new(contact_params)
 
       if @contact.save
-        redirect_to gns_contact.edit_backend_contact_path(@contact), notice: 'Contact was successfully created.'
+        flash[:success] = 'Contact was successfully created.'
+        redirect_to gns_contact.edit_backend_contact_path(@contact)
       else
         render :new
       end
@@ -40,7 +41,8 @@ module GnsContact::Backend
     # PATCH/PUT /contacts/1
     def update
       if @contact.update(contact_params)
-        redirect_to gns_contact.backend_contacts_path, notice: 'Contact was successfully updated.'
+        flash[:success] = 'Contact was successfully updated.'
+        redirect_to gns_contact.backend_contacts_path
       else
         render :edit
       end
@@ -52,7 +54,8 @@ module GnsContact::Backend
       
       respond_to do |format|
         format.html {
-          redirect_to gns_contact.backend_contacts_path, notice: 'Contact was successfully destroyed.'
+          flash[:success] = 'Contact was successfully destroyed.'
+          redirect_to gns_contact.backend_contacts_path
         }
         format.json {
           render json: {

@@ -15,7 +15,12 @@
         <% @contacts.each do |contact| %>
             <tr>
                 <td>KH#<%= contact.id %></td>
-                <td><%= contact.full_name %></td>
+                <td>
+                    <a href="<%= gns_contact.edit_backend_contact_path(contact) %>"
+                      class="modal-control" modal-size="full">
+                        <%= contact.full_name %>
+                    </a>
+                </td>
                 <td><%= contact.email %></td>
                 <td><%= contact.phone %></td>
                 <td><%= contact.address %></td>

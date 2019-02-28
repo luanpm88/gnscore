@@ -83,6 +83,11 @@
     background: rgba(255,255,255,0.6);
     padding-top: 50px;
 }
+.modal-loading-overlay {
+    min-height: 130px;
+    text-align: center;
+    padding-top: 55px;
+}
 .flex {
     display: flex;
 }
