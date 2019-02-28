@@ -1,5 +1,9 @@
 time = Time.now.strftime("%m") + Time.now.strftime("%Y").last(2)
 
+GnsProject::Category.create(
+  name: "Mô phỏng"
+) if GnsProject::Category.where(name: "Mô phỏng").empty?
+
 GnsProject::Project.create(
   code: "PRJ-#{time + 1.to_s.rjust(3, '0')}",
   name: "Công trình nhà phố Ny'Ah",
