@@ -17,6 +17,36 @@
     </a>
 <% end %>
 
+<% content_for :page_script do %>
+    <script>
+        $(document).ready(function() {
+            // Select2 ajax
+            $('.select-ajax-district').each(function() {
+                var url = $(this).attr('data-url');
+                
+                $(this).select2({
+                    ajax: {
+                        url: url,
+                        dataType: 'json',
+                        data: function (params) {
+                            console.log(params);
+                            var query = {
+                                q: params.term,
+                                page: params.page,
+                                type: 'public',
+                                state_id: $('select[name=state_id]').select2('val')
+                            }
+                      
+                            // Query parameters will be ?search=[term]&type=public
+                            return query;
+                        }
+                    }
+                }); 
+            });     
+        });
+    </script>
+<% end %>
+
 <!-- Datatable -->
 <div class="card datalist"
     data-url="<%= gns_contact.list_backend_contacts_path %>"
@@ -45,8 +75,8 @@
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
-                        <select name="state_id" data-placeholder="Select a State..."
-                          class="form-control select-ajax"
+                        <select name="district_id" data-placeholder="Select a State..."
+                          class="form-control select-ajax-district"
                           data-url="<%= gns_area.select2_backend_districts_path %>">
                         </select>
                     </div>

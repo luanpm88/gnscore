@@ -1,0 +1,38 @@
+<div class="card-header bg-white pb-0 pt-sm-0 pr-sm-0 header-elements-sm-inline">
+    <h6 class="card-title"><%= title %></h6>
+    <div class="header-elements">
+        <ul class="nav nav-tabs nav-tabs-bottom card-header-tabs mx-0">
+            <li class="nav-item">
+                <a href="<%= gns_contact.backend_contact_path(@contact) %>"
+                  class="nav-link <%= 'active' if tab == 'general' %> <%= 'modal-control' if request.xhr? %>" modal-size="full">
+                    <i class="icon-users mr-2"></i>
+                    General
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="<%= gns_contact.projects_backend_contacts_path(@contact.id) %>"
+                  class="nav-link <%= 'active' if tab == 'projects' %> <%= 'modal-control' if request.xhr? %>" modal-size="full">
+                    <i class="icon-stats-bars mr-2"></i>
+                    Projects
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon-cog5 mr-2"></i>
+                    Action
+                </a>
+                
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a href="#card-bottom-tab3" tabindex="-1" class="dropdown-item" data-toggle="tab">
+                        <i class="icon-people"></i>
+                        Update
+                    </a>
+                    <a href="#card-bottom-tab4" tabindex="-1" class="dropdown-item" data-toggle="tab">
+                        <i class="icon-stack"></i>
+                        Delete
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

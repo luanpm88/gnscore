@@ -10,15 +10,16 @@ function gModal(options) {
     
     // init
     this.modal = $('#'+this.id);
-    this.modal.remove();
-    var html = '<div id="'+this.id+'" class="modal fade" tabindex="-1">' +
-        '<div class="modal-dialog modal-'+this.size+'">' +
-            '<div class="modal-content">' +
+    if (this.modal.length === 0) {
+        var html = '<div id="'+this.id+'" class="modal fade" tabindex="-1">' +
+            '<div class="modal-dialog modal-'+this.size+'">' +
+                '<div class="modal-content">' +
+                '</div>' +
             '</div>' +
-        '</div>' +
-    '</div>';
-    $('body').append(html);    
-    this.modal = $('#'+this.id);
+        '</div>';
+        $('body').append(html);    
+        this.modal = $('#'+this.id);
+    }
     this.content = this.modal.find('.modal-content');
     
     var thisModal = this;
@@ -27,7 +28,7 @@ function gModal(options) {
     this.load = function(url) {
         // loading effect
         if (thisModal.content.find('.modal-loading-overlay').length === 0) {
-            thisModal.content.prepend('<div class="modal-loading-overlay"><i class="icon-spinner4 spinner mr-2"></i></div>');
+            thisModal.content.html('<div class="modal-loading-overlay"><i class="icon-spinner4 spinner mr-2"></i></div>');
         }
     
         this.modal.modal('show');

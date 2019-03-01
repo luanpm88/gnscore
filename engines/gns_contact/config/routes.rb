@@ -4,6 +4,7 @@ GnsContact::Engine.routes.draw do
             collection do
                 post 'list'
                 get 'select2'
+                get ':id/projects', to: 'contacts#projects', as: 'projects'
             end
         end
     end

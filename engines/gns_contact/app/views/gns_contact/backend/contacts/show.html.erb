@@ -21,22 +21,63 @@
 <div class="row">
     <div class="col-md-12">
         
+        <!-- Bottom tabs -->
         <div class="card">
-            <div class="card-header header-elements-inline">
-                <h5 class="card-title">Details</h5>
-                <div class="header-elements">
-                    <div class="list-icons">
-                        <a class="list-icons-item" data-action="collapse"></a>
-                        <a class="list-icons-item" data-action="reload"></a>
-                        <a class="list-icons-item" data-action="remove"></a>
+            
+            <%= render "contact_menu", title: 'Contact Details', tab: 'general' %>
+            
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="tab-pane fade show active" id="bottom-tab1">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td class="font-weight-semibold">Full name:</td>
+                                        <td class="text-right"><a href="#">Singular app</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-semibold">Email:</td>
+                                        <td class="text-right">
+                                            lahum@gmail.com
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-semibold">Type:</td>
+                                        <td class="text-right">VIP, Normal</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-semibold">Status:</td>
+                                        <td class="text-right"><span class="badge badge-info">Active</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="tab-pane fade show active" id="bottom-tab1">
+                            <table class="table">
+                                <tbody>                                        
+                                    <tr>
+                                        <td class="font-weight-semibold">Added by:</td>
+                                        <td class="text-right"><a href="#">Winnie</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-semibold">Updated:</td>
+                                        <td class="text-right text-muted">12 May, 2015</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-semibold">Created:</td>
+                                        <td class="text-right text-muted">25 Feb, 2015</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="card-body">
-                
-            </div>
         </div>
+        <!-- /bottom tabs -->
         
     </div>
 </div>

@@ -48,7 +48,7 @@ $.fn.datalist = function() {
             
             // Add loading icon spinner
             if (box.content.find('.datalist-loading-overlay').length === 0) {
-                box.content.html('<div class="datalist-loading-overlay"><i class="icon-spinner4 spinner mr-2"></i></div>');
+                box.content.prepend('<div class="datalist-loading-overlay"><i class="icon-spinner4 spinner mr-2"></i></div>');
             }
             
             // form data
@@ -123,11 +123,6 @@ $.fn.datalist = function() {
                 
                 box.load(url);                
             });
-            
-            // scroll top top of list
-            $('html, body').animate({
-                scrollTop: box.datalist.offset().top
-            }, 200);
         };
         
         datalists[box.id] = box;
