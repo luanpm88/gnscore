@@ -1,9 +1,18 @@
 module GnsArea
   class State < ApplicationRecord
-    belongs_to :country
-    has_many :districts
+    belongs_to :country, class_name: 'GnsArea::Country'
+    has_many :districts, class_name: 'GnsArea::District', dependent: :restrict_with_error
     
     validates :name, :country_id, :presence => true
+    
+    # update state cache search
+    after_save :update_cache_search
+		def update_cache_search
+			str = []
+			str << name.to_s.downcase.strip
+
+			self.update_column(:cache_search, str.join(" ") + " " + str.join(" ").to_ascii)
+		end
     
     def self.select2(params)
       per_page = 10
@@ -14,7 +23,7 @@ module GnsArea
       
       # keyword
       if params[:q].present?        
-        query = query.where('LOWER(gns_area_states.name) LIKE ?', '%'+params[:q].downcase.strip+'%')
+        query = query.where('LOWER(gns_area_states.cache_search) LIKE ?', '%'+params[:q].to_ascii.downcase.strip+'%')
       end
       
       # pagination
@@ -28,26 +37,6 @@ module GnsArea
       end
       
       return data
-    end
-    
-    # import state
-    def self.import(file)
-      ActiveRecord::Base.logger = nil
-      
-      xlsx = Roo::Spreadsheet.open(file)
-      
-      # Read excel file. sheet tabs loop
-      xlsx.each_with_pagename do |name, sheet|
-        sheet.each_row_streaming do |row|
-          
-          GnsArea::State.create(
-            name: row[0].value,
-            country_id: row[1].value
-          )
-          puts GnsArea::State.count
-          
-        end
-      end
     end
     
   end

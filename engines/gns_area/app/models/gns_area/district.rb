@@ -1,6 +1,15 @@
 module GnsArea
   class District < ApplicationRecord
-    belongs_to :state
+    belongs_to :state, class_name: 'GnsArea::State'
+    
+    # update district cache search
+    after_save :update_cache_search
+		def update_cache_search
+			str = []
+			str << name.to_s.downcase.strip
+
+			self.update_column(:cache_search, str.join(" ") + " " + str.join(" ").to_ascii)
+		end
     
     def self.select2(params)
       per_page = 10
@@ -11,7 +20,7 @@ module GnsArea
       
       # keyword
       if params[:q].present?
-        query = query.where('LOWER(gns_area_districts.name) LIKE ?', '%'+params[:q].to_ascii.downcase+'%')
+        query = query.where('LOWER(gns_area_districts.cache_search) LIKE ?', '%'+params[:q].to_ascii.downcase+'%')
       end     
       
       # state
@@ -30,26 +39,6 @@ module GnsArea
       end
       
       return data
-    end
-    
-    # import district
-    def self.import(file)
-      ActiveRecord::Base.logger = nil
-      
-      xlsx = Roo::Spreadsheet.open(file)
-      
-      # Read excel file. sheet tabs loop
-      xlsx.each_with_pagename do |name, sheet|
-        sheet.each_row_streaming do |row|
-          
-          GnsArea::District.create(
-            name: row[0].value,
-            state_id: row[1].value
-          )
-          puts GnsArea::District.count
-          
-        end
-      end
     end
     
   end
