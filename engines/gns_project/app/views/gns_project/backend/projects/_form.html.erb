@@ -2,17 +2,34 @@
 
     <fieldset>
         
-        <div class="form-group">
-            <label class="d-block font-weight-semibold">Code <span class="text-danger">*</span></label>
-            <input type="text" class="form-control <%= 'border-danger' if project.errors.full_messages_for(:code).present? %>" placeholder="Enter name"
-                name="project[code]"
-                value="<%= project.code %>"
-            >
-            <% if project.errors.full_messages_for(:code).present? %>
-                <span class="form-text text-danger"><%= project.errors.full_messages_for(:code).join('<br/>').html_safe %></span>
-            <% end %>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-block font-weight-semibold">Code <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control <%= 'border-danger' if project.errors.full_messages_for(:code).present? %>" placeholder="Enter name"
+                        name="project[code]"
+                        value="<%= project.code %>"
+                    >
+                    <% if project.errors.full_messages_for(:code).present? %>
+                        <span class="form-text text-danger"><%= project.errors.full_messages_for(:code).join('<br/>').html_safe %></span>
+                    <% end %>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-block font-weight-semibold">Category</label>
+                    <select name="project[category_id]" data-placeholder="Select category..."
+                      class="form-control select-ajax"
+                      data-url="<%= gns_project.select2_backend_categories_path %>"
+                    >
+                    </select>
+                    <% if project.errors.full_messages_for(:category_id).present? %>
+                        <span class="form-text text-danger"><%= project.errors.full_messages_for(:category_id).join('<br/>').html_safe %></span>
+                    <% end %>
+                </div>
+            </div>
         </div>
-        
+            
         <div class="form-group">
             <label class="d-block font-weight-semibold">Name <span class="text-danger">*</span></label>
             <input type="text" class="form-control <%= 'border-danger' if project.errors.full_messages_for(:name).present? %>" placeholder="Enter name"
@@ -25,14 +42,14 @@
         </div>
         
         <div class="form-group">
-            <label class="d-block font-weight-semibold">Category</label>
-            <select name="project[category_id]" data-placeholder="Select category" class="form-control select form-control-select2" data-fouc>
-                <option></option>
-                <option value="1">Khách hàng</option> 
-                <option value="2">Nhà cung cấp</option>
+            <label class="d-block font-weight-semibold">Customer</label>
+            <select name="project[customer_id]" data-placeholder="Select customer..."
+              class="form-control select-ajax"
+              data-url="<%= gns_contact.select2_backend_contacts_path %>"
+            >
             </select>
-            <% if project.errors.full_messages_for(:category_id).present? %>
-                <span class="form-text text-danger"><%= project.errors.full_messages_for(:category_id).join('<br/>').html_safe %></span>
+            <% if project.errors.full_messages_for(:customer_id).present? %>
+                <span class="form-text text-danger"><%= project.errors.full_messages_for(:customer_id).join('<br/>').html_safe %></span>
             <% end %>
         </div>
         

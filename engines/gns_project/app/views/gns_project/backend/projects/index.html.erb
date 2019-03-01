@@ -34,31 +34,23 @@
     <form class="datalist-filters">
         <div class="card-body pb-0">    
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="form-group">
-                        <select name="state_id" data-placeholder="Select a State..." class="form-control select-search select" data-fouc>
-                            <option></option>
-                            <option value="AZ">Arizona</option>
-                            <option value="CO">Colorado</option>
-                            <option value="ID">Idaho</option>
-                            <option value="WY">Wyoming</option>
-                            <option value="AL">Alabama</option>
-                            <option value="IA">Iowa</option>
-                            <option value="KS">Kansas</option>
-                            <option value="KY">Kentucky</option>
+                        <select name="category_id" data-placeholder="Select to filter by category..."
+                          class="form-control select-ajax"
+                          data-url="<%= gns_project.select2_backend_categories_path %>">
                         </select>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="form-group">
-                        <select name="types[]" data-placeholder="Select types..." class="form-control select" multiple="multiple" data-fouc>
-                            <option value="customer">Customer</option>
-                            <option value="supplier">Supplier</option>
-                            <option value="agent">Agent</option>
+                        <select name="customer_id" data-placeholder="Select to filter by customer..."
+                          class="form-control select-ajax"
+                          data-url="<%= gns_contact.select2_backend_contacts_path %>">
                         </select>
                     </div>
                 </div>
-                <div class="col-md-4 text-right">
+                <div class="col-md-6 text-right">
                     <span class="btn btn-primary mb-3 datalist-search-button">Go</span>
                 </div>
             </div>

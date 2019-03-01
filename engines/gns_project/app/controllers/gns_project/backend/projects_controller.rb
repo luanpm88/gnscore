@@ -33,7 +33,8 @@ module GnsProject::Backend
       if @project.save
         respond_to do |format|
           format.html {
-            redirect_to gns_project.backend_projects_path, notice: 'Project was successfully created.'
+            flash[:success] = 'Project was successfully created.'
+            redirect_to gns_project.backend_projects_path
           }
           format.json {
             render json: {
@@ -52,7 +53,8 @@ module GnsProject::Backend
       if @project.update(project_params)
         respond_to do |format|
           format.html {
-            redirect_to gns_project.backend_projects_path, notice: 'Project was successfully updated.'
+            flash[:success] = 'Project was successfully updated.'
+            redirect_to gns_project.backend_projects_path
           }
           format.json {
             render json: {
@@ -72,7 +74,8 @@ module GnsProject::Backend
       
       respond_to do |format|
         format.html {
-          redirect_to gns_project.backend_categories_path, notice: 'Project was successfully destroyed.'
+          flash[:success] = 'Project was successfully destroyed.'
+          redirect_to gns_project.backend_categories_path
         }
         format.json {
           render json: {
@@ -91,7 +94,7 @@ module GnsProject::Backend
 
       # Only allow a trusted parameter "white list" through.
       def project_params
-        params.fetch(:project, {}).permit(:code, :name, :category_id)
+        params.fetch(:project, {}).permit(:code, :name, :category_id, :customer_id)
       end
   end
 end

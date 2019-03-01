@@ -8,6 +8,7 @@ GnsProject::Engine.routes.draw do
         resources :categories do
             collection do
                 post 'list'
+                get 'select2'
             end
         end
     end

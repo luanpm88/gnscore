@@ -33,7 +33,8 @@ module GnsProject::Backend
       if @category.save
         respond_to do |format|
           format.html {
-            redirect_to gns_project.backend_categories_path, notice: 'Category was successfully created.'
+            flash[:success] = 'Category was successfully created.'
+            redirect_to gns_project.backend_categories_path
           }
           format.json {
             render json: {
@@ -52,7 +53,8 @@ module GnsProject::Backend
       if @category.update(category_params)
         respond_to do |format|
           format.html {
-            redirect_to gns_project.backend_categories_path, notice: 'Category was successfully updated.'
+            flash[:success] = 'Category was successfully updated.'
+            redirect_to gns_project.backend_categories_path
           }
           format.json {
             render json: {
@@ -68,19 +70,38 @@ module GnsProject::Backend
 
     # DELETE /categories/1
     def destroy
-      @category.destroy
-      
-      respond_to do |format|
-        format.html {
-          redirect_to gns_project.backend_categories_path, notice: 'Category was successfully destroyed.'
-        }
-        format.json {
-          render json: {
-            status: 'success',
-            message: 'The category was successfully deleted.',
+      if @category.destroy
+        respond_to do |format|
+          format.html {
+            flash[:success] = 'Category was successfully destroyed.'
+            redirect_to gns_project.backend_categories_path
           }
-        }
+          format.json {
+            render json: {
+              status: 'success',
+              message: 'The category was successfully deleted.',
+            }
+          }
+        end
+      else
+        respond_to do |format|
+          format.html {
+            flash[:warning] = @category.errors.full_messages.to_sentence
+            redirect_to gns_project.backend_categories_path
+          }
+          format.json {
+            render json: {
+              status: 'warning',
+              message: @category.errors.full_messages.to_sentence
+            }
+          }
+        end
       end
+    end
+    
+    # SELECT2 /categories
+    def select2
+      render json: GnsProject::Category.select2(params)
     end
 
     private

@@ -1,9 +1,21 @@
 module GnsProject
   class Project < ApplicationRecord
-    belongs_to :category
+    belongs_to :category, class_name: 'GnsProject::Category'
+    belongs_to :customer, class_name: 'GnsContact::Contact'
     
-    validates :name, :category_id, :presence => true
+    validates :name, :category_id, :customer_id, :presence => true
     
+    # get customer name
+    def customer_name
+      customer.present? ? customer.full_name : ''
+    end
+    
+    # get category name
+    def category_name
+      category.present? ? category.name : ''
+    end
+    
+    # update project cache search
     after_save :update_cache_search
 		def update_cache_search
 			str = []
@@ -13,9 +25,19 @@ module GnsProject
 			self.update_column(:cache_search, str.join(" ") + " " + str.join(" ").to_ascii)
 		end
     
-    # Filters
+    # filters
     def self.filter(query, params)
       params = params.to_unsafe_hash
+      
+      # filter by category
+      if params[:category_id].present?
+        query = query.where(category_id: params[:category_id])
+      end
+      
+      # filter by customer
+      if params[:customer_id].present?
+        query = query.where(customer_id: params[:customer_id])
+      end
       
       # single keyword
       if params[:keyword].present?
@@ -29,6 +51,7 @@ module GnsProject
       return query
     end
     
+    # searchs
     def self.search(params)
       query = self.all
       query = self.filter(query, params)
@@ -42,6 +65,36 @@ module GnsProject
       end
 
       return query
+    end
+    
+    def self.select2(params)
+      per_page = 10
+      page = 1      
+      data = {results: [], pagination: {more: false}}
+      
+      query = self.order(:name)
+      
+      # keyword
+      if params[:q].present?
+        query = query.where('LOWER(gns_area_districts.cache_search) LIKE ?', '%'+params[:q].to_ascii.downcase+'%')
+      end     
+      
+      # state
+      if params[:state_id].present?
+        query = query.where(state_id: params[:state_id])
+      end
+      
+      # pagination
+      page = params[:page].to_i if params[:page].present?
+      query = query.limit(per_page).offset(per_page*(page-1))      
+      data[:pagination][:more] = true if query.count > 0
+      
+      # render items
+      query.each do |d|
+        data[:results] << {id: d.id, text: d.name}
+      end
+      
+      return data
     end
   end
 end
