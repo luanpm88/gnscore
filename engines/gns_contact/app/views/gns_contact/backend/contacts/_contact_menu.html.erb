@@ -3,13 +3,15 @@
     <div class="header-elements">
         <ul class="nav nav-tabs nav-tabs-bottom card-header-tabs mx-0">
             <li class="nav-item">
-                <a href="<%= gns_contact.backend_contact_path(@contact) %>" class="nav-link <%= 'active' if tab == 'general' %>">
+                <a href="<%= gns_contact.backend_contact_path(@contact) %>"
+                  class="nav-link <%= 'active' if tab == 'general' %> <%= 'modal-control' if request.xhr? %>" modal-size="full">
                     <i class="icon-users mr-2"></i>
                     General
                 </a>
             </li>
             <li class="nav-item">
-                <a href="<%= gns_contact.projects_backend_contacts_path(@contact.id) %>" class="nav-link <%= 'active' if tab == 'projects' %>">
+                <a href="<%= gns_contact.projects_backend_contacts_path(@contact.id) %>"
+                  class="nav-link <%= 'active' if tab == 'projects' %> <%= 'modal-control' if request.xhr? %>" modal-size="full">
                     <i class="icon-stats-bars mr-2"></i>
                     Projects
                 </a>
