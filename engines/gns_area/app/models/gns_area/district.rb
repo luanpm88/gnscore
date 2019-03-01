@@ -7,16 +7,21 @@ module GnsArea
       page = 1      
       data = {results: [], pagination: {more: false}}
       
-      query = self.all
+      query = self.order(:name)
       
       # keyword
       if params[:q].present?
         query = query.where('LOWER(gns_area_districts.name) LIKE ?', '%'+params[:q].to_ascii.downcase+'%')
+      end     
+      
+      # state
+      if params[:state_id].present?
+        query = query.where(state_id: params[:state_id])
       end
       
       # pagination
       page = params[:page].to_i if params[:page].present?
-      query = self.limit(per_page).offset(per_page*(page-1))      
+      query = query.limit(per_page).offset(per_page*(page-1))      
       data[:pagination][:more] = true if query.count > 0
       
       # render items

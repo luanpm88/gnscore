@@ -123,11 +123,11 @@ $.fn.datalist = function() {
                 
                 box.load(url);                
             });
-            
-            // scroll top top of list
-            $('html, body').animate({
-                scrollTop: box.datalist.offset().top
-            }, 200);
+            //
+            //// scroll top top of list
+            //$('html, body').animate({
+            //    scrollTop: box.datalist.offset().top
+            //}, 200);
         };
         
         datalists[box.id] = box;

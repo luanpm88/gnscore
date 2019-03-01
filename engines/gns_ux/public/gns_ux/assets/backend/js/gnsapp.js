@@ -1,29 +1,4 @@
 function showNotification(status, message) {
-    //    <% titles = {
-    //    "success" => "Success",
-    //    "notice" => "Info",
-    //    "warning" => "Warning",
-    //    "error" => "Error",
-    //} %>
-    //
-    //<% classes = {
-    //    "success" => "success",
-    //    "alert" => "warning",
-    //    "notice" => "success",
-    //    "warning" => "warning",
-    //    "error" => "error",
-    //    "info" => "info"
-    //} %>
-    //
-    //<% icons = {
-    //    "success" => "icon-checkmark3",
-    //    "alert" => "icon-warning",
-    //    "notice" => "icon-checkmark3",
-    //    "warning" => "icon-warning",
-    //    "error" => "icon-blocked",
-    //    "info" => "icon-info22"
-    //} %>
-    //
     switch(status) {
         case 'success':
             new PNotify({

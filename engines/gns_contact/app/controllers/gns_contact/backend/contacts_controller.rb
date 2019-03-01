@@ -1,6 +1,6 @@
 module GnsContact::Backend
   class ContactsController < GnsCore::Backend::BackendController
-    before_action :set_contact, only: [:show, :edit, :update, :destroy]
+    before_action :set_contact, only: [:show, :projects, :edit, :update, :destroy]
 
     # GET /contacts
     def index
@@ -15,6 +15,10 @@ module GnsContact::Backend
 
     # GET /contacts/1
     def show
+    end
+    
+    # GET /contacts/1/projects
+    def projects
     end
 
     # GET /contacts/new
