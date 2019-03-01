@@ -54,19 +54,32 @@ module GnsContact::Backend
 
     # DELETE /contacts/1
     def destroy
-      @contact.destroy
-      
-      respond_to do |format|
-        format.html {
-          flash[:success] = 'Contact was successfully destroyed.'
-          redirect_to gns_contact.backend_contacts_path
-        }
-        format.json {
-          render json: {
-            status: 'success',
-            message: 'The contact was successfully deleted.',
+      if @contact.destroy
+        respond_to do |format|
+          format.html {
+            flash[:success] = 'Contact was successfully destroyed.'
+            redirect_to gns_contact.backend_contacts_path
           }
-        }
+          format.json {
+            render json: {
+              status: 'success',
+              message: 'The contact was successfully deleted.',
+            }
+          }
+        end
+      else
+        respond_to do |format|
+          format.html {
+            flash[:warning] = @contact.errors.full_messages.to_sentence
+            redirect_to gns_contact.backend_contacts_path
+          }
+          format.json {
+            render json: {
+              status: 'warning',
+              message: @contact.errors.full_messages.to_sentence
+            }
+          }
+        end
       end
     end
     

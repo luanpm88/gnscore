@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_28_071926) do
+ActiveRecord::Schema.define(version: 2019_03_01_042950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2019_02_28_071926) do
     t.bigint "state_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "cache_search"
     t.index ["state_id"], name: "index_gns_area_districts_on_state_id"
   end
 
@@ -34,6 +35,7 @@ ActiveRecord::Schema.define(version: 2019_02_28_071926) do
     t.bigint "country_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "cache_search"
     t.index ["country_id"], name: "index_gns_area_states_on_country_id"
   end
 
@@ -44,12 +46,14 @@ ActiveRecord::Schema.define(version: 2019_02_28_071926) do
     t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "cache_search"
   end
 
   create_table "gns_project_categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "cache_search"
   end
 
   create_table "gns_project_projects", force: :cascade do |t|
@@ -59,7 +63,9 @@ ActiveRecord::Schema.define(version: 2019_02_28_071926) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "cache_search"
+    t.bigint "customer_id"
     t.index ["category_id"], name: "index_gns_project_projects_on_category_id"
+    t.index ["customer_id"], name: "index_gns_project_projects_on_customer_id"
   end
 
 end

@@ -1,6 +1,18 @@
 module GnsContact
   class Contact < ApplicationRecord
+    has_many :projects, class_name: 'GnsProject::Project', foreign_key: :customer_id, dependent: :restrict_with_error # Prevent deleting record being used
+    
     validates :full_name, :presence => true
+    
+    # update contact cache search
+    after_save :update_cache_search
+		def update_cache_search
+			str = []
+			str << full_name.to_s.downcase.strip
+			str << email.to_s.downcase.strip if email.present?
+
+			self.update_column(:cache_search, str.join(" ") + " " + str.join(" ").to_ascii)
+		end
     
     # Filters
     def self.filter(query, params)
@@ -15,7 +27,7 @@ module GnsContact
 				keyword = params[:keyword].strip.downcase
 				keyword.split(' ').each do |q|
 					q = q.strip
-					query = query.where('LOWER(gns_contact_contacts.full_name) LIKE ?', '%'+q.to_ascii.downcase+'%')
+					query = query.where('LOWER(gns_contact_contacts.cache_search) LIKE ?', '%'+q.to_ascii.downcase+'%')
 				end
 			end
 

@@ -2,7 +2,7 @@
 
     <fieldset>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
                     <div class="card-img-actions mx-1 mt-1">
                         <img class="card-img img-fluid" src="/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg" alt="">
@@ -18,42 +18,22 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div class="form-group">
                     <label class="d-block font-weight-semibold">Code <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" placeholder="Enter code (or Generate code automatically)">
                 </div>
-                
                 <div class="form-group">
-                    <label class="d-block font-weight-semibold">Contact type</label>
-                    
-                    <div class="custom-control custom-checkbox custom-control-inline mb-1 mr-3">
-                        <input type="checkbox" class="custom-control-input" id="is_customer" name="contact[is_customer]">
-                        <label class="custom-control-label" for="is_customer">Customer</label>
-                    </div>
-    
-                    <div class="custom-control custom-checkbox custom-control-inline mb-1 mr-3">
-                        <input type="checkbox" class="custom-control-input" id="is_supplier" name="contact[is_supplier]">
-                        <label class="custom-control-label" for="is_supplier">Supplier</label>
-                    </div>
-    
-                    <div class="custom-control custom-checkbox custom-control-inline mb-1 mr-3">
-                        <input type="checkbox" class="custom-control-input" id="is_agent" name="contact[is_agent]">
-                        <label class="custom-control-label" for="is_agent">Agent</label>
-                    </div>
+                    <label class="d-block font-weight-semibold">Full Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control <%= 'border-danger' if contact.errors.full_messages_for(:full_name).present? %>" placeholder="Enter full name"
+                        name="contact[full_name]"
+                        value="<%= contact.full_name %>"
+                    >
+                    <% if contact.errors.full_messages_for(:full_name).present? %>
+                        <span class="form-text text-danger"><%= contact.errors.full_messages_for(:full_name).join('<br/>').html_safe %></span>
+                    <% end %>
                 </div>
             </div>
-        </div>
-        
-        <div class="form-group">
-            <label class="d-block font-weight-semibold">Full Name <span class="text-danger">*</span></label>
-            <input type="text" class="form-control <%= 'border-danger' if contact.errors.full_messages_for(:full_name).present? %>" placeholder="Enter full name"
-                name="contact[full_name]"
-                value="<%= contact.full_name %>"
-            >
-            <% if contact.errors.full_messages_for(:full_name).present? %>
-                <span class="form-text text-danger"><%= contact.errors.full_messages_for(:full_name).join('<br/>').html_safe %></span>
-            <% end %>
         </div>
         
         <div class="row">
