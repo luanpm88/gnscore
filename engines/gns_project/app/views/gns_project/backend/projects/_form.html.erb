@@ -19,9 +19,9 @@
                 <div class="form-group">
                     <label class="d-block font-weight-semibold">Category</label>
                     <select name="project[category_id]" data-placeholder="Select category..."
-                      class="form-control select-ajax"
-                      data-url="<%= gns_project.select2_backend_categories_path %>"
-                    >
+                        class="form-control select-ajax"
+                        data-url="<%= gns_project.select2_backend_categories_path %>">
+                        <option value="<%= project.category_id %>"><%= project.category_name %></option>
                     </select>
                     <% if project.errors.full_messages_for(:category_id).present? %>
                         <span class="form-text text-danger"><%= project.errors.full_messages_for(:category_id).join('<br/>').html_safe %></span>
@@ -44,9 +44,9 @@
         <div class="form-group">
             <label class="d-block font-weight-semibold">Customer</label>
             <select name="project[customer_id]" data-placeholder="Select customer..."
-              class="form-control select-ajax"
-              data-url="<%= gns_contact.select2_backend_contacts_path %>"
-            >
+                class="form-control select-ajax"
+                data-url="<%= gns_contact.select2_backend_contacts_path %>">
+                <option value="<%= project.customer_id %>"><%= project.customer_name %></option>
             </select>
             <% if project.errors.full_messages_for(:customer_id).present? %>
                 <span class="form-text text-danger"><%= project.errors.full_messages_for(:customer_id).join('<br/>').html_safe %></span>

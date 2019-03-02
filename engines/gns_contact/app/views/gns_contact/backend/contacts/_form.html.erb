@@ -98,12 +98,9 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="d-block font-weight-semibold">Country</label>
-                    <select name="contact[country_id]" data-placeholder="Select country" class="form-control select form-control-select2" data-fouc>
-                        <option></option>
-                        <option value="1">Canada</option> 
-                        <option value="2">USA</option> 
-                        <option value="3">Australia</option> 
-                        <option value="4">Germany</option> 
+                    <select name="contact[country_id]" data-placeholder="Choose country"
+                        class="form-control select-ajax"
+                        data-url="<%= gns_area.select2_backend_countries_path %>">
                     </select>
                 </div>
             </div>
@@ -111,12 +108,9 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="d-block font-weight-semibold">State/Province</label>
-                    <select name="contact[state_id]" data-placeholder="Select state/province" class="form-control select form-control-select2" data-fouc>
-                        <option></option>
-                        <option value="1">Canada</option> 
-                        <option value="2">USA</option> 
-                        <option value="3">Australia</option> 
-                        <option value="4">Germany</option> 
+                    <select name="contact[state_id]" data-placeholder="Choose state/province"
+                        class="form-control select-ajax-state"
+                        data-url="<%= gns_area.select2_backend_states_path %>">
                     </select>
                 </div>
             </div>
@@ -126,12 +120,9 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="d-block font-weight-semibold">District/Town/City</label>
-                    <select name="contact[district_id]" data-placeholder="Select district/town/city" class="form-control select form-control-select2" data-fouc>
-                        <option></option>
-                        <option value="1">Canada</option> 
-                        <option value="2">USA</option> 
-                        <option value="3">Australia</option> 
-                        <option value="4">Germany</option> 
+                    <select name="contact[district_id]" data-placeholder="Choose district/town/city"
+                        class="form-control select-ajax-district"
+                        data-url="<%= gns_area.select2_backend_districts_path %>">
                     </select>
                 </div>
             </div>
@@ -185,6 +176,54 @@
 
 <% content_for :page_script do %>
     <script>
-        
+        $(document).ready(function() {
+            // Select2 ajax
+            $('.select-ajax-state').each(function() {
+                var url = $(this).attr('data-url');
+                
+                $(this).select2({
+                    allowClear: true,
+                    ajax: {
+                        url: url,
+                        dataType: 'json',
+                        data: function (params) {
+                            console.log(params);
+                            var query = {
+                                q: params.term,
+                                page: params.page,
+                                type: 'public',
+                                country_id: $('select[name="contact[country_id]"]').select2('val'),
+                            }
+                      
+                            // Query parameters will be ?search=[term]&type=public
+                            return query;
+                        }
+                    }
+                }); 
+            });
+            $('.select-ajax-district').each(function() {
+                var url = $(this).attr('data-url');
+                
+                $(this).select2({
+                    allowClear: true,
+                    ajax: {
+                        url: url,
+                        dataType: 'json',
+                        data: function (params) {
+                            console.log(params);
+                            var query = {
+                                q: params.term,
+                                page: params.page,
+                                type: 'public',
+                                state_id: $('select[name="contact[state_id]"]').select2('val')
+                            }
+                      
+                            // Query parameters will be ?search=[term]&type=public
+                            return query;
+                        }
+                    }
+                }); 
+            });
+        });
     </script>
 <% end %>

@@ -21,7 +21,7 @@ module GnsArea
       # keyword
       if params[:q].present?
         query = query.where('LOWER(gns_area_districts.cache_search) LIKE ?', '%'+params[:q].to_ascii.downcase+'%')
-      end     
+      end
       
       # state
       if params[:state_id].present?

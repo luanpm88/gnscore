@@ -1,7 +1,5 @@
-require_dependency "gns_area/application_controller"
-
-module GnsArea
-  class CountriesController < ApplicationController
+module GnsArea::Backend
+  class CountriesController < GnsCore::Backend::BackendController
     before_action :set_country, only: [:show, :edit, :update, :destroy]
 
     # GET /countries
@@ -46,6 +44,10 @@ module GnsArea
     def destroy
       @country.destroy
       redirect_to countries_url, notice: 'Country was successfully destroyed.'
+    end
+    
+    def select2
+      render json: GnsArea::Country.select2(params)
     end
 
     private
