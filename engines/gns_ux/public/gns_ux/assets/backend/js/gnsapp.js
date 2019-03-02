@@ -104,6 +104,8 @@ $(document).ready(function() {
             
             var message = $(this).attr('data-confirm');
             
+            var confirmModal = $('#confirmModal');
+            confirmModal.remove();
             // show modal confirmation
             var html = '<div id="confirmModal" class="modal fade" tabindex="-1">' +
                 '<div class="modal-dialog modal-sm">' +
@@ -125,7 +127,7 @@ $(document).ready(function() {
                 '</div>' +
             '</div>';
             $('body').append(html);
-            var confirmModal = $('#confirmModal');
+            confirmModal = $('#confirmModal');
             
             confirmModal.modal('show');
             
