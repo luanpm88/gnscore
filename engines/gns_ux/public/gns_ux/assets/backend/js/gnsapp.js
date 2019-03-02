@@ -78,12 +78,13 @@ function applyJs(container) {
         var url = $(this).attr('data-url');
         
         $(this).select2({
+            allowClear: true,
             ajax: {
               url: url,
               dataType: 'json'
               // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
             }
-        }); 
+        });
     });
 }
 
