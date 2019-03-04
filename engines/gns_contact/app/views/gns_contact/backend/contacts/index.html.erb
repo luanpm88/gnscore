@@ -21,7 +21,7 @@
     <script>
         $(document).ready(function() {
             // Select2 ajax
-            $('.select-ajax-district').each(function() {
+            $('[name=district_id]').each(function() {
                 var url = $(this).attr('data-url');
                 
                 $(this).select2({
@@ -35,7 +35,7 @@
                                 q: params.term,
                                 page: params.page,
                                 type: 'public',
-                                state_id: $('select[name=state_id]').select2('val')
+                                state_id: $('[name=state_id]').select2('val')
                             }
                       
                             // Query parameters will be ?search=[term]&type=public
@@ -43,6 +43,15 @@
                         }
                     }
                 }); 
+            });
+            
+            $('[name=state_id]').change(function() {
+                $('[name=district_id]').val(null).trigger('change');
+            });
+            
+            $('[name=country_id]').change(function() {
+                $('[name=state_id]').val(null).trigger('change');
+                $('[name=district_id]').val(null).trigger('change');
             });
         });
     </script>
@@ -76,7 +85,7 @@
                 <div class="col-md-2">
                     <div class="form-group">
                         <select name="district_id" data-placeholder="Select a State..."
-                          class="form-control select-ajax-district"
+                          class="form-control"
                           data-url="<%= gns_area.select2_backend_districts_path %>">
                         </select>
                     </div>
