@@ -51,3 +51,19 @@ xlsx_districts.each_with_pagename do |name, sheet|
   puts "#{thutu_huyen} districts have been imported"
   puts "Total #{GnsArea::District.count} districts in the table"
 end
+
+# Update cache search
+GnsArea::Country.all.each do |c|
+  c.update_cache_search
+end
+puts 'Countries: Cache search have been updated'
+
+GnsArea::State.all.each do |s|
+  s.update_cache_search
+end
+puts 'States: Cache search have been updated'
+
+GnsArea::District.all.each do |d|
+  d.update_cache_search
+end
+puts 'Districts: Cache search have been updated'
