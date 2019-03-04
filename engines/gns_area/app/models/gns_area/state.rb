@@ -26,6 +26,11 @@ module GnsArea
         query = query.where('LOWER(gns_area_states.cache_search) LIKE ?', '%'+params[:q].to_ascii.downcase.strip+'%')
       end
       
+      # state
+      if params[:country_id].present?
+        query = query.where(country_id: params[:country_id])
+      end
+      
       # pagination
       page = params[:page].to_i if params[:page].present?
       query = query.limit(per_page).offset(per_page*(page-1))      
