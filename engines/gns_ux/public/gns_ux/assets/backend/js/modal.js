@@ -24,12 +24,21 @@ function gModal(options) {
     
     var thisModal = this;
     
+    // clear content
+    this.clear = function() {
+        // loading effect
+        thisModal.content.html('<div class="modal-loading-overlay"><i class="icon-spinner4 spinner mr-2"></i></div>');
+    };
+    
+    // hide modal
+    this.hide = function() {
+        this.modal.modal('hide');
+    };
+    
     // load url to modal
     this.load = function(url) {
         // loading effect
-        if (thisModal.content.find('.modal-loading-overlay').length === 0) {
-            thisModal.content.html('<div class="modal-loading-overlay"><i class="icon-spinner4 spinner mr-2"></i></div>');
-        }
+        thisModal.clear();
     
         this.modal.modal('show');
         
@@ -40,10 +49,15 @@ function gModal(options) {
                 layout: 'modal'
             }
         }).done(function(response) {
-            thisModal.content.html(response);
-            
-            applyJs(thisModal.content);
+            thisModal.renderHtml(response);
         });
+    };
+    
+    // load url to modal
+    this.renderHtml = function(html) {
+        // loading effect
+        thisModal.content.html(html);            
+        applyJs(thisModal.content);
     };
 }
 

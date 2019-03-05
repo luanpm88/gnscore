@@ -11,5 +11,6 @@ GnsProject::Engine.routes.draw do
                 get 'select2'
             end
         end
+        resources :stages
     end
 end

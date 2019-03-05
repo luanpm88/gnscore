@@ -1,6 +1,7 @@
 module GnsProject
   class Category < ApplicationRecord
     has_many :projects, dependent: :restrict_with_error # Prevent deleting record being used
+    has_many :stages, dependent: :restrict_with_error
     
     validates :name, :presence => true
     

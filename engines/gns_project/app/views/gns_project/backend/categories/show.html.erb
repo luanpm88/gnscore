@@ -1,0 +1,149 @@
+<% content_for :title do %>
+    Show Contact
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+    <a href="<%= gns_contact.backend_contacts_path %>" class="breadcrumb-item">Project Category</a>
+    <span class="breadcrumb-item active">Show</span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Project Category</span> - <%= @category.name %></h4>
+<% end %>
+
+<% content_for :page_toolbar do %>
+    <a class="btn btn-primary" href="<%= gns_project.new_backend_project_path %>">
+        <b><i class="icon-plus22"></i></b> Thêm mới
+    </a>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        var modal;
+        $(function() {
+            $('.add-stage-button').click(function(e) {
+                e.preventDefault();
+                
+                modal = new gModal();
+                modal.load($(this).attr('href'));
+            });
+        });
+    </script>
+<% end %>
+
+<div class="row">
+    <div class="col-md-7">
+        
+        <!-- Bottom tabs -->
+        <div class="card">
+            
+            <div class="card-header bg-white pb-0 pt-sm-0 pr-sm-0 header-elements-sm-inline">
+                <h6 class="card-title font-weight-semibold">Category Details</h6>
+                <div class="header-elements">
+                    <ul class="nav nav-tabs nav-tabs-bottom card-header-tabs mx-0">
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-cog5 mr-2"></i>
+                                Action
+                            </a>
+                            
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a href="#card-bottom-tab3" tabindex="-1" class="dropdown-item" data-toggle="tab">
+                                    <i class="icon-people"></i>
+                                    Update
+                                </a>
+                                <a href="#card-bottom-tab4" tabindex="-1" class="dropdown-item" data-toggle="tab">
+                                    <i class="icon-stack"></i>
+                                    Delete
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="tab-pane fade show active" id="bottom-tab1">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td class="font-weight-semibold">Category name:</td>
+                                        <td class="text-right"><a href="#"><%= @category.name %></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-semibold">Added by:</td>
+                                        <td class="text-right"><a href="#">Winnie</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="tab-pane fade show active" id="bottom-tab1">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td class="font-weight-semibold">Updated:</td>
+                                        <td class="text-right text-muted">12 May, 2015</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-weight-semibold">Created:</td>
+                                        <td class="text-right text-muted">25 Feb, 2015</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /bottom tabs -->
+        
+        <!-- Bottom tabs -->
+        <div class="card">
+            
+            <div class="card-header bg-white header-elements-inline">
+                <h6 class="card-title font-weight-semibold">Stage List</h6>
+                <div class="header-elements">
+                    <a href="<%= gns_project.new_backend_stage_path(category_id: @category.id) %>" class="btn bg-blue mr-3 add-stage-button">Add stage</a>
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                        <a class="list-icons-item" data-action="remove"></a>
+                    </div>
+                </div>
+            </div>
+            
+            <% if @category.stages.empty? %>
+                <div class="card-body">
+                    <p class="text-center text-warning">
+                        There are no stage
+                    </p>
+                </div>
+            <% else %>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Stage name</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @category.stages.each do |stage| %>
+                            <tr>
+                                <td><%= stage.name %></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            <% end %>
+        </div>
+        <!-- /bottom tabs -->
+        
+    </div>
+</div>
