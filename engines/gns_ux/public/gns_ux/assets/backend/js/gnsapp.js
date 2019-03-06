@@ -77,8 +77,13 @@ function applyJs(container) {
     container.find('.select-ajax').each(function() {
         var url = $(this).attr('data-url');
         
+        var allow_clear = true;
+        if ($(this).attr('multiple') !== 'undefined') {
+            allow_clear = false;
+        }
+        
         $(this).select2({
-            allowClear: true,
+            allowClear: allow_clear,
             ajax: {
               url: url,
               dataType: 'json'
