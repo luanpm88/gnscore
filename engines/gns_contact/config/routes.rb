@@ -7,5 +7,11 @@ GnsContact::Engine.routes.draw do
                 get ':id/projects', to: 'contacts#projects', as: 'projects'
             end
         end
+        resources :categories do
+            collection do
+                post 'list'
+                get 'select2'
+            end
+        end
     end
 end

@@ -1,8 +1,27 @@
 module GnsContact
   class Contact < ApplicationRecord
-    has_many :projects, class_name: 'GnsProject::Project', foreign_key: :customer_id, dependent: :restrict_with_error # Prevent deleting record being used
-    
     validates :full_name, :presence => true
+    
+    belongs_to :country, class_name: 'GnsArea::Country'
+    belongs_to :state, class_name: 'GnsArea::State'
+    belongs_to :district, class_name: 'GnsArea::District'
+    has_many :projects, class_name: 'GnsProject::Project', foreign_key: :customer_id, dependent: :restrict_with_error # Prevent deleting record being used
+    has_and_belongs_to_many :categories, class_name: 'GnsContact::Category'
+    
+    # get coutry name
+    def country_name
+      country.present? ? country.name : ''
+    end
+    
+    # get state name
+    def state_name
+      state.present? ? state.name : ''
+    end
+    
+    # get district name
+    def district_name
+      district.present? ? district.name : ''
+    end
     
     # update contact cache search
     after_save :update_cache_search
@@ -18,8 +37,19 @@ module GnsContact
     def self.filter(query, params)
       params = params.to_unsafe_hash
       
+      # filter by country_id
+      if params[:country_id].present?
+        query = query.where(country_id: params[:country_id])
+      end
+      
+      # filter by state_id
       if params[:state_id].present?
         query = query.where(state_id: params[:state_id])
+      end
+      
+      # filter by district_id
+      if params[:district_id].present?
+        query = query.where(district_id: params[:district_id])
       end
       
       # single keyword

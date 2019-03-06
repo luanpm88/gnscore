@@ -21,6 +21,53 @@
     <script>
         $(document).ready(function() {
             // Select2 ajax
+            $('[name=country_id]').each(function() {
+                var url = $(this).attr('data-url');
+                
+                $(this).select2({
+                    allowClear: true,
+                    ajax: {
+                        url: url,
+                        dataType: 'json',
+                        data: function (params) {
+                            console.log(params);
+                            var query = {
+                                q: params.term,
+                                page: params.page,
+                                type: 'public',
+                            }
+                      
+                            // Query parameters will be ?search=[term]&type=public
+                            return query;
+                        }
+                    }
+                }); 
+            });
+            
+            $('[name=state_id]').each(function() {
+                var url = $(this).attr('data-url');
+                
+                $(this).select2({
+                    allowClear: true,
+                    ajax: {
+                        url: url,
+                        dataType: 'json',
+                        data: function (params) {
+                            console.log(params);
+                            var query = {
+                                q: params.term,
+                                page: params.page,
+                                type: 'public',
+                                country_id: $('[name=country_id]').select2('val')
+                            }
+                      
+                            // Query parameters will be ?search=[term]&type=public
+                            return query;
+                        }
+                    }
+                }); 
+            });
+            
             $('[name=district_id]').each(function() {
                 var url = $(this).attr('data-url');
                 
@@ -76,6 +123,14 @@
             <div class="row">
                 <div class="col-md-2">
                     <div class="form-group">
+                        <select name="country_id" data-placeholder="Select a country..."
+                          class="form-control select-ajax"
+                          data-url="<%= gns_area.select2_backend_countries_path %>">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
                         <select name="state_id" data-placeholder="Select a state..."
                           class="form-control select-ajax"
                           data-url="<%= gns_area.select2_backend_states_path %>">
@@ -90,7 +145,15 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select name="category_ids[]" data-placeholder="Select the categories..."
+                          class="form-control select-ajax" multiple
+                          data-url="<%= gns_contact.select2_backend_categories_path %>">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
                     <div class="form-group">
                         <select name="types[]" data-placeholder="Select types..." class="form-control select" multiple="multiple" data-fouc>
                             <option value="customer">Customer</option>
@@ -99,7 +162,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-4 text-right">
+                <div class="col-md-2 text-right">
                     <span class="btn btn-primary mb-3 datalist-search-button">Go</span>
                 </div>
             </div>

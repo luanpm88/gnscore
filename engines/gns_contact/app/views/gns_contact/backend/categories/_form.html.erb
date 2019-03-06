@@ -1,0 +1,31 @@
+<%= form_for([gns_contact, :backend, category], html: {multipart: true}) do |f| %>
+
+    <fieldset>
+        
+        <div class="form-group">
+            <label class="d-block font-weight-semibold">Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control <%= 'border-danger' if category.errors.full_messages_for(:name).present? %>" placeholder="Enter name"
+                name="category[name]"
+                value="<%= category.name %>"
+            >
+            <% if category.errors.full_messages_for(:name).present? %>
+                <span class="form-text text-danger"><%= category.errors.full_messages_for(:name).join('<br/>').html_safe %></span>
+            <% end %>
+        </div>
+        
+    </fieldset>
+    
+    <hr class="mt-0">
+    <div class="text-left">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a class="btn btn-light ml-1" href="<%= gns_contact.backend_categories_path %>">
+            Cancel
+        </a>
+    </div>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        
+    </script>
+<% end %>

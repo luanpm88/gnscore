@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_05_021900) do
+ActiveRecord::Schema.define(version: 2019_03_06_033704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,20 @@ ActiveRecord::Schema.define(version: 2019_03_05_021900) do
     t.index ["country_id"], name: "index_gns_area_states_on_country_id"
   end
 
+  create_table "gns_contact_categories", force: :cascade do |t|
+    t.string "name"
+    t.text "cache_search"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "gns_contact_categories_contacts", force: :cascade do |t|
+    t.bigint "category_id"
+    t.bigint "contact_id"
+    t.index ["category_id"], name: "index_gns_contact_categories_contacts_on_category_id"
+    t.index ["contact_id"], name: "index_gns_contact_categories_contacts_on_contact_id"
+  end
+
   create_table "gns_contact_contacts", force: :cascade do |t|
     t.string "full_name"
     t.string "email"
@@ -47,6 +61,12 @@ ActiveRecord::Schema.define(version: 2019_03_05_021900) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "cache_search"
+    t.bigint "country_id"
+    t.bigint "state_id"
+    t.bigint "district_id"
+    t.index ["country_id"], name: "index_gns_contact_contacts_on_country_id"
+    t.index ["district_id"], name: "index_gns_contact_contacts_on_district_id"
+    t.index ["state_id"], name: "index_gns_contact_contacts_on_state_id"
   end
 
   create_table "gns_project_categories", force: :cascade do |t|
