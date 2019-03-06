@@ -29,7 +29,7 @@ module GnsProject
         sleep 1
   
         if @stage.save
-          flash[:success] = 'Stage was successfully destroyed.'
+          flash[:success] = 'Stage was successfully created.'
           
           render json: {
             status: 'success',
@@ -43,7 +43,12 @@ module GnsProject
       # PATCH/PUT /stages/1
       def update
         if @stage.update(stage_params)
-          redirect_to @stage, notice: 'Stage was successfully updated.'
+          flash[:success] = 'Stage was successfully updated.'
+          
+          render json: {
+            status: 'success',
+            message: 'Stage was successfully updated.',
+          }
         else
           render :edit
         end
@@ -52,7 +57,13 @@ module GnsProject
       # DELETE /stages/1
       def destroy
         @stage.destroy
-        redirect_to stages_url, notice: 'Stage was successfully destroyed.'
+        
+        flash[:success] = 'Stage was successfully destroyed.'
+          
+          render json: {
+            status: 'success',
+            message: 'Stage was successfully destroyed.',
+          }
       end
   
       private
