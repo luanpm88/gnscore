@@ -1,7 +1,9 @@
 function gModal(options) {
+    var thisModal = this;
+    
     // size
     this.size = 'lg';
-    this.id = 'gModal';
+    this.id = uniqueId();
     if (typeof(options) !== 'undefined') {
         if(typeof(options.size) !== 'undefined') {
             this.size = options.size;
@@ -21,8 +23,6 @@ function gModal(options) {
         this.modal = $('#'+this.id);
     }
     this.content = this.modal.find('.modal-content');
-    
-    var thisModal = this;
     
     // clear content
     this.clear = function() {

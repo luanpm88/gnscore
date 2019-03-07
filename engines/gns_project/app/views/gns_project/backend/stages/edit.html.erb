@@ -21,7 +21,7 @@
                 var form = $(this);
                 
                 // clear modal
-                modal.clear();
+                stage_modal.clear();
                 
                 $.ajax({
                     url: form.attr('action'),
@@ -30,9 +30,9 @@
                 }).done(function(response) {
                     if (typeof(response.status) !== 'undefined') {
                       showNotification(response.status, response.mesages);
-                      modal.hide();
+                      stage_modal.hide();
                       // load lại stages list
-                      ajax_box.load();
+                      stage_list_box.load();
                     } else {
                       modal.renderHtml(response);
                     }

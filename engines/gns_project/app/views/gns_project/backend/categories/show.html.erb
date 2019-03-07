@@ -21,26 +21,23 @@
 <% content_for :page_script do %>
     <script>
         // global modal cho việc tạo mới stage
-        var modal;
-        var ajax_box;
+        var stage_modal = new gModal();
+        var stage_list_box = new ajaxBox($('.stage-list'), '<%= gns_project.stages_backend_categories_path(@category.id) %>');
         $(function() {
             $('.add-stage-button').click(function(e) {
                 e.preventDefault();
                 
-                modal = new gModal(); // gModal hiện có sẵn hàm load, renderHtml, clear
-                modal.load($(this).attr('href'));
+                stage_modal.load($(this).attr('href'));
             });
             
             $(document).on('click', '.edit-stage-button', function(e) {
                 e.preventDefault();
                 
-                modal = new gModal(); // gModal hiện có sẵn hàm load, renderHtml, clear
-                modal.load($(this).attr('href'));
+                stage_modal.load($(this).attr('href'));
             });
             
             // ajax box stage list
-            ajax_box = new ajaxBox($('.stage-list'), '<%= gns_project.stages_backend_categories_path(@category.id) %>');
-            ajax_box.load();
+            stage_list_box.load();
         });
     </script>
 <% end %>
