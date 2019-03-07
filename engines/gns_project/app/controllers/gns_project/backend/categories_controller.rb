@@ -34,7 +34,7 @@ module GnsProject::Backend
         respond_to do |format|
           format.html {
             flash[:success] = 'Category was successfully created.'
-            redirect_to gns_project.backend_categories_path
+            redirect_to gns_project.backend_category_path(@category)
           }
           format.json {
             render json: {
@@ -54,7 +54,7 @@ module GnsProject::Backend
         respond_to do |format|
           format.html {
             flash[:success] = 'Category was successfully updated.'
-            redirect_to gns_project.backend_categories_path
+            redirect_to gns_project.backend_category_path(@category)
           }
           format.json {
             render json: {
@@ -105,7 +105,6 @@ module GnsProject::Backend
     end
     
     def stages
-      sleep 1
       render layout: nil
     end
 

@@ -12,8 +12,9 @@
 <% end %>
 
 <% content_for :page_toolbar do %>
-    <a class="btn btn-primary" href="<%= gns_project.new_backend_category_path %>">
-        <b><i class="icon-plus22"></i></b> Thêm mới
+    <a class="btn btn-primary create-category-button"
+        href="<%= gns_project.new_backend_category_path %>">
+        <b><i class="icon-plus22"></i></b> Create Category
     </a>
 <% end %>
 
@@ -26,7 +27,6 @@
         <div class="header-elements">
             <div class="list-icons">
                 <a class="list-icons-item" data-action="collapse"></a>
-                <a class="list-icons-item" data-action="reload"></a>
                 <a class="list-icons-item" data-action="remove"></a>
             </div>
         </div>

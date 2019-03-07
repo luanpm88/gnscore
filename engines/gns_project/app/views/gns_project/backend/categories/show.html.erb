@@ -4,7 +4,7 @@
 
 <% content_for :breadcrumb do %>
     <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-    <a href="<%= gns_contact.backend_contacts_path %>" class="breadcrumb-item">Project Category</a>
+    <a href="<%= gns_project.backend_categories_path %>" class="breadcrumb-item">Project Category</a>
     <span class="breadcrumb-item active">Show</span>
 <% end %>
 
@@ -13,8 +13,8 @@
 <% end %>
 
 <% content_for :page_toolbar do %>
-    <a class="btn btn-primary" href="<%= gns_project.new_backend_project_path %>">
-        <b><i class="icon-plus22"></i></b> Thêm mới
+    <a class="btn btn-primary create-category-button" href="<%= gns_project.new_backend_category_path %>">
+        <b><i class="icon-plus22"></i></b> Create Category
     </a>
 <% end %>
 
@@ -24,6 +24,13 @@
         var stage_modal = new gModal();
         var stage_list_box = new ajaxBox($('.stage-list'), '<%= gns_project.stages_backend_categories_path(@category.id) %>');
         $(function() {
+            $('.create-category-button').click(function(e) {
+                e.preventDefault();
+                
+                var category_modal = new gModal();
+                category_modal.load($(this).attr('href'));
+            });
+            
             $('.add-stage-button').click(function(e) {
                 e.preventDefault();
                 
@@ -48,27 +55,21 @@
         <!-- Bottom tabs -->
         <div class="card">
             
-            <div class="card-header bg-white pb-0 pt-sm-0 pr-sm-0 header-elements-sm-inline">
+            <div class="card-header bg-white header-elements-sm-inline">
                 <h6 class="card-title font-weight-semibold">Category Details</h6>
                 <div class="header-elements">
                     <ul class="nav nav-tabs nav-tabs-bottom card-header-tabs mx-0">
-                        <li class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                                <i class="icon-cog5 mr-2"></i>
-                                Action
-                            </a>
-                            
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a href="#card-bottom-tab3" tabindex="-1" class="dropdown-item" data-toggle="tab">
-                                    <i class="icon-people"></i>
-                                    Update
+                        <div class="list-icons ml-3">
+                            <div class="dropdown">
+                                <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu7"></i>
                                 </a>
-                                <a href="#card-bottom-tab4" tabindex="-1" class="dropdown-item" data-toggle="tab">
-                                    <i class="icon-stack"></i>
-                                    Delete
-                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="#" class="dropdown-item"><i class="icon-pencil7"></i> Update</a>
+                                    <a href="#" class="dropdown-item"><i class="icon-bin"></i> Delete</a>
+                                </div>
                             </div>
-                        </li>
+                        </div>
                     </ul>
                 </div>
             </div>
