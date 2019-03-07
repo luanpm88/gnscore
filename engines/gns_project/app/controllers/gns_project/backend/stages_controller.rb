@@ -25,8 +25,6 @@ module GnsProject
       # POST /stages
       def create
         @stage = Stage.new(stage_params)
-        
-        sleep 1
   
         if @stage.save
           flash[:success] = 'Stage was successfully created.'
@@ -41,9 +39,7 @@ module GnsProject
       end
   
       # PATCH/PUT /stages/1
-      def update
-        sleep 1
-  
+      def update  
         if @stage.update(stage_params)
           flash[:success] = 'Stage was successfully updated.'
           

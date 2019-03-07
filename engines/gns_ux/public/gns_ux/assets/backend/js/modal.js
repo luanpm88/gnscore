@@ -73,5 +73,5 @@ $(document).ready(function() {
         // show modal
         var m = new gModal({size: size});
         m.load($(this).attr('href'));
-    });    
+    });
 });

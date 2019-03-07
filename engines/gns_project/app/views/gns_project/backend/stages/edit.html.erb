@@ -29,12 +29,12 @@
                     data: form.serialize() + '&layout=modal',
                 }).done(function(response) {
                     if (typeof(response.status) !== 'undefined') {
-                      showNotification(response.status, response.mesages);
+                      showNotification(response.status, response.message);
                       stage_modal.hide();
                       // load lại stages list
                       stage_list_box.load();
                     } else {
-                      modal.renderHtml(response);
+                      stage_modal.renderHtml(response);
                     }
                 });
                 

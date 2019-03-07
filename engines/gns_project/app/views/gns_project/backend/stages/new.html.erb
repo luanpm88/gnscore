@@ -30,13 +30,13 @@
                     data: form.serialize() + '&layout=modal',
                 }).done(function(response) {
                     if (typeof(response.status) !== 'undefined') {
-                      showNotification(response.status, response.mesages);
+                      showNotification(response.status, response.message);
                       // ẩn modal stage đi
                       stage_modal.hide();
                       // load lại stages list
                       stage_list_box.load();
                     } else {
-                      modal.renderHtml(response);
+                      stage_modal.renderHtml(response);
                     }
                 });
                 
@@ -47,7 +47,7 @@
 <% end %>
 
 <div class="row">
-    <div class="col-lg-7 col-md-12">
+    <div class="col-lg-12 col-md-12">
         
         <% if @stage.errors.any? %>
             <div class="alert alert-danger alert-dismissible">
