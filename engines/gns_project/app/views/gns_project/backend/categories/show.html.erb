@@ -20,14 +20,27 @@
 
 <% content_for :page_script do %>
     <script>
+        // global modal cho việc tạo mới stage
         var modal;
+        var ajax_box;
         $(function() {
             $('.add-stage-button').click(function(e) {
                 e.preventDefault();
                 
-                modal = new gModal();
+                modal = new gModal(); // gModal hiện có sẵn hàm load, renderHtml, clear
                 modal.load($(this).attr('href'));
             });
+            
+            $(document).on('click', '.edit-stage-button', function(e) {
+                e.preventDefault();
+                
+                modal = new gModal(); // gModal hiện có sẵn hàm load, renderHtml, clear
+                modal.load($(this).attr('href'));
+            });
+            
+            // ajax box stage list
+            ajax_box = new ajaxBox($('.stage-list'), '<%= gns_project.stages_backend_categories_path(@category.id) %>');
+            ajax_box.load();
         });
     </script>
 <% end %>
@@ -116,32 +129,8 @@
                 </div>
             </div>
             
-            <% if @category.stages.empty? %>
-                <div class="card-body">
-                    <p class="text-center text-warning">
-                        There are no stage
-                    </p>
-                </div>
-            <% else %>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Stage name</th>
-                            <th>Description</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% @category.stages.each do |stage| %>
-                            <tr>
-                                <td><%= stage.name %></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        <% end %>
-                    </tbody>
-                </table>
-            <% end %>
+            <div class="stage-list" style="position: relative; min-height: 130px">                
+            </div>
         </div>
         <!-- /bottom tabs -->
         

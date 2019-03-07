@@ -1,6 +1,6 @@
 module GnsProject::Backend
   class ProjectsController < GnsCore::Backend::BackendController
-    before_action :set_project, only: [:show, :edit, :update, :destroy]
+    before_action :set_project, only: [:stages, :show, :edit, :update, :destroy]
 
     # GET /projects
     def index

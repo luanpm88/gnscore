@@ -31,8 +31,8 @@
                     if (typeof(response.status) !== 'undefined') {
                       showNotification(response.status, response.mesages);
                       modal.hide();
-                      // tam thoi reload lai trang
-                      location.reload();
+                      // load lại stages list
+                      ajax_box.load();
                     } else {
                       modal.renderHtml(response);
                     }

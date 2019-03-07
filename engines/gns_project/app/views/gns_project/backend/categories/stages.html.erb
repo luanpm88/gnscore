@@ -1,0 +1,26 @@
+<% if @category.stages.empty? %>
+    <div class="card-body">
+        <p class="text-center text-warning">
+            There are no stage
+        </p>
+    </div>
+<% else %>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Stage name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @category.stages.each do |stage| %>
+                <tr>
+                    <td><%= stage.name %></td>
+                    <td></td>
+                    <td><a class="edit-stage-button" href="<%= gns_project.edit_backend_stage_path(stage) %>">Edit</a></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+<% end %>

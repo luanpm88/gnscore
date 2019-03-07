@@ -1,6 +1,6 @@
 module GnsProject::Backend
   class CategoriesController < GnsCore::Backend::BackendController
-    before_action :set_category, only: [:show, :edit, :update, :destroy]
+    before_action :set_category, only: [:stages, :show, :edit, :update, :destroy]
 
     # GET /categories
     def index
@@ -102,6 +102,11 @@ module GnsProject::Backend
     # SELECT2 /categories
     def select2
       render json: GnsProject::Category.select2(params)
+    end
+    
+    def stages
+      sleep 1
+      render layout: nil
     end
 
     private
