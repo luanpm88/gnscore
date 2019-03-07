@@ -144,7 +144,7 @@
             <div class="col-md-6">                    
                 <div class="form-group">
                     <label class="d-block font-weight-semibold">Contact group <span class="text-danger">*</span></label>
-                    <select name="contact[category_ids][]" data-placeholder="Choose district/town/city"
+                    <select name="contact[category_ids][]" data-placeholder="Choose group"
                         class="form-control select-ajax" multiple
                         data-url="<%= gns_contact.select2_backend_categories_path %>">
                         <% values = contact.categories.map {|cat| {text: cat.name, value: cat.id}} %>

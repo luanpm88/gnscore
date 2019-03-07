@@ -12,14 +12,22 @@
 <% end %>
 
 <% content_for :page_toolbar do %>
-    <a class="btn btn-primary" href="<%= gns_contact.new_backend_contact_path %>">
-        <b><i class="icon-plus22"></i></b> Thêm mới
+    <a class="btn btn-primary create-contact-button" href="<%= gns_contact.new_backend_contact_path %>">
+        <b><i class="icon-plus22"></i></b> Create Contact
     </a>
 <% end %>
 
 <% content_for :page_script do %>
     <script>
         $(document).ready(function() {
+            // Create contact by modal
+            $('.create-contact-button').click(function(e) {
+                e.preventDefault();
+                
+                contact_modal = new gModal();
+                contact_modal.load($(this).attr('href'));
+            });
+            
             // Select2 ajax
             $('[name=country_id]').each(function() {
                 var url = $(this).attr('data-url');

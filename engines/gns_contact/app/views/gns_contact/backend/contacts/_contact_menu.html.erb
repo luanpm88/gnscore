@@ -1,38 +1,39 @@
-<div class="card-header bg-white pb-0 pt-sm-0 pr-sm-0 header-elements-sm-inline">
+<div class="card-header bg-white pb-0 pt-sm-0 header-elements-sm-inline">
     <h6 class="card-title"><%= title %></h6>
     <div class="header-elements">
         <ul class="nav nav-tabs nav-tabs-bottom card-header-tabs mx-0">
             <li class="nav-item">
                 <a href="<%= gns_contact.backend_contact_path(@contact) %>"
                   class="nav-link <%= 'active' if tab == 'general' %> <%= 'modal-control' if request.xhr? %>" modal-size="full">
-                    <i class="icon-users mr-2"></i>
-                    General
+                    <i class="icon-info22 mr-1"></i>
+                    General Infomation
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#"
+                  class="nav-link <%= 'active' if tab == 'personal' %> <%= 'modal-control' if request.xhr? %>" modal-size="full">
+                    <i class="icon-users2 mr-1"></i>
+                    Contact Personal
                 </a>
             </li>
             <li class="nav-item">
                 <a href="<%= gns_contact.projects_backend_contacts_path(@contact.id) %>"
                   class="nav-link <%= 'active' if tab == 'projects' %> <%= 'modal-control' if request.xhr? %>" modal-size="full">
-                    <i class="icon-stats-bars mr-2"></i>
+                    <i class="icon-design mr-1"></i>
                     Projects
                 </a>
             </li>
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                    <i class="icon-cog5 mr-2"></i>
-                    Action
-                </a>
-                
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a href="#card-bottom-tab3" tabindex="-1" class="dropdown-item" data-toggle="tab">
-                        <i class="icon-people"></i>
-                        Update
+            <div class="list-icons ml-3">
+                <div class="dropdown">
+                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-menu7"></i>
                     </a>
-                    <a href="#card-bottom-tab4" tabindex="-1" class="dropdown-item" data-toggle="tab">
-                        <i class="icon-stack"></i>
-                        Delete
-                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="#" class="dropdown-item">Update</a>
+                        <a href="#" class="dropdown-item">Delete</a>
+                    </div>
                 </div>
-            </li>
+            </div>
         </ul>
     </div>
 </div>
