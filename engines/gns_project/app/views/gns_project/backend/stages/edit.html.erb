@@ -1,5 +1,5 @@
 <% content_for :title do %>
-    <%= @stage.name %>
+    Edit stage
 <% end %>
 
 <% content_for :breadcrumb do %>
@@ -17,10 +17,10 @@
     <script>
         $(document).ready(function() {
             $('.edit_stage').submit(function(e) {
-                e.preventDefault();
-                
+                e.preventDefault();                
                 var form = $(this);
                 
+                // clear modal
                 modal.clear();
                 
                 $.ajax({
