@@ -21,19 +21,56 @@
     <script>
         // global modal cho việc tạo mới stage
         var contact_category_modal = new gModal();
-        var current_datalist;
+        var updateCategoryCallback;
+        var newCategoryCallback;
+        
         $(function() {            
             $('.add-contact-category-button').click(function(e) {
                 e.preventDefault();
+                var button = $(this);
                 
-                contact_category_modal.load($(this).attr('href'));
+                contact_category_modal.load(button.attr('href'));
+                
+                newCategoryCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // ẩn modal stage đi
+                        contact_category_modal.hide();
+                        datalists.forEach(function(datalist) {
+                            datalist.refresh();
+                        });     
+                    } else if (typeof(response.redirect) !== 'undefined') {
+                        window.location = response.redirect;
+                    } else {
+                        // validation error
+                        contact_category_modal.renderHtml(response);
+                    }
+                };
             });
             
             $(document).on('click', '.edit-contact-category-button', function(e) {
                 e.preventDefault();
                 
-                contact_category_modal.load($(this).attr('href'));
-                current_datalist = datalists[$(this).closest('.datalist').attr('data-id')];
+                var but = $(this);
+                
+                // load modal edit category
+                contact_category_modal.load(but.attr('href'));
+                
+                // after update category event
+                updateCategoryCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // ẩn modal stage đi
+                        contact_category_modal.hide();
+                        datalists[but.closest('.datalist').attr('data-id')].refresh();
+                    } else if (typeof(response.redirect) !== 'undefined') {
+                        window.location = response.redirect;
+                    } else {
+                        // validation error
+                        contact_category_modal.renderHtml(response);
+                    }           
+                }
+                    
             });
             
             // ajax box stage list

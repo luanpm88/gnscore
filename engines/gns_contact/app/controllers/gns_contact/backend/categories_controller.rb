@@ -33,9 +33,9 @@ module GnsContact
         @category = Category.new(category_params)
   
         if @category.save
+          flash[:success] = 'Category was successfully created.'
           render json: {
-            status: 'success',
-            message: 'The category was successfully created.',
+            redirect: gns_contact.backend_category_path(@category),
           }
         else
           render :new

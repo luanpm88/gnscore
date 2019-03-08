@@ -34,16 +34,9 @@
                     method: form.attr('method'),
                     data: form.serialize() + '&layout=modal',
                 }).done(function(response) {
-                    if (typeof(response.status) !== 'undefined') {
-                      showNotification(response.status, response.message);
-                      // ẩn modal stage đi
-                      contact_category_modal.hide();
-                      // load lại stages list
-                      if (typeof(current_datalist) !== 'undefined') {
-                        current_datalist.load();
-                      }
-                    } else {
-                      contact_category_modal.renderHtml(response);
+                    // làm gì đó ở đây
+                    if (typeof(updateCategoryCallback) !== 'undefined') {
+                        updateCategoryCallback(response);
                     }
                 });
                 
