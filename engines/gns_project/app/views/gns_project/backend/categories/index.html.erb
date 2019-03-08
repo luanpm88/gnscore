@@ -12,10 +12,69 @@
 <% end %>
 
 <% content_for :page_toolbar do %>
-    <a class="btn btn-primary create-category-button"
+    <a class="btn btn-primary add-category-button"
         href="<%= gns_project.new_backend_category_path %>">
         <b><i class="icon-plus22"></i></b> Create Category
     </a>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        // global modal
+        var category_modal = new gModal();
+        var updateCategoryCallback;
+        var newCategoryCallback;
+        
+        $(function() {            
+            $('.add-category-button').click(function(e) {
+                e.preventDefault();
+                var button = $(this);
+                
+                category_modal.load(button.attr('href'));
+                
+                newCategoryCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // Hide modal
+                        category_modal.hide();
+                        datalists.forEach(function(datalist) {
+                            datalist.refresh();
+                        });     
+                    } else if (typeof(response.redirect) !== 'undefined') {
+                        window.location = response.redirect;
+                    } else {
+                        // validation error
+                        category_modal.renderHtml(response);
+                    }
+                };
+            });
+            
+            $(document).on('click', '.edit-category-button', function(e) {
+                e.preventDefault();
+                
+                var button = $(this);
+                
+                // load modal edit category
+                category_modal.load(button.attr('href'));
+                
+                // after update category event
+                updateCategoryCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // Hide modal
+                        category_modal.hide();
+                        datalists[button.closest('.datalist').attr('data-id')].refresh();
+                    } else if (typeof(response.redirect) !== 'undefined') {
+                        window.location = response.redirect;
+                    } else {
+                        // validation error
+                        category_modal.renderHtml(response);
+                    }           
+                }
+                    
+            });
+        });
+    </script>
 <% end %>
 
 <!-- Datatable -->

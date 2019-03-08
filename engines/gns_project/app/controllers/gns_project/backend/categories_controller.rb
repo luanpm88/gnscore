@@ -31,18 +31,10 @@ module GnsProject::Backend
       @category = GnsProject::Category.new(category_params)
 
       if @category.save
-        respond_to do |format|
-          format.html {
-            flash[:success] = 'Category was successfully created.'
-            redirect_to gns_project.backend_category_path(@category)
-          }
-          format.json {
-            render json: {
-              status: 'success',
-              message: 'The category was successfully created.',
-            }
-          }
-        end
+        flash[:success] = 'Category was successfully created.'
+        render json: {
+          redirect: gns_project.backend_category_path(@category)
+        }
       else
         render :new
       end
@@ -51,18 +43,10 @@ module GnsProject::Backend
     # PATCH/PUT /categories/1
     def update
       if @category.update(category_params)
-        respond_to do |format|
-          format.html {
-            flash[:success] = 'Category was successfully updated.'
-            redirect_to gns_project.backend_category_path(@category)
-          }
-          format.json {
-            render json: {
-              status: 'success',
-              message: 'The category was successfully deleted.',
-            }
-          }
-        end
+        render json: {
+          status: 'success',
+          message: 'Category was successfully deleted.',
+        }
       else
         render :edit
       end

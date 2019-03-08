@@ -79,6 +79,14 @@ ActiveRecord::Schema.define(version: 2019_03_08_020441) do
     t.index ["parent_id"], name: "index_gns_contact_parent_contacts_on_parent_id"
   end
 
+  create_table "gns_project_attachments", force: :cascade do |t|
+    t.string "file"
+    t.bigint "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_gns_project_attachments_on_task_id"
+  end
+
   create_table "gns_project_categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -104,6 +112,16 @@ ActiveRecord::Schema.define(version: 2019_03_08_020441) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_gns_project_stages_on_category_id"
+  end
+
+  create_table "gns_project_tasks", force: :cascade do |t|
+    t.string "name"
+    t.bigint "project_id"
+    t.bigint "stage_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_gns_project_tasks_on_project_id"
+    t.index ["stage_id"], name: "index_gns_project_tasks_on_stage_id"
   end
 
 end

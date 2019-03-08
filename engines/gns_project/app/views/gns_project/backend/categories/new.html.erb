@@ -1,5 +1,5 @@
 <% content_for :title do %>
-    New Contact
+    New Project Category
 <% end %>
 
 <% content_for :breadcrumb do %>
@@ -21,24 +21,16 @@
                 var form = $(this);
                 
                 // clear modal trước khi chạy ajax
-                pcategory_modal.clear();
+                category_modal.clear();
                 
                 $.ajax({
                     url: form.attr('action'),
                     method: form.attr('method'),
                     data: form.serialize() + '&layout=modal',
                 }).done(function(response) {
-                    if (typeof(response.status) !== 'undefined') {
-                      showNotification(response.status, response.message);
-                      // hide modal
-                      pcategory_modal.hide();
-                      // load list
-                      //stage_list_box.load();
-                      if ($('.datalist').length) {
-                        datalists[$('.datalist').attr('data-id')].load();
-                      }
-                    } else {
-                      pcategory_modal.renderHtml(response);
+                    // làm gì đó ở đây
+                    if (typeof(newCategoryCallback) !== 'undefined') {
+                        newCategoryCallback(response);
                     }
                 });
                 

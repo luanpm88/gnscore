@@ -1,13 +1,13 @@
 <% if @category.stages.empty? %>
     <div class="card-body">
-        <p class="text-center text-warning">
+        <p class="text-center text-warning pt-2">
             There are no stage
         </p>
     </div>
 <% else %>
     <table class="table">
         <thead>
-            <tr>
+            <tr class="alpha-primary">
                 <th>Stage name</th>
                 <th>Description</th>
                 <th class="text-center" style="width: 100px;">Actions</th>
@@ -30,8 +30,11 @@
                                 <i class="icon-pencil7"></i>
                             </a>
         
-                            <a class="list-icons-item" title="Remove stage"
-                               href="#">
+                            <a class="list-icons-item ajax" title="Remove stage"
+                                href="<%= gns_project.backend_stage_path(stage) %>"
+                                data-method="DELETE"
+                                data-confirm="You are about to delete a stage"
+                            >
                                 <i class="icon-bin"></i>
                             </a>
                         </div>

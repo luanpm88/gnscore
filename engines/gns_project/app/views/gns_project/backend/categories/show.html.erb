@@ -13,22 +13,42 @@
 <% end %>
 
 <% content_for :page_toolbar do %>
-    <a class="btn btn-primary create-pcategory-button" href="<%= gns_project.new_backend_category_path %>">
+    <a class="btn btn-primary add-category-button" href="<%= gns_project.new_backend_category_path %>">
         <b><i class="icon-plus22"></i></b> Create Category
     </a>
 <% end %>
 
 <% content_for :page_script do %>
     <script>
-        var pcategory_modal = new gModal();
-        // global modal cho việc tạo mới stage
+        // global modal
         var stage_modal = new gModal();
         var stage_list_box = new ajaxBox($('.stage-list'), '<%= gns_project.stages_backend_categories_path(@category.id) %>');
+        
+        var category_modal = new gModal();
+        var newCategoryCallback;
+        
         $(function() {
-            $('.create-pcategory-button').click(function(e) {
+            $('.add-category-button').click(function(e) {
                 e.preventDefault();
+                var button = $(this);
                 
-                pcategory_modal.load($(this).attr('href'));
+                category_modal.load(button.attr('href'));
+                
+                newCategoryCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // Hide modal
+                        category_modal.hide();
+                        datalists.forEach(function(datalist) {
+                            datalist.refresh();
+                        });     
+                    } else if (typeof(response.redirect) !== 'undefined') {
+                        window.location = response.redirect;
+                    } else {
+                        // validation error
+                        category_modal.renderHtml(response);
+                    }
+                };
             });
             
             $('.add-stage-button').click(function(e) {
@@ -50,7 +70,7 @@
 <% end %>
 
 <div class="row">
-    <div class="col-md-7">
+    <div class="col-lg-7 col-md-12 col-ms-12">
         
         <!-- Bottom tabs -->
         <div class="card">
@@ -59,9 +79,9 @@
                 <h6 class="card-title font-weight-semibold">Category Details</h6>
                 <div class="header-elements">
                     <ul class="nav nav-tabs nav-tabs-bottom card-header-tabs mx-0">
-                        <div class="list-icons ml-3">
+                        <div class="list-icons mr-3">
                             <div class="dropdown">
-                                <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown">
+                                <a href="#" class="list-icons-item" data-toggle="dropdown">
                                     <i class="icon-menu7"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
@@ -71,44 +91,62 @@
                             </div>
                         </div>
                     </ul>
+                    
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                        <a class="list-icons-item" data-action="remove"></a>
+                    </div>
                 </div>
             </div>
             
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="tab-pane fade show active" id="bottom-tab1">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="font-weight-semibold">Category name:</td>
-                                        <td class="text-right"><a href="#"><%= @category.name %></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-weight-semibold">Added by:</td>
-                                        <td class="text-right"><a href="#">Winnie</a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                <ul class="media-list">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <li class="media mt-0 py-2 px-2">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Category name:</div>
+                                </div>
+        
+                                <div class="ml-3 align-self-center text-blue-800">
+                                    <%= @category.name %>
+                                </div>
+                            </li>
+        
+                            <li class="media mt-0 py-2 px-2">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Added by:</div>
+                                </div>
+        
+                                <div class="ml-3 align-self-center text-blue-800">
+                                    Winnie
+                                </div>
+                            </li>
+                        </div>
+                            
+                        <div class="col-md-6">
+                            <li class="media mt-0 py-2 px-2">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Updated:</div>
+                                </div>
+        
+                                <div class="ml-3 align-self-center text-muted">
+                                    <%= @category.updated_at.strftime('%d %b, %Y') %>
+                                </div>
+                            </li>
+                            
+                            <li class="media mt-0 py-2 px-2">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Created:</div>
+                                </div>
+        
+                                <div class="ml-3 align-self-center text-muted">
+                                    <%= @category.created_at.strftime('%d %b, %Y') %>
+                                </div>
+                            </li>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="tab-pane fade show active" id="bottom-tab1">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="font-weight-semibold">Updated:</td>
-                                        <td class="text-right text-muted">12 May, 2015</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-weight-semibold">Created:</td>
-                                        <td class="text-right text-muted">25 Feb, 2015</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                </ul>
             </div>
         </div>
         <!-- /bottom tabs -->
