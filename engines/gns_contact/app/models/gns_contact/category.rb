@@ -2,6 +2,7 @@ module GnsContact
   class Category < ApplicationRecord
     validates :name, :presence => true
     
+    has_many :categories_contacts, dependent: :restrict_with_error
     has_and_belongs_to_many :contacts, class_name: 'GnsContact::Contact'
     
     # update category cache search

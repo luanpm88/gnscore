@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_07_095217) do
+ActiveRecord::Schema.define(version: 2019_03_08_020441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,15 @@ ActiveRecord::Schema.define(version: 2019_03_07_095217) do
     t.index ["country_id"], name: "index_gns_contact_contacts_on_country_id"
     t.index ["district_id"], name: "index_gns_contact_contacts_on_district_id"
     t.index ["state_id"], name: "index_gns_contact_contacts_on_state_id"
+  end
+
+  create_table "gns_contact_parent_contacts", force: :cascade do |t|
+    t.bigint "parent_id"
+    t.bigint "contact_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contact_id"], name: "index_gns_contact_parent_contacts_on_contact_id"
+    t.index ["parent_id"], name: "index_gns_contact_parent_contacts_on_parent_id"
   end
 
   create_table "gns_project_categories", force: :cascade do |t|

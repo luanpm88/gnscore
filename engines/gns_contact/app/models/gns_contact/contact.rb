@@ -6,7 +6,14 @@ module GnsContact
     belongs_to :state, class_name: 'GnsArea::State'
     belongs_to :district, class_name: 'GnsArea::District'
     has_many :projects, class_name: 'GnsProject::Project', foreign_key: :customer_id, dependent: :restrict_with_error # Prevent deleting record being used
+    
+    has_many :categories_contacts, dependent: :restrict_with_error
     has_and_belongs_to_many :categories, class_name: 'GnsContact::Category'
+    
+    has_many :parent_contacts
+    has_many :children_contacts, class_name: 'GnsContact::ParentContact', foreign_key: :parent_id
+    has_many :parent, class_name: 'GnsContact::Contact', through: :parent_contacts
+    has_many :children, class_name: 'GnsContact::Contact', through: :children_contacts
     
     # get coutry name
     def country_name

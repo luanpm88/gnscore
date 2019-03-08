@@ -21,6 +21,7 @@
     <script>
         // global modal cho việc tạo mới stage
         var contact_category_modal = new gModal();
+        var current_datalist;
         $(function() {            
             $('.add-contact-category-button').click(function(e) {
                 e.preventDefault();
@@ -32,6 +33,7 @@
                 e.preventDefault();
                 
                 contact_category_modal.load($(this).attr('href'));
+                current_datalist = datalists[$(this).closest('.datalist').attr('data-id')];
             });
             
             // ajax box stage list
