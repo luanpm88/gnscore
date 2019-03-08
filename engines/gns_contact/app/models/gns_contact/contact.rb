@@ -23,6 +23,18 @@ module GnsContact
       district.present? ? district.name : ''
     end
     
+    # class const
+    BUSINESS_TYPE_PERSON = 'person'
+    BUSINESS_TYPE_COMPANY = 'company'
+    
+    # get business type options
+    def self.get_type_options()
+      [
+        {text: 'Person', value: self::BUSINESS_TYPE_PERSON},
+        {text: 'Company', value: self::BUSINESS_TYPE_COMPANY}
+      ]
+    end
+    
     # update contact cache search
     after_save :update_cache_search
 		def update_cache_search

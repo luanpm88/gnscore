@@ -10,7 +10,7 @@
             <tr>
                 <th>Stage name</th>
                 <th>Description</th>
-                <th>Actions</th>
+                <th class="text-center" style="width: 100px;">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -18,7 +18,24 @@
                 <tr>
                     <td><%= stage.name %></td>
                     <td></td>
-                    <td><a class="edit-stage-button" href="<%= gns_project.edit_backend_stage_path(stage) %>">Edit</a></td>
+                    <td class="text-center">
+                        <div class="list-icons">
+                            <a class="list-icons-item mr-2" title="Insert below"
+                                href="#">
+                                <i class="icon-plus-circle2"></i>
+                            </a>
+                            
+                            <a class="list-icons-item edit-stage-button" title="Update stage"
+                               href="<%= gns_project.edit_backend_stage_path(stage) %>">
+                                <i class="icon-pencil7"></i>
+                            </a>
+        
+                            <a class="list-icons-item" title="Remove stage"
+                               href="#">
+                                <i class="icon-bin"></i>
+                            </a>
+                        </div>
+                    </td>
                 </tr>
             <% end %>
         </tbody>

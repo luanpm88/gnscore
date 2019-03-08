@@ -13,22 +13,22 @@
 <% end %>
 
 <% content_for :page_toolbar do %>
-    <a class="btn btn-primary create-category-button" href="<%= gns_project.new_backend_category_path %>">
+    <a class="btn btn-primary create-pcategory-button" href="<%= gns_project.new_backend_category_path %>">
         <b><i class="icon-plus22"></i></b> Create Category
     </a>
 <% end %>
 
 <% content_for :page_script do %>
     <script>
+        var pcategory_modal = new gModal();
         // global modal cho việc tạo mới stage
         var stage_modal = new gModal();
         var stage_list_box = new ajaxBox($('.stage-list'), '<%= gns_project.stages_backend_categories_path(@category.id) %>');
         $(function() {
-            $('.create-category-button').click(function(e) {
+            $('.create-pcategory-button').click(function(e) {
                 e.preventDefault();
                 
-                var category_modal = new gModal();
-                category_modal.load($(this).attr('href'));
+                pcategory_modal.load($(this).attr('href'));
             });
             
             $('.add-stage-button').click(function(e) {
@@ -113,10 +113,8 @@
         </div>
         <!-- /bottom tabs -->
         
-        <!-- Bottom tabs -->
         <div class="card">
-            
-            <div class="card-header bg-white header-elements-inline">
+            <div class="card-header header-elements-inline">
                 <h6 class="card-title font-weight-semibold">Stage List</h6>
                 <div class="header-elements">
                     <a href="<%= gns_project.new_backend_stage_path(category_id: @category.id) %>" class="btn bg-blue mr-3 add-stage-button">Add stage</a>
@@ -126,11 +124,11 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="stage-list" style="position: relative; min-height: 130px">                
+
+            <div class="table-responsive stage-list" style="position: relative; min-height: 130px">
+                
             </div>
         </div>
-        <!-- /bottom tabs -->
         
     </div>
 </div>

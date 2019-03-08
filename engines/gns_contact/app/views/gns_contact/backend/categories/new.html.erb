@@ -16,6 +16,42 @@
   
 <% end %>
 
+<% content_for :page_script do %>
+    <script>
+        $(document).ready(function() {
+            $('.new_category').submit(function(e) {
+                e.preventDefault();
+                
+                var form = $(this);
+                
+                // clear modal trước khi chạy ajax
+                contact_category_modal.clear();
+                
+                $.ajax({
+                    url: form.attr('action'),
+                    method: form.attr('method'),
+                    data: form.serialize() + '&layout=modal',
+                }).done(function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                      showNotification(response.status, response.message);
+                      // ẩn modal stage đi
+                      contact_category_modal.hide();
+                      // load lại stages list
+                      //contact_category_modal.load();
+                      if ($('.datalist').length) {
+                        datalists[$('.datalist').attr('data-id')].load();
+                      }
+                    } else {
+                      contact_category_modal.renderHtml(response);
+                    }
+                });
+                
+                return false;
+            });
+        });
+    </script>
+<% end %>
+
 <div class="row">
     <div class="col-lg-7 col-md-12">
         

@@ -39,7 +39,7 @@ module GnsProject
       end
   
       # PATCH/PUT /stages/1
-      def update  
+      def update
         if @stage.update(stage_params)
           flash[:success] = 'Stage was successfully updated.'
           

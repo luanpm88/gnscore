@@ -12,9 +12,33 @@
 <% end %>
 
 <% content_for :page_toolbar do %>
-    <a class="btn btn-primary" href="<%= gns_contact.new_backend_category_path %>">
-        <b><i class="icon-plus22"></i></b> Thêm mới
+    <a class="btn btn-primary add-contact-category-button" href="<%= gns_contact.new_backend_category_path %>">
+        <b><i class="icon-plus22"></i></b> Create Category
     </a>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        // global modal cho việc tạo mới stage
+        var contact_category_modal = new gModal();
+        $(function() {            
+            $('.add-contact-category-button').click(function(e) {
+                e.preventDefault();
+                
+                contact_category_modal.load($(this).attr('href'));
+            });
+            
+            $(document).on('click', '.edit-contact-category-button', function(e) {
+                e.preventDefault();
+                
+                contact_category_modal.load($(this).attr('href'));
+            });
+            
+            // ajax box stage list
+            //contact_category_modal.load();
+            console.log(contact_category_modal);
+        });
+    </script>
 <% end %>
 
 <!-- Datatable -->

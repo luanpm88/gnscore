@@ -4,6 +4,15 @@ module GnsArea
     
     validates :name, :presence => true
     
+    # update district cache search
+    after_save :update_cache_search
+		def update_cache_search
+			str = []
+			str << name.to_s.downcase.strip
+
+			self.update_column(:cache_search, str.join(" ") + " " + str.join(" ").to_ascii)
+		end
+    
     def self.select2(params)
       per_page = 10
       page = 1      
@@ -13,7 +22,7 @@ module GnsArea
       
       # keyword
       if params[:q].present?
-        query = query.where('LOWER(gns_area_countries.name) LIKE ?', '%'+params[:q].downcase+'%')
+        query = query.where('LOWER(gns_area_countries.cache_search) LIKE ?', '%'+params[:q].downcase+'%')
       end
       
       # pagination
