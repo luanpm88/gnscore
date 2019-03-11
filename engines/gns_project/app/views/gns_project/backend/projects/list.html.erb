@@ -4,9 +4,11 @@
             <th>Code</th>
             <th>Name</th>
             <th>Customer</th>
-            <th>Category</th>
+            <th>Type</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>% Complete</th>
             <th>Status</th>
-            <th>Created At</th>
             <th class="text-center">Actions</th>
         </tr>
     </thead>
@@ -17,11 +19,11 @@
                 <td><%= project.name %></td>
                 <td><%= project.customer_name %></td>
                 <td><%= project.category_name %></td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td>
                     <span class="badge badge-success">Active</span>
-                </td>
-                <td title="<%= project.created_at.strftime("%d/%m/%Y - %T") %>">
-                    <%= project.created_at.strftime("%d/%m/%Y") %>
                 </td>
                 <td class="text-center">
                     <div class="list-icons">
