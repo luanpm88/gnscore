@@ -36,9 +36,8 @@
                         showNotification(response.status, response.message);
                         // ẩn modal stage đi
                         contact_category_modal.hide();
-                        datalists.forEach(function(datalist) {
-                            datalist.refresh();
-                        });
+                        
+                        datalists[$('.datalist-categories').attr('data-id')].refresh();          
                     } else if (typeof(response.redirect) !== 'undefined') {
                         window.location = response.redirect;
                     } else {
@@ -62,6 +61,7 @@
                         showNotification(response.status, response.message);
                         // ẩn modal stage đi
                         contact_category_modal.hide();
+                        
                         datalists[but.closest('.datalist').attr('data-id')].refresh();
                     } else if (typeof(response.redirect) !== 'undefined') {
                         window.location = response.redirect;
@@ -77,7 +77,7 @@
 <% end %>
 
 <!-- Datatable -->
-<div class="card datalist"
+<div class="card datalist datalist-categories"
     data-url="<%= gns_contact.list_backend_categories_path %>"
 >
     <div class="card-header header-elements-inline">

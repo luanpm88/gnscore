@@ -4,23 +4,20 @@
         <ul class="nav nav-tabs nav-tabs-bottom card-header-tabs mx-0">
             <li class="nav-item">
                 <a href="<%= gns_contact.backend_contact_path(@contact) %>"
-                  class="nav-link <%= 'active' if tab == 'general' %> <%= 'modal-control' if request.xhr? %>" modal-size="full">
+                    class="nav-link <%= 'modal-control' if request.xhr? %>" modal-size="full"
+                    data-menu="gns_contact/backend/contacts/show"
+                >
                     <i class="icon-info22 mr-1"></i>
                     General Infomation
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#"
-                  class="nav-link <%= 'active' if tab == 'personal' %> <%= 'modal-control' if request.xhr? %>" modal-size="full">
-                    <i class="icon-users2 mr-1"></i>
-                    Contact Personal
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="<%= gns_contact.projects_backend_contacts_path(@contact.id) %>"
-                  class="nav-link <%= 'active' if tab == 'projects' %> <%= 'modal-control' if request.xhr? %>" modal-size="full">
-                    <i class="icon-design mr-1"></i>
-                    Projects
+                <a
+                    data-menu="gns_contact/backend/contacts/projects"
+                    href="<%= gns_contact.projects_backend_contacts_path(@contact.id) %>"
+                    class="nav-link <%= 'modal-control' if request.xhr? %>" modal-size="full">
+                        <i class="icon-design mr-1"></i>
+                        Projects
                 </a>
             </li>
             <div class="list-icons ml-3">
