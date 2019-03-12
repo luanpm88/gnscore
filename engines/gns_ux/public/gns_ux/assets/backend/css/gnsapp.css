@@ -120,3 +120,11 @@
     padding: 0.8rem 0;
     margin-right: 0;
 }
+.badge-active {
+    color: #fff;
+    background-color: #4caf50;
+}
+.badge-inactive {
+    color: #fff;
+    background-color: #e53935;
+}

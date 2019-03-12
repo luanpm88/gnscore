@@ -32,7 +32,7 @@ $.fn.datalist = function() {
         box.form.append('<input type="hidden" name="authenticity_token" value="'+$('meta[name="csrf-token"]').attr('content')+'" />');
         
         // append sort direction button
-        box.sort_direction_input.after('<span class="btn btn-light btn-icon ml-2 sort-direction-button"><i class="icon-sort-amount-'+box.sort_direction_value()+'"></i></span>');
+        box.sort_direction_input.after('<span class="btn btn-light btn-icon ml-2 sort-direction-button"><i class="icon-sort-alpha-'+box.sort_direction_value()+'"></i></span>');
         box.sort_direction_button  = box.datalist.find('.sort-direction-button');
         box.sort_direction_icon  = box.sort_direction_button.find('i');
         
@@ -103,12 +103,12 @@ $.fn.datalist = function() {
         box.sort_direction_button.click(function() {
             if (box.sort_direction_value() == 'asc') {
                 box.sort_direction_input.val('desc');
-                box.sort_direction_icon.removeClass('icon-sort-amount-asc');
-                box.sort_direction_icon.addClass('icon-sort-amount-desc');
+                box.sort_direction_icon.removeClass('icon-sort-alpha-asc');
+                box.sort_direction_icon.addClass('icon-sort-alpha-desc');
             } else {
                 box.sort_direction_input.val('asc');
-                box.sort_direction_icon.removeClass('icon-sort-amount-desc');
-                box.sort_direction_icon.addClass('icon-sort-amount-asc');
+                box.sort_direction_icon.removeClass('icon-sort-alpha-desc');
+                box.sort_direction_icon.addClass('icon-sort-alpha-asc');
             }
             
             box.load();

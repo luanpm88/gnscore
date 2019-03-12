@@ -96,7 +96,10 @@ module GnsContact
   
         # Only allow a trusted parameter "white list" through.
         def contact_params
-          params.fetch(:contact, {}).permit(:full_name, :phone, :email, :address, :country_id, :state_id, :district_id, category_ids: [])
+          params.fetch(:contact, {}).permit(:code, :full_name, :foreign_name, :phone, :email, :mobile, :tax_code, :website, :fax, :invoice_address,
+                                            :contact_type, :active,
+                                            :address, :country_id, :state_id, :district_id,
+                                            category_ids: [])
         end
     end
   end

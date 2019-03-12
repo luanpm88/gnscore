@@ -128,48 +128,63 @@
     <form class="datalist-filters">
         <div class="card-body pb-0">    
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <div class="form-group">
-                        <select name="country_id" data-placeholder="Select a country..."
+                        <select name="country_id" data-placeholder="Filter by country..."
                           class="form-control select-ajax"
                           data-url="<%= gns_area.select2_backend_countries_path %>">
                         </select>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <div class="form-group">
-                        <select name="state_id" data-placeholder="Select a state..."
+                        <select name="state_id" data-placeholder="Filter by state..."
                           class="form-control select-ajax"
                           data-url="<%= gns_area.select2_backend_states_path %>">
                         </select>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <div class="form-group">
-                        <select name="district_id" data-placeholder="Select a district..."
-                          class="form-control"
+                        <select name="district_id" data-placeholder="Filter by district..."
+                          class="form-control select-ajax"
                           data-url="<%= gns_area.select2_backend_districts_path %>">
                         </select>
                     </div>
                 </div>
-                <div class="col-md-2">
+            </div>
+            <div class="row">
+                <div class="col-md-3">
                     <div class="form-group">
-                        <select name="category_ids[]" data-placeholder="Select the categories..."
-                          class="form-control select-ajax" multiple
+                        <select name="active" data-placeholder="Filter by status..."
+                            class="form-control selectAllowClear" data-fouc>
+                            <option value="true">Active</option>
+                            <option value="false">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select name="category_ids[]" data-placeholder="Filter by group..."
+                          class="form-control select-ajax"
                           data-url="<%= gns_contact.select2_backend_categories_path %>">
                         </select>
                     </div>
                 </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <select name="types[]" data-placeholder="Select types..." class="form-control select" multiple="multiple" data-fouc>
-                            <option value="customer">Customer</option>
-                            <option value="supplier">Supplier</option>
-                            <option value="agent">Agent</option>
-                        </select>
-                    </div>
+                <div class="col-md-3">
+                    <select class="form-control selectAllowClear"
+                        data-placeholder="Filter by business partner type..."
+                        data-fouc
+                        name="contact_type"
+                    >
+                        <option></option>
+                        <% options = GnsContact::Contact::get_type_options() %>
+                        <% options.each do |option| %>
+                            <option value="<%= option[:value] %>"><%= option[:text] %></option>
+                        <% end %>
+                    </select>
                 </div>
-                <div class="col-md-2 text-right">
+                <div class="col-md-3 text-right">
                     <span class="btn btn-primary mb-3 datalist-search-button">Go</span>
                 </div>
             </div>
@@ -198,7 +213,7 @@
                 <div class="text-right text-nowrap flex">
                     <div class="sort-by-box flex align-center mr-3">
                         <span class="mr-1">Sort by:</span>
-                        <select name="sort_by" data-placeholder="Sort by..." class="form-control select select-not-search-field sort-by-select" data-fouc>
+                        <select name="sort_by" data-placeholder="Sort by..." class="form-control selectPrimary sort-by-select" data-fouc>
                             <option value="full_name">code</option>
                             <option value="full_name">fullname</option>
                             <option value="created_at">created_at</option>
@@ -207,7 +222,7 @@
                     </div>
                     <div class="show-per-page flex align-center">
                         <span class="mr-1">Per page:</span>
-                        <select name="per_page" class="form-control select select-not-search-field per-page-select">
+                        <select name="per_page" class="form-control selectPrimary per-page-select">
                             <option value="10">10</option>
                             <option value="25">25</option>
                             <option value="50">50</option>

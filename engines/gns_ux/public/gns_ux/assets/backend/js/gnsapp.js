@@ -51,13 +51,27 @@ function applyJs(container) {
     // Select initialization
     container.find('.select').select2();
     
+    container.find('.selectAllowClear').select2({
+        allowClear: true,
+        minimumResultsForSearch: Infinity
+    });
+    
     // Infinity search field of select
-    container.find('select.select-not-search-field').select2({
+    container.find('.selectPrimary').select2({
         minimumResultsForSearch: Infinity
     });
     
     // Initialize
     container.find('.radio-button').uniform();
+    
+    // Initialize multiple switches /switchery
+    var elems = Array.prototype.slice.call(document.querySelectorAll('.form-check-input-switchery'));
+    elems.forEach(function(html) {
+      var switchery = new Switchery(html);
+    });
+    
+    // Initialize multiple switches /switch
+    $('.form-check-input-switch').bootstrapSwitch();
     
     // Multi select initialization
     container.find('.multiselect').multiselect();
@@ -78,7 +92,7 @@ function applyJs(container) {
         var url = $(this).attr('data-url');
         
         var allow_clear = true;
-        if ($(this).attr('multiple') !== 'undefined') {
+        if (typeof($(this).attr('multiple')) !== 'undefined') {
             allow_clear = false;
         }
         

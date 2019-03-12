@@ -1,19 +1,25 @@
 module GnsContact
   class Contact < ApplicationRecord
-    validates :full_name, :presence => true
+    validates :code, uniqueness: true
+    validates :full_name, :contact_type, presence: true
     
-    belongs_to :country, class_name: 'GnsArea::Country'
-    belongs_to :state, class_name: 'GnsArea::State'
-    belongs_to :district, class_name: 'GnsArea::District'
+    belongs_to :country, class_name: 'GnsArea::Country', optional: true
+    belongs_to :state, class_name: 'GnsArea::State', optional: true
+    belongs_to :district, class_name: 'GnsArea::District', optional: true
     has_many :projects, class_name: 'GnsProject::Project', foreign_key: :customer_id, dependent: :restrict_with_error # Prevent deleting record being used
     
-    has_many :categories_contacts, dependent: :restrict_with_error
     has_and_belongs_to_many :categories, class_name: 'GnsContact::Category'
+    validates :categories, presence: true
     
     has_many :parent_contacts
     has_many :children_contacts, class_name: 'GnsContact::ParentContact', foreign_key: :parent_id
     has_many :parent, class_name: 'GnsContact::Contact', through: :parent_contacts
     has_many :children, class_name: 'GnsContact::Contact', through: :children_contacts
+    
+    # get name
+    def name
+      self.full_name
+    end
     
     # get coutry name
     def country_name
@@ -30,15 +36,33 @@ module GnsContact
       district.present? ? district.name : ''
     end
     
+    def get_full_address
+      str = []
+      str << address if address?
+      str << district_name if district_name.present?
+      str << state_name if state_name.present?
+      str << country_name if country_name.present?
+      return str.join(", ")
+    end
+    
+    def get_status_label
+      active? ? 'active' : 'inactive'
+    end
+    
+    # getActive
+    def self.get_active
+			self.where(active: true)
+		end
+    
     # class const
-    BUSINESS_TYPE_PERSON = 'person'
-    BUSINESS_TYPE_COMPANY = 'company'
+    TYPE_PERSON = 'person'
+    TYPE_COMPANY = 'company'
     
     # get business type options
     def self.get_type_options()
       [
-        {text: 'Person', value: self::BUSINESS_TYPE_PERSON},
-        {text: 'Company', value: self::BUSINESS_TYPE_COMPANY}
+        {text: I18n.t(self::TYPE_PERSON), value: self::TYPE_PERSON},
+        {text: I18n.t(self::TYPE_COMPANY), value: self::TYPE_COMPANY}
       ]
     end
     
@@ -46,8 +70,9 @@ module GnsContact
     after_save :update_cache_search
 		def update_cache_search
 			str = []
+			str << code.to_s.downcase.strip
 			str << full_name.to_s.downcase.strip
-			str << email.to_s.downcase.strip if email.present?
+			str << foreign_name.to_s.downcase.strip
 
 			self.update_column(:cache_search, str.join(" ") + " " + str.join(" ").to_ascii)
 		end
@@ -55,6 +80,21 @@ module GnsContact
     # Filters
     def self.filter(query, params)
       params = params.to_unsafe_hash
+      
+      # filter by active
+      if params[:active].present?
+        query = query.where(active: params[:active])
+      end
+      
+      # filter by active
+      if params[:category_ids].present?
+        query = query.joins(:categories).where(gns_contact_categories_contacts: {category_id: params[:category_ids]})
+      end
+      
+      # filter by bussiness partner type
+      if params[:contact_type].present?
+        query = query.where(contact_type: params[:contact_type])
+      end
       
       # filter by country_id
       if params[:country_id].present?
@@ -103,7 +143,7 @@ module GnsContact
       page = 1      
       data = {results: [], pagination: {more: false}}
       
-      query = self.all
+      query = self.get_active
       
       # keyword
       if params[:q].present?

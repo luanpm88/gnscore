@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_08_020441) do
+ActiveRecord::Schema.define(version: 2019_03_12_085528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,15 @@ ActiveRecord::Schema.define(version: 2019_03_08_020441) do
     t.bigint "country_id"
     t.bigint "state_id"
     t.bigint "district_id"
+    t.string "code"
+    t.string "mobile"
+    t.string "tax_code"
+    t.string "invoice_address"
+    t.string "website"
+    t.string "contact_type"
+    t.boolean "active", default: true
+    t.string "foreign_name"
+    t.string "fax"
     t.index ["country_id"], name: "index_gns_contact_contacts_on_country_id"
     t.index ["district_id"], name: "index_gns_contact_contacts_on_district_id"
     t.index ["state_id"], name: "index_gns_contact_contacts_on_state_id"
