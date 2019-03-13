@@ -116,12 +116,20 @@ $.fn.datalist = function() {
         
         // After list loaded
         box.afterLoad = function() {
+            // apply js
+            applyJs(box.content);
+            
             // pagination click
             box.datalist.find('.pagination a').click(function(e) {
                 e.preventDefault();
                 var url = $(this).attr('href');
                 
                 box.load(url);                
+            });
+            
+            // apply action
+            new gLink(box.content.find('.datalist-g-link'), function() {
+                box.refresh();
             });
         };
         

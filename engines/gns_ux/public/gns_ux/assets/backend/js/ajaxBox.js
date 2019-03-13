@@ -1,4 +1,4 @@
-function ajaxBox(obj, url) {
+function ajaxBox(obj, url, callback) {
     this.box = obj;
     this.url = url;
     var main = this;
@@ -17,6 +17,11 @@ function ajaxBox(obj, url) {
             method: 'GET'
         }).done(function(response) {
             main.box.html(response);
+            
+            // callback function
+            if(typeof(callback) !== 'undefined') {
+                callback(main.box);
+            }
         });
     };
 }

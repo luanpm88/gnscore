@@ -55,13 +55,11 @@ module GnsProject
       # DELETE /stages/1
       def destroy
         @stage.destroy
-        
-        flash[:success] = 'Stage was successfully destroyed.'
           
-          render json: {
-            status: 'success',
-            message: 'Stage was successfully destroyed.',
-          }
+        render json: {
+          status: 'success',
+          message: 'Stage was successfully destroyed.',
+        }
       end
   
       private

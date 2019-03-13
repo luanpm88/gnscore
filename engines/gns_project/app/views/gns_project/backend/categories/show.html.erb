@@ -22,7 +22,16 @@
     <script>
         // global modal
         var stage_modal = new gModal();
-        var stage_list_box = new ajaxBox($('.stage-list'), '<%= gns_project.stages_backend_categories_path(@category.id) %>');
+        var stage_list_box = new ajaxBox(
+            $('.stage-list'),
+            '<%= gns_project.stages_backend_categories_path(@category.id) %>',
+            function(box) {
+                // apply g-link for delete stage button
+                new gLink(box.find('.delete-stage-button, .enable-stage-button'), function(link) {
+                    stage_list_box.load();
+                });
+            }
+        );
         
         var category_modal = new gModal();
         var newCategoryCallback;
