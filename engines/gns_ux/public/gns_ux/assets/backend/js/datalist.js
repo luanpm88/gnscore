@@ -20,6 +20,8 @@ $.fn.datalist = function() {
         };
         box.sort_by_select = box.datalist.find('.sort-by-select');
         
+        box.show_columns_select = box.datalist.find('.show-columns-select');
+        
         // prvent form submit
         box.form.submit(function() {
             return false;
@@ -111,6 +113,11 @@ $.fn.datalist = function() {
                 box.sort_direction_icon.addClass('icon-sort-alpha-asc');
             }
             
+            box.load();
+        });
+        
+        // show_columns select change
+        box.show_columns_select.change(function() {
             box.load();
         });
         

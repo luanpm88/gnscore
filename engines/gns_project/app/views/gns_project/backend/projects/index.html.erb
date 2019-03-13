@@ -58,8 +58,25 @@
         
         <div class="card-body">
             <div class="datalist-header flex space-between">
-                <div class="keyword-search mr-2">
-                    <input class="form-control keyword-input" name="keyword" type="search" placeholder="Type to filter...">
+                <div class="text-left text-nowrap flex">
+                    <div class="keyword-search flex align-center mr-3">
+                        <input class="form-control keyword-input" name="keyword" type="search" placeholder="Type to filter...">
+                    </div>
+                    <div class="flex align-center">
+                        <span class="mr-1">Show columns:</span>
+                        <select name="show_columns[]" class="form-control multiselect show-columns-select" multiple="multiple">
+                            <option value="code" selected>Code</option>
+                            <option value="name" selected>Name</option>
+                            <option value="customer">Customer</option>
+                            <option value="project_type" selected>Type</option>
+                            <option value="start_date" selected>Start Date</option>
+                            <option value="end_date" selected>End Date</option>
+                            <option value="complete" selected>% Complete</option>
+                            <option value="status" selected>Status</option>
+                            <option value="created_at">Created at</option>
+                            <option value="updated_at">Updated at</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="text-right text-nowrap flex">
                     <div class="sort-by-box flex align-center mr-3">

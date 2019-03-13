@@ -12,8 +12,32 @@
     <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Contact</span> - Create</h4>
 <% end %>
 
-<% content_for :page_toolbar do %>
-  
+<% content_for :page_script do %>
+    <script>
+        $(document).ready(function() {
+            $('.new_contact').submit(function(e) {
+                e.preventDefault();
+                
+                var form = $(this);
+                
+                // clear modal before ajax run
+                contact_modal.clear();
+                
+                $.ajax({
+                    url: form.attr('action'),
+                    method: form.attr('method'),
+                    data: form.serialize() + '&layout=modal',
+                }).done(function(response) {
+                    // do something
+                    if (typeof(newContactCallback) !== 'undefined') {
+                        newContactCallback(response);
+                    }
+                });
+                
+                return false;
+            });
+        });
+    </script>
 <% end %>
 
 <div class="row">

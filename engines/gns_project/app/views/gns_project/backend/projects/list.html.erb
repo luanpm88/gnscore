@@ -1,30 +1,88 @@
 <table class="table table-hover">
     <thead>
         <tr class="bg-info-700">
-            <th>Code</th>
-            <th>Name</th>
-            <th>Customer</th>
-            <th>Type</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>% Complete</th>
-            <th>Status</th>
+            <% if params["show_columns"].include?("code") %>
+                <th>Code</th>
+            <% end %>
+            <% if params["show_columns"].include?("name") %>
+                <th>Name</th>
+            <% end %>
+            <% if params["show_columns"].include?("customer") %>
+                <th>Customer</th>
+            <% end %>
+            <% if params["show_columns"].include?("type") %>
+                <th>Type</th>
+            <% end %>
+            <% if params["show_columns"].include?("start_date") %>
+                <th>Start Date</th>
+            <% end %>
+            <% if params["show_columns"].include?("end_date") %>
+                <th>End Date</th>
+            <% end %>
+            <% if params["show_columns"].include?("complete") %>
+                <th>Complete</th>
+            <% end %>
+            <% if params["show_columns"].include?("status") %>
+                <th>Status</th>
+            <% end %>
+            <% if params["show_columns"].include?("created_at") %>
+                <th class="text-nowrap">Created At</th>
+            <% end %>
+            <% if params["show_columns"].include?("updated_at") %>
+                <th class="text-nowrap">Updated At</th>
+            <% end %>
             <th class="text-center">Actions</th>
         </tr>
     </thead>
     <tbody>
         <% @projects.each do |project| %>
             <tr>
-                <td><%= project.code %></td>
-                <td><%= project.name %></td>
-                <td><%= project.customer_name %></td>
-                <td><%= project.category_name %></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                    <span class="badge badge-success">Active</span>
-                </td>
+                <% if params["show_columns"].include?("code") %>
+                    <td><%= project.code %></td>
+                <% end %>
+                <% if params["show_columns"].include?("name") %>
+                    <td><%= project.name %></td>
+                <% end %>
+                <% if params["show_columns"].include?("customer") %>
+                    <td><%= project.customer_name %></td>
+                <% end %>
+                <% if params["show_columns"].include?("type") %>
+                    <td><%= project.category_name %></td>
+                <% end %>
+                <% if params["show_columns"].include?("start_date") %>
+                    <td>
+                        <%= Time.now.strftime("%d/%m/%Y") %>
+                    </td>
+                <% end %>
+                <% if params["show_columns"].include?("end_date") %>
+                    <td>
+                        <%= Time.now.strftime("%d/%m/%Y") %>
+                    </td>
+                <% end %>
+                <% if params["show_columns"].include?("complete") %>
+                    <td width="150px">
+                        <div class="progress rounded-round" title="20% Complete">
+                            <div class="progress-bar bg-dark progress-bar-striped progress-bar-animated" style="width: 90%">
+                                <span>90%</span>
+                            </div>
+                        </div>
+                    </td>
+                <% end %>
+                <% if params["show_columns"].include?("status") %>
+                    <td>
+                        <span class="badge badge-success">Active</span>
+                    </td>
+                <% end %>
+                <% if params["show_columns"].include?("created_at") %>
+                    <td>
+                        <%= Time.now.strftime("%d/%m/%Y") %>
+                    </td>
+                <% end %>
+                <% if params["show_columns"].include?("updated_at") %>
+                    <td>
+                        <%= Time.now.strftime("%d/%m/%Y") %>
+                    </td>
+                <% end %>
                 <td class="text-center">
                     <div class="list-icons">
                         <div class="dropdown">

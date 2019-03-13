@@ -14,7 +14,7 @@
 
 <% content_for :page_toolbar do %>
     <a class="btn btn-primary" href="<%= gns_contact.new_backend_category_path %>">
-        <b><i class="icon-plus22"></i></b> Thêm mới
+        <b><i class="icon-plus22"></i></b> Create category
     </a>
 <% end %>
 
@@ -26,7 +26,7 @@
                 
                 var form = $(this);
                 
-                // clear modal trước khi chạy ajax
+                // clear modal
                 contact_category_modal.clear();
                 
                 $.ajax({
@@ -34,7 +34,7 @@
                     method: form.attr('method'),
                     data: form.serialize() + '&layout=modal',
                 }).done(function(response) {
-                    // làm gì đó ở đây
+                    // do something
                     if (typeof(updateCategoryCallback) !== 'undefined') {
                         updateCategoryCallback(response);
                     }
