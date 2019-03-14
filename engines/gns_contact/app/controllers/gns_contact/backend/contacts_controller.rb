@@ -1,7 +1,7 @@
 module GnsContact
   module Backend
     class ContactsController < GnsCore::Backend::BackendController
-      before_action :set_contact, only: [:show, :projects, :edit, :update, :destroy]
+      before_action :set_contact, only: [:children, :show, :projects, :edit, :update, :destroy]
   
       # GET /contacts
       def index
@@ -90,6 +90,10 @@ module GnsContact
       
       def select2
         render json: Contact.select2(params)
+      end
+      
+      def children
+        render layout: nil
       end
   
       private

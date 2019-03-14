@@ -5,6 +5,7 @@ GnsContact::Engine.routes.draw do
                 post 'list'
                 get 'select2'
                 get ':id/projects', to: 'contacts#projects', as: 'projects'
+                get ':id/children', to: 'contacts#children', as: 'children'
             end
         end
         resources :categories do

@@ -131,3 +131,7 @@
 .progress {
     background-color: #999;
 }
+.progress .progress-bar span {
+    position: absolute;
+    min-width: 100%;
+}
