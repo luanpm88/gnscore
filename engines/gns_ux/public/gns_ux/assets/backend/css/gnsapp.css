@@ -135,3 +135,6 @@
     position: absolute;
     min-width: 100%;
 }
+.border-bottom-dotted {
+    border-bottom: 1px dotted #eee;
+}

@@ -10,7 +10,7 @@
             <% if params["show_columns"].include?("customer") %>
                 <th>Customer</th>
             <% end %>
-            <% if params["show_columns"].include?("type") %>
+            <% if params["show_columns"].include?("project_type") %>
                 <th>Type</th>
             <% end %>
             <% if params["show_columns"].include?("start_date") %>
@@ -46,7 +46,7 @@
                 <% if params["show_columns"].include?("customer") %>
                     <td><%= project.customer_name %></td>
                 <% end %>
-                <% if params["show_columns"].include?("type") %>
+                <% if params["show_columns"].include?("project_type") %>
                     <td><%= project.category_name %></td>
                 <% end %>
                 <% if params["show_columns"].include?("start_date") %>
@@ -62,7 +62,7 @@
                 <% if params["show_columns"].include?("complete") %>
                     <td width="150px">
                         <div class="progress rounded-round" title="20% Complete">
-                            <div class="progress-bar bg-dark progress-bar-striped progress-bar-animated" style="width: 90%">
+                            <div class="progress-bar" style="width: 90%">
                                 <span>90%</span>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                                 <a href="<%= gns_project.backend_project_path(project) %>" class="dropdown-item">
                                     <i class="icon-file-eye"></i> View
                                 </a>
-                                <a class="dropdown-item"
+                                <a class="dropdown-item edit-project-button"
                                     href="<%= gns_project.edit_backend_project_path(project) %>">
                                     <i class="icon-pencil7"></i> Update
                                 </a>

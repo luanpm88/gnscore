@@ -12,9 +12,68 @@
 <% end %>
 
 <% content_for :page_toolbar do %>
-    <a class="btn btn-primary" href="<%= gns_project.new_backend_project_path %>">
-        <b><i class="icon-plus22"></i></b> Thêm mới
+    <a class="btn btn-primary add-project-button" href="<%= gns_project.new_backend_project_path %>">
+        <b><i class="icon-plus22"></i></b> Create project
     </a>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        // global modal
+        var project_modal = new gModal();
+        var updateProjectCallback;
+        var newProjectCallback;
+        
+        $(function() {            
+            $('.add-project-button').click(function(e) {
+                e.preventDefault();
+                var button = $(this);
+                
+                project_modal.load(button.attr('href'));
+                
+                newProjectCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // Hide modal
+                        project_modal.hide();
+                        datalists.forEach(function(datalist) {
+                            datalist.refresh();
+                        });     
+                    } else if (typeof(response.redirect) !== 'undefined') {
+                        window.location = response.redirect;
+                    } else {
+                        // validation error
+                        project_modal.renderHtml(response);
+                    }
+                };
+            });
+            
+            $(document).on('click', '.edit-project-button', function(e) {
+                e.preventDefault();
+                
+                var button = $(this);
+                
+                // load modal edit
+                project_modal.load(button.attr('href'));
+                
+                // after update category event
+                updateProjectCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // Hide modal
+                        project_modal.hide();
+                        datalists[button.closest('.datalist').attr('data-id')].refresh();
+                    } else if (typeof(response.redirect) !== 'undefined') {
+                        window.location = response.redirect;
+                    } else {
+                        // validation error
+                        project_modal.renderHtml(response);
+                    }           
+                }
+                    
+            });
+        });
+    </script>
 <% end %>
 
 <!-- Datatable -->

@@ -2,8 +2,14 @@ module GnsProject
   class Project < ApplicationRecord
     belongs_to :category, class_name: 'GnsProject::Category'
     belongs_to :customer, class_name: 'GnsContact::Contact'
+    has_many :tasks, dependent: :restrict_with_error
     
     validates :name, :category_id, :customer_id, :presence => true
+    
+    # get customer code
+    def customer_code
+      customer.present? ? customer.code : ''
+    end
     
     # get customer name
     def customer_name

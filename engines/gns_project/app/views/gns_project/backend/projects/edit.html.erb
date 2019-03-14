@@ -14,8 +14,36 @@
 
 <% content_for :page_toolbar do %>
     <a class="btn btn-primary" href="<%= gns_project.new_backend_project_path %>">
-        <b><i class="icon-plus22"></i></b> Thêm mới
+        <b><i class="icon-plus22"></i></b> Create project
     </a>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        $(document).ready(function() {
+            $('.edit_project').submit(function(e) {
+                e.preventDefault();
+                
+                var form = $(this);
+                
+                // clear modal before ajax running
+                project_modal.clear();
+                
+                $.ajax({
+                    url: form.attr('action'),
+                    method: form.attr('method'),
+                    data: form.serialize() + '&layout=modal',
+                }).done(function(response) {
+                    // do something
+                    if (typeof(updateProjectCallback) !== 'undefined') {
+                        updateProjectCallback(response);
+                    }
+                });
+                
+                return false;
+            });
+        });
+    </script>
 <% end %>
 
 <div class="row">

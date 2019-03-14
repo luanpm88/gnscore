@@ -26,7 +26,7 @@
                 
                 var form = $(this);
                 
-                // clear modal trước khi chạy ajax
+                // clear modal before ajax running
                 category_modal.clear();
                 
                 $.ajax({
@@ -34,7 +34,7 @@
                     method: form.attr('method'),
                     data: form.serialize() + '&layout=modal',
                 }).done(function(response) {
-                    // làm gì đó ở đây
+                    // do something
                     if (typeof(updateCategoryCallback) !== 'undefined') {
                         updateCategoryCallback(response);
                     }

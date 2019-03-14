@@ -61,6 +61,11 @@ module GnsProject
           message: 'Stage was successfully destroyed.',
         }
       end
+      
+      # SELECT2 /stages
+      def select2
+        render json: GnsProject::Stage.select2(params)
+      end
   
       private
         # Use callbacks to share common setup or constraints between actions.

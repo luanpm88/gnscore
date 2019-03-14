@@ -1,0 +1,93 @@
+<%= form_for([gns_project, :backend, task], html: {multipart: true}) do |f| %>
+
+    <fieldset>
+        <input type="hidden" name="task[project_id]" value="<%= @task.project.id %>">
+        <div class="form-group">
+            <label class="d-block">Stage <span class="text-danger">*</span></label>
+            <select name="task[stage_id]" data-placeholder="Select stage..."
+                class="form-control select-ajax"
+                data-url="<%= gns_project.select2_backend_stages_path %>"
+                data-container-css-class="font-weight-semibold"
+            >
+                <option value="<%= task.stage_id %>"><%= task.stage_name %></option>
+            </select>
+            <% if task.errors.full_messages_for(:stage_id).present? %>
+                <span class="form-text text-danger"><%= task.errors.full_messages_for(:stage_id).join('<br/>').html_safe %></span>
+            <% end %>
+        </div>
+        
+        <div class="form-group">
+            <label class="d-block">Task Description <span class="text-danger">*</span></label>
+            <input type="text" class="form-control font-weight-semibold <%= 'border-danger' if task.errors.full_messages_for(:name).present? %>" placeholder="Enter name"
+                name="task[name]"
+                value="<%= task.name %>"
+            >
+            <% if task.errors.full_messages_for(:name).present? %>
+                <span class="form-text text-danger"><%= task.errors.full_messages_for(:name).join('<br/>').html_safe %></span>
+            <% end %>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label class="d-block">Starting Date <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-calendar22"></i></span>
+                        </span>
+                        <input type="text" class="form-control font-weight-semibold daterange-single" value="" name="contact[birthday]">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label class="d-block">End Date <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-calendar22"></i></span>
+                        </span>
+                        <input type="text" class="form-control font-weight-semibold daterange-single" value="" name="contact[birthday]">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="d-block">Hours <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control font-weight-semibold" placeholder="Hours (enter number)"
+                        name="task[hours]"
+                        value="">
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="d-blocks">Responsible <span class="text-danger">*</span></label>
+            <select name="task[stage_id]" data-placeholder="The person responsible..."
+                class="form-control select-ajax"
+                data-url="<%= gns_project.select2_backend_stages_path %>"
+                data-container-css-class="font-weight-semibold"
+            >
+                <option value="<%= task.stage_id %>"><%= task.stage_name %></option>
+            </select>
+            <% if task.errors.full_messages_for(:stage_id).present? %>
+                <span class="form-text text-danger"><%= task.errors.full_messages_for(:stage_id).join('<br/>').html_safe %></span>
+            <% end %>
+        </div>
+        
+        <div class="form-group">
+            <label class="d-block">Status <span class="text-danger">*</span></label>
+            <input type="text" class="form-control font-weight-semibold" placeholder=""
+                name="task[responsible]"
+                value=""
+            >
+        </div>
+        
+    </fieldset>    
+    <hr class="mt-0">
+    <div class="text-left">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a class="btn btn-light ml-1" href="<%= gns_project.backend_tasks_path %>">
+            Cancel
+        </a>
+    </div>
+<% end %>
