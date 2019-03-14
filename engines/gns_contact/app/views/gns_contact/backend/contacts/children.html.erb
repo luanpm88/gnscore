@@ -1,0 +1,56 @@
+<% if @contact.children.empty? %>
+    <div class="card-body">
+        <p class="text-center text-warning pt-2">
+            There are no children
+        </p>
+    </div>
+<% else %>
+    <table class="table">
+        <thead>
+            <tr class="alpha-primary">
+                <th>Code</th>
+                <th>Full Name</th>
+                <th>Mobile Phone</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Status</th>
+                <th>Created At</th>
+                <th class="text-center" style="width: 100px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @contact.children.each do |child| %>
+                <tr>
+                    <td><%= child.code %></td>
+                    <td><%= child.name %></td>
+                    <td><%= child.mobile %></td>
+                    <td><%= child.email %></td>
+                    <td><%= child.get_full_address %></td>
+                    <td><%= child.get_status_label %></td>
+                    <td><%= child.created_at.strftime("%d/%m/%Y") %></td>
+                    <td class="text-center">
+                        <div class="list-icons">
+                            <a class="list-icons-item mr-2" title="Insert below"
+                                href="#">
+                                <i class="icon-plus-circle2"></i>
+                            </a>
+                            
+                            <a class="list-icons-item edit-stage-button" title="Update stage"
+                               href="<%= gns_contact.edit_backend_contact_path(child) %>">
+                                <i class="icon-pencil7"></i>
+                            </a>
+        
+                            <a class="list-icons-item ajax delete-stage-button" title="Remove stage"
+                                href="<%= gns_contact.backend_contact_path(child) %>"
+                                data-method="DELETE"
+                                data-confirm="You are about to delete a stage"
+                            >
+                                <i class="icon-bin"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+<% end %>
