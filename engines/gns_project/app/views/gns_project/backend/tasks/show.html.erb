@@ -1,1 +1,84 @@
-Show task
+<% content_for :title do %>
+    Show Task
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+    <a href="<%= gns_project.backend_tasks_path %>" class="breadcrumb-item">Tasks</a>
+    <span class="breadcrumb-item active">Show</span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Task</span> - <%= @task.name %> (Belongs to Stage: <%= @task.stage_name %>)</h4>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        var task_attachment_list_box = new ajaxBox(
+            $('.task-attachment-list'),
+            '<%= gns_project.attachments_backend_tasks_path(@task.id) %>',
+            function(box) {
+                // apply g-link
+                new gLink(box.find('.delete-task-attachment-button'), function(link) {
+                    task_attachment_list_box.load();
+                });
+            }
+        );
+        
+        //var history_attachment_list_box = new ajaxBox(
+        //    $('.history-attachment-list'),
+        //    '<%= gns_project.history_backend_attachments_path(1) %>'
+        //);
+        
+        $(function() {
+            task_attachment_list_box.load();
+            //history_attachment_list_box.load();
+        });
+    </script>
+<% end %>
+
+<div class="card">
+    <div class="card-header bg-white header-elements-inline">
+        <h6 class="card-title">View - Attachment list</h6>
+        <div class="header-elements">
+            <a href="#" class="btn btn-light mr-3">Finish Task</a>
+            <a href="#" class="btn btn-light mr-3">Close Task</a>
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-blocks">Stage</label>
+                    <select name="stage_id" data-placeholder="Filter by stage..."
+                        class="form-control select-ajax"
+                        data-url="<%= gns_project.select2_backend_stages_path %>"
+                        data-container-css-class="font-weight-semibold"
+                    >
+                        <option value="<%= @task.stage_id %>"><%= @task.stage_name %></option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-blocks">Task Description</label>
+                    <select name="stage_id" data-placeholder="Filter by stage..."
+                        class="form-control select-ajax"
+                        data-url="<%= gns_project.select2_backend_tasks_path %>"
+                        data-container-css-class="font-weight-semibold"
+                    >
+                        <option value="<%= @task.id %>"><%= @task.name %></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="task-attachment-list">
+            
+        </div>
+    </div>
+</div>

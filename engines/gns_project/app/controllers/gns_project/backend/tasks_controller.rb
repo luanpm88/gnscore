@@ -1,7 +1,7 @@
 module GnsProject
   module Backend
     class TasksController < GnsCore::Backend::BackendController
-      before_action :set_task, only: [:show, :edit, :update, :destroy]
+      before_action :set_task, only: [:attachments, :show, :edit, :update, :destroy]
   
       # GET /tasks
       def index
@@ -54,6 +54,16 @@ module GnsProject
           status: 'success',
           message: 'Task was successfully destroyed.',
         }
+      end
+      
+      # SELECT2 /tasks
+      def select2
+        render json: GnsProject::Task.select2(params)
+      end
+      
+      # danh sach attachment cua task
+      def attachments
+        render layout: nil
       end
   
       private

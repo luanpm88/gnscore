@@ -1,7 +1,7 @@
 module GnsProject
   module Backend
     class ProjectsController < GnsCore::Backend::BackendController
-      before_action :set_project, only: [:tasks, :show, :edit, :update, :destroy]
+      before_action :set_project, only: [:tasks, :tasks_attachment, :show, :edit, :update, :destroy]
   
       # GET /projects
       def index
@@ -87,6 +87,11 @@ module GnsProject
       
       # task list ajax table / project planning
       def tasks
+        render layout: nil
+      end
+      
+      # task list ajax table / project planning
+      def tasks_attachment
         render layout: nil
       end
   

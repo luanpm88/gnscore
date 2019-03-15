@@ -33,6 +33,17 @@
             }
         );
         
+        var attachment_list_box = new ajaxBox(
+            $('.attachment-list'),
+            '<%= gns_project.tasks_attachment_backend_projects_path(@project.id) %>',
+            function(box) {
+                // apply g-link
+                new gLink(box.find('.delete-task-button'), function(link) {
+                    attachment_list_box.load();
+                });
+            }
+        );
+        
         var project_modal = new gModal();
         var newProjectCallback;
         
@@ -74,6 +85,33 @@
             
             // ajax box task list
             task_list_box.load();
+            attachment_list_box.load();
+        });
+        
+        var task_attachments_modal = new gModal();
+        $(function() {
+            $(document).on('click', '.show-attachment-list-button', function(e) {
+                e.preventDefault();
+                
+                task_attachments_modal.load($(this).attr('href'));
+            });
+            
+            // ajax box task list
+            //task_list_box.load();
+            //attachment_list_box.load();
+        });
+        
+        var history_task_attachment_modal = new gModal();
+        $(function() {
+            $(document).on('click', '.history-attachment-list-button', function(e) {
+                e.preventDefault();
+                
+                history_task_attachment_modal.load($(this).attr('href'));
+            });
+            
+            // ajax box task list
+            //task_list_box.load();
+            //attachment_list_box.load();
         });
     </script>
 <% end %>
@@ -271,6 +309,24 @@
     </div>
     <div class="card-body">
         <div class="table-responsive task-list">
+            
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header bg-white header-elements-inline">
+        <h6 class="card-title">Attachment</h6>
+        <div class="header-elements">
+            <a href="#" class="btn btn-light mr-3"><i class="icon-download4 mr-2"></i> Download All</a>
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="attachment-list">
             
         </div>
     </div>
