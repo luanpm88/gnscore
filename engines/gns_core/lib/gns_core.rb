@@ -1,3 +1,4 @@
+require 'devise'
 require "gns_core/engine"
 require "unidecoder"
 require "roo"
