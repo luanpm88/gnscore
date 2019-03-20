@@ -49,7 +49,11 @@ function uniqueId() {
 
 function applyJs(container) {
     // Select initialization
-    container.find('.select').select2();
+    container.find('.select').each(function () {
+        $(this).select2({
+            dropdownParent: $(this).parent()
+        });
+    });
     
     container.find('.selectAllowClear').select2({
         allowClear: true,
@@ -98,6 +102,7 @@ function applyJs(container) {
         
         $(this).select2({
             allowClear: allow_clear,
+            dropdownParent: $(this).parent(),
             ajax: {
               url: url,
               dataType: 'json'

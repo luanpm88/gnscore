@@ -61,8 +61,8 @@ module GnsContact
     # get business type options
     def self.get_type_options()
       [
-        {text: I18n.t(self::TYPE_PERSON), value: self::TYPE_PERSON},
-        {text: I18n.t(self::TYPE_COMPANY), value: self::TYPE_COMPANY}
+        {text: 'Person', value: self::TYPE_PERSON},
+        {text: 'Company', value: self::TYPE_COMPANY}
       ]
     end
     
@@ -138,26 +138,33 @@ module GnsContact
       return query
     end
     
+    # get select2 records
     def self.select2(params)
       per_page = 10
       page = 1      
       data = {results: [], pagination: {more: false}}
       
       query = self.get_active
+      query = query.order(:full_name)
       
       # keyword
       if params[:q].present?
-        query = query.where('LOWER(gns_contact_contacts.full_name) LIKE ?', '%'+params[:q].to_ascii.downcase+'%')
+        query = query.where('LOWER(gns_contact_contacts.cache_search) LIKE ?', '%'+params[:q].to_ascii.strip.downcase+'%')
+      end
+      
+      # where /params
+      if params[:current_contact_id].present?
+        query = query.where.not(id: params[:current_contact_id])
       end
       
       # pagination
       page = params[:page].to_i if params[:page].present?
-      query = self.limit(per_page).offset(per_page*(page-1))      
-      data[:pagination][:more] = true if query.count > 0
+      query = query.limit(per_page).offset(per_page*(page-1))      
+      data[:pagination][:more] = true if query.count >= per_page
       
       # render items
       query.each do |c|
-        data[:results] << {id: c.id, text: c.full_name}
+        data[:results] << {id: c.id, text: c.name}
       end
       
       return data

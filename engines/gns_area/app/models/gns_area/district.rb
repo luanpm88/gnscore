@@ -20,7 +20,7 @@ module GnsArea
       
       # keyword
       if params[:q].present?
-        query = query.where('LOWER(gns_area_districts.cache_search) LIKE ?', '%'+params[:q].to_ascii.downcase+'%')
+        query = query.where('LOWER(gns_area_districts.cache_search) LIKE ?', '%'+params[:q].to_ascii.downcase.strip+'%')
       end
       
       # state
@@ -31,7 +31,7 @@ module GnsArea
       # pagination
       page = params[:page].to_i if params[:page].present?
       query = query.limit(per_page).offset(per_page*(page-1))      
-      data[:pagination][:more] = true if query.count > 0
+      data[:pagination][:more] = true if query.count >= per_page
       
       # render items
       query.each do |d|
