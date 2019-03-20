@@ -1,7 +1,7 @@
 module GnsContact
   module Backend
     class ContactsController < GnsCore::Backend::BackendController
-      before_action :set_contact, only: [:children, :show, :projects, :edit, :update, :destroy]
+      before_action :set_contact, only: [:remove_child, :children, :show, :projects, :edit, :update, :destroy]
   
       # GET /contacts
       def index
@@ -95,6 +95,11 @@ module GnsContact
       def children
         render layout: nil
       end
+      
+      # @todo: xoa sub-contact khoi contact cha hien tai
+      def remove_child
+        @contact.parent.delete(params[:current_parent_id])
+      end
   
       private
         # Use callbacks to share common setup or constraints between actions.
@@ -104,10 +109,11 @@ module GnsContact
   
         # Only allow a trusted parameter "white list" through.
         def contact_params
-          params.fetch(:contact, {}).permit(:code, :full_name, :foreign_name, :phone, :email, :mobile, :tax_code, :website, :fax, :invoice_address,
+          params.fetch(:contact, {}).permit(:code, :full_name, :foreign_name, :phone, :email, :mobile,
+                                            :tax_code, :website, :fax, :invoice_address, :description,
                                             :contact_type, :active,
                                             :address, :country_id, :state_id, :district_id,
-                                            category_ids: [])
+                                            category_ids: [], parent_ids: [])
         end
     end
   end

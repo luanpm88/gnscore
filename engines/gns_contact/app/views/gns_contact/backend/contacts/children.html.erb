@@ -30,23 +30,26 @@
                     <td><%= child.created_at.strftime("%d/%m/%Y") %></td>
                     <td class="text-center">
                         <div class="list-icons">
-                            <a class="list-icons-item mr-2" title="Insert below"
-                                href="#">
-                                <i class="icon-plus-circle2"></i>
-                            </a>
-                            
-                            <a class="list-icons-item edit-stage-button" title="Update stage"
-                               href="<%= gns_contact.edit_backend_contact_path(child) %>">
-                                <i class="icon-pencil7"></i>
-                            </a>
-        
-                            <a class="list-icons-item ajax delete-stage-button" title="Remove stage"
-                                href="<%= gns_contact.backend_contact_path(child) %>"
-                                data-method="DELETE"
-                                data-confirm="You are about to delete a stage"
-                            >
-                                <i class="icon-bin"></i>
-                            </a>
+                            <div class="dropdown">
+                                <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+    
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item edit-contact-button"
+                                        href="<%= gns_contact.edit_backend_contact_path(child) %>">
+                                        <i class="icon-pencil7"></i> Update infomation
+                                    </a>
+                                    <!--<div class="dropdown-divider"></div>-->
+                                    <a class="dropdown-item ajax remove-child-button"
+                                        href="<%= gns_contact.remove_child_backend_contacts_path(child, current_parent_id: @contact.id) %>"
+                                        data-method="PUT"
+                                        data-confirm="You want to remove a contact from the contact persons"
+                                    >
+                                        <i class="icon-subtract"></i> Remove from list
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </td>
                 </tr>

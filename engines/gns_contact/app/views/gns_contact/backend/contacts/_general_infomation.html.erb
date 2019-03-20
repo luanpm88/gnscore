@@ -1,0 +1,236 @@
+<div class="card">
+    <div class="card-header bg-white header-elements-sm-inline">
+        <h6 class="card-title">Contact Details</h6>
+        <div class="header-elements">            
+            <div class="list-icons mr-3">
+                <div class="dropdown">
+                    <a href="#" class="list-icons-item" data-toggle="dropdown"><i class="icon-three-bars"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="#" class="dropdown-item">
+                            <i class="icon-pencil7"></i> Update
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <i class="icon-bin"></i> Delete
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+                <a class="list-icons-item" data-action="remove"></a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card-body">
+        <ul class="media-list">
+            <div class="row">
+                <div class="col-md-6">
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Code:</div>
+                        </div>
+    
+                        <div class="ml-3 align-self-center text-blue-800">
+                            <%= @contact.code %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Full Name:</div>
+                        </div>
+    
+                        <div class="ml-3 align-self-center text-blue-800">
+                            <%= @contact.name %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Foreign Name:</div>
+                        </div>
+    
+                        <div class="ml-3 align-self-center text-blue-800">
+                            <%= @contact.foreign_name %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Contact Group:</div>
+                        </div>
+    
+                        <div class="ml-3 align-self-center text-blue-800">
+                            <% @contact.categories.map {|cat| {text: cat.name, value: cat.id}}.each do |value| %>
+                                <% if value[:value].present? %>
+                                    <%= value[:text] %>
+                                <% end %>
+                            <% end %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Business Partner Type:</div>
+                        </div>
+    
+                        <div class="ml-3 align-self-center text-blue-800">
+                            <%= t @contact.contact_type %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Belongs To/Company:</div>
+                        </div>
+    
+                        <div class="ml-3 align-self-center text-blue-800">
+                            <%= @contact.parent.present? ? @contact.parent.last.name : '--' %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Address:</div>
+                        </div>
+    
+                        <div class="ml-3 align-self-center text-blue-800">
+                            <%= @contact.get_full_address %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Email Add:</div>
+                        </div>
+    
+                        <div class="ml-3 align-self-center text-blue-800">
+                            <%= mail_to @contact.email, @contact.email if @contact.email.present? %>
+                        </div>
+                    </li>
+                </div>
+                    
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Telephone:</div>
+                                </div>
+            
+                                <div class="ml-3 align-self-center text-blue-800">
+                                    <%= @contact.phone %>
+                                </div>
+                            </li>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Mobile:</div>
+                                </div>
+            
+                                <div class="ml-3 align-self-center text-blue-800">
+                                    <%= @contact.mobile %>
+                                </div>
+                            </li>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Fax:</div>
+                                </div>
+        
+                                <div class="ml-3 align-self-center text-blue-800">
+                                    <%= @contact.fax %>
+                                </div>
+                            </li>
+                        </div>
+                        <div class="col-md-6">
+                            <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Tax ID:</div>
+                                </div>
+        
+                                <div class="ml-3 align-self-center text-blue-800">
+                                    <%= @contact.tax_code %>
+                                </div>
+                            </li>
+                        </div>
+                    </div>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Invoice Address:</div>
+                        </div>
+    
+                        <div class="ml-3 align-self-center text-blue-800">
+                            <%= @contact.invoice_address %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Status:</div>
+                        </div>
+    
+                        <div class="ml-3 align-self-center text-blue-800">
+                            <span class="badge badge-<%= @contact.get_status_label %>"><%= t @contact.get_status_label %></span>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Added By:</div>
+                        </div>
+    
+                        <div class="ml-3 align-self-center">
+                            <%= current_user.email %>
+                        </div>
+                    </li>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Created:</div>
+                                </div>
+            
+                                <div class="ml-3 align-self-center text-muted">
+                                    <%= @contact.created_at.strftime('%d/%m/%Y - %T') %>
+                                </div>
+                            </li>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Last Updated:</div>
+                                </div>
+            
+                                <div class="ml-3 align-self-center text-muted">
+                                    <%= @contact.updated_at.strftime('%d/%m/%Y - %T') %>
+                                </div>
+                            </li>
+                        </div>
+                    </div>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Remark:</div>
+                        </div>
+    
+                        <div class="ml-3 align-self-center text-blue-800">
+                            <%= @contact.description %>
+                        </div>
+                    </li>
+                </div>
+            </div>
+        </ul>
+    </div>
+</div>

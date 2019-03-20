@@ -13,7 +13,7 @@
 <% end %>
 
 <% content_for :page_toolbar do %>
-    <a class="btn btn-primary" href="<%= gns_contact.new_backend_contact_path %>">
+    <a class="btn btn-primary add-contact-button" href="<%= gns_contact.new_backend_contact_path %>">
         <b><i class="icon-plus22"></i></b> Create contact
     </a>
 <% end %>
@@ -26,92 +26,78 @@
             $('.children-contact-list'),
             '<%= gns_contact.children_backend_contacts_path(@contact.id) %>',
             function(box) {
-                // apply g-link for delete stage button
+                // apply g-link for button
                 new gLink(box.find('.delete-child-button'), function(link) {
                     children_contact_list_box.load();
                 });
             }
         );
-        // ajax box children list
-        children_contact_list_box.load();
+        
+        var contact_modal = new gModal();
+        var newContactCallback;
+        
+        $(function() {
+            $('.add-contact-button').click(function(e) {
+                e.preventDefault();
+                var button = $(this);
+                
+                contact_modal.load(button.attr('href'));
+                
+                newContactCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // Hide modal
+                        contact_modal.hide();
+                        datalists.forEach(function(datalist) {
+                            datalist.refresh();
+                        });     
+                    } else if (typeof(response.redirect) !== 'undefined') {
+                        window.location = response.redirect;
+                    } else {
+                        // validation error
+                        contact_modal.renderHtml(response);
+                    }
+                };
+            });
+            
+            $('.add-subcontact-exist-button').click(function(e) {
+                e.preventDefault();
+                
+                //children_contact_modal.load($(this).attr('href'));
+            });
+            
+            $('.add-new-subcontact-button').click(function(e) {
+                e.preventDefault();
+                
+                //children_contact_modal.load($(this).attr('href'));
+            });
+            
+            $(document).on('click', '.edit-contact-button', function(e) {
+                e.preventDefault();
+                
+                children_contact_modal.load($(this).attr('href'));
+            });
+            
+            // ajax box children list
+            children_contact_list_box.load();
+        });
     </script>
 <% end %>
 
 <div class="row">
     <div class="col-md-12">
         
-        <!-- Bottom tabs -->
+        <%= render "general_infomation" %>
+        
         <div class="card">
-            
-            <%= render "contact_menu", title: 'Contact Details' %>
-            
+            <%= render "contact_menu", title: 'Contact Person' %>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="tab-pane fade show active" id="bottom-tab1">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td class="font-weight-semibold">Full name:</td>
-                                        <td class="text-right"><a href="#">Singular app</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-weight-semibold">Email:</td>
-                                        <td class="text-right">
-                                            lahum@gmail.com
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-weight-semibold">Type:</td>
-                                        <td class="text-right">VIP, Normal</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-weight-semibold">Status:</td>
-                                        <td class="text-right"><span class="badge badge-info">Active</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="tab-pane fade show active" id="bottom-tab1">
-                            <table class="table">
-                                <tbody>                                        
-                                    <tr>
-                                        <td class="font-weight-semibold">Added by:</td>
-                                        <td class="text-right"><a href="#">Winnie</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-weight-semibold">Updated:</td>
-                                        <td class="text-right text-muted">12 May, 2015</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="font-weight-semibold">Created:</td>
-                                        <td class="text-right text-muted">25 Feb, 2015</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                <div class="text-right">
+                    <a href="#" class="btn bg-blue mr-3 add-new-subcontact-button">Add new contact</a>
+                    <a href="#" class="btn bg-blue add-subcontact-exist-button">Add contact already exists</a>
                 </div>
             </div>
-        </div>
-        <!-- /bottom tabs -->
-        
-        
-        <div class="card">
-            <div class="card-header header-elements-inline">
-                <h6 class="card-title">Contact Persons / Employees</h6>
-                <div class="header-elements">
-                    <a href="#" class="btn bg-blue mr-3 add-stage-button">Add new contact</a>
-                    <a href="#" class="btn bg-blue mr-3 add-stage-button">Add contact already exists</a>
-                    <div class="list-icons">
-                        <a class="list-icons-item" data-action="collapse"></a>
-                        <a class="list-icons-item" data-action="remove"></a>
-                    </div>
-                </div>
-            </div>
-            <div class="table-responsive children-contact-list" style="position: relative; min-height: 130px">
+            <div class="children-contact-list" style="position: relative; min-height: 130px">
                 
             </div>
         </div>

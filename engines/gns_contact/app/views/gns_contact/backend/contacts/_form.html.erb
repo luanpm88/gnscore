@@ -2,58 +2,25 @@
 
     <fieldset>
         <div class="row">
-            
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <div class="form-group">
-                    <div class="card-img-actions mx-1 mt-1">
-                        <img class="card-img img-fluid" src="/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg" alt="">
-                        <div class="card-img-actions-overlay card-img">
-                            <a href="#" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round">
-                                <i class="icon-bin"></i>
-                            </a>
-        
-                            <a href="#" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round ml-2">
-                                <i class="icon-file-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                    <label class="d-block">Code <span class="text-danger">*</span></label>
+                    <input type="text"
+                        class="form-control font-weight-semibold <%= 'border-danger' if contact.errors.full_messages_for(:code).present? %>"
+                        placeholder="Enter code"
+                        name="contact[code]"
+                        value="<%= contact.code %>"
+                    >
+                    <% if contact.errors.full_messages_for(:code).present? %>
+                        <span class="form-text text-danger"><%= contact.errors.full_messages_for(:code).join('<br/>').html_safe %></span>
+                    <% end %>
+                </div>          
             </div>
             
-            <div class="col-md-9">
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <label class="d-block">Code <span class="text-danger">*</span></label>
-                            <input type="text"
-                                class="form-control font-weight-semibold <%= 'border-danger' if contact.errors.full_messages_for(:code).present? %>"
-                                placeholder="Enter code"
-                                name="contact[code]"
-                                value="<%= contact.code %>"
-                            >
-                            <% if contact.errors.full_messages_for(:code).present? %>
-                                <span class="form-text text-danger"><%= contact.errors.full_messages_for(:code).join('<br/>').html_safe %></span>
-                            <% end %>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-							<label class="d-block">Active/In-active</label>
-                            <div class="form-check form-check-switch">
-                                <label class="form-check-label d-flex align-items-center">
-                                    <input type="hidden" name="contact[active]" value="false" />
-                                    <input type="checkbox"
-                                        name="contact[active]"
-                                        value="true"
-                                        class="form-check-input-switch"
-                                        data-on-color="info" data-off-color="danger"
-                                        data-on-text="active" data-off-text="inactive"
-                                        <%= 'checked' if contact.active? %>>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label class="d-block">Full Name <span class="text-danger">*</span></label>
                     <input type="text"
@@ -66,6 +33,8 @@
                         <span class="form-text text-danger"><%= contact.errors.full_messages_for(:full_name).join('<br/>').html_safe %></span>
                     <% end %>
                 </div>
+            </div>
+            <div class="col-md-6">
                 <div class="form-group">
                     <label class="d-block">Foreign Name</label>
                     <input type="text"
@@ -181,7 +150,7 @@
                 
                 <div class="form-group">
                     <label class="d-block">State/Province</label>
-                    <select class="form-control font-weight-semibold select-ajax-state"
+                    <select class="form-control font-weight-semibold select-ajax"
                         data-container-css-class="font-weight-semibold"
                         data-placeholder="Choose state/province"
                         data-url="<%= gns_area.select2_backend_states_path %>"
@@ -193,7 +162,7 @@
                 
                 <div class="form-group">
                     <label class="d-block">District/Town/City</label>
-                    <select class="form-control font-weight-semibold select-ajax-district"
+                    <select class="form-control font-weight-semibold select-ajax"
                         data-container-css-class="font-weight-semibold"
                         data-placeholder="Choose district/town/city"
                         data-url="<%= gns_area.select2_backend_districts_path %>"
@@ -218,12 +187,47 @@
                         value="<%= contact.invoice_address %>"
                     >
                 </div>
+                
+                <div class="form-group">
+                    <label class="d-block">BelongsTo/Parent</label>
+                    <select class="form-control select-ajax"
+                        data-container-css-class="font-weight-semibold"
+                        data-placeholder="Choose group"
+                        data-url="<%= gns_contact.select2_backend_contacts_path(current_contact_id: contact.id) %>"
+                        name="contact[parent_ids][]"
+                    >
+                        <% values = contact.parent.map {|c| {text: c.name, value: c.id}} %>
+                        <% values.each do |value| %>
+                            <% if value[:value].present? %>
+                                <option selected="selected" value="<%= value[:value] %>"><%= value[:text] %></option>
+                            <% end %>
+                        <% end %>
+                    </select>
+                </div>
             </div>
         </div>
         
         <div class="form-group">
             <label>Remark:</label>
-            <textarea rows="2" cols="5" class="form-control" placeholder="Enter your remark here"></textarea>
+            <textarea rows="2" cols="5"
+                class="form-control"
+                placeholder="Enter your remark here"
+                name="contact[description]"
+            ><%= contact.description %></textarea>
+        </div>
+        
+        <div class="form-group">
+            <div class="form-check form-check-inline form-check-right form-check-switchery">
+                <label class="form-check-label">
+                    Set active:
+                    <input type="hidden" name="contact[active]" value="false" />
+                    <input type="checkbox" class="form-check-input-switchery"
+                        name="contact[active]"
+                        value="true"
+                        <%= 'checked' if contact.active? %>
+                    >
+                </label>
+            </div>
         </div>
         
     </fieldset>
@@ -240,11 +244,12 @@
     <script>
         $(document).ready(function() {
             // Select2 ajax
-            $('.select-ajax-state').each(function() {
+            $('select[name="contact[state_id]"]').each(function() {
                 var url = $(this).attr('data-url');
                 
                 $(this).select2({
                     allowClear: true,
+                    dropdownParent: $(this).parent(),
                     ajax: {
                         url: url,
                         dataType: 'json',
@@ -264,11 +269,12 @@
                 }); 
             });
             
-            $('.select-ajax-district').each(function() {
+            $('select[name="contact[district_id]"]').each(function() {
                 var url = $(this).attr('data-url');
                 
                 $(this).select2({
                     allowClear: true,
+                    dropdownParent: $(this).parent(),
                     ajax: {
                         url: url,
                         dataType: 'json',

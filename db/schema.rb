@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_12_085528) do
+ActiveRecord::Schema.define(version: 2019_03_20_012503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 2019_03_12_085528) do
     t.boolean "active", default: true
     t.string "foreign_name"
     t.string "fax"
+    t.text "description"
     t.index ["country_id"], name: "index_gns_contact_contacts_on_country_id"
     t.index ["district_id"], name: "index_gns_contact_contacts_on_district_id"
     t.index ["state_id"], name: "index_gns_contact_contacts_on_state_id"
@@ -86,6 +87,26 @@ ActiveRecord::Schema.define(version: 2019_03_12_085528) do
     t.datetime "updated_at", null: false
     t.index ["contact_id"], name: "index_gns_contact_parent_contacts_on_contact_id"
     t.index ["parent_id"], name: "index_gns_contact_parent_contacts_on_parent_id"
+  end
+
+  create_table "gns_core_users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_gns_core_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_gns_core_users_on_reset_password_token", unique: true
+  end
+
+  create_table "gns_project_attachments", force: :cascade do |t|
+    t.string "file"
+    t.bigint "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_gns_project_attachments_on_task_id"
   end
 
   create_table "gns_project_categories", force: :cascade do |t|
@@ -113,6 +134,16 @@ ActiveRecord::Schema.define(version: 2019_03_12_085528) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_gns_project_stages_on_category_id"
+  end
+
+  create_table "gns_project_tasks", force: :cascade do |t|
+    t.string "name"
+    t.bigint "project_id"
+    t.bigint "stage_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_gns_project_tasks_on_project_id"
+    t.index ["stage_id"], name: "index_gns_project_tasks_on_stage_id"
   end
 
 end
