@@ -36,6 +36,11 @@ module GnsContact
         @contact = Contact.new(contact_params)
   
         if @contact.save
+          # Add notification
+          current_user.add_notification("gns_contact.notification.contact.created", {
+            name: @contact.full_name
+          })
+          
           flash[:success] = 'Contact was successfully created.'
           render json: {
             redirect: gns_contact.backend_contact_path(@contact)
@@ -48,6 +53,11 @@ module GnsContact
       # PATCH/PUT /contacts/1
       def update
         if @contact.update(contact_params)
+          # Add notification
+          current_user.add_notification("gns_contact.notification.contact.updated", {
+            name: @contact.full_name
+          })
+          
           render json: {
             status: 'success',
             message: 'Contact was successfully updated.',

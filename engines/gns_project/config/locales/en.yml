@@ -30,7 +30,14 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  ss: "hhhhhhh %{name}"
+  gns_contact:
+    notification:
+      contact:
+        created: "Created new contact: %{name}"
+        updated: "Updated contact: %{name}"
   gns_project:
     notification:
       project:
         created: "Created new project: %{name}"
+        updated: "Updated project: %{name}"

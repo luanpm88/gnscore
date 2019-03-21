@@ -20,6 +20,12 @@ PATH
       unidecoder
 
 PATH
+  remote: engines/gns_notification
+  specs:
+    gns_notification (0.1.0)
+      rails (~> 5.2.2)
+
+PATH
   remote: engines/gns_project
   specs:
     gns_project (0.1.0)
@@ -262,6 +268,7 @@ DEPENDENCIES
   gns_area!
   gns_contact!
   gns_core!
+  gns_notification!
   gns_project!
   gns_ux!
   jbuilder (~> 2.5)

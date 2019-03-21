@@ -34,6 +34,7 @@
             </li>
             
             <li class="nav-item dropdown">
+                <% notifications = GnsNotification::Notification.all %>
                 <a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
                     <i class="icon-bubbles9"></i>
                     <span class="d-md-none ml-2">Messages</span>
@@ -49,7 +50,7 @@
                     <div class="dropdown-content-body dropdown-scrollable">
                         <ul class="media-list">
                             
-                            <% (1..4).each do |notif| %>
+                            <% notifications.each do |notification| %>
                                 <li class="media">
                                     <div class="mr-3 position-relative">
                                         <img src="/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg" width="36" height="36" class="rounded-circle" alt="">
@@ -63,7 +64,8 @@
                                             </a>
                                         </div>
     
-                                        <span class="text-muted">Vừa thêm mới dự án - Hoàng Khang Incotech</span>
+                                        <span class="text-muted"><%= t(notification.phrase, notification.get_data) %></span>
+                                        <%= t('ss', "name" => 'sdee') %>
                                     </div>
                                 </li>
                             <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_20_012503) do
+ActiveRecord::Schema.define(version: 2019_03_20_142308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,15 @@ ActiveRecord::Schema.define(version: 2019_03_20_012503) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_gns_core_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_gns_core_users_on_reset_password_token", unique: true
+  end
+
+  create_table "gns_notification_notifications", force: :cascade do |t|
+    t.string "phrase"
+    t.text "data"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_gns_notification_notifications_on_user_id"
   end
 
   create_table "gns_project_attachments", force: :cascade do |t|
