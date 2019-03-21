@@ -12,16 +12,9 @@
     <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Contact</span> - Show: <%= @contact.full_name %></h4>
 <% end %>
 
-<% content_for :page_toolbar do %>
-    <a class="btn btn-primary add-contact-button" href="<%= gns_contact.new_backend_contact_path %>">
-        <b><i class="icon-plus22"></i></b> Create contact
-    </a>
-<% end %>
-
 <% content_for :page_script do %>
     <script>
         // global modal
-        var children_contact_modal = new gModal();
         var children_contact_list_box = new ajaxBox(
             $('.children-contact-list'),
             '<%= gns_contact.children_backend_contacts_path(@contact.id) %>',
@@ -37,7 +30,7 @@
         var newContactCallback;
         
         $(function() {
-            $('.add-contact-button').click(function(e) {
+            $('.add-new-subcontact-button').click(function(e) {
                 e.preventDefault();
                 var button = $(this);
                 
@@ -48,11 +41,15 @@
                         showNotification(response.status, response.message);
                         // Hide modal
                         contact_modal.hide();
-                        datalists.forEach(function(datalist) {
-                            datalist.refresh();
-                        });     
+                        
+                        // load box
+                        children_contact_list_box.load();
                     } else if (typeof(response.redirect) !== 'undefined') {
-                        window.location = response.redirect;
+                        // Hide modal
+                        contact_modal.hide();
+                        
+                        // load box
+                        children_contact_list_box.load();
                     } else {
                         // validation error
                         contact_modal.renderHtml(response);
@@ -61,12 +58,6 @@
             });
             
             $('.add-subcontact-exist-button').click(function(e) {
-                e.preventDefault();
-                
-                //children_contact_modal.load($(this).attr('href'));
-            });
-            
-            $('.add-new-subcontact-button').click(function(e) {
                 e.preventDefault();
                 
                 //children_contact_modal.load($(this).attr('href'));
@@ -93,7 +84,7 @@
             <%= render "contact_menu", title: 'Contact Person' %>
             <div class="card-body">
                 <div class="text-right">
-                    <a href="#" class="btn bg-blue mr-3 add-new-subcontact-button">Add new contact</a>
+                    <a href="<%= gns_contact.subcontact_new_backend_contacts_path(parent_id: @contact.id) %>" class="btn bg-blue mr-3 add-new-subcontact-button">Add new contact</a>
                     <a href="#" class="btn bg-blue add-subcontact-exist-button">Add contact already exists</a>
                 </div>
             </div>

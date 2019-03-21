@@ -26,6 +26,12 @@ module GnsContact
       def new
         @contact = Contact.new
       end
+      
+      # GET /contacts/new
+      def subcontact_new
+        @contact = Contact.new
+        @contact.parent_ids = [params[:parent_id]]
+      end
   
       # GET /contacts/1/edit
       def edit
@@ -41,6 +47,22 @@ module GnsContact
             redirect: gns_contact.backend_contact_path(@contact)
           }
         else
+          logger.info @contact.errors.to_json
+          render :new
+        end
+      end
+      
+      # POST /contacts
+      def subcontact_create
+        @contact = Contact.new(contact_params)
+  
+        if @contact.save
+          render json: {
+            status: 'success',
+            message: 'Sub-contact was successfully created.',
+          }
+        else
+          logger.info @contact.errors.to_json
           render :new
         end
       end
