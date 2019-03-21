@@ -38,13 +38,13 @@
                 <a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
                     <i class="icon-bubbles9"></i>
                     <span class="d-md-none ml-2">Messages</span>
-                    <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0">2</span>
+                    <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0"><%= notifications.count %></span>
                 </a>
                 
                 <div class="dropdown-menu dropdown-menu-right dropdown-content wmin-md-350">
                     <div class="dropdown-content-header">
-                        <span class="font-weight-semibold">Messages</span>
-                        <a href="#" class="text-default"><i class="icon-compose"></i></a>
+                        <span class="font-weight-semibold">Notifications</span>
+                        <a href="#" class="text-primary">Mark All as Read</a>
                     </div>
 
                     <div class="dropdown-content-body dropdown-scrollable">
@@ -53,20 +53,21 @@
                             <% notifications.each do |notification| %>
                                 <li class="media">
                                     <div class="mr-3 position-relative">
-                                        <img src="/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg" width="36" height="36" class="rounded-circle" alt="">
-                                    </div>
-    
-                                    <div class="media-body">
-                                        <div class="media-title">
-                                            <a href="#">
-                                                <span class="font-weight-semibold">Nguyễn Tôn Hùng</span>
+										<img src="/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg"
+                                            width="40" height="40" class="rounded-circle" alt=""
+                                        >
+									</div>
+
+									<div class="media-body">
+                                        <a href="#">
+                                            <div class="media-title">
+                                                <span class="text-info">James Alexander</span>
                                                 <span class="text-muted float-right font-size-sm">04:58</span>
-                                            </a>
-                                        </div>
+                                            </div>
     
-                                        <span class="text-muted"><%= t(notification.phrase, notification.get_data) %></span>
-                                        <%= t('ss', "name" => 'sdee') %>
-                                    </div>
+                                            <span class="text-grey-600"><%= t(notification.phrase, notification.get_data) %></span>
+                                        </a>
+									</div>
                                 </li>
                             <% end %>
                             
@@ -74,7 +75,7 @@
                     </div>
 
                     <div class="dropdown-content-footer justify-content-center p-0">
-                        <a href="#" class="bg-light text-grey w-100 py-2" data-popup="tooltip" title="Load more"><i class="icon-menu7 d-block top-0"></i></a>
+                        <a href="#" class="bg-light text-grey w-100 py-2" data-popup="tooltip" title="See All"><i class="icon-menu7 d-block top-0"></i></a>
                     </div>
                 </div>
             </li>

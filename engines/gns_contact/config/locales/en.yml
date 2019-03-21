@@ -1,0 +1,6 @@
+en:
+  gns_contact:
+    notification:
+      contact:
+        created: "created new contact: %{name}"
+        updated: "updated contact: %{name}"
