@@ -121,6 +121,10 @@ module GnsContact
       # @todo: xoa sub-contact khoi contact cha hien tai
       def remove_child
         @contact.parent.delete(params[:current_parent_id])
+        render json: {
+          status: 'success',
+          message: 'The sub-contact was successfully removed.',
+        }
       end
   
       private

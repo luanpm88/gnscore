@@ -22,6 +22,9 @@ function ajaxBox(obj, url, callback) {
             if(typeof(callback) !== 'undefined') {
                 callback(main.box);
             }
+            
+            // apply js
+            applyJs(main.box);
         });
     };
 }

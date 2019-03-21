@@ -20,7 +20,7 @@
             '<%= gns_contact.children_backend_contacts_path(@contact.id) %>',
             function(box) {
                 // apply g-link for button
-                new gLink(box.find('.delete-child-button'), function(link) {
+                new gLink(box.find('.remove-child-button'), function(link) {
                     children_contact_list_box.load();
                 });
             }
