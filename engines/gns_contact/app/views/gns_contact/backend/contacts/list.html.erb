@@ -38,7 +38,7 @@
             <% if params["show_columns"].include?("updated_at") %>
                 <th class="text-nowrap">Updated At</th>
             <% end %>
-            <th class="text-nowrap">Actions</th>
+            <th class="text-nowrap text-right">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -91,7 +91,7 @@
                         <%= contact.updated_at.strftime("%d/%m/%Y") %>
                     </td>
                 <% end %>
-                <td class="text-center">
+                <td class="text-right">
                     <div class="list-icons">
                         <div class="dropdown">
                             <a href="#" class="list-icons-item" data-toggle="dropdown">

@@ -4,7 +4,7 @@
             <th>Name</th>
             <th>Status</th>
             <th>Created At</th>
-            <th>Actions</th>
+            <th class="text-right">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -17,7 +17,7 @@
                 <td title="<%= category.created_at.strftime("%d/%m/%Y - %T") %>">
                     <%= category.created_at.strftime("%d/%m/%Y") %>
                 </td>
-                <td class="text-center">
+                <td class="text-right">
                     <div class="list-icons">
                         <div class="dropdown">
                             <a href="#" class="list-icons-item" data-toggle="dropdown">
