@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="media-body">
-                        <div class="media-title font-weight-semibold">Hung, Nguyen Ton</div>
+                        <div class="media-title font-weight-semibold">Phuong, Vo Duc Hung</div>
                         <div class="font-size-xs opacity-50">
                             <%= current_user.email %>
                         </div>
@@ -59,25 +59,6 @@
                 <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link"
                         data-menu="
-                            gns_project/backend/projects,
-                            gns_project/backend/categories
-                        "
-                    ><i class="icon-task"></i> <span>Project</span></a>
-
-                    <ul class="nav nav-group-sub" data-submenu-title="Project">
-                        <li class="nav-item">
-                            <a href="<%= gns_project.backend_projects_path %>" class="nav-link"
-                                data-menu="gns_project/backend/projects"
-                            >Projects</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<%= gns_project.backend_categories_path %>" class="nav-link" data-menu="gns_project/backend/categories">Project Types</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item nav-item-submenu">
-                    <a href="#" class="nav-link"
-                        data-menu="
                             gns_contact/backend/contacts,
                             gns_contact/backend/categories
                         "
@@ -98,6 +79,35 @@
                                     gns_contact/backend/categories
                                 "
                             >Groups</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item nav-item-submenu">
+                    <a href="#" class="nav-link"
+                        data-menu="
+                            gns_project/backend/projects,
+                            gns_project/backend/categories
+                        "
+                    ><i class="icon-task"></i> <span>Project</span></a>
+
+                    <ul class="nav nav-group-sub" data-submenu-title="Project">
+                        <li class="nav-item">
+                            <a href="<%= gns_project.backend_projects_path %>" class="nav-link disabled"
+                                data-menu="
+                                    gns_project/backend/projects
+                                "
+                            >Projects
+                                <span class="badge bg-transparent align-self-center ml-auto">Coming soon</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<%= gns_project.backend_categories_path %>" class="nav-link disabled"
+                                data-menu="
+                                    gns_project/backend/categories
+                                "
+                            >Project Types
+                                <span class="badge bg-transparent align-self-center ml-auto">Coming soon</span>
+                            </a>
                         </li>
                     </ul>
                 </li>
@@ -124,16 +134,36 @@
                 <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link"><i class="icon-stats-dots"></i> <span>Report</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Report">
-                        <li class="nav-item"><a href="#" class="nav-link">Projects Tracing</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">User Statistics</a></li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link disabled">Projects Tracing
+                                <span class="badge bg-transparent align-self-center ml-auto">Coming soon</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link disabled">User Statistics
+                                <span class="badge bg-transparent align-self-center ml-auto">Coming soon</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link"><i class="icon-hammer-wrench"></i> <span>System</span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="System">
-                        <li class="nav-item"><a href="#" class="nav-link">Backup & Restore</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Settings</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Notifications</a></li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link disabled">Backup & Restore
+                                <span class="badge bg-transparent align-self-center ml-auto">Coming soon</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link disabled">Settings
+                                <span class="badge bg-transparent align-self-center ml-auto">Coming soon</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link disabled">Notifications
+                                <span class="badge bg-transparent align-self-center ml-auto">Coming soon</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <!-- /advanced -->
