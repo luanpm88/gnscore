@@ -20,7 +20,7 @@
             '<%= gns_contact.children_backend_contacts_path(@contact.id) %>',
             function(box) {
                 // apply g-link for button
-                new gLink(box.find('.remove-child-button'), function(link) {
+                new gLink(box.find('.remove-subcontact-button'), function(link) {
                     children_contact_list_box.load();
                 });
             }
@@ -28,8 +28,34 @@
         
         var contact_modal = new gModal();
         var newContactCallback;
+        var updateContactCallback;
+        
+        var add_subcontact_modal = new gModal();
+        var addSubContactCallback;
         
         $(function() {
+            $('.add-subcontact-exist-button').click(function(e) {
+                e.preventDefault();
+                
+                var button = $(this);
+                
+                add_subcontact_modal.load(button.attr('href'));
+                
+                addSubContactCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // Hide modal
+                        add_subcontact_modal.hide();
+                        
+                        // load box
+                        children_contact_list_box.load();
+                    } else {
+                        // validation error
+                        add_subcontact_modal.renderHtml(response);
+                    }
+                };
+            });
+            
             $('.add-new-subcontact-button').click(function(e) {
                 e.preventDefault();
                 var button = $(this);
@@ -57,16 +83,29 @@
                 };
             });
             
-            $('.add-subcontact-exist-button').click(function(e) {
+            $(document).on('click', '.edit-subcontact-button', function(e) {
                 e.preventDefault();
                 
-                //children_contact_modal.load($(this).attr('href'));
-            });
-            
-            $(document).on('click', '.edit-contact-button', function(e) {
-                e.preventDefault();
+                var but = $(this);
                 
-                children_contact_modal.load($(this).attr('href'));
+                // load modal edit category
+                contact_modal.load(but.attr('href'));
+                
+                // after update category event
+                updateContactCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // hide modal
+                        contact_modal.hide();
+                        
+                        // load box
+                        children_contact_list_box.load();
+                    } else {
+                        // validation error
+                        contact_modal.renderHtml(response);
+                    }           
+                }
+                    
             });
             
             // ajax box children list
@@ -85,7 +124,7 @@
             <div class="card-body">
                 <div class="text-right">
                     <a href="<%= gns_contact.subcontact_new_backend_contacts_path(parent_id: @contact.id) %>" class="btn bg-blue mr-3 add-new-subcontact-button">Add new contact</a>
-                    <a href="#" class="btn bg-blue add-subcontact-exist-button">Add contact already exists</a>
+                    <a href="<%= gns_contact.add_subcontact_backend_contacts_path %>" class="btn bg-blue add-subcontact-exist-button">Add contact already exists</a>
                 </div>
             </div>
             <div class="children-contact-list" style="position: relative; min-height: 130px">

@@ -1,7 +1,9 @@
 module GnsContact
   module Backend
     class ContactsController < GnsCore::Backend::BackendController
-      before_action :set_contact, only: [:remove_child, :children, :show, :projects, :edit, :update, :destroy]
+      before_action :set_contact, only: [:edit, :update, :destroy,
+                                         :add_subcontact, :subcontact_edit, :subcontact_update,
+                                         :remove_child, :children, :show, :projects,]
   
       # GET /contacts
       def index
@@ -27,7 +29,7 @@ module GnsContact
         @contact = Contact.new
       end
       
-      # GET /contacts/new
+      # GET /contacts/subcontact_new
       def subcontact_new
         @contact = Contact.new
         @contact.parent_ids = [params[:parent_id]]
@@ -35,6 +37,10 @@ module GnsContact
   
       # GET /contacts/1/edit
       def edit
+      end
+      
+      # GET /contacts/subcontact_edit
+      def subcontact_edit
       end
   
       # POST /contacts
@@ -89,6 +95,23 @@ module GnsContact
         end
       end
   
+      # PATCH/PUT /contacts/1
+      def subcontact_update
+        if @contact.update(contact_params)
+          # Add notification
+          current_user.add_notification("gns_contact.notification.contact.updated", {
+            name: @contact.full_name
+          })
+          
+          render json: {
+            status: 'success',
+            message: 'Sub-contact was successfully updated.',
+          }
+        else
+          render :edit
+        end
+      end
+  
       # DELETE /contacts/1
       def destroy
         if @contact.destroy
@@ -122,6 +145,10 @@ module GnsContact
       
       def select2
         render json: Contact.select2(params)
+      end
+      
+      def add_subcontact
+        
       end
       
       def children

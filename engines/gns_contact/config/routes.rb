@@ -9,6 +9,10 @@ GnsContact::Engine.routes.draw do
                 put ':id/remove', to: 'contacts#remove_child', as: 'remove_child'
                 get 'subcontact_new'
                 post 'subcontact_create'
+                get ':id/subcontact_edit', to: 'contacts#subcontact_edit', as: 'subcontact_edit'
+                #post 'subcontact_update'
+                get ':id/add_subcontact', to: 'contacts#add_subcontact', as: 'add_subcontact'
+                #post ':id/add_subcontact', to: 'contacts#add_subcontact'
             end
         end
         resources :categories do

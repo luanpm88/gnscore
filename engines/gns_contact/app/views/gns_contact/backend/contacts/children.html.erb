@@ -14,7 +14,7 @@
                 <th>Email</th>
                 <th>Address</th>
                 <th>Status</th>
-                <th>Created At</th>
+                <th>Created</th>
                 <th class="text-center" style="width: 100px;">Actions</th>
             </tr>
         </thead>
@@ -26,7 +26,9 @@
                     <td><%= child.mobile %></td>
                     <td><%= child.email %></td>
                     <td><%= child.get_full_address %></td>
-                    <td><%= child.get_status_label %></td>
+                    <td>
+                        <span class="badge badge-<%= child.get_status_label %>"><%= t child.get_status_label %></span>
+                    </td>
                     <td><%= child.created_at.strftime("%d/%m/%Y") %></td>
                     <td class="text-center">
                         <div class="list-icons">
@@ -36,12 +38,13 @@
                                 </a>
     
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item edit-contact-button"
+                                    <a class="dropdown-item edit-subcontact-button"
                                         href="<%= gns_contact.edit_backend_contact_path(child) %>">
                                         <i class="icon-pencil7"></i> Update infomation
                                     </a>
+                                    
                                     <!--<div class="dropdown-divider"></div>-->
-                                    <a class="dropdown-item ajax remove-child-button"
+                                    <a class="dropdown-item ajax remove-subcontact-button"
                                         href="<%= gns_contact.remove_child_backend_contacts_path(child, current_parent_id: @contact.id) %>"
                                         data-method="PUT"
                                         data-confirm="You want to remove a contact from the contact persons"

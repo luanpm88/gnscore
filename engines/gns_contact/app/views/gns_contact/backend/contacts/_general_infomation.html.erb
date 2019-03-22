@@ -5,8 +5,10 @@
             <div class="btn-group mr-3">
                 <button type="button" class="btn bg-blue-600 dropdown-toggle" data-toggle="dropdown">Actions</button>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a href="#" class="dropdown-item"><i class="icon-pencil5"></i> Update</a>
-                    <a href="#" class="dropdown-item"><i class="icon-bin"></i>Delete</a>
+                    <a class="dropdown-item add-current-contact-button"
+                        href="<%= gns_contact.edit_backend_contact_path(@contact) %>">
+                        <i class="icon-pencil5"></i> Update
+                    </a>
                 </div>
             </div>
             
@@ -228,3 +230,32 @@
         </ul>
     </div>
 </div>
+
+<% content_for :page_script do %>
+    <script>
+        var contact_modal = new gModal();
+        var updateContactCallback;
+        $(function() {            
+            $('.add-current-contact-button').click(function(e) {
+                e.preventDefault();
+                var button = $(this);
+                
+                contact_modal.load(button.attr('href'));
+                
+                updateContactCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // hide modal
+                        contact_modal.hide();
+                        
+                        // reload loaction windows
+                        location.reload(true);
+                    } else {
+                        // validation error
+                        contact_modal.renderHtml(response);
+                    }           
+                };
+            });
+        });
+    </script>
+<% end %>
