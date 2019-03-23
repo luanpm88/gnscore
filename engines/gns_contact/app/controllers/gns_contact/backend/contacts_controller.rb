@@ -148,7 +148,21 @@ module GnsContact
       end
       
       def add_subcontact
-        
+        @child_contact = @contact.children_contacts.new(contact_id: params[:contact_id])
+  
+        if request.post?
+          if !@child_contact.contact_id.present?
+            @child_contact.errors.add('contact_id', "contact must not be empty")
+          end
+          
+          if @child_contact.errors.empty?
+            @child_contact.save
+            render json: {
+              status: 'success',
+              message: 'Sub-contact was successfully created.',
+            }
+          end     
+        end
       end
       
       def children

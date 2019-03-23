@@ -5,7 +5,7 @@
 <% content_for :page_script do %>
     <script>
         $(document).ready(function() {
-            $('.edit_contact').submit(function(e) {
+            $('.add_exist').submit(function(e) {
                 e.preventDefault();
                 
                 var form = $(this);
@@ -42,17 +42,20 @@
         
         <div class="card mb-0">
             <div class="card-body">
-                <%= form_for '', url: gns_contact.add_subcontact_backend_contacts_path, html: {multipart: false} do |f| %>
+                <%= form_for '', url: gns_contact.add_subcontact_backend_contacts_path, html: {multipart: false, class: 'add_exist'} do |f| %>
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group mb-0">
                                 <select class="form-control select-ajax"
                                     data-container-css-class="font-weight-semibold"
                                     data-placeholder="Choose contact person (sub-contact)"
-                                    data-url="<%= gns_contact.select2_backend_contacts_path(current_contact_id: @contact.id) %>"
-                                    name="contact[child_ids][]"
+                                    data-url="<%= gns_contact.select2_backend_contacts_path(exclude_self_children_of_contact_id: @contact.id) %>"
+                                    name="contact_id"
                                 >
                                 </select>
+                                <% if @child_contact.errors.full_messages_for(:contact_id).present? %>
+                                    <span class="form-text text-danger"><%= @child_contact.errors.full_messages_for(:contact_id).join('<br/>').html_safe %></span>
+                                <% end %>
                             </div>
                         </div>
                         <div class="col-md-4">
