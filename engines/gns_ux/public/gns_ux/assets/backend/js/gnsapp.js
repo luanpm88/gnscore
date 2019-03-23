@@ -113,6 +113,120 @@ function applyJs(container) {
     
     // gLink
     new gLink(container.find('.g-link'));
+    
+    //
+    // Card actions
+    // -------------------------
+
+    // Reload card (uses BlockUI extension)
+    var gCardActionReload = function() {
+        container.find('.card [data-action=reload]:not(.disabled)').on('click', function (e) {
+            e.preventDefault();
+            var $target = $(this),
+                block = $target.closest('.card');
+            
+            // Block card
+            $(block).block({ 
+                message: '<i class="icon-spinner2 spinner"></i>',
+                overlayCSS: {
+                    backgroundColor: '#fff',
+                    opacity: 0.8,
+                    cursor: 'wait',
+                    'box-shadow': '0 0 0 1px #ddd'
+                },
+                css: {
+                    border: 0,
+                    padding: 0,
+                    backgroundColor: 'none'
+                }
+            });
+
+            // For demo purposes
+            window.setTimeout(function () {
+               $(block).unblock();
+            }, 2000); 
+        });
+    };
+
+    // Collapse card
+    var gCardActionCollapse = function() {
+        var $cardCollapsedClass = container.find('.card-collapsed');
+
+        // Hide if collapsed by default
+        $cardCollapsedClass.children('.card-header').nextAll().hide();
+
+        // Rotate icon if collapsed by default
+        $cardCollapsedClass.find('[data-action=collapse]').addClass('rotate-180');
+
+        // Collapse on click
+        container.find('.card [data-action=collapse]:not(.disabled)').on('click', function (e) {
+            var $target = $(this),
+                slidingSpeed = 150;
+
+            e.preventDefault();
+            $target.parents('.card').toggleClass('card-collapsed');
+            $target.toggleClass('rotate-180');
+            $target.closest('.card').children('.card-header').nextAll().slideToggle(slidingSpeed);
+        });
+    };
+
+    // Remove card
+    var gCardActionRemove = function() {
+        container.find('.card [data-action=remove]').on('click', function (e) {
+            e.preventDefault();
+            var $target = $(this),
+                slidingSpeed = 150;
+
+            // If not disabled
+            if(!$target.hasClass('disabled')) {
+                $target.closest('.card').slideUp({
+                    duration: slidingSpeed,
+                    start: function() {
+                        $target.addClass('d-block');
+                    },
+                    complete: function() {
+                        $target.remove();
+                    }
+                });
+            }
+        });
+    };
+
+    // Card fullscreen mode
+    var gCardActionFullscreen = function() {
+        container.find('.card [data-action=fullscreen]').on('click', function (e) {
+            e.preventDefault();
+
+            // Define vars
+            var $target = $(this),
+                cardFullscreen = $target.closest('.card'),
+                overflowHiddenClass = 'overflow-hidden',
+                collapsedClass = 'collapsed-in-fullscreen',
+                fullscreenAttr = 'data-fullscreen';
+
+            // Toggle classes on card
+            cardFullscreen.toggleClass('fixed-top h-100 rounded-0');
+
+            // Configure
+            if (!cardFullscreen.hasClass('fixed-top')) {
+                $target.removeAttr(fullscreenAttr);
+                cardFullscreen.children('.' + collapsedClass).removeClass('show');
+                $('body').removeClass(overflowHiddenClass);
+                $target.siblings('[data-action=move], [data-action=remove], [data-action=collapse]').removeClass('d-none');
+            }
+            else {
+                $target.attr(fullscreenAttr, 'active');
+                cardFullscreen.removeAttr('style').children('.collapse:not(.show)').addClass('show ' + collapsedClass);
+                $('body').addClass(overflowHiddenClass);
+                $target.siblings('[data-action=move], [data-action=remove], [data-action=collapse]').addClass('d-none');
+            }
+        });
+    };
+    
+    gCardActionReload();
+    gCardActionCollapse();
+    gCardActionRemove();
+    gCardActionFullscreen();
 }
 
 $(document).ready(function() {    
