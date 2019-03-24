@@ -157,6 +157,13 @@ module GnsContact
         query = query.where.not(id: params[:current_contact_id])
       end
       
+      # exclude self id and his children id
+      if params[:exclude_self_children_of_contact_id].present?
+        contact = self.find(params[:exclude_self_children_of_contact_id])
+        no_ids = [contact.id] + contact.children.map(&:id)
+        query = query.where.not(id: no_ids)
+      end
+      
       # pagination
       page = params[:page].to_i if params[:page].present?
       query = query.limit(per_page).offset(per_page*(page-1))      
