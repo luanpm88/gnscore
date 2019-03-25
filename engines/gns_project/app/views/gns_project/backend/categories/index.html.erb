@@ -21,7 +21,7 @@
 <% content_for :page_script do %>
     <script>
         // global modal
-        var category_modal = new gModal();
+        var category_modal = new gModal({size: 'md'});
         var updateCategoryCallback;
         var newCategoryCallback;
         
@@ -86,7 +86,6 @@
         <div class="header-elements">
             <div class="list-icons">
                 <a class="list-icons-item" data-action="collapse"></a>
-                <a class="list-icons-item" data-action="remove"></a>
             </div>
         </div>
     </div>
@@ -101,8 +100,8 @@
                     <div class="sort-by-box flex align-center mr-3">
                         <span class="mr-1">Sort by:</span>
                         <select name="sort_by" data-placeholder="Sort by..." class="form-control selectPrimary sort-by-select" data-fouc>
-                            <option value="created_at">Created At</option>
-                            <option value="name">Name</option>
+                            <option value="created_at">created_at</option>
+                            <option value="name">name</option>
                         </select>
                         <input class="sort-direction" type="hidden" name="sort_direction" value="desc" />
                     </div>

@@ -23,7 +23,7 @@ module GnsProject
 				keyword = params[:keyword].strip.downcase
 				keyword.split(' ').each do |q|
 					q = q.strip
-					query = query.where('LOWER(gns_project_categories.cache_search) LIKE ?', '%'+q.to_ascii.downcase+'%')
+					query = query.where('LOWER(gns_project_categories.cache_search) LIKE ?', '%'+q.to_ascii.strip.downcase+'%')
 				end
 			end
 
@@ -61,8 +61,8 @@ module GnsProject
       
       # pagination
       page = params[:page].to_i if params[:page].present?
-      query = query.limit(per_page).offset(per_page*(page-1))      
-      data[:pagination][:more] = true if query.count > 0
+      query = query.limit(per_page).offset(per_page*(page-1))
+      data[:pagination][:more] = true if query.count >= per_page
       
       # render items
       query.each do |d|
