@@ -1,6 +1,6 @@
 module GnsContact
   class Contact < ApplicationRecord
-    validates :code, uniqueness: true
+    validates :code, uniqueness: true, allow_blank: true
     validates :full_name, :contact_type, presence: true
     
     belongs_to :country, class_name: 'GnsArea::Country', optional: true

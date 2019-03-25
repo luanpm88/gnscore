@@ -17,7 +17,7 @@
         // global modal
         var children_contact_list_box = new ajaxBox(
             $('.children-contact-list'),
-            '<%= gns_contact.children_backend_contacts_path(@contact.id) %>',
+            '<%= gns_contact.subcontact_list_backend_contacts_path(@contact.id) %>',
             function(box) {
                 // apply g-link for button
                 new gLink(box.find('.remove-subcontact-button'), function(link) {
@@ -26,11 +26,11 @@
             }
         );
         
-        var contact_modal = new gModal();
-        var newContactCallback;
-        var updateContactCallback;
+        var subcontact_modal = new gModal({size: 'md'});
+        var newSubContactCallback;
+        var updateSubContactCallback;
         
-        var add_subcontact_modal = new gModal();
+        var add_subcontact_modal = new gModal({size: 'md'});
         var addSubContactCallback;
         
         $(function() {
@@ -60,25 +60,25 @@
                 e.preventDefault();
                 var button = $(this);
                 
-                contact_modal.load(button.attr('href'));
+                subcontact_modal.load(button.attr('href'));
                 
-                newContactCallback = function(response) {
+                newSubContactCallback = function(response) {
                     if (typeof(response.status) !== 'undefined') {
                         showNotification(response.status, response.message);
                         // Hide modal
-                        contact_modal.hide();
+                        subcontact_modal.hide();
                         
                         // load box
                         children_contact_list_box.load();
                     } else if (typeof(response.redirect) !== 'undefined') {
                         // Hide modal
-                        contact_modal.hide();
+                        subcontact_modal.hide();
                         
                         // load box
                         children_contact_list_box.load();
                     } else {
                         // validation error
-                        contact_modal.renderHtml(response);
+                        subcontact_modal.renderHtml(response);
                     }
                 };
             });
@@ -89,20 +89,20 @@
                 var but = $(this);
                 
                 // load modal edit category
-                contact_modal.load(but.attr('href'));
+                subcontact_modal.load(but.attr('href'));
                 
                 // after update category event
-                updateContactCallback = function(response) {
+                updateSubContactCallback = function(response) {
                     if (typeof(response.status) !== 'undefined') {
                         showNotification(response.status, response.message);
                         // hide modal
-                        contact_modal.hide();
+                        subcontact_modal.hide();
                         
                         // load box
                         children_contact_list_box.load();
                     } else {
                         // validation error
-                        contact_modal.renderHtml(response);
+                        subcontact_modal.renderHtml(response);
                     }           
                 }
                     

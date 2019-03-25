@@ -3,7 +3,7 @@ module GnsContact
     class ContactsController < GnsCore::Backend::BackendController
       before_action :set_contact, only: [:edit, :update, :destroy,
                                          :add_subcontact, :subcontact_edit, :subcontact_update,
-                                         :remove_child, :children, :show, :projects,]
+                                         :remove_subcontact, :subcontact_list, :show, :projects]
   
       # GET /contacts
       def index
@@ -74,7 +74,7 @@ module GnsContact
           }
         else
           logger.info @contact.errors.to_json
-          render :new
+          render :subcontact_new
         end
       end
   
@@ -108,7 +108,7 @@ module GnsContact
             message: 'Sub-contact was successfully updated.',
           }
         else
-          render :edit
+          render :subcontact_edit
         end
       end
   
@@ -165,12 +165,12 @@ module GnsContact
         end
       end
       
-      def children
+      def subcontact_list
         render layout: nil
       end
       
       # @todo: xoa sub-contact khoi contact cha hien tai
-      def remove_child
+      def remove_subcontact
         @contact.parent.delete(params[:current_parent_id])
         render json: {
           status: 'success',
