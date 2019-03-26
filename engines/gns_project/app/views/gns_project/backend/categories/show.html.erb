@@ -60,6 +60,29 @@
                 };
             });
             
+            $(document).on('click', '.edit-category-button', function(e) {
+                e.preventDefault();
+                
+                var button = $(this);
+                
+                // load modal edit category
+                category_modal.load(button.attr('href'));
+                
+                // after update category event
+                updateCategoryCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // Hide modal
+                        category_modal.hide();
+                        location.reload();
+                    } else {
+                        // validation error
+                        category_modal.renderHtml(response);
+                    }
+                }
+                
+            });
+            
             $('.add-stage-button').click(function(e) {
                 e.preventDefault();
                 
@@ -90,7 +113,7 @@
                     <div class="btn-group mr-3">
                         <button type="button" class="btn bg-blue-600 btn-sm dropdown-toggle" data-toggle="dropdown">Actions</button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item add-current-contact-button"
+                            <a class="dropdown-item edit-category-button"
                                 href="<%= gns_project.edit_backend_category_path(@category) %>">
                                 <i class="icon-pencil5"></i> Update
                             </a>
@@ -116,14 +139,22 @@
                                     <%= @category.name %>
                                 </div>
                             </li>
-        
                             <li class="media mt-0 py-2 px-2">
                                 <div class="media-body">
-                                    <div class="font-weight-semibold">Added by:</div>
+                                    <div class="font-weight-semibold">Discription:</div>
                                 </div>
         
                                 <div class="ml-3 align-self-center text-blue-800">
-                                    Winnie
+                                    <%= @category.description %>
+                                </div>
+                            </li>
+                            <li class="media mt-0 py-2 px-2">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Status:</div>
+                                </div>
+        
+                                <div class="ml-3 align-self-center text-blue-800">
+                                    <span class="badge badge-<%= @category.get_status_label %>"><%= t @category.get_status_label %></span>
                                 </div>
                             </li>
                         </div>
@@ -131,14 +162,13 @@
                         <div class="col-md-6">
                             <li class="media mt-0 py-2 px-2">
                                 <div class="media-body">
-                                    <div class="font-weight-semibold">Updated:</div>
+                                    <div class="font-weight-semibold">Added by:</div>
                                 </div>
         
-                                <div class="ml-3 align-self-center text-muted">
-                                    <%= @category.updated_at.strftime('%d %b, %Y') %>
+                                <div class="ml-3 align-self-center text-blue-800">
+                                    <%= @category.creator_name %>
                                 </div>
                             </li>
-                            
                             <li class="media mt-0 py-2 px-2">
                                 <div class="media-body">
                                     <div class="font-weight-semibold">Created:</div>
@@ -146,6 +176,15 @@
         
                                 <div class="ml-3 align-self-center text-muted">
                                     <%= @category.created_at.strftime('%d %b, %Y') %>
+                                </div>
+                            </li>
+                            <li class="media mt-0 py-2 px-2">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Updated:</div>
+                                </div>
+        
+                                <div class="ml-3 align-self-center text-muted">
+                                    <%= @category.updated_at.strftime('%d %b, %Y') %>
                                 </div>
                             </li>
                         </div>

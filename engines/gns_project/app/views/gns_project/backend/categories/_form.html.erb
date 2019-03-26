@@ -13,6 +13,29 @@
             <% end %>
         </div>
         
+        <div class="form-group">
+            <label>Description:</label>
+            <textarea rows="2" cols="5"
+                class="form-control"
+                placeholder="Enter description"
+                name="category[description]"
+            ><%= category.description %></textarea>
+        </div>
+        
+        <div class="form-group">
+            <div class="form-check form-check-inline form-check-right form-check-switchery">
+                <label class="form-check-label">
+                    Set active:
+                    <input type="hidden" name="category[active]" value="false" />
+                    <input type="checkbox" class="form-check-input-switchery"
+                        name="category[active]"
+                        value="true"
+                        <%= 'checked' if category.active? %>
+                    >
+                </label>
+            </div>
+        </div>
+        
     </fieldset>    
     <hr class="mt-0">
     <div class="text-left">

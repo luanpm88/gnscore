@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_21_085749) do
+ActiveRecord::Schema.define(version: 2019_03_25_092428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,6 +125,10 @@ ActiveRecord::Schema.define(version: 2019_03_21_085749) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "cache_search"
+    t.text "description"
+    t.boolean "active", default: true
+    t.bigint "creator_id"
+    t.index ["creator_id"], name: "index_gns_project_categories_on_creator_id"
   end
 
   create_table "gns_project_projects", force: :cascade do |t|

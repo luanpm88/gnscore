@@ -29,6 +29,7 @@ module GnsProject::Backend
     # POST /categories
     def create
       @category = GnsProject::Category.new(category_params)
+      @category.creator = current_user
 
       if @category.save
         flash[:success] = 'Category was successfully created.'
@@ -100,7 +101,7 @@ module GnsProject::Backend
 
       # Only allow a trusted parameter "white list" through.
       def category_params
-        params.fetch(:category, {}).permit(:name)
+        params.fetch(:category, {}).permit(:name, :description, :active)
       end
   end
 end

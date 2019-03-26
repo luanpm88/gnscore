@@ -1,9 +1,25 @@
 module GnsProject
   class Category < ApplicationRecord
+    belongs_to :creator, class_name: 'GnsCore::User'
     has_many :projects, dependent: :restrict_with_error # Prevent deleting record being used
     has_many :stages, dependent: :restrict_with_error
     
     validates :name, :presence => true
+    
+    # get creator name
+    def creator_name
+      creator.present? ? creator.short_name : ''
+    end
+    
+    # get status
+    def get_status_label
+      active? ? 'active' : 'inactive'
+    end
+    
+    # getActive
+    def self.get_active
+			self.where(active: true)
+		end
     
     # update category cache search
     after_save :update_cache_search
@@ -17,6 +33,11 @@ module GnsProject
     # filters
     def self.filter(query, params)
       params = params.to_unsafe_hash
+      
+      # filter by active
+      if params[:active].present?
+        query = query.where(active: params[:active])
+      end
       
       # single keyword
       if params[:keyword].present?
