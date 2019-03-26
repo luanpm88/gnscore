@@ -1,0 +1,13 @@
+vi:
+  will_paginate:
+    page_entries_info:
+      single_page:
+        zero: "Không tìm thấy kết quả"
+        one: "Hiển thị 1 mục"
+        other: "Hiển thị tất cả %{count} mục"
+      single_page_html:
+        zero: "Không tìm thấy kết quả"
+        one: "Hiển thị 1 mục"
+        other: "Hiển thị tất cả %{count} mục"
+      multi_page: "Hiển thị từ %{from} đến %{to} trên tổng số %{count} mục"
+      multi_page_html: "Hiển thị từ %{from} đến %{to} trên tổng số %{count} mục"
