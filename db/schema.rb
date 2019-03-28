@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_25_092428) do
+ActiveRecord::Schema.define(version: 2019_03_27_075513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -139,8 +139,16 @@ ActiveRecord::Schema.define(version: 2019_03_25_092428) do
     t.datetime "updated_at", null: false
     t.text "cache_search"
     t.bigint "customer_id"
+    t.string "priority"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "status"
+    t.bigint "manager_id"
+    t.bigint "creator_id"
     t.index ["category_id"], name: "index_gns_project_projects_on_category_id"
+    t.index ["creator_id"], name: "index_gns_project_projects_on_creator_id"
     t.index ["customer_id"], name: "index_gns_project_projects_on_customer_id"
+    t.index ["manager_id"], name: "index_gns_project_projects_on_manager_id"
   end
 
   create_table "gns_project_stages", force: :cascade do |t|
