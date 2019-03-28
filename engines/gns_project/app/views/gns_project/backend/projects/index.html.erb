@@ -95,7 +95,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <select name="category_id" data-placeholder="Select to filter by category..."
+                        <select name="category_id" data-placeholder="Filter by category..."
                           class="form-control select-ajax"
                           data-url="<%= gns_project.select2_backend_categories_path %>">
                         </select>
@@ -103,7 +103,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <select name="customer_id" data-placeholder="Select to filter by customer..."
+                        <select name="customer_id" data-placeholder="Filter by customer..."
                           class="form-control select-ajax"
                           data-url="<%= gns_contact.select2_backend_contacts_path %>">
                         </select>
@@ -119,7 +119,7 @@
             <div class="datalist-header flex space-between">
                 <div class="text-left text-nowrap flex">
                     <div class="keyword-search flex align-center mr-3">
-                        <input class="form-control keyword-input" name="keyword" type="search" placeholder="Type to filter...">
+                        <input class="form-control keyword-input" name="keyword" type="search" placeholder="Type to search...">
                     </div>
                     <div class="flex align-center">
                         <span class="mr-1">Show columns:</span>
@@ -160,7 +160,7 @@
             </div>
         </div>
     
-        <div class="table-responsive datalist-content">
+        <div class="datalist-content">
             
         </div>
     </form>

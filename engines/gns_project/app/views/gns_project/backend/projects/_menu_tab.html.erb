@@ -1,0 +1,29 @@
+<div class="card-header bg-white pb-0 pt-sm-0 header-elements-sm-inline">
+    <h6 class="card-title"><%= title %></h6>
+    <div class="header-elements">
+        <ul class="nav nav-tabs nav-tabs-bottom card-header-tabs mx-0">
+            <li class="nav-item">
+                <a href="<%= gns_project.backend_project_path(@project) %>"
+                    class="nav-link <%= 'modal-control' if request.xhr? %>" modal-size="full"
+                    data-menu="gns_project/backend/projects/show"
+                >
+                    <i class="icon-info22 mr-1"></i>
+                    Project Planing
+                </a>
+            </li>
+            <li class="nav-item mr-3">
+                <a
+                    data-menu="gns_project/backend/projects/attachments"
+                    href="<%= gns_project.attachments_backend_projects_path(@project.id) %>"
+                    class="nav-link <%= 'modal-control' if request.xhr? %>" modal-size="full">
+                        <i class="icon-design mr-1"></i>
+                        Attachment
+                </a>
+            </li>
+            
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </ul>
+    </div>
+</div>

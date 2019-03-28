@@ -22,54 +22,19 @@
     <script>
         // global modal
         var task_modal = new gModal();
+        
         var task_list_box = new ajaxBox(
-            $('.task-list'),
-            '<%= gns_project.tasks_backend_projects_path(@project.id) %>',
+            $('.task-planning-list'),
+            '<%= gns_project.task_planning_backend_projects_path(@project.id) %>',
             function(box) {
-                // apply g-link for delete stage button
+                // apply g-link
                 new gLink(box.find('.delete-task-button'), function(link) {
                     task_list_box.load();
                 });
             }
         );
         
-        var attachment_list_box = new ajaxBox(
-            $('.attachment-list'),
-            '<%= gns_project.tasks_attachment_backend_projects_path(@project.id) %>',
-            function(box) {
-                // apply g-link
-                new gLink(box.find('.delete-task-button'), function(link) {
-                    attachment_list_box.load();
-                });
-            }
-        );
-        
-        var project_modal = new gModal();
-        var newProjectCallback;
-        
         $(function() {
-            $('.add-project-button').click(function(e) {
-                e.preventDefault();
-                var button = $(this);
-                
-                project_modal.load(button.attr('href'));
-                
-                newProjectCallback = function(response) {
-                    if (typeof(response.status) !== 'undefined') {
-                        showNotification(response.status, response.message);
-                        // Hide modal
-                        project_modal.hide();
-                        datalists.forEach(function(datalist) {
-                            datalist.refresh();
-                        });     
-                    } else if (typeof(response.redirect) !== 'undefined') {
-                        window.location = response.redirect;
-                    } else {
-                        // validation error
-                        project_modal.renderHtml(response);
-                    }
-                };
-            });
             
             $('.add-task-button').click(function(e) {
                 e.preventDefault();
@@ -85,249 +50,20 @@
             
             // ajax box task list
             task_list_box.load();
-            attachment_list_box.load();
-        });
-        
-        var task_attachments_modal = new gModal();
-        $(function() {
-            $(document).on('click', '.show-attachment-list-button', function(e) {
-                e.preventDefault();
-                
-                task_attachments_modal.load($(this).attr('href'));
-            });
-            
-            // ajax box task list
-            //task_list_box.load();
-            //attachment_list_box.load();
-        });
-        
-        var history_task_attachment_modal = new gModal();
-        $(function() {
-            $(document).on('click', '.history-attachment-list-button', function(e) {
-                e.preventDefault();
-                
-                history_task_attachment_modal.load($(this).attr('href'));
-            });
-            
-            // ajax box task list
-            //task_list_box.load();
-            //attachment_list_box.load();
         });
     </script>
 <% end %>
 
+<%= render "general_infomation" %>
+
 <div class="card">
-    <div class="card-header bg-white header-elements-sm-inline">
-        <h6 class="card-title">Project Details</h6>
-        <div class="header-elements">
-            <div class="list-icons">
-                <a class="list-icons-item" data-action="collapse"></a>
-                <a class="list-icons-item" data-action="remove"></a>
-            </div>
-        </div>
-    </div>
+    <%= render "menu_tab", title: 'Project Planing' %>
+    
     <div class="card-body">
-        <ul class="media-list">
-            <div class="row">
-                <div class="col-md-6">
-                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
-                        <div class="media-body">
-                            <div class="font-weight-semibold">Project Type:</div>
-                        </div>
-
-                        <div class="ml-3 align-self-center">
-                            <%= @project.category_name %>
-                        </div>
-                    </li>
-                    
-                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
-                        <div class="media-body">
-                            <div class="font-weight-semibold">Project Code:</div>
-                        </div>
-
-                        <div class="ml-3 align-self-center text-blue-800">
-                            <%= @project.code %>
-                        </div>
-                    </li>
-                    
-                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
-                        <div class="media-body">
-                            <div class="font-weight-semibold">Project Name:</div>
-                        </div>
-
-                        <div class="ml-3 align-self-center text-blue-800">
-                            <%= @project.name %>
-                        </div>
-                    </li>
-                    
-                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
-                        <div class="media-body">
-                            <div class="font-weight-semibold">Start Date:</div>
-                        </div>
-
-                        <div class="ml-3 align-self-center text-muted">
-                            <%= Time.now.strftime('%d/%m/%Y') %>
-                        </div>
-                    </li>
-                    
-                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
-                        <div class="media-body">
-                            <div class="font-weight-semibold">End Date:</div>
-                        </div>
-
-                        <div class="ml-3 align-self-center text-muted">
-                            <%= (Time.now + 2.month).strftime('%d/%m/%Y') %>
-                        </div>
-                    </li>
-                    
-                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
-                        <div class="media-body">
-                            <div class="font-weight-semibold">Status:</div>
-                        </div>
-
-                        <div class="ml-3 align-self-center text-blue-800">
-                            <span class="badge badge-info">Progress</span>
-                        </div>
-                    </li>
-                    
-                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
-                        <div class="media-body">
-                            <div class="font-weight-semibold">Priority:</div>
-                        </div>
-
-                        <div class="ml-3 align-self-center font-weight-semibold">
-                            <span class="badge badge-flat border-success">High</span>
-                        </div>
-                    </li>
-                </div>
-                    
-                <div class="col-md-6">
-                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
-                        <div class="media-body">
-                            <div class="font-weight-semibold">Customer Code:</div>
-                        </div>
-
-                        <div class="ml-3 align-self-center text-blue-800">
-                            <%= @project.customer_code %>
-                        </div>
-                    </li>
-                    
-                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
-                        <div class="media-body">
-                            <div class="font-weight-semibold">Customer Name:</div>
-                        </div>
-
-                        <div class="ml-3 align-self-center text-blue-800">
-                            <%= @project.customer_name %>
-                        </div>
-                    </li>
-                    
-                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
-                        <div class="media-body">
-                            <div class="font-weight-semibold">PM (Project Manager):</div>
-                        </div>
-
-                        <div class="ml-3 align-self-center">
-                            Nguyễn Quang Huy
-                        </div>
-                    </li>
-                    
-                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
-                        <div class="media-body">
-                            <div class="font-weight-semibold">Created:</div>
-                        </div>
-
-                        <div class="ml-3 align-self-center text-muted">
-                            <%= @project.created_at.strftime('%d/%m/%Y - %T') %>
-                        </div>
-                    </li>
-                    
-                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
-                        <div class="media-body">
-                            <div class="font-weight-semibold">Last Updated:</div>
-                        </div>
-
-                        <div class="ml-3 align-self-center text-muted">
-                            <%= @project.updated_at.strftime('%d/%m/%Y - %T') %>
-                        </div>
-                    </li>
-                    
-                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
-                        <div class="media-body">
-                            <div class="font-weight-semibold">Added By:</div>
-                        </div>
-
-                        <div class="ml-3 align-self-center">
-                            John
-                        </div>
-                    </li>
-                    
-                    <div class="row border-bottom-dotted">
-                        <div class="col-md-6">
-                            <li class="media mt-0 py-2 px-2">
-                                <div class="media-body">
-                                    <div class="font-weight-semibold">Complete:</div>
-                                </div>
-        
-                                <div class="ml-3 align-self-center" style="min-width: 120px">
-                                    <div class="progress rounded-round" title="20% Complete">
-                                        <div class="progress-bar" style="width: 90%">
-                                            <span>90%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </div>
-                        <div class="col-md-6">
-                            <li class="media mt-0 py-2 px-2">
-                                <div class="media-body">
-                                    <div class="font-weight-semibold">Opening Activities:</div>
-                                </div>
-        
-                                <div class="ml-3 align-self-center font-weight-semibold">
-                                    4
-                                </div>
-                            </li>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </ul>
-    </div>
-</div>
-
-<div class="card">
-    <div class="card-header bg-white header-elements-inline">
-        <h6 class="card-title">Project Planning (Task list)</h6>
-        <div class="header-elements">
+        <div class="text-right">
             <a href="<%= gns_project.new_backend_task_path(project_id: @project.id) %>" class="btn bg-blue mr-3 add-task-button">Add new task</a>
-            <div class="list-icons">
-                <a class="list-icons-item" data-action="collapse"></a>
-                <a class="list-icons-item" data-action="remove"></a>
-            </div>
         </div>
     </div>
-    <div class="card-body">
-        <div class="table-responsive task-list">
-            
-        </div>
-    </div>
-</div>
-
-<div class="card">
-    <div class="card-header bg-white header-elements-inline">
-        <h6 class="card-title">Attachment</h6>
-        <div class="header-elements">
-            <a href="#" class="btn btn-light mr-3"><i class="icon-download4 mr-2"></i> Download All</a>
-            <div class="list-icons">
-                <a class="list-icons-item" data-action="collapse"></a>
-                <a class="list-icons-item" data-action="remove"></a>
-            </div>
-        </div>
-    </div>
-    <div class="card-body">
-        <div class="attachment-list">
-            
-        </div>
-    </div>
+        
+    <div class="task-planning-list" style="position: relative; min-height: 130px"></div>
 </div>

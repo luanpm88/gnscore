@@ -1,0 +1,76 @@
+<% content_for :title do %>
+    Show Project
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+    <a href="<%= gns_project.backend_projects_path %>" class="breadcrumb-item">Projects</a>
+    <span class="breadcrumb-item active">Show</span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Project</span> - <%= @project.name %></h4>
+<% end %>
+
+<% content_for :page_toolbar do %>
+    <a class="btn btn-primary add-project-button" href="<%= gns_project.new_backend_project_path %>">
+        <b><i class="icon-plus22"></i></b> Create project
+    </a>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        // global modal
+        var show_task_modal = new gModal();
+        
+        // tab attachment -> danh sach cac task
+        var task_attachment_list_box = new ajaxBox(
+            $('.task-attachment-list'),
+            '<%= gns_project.task_attachment_backend_projects_path(@project.id) %>',
+            function(box) {
+                // apply g-link
+                new gLink(box.find('.enable-task-button'), function(link) {
+                    //task_attachment_list_box.load();
+                });
+            }
+        );
+        
+        $(function() {
+            $(document).on('click', '.show-task-button', function(e) {
+                e.preventDefault();
+                
+                show_task_modal.load($(this).attr('href'));
+            });
+            
+            // ajax box task attachment list
+            task_attachment_list_box.load();
+        });
+        
+        //var history_task_attachment_modal = new gModal();
+        //$(function() {
+        //    $(document).on('click', '.history-attachment-list-button', function(e) {
+        //        e.preventDefault();
+        //        
+        //        history_task_attachment_modal.load($(this).attr('href'));
+        //    });
+        //    
+        //    // ajax box task list
+        //    //task_list_box.load();
+        //    //attachment_list_box.load();
+        //});
+    </script>
+<% end %>
+
+<%= render "general_infomation" %>
+
+<div class="card">
+    <%= render "menu_tab", title: 'Attachment' %>
+    
+    <div class="card-body">
+        <div class="text-right">
+            <a href="#" class="btn btn-light mr-3"><i class="icon-download4 mr-2"></i> Download All</a>
+        </div>
+    </div>
+    
+    <div class="task-attachment-list" style="position: relative; min-height: 130px"></div>
+</div>

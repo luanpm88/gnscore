@@ -1,7 +1,8 @@
 module GnsProject
   module Backend
     class ProjectsController < GnsCore::Backend::BackendController
-      before_action :set_project, only: [:tasks, :tasks_attachment, :show, :edit, :update, :destroy]
+      before_action :set_project, only: [:show, :edit, :update, :destroy,
+                                         :attachments, :task_planning, :task_attachment]
   
       # GET /projects
       def index
@@ -30,6 +31,8 @@ module GnsProject
       # POST /projects
       def create
         @project = Project.new(project_params)
+        
+        @project.creator = current_user
   
         if @project.save
           flash[:success] = 'Project was successfully created.'
@@ -86,13 +89,16 @@ module GnsProject
       end
       
       # task list ajax table / project planning
-      def tasks
+      def task_planning
         render layout: nil
       end
       
       # task list ajax table / project planning
-      def tasks_attachment
+      def task_attachment
         render layout: nil
+      end
+      
+      def attachments
       end
   
       private
@@ -103,7 +109,8 @@ module GnsProject
   
         # Only allow a trusted parameter "white list" through.
         def project_params
-          params.fetch(:project, {}).permit(:code, :name, :category_id, :customer_id)
+          params.fetch(:project, {}).permit(:code, :name, :category_id, :customer_id,
+                                            :start_date, :end_date, :priority, :manager_id)
         end
     end
   end
