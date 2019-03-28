@@ -1,4 +1,7 @@
 <fieldset>
+    <input type="hidden" name="contact[parent_ids][]" value="<%= @contact.parent_ids.first %>">
+    <input type="hidden" name="contact[category_ids][]" value="<%= @contact.category_ids.first %>">
+    
     <div class="form-group">
         <label class="d-block">Full Name <span class="text-danger">*</span></label>
         <input type="text"
@@ -12,67 +15,22 @@
         <% end %>
     </div>
     
-    <div class="form-group">
-        <label class="d-block">Starting Date</label>
-        <div class="input-group">
-            <span class="input-group-prepend">
-                <span class="input-group-text"><i class="icon-calendar22"></i></span>
-            </span>
-            <input type="text" class="form-control font-weight-semibold daterange-single" value="" name="contact[birthday]">
-        </div>
-    </div>
-            
-    <div class="row">
-        <div class="col-md-6">                    
-            <div class="form-group">
-                <label class="d-block">Contact Group <span class="text-danger">*</span></label>
-                <select class="form-control select-ajax"
-                    data-container-css-class="font-weight-semibold"
-                    data-placeholder="Choose group"
-                    data-url="<%= gns_contact.select2_backend_categories_path %>"
-                    name="contact[category_ids][]"
-                >
-                    <% values = contact.categories.map {|cat| {text: cat.name, value: cat.id}} %>
-                    <% values.each do |value| %>
-                        <% if value[:value].present? %>
-                            <option selected="selected" value="<%= value[:value] %>"><%= value[:text] %></option>
-                        <% end %>
-                    <% end %>
-                </select>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label class="d-block">Business Partner Type <span class="text-danger">*</span></label>
-                <select class="form-control selectAllowClear"
-                    data-container-css-class="font-weight-semibold"
-                    data-placeholder="Select business partner type"
-                    data-fouc
-                    name="contact[contact_type]"
-                >
-                    <option></option>
-                    <% options = GnsContact::Contact::get_type_options() %>
-                    <% options.each do |option| %>
-                        <option <%= 'selected' if option[:value] == contact.contact_type %> value="<%= option[:value] %>"><%= option[:text] %></option>
-                    <% end %>
-                </select>
-            </div>
-        </div>
-    </div>
-</fieldset>
-
-<fieldset>
-    <legend class="font-weight-semibold text-uppercase font-size-sm text-info-700">Other Information</legend>
-    
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label class="d-block">Telephone</label>
-                <input type="text" class="form-control font-weight-semibold" placeholder="Enter telephone number"
-                    name="contact[phone]"
-                    value="<%= contact.phone %>"
-                >
+                <label class="d-block">Date Of Birth</label>
+                <div class="input-group">
+                    <span class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-calendar22"></i></span>
+                    </span>
+                    <input type="text"
+                        class="form-control font-weight-semibold datepicker"
+                        name="contact[birthday]"
+                        value="<%= contact.birthday.strftime('%Y/%m/%d, %a') if contact.birthday.present? %>">
+                </div>
             </div>
+        </div>
+        <div class="col-md-6">
             <div class="form-group">
                 <label class="d-block">Mobile</label>
                 <input type="text" class="form-control font-weight-semibold" placeholder="Enter mobile number"
@@ -80,36 +38,40 @@
                     value="<%= contact.mobile %>"
                 >
             </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label class="d-block">Email</label>
+        <input type="text" class="form-control font-weight-semibold" placeholder="Eg: name@sao-ee.vn"
+            name="contact[email]"
+            value="<%= contact.email %>"
+        >
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6">
             <div class="form-group">
-                <label class="d-block">Fax</label>
-                <input type="text" class="form-control font-weight-semibold" placeholder="Enter fax number"
-                    name="contact[fax]"
-                    value="<%= contact.fax %>"
-                >
-            </div>
-            <div class="form-group">
-                <label class="d-block">Tax Code</label>
-                <input type="text" class="form-control font-weight-semibold" placeholder="Enter tax code"
-                    name="contact[tax_code]"
-                    value="<%= contact.tax_code %>"
-                >
-            </div>
-            <div class="form-group">
-                <label class="d-block">Email</label>
-                <input type="text" class="form-control font-weight-semibold" placeholder="Eg: name@sao-ee.vn"
-                    name="contact[email]"
-                    value="<%= contact.email %>"
-                >
-            </div>
-            <div class="form-group">
-                <label class="d-block">Website</label>
-                <input type="text" class="form-control font-weight-semibold" placeholder="http://sao-ee.vn"
-                    name="contact[website]"
-                    value="<%= contact.website %>"
+                <label class="d-block">Department</label>
+                <input type="text" class="form-control font-weight-semibold" placeholder="Enter department"
+                    name="contact[department]"
+                    value="<%= contact.department %>"
                 >
             </div>
         </div>
         
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="d-block">Position</label>
+                <input type="text" class="form-control font-weight-semibold" placeholder="Enter position"
+                    name="contact[position]"
+                    value="<%= contact.position %>"
+                >
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
         <div class="col-md-6">
             <div class="form-group">
                 <label class="d-block">Country</label>
@@ -122,7 +84,9 @@
                     <option value="<%= contact.country_id %>"><%= contact.country_name %></option>
                 </select>
             </div>
-            
+        </div>
+        
+        <div class="col-md-6">
             <div class="form-group">
                 <label class="d-block">State/Province</label>
                 <select class="form-control font-weight-semibold select-ajax"
@@ -134,7 +98,11 @@
                     <option value="<%= contact.state_id %>"><%= contact.state_name %></option>
                 </select>
             </div>
-            
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-6">
             <div class="form-group">
                 <label class="d-block">District/Town/City</label>
                 <select class="form-control font-weight-semibold select-ajax"
@@ -146,7 +114,9 @@
                     <option value="<%= contact.district_id %>"><%= contact.district_name %></option>
                 </select>
             </div>
-            
+        </div>
+        
+        <div class="col-md-6">
             <div class="form-group">
                 <label class="d-block">Address</label>
                 <input type="text" class="form-control font-weight-semibold" placeholder="Enter address"
@@ -154,43 +124,11 @@
                     value="<%= contact.address %>"
                 >
             </div>
-            
-            <div class="form-group">
-                <label class="d-block">Invoice Address</label>
-                <input type="text" class="form-control font-weight-semibold" placeholder="Enter address for invoice"
-                    name="contact[invoice_address]"
-                    value="<%= contact.invoice_address %>"
-                >
-            </div>
-            
-            <div class="form-group">
-                <label class="d-block">BelongsTo/Parent</label>
-                <select class="form-control select-ajax"
-                    data-container-css-class="font-weight-semibold"
-                    data-placeholder="Choose group"
-                    data-url="<%= gns_contact.select2_backend_contacts_path(current_contact_id: contact.id) %>"
-                    name="contact[parent_ids][]"
-                >
-                    <% values = contact.parent.map {|c| {text: c.name, value: c.id}} %>
-                    <% values.each do |value| %>
-                        <% if value[:value].present? %>
-                            <option selected="selected" value="<%= value[:value] %>"><%= value[:text] %></option>
-                        <% end %>
-                    <% end %>
-                </select>
-            </div>
         </div>
     </div>
-    
-    <div class="form-group">
-        <label>Remark:</label>
-        <textarea rows="2" cols="5"
-            class="form-control"
-            placeholder="Enter your remark here"
-            name="contact[description]"
-        ><%= contact.description %></textarea>
-    </div>
-    
+</fieldset>
+
+<fieldset>
     <div class="form-group">
         <div class="form-check form-check-inline form-check-right form-check-switchery">
             <label class="form-check-label">
@@ -204,9 +142,7 @@
             </label>
         </div>
     </div>
-    
 </fieldset>
-
 
 <% content_for :page_script do %>
     <script>

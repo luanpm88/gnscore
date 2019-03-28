@@ -32,7 +32,8 @@ module GnsContact
       # GET /contacts/subcontact_new
       def subcontact_new
         @contact = Contact.new
-        @contact.parent_ids = [params[:parent_id]]
+        @contact.parent_ids = params[:parent_id]
+        @contact.category_ids = Contact.find(params[:parent_id]).category_ids
       end
   
       # GET /contacts/1/edit
@@ -66,6 +67,9 @@ module GnsContact
       # POST /contacts
       def subcontact_create
         @contact = Contact.new(contact_params)
+        
+        @contact.contact_type = GnsContact::Contact::TYPE_PERSON
+        @contact.code = "PERSON#{GnsContact::Contact.maximum(:id).next}"
   
         if @contact.save
           render json: {
@@ -73,7 +77,6 @@ module GnsContact
             message: 'Sub-contact was successfully created.',
           }
         else
-          logger.info @contact.errors.to_json
           render :subcontact_new
         end
       end
@@ -190,6 +193,7 @@ module GnsContact
                                             :tax_code, :website, :fax, :invoice_address, :description,
                                             :contact_type, :active,
                                             :address, :country_id, :state_id, :district_id,
+                                            :birthday, :department, :position,
                                             category_ids: [], parent_ids: [])
         end
     end
