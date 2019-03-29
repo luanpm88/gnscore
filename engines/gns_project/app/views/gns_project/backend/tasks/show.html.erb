@@ -51,8 +51,32 @@
     <div class="card-header bg-white header-elements-inline">
         <h6 class="card-title">Attachment list</h6>
         <div class="header-elements">
-            <a href="#" class="btn btn-light mr-3">Finish Task</a>
-            <a href="#" class="btn btn-light mr-3">Close Task</a>
+            <a href="#" class="btn bg-blue-600 mr-3">
+                <i class="icon-upload4 mr-2"></i> Upload File
+            </a>
+            
+            <div class="btn-group mr-3">
+                <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">Actions</button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item finish-task-button"
+                        href="#">
+                        <i class="icon-checkmark3"></i> Finish Task
+                    </a>
+                    <a class="dropdown-item unfinish-task-button"
+                        href="#">
+                        <i class="icon-x"></i> Un-finish task
+                    </a>
+                    <a class="dropdown-item close-task-button"
+                        href="#">
+                        <i class="icon-lock5"></i> Close task
+                    </a>
+                    <a class="dropdown-item re-open-task-button"
+                        href="#">
+                        <i class="icon-rotate-ccw2"></i> Re-open task
+                    </a>
+                </div>
+            </div>
+            
             <div class="list-icons">
                 <a class="list-icons-item" data-action="collapse"></a>
             </div>

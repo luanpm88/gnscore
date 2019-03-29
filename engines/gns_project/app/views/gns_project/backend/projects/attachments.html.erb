@@ -29,8 +29,8 @@
             '<%= gns_project.task_attachment_backend_projects_path(@project.id) %>',
             function(box) {
                 // apply g-link
-                new gLink(box.find('.enable-task-button'), function(link) {
-                    //task_attachment_list_box.load();
+                new gLink(box.find('.delete-task-button, .close-task-button, .reopen-task-button, .finish-task-button, .unfinish-task-button'), function(link) {
+                    task_attachment_list_box.load();
                 });
             }
         );

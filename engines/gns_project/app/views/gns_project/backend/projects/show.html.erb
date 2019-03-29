@@ -21,16 +21,18 @@
 <% content_for :page_script do %>
     <script>
         // global modal
-        var task_modal = new gModal();
+        var task_modal = new gModal({size: 'md'});
         
         var task_list_box = new ajaxBox(
             $('.task-planning-list'),
             '<%= gns_project.task_planning_backend_projects_path(@project.id) %>',
             function(box) {
                 // apply g-link
-                new gLink(box.find('.delete-task-button'), function(link) {
-                    task_list_box.load();
-                });
+                new gLink(box.find('.delete-task-button, .close-task-button, .reopen-task-button, .finish-task-button, .unfinish-task-button'),
+                    function(link) {
+                        task_list_box.load();
+                    }
+                );
             }
         );
         

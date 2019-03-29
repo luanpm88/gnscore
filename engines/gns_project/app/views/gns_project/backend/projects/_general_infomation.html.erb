@@ -183,9 +183,10 @@
                                 </div>
         
                                 <div class="ml-3 align-self-center" style="min-width: 120px">
-                                    <div class="progress rounded-round" title="20% Complete">
-                                        <div class="progress-bar" style="width: 90%">
-                                            <span>90%</span>
+                                    <% num = @project.progress_percent.round %>
+                                    <div class="progress" title="<%= num %>% Complete">
+                                        <div class="progress-bar bg-teal" style="width: <%= num %>%">
+                                            <span><%= num %>%</span>
                                         </div>
                                     </div>
                                 </div>
@@ -198,7 +199,7 @@
                                 </div>
         
                                 <div class="ml-3 align-self-center font-weight-semibold">
-                                    4
+                                    <%= @project.open_tasks.count %>
                                 </div>
                             </li>
                         </div>

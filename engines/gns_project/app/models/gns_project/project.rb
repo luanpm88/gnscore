@@ -137,5 +137,16 @@ module GnsProject
       
       return data
     end
+    
+    def progress_percent
+      all_tasks = self.tasks.count
+      closed_tasks = self.tasks.where(status: GnsProject::Task::STATUS_CLOSED).count
+      
+      return (closed_tasks.to_f/all_tasks.to_f)*100
+    end
+    
+    def open_tasks
+      self.tasks.where(status: GnsProject::Task::STATUS_OPEN)
+    end
   end
 end

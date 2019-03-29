@@ -1,7 +1,8 @@
 module GnsProject
   module Backend
     class TasksController < GnsCore::Backend::BackendController
-      before_action :set_task, only: [:attachments, :show, :edit, :update, :destroy]
+      before_action :set_task, only: [:show, :edit, :update, :destroy,
+                                      :reopen, :close, :attachments]
   
       # GET /tasks
       def index
@@ -24,7 +25,8 @@ module GnsProject
       # POST /tasks
       def create
         @task = Task.new(task_params)
-  
+        
+        @task.status = Task::STATUS_OPEN
         if @task.save
           render json: {
             status: 'success',
@@ -50,6 +52,7 @@ module GnsProject
       # DELETE /tasks/1
       def destroy
         @task.destroy
+        
         render json: {
           status: 'success',
           message: 'Task was successfully destroyed.',
@@ -65,6 +68,46 @@ module GnsProject
       def attachments
         render layout: nil
       end
+      
+      # Re-open action
+      def reopen
+        @task.set_open
+        
+        render json: {
+          status: 'success',
+          message: 'The task was successfully reopened.',
+        }
+      end
+      
+      # Close action
+      def close
+        @task.set_closed
+        
+        render json: {
+          status: 'success',
+          message: 'The task has been successfully closed.',
+        }
+      end
+      
+      # Finish action
+      def finish
+        @task.finish
+        
+        render json: {
+          status: 'success',
+          message: 'The task has been finished.',
+        }
+      end
+      
+      # Close action
+      def unfinish
+        @task.unfinish
+        
+        render json: {
+          status: 'success',
+          message: 'The task has been unfinished.',
+        }
+      end
   
       private
         # Use callbacks to share common setup or constraints between actions.
@@ -74,7 +117,7 @@ module GnsProject
   
         # Only allow a trusted parameter "white list" through.
         def task_params
-          params.fetch(:task, {}).permit(:name, :project_id, :stage_id)
+          params.fetch(:task, {}).permit(:name, :project_id, :stage_id, :start_date, :end_date, :employee_id)
         end
     end
   end
