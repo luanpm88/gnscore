@@ -3,7 +3,7 @@ module GnsContact
     class ContactsController < GnsCore::Backend::BackendController
       before_action :set_contact, only: [:edit, :update, :destroy,
                                          :add_subcontact, :subcontact_edit, :subcontact_update,
-                                         :remove_child, :children, :show, :projects,]
+                                         :remove_subcontact, :subcontact_list, :show, :projects]
   
       # GET /contacts
       def index
@@ -32,7 +32,8 @@ module GnsContact
       # GET /contacts/subcontact_new
       def subcontact_new
         @contact = Contact.new
-        @contact.parent_ids = [params[:parent_id]]
+        @contact.parent_ids = params[:parent_id]
+        @contact.category_ids = Contact.find(params[:parent_id]).category_ids
       end
   
       # GET /contacts/1/edit
@@ -66,6 +67,9 @@ module GnsContact
       # POST /contacts
       def subcontact_create
         @contact = Contact.new(contact_params)
+        
+        @contact.contact_type = GnsContact::Contact::TYPE_PERSON
+        @contact.code = "PERSON#{GnsContact::Contact.maximum(:id).next}"
   
         if @contact.save
           render json: {
@@ -73,8 +77,7 @@ module GnsContact
             message: 'Sub-contact was successfully created.',
           }
         else
-          logger.info @contact.errors.to_json
-          render :new
+          render :subcontact_new
         end
       end
   
@@ -108,7 +111,7 @@ module GnsContact
             message: 'Sub-contact was successfully updated.',
           }
         else
-          render :edit
+          render :subcontact_edit
         end
       end
   
@@ -165,12 +168,12 @@ module GnsContact
         end
       end
       
-      def children
+      def subcontact_list
         render layout: nil
       end
       
       # @todo: xoa sub-contact khoi contact cha hien tai
-      def remove_child
+      def remove_subcontact
         @contact.parent.delete(params[:current_parent_id])
         render json: {
           status: 'success',
@@ -190,6 +193,7 @@ module GnsContact
                                             :tax_code, :website, :fax, :invoice_address, :description,
                                             :contact_type, :active,
                                             :address, :country_id, :state_id, :district_id,
+                                            :birthday, :department, :position,
                                             category_ids: [], parent_ids: [])
         end
     end

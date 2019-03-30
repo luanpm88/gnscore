@@ -1,25 +1,13 @@
 <%= form_for([gns_project, :backend, project], html: {multipart: true}) do |f| %>
-
     <fieldset>
-        
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="d-block font-weight-semibold">Code <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control <%= 'border-danger' if project.errors.full_messages_for(:code).present? %>" placeholder="Enter name"
-                        name="project[code]"
-                        value="<%= project.code %>"
-                    >
-                    <% if project.errors.full_messages_for(:code).present? %>
-                        <span class="form-text text-danger"><%= project.errors.full_messages_for(:code).join('<br/>').html_safe %></span>
-                    <% end %>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="d-block font-weight-semibold">Category</label>
-                    <select name="project[category_id]" data-placeholder="Select category..."
+                    <label class="d-block">Project Type <span class="text-danger">*</span></label>
+                    <select name="project[category_id]"
                         class="form-control select-ajax"
+                        data-container-css-class="font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:category_id).present? %>"
+                        data-placeholder="Select category..."
                         data-url="<%= gns_project.select2_backend_categories_path %>">
                         <option value="<%= project.category_id %>"><%= project.category_name %></option>
                     </select>
@@ -27,57 +15,109 @@
                         <span class="form-text text-danger"><%= project.errors.full_messages_for(:category_id).join('<br/>').html_safe %></span>
                     <% end %>
                 </div>
-            </div>
-        </div>
-            
-        <div class="form-group">
-            <label class="d-block font-weight-semibold">Name <span class="text-danger">*</span></label>
-            <input type="text" class="form-control <%= 'border-danger' if project.errors.full_messages_for(:name).present? %>" placeholder="Enter name"
-                name="project[name]"
-                value="<%= project.name %>"
-            >
-            <% if project.errors.full_messages_for(:name).present? %>
-                <span class="form-text text-danger"><%= project.errors.full_messages_for(:name).join('<br/>').html_safe %></span>
-            <% end %>
-        </div>
-        
-        <div class="form-group">
-            <label class="d-block font-weight-semibold">Customer</label>
-            <select name="project[customer_id]" data-placeholder="Select customer..."
-                class="form-control select-ajax"
-                data-url="<%= gns_contact.select2_backend_contacts_path %>">
-                <option value="<%= project.customer_id %>"><%= project.customer_name %></option>
-            </select>
-            <% if project.errors.full_messages_for(:customer_id).present? %>
-                <span class="form-text text-danger"><%= project.errors.full_messages_for(:customer_id).join('<br/>').html_safe %></span>
-            <% end %>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-6">
+                
                 <div class="form-group">
-                    <label class="d-block">Starting Date</label>
-                    <div class="input-group">
-                        <span class="input-group-prepend">
-                            <span class="input-group-text"><i class="icon-calendar22"></i></span>
-                        </span>
-                        <input type="text" class="form-control font-weight-semibold daterange-single" value="" name="contact[birthday]">
-                    </div>
+                    <label class="d-block">Project Code <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:code).present? %>" placeholder="Enter name"
+                        name="project[code]"
+                        value="<%= project.code %>"
+                    >
+                    <% if project.errors.full_messages_for(:code).present? %>
+                        <span class="form-text text-danger"><%= project.errors.full_messages_for(:code).join('<br/>').html_safe %></span>
+                    <% end %>
+                </div>
+                
+                <div class="form-group">
+                    <label class="d-block">Project Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:name).present? %>" placeholder="Enter name"
+                        name="project[name]"
+                        value="<%= project.name %>"
+                    >
+                    <% if project.errors.full_messages_for(:name).present? %>
+                        <span class="form-text text-danger"><%= project.errors.full_messages_for(:name).join('<br/>').html_safe %></span>
+                    <% end %>
+                </div>
+                
+                <div class="form-group">
+                    <label class="d-block">Customer <span class="text-danger">*</span></label>
+                    <select name="project[customer_id]"
+                        data-container-css-class="font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:customer_id).present? %>"
+                        data-placeholder="Select customer"
+                        class="form-control select-ajax"
+                        data-url="<%= gns_contact.select2_backend_contacts_path %>">
+                        <option value="<%= project.customer_id %>"><%= project.customer_name %></option>
+                    </select>
+                    <% if project.errors.full_messages_for(:customer_id).present? %>
+                        <span class="form-text text-danger"><%= project.errors.full_messages_for(:customer_id).join('<br/>').html_safe %></span>
+                    <% end %>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="d-block">End Date</label>
+                    <label class="d-block">Start Date <span class="text-danger">*</span></label>
                     <div class="input-group">
                         <span class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-calendar22"></i></span>
                         </span>
-                        <input type="text" class="form-control font-weight-semibold daterange-single" value="" name="contact[birthday]">
+                        <input type="text"
+                            class="form-control font-weight-semibold datepicker <%= 'border-danger' if project.errors.full_messages_for(:start_date).present? %>"
+                            name="project[start_date]"
+                            value="<%= project.start_date.strftime('%Y/%m/%d, %a') if project.start_date.present? %>">
                     </div>
+                    <% if project.errors.full_messages_for(:start_date).present? %>
+                        <span class="form-text text-danger"><%= project.errors.full_messages_for(:start_date).join('<br/>').html_safe %></span>
+                    <% end %>
+                </div>
+                
+                <div class="form-group">
+                    <label class="d-block">End Date <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-calendar22"></i></span>
+                        </span>
+                        <input type="text"
+                            class="form-control font-weight-semibold datepicker <%= 'border-danger' if project.errors.full_messages_for(:end_date).present? %>"
+                            name="project[end_date]"
+                            value="<%= project.end_date.strftime('%Y/%m/%d, %a') if project.end_date.present? %>">
+                    </div>
+                    <% if project.errors.full_messages_for(:end_date).present? %>
+                        <span class="form-text text-danger"><%= project.errors.full_messages_for(:end_date).join('<br/>').html_safe %></span>
+                    <% end %>
+                </div>
+                
+                <div class="form-group">
+                    <label class="d-block">Project Manager <span class="text-danger">*</span></label>
+                    <select name="project[manager_id]"
+                        data-container-css-class="font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:manager_id).present? %>"
+                        data-placeholder="Select manager"
+                        class="form-control select-ajax"
+                        data-url="<%= gns_core.select2_backend_users_path %>">
+                        <option value="<%= project.manager_id %>"><%= project.manager_name %></option>
+                    </select>
+                    <% if project.errors.full_messages_for(:customer_id).present? %>
+                        <span class="form-text text-danger"><%= project.errors.full_messages_for(:customer_id).join('<br/>').html_safe %></span>
+                    <% end %>
+                </div>
+                
+                <div class="form-group">
+                    <label class="d-block">Priority <span class="text-danger">*</span></label>
+                    <select class="form-control selectAllowClear"
+                        data-container-css-class="font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:priority).present? %>"
+                        data-placeholder="Select priority level"
+                        name="project[priority]"
+                    >
+                        <option></option>
+                        <% options = GnsProject::Project::get_priority_options() %>
+                        <% options.each do |option| %>
+                            <option <%= 'selected' if option[:value] == project.priority %> value="<%= option[:value] %>"><%= option[:text] %></option>
+                        <% end %>
+                    </select>
+                    <% if project.errors.full_messages_for(:priority).present? %>
+                        <span class="form-text text-danger"><%= project.errors.full_messages_for(:priority).join('<br/>').html_safe %></span>
+                    <% end %>
                 </div>
             </div>
-        </div>
-        
+        </div>        
     </fieldset>
     
     <hr class="mt-0">

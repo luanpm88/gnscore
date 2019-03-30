@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_20_142308) do
+ActiveRecord::Schema.define(version: 2019_03_29_071500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,9 @@ ActiveRecord::Schema.define(version: 2019_03_20_142308) do
     t.string "foreign_name"
     t.string "fax"
     t.text "description"
+    t.datetime "birthday"
+    t.string "department"
+    t.string "position"
     t.index ["country_id"], name: "index_gns_contact_contacts_on_country_id"
     t.index ["district_id"], name: "index_gns_contact_contacts_on_district_id"
     t.index ["state_id"], name: "index_gns_contact_contacts_on_state_id"
@@ -97,6 +100,8 @@ ActiveRecord::Schema.define(version: 2019_03_20_142308) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
     t.index ["email"], name: "index_gns_core_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_gns_core_users_on_reset_password_token", unique: true
   end
@@ -123,6 +128,10 @@ ActiveRecord::Schema.define(version: 2019_03_20_142308) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "cache_search"
+    t.text "description"
+    t.boolean "active", default: true
+    t.bigint "creator_id"
+    t.index ["creator_id"], name: "index_gns_project_categories_on_creator_id"
   end
 
   create_table "gns_project_projects", force: :cascade do |t|
@@ -133,8 +142,16 @@ ActiveRecord::Schema.define(version: 2019_03_20_142308) do
     t.datetime "updated_at", null: false
     t.text "cache_search"
     t.bigint "customer_id"
+    t.string "priority"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "status"
+    t.bigint "manager_id"
+    t.bigint "creator_id"
     t.index ["category_id"], name: "index_gns_project_projects_on_category_id"
+    t.index ["creator_id"], name: "index_gns_project_projects_on_creator_id"
     t.index ["customer_id"], name: "index_gns_project_projects_on_customer_id"
+    t.index ["manager_id"], name: "index_gns_project_projects_on_manager_id"
   end
 
   create_table "gns_project_stages", force: :cascade do |t|
@@ -142,6 +159,7 @@ ActiveRecord::Schema.define(version: 2019_03_20_142308) do
     t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "custom_order"
     t.index ["category_id"], name: "index_gns_project_stages_on_category_id"
   end
 
@@ -151,6 +169,12 @@ ActiveRecord::Schema.define(version: 2019_03_20_142308) do
     t.bigint "stage_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "employee_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "status"
+    t.boolean "finished"
+    t.index ["employee_id"], name: "index_gns_project_tasks_on_employee_id"
     t.index ["project_id"], name: "index_gns_project_tasks_on_project_id"
     t.index ["stage_id"], name: "index_gns_project_tasks_on_stage_id"
   end

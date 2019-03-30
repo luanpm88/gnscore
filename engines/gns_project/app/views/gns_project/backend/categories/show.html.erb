@@ -21,7 +21,7 @@
 <% content_for :page_script do %>
     <script>
         // global modal
-        var stage_modal = new gModal();
+        var stage_modal = new gModal({size: 'md'});
         var stage_list_box = new ajaxBox(
             $('.stage-list'),
             '<%= gns_project.stages_backend_categories_path(@category.id) %>',
@@ -33,7 +33,7 @@
             }
         );
         
-        var category_modal = new gModal();
+        var category_modal = new gModal({size: 'md'});
         var newCategoryCallback;
         
         $(function() {
@@ -58,6 +58,29 @@
                         category_modal.renderHtml(response);
                     }
                 };
+            });
+            
+            $(document).on('click', '.edit-category-button', function(e) {
+                e.preventDefault();
+                
+                var button = $(this);
+                
+                // load modal edit category
+                category_modal.load(button.attr('href'));
+                
+                // after update category event
+                updateCategoryCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // Hide modal
+                        category_modal.hide();
+                        location.reload();
+                    } else {
+                        // validation error
+                        category_modal.renderHtml(response);
+                    }
+                }
+                
             });
             
             $('.add-stage-button').click(function(e) {
@@ -87,23 +110,18 @@
             <div class="card-header bg-white header-elements-sm-inline">
                 <h6 class="card-title font-weight-semibold">Category Details</h6>
                 <div class="header-elements">
-                    <ul class="nav nav-tabs nav-tabs-bottom card-header-tabs mx-0">
-                        <div class="list-icons mr-3">
-                            <div class="dropdown">
-                                <a href="#" class="list-icons-item" data-toggle="dropdown">
-                                    <i class="icon-menu7"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="#" class="dropdown-item"><i class="icon-pencil7"></i> Update</a>
-                                    <a href="#" class="dropdown-item"><i class="icon-bin"></i> Delete</a>
-                                </div>
-                            </div>
+                    <div class="btn-group mr-3">
+                        <button type="button" class="btn bg-blue-600 btn-sm dropdown-toggle" data-toggle="dropdown">Actions</button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item edit-category-button"
+                                href="<%= gns_project.edit_backend_category_path(@category) %>">
+                                <i class="icon-pencil5"></i> Update
+                            </a>
                         </div>
-                    </ul>
+                    </div>
                     
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="collapse"></a>
-                        <a class="list-icons-item" data-action="remove"></a>
                     </div>
                 </div>
             </div>
@@ -121,14 +139,22 @@
                                     <%= @category.name %>
                                 </div>
                             </li>
-        
                             <li class="media mt-0 py-2 px-2">
                                 <div class="media-body">
-                                    <div class="font-weight-semibold">Added by:</div>
+                                    <div class="font-weight-semibold">Discription:</div>
                                 </div>
         
                                 <div class="ml-3 align-self-center text-blue-800">
-                                    Winnie
+                                    <%= @category.description %>
+                                </div>
+                            </li>
+                            <li class="media mt-0 py-2 px-2">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Status:</div>
+                                </div>
+        
+                                <div class="ml-3 align-self-center text-blue-800">
+                                    <span class="badge badge-<%= @category.get_status_label %>"><%= t @category.get_status_label %></span>
                                 </div>
                             </li>
                         </div>
@@ -136,14 +162,13 @@
                         <div class="col-md-6">
                             <li class="media mt-0 py-2 px-2">
                                 <div class="media-body">
-                                    <div class="font-weight-semibold">Updated:</div>
+                                    <div class="font-weight-semibold">Added by:</div>
                                 </div>
         
-                                <div class="ml-3 align-self-center text-muted">
-                                    <%= @category.updated_at.strftime('%d %b, %Y') %>
+                                <div class="ml-3 align-self-center text-blue-800">
+                                    <%= @category.creator_name %>
                                 </div>
                             </li>
-                            
                             <li class="media mt-0 py-2 px-2">
                                 <div class="media-body">
                                     <div class="font-weight-semibold">Created:</div>
@@ -151,6 +176,15 @@
         
                                 <div class="ml-3 align-self-center text-muted">
                                     <%= @category.created_at.strftime('%d %b, %Y') %>
+                                </div>
+                            </li>
+                            <li class="media mt-0 py-2 px-2">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Updated:</div>
+                                </div>
+        
+                                <div class="ml-3 align-self-center text-muted">
+                                    <%= @category.updated_at.strftime('%d %b, %Y') %>
                                 </div>
                             </li>
                         </div>
@@ -164,10 +198,9 @@
             <div class="card-header header-elements-inline">
                 <h6 class="card-title font-weight-semibold">Stage List</h6>
                 <div class="header-elements">
-                    <a href="<%= gns_project.new_backend_stage_path(category_id: @category.id) %>" class="btn bg-blue mr-3 add-stage-button">Add stage</a>
+                    <a href="<%= gns_project.new_backend_stage_path(category_id: @category.id) %>" class="btn bg-blue btn-sm mr-3 add-stage-button">Add stage</a>
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="collapse"></a>
-                        <a class="list-icons-item" data-action="remove"></a>
                     </div>
                 </div>
             </div>

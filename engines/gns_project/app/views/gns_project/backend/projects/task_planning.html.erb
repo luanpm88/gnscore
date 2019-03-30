@@ -1,0 +1,119 @@
+<% if @project.tasks.empty? %>
+    <div class="card-body">
+        <p class="text-center text-warning pt-2">
+            There are no task description
+        </p>
+    </div>
+<% else %>
+    <table class="table">
+        <thead>
+            <tr class="alpha-primary">
+                <th>No.</th>
+                <th class="text-nowrap">Stage</th>
+                <th class="text-nowrap">Task Description</th>
+                <th class="text-nowrap">Start Date</th>
+                <th class="text-nowrap">End Date</th>
+                <th class="text-nowrap">Complete</th>
+                <th class="text-nowrap">Hours</th>
+                <th class="text-nowrap">Responsible</th>
+                <th class="text-nowrap">Status</th>
+                <th class="text-nowrap">Finished</th>
+                <th class="text-center" style="width: 100px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @project.tasks.each_with_index do |task,index| %>
+                <tr>
+                    <td class="font-weight-semibold"><%= index + 1 %></td>
+                    <td><%= task.stage_name %></td>
+                    <td><%= task.name %></td>
+                    <td><%= task.start_date.strftime("%d/%m/%Y") if task.start_date.present? %></td>
+                    <td><%= task.end_date.strftime("%d/%m/%Y") if task.end_date.present? %></td>
+                    <td>
+                        <div class="progress" title="20% Complete">
+                            <div class="progress-bar bg-teal" style="width: 90%">
+                                <span>90%</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td><%= task.employee_name %></td>
+                    <td>
+                        <span class="badge badge-flat badge-pill badge-<%= task.status %>"><%= t task.status %></span>
+                    </td>
+                    <td class="text-center">
+                        <a href="#"
+                            class="check-finished-task-button"
+                            title="Check finished"
+                        >
+                            <i class="icon-checkmark-circle text-success"></i>
+                        </a>
+                    </td>
+                    <td class="text-center">
+                        <div class="list-icons">
+                            <div class="dropdown">
+                                <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="#" class="dropdown-item insert-below-task-button">
+                                        <i class="icon-plus-circle2"></i> Insert below
+                                    </a>
+                                    
+                                    <a class="dropdown-item edit-task-button"
+                                        href="<%= gns_project.edit_backend_task_path(task) %>">
+                                        <i class="icon-pencil7"></i> Update
+                                    </a>
+                                    
+                                    <div class="dropdown-divider"></div>
+                                    
+                                    <a href="<%= gns_project.finish_backend_tasks_path(id: task) %>"
+                                        class="dropdown-item ajax finish-task-button"
+                                        data_method="PUT"
+                                        data-confirm="You are about to finish a task"
+                                    >
+                                        <i class="icon-checkmark3"></i> Finish Task
+                                    </a>
+                                    
+                                    <a href="<%= gns_project.unfinish_backend_tasks_path(id: task) %>"
+                                        class="dropdown-item ajax unfinish-task-button"
+                                        data_method="PUT"
+                                        data-confirm="You are about to un-finish a task"
+                                    >
+                                        <i class="icon-x"></i> Un-finish Task
+                                    </a>
+                                    
+                                    <a href="<%= gns_project.close_backend_tasks_path(id: task) %>"
+                                        class="dropdown-item ajax close-task-button"
+                                        data_method="PUT"
+                                        data-confirm="You are about to close a task"
+                                    >
+                                        <i class="icon-lock5"></i> Close Task
+                                    </a>
+                                    
+                                    <a href="<%= gns_project.reopen_backend_tasks_path(id: task) %>"
+                                        class="dropdown-item ajax reopen-task-button"
+                                        data_method="PUT"
+                                        data-confirm="You are about to reopen a task"
+                                    >
+                                        <i class="icon-rotate-ccw2"></i> Re-open Task
+                                    </a>
+                                    
+                                    <div class="dropdown-divider"></div>
+                                    
+                                    <a class="dropdown-item ajax delete-task-button"
+                                        href="<%= gns_project.backend_task_path(task) %>"
+                                        data-method="DELETE"
+                                        data-confirm="You are about to delete a task"
+                                    >
+                                        <i class="icon-bin"></i> Delete
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+<% end %>

@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="media-body">
-                        <div class="media-title font-weight-semibold">Phuong, Vo Duc Hung</div>
+                        <div class="media-title font-weight-semibold"><%= current_user.full_name %></div>
                         <div class="font-size-xs opacity-50">
                             <%= current_user.email %>
                         </div>
@@ -105,8 +105,7 @@
                                 data-menu="
                                     gns_project/backend/categories
                                 "
-                            >Project Types
-                                <span class="badge bg-transparent align-self-center ml-auto">Coming soon</span>
+                            >Types
                             </a>
                         </li>
                     </ul>

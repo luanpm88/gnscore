@@ -14,38 +14,71 @@
 
 <% content_for :page_script do %>
     <script>
-        var task_attachment_list_box = new ajaxBox(
-            $('.task-attachment-list'),
+        var attachment_list_box = new ajaxBox(
+            $('.attachment-list'),
             '<%= gns_project.attachments_backend_tasks_path(@task.id) %>',
             function(box) {
                 // apply g-link
-                new gLink(box.find('.delete-task-attachment-button'), function(link) {
-                    task_attachment_list_box.load();
+                new gLink(box.find('.remove-attachment-button, .insert-bellow-attachment-button, .download_attachment-button'), function(link) {
+                    attachment_list_box.load();
                 });
             }
         );
         
-        //var history_attachment_list_box = new ajaxBox(
-        //    $('.history-attachment-list'),
-        //    '<%= gns_project.history_backend_attachments_path(1) %>'
-        //);
+        var attachment_logs_modal = new gModal();
+        var attachment_logs_list_box = new ajaxBox(
+            $('.attachment-logs-list'),
+            '<%= gns_project.logs_backend_attachments_path(1) %>'
+        );
         
         $(function() {
-            task_attachment_list_box.load();
-            //history_attachment_list_box.load();
+            // Danh sach attachment /cac phien ban moi nhat
+            attachment_list_box.load();
+            
+            $(document).on('click', '.attachment-logs-list-button', function(e) {
+                e.preventDefault();
+                
+                attachment_logs_modal.load($(this).attr('href'));
+            });
+            
+            // Danh sach attachment /nhat ky tat ca phien ban
+            //attachment_logs_list_box.load();
         });
     </script>
 <% end %>
 
 <div class="card">
     <div class="card-header bg-white header-elements-inline">
-        <h6 class="card-title">View - Attachment list</h6>
+        <h6 class="card-title">Attachment list</h6>
         <div class="header-elements">
-            <a href="#" class="btn btn-light mr-3">Finish Task</a>
-            <a href="#" class="btn btn-light mr-3">Close Task</a>
+            <a href="#" class="btn bg-blue-600 mr-3">
+                <i class="icon-upload4 mr-2"></i> Upload File
+            </a>
+            
+            <div class="btn-group mr-3">
+                <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">Actions</button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item finish-task-button"
+                        href="#">
+                        <i class="icon-checkmark3"></i> Finish Task
+                    </a>
+                    <a class="dropdown-item unfinish-task-button"
+                        href="#">
+                        <i class="icon-x"></i> Un-finish task
+                    </a>
+                    <a class="dropdown-item close-task-button"
+                        href="#">
+                        <i class="icon-lock5"></i> Close task
+                    </a>
+                    <a class="dropdown-item re-open-task-button"
+                        href="#">
+                        <i class="icon-rotate-ccw2"></i> Re-open task
+                    </a>
+                </div>
+            </div>
+            
             <div class="list-icons">
                 <a class="list-icons-item" data-action="collapse"></a>
-                <a class="list-icons-item" data-action="remove"></a>
             </div>
         </div>
     </div>
@@ -77,7 +110,7 @@
             </div>
         </div>
         
-        <div class="task-attachment-list">
+        <div class="attachment-list">
             
         </div>
     </div>

@@ -7,7 +7,7 @@
             <select name="task[stage_id]" data-placeholder="Select stage..."
                 class="form-control select-ajax"
                 data-url="<%= gns_project.select2_backend_stages_path %>"
-                data-container-css-class="font-weight-semibold"
+                data-container-css-class="font-weight-semibold <%= 'border-danger' if task.errors.full_messages_for(:stage_id).present? %>"
             >
                 <option value="<%= task.stage_id %>"><%= task.stage_name %></option>
             </select>
@@ -28,58 +28,61 @@
         </div>
         
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-6">                
                 <div class="form-group">
-                    <label class="d-block">Starting Date <span class="text-danger">*</span></label>
+                    <label class="d-block">Start Date <span class="text-danger">*</span></label>
                     <div class="input-group">
                         <span class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-calendar22"></i></span>
                         </span>
-                        <input type="text" class="form-control font-weight-semibold daterange-single" value="" name="contact[birthday]">
+                        <input type="text"
+                            class="form-control font-weight-semibold datepicker <%= 'border-danger' if task.errors.full_messages_for(:start_date).present? %>"
+                            name="task[start_date]"
+                            value="<%= task.start_date.strftime('%Y/%m/%d, %a') if task.start_date.present? %>">
                     </div>
+                    <% if task.errors.full_messages_for(:start_date).present? %>
+                        <span class="form-text text-danger"><%= task.errors.full_messages_for(:start_date).join('<br/>').html_safe %></span>
+                    <% end %>
                 </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label class="d-block">End Date <span class="text-danger">*</span></label>
                     <div class="input-group">
                         <span class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-calendar22"></i></span>
                         </span>
-                        <input type="text" class="form-control font-weight-semibold daterange-single" value="" name="contact[birthday]">
+                        <input type="text"
+                            class="form-control font-weight-semibold datepicker <%= 'border-danger' if task.errors.full_messages_for(:end_date).present? %>"
+                            name="task[end_date]"
+                            value="<%= task.end_date.strftime('%Y/%m/%d, %a') if task.end_date.present? %>">
                     </div>
+                    <% if task.errors.full_messages_for(:end_date).present? %>
+                        <span class="form-text text-danger"><%= task.errors.full_messages_for(:end_date).join('<br/>').html_safe %></span>
+                    <% end %>
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label class="d-block">Hours <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control font-weight-semibold" placeholder="Hours (enter number)"
-                        name="task[hours]"
-                        value="">
-                </div>
-            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="d-block">Hours</label>
+            <input type="text" class="form-control font-weight-semibold" placeholder="Hours (enter number)"
+                name="task[hours]"
+                value="<%= '' %>">
         </div>
         
         <div class="form-group">
             <label class="d-blocks">Responsible <span class="text-danger">*</span></label>
-            <select name="task[stage_id]" data-placeholder="The person responsible..."
+            <select name="task[employee_id]" data-placeholder="The person responsible..."
                 class="form-control select-ajax"
-                data-url="<%= gns_project.select2_backend_stages_path %>"
-                data-container-css-class="font-weight-semibold"
+                data-url="<%= gns_core.select2_backend_users_path %>"
+                data-container-css-class="font-weight-semibold <%= 'border-danger' if task.errors.full_messages_for(:employee_id).present? %>"
             >
-                <option value="<%= task.stage_id %>"><%= task.stage_name %></option>
+                <option value="<%= task.employee_id %>"><%= task.employee_name %></option>
             </select>
-            <% if task.errors.full_messages_for(:stage_id).present? %>
-                <span class="form-text text-danger"><%= task.errors.full_messages_for(:stage_id).join('<br/>').html_safe %></span>
+            <% if task.errors.full_messages_for(:employee_id).present? %>
+                <span class="form-text text-danger"><%= task.errors.full_messages_for(:employee_id).join('<br/>').html_safe %></span>
             <% end %>
-        </div>
-        
-        <div class="form-group">
-            <label class="d-block">Status <span class="text-danger">*</span></label>
-            <input type="text" class="form-control font-weight-semibold" placeholder=""
-                name="task[responsible]"
-                value=""
-            >
         </div>
         
     </fieldset>    

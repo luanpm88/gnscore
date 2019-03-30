@@ -8,21 +8,19 @@
     <table class="table">
         <thead>
             <tr class="alpha-primary">
-                <th>Code</th>
-                <th>Full Name</th>
-                <th>Mobile Phone</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Status</th>
-                <th>Created</th>
-                <th class="text-center" style="width: 100px;">Actions</th>
+                <th class="text-nowrap">Person Name</th>
+                <th class="text-nowrap">Mobile Phone</th>
+                <th class="text-nowrap">Email</th>
+                <th class="text-nowrap">Address</th>
+                <th class="text-nowrap">Status</th>
+                <th class="text-nowrap">Created</th>
+                <th class="text-center text-nowrap" style="width: 100px;">Actions</th>
             </tr>
         </thead>
         <tbody>
             <% @contact.children.each do |child| %>
                 <tr>
-                    <td><%= child.code %></td>
-                    <td><%= child.name %></td>
+                    <td class="text-blue-800"><%= child.name %></td>
                     <td><%= child.mobile %></td>
                     <td><%= child.email %></td>
                     <td><%= child.get_full_address %></td>
@@ -39,13 +37,13 @@
     
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item edit-subcontact-button"
-                                        href="<%= gns_contact.edit_backend_contact_path(child) %>">
+                                        href="<%= gns_contact.subcontact_edit_backend_contacts_path(child) %>">
                                         <i class="icon-pencil7"></i> Update infomation
                                     </a>
                                     
                                     <!--<div class="dropdown-divider"></div>-->
                                     <a class="dropdown-item ajax remove-subcontact-button"
-                                        href="<%= gns_contact.remove_child_backend_contacts_path(child, current_parent_id: @contact.id) %>"
+                                        href="<%= gns_contact.remove_subcontact_backend_contacts_path(child, current_parent_id: @contact.id) %>"
                                         data-method="PUT"
                                         data-confirm="You want to remove a contact from the contact persons"
                                     >

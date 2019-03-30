@@ -125,6 +125,14 @@
     color: #fff;
     background-color: #e53935;
 }
+.badge-open {
+    color: #1e88e5;
+    border-color: #2196f3;
+}
+.badge-closed {
+    color: #666;
+    border-color: #777;
+}
 .progress {
     background-color: #999;
 }

@@ -80,12 +80,25 @@ function applyJs(container) {
     // Multi select initialization
     container.find('.multiselect').multiselect();
     
-    // Single picker
-    container.find('.daterange-single').daterangepicker({ 
-        singleDatePicker: true,
-        locale: {
-            format: 'DD/MM/YYYY'
-        }
+    container.find('.datepicker').pickadate({
+        format: 'yyyy/mm/dd, ddd',
+        //min: [2019,3,20],
+        //max: [2019,3,30],
+        editable: false,
+        selectYears: true,
+        selectMonths: true,
+        labelMonthNext: 'Next month',
+        labelMonthPrev: 'Previous month',
+        today: 'Today',
+        clear: 'Clear',
+        close: 'Close',
+        klass: {},
+    });
+    
+    container.find('.timepicker').pickatime({
+        format: 'HH:i',
+        formatSubmit: 'HH:i',
+        editable: false,
     });
     
     // Datalist

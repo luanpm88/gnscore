@@ -1,9 +1,25 @@
 module GnsProject
   class Category < ApplicationRecord
+    belongs_to :creator, class_name: 'GnsCore::User'
     has_many :projects, dependent: :restrict_with_error # Prevent deleting record being used
     has_many :stages, dependent: :restrict_with_error
     
     validates :name, :presence => true
+    
+    # get creator name
+    def creator_name
+      creator.present? ? creator.short_name : ''
+    end
+    
+    # get status
+    def get_status_label
+      active? ? 'active' : 'inactive'
+    end
+    
+    # getActive
+    def self.get_active
+			self.where(active: true)
+		end
     
     # update category cache search
     after_save :update_cache_search
@@ -18,12 +34,17 @@ module GnsProject
     def self.filter(query, params)
       params = params.to_unsafe_hash
       
+      # filter by active
+      if params[:active].present?
+        query = query.where(active: params[:active])
+      end
+      
       # single keyword
       if params[:keyword].present?
 				keyword = params[:keyword].strip.downcase
 				keyword.split(' ').each do |q|
 					q = q.strip
-					query = query.where('LOWER(gns_project_categories.cache_search) LIKE ?', '%'+q.to_ascii.downcase+'%')
+					query = query.where('LOWER(gns_project_categories.cache_search) LIKE ?', '%'+q.to_ascii.strip.downcase+'%')
 				end
 			end
 
@@ -61,8 +82,8 @@ module GnsProject
       
       # pagination
       page = params[:page].to_i if params[:page].present?
-      query = query.limit(per_page).offset(per_page*(page-1))      
-      data[:pagination][:more] = true if query.count > 0
+      query = query.limit(per_page).offset(per_page*(page-1))
+      data[:pagination][:more] = true if query.count >= per_page
       
       # render items
       query.each do |d|

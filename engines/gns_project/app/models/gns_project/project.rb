@@ -1,10 +1,14 @@
 module GnsProject
   class Project < ApplicationRecord
+    belongs_to :creator, class_name: 'GnsCore::User'
     belongs_to :category, class_name: 'GnsProject::Category'
     belongs_to :customer, class_name: 'GnsContact::Contact'
+    belongs_to :manager, class_name: 'GnsCore::User', foreign_key: :manager_id
     has_many :tasks, dependent: :restrict_with_error
     
-    validates :name, :category_id, :customer_id, :presence => true
+    validates :code, :name, :priority, :start_date, :end_date,
+              :category_id, :customer_id, :manager_id,
+              :presence => true
     
     # get customer code
     def customer_code
@@ -19,6 +23,37 @@ module GnsProject
     # get category name
     def category_name
       category.present? ? category.name : ''
+    end
+    
+    # get manager name
+    def manager_name
+      manager.present? ? manager.full_name : ''
+    end
+    
+    # get creator name
+    def creator_name
+      creator.present? ? creator.short_name : ''
+    end
+    
+    # class const
+    PRIORITY_HIGHT = 'high'
+    PRIORITY_NORMAL = 'normal'
+    PRIORITY_LOW = 'low'
+    
+    STATUS_NEW = 'new'
+    STATUS_WAITING_APPROVE = 'waiting_approve'
+    STATUS_PROGRESSING = 'progressing'
+    STATUS_PAUSED = 'paused'
+    STATUS_FINISHED = 'finished'
+    STATUS_CANCELED = 'canceled'
+    
+    # get business type options
+    def self.get_priority_options()
+      [
+        {text: 'High', value: self::PRIORITY_HIGHT},
+        {text: 'Normal', value: self::PRIORITY_NORMAL},
+        {text: 'Low', value: self::PRIORITY_LOW}
+      ]
     end
     
     # update project cache search
@@ -82,7 +117,7 @@ module GnsProject
       
       # keyword
       if params[:q].present?
-        query = query.where('LOWER(gns_area_districts.cache_search) LIKE ?', '%'+params[:q].to_ascii.downcase+'%')
+        query = query.where('LOWER(gns_area_districts.cache_search) LIKE ?', '%'+params[:q].to_ascii.strip.downcase+'%')
       end     
       
       # state
@@ -93,7 +128,7 @@ module GnsProject
       # pagination
       page = params[:page].to_i if params[:page].present?
       query = query.limit(per_page).offset(per_page*(page-1))      
-      data[:pagination][:more] = true if query.count > 0
+      data[:pagination][:more] = true if query.count >= per_page
       
       # render items
       query.each do |d|
@@ -101,6 +136,17 @@ module GnsProject
       end
       
       return data
+    end
+    
+    def progress_percent
+      all_tasks = self.tasks.count
+      closed_tasks = self.tasks.where(status: GnsProject::Task::STATUS_CLOSED).count
+      
+      return (closed_tasks.to_f/all_tasks.to_f)*100
+    end
+    
+    def open_tasks
+      self.tasks.where(status: GnsProject::Task::STATUS_OPEN)
     end
   end
 end

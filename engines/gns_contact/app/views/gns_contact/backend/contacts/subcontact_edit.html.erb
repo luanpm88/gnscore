@@ -21,7 +21,7 @@
                 var form = $(this);
                 
                 // clear modal
-                contact_modal.clear();
+                subcontact_modal.clear();
                 
                 $.ajax({
                     url: form.attr('action'),
@@ -29,8 +29,8 @@
                     data: form.serialize() + '&layout=modal',
                 }).done(function(response) {
                     // do something
-                    if (typeof(updateContactCallback) !== 'undefined') {
-                        updateContactCallback(response);
+                    if (typeof(updateSubContactCallback) !== 'undefined') {
+                        updateSubContactCallback(response);
                     }
                 });
                 
@@ -56,13 +56,17 @@
                 <div class="header-elements">
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="collapse"></a>
-                        <a class="list-icons-item" data-action="remove"></a>
                     </div>
                 </div>
             </div>
 
             <div class="card-body">
-                <%= render 'form', contact: @contact %>
+                <%= form_for(@contact, url: gns_contact.subcontact_update_backend_contacts_path(id: @contact.id), html: {multipart: true, method: 'put'}) do |f| %>
+                    <%= render 'subcontact_form', contact: @contact %>
+                    <div class="text-left">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                <% end %>
             </div>
         </div>
         

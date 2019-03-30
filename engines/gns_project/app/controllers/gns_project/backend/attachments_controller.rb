@@ -1,7 +1,7 @@
 module GnsProject
   module Backend
     class AttachmentsController < GnsCore::Backend::BackendController
-      before_action :set_attachment, only: [:show, :edit, :update, :destroy]
+      before_action :set_attachment, only: [:edit, :update, :destroy]
       
       def history
         render layout: nil
@@ -11,10 +11,15 @@ module GnsProject
       #def index
       #  @attachments = Attachment.all
       #end
-      #
-      ## GET /attachments/1
-      #def show
-      #end
+      
+      # GET /attachments/1
+      def show
+        @attachment = Attachment.new
+      end
+      
+      def logs
+        render layout: nil
+      end
       #
       ## GET /attachments/new
       #def new

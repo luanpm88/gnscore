@@ -1,5 +1,5 @@
 <% content_for :title do %>
-    New Contact Person
+    Add New Contact Person
 <% end %>
 
 <% content_for :breadcrumb do %>
@@ -21,7 +21,7 @@
                 var form = $(this);
                 
                 // clear modal before ajax run
-                contact_modal.clear();
+                subcontact_modal.clear();
                 
                 $.ajax({
                     url: form.attr('action'),
@@ -29,8 +29,8 @@
                     data: form.serialize() + '&layout=modal',
                 }).done(function(response) {
                     // do something
-                    if (typeof(newContactCallback) !== 'undefined') {
-                        newContactCallback(response);
+                    if (typeof(newSubContactCallback) !== 'undefined') {
+                        newSubContactCallback(response);
                     }
                 });
                 
@@ -56,13 +56,18 @@
                 <div class="header-elements">
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="collapse"></a>
-                        <a class="list-icons-item" data-action="remove"></a>
                     </div>
                 </div>
             </div>
 
             <div class="card-body">
-                <%= render 'subcontact_form', contact: @contact %>
+                <%= form_for(@contact, url: gns_contact.subcontact_create_backend_contacts_path, html: {multipart: true}) do |f| %>
+                    <%= render 'subcontact_form', contact: @contact %>
+                    <hr class="mt-0">
+                    <div class="text-left">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                <% end %>
             </div>
         </div>
         
