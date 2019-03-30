@@ -1,3 +1,4 @@
+
 <% content_for :title do %>
     Show Project
 <% end %>
@@ -63,14 +64,27 @@
 
 <%= render "general_infomation" %>
 
+<% if false %>
+    <div class="card">
+        <%= render "menu_tab", title: 'Attachment' %>
+        
+        <div class="card-body">
+            <div class="text-right">
+                <a href="#" class="btn btn-light mr-3"><i class="icon-download4 mr-2"></i> Download All</a>
+            </div>
+        </div>
+        
+        <div class="task-attachment-list" style="position: relative; min-height: 130px"></div>
+    </div>
+<% end %>
+
 <div class="card">
+          
     <%= render "menu_tab", title: 'Attachment' %>
     
     <div class="card-body">
-        <div class="text-right">
-            <a href="#" class="btn btn-light mr-3"><i class="icon-download4 mr-2"></i> Download All</a>
+        <div class="alert alert-info">
+            Coming soon!
         </div>
     </div>
-    
-    <div class="task-attachment-list" style="position: relative; min-height: 130px"></div>
 </div>
