@@ -14,6 +14,8 @@
 
 <% content_for :page_script do %>
     <script>
+        var attachment_modal = new gModal({size: 'md'});
+        
         var attachment_list_box = new ajaxBox(
             $('.attachment-list'),
             '<%= gns_project.attachments_backend_tasks_path(@task.id) %>',
@@ -32,6 +34,50 @@
         );
         
         $(function() {
+            $('.add-attachment-button').click(function(e) {
+                e.preventDefault();
+                var button = $(this);
+                
+                attachment_modal.load(button.attr('href'));
+                
+                newAttachmentCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // Hide modal
+                        attachment_modal.hide();
+                        
+                        attachment_list_box.load();
+                    } else {
+                        // validation error
+                        attachment_modal.renderHtml(response);
+                    }
+                };
+            });
+            
+            $(document).on('click', '.edit-attachment-button', function(e) {
+                e.preventDefault();
+                
+                var button = $(this);
+                
+                // load modal
+                attachment_modal.load(button.attr('href'));
+                
+                // after update category event
+                updateAttachmentCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // Hide modal
+                        attachment_modal.hide();
+                        
+                        attachment_list_box.load();
+                    } else {
+                        // validation error
+                        attachment_modal.renderHtml(response);
+                    }
+                }
+            });
+            
+            
             // Danh sach attachment /cac phien ban moi nhat
             attachment_list_box.load();
             
@@ -51,7 +97,8 @@
     <div class="card-header bg-white header-elements-inline">
         <h6 class="card-title">Attachment list</h6>
         <div class="header-elements">
-            <a href="#" class="btn bg-blue-600 mr-3">
+            <a href="<%= gns_project.new_backend_attachment_path %>"
+                class="btn bg-blue-600 mr-3 add-attachment-button">
                 <i class="icon-upload4 mr-2"></i> Upload File
             </a>
             

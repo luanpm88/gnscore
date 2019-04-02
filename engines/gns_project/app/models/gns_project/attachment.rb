@@ -2,6 +2,6 @@ module GnsProject
   class Attachment < ApplicationRecord
     belongs_to :task
     
-    validates :file, :presence => true
+    validates :name, :presence => true
   end
 end

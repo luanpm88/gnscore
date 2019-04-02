@@ -2,7 +2,7 @@ module GnsProject
   module Backend
     class TasksController < GnsCore::Backend::BackendController
       before_action :set_task, only: [:show, :edit, :update, :destroy,
-                                      :reopen, :close, :attachments]
+                                      :reopen, :close, :finish, :unfinish, :attachments]
   
       # GET /tasks
       def index

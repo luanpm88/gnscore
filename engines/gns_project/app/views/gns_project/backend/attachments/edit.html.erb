@@ -1,6 +1,69 @@
-<h1>Editing Attachment</h1>
+<% content_for :title do %>
+    Edit Attachment
+<% end %>
 
-<%= render 'form', attachment: @attachment %>
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+    <a href="<%= gns_project.backend_attachments_path %>" class="breadcrumb-item">Project attachments</a>
+    <span class="breadcrumb-item active">Edit</span>
+<% end %>
 
-<%= link_to 'Show', @attachment %> |
-<%= link_to 'Back', attachments_path %>
+<% content_for :page_title do %>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Attachment</span> - <%= @attachment.name %></h4>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        $(document).ready(function() {
+            $('.edit_attachment').submit(function(e) {
+                e.preventDefault();
+                
+                var form = $(this);
+                
+                // clear modal before ajax running
+                attachment_modal.clear();
+                
+                $.ajax({
+                    url: form.attr('action'),
+                    method: form.attr('method'),
+                    data: form.serialize() + '&layout=modal',
+                }).done(function(response) {
+                    // do something
+                    if (typeof(updateAttachmentCallback) !== 'undefined') {
+                        updateAttachmentCallback(response);
+                    }
+                });
+                
+                return false;
+            });
+        });
+    </script>
+<% end %>
+
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        
+        <% if @attachment.errors.any? %>
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                <span class="font-weight-semibold">Oh snap!</span> Check a few things up (below) and try submitting again.
+            </div>
+        <% end %>
+        
+        <div class="card">
+            <div class="card-header header-elements-inline">
+                <h5 class="card-title">Details</h5>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <%= render 'form', attachment: @attachment %>
+            </div>
+        </div>
+        
+    </div>
+</div>
