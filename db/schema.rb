@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_29_095941) do
+ActiveRecord::Schema.define(version: 2019_04_02_030903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -135,6 +135,19 @@ ActiveRecord::Schema.define(version: 2019_03_29_095941) do
     t.index ["creator_id"], name: "index_gns_project_categories_on_creator_id"
   end
 
+  create_table "gns_project_logs", force: :cascade do |t|
+    t.bigint "project_id"
+    t.string "class_name"
+    t.string "phrase"
+    t.text "data"
+    t.text "remark"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_gns_project_logs_on_project_id"
+    t.index ["user_id"], name: "index_gns_project_logs_on_user_id"
+  end
+
   create_table "gns_project_projects", force: :cascade do |t|
     t.string "code"
     t.string "name"
@@ -174,7 +187,7 @@ ActiveRecord::Schema.define(version: 2019_03_29_095941) do
     t.datetime "start_date"
     t.datetime "end_date"
     t.string "status"
-    t.boolean "finished"
+    t.boolean "finished", default: false
     t.index ["employee_id"], name: "index_gns_project_tasks_on_employee_id"
     t.index ["project_id"], name: "index_gns_project_tasks_on_project_id"
     t.index ["stage_id"], name: "index_gns_project_tasks_on_stage_id"
