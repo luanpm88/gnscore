@@ -22,6 +22,10 @@
     <script>
         // global modal
         var show_task_modal = new gModal();
+        var finish_task_modal = new gModal({size: 'md'});
+        var unfinish_task_modal = new gModal({size: 'md'});
+        var close_task_modal = new gModal({size: 'md'});
+        var reopen_task_modal = new gModal({size: 'md'});
         
         // tab attachment -> danh sach cac task
         var task_attachment_list_box = new ajaxBox(
@@ -29,7 +33,7 @@
             '<%= gns_project.task_attachment_backend_projects_path(@project.id) %>',
             function(box) {
                 // apply g-link
-                new gLink(box.find('.delete-task-button, .close-task-button, .reopen-task-button, .finish-task-button, .unfinish-task-button'), function(link) {
+                new gLink(box.find('.delete-task-button'), function(link) {
                     task_attachment_list_box.load();
                 });
             }
@@ -42,22 +46,33 @@
                 show_task_modal.load($(this).attr('href'));
             });
             
+            $(document).on('click', '.finish-task-button', function(e) {
+                e.preventDefault();
+                
+                finish_task_modal.load($(this).attr('href'));
+            });
+            
+            $(document).on('click', '.unfinish-task-button', function(e) {
+                e.preventDefault();
+                
+                unfinish_task_modal.load($(this).attr('href'));
+            });
+            
+            $(document).on('click', '.close-task-button', function(e) {
+                e.preventDefault();
+                
+                close_task_modal.load($(this).attr('href'));
+            });
+            
+            $(document).on('click', '.reopen-task-button', function(e) {
+                e.preventDefault();
+                
+                reopen_task_modal.load($(this).attr('href'));
+            });
+            
             // ajax box task attachment list
             task_attachment_list_box.load();
         });
-        
-        //var history_task_attachment_modal = new gModal();
-        //$(function() {
-        //    $(document).on('click', '.history-attachment-list-button', function(e) {
-        //        e.preventDefault();
-        //        
-        //        history_task_attachment_modal.load($(this).attr('href'));
-        //    });
-        //    
-        //    // ajax box task list
-        //    //task_list_box.load();
-        //    //attachment_list_box.load();
-        //});
     </script>
 <% end %>
 

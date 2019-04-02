@@ -2,7 +2,8 @@ module GnsProject
   module Backend
     class TasksController < GnsCore::Backend::BackendController
       before_action :set_task, only: [:show, :edit, :update, :destroy,
-                                      :reopen, :close, :finish, :unfinish, :attachments]
+                                      :reopen, :close, :finish, :unfinish,
+                                      :attachments]
   
       # GET /tasks
       def index
@@ -71,42 +72,86 @@ module GnsProject
       
       # Re-open action
       def reopen
-        @task.set_open
+        remark = params[:remark]
         
-        render json: {
-          status: 'success',
-          message: 'The task was successfully reopened.',
-        }
+        if request.post?
+          if !remark.present?
+            @task.errors.add('remark', "not be blank")
+          end
+          
+          if @task.errors.empty?
+            @task.set_open
+            @task.log("gns_project.log.task.reopen", current_user, remark)
+            
+            render json: {
+              status: 'success',
+              message: 'The task was successfully reopened.',
+            }
+          end
+        end
       end
       
       # Close action
       def close
-        @task.set_closed
+        remark = params[:remark]
         
-        render json: {
-          status: 'success',
-          message: 'The task has been successfully closed.',
-        }
+        if request.post?
+          if !remark.present?
+            @task.errors.add('remark', "not be blank")
+          end
+          
+          if @task.errors.empty?
+            @task.set_closed
+            @task.log("gns_project.log.task.close", current_user, remark)
+            
+            render json: {
+              status: 'success',
+              message: 'The task has been successfully closed.',
+            }
+          end
+        end
       end
       
       # Finish action
       def finish
-        @task.finish
+        remark = params[:remark]
         
-        render json: {
-          status: 'success',
-          message: 'The task has been finished.',
-        }
+        if request.post?
+          if !remark.present?
+            @task.errors.add('remark', "not be blank")
+          end
+          
+          if @task.errors.empty?
+            @task.finish
+            @task.log("gns_project.log.task.finish", current_user, remark)
+            
+            render json: {
+              status: 'success',
+              message: 'The task has been finished.',
+            }
+          end
+        end
       end
       
       # Close action
       def unfinish
-        @task.unfinish
+        remark = params[:remark]
         
-        render json: {
-          status: 'success',
-          message: 'The task has been unfinished.',
-        }
+        if request.post?
+          if !remark.present?
+            @task.errors.add('remark', "not be blank")
+          end
+          
+          if @task.errors.empty?
+            @task.unfinish
+            @task.log("gns_project.log.task.unfinish", current_user, remark)
+            
+            render json: {
+              status: 'success',
+              message: 'The task has been unfinished.',
+            }
+          end
+        end
       end
   
       private

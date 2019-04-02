@@ -77,15 +77,13 @@
                                     <div class="dropdown-divider"></div>
                                     
                                     <a href="<%= gns_project.finish_backend_tasks_path(id: task) %>"
-                                        class="dropdown-item ajax finish-task-button"
-                                        data-method="PUT"
-                                        data-confirm="You are about to finish a task"
+                                        class="dropdown-item finish-task-button"
                                     >
                                         <i class="icon-checkmark3"></i> Finish Task
                                     </a>
                                     
                                     <a href="<%= gns_project.unfinish_backend_tasks_path(id: task) %>"
-                                        class="dropdown-item ajax unfinish-task-button"
+                                        class="dropdown-item unfinish-task-button"
                                         data-method="PUT"
                                         data-confirm="You are about to un-finish a task"
                                     >
@@ -93,7 +91,7 @@
                                     </a>
                                     
                                     <a href="<%= gns_project.close_backend_tasks_path(id: task) %>"
-                                        class="dropdown-item ajax close-task-button"
+                                        class="dropdown-item close-task-button"
                                         data-method="PUT"
                                         data-confirm="You are about to close a task"
                                     >
@@ -101,7 +99,7 @@
                                     </a>
                                     
                                     <a href="<%= gns_project.reopen_backend_tasks_path(id: task) %>"
-                                        class="dropdown-item ajax reopen-task-button"
+                                        class="dropdown-item reopen-task-button"
                                         data-method="PUT"
                                         data-confirm="You are about to reopen a task"
                                     >

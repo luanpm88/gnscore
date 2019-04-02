@@ -23,11 +23,15 @@ GnsProject::Engine.routes.draw do
         resources :tasks do
             collection do
                 get 'select2'
-                put 'reopen'
-                put 'close'
-                put 'finish'
-                put 'unfinish'
                 get ':id/attachments', to: 'tasks#attachments', as: 'attachments'
+                get 'reopen'
+                post 'reopen'
+                get 'close'
+                post 'close'
+                get 'finish'
+                post 'finish'
+                get 'unfinish'
+                post 'unfinish'
             end
         end
         resources :attachments do

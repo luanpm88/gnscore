@@ -71,5 +71,9 @@ module GnsProject
     def unfinish
 			update_attributes(finished: false)
 		end
+    
+    def log(phrase, user, remark)
+      GnsProject::Log::log(phrase, self, user, remark)
+    end
   end
 end

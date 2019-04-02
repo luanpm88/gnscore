@@ -1,0 +1,57 @@
+<% content_for :title do %>
+    Re-open Task - <%= @task.name %>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        $(document).ready(function() {
+            $('.reopen_task').submit(function(e) {
+                e.preventDefault();                
+                var form = $(this);
+                
+                // clear modal
+                reopen_task_modal.clear();
+                
+                $.ajax({
+                    url: form.attr('action'),
+                    method: form.attr('method'),
+                    data: form.serialize() + '&layout=modal',
+                }).done(function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                      showNotification(response.status, response.message);
+                      reopen_task_modal.hide();
+                      // load task list
+                      task_list_box.load();
+                    } else {
+                      reopen_task_modal.renderHtml(response);
+                    }
+                });
+                
+                return false;
+            });
+        });
+    </script>
+<% end %>
+
+<div class="card">
+    <div class="card-body">
+        <%= form_for '', url: gns_project.reopen_backend_tasks_path(id: @task.id), html: {multipart: false, class: 'reopen_task'} do |f| %>
+            <h5>Do you want to reopen this task?</h5>
+            
+            <div class="form-group">
+                <textarea rows="2" cols="5"
+                    class="form-control <%= 'border-danger' if @task.errors.full_messages_for(:remark).present? %>"
+                    placeholder="Enter your remark here"
+                    name="remark"
+                ></textarea>
+                <% if @task.errors.full_messages_for(:remark).present? %>
+                    <span class="form-text text-danger"><%= @task.errors.full_messages_for(:remark).join('<br/>').html_safe %></span>
+                <% end %>
+            </div>
+            
+            <div class="text-left">
+                <button type="submit" class="btn btn-primary">Re-open Confirm</button>
+            </div>
+        <% end %>
+    </div>
+</div>
