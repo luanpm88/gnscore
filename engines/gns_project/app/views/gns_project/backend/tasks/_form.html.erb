@@ -6,7 +6,7 @@
             <label class="d-block">Stage <span class="text-danger">*</span></label>
             <select name="task[stage_id]" data-placeholder="Select stage..."
                 class="form-control select-ajax"
-                data-url="<%= gns_project.select2_backend_stages_path %>"
+                data-url="<%= gns_project.select2_backend_stages_path(category_id: @task.project.category_id) %>"
                 data-container-css-class="font-weight-semibold <%= 'border-danger' if task.errors.full_messages_for(:stage_id).present? %>"
             >
                 <option value="<%= task.stage_id %>"><%= task.stage_name %></option>
