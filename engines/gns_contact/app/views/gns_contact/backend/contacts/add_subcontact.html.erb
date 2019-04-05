@@ -47,7 +47,7 @@
                         <div class="col-md-10">
                             <div class="form-group mb-0">
                                 <select class="form-control select-ajax"
-                                    data-container-css-class="font-weight-semibold"
+                                    data-container-css-class="font-weight-semibold <%= 'border-danger' if @child_contact.errors.full_messages_for(:contact_id).present? %>"
                                     data-placeholder="Choose contact person (sub-contact)"
                                     data-url="<%= gns_contact.select2_backend_contacts_path(exclude_self_children_of_contact_id: @contact.id) %>"
                                     name="contact_id"

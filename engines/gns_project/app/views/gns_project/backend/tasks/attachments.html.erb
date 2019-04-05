@@ -1,47 +1,148 @@
-<table class="table">
-    <thead>
-        <tr class="alpha-primary">
-            <th>No.</th>
-            <th>Attached File</th>
-            <th>Size</th>
-            <th>Upload Date</th>
-            <th class="text-center" style="width: 100px;">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% (1..3).each_with_index do |attach,index| %>
-            <tr>
-                <td><%= index + 1 %></td>
-                <td>Bản vẽ số <%= index + 1 %></td>
-                <td><%= '15KB' %></td>
-                <td><%= Time.now.strftime("%d/%m/%Y") %></td>
-                <td class="text-center">
-                    <div class="list-icons">
-                        <a class="list-icons-item mr-2" title="Insert below"
-                            href="#">
-                            <i class="icon-plus-circle2"></i>
-                        </a>
+<% content_for :title do %>
+    Task Attachments
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+    <a href="<%= gns_project.backend_tasks_path %>" class="breadcrumb-item">Tasks</a>
+    <span class="breadcrumb-item active">Attachments</span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Task</span> - <%= @task.name %> - Attachments</h4>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        var attachment_modal = new gModal({size: 'md'});
+        
+        var attachment_list_box = new ajaxBox(
+            $('.attachments-list'),
+            '<%= gns_project.attachments_list_backend_tasks_path(@task.id) %>',
+            function(box) {
+                // apply g-link
+                new gLink(box.find('.remove-attachment-button, .insert-bellow-attachment-button, .download_attachment-button'), function(link) {
+                    attachment_list_box.load();
+                });
+            }
+        );
+        
+        var attachment_logs_modal = new gModal();
+        var attachment_logs_list_box = new ajaxBox(
+            $('.attachment-logs-list'),
+            '<%= gns_project.logs_backend_attachments_path(1) %>'
+        );
+        
+        $(function() {
+            $('.add-attachment-button').click(function(e) {
+                e.preventDefault();
+                var button = $(this);
+                
+                attachment_modal.load(button.attr('href'));
+                
+                newAttachmentCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // Hide modal
+                        attachment_modal.hide();
                         
-                        <a class="list-icons-item" title="Download attachment"
-                           href="#">
-                            <i class="icon-download"></i>
-                        </a>
-    
-                        <a class="list-icons-item ajax" title="Remove attachment"
-                            href="#"
-                            data-method="DELETE"
-                            data-confirm="You are about to delete a file"
-                        >
-                            <i class="icon-bin"></i>
-                        </a>
+                        attachment_list_box.load();
+                    } else {
+                        // validation error
+                        attachment_modal.renderHtml(response);
+                    }
+                };
+            });
+            
+            $(document).on('click', '.edit-attachment-button', function(e) {
+                e.preventDefault();
+                
+                var button = $(this);
+                
+                // load modal
+                attachment_modal.load(button.attr('href'));
+                
+                // after update category event
+                updateAttachmentCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // Hide modal
+                        attachment_modal.hide();
                         
-                        <a class="list-icons-item attachment-logs-list-button" title="History (Logs)"
-                           href="<%= gns_project.backend_attachment_path %>">
-                            <i class="icon-history"></i>
-                        </a>
-                    </div>
-                </td>
-            </tr>
-        <% end %>
-    </tbody>
-</table>
+                        attachment_list_box.load();
+                    } else {
+                        // validation error
+                        attachment_modal.renderHtml(response);
+                    }
+                }
+            });
+            
+            
+            // Danh sach attachment /cac phien ban moi nhat
+            attachment_list_box.load();
+            
+            $(document).on('click', '.attachment-logs-list-button', function(e) {
+                e.preventDefault();
+                
+                attachment_logs_modal.load($(this).attr('href'));
+            });
+            
+            // Danh sach attachment /nhat ky tat ca phien ban
+            //attachment_logs_list_box.load();
+        });
+    </script>
+<% end %>
+
+<div class="card">
+    <div class="card-header bg-white header-elements-inline">
+        <h6 class="card-title">Attachment list</h6>
+        <div class="header-elements">
+            <a href="<%= gns_project.new_backend_attachment_path(task_id: @task.id) %>"
+                class="btn bg-blue-600 mr-3 add-attachment-button">
+                <i class="icon-upload4 mr-2"></i> Upload File
+            </a>
+            
+            <% if @task.count_attachments > 0 %>
+                <a class="btn btn-light mr-3" href="<%= gns_project.download_attachments_backend_tasks_path(task_id: @task.id) %>">
+                    <i class="icon-download4 mr-2"></i> Download All
+                </a>
+            <% end %>
+            
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-blocks">Stage</label>
+                    <select name="stage_id" data-placeholder="Filter by stage..."
+                        class="form-control select-ajax"
+                        data-url="<%= gns_project.select2_backend_stages_path %>"
+                        data-container-css-class="font-weight-semibold"
+                    >
+                        <option value="<%= @task.stage_id %>"><%= @task.stage_name %></option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-blocks">Task Description</label>
+                    <select name="stage_id" data-placeholder="Filter by stage..."
+                        class="form-control select-ajax"
+                        data-url="<%= gns_project.select2_backend_tasks_path %>"
+                        data-container-css-class="font-weight-semibold"
+                    >
+                        <option value="<%= @task.id %>"><%= @task.name %></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="attachments-list">
+            
+        </div>
+    </div>
+</div>

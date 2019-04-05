@@ -17,6 +17,11 @@ module GnsProject
         query = query.where('LOWER(gns_project_stages.name) LIKE ?', '%'+params[:q].to_ascii.strip.downcase+'%')
       end
       
+      # category
+      if params[:category_id].present?
+        query = query.where(category_id: params[:category_id])
+      end
+      
       # pagination
       page = params[:page].to_i if params[:page].present?
       query = query.limit(per_page).offset(per_page*(page-1))      

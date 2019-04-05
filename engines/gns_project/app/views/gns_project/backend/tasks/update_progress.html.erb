@@ -1,0 +1,69 @@
+<% content_for :title do %>
+    Progress Update - <%= @task.name %>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        $(document).ready(function() {
+            $('.update_progress_task').submit(function(e) {
+                e.preventDefault();                
+                var form = $(this);
+                
+                // clear modal
+                update_progress_task_modal.clear();
+                
+                $.ajax({
+                    url: form.attr('action'),
+                    method: form.attr('method'),
+                    data: form.serialize() + '&layout=modal',
+                }).done(function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                      showNotification(response.status, response.message);
+                      update_progress_task_modal.hide();
+                      // load task list
+                      task_list_box.load();
+                    } else {
+                      update_progress_task_modal.renderHtml(response);
+                    }
+                });
+                
+                return false;
+            });
+        });
+    </script>
+<% end %>
+
+<div class="card">
+    <div class="card-body">
+        <%= form_for '', url: gns_project.update_progress_backend_tasks_path(id: @task.id), html: {multipart: false, class: 'update_progress_task'} do |f| %>
+            
+            <div class="form-group">
+                <label class="d-block">Progress Complete <span class="text-danger">*</span></label>
+                <input type="text" class="form-control font-weight-semibold <%= 'border-danger' if @task.errors.full_messages_for(:progress).present? %>"
+                    placeholder="Enter the percentage of progress completed"
+                    name="progress"
+                    value="<%= @task.progress %>"
+                >
+                <% if @task.errors.full_messages_for(:progress).present? %>
+                    <span class="form-text text-danger"><%= @task.errors.full_messages_for(:progress).join('<br/>').html_safe %></span>
+                <% end %>
+            </div>
+            
+            <div class="form-group">
+                <label class="d-block">Remark <span class="text-danger">*</span></label>
+                <textarea rows="2" cols="5"
+                    class="form-control font-weight-semibold <%= 'border-danger' if @task.errors.full_messages_for(:remark).present? %>"
+                    placeholder="Enter your remark here"
+                    name="remark"
+                ></textarea>
+                <% if @task.errors.full_messages_for(:remark).present? %>
+                    <span class="form-text text-danger"><%= @task.errors.full_messages_for(:remark).join('<br/>').html_safe %></span>
+                <% end %>
+            </div>
+            
+            <div class="text-left">
+                <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+        <% end %>
+    </div>
+</div>

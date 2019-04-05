@@ -19,6 +19,11 @@ module GnsProject
       employee.present? ? employee.full_name : ''
     end
     
+    # count attachments
+    def count_attachments
+      self.attachments.count
+    end
+    
     # get select2 records
     def self.select2(params)
       per_page = 10
@@ -71,5 +76,9 @@ module GnsProject
     def unfinish
 			update_attributes(finished: false)
 		end
+    
+    def log(phrase, user, remark)
+      GnsProject::Log.add_new(self.project, phrase, self, user, remark)
+    end
   end
 end
