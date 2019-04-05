@@ -33,6 +33,7 @@ module GnsProject
         @project = Project.new(project_params)
         
         @project.creator = current_user
+        @project.status = Project::STATUS_NEW
   
         if @project.save
           flash[:success] = 'Project was successfully created.'

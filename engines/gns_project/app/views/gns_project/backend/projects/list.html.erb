@@ -76,7 +76,7 @@
                 <% end %>
                 <% if params["show_columns"].include?("status") %>
                     <td>
-                        <span class="badge badge-success">Active</span>
+                        <span class="badge badge-<%= project.status %>"><%= t project.status %></span>
                     </td>
                 <% end %>
                 <% if params["show_columns"].include?("created_at") %>
