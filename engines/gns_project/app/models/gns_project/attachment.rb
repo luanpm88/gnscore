@@ -1,8 +1,13 @@
 module GnsProject
   class Attachment < ApplicationRecord
-    belongs_to :task
+    belongs_to :task, class_name: 'GnsProject::Task'
     
     validates :name, :presence => true
+    
+    # get task name
+    def task_name
+      task.present? ? task.name : ''
+    end
     
     def self.upload_dir
       return Rails.root.join('storage', 'uploads', 'gns_project', 'attachments')
@@ -33,6 +38,11 @@ module GnsProject
     
     def file_path
       "#{Attachment.upload_dir}/#{self.file}"
+    end
+    
+    # add log
+    def log(phrase, user, remark=nil)
+      GnsProject::Log.add_new(self.task.project, phrase, self, user, remark)
     end
   end
 end

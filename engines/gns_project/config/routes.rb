@@ -42,6 +42,7 @@ GnsProject::Engine.routes.draw do
         resources :attachments do
             collection do
                 get ':id/logs', to: 'attachments#logs', as: 'logs'
+                get ':id/logs_list', to: 'attachments#logs_list', as: 'logs_list'
                 get ':id/download', to: 'attachments#download', as: 'download'
             end
         end

@@ -1,31 +1,62 @@
-<table class="table">
-    <thead>
-        <tr class="alpha-primary">
-            <th>No.</th>
-            <th>Document</th>
-            <th>Update Date</th>
-            <th>Change Description</th>
-            <th>Changed By</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <% (1..3).each_with_index do |history,index| %>
-            <tr>
-                <td><%= index + 1 %></td>
-                <td>Bản vẽ số 1</td>
-                <td><%= Time.now.strftime("%d/%m/%Y") %></td>
-                <td>Chinh noi dung A</td>
-                <td>Nguyen Van A</td>
-                <td>
-                    <div class="list-icons">                        
-                        <a class="list-icons-item" title="Download attachment"
-                           href="#">
-                            <i class="icon-download"></i>
-                        </a>
+<% content_for :title do %>
+    Attachment Logs
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+    <a href="<%= gns_project.backend_tasks_path %>" class="breadcrumb-item">Attachments</a>
+    <span class="breadcrumb-item active">Show</span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Attachment</span></h4>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        var attachment_logs_list_box = new ajaxBox(
+            $('.attachment-logs-list'),
+            '<%= gns_project.logs_list_backend_attachments_path(params[:attachment_id]) %>'
+        );
+        
+        $(function() {            
+            // Danh sach attachment /nhat ky tat ca phien ban
+            attachment_logs_list_box.load();
+        });
+    </script>
+<% end %>
+
+<div class="card">
+    <div class="card-header bg-white header-elements-inline">
+        <h6 class="card-title">Details</h6>
+        <div class="header-elements">            
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-blocks">Task Description</label>
+                    <div class="form-control" data-container-css-class="font-weight-semibold">
+                        <%= @attachment.task_name %>
                     </div>
-                </td>
-            </tr>
-        <% end %>
-    </tbody>
-</table>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-blocks">Document Name</label>
+                    <div class="form-control" data-container-css-class="font-weight-semibold">
+                        <%= @attachment.name %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="attachment-logs-list">
+            
+        </div>
+    </div>
+</div>
