@@ -14,6 +14,13 @@ GnsCore::Engine.routes.draw do
     namespace :backend, module: "backend", path: "backend/system" do
         resources :users do
             collection do
+                post 'list'
+                get 'select2'
+            end
+        end
+        resources :roles do
+            collection do
+                post 'list'
                 get 'select2'
             end
         end

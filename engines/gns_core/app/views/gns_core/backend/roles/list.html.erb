@@ -1,0 +1,62 @@
+<table class="table table-hover">
+    <thead>
+        <tr class="bg-info-700">
+            <th>Name</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th class="text-right">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @roles.each do |role| %>
+            <tr>
+                <td><%= role.name %></td>
+                <td>
+                    <span class="badge badge-success">Active</span>
+                </td>
+                <td title="<%= role.created_at.strftime("%d/%m/%Y - %T") %>">
+                    <%= role.created_at.strftime("%d/%m/%Y") %>
+                </td>
+                <td class="text-right">
+                    <div class="list-icons">
+                        <div class="dropdown">
+                            <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                <i class="icon-menu9"></i>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item edit-role-button"
+                                    href="<%= gns_core.edit_backend_role_path(role) %>">
+                                    <i class="icon-pencil7"></i> Update
+                                </a>
+                                <a class="dropdown-item"
+                                    href="<%= gns_core.backend_role_path(role) %>">
+                                    <i class="icon-gear"></i> Policy Setting
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item ajax datalist-g-link"
+                                    href="<%= gns_core.backend_role_path(role) %>"
+                                    data-method="DELETE"
+                                    data-confirm="You are about to delete a role"
+                                >
+                                    <i class="icon-bin"></i> Delete
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<div class="pagination-area">
+    <div class="page_entries_info">
+        <!-- Showing 1 to 10 of 19 entries -->
+        <%= page_entries_info @roles %>
+    </div>
+
+    <div class="pagination_style paging_simple_numbers">
+        <%= will_paginate @roles, previous_label: 'Prev'.html_safe, next_label: 'Next'.html_safe, renderer: BootstrapPagination::Rails, class: 'align-self-center' %>
+    </div>
+</div>
