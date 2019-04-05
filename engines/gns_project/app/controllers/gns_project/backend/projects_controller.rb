@@ -1,7 +1,7 @@
 module GnsProject
   module Backend
     class ProjectsController < GnsCore::Backend::BackendController
-      before_action :set_project, only: [:show, :edit, :update, :destroy,
+      before_action :set_project, only: [:download_attachments, :show, :edit, :update, :destroy,
                                          :attachments, :task_planning, :task_attachment]
   
       # GET /projects
@@ -99,6 +99,29 @@ module GnsProject
       end
       
       def attachments
+      end
+      
+      def download_attachments
+        filename = "#{@project.code}.zip"
+        t = Tempfile.new(filename)
+        # Give the path of the temp file to the zip outputstream, it won't try to open it as an archive.
+        Zip::OutputStream.open(t.path) do |zos|
+          @project.tasks.each do |task|
+            task.attachments.each do |att|
+              file = File.read(att.file_path)
+              # Create a new entry with some arbitrary name
+              zos.put_next_entry(task.stage.name + '/' + task.name + '/' + att.original_name)
+              # Add the contents of the file, don't read the stuff linewise if its binary, instead use direct IO
+              zos.puts file
+            end
+          end
+        end
+        
+        # End of the block  automatically closes the file.
+        # Send it using the right mime type, with a download window and some nice file name.
+        send_file t.path, :type => 'application/zip', :disposition => 'attachment', :filename => "#{@project.code}.zip"
+        # The temp file will be deleted some time...
+        t.close
       end
   
       private

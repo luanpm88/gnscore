@@ -97,7 +97,7 @@
     <div class="card-header bg-white header-elements-inline">
         <h6 class="card-title">Attachment list</h6>
         <div class="header-elements">
-            <a href="<%= gns_project.new_backend_attachment_path %>"
+            <a href="<%= gns_project.new_backend_attachment_path(task_id: @task.id) %>"
                 class="btn bg-blue-600 mr-3 add-attachment-button">
                 <i class="icon-upload4 mr-2"></i> Upload File
             </a>

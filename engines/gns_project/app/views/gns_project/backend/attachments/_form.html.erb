@@ -1,6 +1,6 @@
 <%= form_for([gns_project, :backend, attachment], html: {multipart: true}) do |f| %>
     <fieldset>
-        <input type="hidden" name="attachment[task_id]" value="5">
+        <input type="hidden" name="attachment[task_id]" value="<%= params[:task_id] %>">
         <div class="form-group">
             <label class="d-block font-weight-semibold">Document Name <span class="text-danger">*</span></label>
             <input type="text" class="form-control <%= 'border-danger' if attachment.errors.full_messages_for(:name).present? %>" placeholder="Enter name"

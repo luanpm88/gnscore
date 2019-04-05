@@ -32,4 +32,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'devise'
   spec.add_dependency 'unidecoder'
   spec.add_dependency 'roo'
+  spec.add_dependency 'rubyzip'
 end

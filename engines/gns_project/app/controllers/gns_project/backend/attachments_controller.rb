@@ -1,7 +1,7 @@
 module GnsProject
   module Backend
     class AttachmentsController < GnsCore::Backend::BackendController
-      before_action :set_attachment, only: [:edit, :update, :destroy]
+      before_action :set_attachment, only: [:download, :edit, :update, :destroy]
       
       def history
         render layout: nil
@@ -34,63 +34,30 @@ module GnsProject
       def create
         @attachment = Attachment.new(attachment_params)
         
-        uploaded_io = params[:attachment][:file]
-        readfile = uploaded_io.read
-        
         if @attachment.save
-          # md5 attachmentID
-          attachment_id = Digest::MD5.hexdigest(@attachment.id.to_s)
+          @attachment.upload(params[:attachment][:file])
           
-          # check the directory
-          dir = Rails.root.join('storage', 'uploads', 'gns_project', 'attachements', attachment_id)
-          Dir.mkdir(dir) unless Dir.exist?(dir)
-          
-          # file path
-          path = dir.join(Digest::MD5.hexdigest(readfile) + '_' + uploaded_io.original_filename)
-          
-          if @attachment.update_attributes(file: path)
-            # write file
-            File.open(path, "wb") do |file|
-              file.write(readfile)
-            end
-            
-            render json: {
-              status: 'success',
-              message: 'Attachment was successfully uploaded.',
-            }
-          end
+          render json: {
+            status: 'success',
+            message: 'Attachment was successfully uploaded.',
+          }
         else
+          logger.info @attachment.errors.to_json
+          logger.info '=========================='
           render :new
         end
       end
       
       # PATCH/PUT /attachments/1
       def update
-        uploaded_io = params[:attachment][:file]
-        readfile = uploaded_io.read
-        
-        # md5 attachmentID
-        attachment_id = Digest::MD5.hexdigest(@attachment.id.to_s)
-        
-        # check the directory
-        dir = Rails.root.join('storage', 'uploads', 'gns_project', 'attachements', attachment_id)
-        Dir.mkdir(dir) unless Dir.exist?(dir)
-        
-        # file path
-        path = dir.join(Digest::MD5.hexdigest(readfile) + '_' + uploaded_io.original_filename)
-        
-        @attachment.file = path
-        # Check nếu đường dẫn file đã tồn tại thì không cho lưu nữa
         if @attachment.update(attachment_params)
-            # write file
-            File.open(path, "wb") do |file|
-              file.write(readfile)
-            end
-            
-            render json: {
-              status: 'success',
-              message: 'Attachment was successfully uploaded.',
-            }
+          # upload file
+          @attachment.upload(params[:attachment][:file]) 
+          
+          render json: {
+            status: 'success',
+            message: 'Attachment was successfully uploaded.',
+          }
         else
           render :edit
         end
@@ -101,6 +68,19 @@ module GnsProject
       #  @attachment.destroy
       #  redirect_to attachments_url, notice: 'Attachment was successfully destroyed.'
       #end
+      
+      def download
+        send_file(
+          @attachment.file_path,
+          filename: @attachment.original_name
+        )
+      end
+      
+      def log_download
+        @log = Log.find(params[:att_log_id]);
+        "#{@log.getData['upload_dir']}/#{@log.getData['file']}",
+          filename: @attachment.original_name
+      end
   
       private
         # Use callbacks to share common setup or constraints between actions.

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_02_030903) do
+ActiveRecord::Schema.define(version: 2019_04_05_020352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,6 +121,10 @@ ActiveRecord::Schema.define(version: 2019_04_02_030903) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.string "extension"
+    t.float "size"
+    t.string "original_name"
+    t.datetime "uploaded_at"
     t.index ["task_id"], name: "index_gns_project_attachments_on_task_id"
   end
 

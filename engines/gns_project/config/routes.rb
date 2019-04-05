@@ -6,6 +6,7 @@ GnsProject::Engine.routes.draw do
                 get ':id/attachments', to: 'projects#attachments', as: 'attachments'
                 get ':id/task_planning', to: 'projects#task_planning', as: 'task_planning'
                 get ':id/task_attachment', to: 'projects#task_attachment', as: 'task_attachment'
+                get ':id/download_attachments', to: 'projects#download_attachments', as: 'download_attachments'
             end
         end
         resources :categories do
@@ -37,6 +38,7 @@ GnsProject::Engine.routes.draw do
         resources :attachments do
             collection do
                 get ':id/logs', to: 'attachments#logs', as: 'logs'
+                get ':id/download', to: 'attachments#download', as: 'download'
             end
         end
     end
