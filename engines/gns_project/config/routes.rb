@@ -25,6 +25,7 @@ GnsProject::Engine.routes.draw do
             collection do
                 get 'select2'
                 get ':id/attachments', to: 'tasks#attachments', as: 'attachments'
+                get ':id/attachments_list', to: 'tasks#attachments_list', as: 'attachments_list'
                 get 'reopen'
                 post 'reopen'
                 get 'close'
@@ -33,6 +34,9 @@ GnsProject::Engine.routes.draw do
                 post 'finish'
                 get 'unfinish'
                 post 'unfinish'
+                get 'update_progress'
+                post 'update_progress'
+                get ':id/download_attachments', to: 'tasks#download_attachments', as: 'download_attachments'
             end
         end
         resources :attachments do

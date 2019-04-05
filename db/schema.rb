@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_05_020352) do
+ActiveRecord::Schema.define(version: 2019_04_05_145454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -192,6 +192,8 @@ ActiveRecord::Schema.define(version: 2019_04_05_020352) do
     t.datetime "end_date"
     t.string "status"
     t.boolean "finished", default: false
+    t.float "hours"
+    t.integer "progress", default: 0
     t.index ["employee_id"], name: "index_gns_project_tasks_on_employee_id"
     t.index ["project_id"], name: "index_gns_project_tasks_on_project_id"
     t.index ["stage_id"], name: "index_gns_project_tasks_on_stage_id"

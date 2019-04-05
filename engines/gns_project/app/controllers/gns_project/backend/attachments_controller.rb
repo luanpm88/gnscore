@@ -42,8 +42,6 @@ module GnsProject
             message: 'Attachment was successfully uploaded.',
           }
         else
-          logger.info @attachment.errors.to_json
-          logger.info '=========================='
           render :new
         end
       end
@@ -77,9 +75,9 @@ module GnsProject
       end
       
       def log_download
-        @log = Log.find(params[:att_log_id]);
-        "#{@log.getData['upload_dir']}/#{@log.getData['file']}",
-          filename: @attachment.original_name
+        #@log = Log.find(params[:att_log_id]);
+        #"#{@log.getData['upload_dir']}/#{@log.getData['file']}",
+        #  filename: @attachment.original_name
       end
   
       private

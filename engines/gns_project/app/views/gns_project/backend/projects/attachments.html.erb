@@ -83,7 +83,9 @@
     
     <div class="card-body">
         <div class="text-right">
-            <a href="#" class="btn btn-light mr-3"><i class="icon-download4 mr-2"></i> Download All</a>
+            <a class="btn btn-light mr-3" href="<%= gns_project.download_attachments_backend_projects_path(@project.id) %>">
+                <i class="icon-download4 mr-2"></i> Download All
+            </a>
         </div>
     </div>
     

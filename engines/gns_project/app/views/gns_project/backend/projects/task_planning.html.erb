@@ -30,29 +30,32 @@
                     <td><%= task.start_date.strftime("%d/%m/%Y") if task.start_date.present? %></td>
                     <td><%= task.end_date.strftime("%d/%m/%Y") if task.end_date.present? %></td>
                     <td>
-                        <div class="progress" title="20% Complete">
-                            <div class="progress-bar bg-teal" style="width: 90%">
-                                <span>90%</span>
+                        <a href="<%= gns_project.update_progress_backend_tasks_path(id: task) %>"
+                            class="update-progress-task-button">
+                            <div class="progress" title="<%= task.progress %>% Complete">
+                                <div class="progress-bar bg-teal" style="width: <%= task.progress %>%">
+                                    <span><%= task.progress %>%</span>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </td>
-                    <td></td>
+                    <td><%= task.hours %></td>
                     <td><%= task.employee_name %></td>
                     <td>
                         <span class="badge badge-flat badge-pill badge-<%= task.status %>"><%= t task.status %></span>
                     </td>
                     <td class="text-center">
                         <% if task.finished? %>
-                            <a href="#"
-                                class="check-finished-task-button"
-                                title="Check finished"
+                            <a href="<%= gns_project.unfinish_backend_tasks_path(id: task) %>"
+                                class="unfinish-task-button"
+                                title="Click to un-finish"
                             >
                                 <i class="icon-checkmark-circle text-success"></i>
                             </a>
                         <% else %>
-                            <a href="#"
-                                class="check-finished-task-button"
-                                title="Check finished"
+                            <a href="<%= gns_project.finish_backend_tasks_path(id: task) %>"
+                                class="finish-task-button"
+                                title="Click to finish"
                             >
                                 <i class="icon-cancel-circle2 text-danger"></i>
                             </a>
@@ -77,32 +80,22 @@
                                     <div class="dropdown-divider"></div>
                                     
                                     <a href="<%= gns_project.finish_backend_tasks_path(id: task) %>"
-                                        class="dropdown-item finish-task-button"
-                                    >
+                                        class="dropdown-item finish-task-button">
                                         <i class="icon-checkmark3"></i> Finish Task
                                     </a>
                                     
                                     <a href="<%= gns_project.unfinish_backend_tasks_path(id: task) %>"
-                                        class="dropdown-item unfinish-task-button"
-                                        data-method="PUT"
-                                        data-confirm="You are about to un-finish a task"
-                                    >
+                                        class="dropdown-item unfinish-task-button">
                                         <i class="icon-x"></i> Un-finish Task
                                     </a>
                                     
                                     <a href="<%= gns_project.close_backend_tasks_path(id: task) %>"
-                                        class="dropdown-item close-task-button"
-                                        data-method="PUT"
-                                        data-confirm="You are about to close a task"
-                                    >
+                                        class="dropdown-item close-task-button">
                                         <i class="icon-lock5"></i> Close Task
                                     </a>
                                     
                                     <a href="<%= gns_project.reopen_backend_tasks_path(id: task) %>"
-                                        class="dropdown-item reopen-task-button"
-                                        data-method="PUT"
-                                        data-confirm="You are about to reopen a task"
-                                    >
+                                        class="dropdown-item reopen-task-button">
                                         <i class="icon-rotate-ccw2"></i> Re-open Task
                                     </a>
                                     

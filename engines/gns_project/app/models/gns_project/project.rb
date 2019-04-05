@@ -1,10 +1,11 @@
 module GnsProject
   class Project < ApplicationRecord
     belongs_to :creator, class_name: 'GnsCore::User'
-    belongs_to :category, class_name: 'GnsProject::Category'
-    belongs_to :customer, class_name: 'GnsContact::Contact'
     belongs_to :manager, class_name: 'GnsCore::User', foreign_key: :manager_id
-    has_many :tasks, dependent: :restrict_with_error
+    belongs_to :customer, class_name: 'GnsContact::Contact'
+    belongs_to :category, class_name: 'GnsProject::Category'
+    has_many :tasks, class_name: 'GnsProject::Task', dependent: :restrict_with_error
+    has_many :logs, class_name: 'GnsProject::Log'
     
     validates :code, :name, :priority, :start_date, :end_date,
               :category_id, :customer_id, :manager_id,
@@ -153,6 +154,10 @@ module GnsProject
     
     def open_tasks
       self.tasks.where(status: GnsProject::Task::STATUS_OPEN)
+    end
+    
+    def log(phrase, object, user, remark=nil)
+      GnsProject::Log.add_new(self, phrase, object, user, remark=nil)
     end
   end
 end

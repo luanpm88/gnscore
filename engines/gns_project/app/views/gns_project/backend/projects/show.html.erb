@@ -26,6 +26,7 @@
         var unfinish_task_modal = new gModal({size: 'md'});
         var close_task_modal = new gModal({size: 'md'});
         var reopen_task_modal = new gModal({size: 'md'});
+        var update_progress_task_modal = new gModal({size: 'md'});
         
         var task_list_box = new ajaxBox(
             $('.task-planning-list'),
@@ -76,6 +77,12 @@
                 e.preventDefault();
                 
                 reopen_task_modal.load($(this).attr('href'));
+            });
+            
+            $(document).on('click', '.update-progress-task-button', function(e) {
+                e.preventDefault();
+                
+                update_progress_task_modal.load($(this).attr('href'));
             });
             
             // ajax box task list
