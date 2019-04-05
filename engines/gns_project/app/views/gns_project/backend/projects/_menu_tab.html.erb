@@ -15,7 +15,7 @@
                 <a
                     data-menu="gns_project/backend/projects/attachments"
                     href="<%= gns_project.attachments_backend_projects_path(@project.id) %>"
-                    class="nav-link disabled <%= 'modal-control' if request.xhr? %>" modal-size="full">
+                    class="nav-link <%= 'modal-control' if request.xhr? %>" modal-size="full">
                         <i class="icon-design mr-1"></i>
                         Attachment
                 </a>
