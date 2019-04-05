@@ -29,6 +29,8 @@ module GnsProject
         
         @task.status = Task::STATUS_OPEN
         if @task.save
+          @task.log("gns_project.log.task.created", current_user)
+          
           render json: {
             status: 'success',
             message: 'Task was successfully created.',

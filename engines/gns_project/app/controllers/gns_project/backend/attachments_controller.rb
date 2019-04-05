@@ -1,7 +1,8 @@
 module GnsProject
   module Backend
     class AttachmentsController < GnsCore::Backend::BackendController
-      before_action :set_attachment, only: [:download, :edit, :update, :destroy]
+      before_action :set_attachment, only: [:download, :edit, :update, :destroy,
+                                            :logs]
       
       def history
         render layout: nil
@@ -17,10 +18,6 @@ module GnsProject
         @attachment = Attachment.new
       end
       
-      def logs
-        render layout: nil
-      end
-      
       # GET /attachments/new
       def new
         @attachment = Attachment.new
@@ -34,13 +31,34 @@ module GnsProject
       def create
         @attachment = Attachment.new(attachment_params)
         
-        if @attachment.save
-          @attachment.upload(params[:attachment][:file])
-          
-          render json: {
-            status: 'success',
-            message: 'Attachment was successfully uploaded.',
-          }
+        name = params[:attachment][:name]
+        fileinput = params[:attachment][:file]
+        remark = params[:attachment][:remark]
+        
+        if !name.present?
+          @attachment.errors.add('name', "not be blank")
+        end
+        
+        if !fileinput.present?
+          @attachment.errors.add('file', "not be blank")
+        end
+        
+        if !remark.present?
+          @attachment.errors.add('remark', "not be blank")
+        end
+        
+        if @attachment.errors.empty?
+          if @attachment.save
+            @attachment.upload(fileinput)
+            @attachment.log("gns_project.log.attachment.uploaded", current_user)
+            
+            render json: {
+              status: 'success',
+              message: 'Attachment was successfully uploaded.',
+            }
+          else
+            render :new
+          end
         else
           render :new
         end
@@ -48,14 +66,23 @@ module GnsProject
       
       # PATCH/PUT /attachments/1
       def update
-        if @attachment.update(attachment_params)
-          # upload file
-          @attachment.upload(params[:attachment][:file]) 
-          
-          render json: {
-            status: 'success',
-            message: 'Attachment was successfully uploaded.',
-          }
+        if !params[:attachment][:remark].present?
+          @attachment.errors.add('remark', "not be blank")
+        end
+        
+        if @attachment.errors.empty?
+          if @attachment.update(attachment_params)
+            # upload file
+            @attachment.upload(params[:attachment][:file])
+            @attachment.log("gns_project.log.attachment.uploaded", current_user)
+            
+            render json: {
+              status: 'success',
+              message: 'Attachment was successfully uploaded.',
+            }
+          else
+            render :edit
+          end
         else
           render :edit
         end
@@ -72,6 +99,14 @@ module GnsProject
           @attachment.file_path,
           filename: @attachment.original_name
         )
+      end
+      
+      def logs
+      end
+      
+      def logs_list
+        #@logs = GnsProject::Log.all
+        render layout: nil
       end
       
       def log_download
