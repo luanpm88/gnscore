@@ -27,10 +27,12 @@
                                     <i class="icon-plus-circle2"></i> Insert below
                                 </a>
                                 
-                                <a class="dropdown-item"
-                                   href="<%= gns_project.download_backend_attachments_path(att) %>">
-                                    <i class="icon-download"></i> Download
-                                </a>
+                                <% if can? :download, att %>
+                                    <a class="dropdown-item"
+                                       href="<%= gns_project.download_backend_attachments_path(att) %>">
+                                        <i class="icon-download"></i> Download
+                                    </a>
+                                <% end %>
                                 
                                 <a class="dropdown-item attachment-logs-list-button"
                                    href="<%= gns_project.logs_backend_attachments_path(attachment_id: att) %>">

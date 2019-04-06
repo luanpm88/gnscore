@@ -95,6 +95,8 @@ module GnsProject
       #end
       
       def download
+        authorize! :download, @attachment
+        
         send_file(
           @attachment.file_path,
           filename: @attachment.original_name

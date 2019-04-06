@@ -82,12 +82,17 @@
     <%= render "menu_tab", title: 'Attachment' %>
     
     <div class="card-body">
-        <div class="text-right">
-            <a class="btn btn-light mr-3" href="<%= gns_project.download_attachments_backend_projects_path(@project.id) %>">
-                <i class="icon-download4 mr-2"></i> Download All
-            </a>
-        </div>
+        <% if can? :download_attachments, @project %>
+            <div class="text-right">
+                <a class="btn btn-light mr-3 mb-3"
+                   href="<%= gns_project.download_attachments_backend_projects_path(@project.id) %>"
+                   target="_blank">
+                    <i class="icon-download4 mr-2"></i> Download All
+                </a>
+            </div>
+        <% end %>
+        
+        <div class="task-attachment-list" style="position: relative; min-height: 130px"></div>
     </div>
     
-    <div class="task-attachment-list" style="position: relative; min-height: 130px"></div>
 </div>

@@ -36,6 +36,11 @@ module GnsProject
       creator.present? ? creator.short_name : ''
     end
     
+    # count attachments
+    def count_attachments
+      return tasks.sum(&:count_attachments)
+    end
+    
     # class const
     PRIORITY_HIGHT = 'high'
     PRIORITY_NORMAL = 'normal'

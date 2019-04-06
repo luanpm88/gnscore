@@ -28,19 +28,27 @@
                     </td>
                     <td class="text-center">
                         <% if task.finished? %>
-                            <a href="<%= gns_project.unfinish_backend_tasks_path(id: task) %>"
-                                class="unfinish-task-button"
-                                title="Click to un-finish"
-                            >
+                            <% if can? :unfinish, task %>
+                                <a href="<%= gns_project.unfinish_backend_tasks_path(id: task) %>"
+                                    class="unfinish-task-button"
+                                    title="Click to un-finish"
+                                >
+                                    <i class="icon-checkmark-circle text-success"></i>
+                                </a>
+                            <% else %>
                                 <i class="icon-checkmark-circle text-success"></i>
-                            </a>
+                            <% end %>
                         <% else %>
-                            <a href="<%= gns_project.finish_backend_tasks_path(id: task) %>"
-                                class="finish-task-button"
-                                title="Click to finish"
-                            >
+                            <% if can? :finish, task %>
+                                <a href="<%= gns_project.finish_backend_tasks_path(id: task) %>"
+                                    class="finish-task-button"
+                                    title="Click to finish"
+                                >
+                                    <i class="icon-cancel-circle2 text-danger"></i>
+                                </a>
+                            <% else %>
                                 <i class="icon-cancel-circle2 text-danger"></i>
-                            </a>
+                            <% end %>
                         <% end %>
                     </td>
                     <td>
@@ -63,27 +71,33 @@
                                         <i class="icon-eye4"></i> View attachs
                                     </a>
                                     
-                                    <div class="dropdown-divider"></div>
+                                    <% if can? :finish, task %>
+                                        <a href="<%= gns_project.finish_backend_tasks_path(id: task) %>"
+                                            class="dropdown-item finish-task-button">
+                                            <i class="icon-checkmark3"></i> Finish Task
+                                        </a>
+                                    <% end %>
                                     
-                                    <a href="<%= gns_project.finish_backend_tasks_path(id: task) %>"
-                                        class="dropdown-item ajax finish-task-button">
-                                        <i class="icon-checkmark3"></i> Finish Task
-                                    </a>
+                                    <% if can? :unfinish, task %>
+                                        <a href="<%= gns_project.unfinish_backend_tasks_path(id: task) %>"
+                                            class="dropdown-item unfinish-task-button">
+                                            <i class="icon-x"></i> Un-finish Task
+                                        </a>
+                                    <% end %>
                                     
-                                    <a href="<%= gns_project.unfinish_backend_tasks_path(id: task) %>"
-                                        class="dropdown-item ajax unfinish-task-button">
-                                        <i class="icon-x"></i> Un-finish Task
-                                    </a>
+                                    <% if can? :close, task %>
+                                        <a href="<%= gns_project.close_backend_tasks_path(id: task) %>"
+                                            class="dropdown-item close-task-button">
+                                            <i class="icon-lock5"></i> Close Task
+                                        </a>
+                                    <% end %>
                                     
-                                    <a href="<%= gns_project.close_backend_tasks_path(id: task) %>"
-                                        class="dropdown-item ajax close-task-button">
-                                        <i class="icon-lock5"></i> Close Task
-                                    </a>
-                                    
-                                    <a href="<%= gns_project.reopen_backend_tasks_path(id: task) %>"
-                                        class="dropdown-item ajax reopen-task-button">
-                                        <i class="icon-rotate-ccw2"></i> Re-open Task
-                                    </a>
+                                    <% if can? :reopen, task %>
+                                        <a href="<%= gns_project.reopen_backend_tasks_path(id: task) %>"
+                                            class="dropdown-item reopen-task-button">
+                                            <i class="icon-rotate-ccw2"></i> Re-open Task
+                                        </a>
+                                    <% end %>
                                 </div>
                             </div>
                         </div>

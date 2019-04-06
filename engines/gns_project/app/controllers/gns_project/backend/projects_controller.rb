@@ -103,6 +103,8 @@ module GnsProject
       end
       
       def download_attachments
+        authorize! :download_attachments, @project
+        
         filename = "#{@project.code}.zip"
         t = Tempfile.new(filename)
         # Give the path of the temp file to the zip outputstream, it won't try to open it as an archive.

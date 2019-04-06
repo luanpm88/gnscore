@@ -91,6 +91,8 @@ module GnsProject
       
       # Re-open action
       def reopen
+        authorize! :reopen, @task
+        
         remark = params[:remark]
         
         if request.post?
@@ -112,6 +114,8 @@ module GnsProject
       
       # Close action
       def close
+        authorize! :close, @task
+        
         remark = params[:remark]
         
         if request.post?
@@ -133,6 +137,8 @@ module GnsProject
       
       # Finish action
       def finish
+        authorize! :finish, @task
+        
         remark = params[:remark]
         
         if request.post?
@@ -154,6 +160,8 @@ module GnsProject
       
       # Close action
       def unfinish
+        authorize! :unfinish, @task
+        
         remark = params[:remark]
         
         if request.post?
@@ -200,6 +208,8 @@ module GnsProject
       end
       
       def download_attachments
+        authorize! :download_attachments, @task
+        
         filename = "#{@task.name}.zip"
         t = Tempfile.new(filename)
         # Give the path of the temp file to the zip outputstream, it won't try to open it as an archive.

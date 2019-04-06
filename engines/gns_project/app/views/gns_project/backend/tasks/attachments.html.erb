@@ -102,7 +102,7 @@
                 <i class="icon-upload4 mr-2"></i> Upload File
             </a>
             
-            <% if @task.count_attachments > 0 %>
+            <% if can? :download_attachments, @task %>
                 <a class="btn btn-light mr-3" href="<%= gns_project.download_attachments_backend_tasks_path(task_id: @task.id) %>">
                     <i class="icon-download4 mr-2"></i> Download All
                 </a>
