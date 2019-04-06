@@ -59,6 +59,15 @@ module GnsProject
     STATUS_OPEN = 'open'
     STATUS_CLOSED = 'closed'
     
+    # check status: true/false
+    def is_open?
+			return self.status == Task::STATUS_OPEN
+		end
+    
+    def is_closed?
+			return self.status == Task::STATUS_CLOSED
+		end
+    
     # set status
 		def set_open
 			update_attributes(status: GnsProject::Task::STATUS_OPEN)
