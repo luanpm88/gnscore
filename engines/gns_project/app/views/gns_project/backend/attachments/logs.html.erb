@@ -16,7 +16,7 @@
     <script>
         var attachment_logs_list_box = new ajaxBox(
             $('.attachment-logs-list'),
-            '<%= gns_project.logs_list_backend_attachments_path(params[:attachment_id]) %>'
+            '<%= gns_project.logs_list_backend_attachments_path %>'
         );
         
         $(function() {            
@@ -41,7 +41,7 @@
                 <div class="form-group">
                     <label class="d-blocks">Task Description</label>
                     <div class="form-control" data-container-css-class="font-weight-semibold">
-                        <%= @attachment.task_name %>
+                        <%= @attachment.task.name_with_stage %>
                     </div>
                 </div>
             </div>
@@ -55,7 +55,7 @@
             </div>
         </div>
         
-        <div class="attachment-logs-list">
+        <div class="attachment-logs-list" style="position: relative">
             
         </div>
     </div>

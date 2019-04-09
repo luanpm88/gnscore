@@ -2,7 +2,7 @@ module GnsProject
   module Backend
     class AttachmentsController < GnsCore::Backend::BackendController
       before_action :set_attachment, only: [:download, :edit, :update, :destroy,
-                                            :logs]
+                                            :logs, :logs_list]
       
       def history
         render layout: nil
@@ -89,10 +89,16 @@ module GnsProject
       end
       
       # DELETE /attachments/1
-      #def destroy
-      #  @attachment.destroy
-      #  redirect_to attachments_url, notice: 'Attachment was successfully destroyed.'
-      #end
+      def destroy
+        @attachment.log("gns_project.log.attachment.destroyed", current_user)
+        
+        @attachment.destroy
+        
+        render json: {
+          status: 'success',
+          message: 'Attachment was successfully destroyed.',
+        }
+      end
       
       def download
         authorize! :download, @attachment

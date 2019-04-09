@@ -24,22 +24,32 @@ module GnsProject
       self.attachments.count
     end
     
+    # name with stage
+    def name_with_stage
+      "#{self.stage_name} / #{self.name}"
+    end
+    
     # get select2 records
     def self.select2(params)
       per_page = 10
       page = 1      
       data = {results: [], pagination: {more: false}}
       
-      query = self.order(:name)
+      query = self.includes(:stage).order("gns_project_stages.custom_order, gns_project_tasks.custom_order")
       
       # keyword
       if params[:q].present?
         query = query.where('LOWER(gns_project_tasks.name) LIKE ?', '%'+params[:q].to_ascii.strip.downcase+'%')
       end
       
-      # state
+      # stage
       if params[:stage_id].present?
         query = query.where(stage_id: params[:stage_id])
+      end
+      
+      # project
+      if params[:project_id].present?
+        query = query.where(project_id: params[:project_id])
       end
       
       # pagination
@@ -49,7 +59,8 @@ module GnsProject
       
       # render items
       query.each do |d|
-        data[:results] << {id: d.id, text: d.name}
+        name = params[:include_stage_name].present? ? d.name_with_stage : d.name
+        data[:results] << {id: d.id, text: name}
       end
       
       return data
