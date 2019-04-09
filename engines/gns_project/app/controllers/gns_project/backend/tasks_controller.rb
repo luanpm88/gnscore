@@ -194,11 +194,7 @@ module GnsProject
         progress = params[:progress]
         remark = params[:remark]
         
-        if request.post?
-          if !progress.present?
-            @task.errors.add('progress', "not be blank")
-          end
-          
+        if request.post?          
           if !remark.present?
             @task.errors.add('remark', "not be blank")
           end

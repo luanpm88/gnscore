@@ -101,6 +101,12 @@ function applyJs(container) {
         editable: false,
     });
     
+    container.find('#ion-percentage').ionRangeSlider({
+        min: 0,
+        max: 100,
+        postfix: '%'
+    });
+    
     // Datalist
     container.find('.datalist').datalist();
     
