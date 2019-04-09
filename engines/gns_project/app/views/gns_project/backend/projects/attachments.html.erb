@@ -23,9 +23,13 @@
         // global modal
         var show_task_modal = new gModal();
         var finish_task_modal = new gModal({size: 'md'});
+        var finish_task_callback;
         var unfinish_task_modal = new gModal({size: 'md'});
+        var unfinish_task_callback;
         var close_task_modal = new gModal({size: 'md'});
+        var close_task_callback;
         var reopen_task_modal = new gModal({size: 'md'});
+        var reopen_task_callback;
         
         // tab attachment -> danh sach cac task
         var task_attachment_list_box = new ajaxBox(
@@ -50,24 +54,40 @@
                 e.preventDefault();
                 
                 finish_task_modal.load($(this).attr('href'));
+                
+                finish_task_callback = function() {
+                    task_attachment_list_box.load();
+                };
             });
             
             $(document).on('click', '.unfinish-task-button', function(e) {
                 e.preventDefault();
                 
                 unfinish_task_modal.load($(this).attr('href'));
+                
+                unfinish_task_callback = function() {
+                    task_attachment_list_box.load();
+                };
             });
             
             $(document).on('click', '.close-task-button', function(e) {
                 e.preventDefault();
                 
                 close_task_modal.load($(this).attr('href'));
+                
+                close_task_callback = function() {
+                    task_attachment_list_box.load();
+                };
             });
             
             $(document).on('click', '.reopen-task-button', function(e) {
                 e.preventDefault();
                 
                 reopen_task_modal.load($(this).attr('href'));
+                
+                reopen_task_callback = function() {
+                    task_attachment_list_box.load();
+                };
             });
             
             // ajax box task attachment list

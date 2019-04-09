@@ -20,8 +20,11 @@
                     if (typeof(response.status) !== 'undefined') {
                       showNotification(response.status, response.message);
                       reopen_task_modal.hide();
+                      
                       // load task list
-                      task_list_box.load();
+                      if (typeof(finish_task_callback) !== 'undefined') {
+                        reopen_task_callback();
+                      }
                     } else {
                       reopen_task_modal.renderHtml(response);
                     }
