@@ -91,11 +91,15 @@ module GnsProject
       
       # task list ajax table / project planning
       def task_planning
+        @tasks = @project.tasks.order(:custom_order)
+        
         render layout: nil
       end
       
       # task list ajax table / project planning
       def task_attachment
+        @tasks = @project.tasks.order(:custom_order)
+        
         render layout: nil
       end
       

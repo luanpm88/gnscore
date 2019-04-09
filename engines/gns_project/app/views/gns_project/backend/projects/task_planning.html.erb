@@ -22,7 +22,7 @@
             </tr>
         </thead>
         <tbody>
-            <% @project.tasks.each_with_index do |task,index| %>
+            <% @tasks.each_with_index do |task,index| %>
                 <tr>
                     <td class="font-weight-semibold"><%= index + 1 %></td>
                     <td><%= task.stage_name %></td>
@@ -84,12 +84,13 @@
                                     <i class="icon-menu9"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="#" class="dropdown-item insert-below-task-button">
+                                    <a href="<%= gns_project.new_backend_task_path(project_id: @project.id, current_task_id: task.id) %>"
+                                       class="dropdown-item insert-below-task-button">
                                         <i class="icon-plus-circle2"></i> Insert below
                                     </a>
                                     
-                                    <a class="dropdown-item edit-task-button"
-                                        href="<%= gns_project.edit_backend_task_path(task) %>">
+                                    <a href="<%= gns_project.edit_backend_task_path(task) %>"
+                                        class="dropdown-item edit-task-button">
                                         <i class="icon-pencil7"></i> Update
                                     </a>
                                     

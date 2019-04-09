@@ -18,7 +18,7 @@
             </tr>
         </thead>
         <tbody>
-            <% @project.tasks.each_with_index do |task,index| %>
+            <% @tasks.each_with_index do |task,index| %>
                 <tr>
                     <td class="font-weight-semibold"><%= index + 1 %></td>
                     <td><%= task.stage_name %></td>

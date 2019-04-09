@@ -55,6 +55,12 @@
                 task_modal.load($(this).attr('href'));
             });
             
+            $(document).on('click', '.insert-below-task-button', function(e) {
+                e.preventDefault();
+                
+                task_modal.load($(this).attr('href'));
+            });
+            
             $(document).on('click', '.finish-task-button', function(e) {
                 e.preventDefault();
                 

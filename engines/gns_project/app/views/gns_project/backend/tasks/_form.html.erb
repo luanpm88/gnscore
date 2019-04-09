@@ -1,7 +1,8 @@
 <%= form_for([gns_project, :backend, task], html: {multipart: true}) do |f| %>
-
     <fieldset>
         <input type="hidden" name="task[project_id]" value="<%= @task.project.id %>">
+        <input type="hidden" name="task[current_task_id]" value="<%= params[:current_task_id] %>">
+        
         <div class="form-group">
             <label class="d-block">Stage <span class="text-danger">*</span></label>
             <select name="task[stage_id]" data-placeholder="Select stage..."

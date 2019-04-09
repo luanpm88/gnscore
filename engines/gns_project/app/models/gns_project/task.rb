@@ -55,6 +55,25 @@ module GnsProject
       return data
     end
     
+    # update custom_order
+    def update_custom_order(current_task=nil)
+      tasks_query = Task.where(project_id: self.project_id)
+      max_order_num = tasks_query.maximum(:custom_order)
+      
+      if max_order_num == nil
+        self.update_columns(custom_order: 1)
+        
+      elsif current_task.present?
+        # tasks behind / update custom_order
+        tasks_query.where("custom_order > ?", current_task.custom_order).update_all("custom_order=custom_order + 1")
+        
+        # self / update custom_order
+        self.update_columns(custom_order: current_task.custom_order + 1)
+      else
+        self.update_columns(custom_order: max_order_num + 1)
+      end
+    end
+    
     # class const
     STATUS_OPEN = 'open'
     STATUS_CLOSED = 'closed'
@@ -86,7 +105,7 @@ module GnsProject
 			update_attributes(finished: false)
 		end
     
-    def log(phrase, user, remark)
+    def log(phrase, user, remark=nil)
       GnsProject::Log.add_new(self.project, phrase, self, user, remark)
     end
   end

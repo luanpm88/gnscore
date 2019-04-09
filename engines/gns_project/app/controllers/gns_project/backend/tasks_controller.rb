@@ -28,9 +28,17 @@ module GnsProject
         @task = Task.new(task_params)
         
         @task.status = Task::STATUS_OPEN
+        
+        current_task_id = params.to_unsafe_hash[:task][:current_task_id]
+        if current_task_id.present?
+          current_task = Task.find(current_task_id)
+        end
+        
         if @task.save
-          @task.log("gns_project.log.task.created", current_user)
+          # add below stage
+          @task.update_custom_order(current_task)
           
+          @task.log("gns_project.log.task.created", current_user)
           render json: {
             status: 'success',
             message: 'Task was successfully created.',
