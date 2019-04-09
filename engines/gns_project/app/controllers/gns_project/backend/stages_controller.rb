@@ -25,8 +25,17 @@ module GnsProject
       # POST /stages
       def create
         @stage = Stage.new(stage_params)
-  
+        
+        current_stage_id = params.to_unsafe_hash[:stage][:current_stage_id]
+        if current_stage_id.present?
+          current_stage = Stage.find(current_stage_id)
+        end
+        
         if @stage.save
+          
+          # add below stage
+          @stage.update_custom_order(current_stage)
+          
           flash[:success] = 'Stage was successfully created.'
           
           render json: {
