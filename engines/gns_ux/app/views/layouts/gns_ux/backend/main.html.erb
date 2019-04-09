@@ -54,6 +54,12 @@
 	<%= javascript_include_tag '/gns_ux/assets/backend/lib/pickadate-3.6.2/legacy.js' %>
 	<!-- /theme JS files -->
 	
+	<script>
+		var current_controller = '<%= controller_path %>';
+		var current_action = '<%= action_name %>';
+		var full_path = current_controller + '/' + current_action;
+	</script>
+	
 	<!-- GNSAPP JS files -->
 	<%= javascript_include_tag '/gns_ux/assets/backend/js/gnsapp.js' %>
 	<%= javascript_include_tag '/gns_ux/assets/backend/js/datalist.js' %>
@@ -61,36 +67,6 @@
 	<%= javascript_include_tag '/gns_ux/assets/backend/js/ajaxBox.js' %>
 	<%= javascript_include_tag '/gns_ux/assets/backend/js/link.js' %>
 	<!-- /gnsapp JS files -->
-	
-	<script>
-		$(function() {
-			var current_controller = '<%= controller_path %>';
-			var current_action = '<%= action_name %>';
-			var full_path = current_controller + '/' + current_action;
-			
-			$('.nav-link').each(function() {
-				var menus = [];
-				var active = false;
-				
-				if (typeof($(this).attr('data-menu')) !== 'undefined') {
-					menus = $(this).attr('data-menu').split(',');
-				}
-				
-				menus.forEach(function(item) {
-					if (current_controller == item.trim() || full_path == item.trim()) {
-						active = true;
-						return;
-					}
-				});
-				
-				if(active) {
-					$(this).addClass('active');
-					$(this).closest('.nav-item-submenu').addClass('nav-item-open');
-					$(this).closest('.nav-group-sub').css('display', 'block');
-				}
-			});	
-		});
-	</script>
 </head>
 
 <body>

@@ -124,6 +124,29 @@ function applyJs(container) {
         });
     });
     
+    // check active menu
+    container.find('.nav-link').each(function() {
+        var menus = [];
+        var active = false;
+        
+        if (typeof($(this).attr('data-menu')) !== 'undefined') {
+            menus = $(this).attr('data-menu').split(',');
+        }
+        
+        menus.forEach(function(item) {
+            if (current_controller == item.trim() || full_path == item.trim()) {
+                active = true;
+                return;
+            }
+        });
+        
+        if(active) {
+            $(this).addClass('active');
+            $(this).closest('.nav-item-submenu').addClass('nav-item-open');
+            $(this).closest('.nav-group-sub').css('display', 'block');
+        }
+    });	
+    
     // gLink
     new gLink(container.find('.g-link'));
     

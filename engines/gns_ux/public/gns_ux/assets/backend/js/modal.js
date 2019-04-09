@@ -56,7 +56,7 @@ function gModal(options) {
     // load url to modal
     this.renderHtml = function(html) {
         // loading effect
-        thisModal.content.html(html);            
+        thisModal.content.html(html);
         applyJs(thisModal.content);
     };
 }

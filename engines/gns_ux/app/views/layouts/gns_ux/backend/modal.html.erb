@@ -1,5 +1,11 @@
 <%= yield :page_script %>
 
+<script>
+    var current_controller = '<%= controller_path %>';
+    var current_action = '<%= action_name %>';
+    var full_path = current_controller + '/' + current_action;
+</script>
+
 <div class="modal-header pb-2">
     <h5 class="modal-title"><%= yield :title %></h5>
     <button type="button" class="close" data-dismiss="modal">&times;</button>

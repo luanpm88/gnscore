@@ -4,7 +4,7 @@
         <ul class="nav nav-tabs nav-tabs-bottom card-header-tabs mx-0">
             <li class="nav-item">
                 <a href="<%= gns_project.backend_project_path(@project) %>"
-                    class="nav-link <%= 'modal-control' if request.xhr? %>" modal-size="full"
+                    class="nav-link" modal-size="full"
                     data-menu="gns_project/backend/projects/show"
                 >
                     <i class="icon-info22 mr-1"></i>
@@ -15,7 +15,7 @@
                 <a
                     data-menu="gns_project/backend/projects/attachments"
                     href="<%= gns_project.attachments_backend_projects_path(@project.id) %>"
-                    class="nav-link <%= 'modal-control' if request.xhr? %>" modal-size="full">
+                    class="nav-link" modal-size="full">
                         <i class="icon-design mr-1"></i>
                         Attachment
                 </a>
