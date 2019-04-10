@@ -3,6 +3,11 @@ module GnsProject
     belongs_to :project, class_name: 'GnsProject::Project'
     belongs_to :user, class_name: 'GnsCore::User'
     
+    # get user name
+    def user_name
+      user.present? ? user.full_name : ''
+    end
+    
     # add log
     def self.add_new(project, phrase, object, user, remark=nil)
       log = project.logs.new
