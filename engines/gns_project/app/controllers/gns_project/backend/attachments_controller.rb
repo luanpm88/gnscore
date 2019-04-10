@@ -2,7 +2,7 @@ module GnsProject
   module Backend
     class AttachmentsController < GnsCore::Backend::BackendController
       before_action :set_attachment, only: [:download, :edit, :update, :destroy,
-                                            :logs, :logs_list]
+                                            :logs, :logs_list, :log_download]
       
       def history
         render layout: nil
@@ -21,6 +21,7 @@ module GnsProject
       # GET /attachments/new
       def new
         @attachment = Attachment.new
+        @attachment.task_id = params[:task_id]
       end
       
       # GET /attachments/1/edit
@@ -50,7 +51,7 @@ module GnsProject
         if @attachment.errors.empty?
           if @attachment.save
             @attachment.upload(fileinput)
-            @attachment.log("gns_project.log.attachment.created", current_user)
+            @attachment.log("gns_project.log.attachment.created", current_user, remark)
             
             render json: {
               status: 'success',
@@ -66,15 +67,26 @@ module GnsProject
       
       # PATCH/PUT /attachments/1
       def update
-        if !params[:attachment][:remark].present?
+        name = params[:attachment][:name]
+        fileinput = params[:attachment][:file]
+        remark = params[:attachment][:remark]
+        if !name.present?
+          @attachment.errors.add('name', "not be blank")
+        end
+        
+        if !remark.present?
           @attachment.errors.add('remark', "not be blank")
         end
         
         if @attachment.errors.empty?
           if @attachment.update(attachment_params)
             # upload file
-            @attachment.upload(params[:attachment][:file])
-            @attachment.log("gns_project.log.attachment.updated", current_user)
+            
+            if fileinput.present?
+              @attachment.upload(fileinput)
+            end
+            
+            @attachment.log("gns_project.log.attachment.updated", current_user, remark)
             
             render json: {
               status: 'success',
@@ -118,7 +130,7 @@ module GnsProject
       end
       
       def logs_list
-        #@logs = GnsProject::Log.all
+        @logs = @attachment.logs
         render layout: nil
       end
       

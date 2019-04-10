@@ -19,14 +19,18 @@
                 e.preventDefault();
                 
                 var form = $(this);
+                var formData = new FormData($(this)[0]);
+                formData.append('layout', 'modal');
                 
-                // clear modal before ajax running
+                // clear modal
                 attachment_modal.clear();
                 
                 $.ajax({
                     url: form.attr('action'),
                     method: form.attr('method'),
-                    data: form.serialize() + '&layout=modal',
+                    data: formData,
+                    processData: false,  // tell jQuery not to process the data
+                    contentType: false,
                 }).done(function(response) {
                     // do something
                     if (typeof(updateAttachmentCallback) !== 'undefined') {

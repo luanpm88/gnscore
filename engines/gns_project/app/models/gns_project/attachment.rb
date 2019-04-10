@@ -72,8 +72,16 @@ module GnsProject
     end
     
     # add log
-    def log(phrase, user, remark=nil)
+    def log(phrase, user, remark)
       GnsProject::Log.add_new(self.task.project, phrase, self, user, remark)
+    end
+    
+    # get logs list
+    def logs
+      query = task.project.logs
+      query = query.where("data LIKE ?", "%GnsProject::Attachment%")
+                .where("data LIKE ? AND data LIKE ?", "%name: id___value_before_type_cast: #{self.id}%", "%name: task_id___value_before_type_cast: #{self.task_id}%")
+      query = query.order('created_at desc')
     end
   end
 end
