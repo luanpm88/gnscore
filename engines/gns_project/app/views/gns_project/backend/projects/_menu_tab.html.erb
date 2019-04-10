@@ -7,17 +7,27 @@
                     class="nav-link" modal-size="full"
                     data-menu="gns_project/backend/projects/show"
                 >
-                    <i class="icon-info22 mr-1"></i>
-                    Project Planing
+                    <i class="icon-clipboard3 mr-1"></i>
+                    Planning
                 </a>
             </li>
-            <li class="nav-item mr-3">
+            <li class="nav-item">
                 <a
                     data-menu="gns_project/backend/projects/attachments"
                     href="<%= gns_project.attachments_backend_projects_path(@project.id) %>"
                     class="nav-link" modal-size="full">
-                        <i class="icon-design mr-1"></i>
+                        <i class="icon-attachment mr-1"></i>
                         Attachment
+                </a>
+            </li>
+            
+            <li class="nav-item mr-3">
+                <a
+                    data-menu="gns_project/backend/projects/logs"
+                    href="<%= gns_project.logs_backend_projects_path(@project.id) %>"
+                    class="nav-link" modal-size="full">
+                        <i class="icon-history mr-1"></i>
+                        Logs
                 </a>
             </li>
             

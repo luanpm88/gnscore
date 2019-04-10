@@ -50,11 +50,11 @@ module GnsProject
         if @attachment.errors.empty?
           if @attachment.save
             @attachment.upload(fileinput)
-            @attachment.log("gns_project.log.attachment.uploaded", current_user)
+            @attachment.log("gns_project.log.attachment.created", current_user)
             
             render json: {
               status: 'success',
-              message: 'Attachment was successfully uploaded.',
+              message: 'Attachment was successfully created.',
             }
           else
             render :new
@@ -74,11 +74,11 @@ module GnsProject
           if @attachment.update(attachment_params)
             # upload file
             @attachment.upload(params[:attachment][:file])
-            @attachment.log("gns_project.log.attachment.uploaded", current_user)
+            @attachment.log("gns_project.log.attachment.updated", current_user)
             
             render json: {
               status: 'success',
-              message: 'Attachment was successfully uploaded.',
+              message: 'Attachment was successfully updated.',
             }
           else
             render :edit
@@ -98,6 +98,11 @@ module GnsProject
           status: 'success',
           message: 'Attachment was successfully destroyed.',
         }
+      end
+      
+      # SELECT2 /tasks
+      def select2
+        render json: GnsProject::Attachment.select2(params)
       end
       
       def download

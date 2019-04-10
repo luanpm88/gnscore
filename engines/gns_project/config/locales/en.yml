@@ -4,3 +4,22 @@ en:
       project:
         created: "Created new project: %{name}"
         updated: "Updated project: %{name}"
+    
+    # Project Logs
+    log:
+      project:
+        created: "Created new project: %{name}"
+        updated: "Updated project: %{name}"
+      task:
+        created: "Created new task: %{name}"
+        updated: "Updated task: %{name}"
+        close: "Closed the task: %{name}"
+        reopen: "Has re-opened the task: %{name}"
+        finish: "Finished task: %{name}"
+        unfinish: "Un-finish task: %{name}"
+        update_progress: "Update progress to %{progress}% for %{name}"
+      attachment:
+        created: "Uploaded an attachment for %{name}"
+        updated: "Uploaded/Updated an attachment for %{name}"
+        uploaded: "Uploaded an attachment for %{name}"
+        destroyed: "%{name} attachment has been destroyed"
