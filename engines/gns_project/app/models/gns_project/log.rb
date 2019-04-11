@@ -46,6 +46,15 @@ module GnsProject
       if params[:attachment_id].present?
         query = query.where("data LIKE ? and data LIKE ?", "%GnsProject::Attachment%", "%name: id___value_before_type_cast: #{params[:attachment_id]}%")
       end
+      
+      # filter by from_date/to_date
+      if params[:from_date].present?
+        query = query.where("created_at >= ?", params[:from_date].to_date.beginning_of_day)
+      end
+      
+      if params[:to_date].present?
+        query = query.where("created_at <= ?", params[:to_date].to_date.end_of_day)
+      end
 
       return query
     end

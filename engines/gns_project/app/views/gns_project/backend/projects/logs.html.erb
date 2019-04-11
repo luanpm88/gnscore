@@ -110,10 +110,31 @@
         <form class="datalist-filters">
             <div class="card-body pb-0">    
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="form-group">
-                            <select name="log_type" data-placeholder="Filter by Log type"
-                                class="form-control selectAllowClear">
+                            <div class="input-group">
+                                <input type="text"
+                                    class="form-control font-weight-semibold datepicker"
+                                    placeholder="Select from date"
+                                    name="from_date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text"
+                                    class="form-control font-weight-semibold datepicker"
+                                    placeholder="Select to date"
+                                    name="to_date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <select name="log_type" data-placeholder="Select log type"
+                                class="form-control selectAllowClear"
+                                data-container-css-class="font-weight-semibold">
                                 <option></option>
                                 <option value="GnsProject::Project">Project</option>
                                 <option value="GnsProject::Task">Task</option>
@@ -121,11 +142,13 @@
                             </select>
                         </div>
                     </div>
-                    
+                </div>
+                <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <select name="stage_id" data-placeholder="Filter by Stage"
+                            <select name="stage_id" data-placeholder="Select stage name"
                               class="form-control select-ajax"
+                              data-container-css-class="font-weight-semibold"
                               data-url="<%= gns_project.select2_backend_stages_path(category_id: @project.category_id) %>">
                             </select>
                         </div>
@@ -133,8 +156,9 @@
                     
                     <div class="col-md-3">
                         <div class="form-group">
-                            <select name="task_id" data-placeholder="Filter by Task"
+                            <select name="task_id" data-placeholder="Select task name"
                               class="form-control select-ajax"
+                              data-container-css-class="font-weight-semibold"
                               data-url="<%= gns_project.select2_backend_tasks_path(project_id: @project.id) %>">
                             </select>
                         </div>
@@ -142,8 +166,9 @@
                     
                     <div class="col-md-3">
                         <div class="form-group">
-                            <select name="attachment_id" data-placeholder="Filter by Attachment"
+                            <select name="attachment_id" data-placeholder="Select attachment name"
                               class="form-control select-ajax"
+                              data-container-css-class="font-weight-semibold"
                               data-url="<%= gns_project.select2_backend_attachments_path %>">
                             </select>
                         </div>
