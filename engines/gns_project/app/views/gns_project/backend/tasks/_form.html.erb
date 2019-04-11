@@ -1,15 +1,18 @@
 <%= form_for([gns_project, :backend, task], html: {multipart: true}) do |f| %>
-
     <fieldset>
         <input type="hidden" name="task[project_id]" value="<%= @task.project.id %>">
+        <input type="hidden" name="task[current_task_id]" value="<%= params[:current_task_id] %>">
+        
         <div class="form-group">
+            <%= task.stage_id %>
             <label class="d-block">Stage <span class="text-danger">*</span></label>
             <select name="task[stage_id]" data-placeholder="Select stage..."
                 class="form-control select-ajax"
                 data-url="<%= gns_project.select2_backend_stages_path(category_id: @task.project.category_id) %>"
                 data-container-css-class="font-weight-semibold <%= 'border-danger' if task.errors.full_messages_for(:stage_id).present? %>"
             >
-                <option value="<%= task.stage_id %>"><%= task.stage_name %></option>
+                <option value=''>None</option>
+                <option selected value="<%= task.stage_id %>"><%= task.stage_name %></option>
             </select>
             <% if task.errors.full_messages_for(:stage_id).present? %>
                 <span class="form-text text-danger"><%= task.errors.full_messages_for(:stage_id).join('<br/>').html_safe %></span>

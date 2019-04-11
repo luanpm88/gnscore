@@ -1,3 +1,18 @@
+<div class="text-right">
+    <a href="<%= gns_project.new_backend_attachment_path(task_id: @task.id) %>"
+        class="btn bg-blue-600 mb-3 add-attachment-button">
+        <i class="icon-upload4 mr-2"></i> Upload File
+    </a>
+    
+    <% if can? :download_attachments, @task %>
+        <a class="btn btn-light mb-3 ml-3"
+           href="<%= gns_project.download_attachments_backend_tasks_path(task_id: @task.id) %>"
+           target="_blank">
+            <i class="icon-download4 mr-2"></i> Download All
+        </a>
+    <% end %>
+</div>
+
 <table class="table">
     <thead>
         <tr class="alpha-primary">
@@ -9,40 +24,42 @@
         </tr>
     </thead>
     <tbody>
-        <% @attachments.each_with_index do |att,index| %>
+        <% @attachments.each_with_index do |attachment,index| %>
             <tr>
                 <td><%= index + 1 %></td>
-                <td><%= att.name %></td>
-                <td><%= number_to_human_size(att.size) %></td>
-                <td><%= att.uploaded_at.strftime("%d/%m/%Y - %I:%M %p") %></td>
+                <td><%= attachment.name %></td>
+                <td><%= number_to_human_size(attachment.size) %></td>
+                <td><%= attachment.uploaded_at.strftime("%d/%m/%Y - %I:%M %p") %></td>
                 <td class="text-center">
                     <div class="list-icons">
                         <div class="dropdown">
                             <a href="#" class="list-icons-item" data-toggle="dropdown">
                                 <i class="icon-menu9"></i>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right">                                
-                                <a class="dropdown-item insert-below-attachment-button disabled"
-                                    href="#">
-                                    <i class="icon-plus-circle2"></i> Insert below
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item edit-attachment-button"
+                                    href="<%= gns_project.edit_backend_attachment_path(attachment) %>">
+                                    <i class="icon-pencil7"></i> Update
                                 </a>
                                 
-                                <a class="dropdown-item"
-                                   href="<%= gns_project.download_backend_attachments_path(att) %>">
-                                    <i class="icon-download"></i> Download
-                                </a>
+                                <% if can? :download, attachment %>
+                                    <a class="dropdown-item"
+                                       href="<%= gns_project.download_backend_attachments_path(attachment) %>">
+                                        <i class="icon-download"></i> Download
+                                    </a>
+                                <% end %>
                                 
                                 <a class="dropdown-item attachment-logs-list-button"
-                                   href="<%= gns_project.logs_backend_attachments_path(attachment_id: att) %>">
+                                   href="<%= gns_project.logs_backend_attachments_path(attachment) %>">
                                     <i class="icon-history"></i> Logs attached
                                 </a>
                                 
                                 <div class="dropdown-divider"></div>
                                 
-                                <a class="dropdown-item disabled"
-                                    href="#"
+                                <a class="dropdown-item ajax delete-attachment-button"
+                                    href="<%= gns_project.backend_attachment_path(attachment) %>"
                                     data-method="DELETE"
-                                    data-confirm="You are about to delete a file"
+                                    data-confirm="You are about to delete a attachment"
                                 >
                                     <i class="icon-bin"></i> Remove
                                 </a>

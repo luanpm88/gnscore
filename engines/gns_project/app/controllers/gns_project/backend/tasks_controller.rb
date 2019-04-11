@@ -28,9 +28,17 @@ module GnsProject
         @task = Task.new(task_params)
         
         @task.status = Task::STATUS_OPEN
+        
+        current_task_id = params.to_unsafe_hash[:task][:current_task_id]
+        if current_task_id.present?
+          current_task = Task.find(current_task_id)
+        end
+        
         if @task.save
-          @task.log("gns_project.log.task.created", current_user)
+          # add below stage
+          @task.update_custom_order(current_task)
           
+          @task.log("gns_project.log.task.created", current_user)
           render json: {
             status: 'success',
             message: 'Task was successfully created.',
@@ -42,23 +50,26 @@ module GnsProject
   
       # PATCH/PUT /tasks/1
       def update
-        remark = params[:remark]
+        # check other model errors
+        @task.assign_attributes(task_params)
+        @task.valid?
         
-        if !remark.present?
+        # check if remark empty errors
+        if !params[:remark].present?
           @task.errors.add('remark', "not be blank")
         end
         
+        # check error empty?
         if @task.errors.empty?
-          if @task.update(task_params)
-            @task.log("gns_project.log.task.updated", current_user, remark)
-            
-            render json: {
-              status: 'success',
-              message: 'Task was successfully updated.',
-            }
-          else
-            render :edit
-          end
+          @task.save
+          
+          # project log
+          @task.log("gns_project.log.task.updated", current_user, params[:remark])
+          
+          render json: {
+            status: 'success',
+            message: 'Task was successfully updated.',
+          }
         else
           render :edit
         end
@@ -91,6 +102,8 @@ module GnsProject
       
       # Re-open action
       def reopen
+        authorize! :reopen, @task
+        
         remark = params[:remark]
         
         if request.post?
@@ -112,6 +125,8 @@ module GnsProject
       
       # Close action
       def close
+        authorize! :close, @task
+        
         remark = params[:remark]
         
         if request.post?
@@ -133,6 +148,8 @@ module GnsProject
       
       # Finish action
       def finish
+        authorize! :finish, @task
+        
         remark = params[:remark]
         
         if request.post?
@@ -154,6 +171,8 @@ module GnsProject
       
       # Close action
       def unfinish
+        authorize! :unfinish, @task
+        
         remark = params[:remark]
         
         if request.post?
@@ -174,21 +193,17 @@ module GnsProject
       end
       
       # update progress for task action
-      def update_progress
-        progress = params[:progress]
-        remark = params[:remark]
-        
+      def update_progress       
         if request.post?
-          if !progress.present?
-            @task.errors.add('progress', "not be blank")
-          end
+          @task.progress = params[:progress]
+          remark = params[:remark]
           
           if !remark.present?
             @task.errors.add('remark', "not be blank")
           end
           
           if @task.errors.empty?
-            @task.update_columns(progress: progress)
+            @task.save
             @task.log("gns_project.log.task.update_progress", current_user, remark)
             
             render json: {
@@ -200,6 +215,8 @@ module GnsProject
       end
       
       def download_attachments
+        authorize! :download_attachments, @task
+        
         filename = "#{@task.name}.zip"
         t = Tempfile.new(filename)
         # Give the path of the temp file to the zip outputstream, it won't try to open it as an archive.

@@ -9,6 +9,37 @@ module GnsProject
       task.present? ? task.name : ''
     end
     
+    # get select2 records
+    def self.select2(params)
+      per_page = 10
+      page = 1      
+      data = {results: [], pagination: {more: false}}
+      
+      query = self.order(:created_at)
+      
+      # keyword
+      if params[:q].present?
+        query = query.where('LOWER(gns_project_attachments.name) LIKE ?', '%'+params[:q].to_ascii.strip.downcase+'%')
+      end
+      
+      # stage
+      if params[:task_id].present?
+        query = query.where(task_id: params[:task_id])
+      end
+      
+      # pagination
+      page = params[:page].to_i if params[:page].present?
+      query = query.limit(per_page).offset(per_page*(page-1))      
+      data[:pagination][:more] = true if query.count >= per_page
+      
+      # render items
+      query.each do |a|
+        data[:results] << {id: a.id, text: a.name}
+      end
+      
+      return data
+    end
+    
     def self.upload_dir
       return Rails.root.join('storage', 'uploads', 'gns_project', 'attachments')
     end
@@ -41,8 +72,16 @@ module GnsProject
     end
     
     # add log
-    def log(phrase, user, remark=nil)
+    def log(phrase, user, remark)
       GnsProject::Log.add_new(self.task.project, phrase, self, user, remark)
+    end
+    
+    # get logs list
+    def logs
+      query = task.project.logs
+      query = query.where("data LIKE ?", "%GnsProject::Attachment%")
+                .where("data LIKE ? AND data LIKE ?", "%name: id___value_before_type_cast: #{self.id}%", "%name: task_id___value_before_type_cast: #{self.task_id}%")
+      query = query.order('created_at desc')
     end
   end
 end

@@ -90,6 +90,8 @@ module GnsProject::Backend
     end
     
     def stages
+      @stages = @category.stages.order(:custom_order)
+      
       render layout: nil
     end
 

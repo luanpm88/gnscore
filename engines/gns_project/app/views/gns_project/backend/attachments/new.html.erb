@@ -20,6 +20,7 @@
                 
                 var form = $(this);
                 var formData = new FormData($(this)[0]);
+                formData.append('layout', 'modal');
                 
                 // clear modal
                 attachment_modal.clear();

@@ -2,7 +2,7 @@ module GnsProject
   module Backend
     class ProjectsController < GnsCore::Backend::BackendController
       before_action :set_project, only: [:download_attachments, :show, :edit, :update, :destroy,
-                                         :attachments, :task_planning, :task_attachment]
+                                         :attachments, :task_planning, :task_attachment, :logs, :logs_list]
   
       # GET /projects
       def index
@@ -91,18 +91,30 @@ module GnsProject
       
       # task list ajax table / project planning
       def task_planning
+        @tasks = @project.tasks.order(:custom_order)
+        
         render layout: nil
       end
       
       # task list ajax table / project planning
-      def task_attachment
-        render layout: nil
-      end
-      
       def attachments
       end
       
+      def task_attachment
+        @tasks = @project.tasks.order(:custom_order)
+        
+        render layout: nil
+      end
+      
+      def logs_list
+        @logs = @project.logs.search(params).paginate(:page => params[:page], :per_page => params[:per_page])
+        
+        render layout: nil
+      end
+      
       def download_attachments
+        authorize! :download_attachments, @project
+        
         filename = "#{@project.code}.zip"
         t = Tempfile.new(filename)
         # Give the path of the temp file to the zip outputstream, it won't try to open it as an archive.

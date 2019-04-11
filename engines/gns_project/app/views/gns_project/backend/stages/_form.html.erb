@@ -1,5 +1,6 @@
 <%= form_for([gns_project, :backend, stage], html: {multipart: true}) do |f| %>
     <input type="hidden" name="stage[category_id]" value="<%= stage.category_id %>" />
+    <input type="hidden" name="stage[current_stage_id]" value="<%= params[:current_stage_id] %>" />
     <fieldset>
         <div class="form-group">
             <label class="d-block font-weight-semibold">Name <span class="text-danger">*</span></label>

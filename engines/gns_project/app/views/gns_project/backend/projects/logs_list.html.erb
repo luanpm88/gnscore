@@ -1,0 +1,40 @@
+<table class="table table-hover">
+    <thead>
+        <tr class="alpha-primary">
+            <th class="text-nowrap">Date / Time</th>
+            <th class="text-nowrap">Content of changes</th>
+            <th class="text-nowrap">Remark</th>
+            <th class="text-nowrap">By</th>
+            <th class="text-nowrap">Attached file</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @logs.each do |log| %>
+            <tr>
+                <td><%= log.created_at.strftime("%a, %d/%m/%Y %I:%M %p") %></td>
+                <td><%= t(log.phrase, log.get_data.attributes.symbolize_keys) %></td>
+                <td><%= log.remark %></td>
+                <td><%= log.user.full_name %></td>
+                <td>
+                    <% if log.class_name == "GnsProject::Attachment" %>
+                        <%= link_to '<i class="icon-file-download"></i> download'.html_safe,
+                            gns_project.log_download_backend_attachments_path(attachment_log_id: log),
+                            'data-popup': 'tooltip',
+                            title: log.get_data.original_name
+                        %>
+                    <% end %>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<div class="pagination-area">
+    <div class="page_entries_info">
+        <%= page_entries_info @logs %>
+    </div>
+
+    <div class="pagination_style paging_simple_numbers">
+        <%= will_paginate @logs, previous_label: 'Prev'.html_safe, next_label: 'Next'.html_safe, renderer: BootstrapPagination::Rails, class: 'align-self-center' %>
+    </div>
+</div>

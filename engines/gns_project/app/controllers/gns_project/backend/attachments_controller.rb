@@ -2,16 +2,7 @@ module GnsProject
   module Backend
     class AttachmentsController < GnsCore::Backend::BackendController
       before_action :set_attachment, only: [:download, :edit, :update, :destroy,
-                                            :logs]
-      
-      def history
-        render layout: nil
-      end
-  
-      ## GET /attachments
-      #def index
-      #  @attachments = Attachment.all
-      #end
+                                            :logs, :logs_list, :log_download]
       
       # GET /attachments/1
       def show
@@ -21,6 +12,7 @@ module GnsProject
       # GET /attachments/new
       def new
         @attachment = Attachment.new
+        @attachment.task_id = params[:task_id]
       end
       
       # GET /attachments/1/edit
@@ -50,11 +42,11 @@ module GnsProject
         if @attachment.errors.empty?
           if @attachment.save
             @attachment.upload(fileinput)
-            @attachment.log("gns_project.log.attachment.uploaded", current_user)
+            @attachment.log("gns_project.log.attachment.created", current_user, remark)
             
             render json: {
               status: 'success',
-              message: 'Attachment was successfully uploaded.',
+              message: 'Attachment was successfully created.',
             }
           else
             render :new
@@ -66,19 +58,31 @@ module GnsProject
       
       # PATCH/PUT /attachments/1
       def update
-        if !params[:attachment][:remark].present?
+        name = params[:attachment][:name]
+        fileinput = params[:attachment][:file]
+        remark = params[:attachment][:remark]
+        if !name.present?
+          @attachment.errors.add('name', "not be blank")
+        end
+        
+        if !remark.present?
           @attachment.errors.add('remark', "not be blank")
         end
         
         if @attachment.errors.empty?
           if @attachment.update(attachment_params)
             # upload file
-            @attachment.upload(params[:attachment][:file])
-            @attachment.log("gns_project.log.attachment.uploaded", current_user)
+            
+            if fileinput.present?
+              @attachment.upload(fileinput)
+              @attachment.log("gns_project.log.attachment.reupload", current_user, remark)
+            else
+              @attachment.log("gns_project.log.attachment.updated", current_user, remark)
+            end
             
             render json: {
               status: 'success',
-              message: 'Attachment was successfully uploaded.',
+              message: 'Attachment was successfully updated.',
             }
           else
             render :edit
@@ -89,12 +93,25 @@ module GnsProject
       end
       
       # DELETE /attachments/1
-      #def destroy
-      #  @attachment.destroy
-      #  redirect_to attachments_url, notice: 'Attachment was successfully destroyed.'
-      #end
+      def destroy
+        @attachment.log("gns_project.log.attachment.destroyed", current_user)
+        
+        @attachment.destroy
+        
+        render json: {
+          status: 'success',
+          message: 'Attachment was successfully destroyed.',
+        }
+      end
+      
+      # SELECT2 /tasks
+      def select2
+        render json: GnsProject::Attachment.select2(params)
+      end
       
       def download
+        authorize! :download, @attachment
+        
         send_file(
           @attachment.file_path,
           filename: @attachment.original_name
@@ -105,14 +122,17 @@ module GnsProject
       end
       
       def logs_list
-        #@logs = GnsProject::Log.all
+        @logs = @attachment.logs
         render layout: nil
       end
       
       def log_download
-        #@log = Log.find(params[:att_log_id]);
-        #"#{@log.getData['upload_dir']}/#{@log.getData['file']}",
-        #  filename: @attachment.original_name
+        @attachment_log = GnsProject::Log.find(params[:attachment_log_id])
+        
+        send_file(
+          "#{Attachment.upload_dir}/#{@attachment_log.get_data.file}",
+          filename: @attachment_log.get_data.original_name
+        )
       end
   
       private

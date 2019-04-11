@@ -33,4 +33,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'unidecoder'
   spec.add_dependency 'roo'
   spec.add_dependency 'rubyzip'
+  spec.add_dependency	'cancan'
 end

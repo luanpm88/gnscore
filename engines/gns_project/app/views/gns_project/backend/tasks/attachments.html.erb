@@ -21,7 +21,7 @@
             '<%= gns_project.attachments_list_backend_tasks_path(@task.id) %>',
             function(box) {
                 // apply g-link
-                new gLink(box.find('.remove-attachment-button, .insert-bellow-attachment-button, .download_attachment-button'), function(link) {
+                new gLink(box.find('.delete-attachment-button, .remove-attachment-button'), function(link) {
                     attachment_list_box.load();
                 });
             }
@@ -34,7 +34,7 @@
         );
         
         $(function() {
-            $('.add-attachment-button').click(function(e) {
+            $(document).on('click', '.add-attachment-button', function(e) {
                 e.preventDefault();
                 var button = $(this);
                 
@@ -77,6 +77,18 @@
                 }
             });
             
+            $(document).on('change', '[name="task_id"]', function(e) {
+                var url = '<%= gns_project.attachments_list_backend_tasks_path('ID') %>';
+                
+                if ($(this).val()) {
+                    url = url.replace('ID', $(this).val());
+                    attachment_list_box.url = url;
+                    attachment_list_box.load();
+                } else {
+                    attachment_list_box.loadHtml('<div class="alert alert-warning">No task selected!</div>');
+                }
+            });
+            
             
             // Danh sach attachment /cac phien ban moi nhat
             attachment_list_box.load();
@@ -96,18 +108,7 @@
 <div class="card">
     <div class="card-header bg-white header-elements-inline">
         <h6 class="card-title">Attachment list</h6>
-        <div class="header-elements">
-            <a href="<%= gns_project.new_backend_attachment_path(task_id: @task.id) %>"
-                class="btn bg-blue-600 mr-3 add-attachment-button">
-                <i class="icon-upload4 mr-2"></i> Upload File
-            </a>
-            
-            <% if @task.count_attachments > 0 %>
-                <a class="btn btn-light mr-3" href="<%= gns_project.download_attachments_backend_tasks_path(task_id: @task.id) %>">
-                    <i class="icon-download4 mr-2"></i> Download All
-                </a>
-            <% end %>
-            
+        <div class="header-elements">            
             <div class="list-icons">
                 <a class="list-icons-item" data-action="collapse"></a>
             </div>
@@ -115,34 +116,21 @@
     </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="d-blocks">Stage</label>
-                    <select name="stage_id" data-placeholder="Filter by stage..."
-                        class="form-control select-ajax"
-                        data-url="<%= gns_project.select2_backend_stages_path %>"
-                        data-container-css-class="font-weight-semibold"
-                    >
-                        <option value="<%= @task.stage_id %>"><%= @task.stage_name %></option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label class="d-blocks">Task Description</label>
-                    <select name="stage_id" data-placeholder="Filter by stage..."
+                    <select name="task_id" data-placeholder="Filter by stage..."
                         class="form-control select-ajax"
-                        data-url="<%= gns_project.select2_backend_tasks_path %>"
+                        data-url="<%= gns_project.select2_backend_tasks_path(project_id: @task.project_id, include_stage_name: true) %>"
                         data-container-css-class="font-weight-semibold"
                     >
-                        <option value="<%= @task.id %>"><%= @task.name %></option>
+                        <option value="<%= @task.id %>"><%= @task.name_with_stage %></option>
                     </select>
                 </div>
             </div>
         </div>
-        
-        <div class="attachments-list">
-            
-        </div>
+    </div>
+    <div class="card-body">
+        <div class="attachments-list" style="position: relative"></div>
     </div>
 </div>

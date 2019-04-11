@@ -14,14 +14,14 @@
             </tr>
         </thead>
         <tbody>
-            <% @category.stages.each do |stage| %>
+            <% @stages.each do |stage| %>
                 <tr>
                     <td><%= stage.name %></td>
-                    <td></td>
+                    <td><%= stage.description %></td>
                     <td class="text-center">
                         <div class="list-icons">
-                            <a class="list-icons-item mr-2" title="Insert below"
-                                href="#">
+                            <a class="list-icons-item mr-2 insert-below-stage-button" title="Insert below"
+                                href="<%= gns_project.new_backend_stage_path(category_id: @category.id, current_stage_id: stage.id) %>">
                                 <i class="icon-plus-circle2"></i>
                             </a>
                             

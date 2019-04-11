@@ -23,9 +23,13 @@
         // global modal
         var task_modal = new gModal({size: 'md'});
         var finish_task_modal = new gModal({size: 'md'});
+        var finish_task_callback;
         var unfinish_task_modal = new gModal({size: 'md'});
+        var unfinish_task_callback;
         var close_task_modal = new gModal({size: 'md'});
+        var close_task_callback;
         var reopen_task_modal = new gModal({size: 'md'});
+        var reopen_task_callback;
         var update_progress_task_modal = new gModal({size: 'md'});
         
         var task_list_box = new ajaxBox(
@@ -55,28 +59,50 @@
                 task_modal.load($(this).attr('href'));
             });
             
+            $(document).on('click', '.insert-below-task-button', function(e) {
+                e.preventDefault();
+                
+                task_modal.load($(this).attr('href'));
+            });
+            
             $(document).on('click', '.finish-task-button', function(e) {
                 e.preventDefault();
                 
                 finish_task_modal.load($(this).attr('href'));
+                
+                finish_task_callback = function() {
+                    task_list_box.load();
+                };
             });
             
             $(document).on('click', '.unfinish-task-button', function(e) {
                 e.preventDefault();
                 
                 unfinish_task_modal.load($(this).attr('href'));
+                
+                unfinish_task_callback = function() {
+                    task_list_box.load();
+                };
             });
             
             $(document).on('click', '.close-task-button', function(e) {
                 e.preventDefault();
                 
                 close_task_modal.load($(this).attr('href'));
+                
+                close_task_callback = function() {
+                    task_list_box.load();
+                };
             });
             
             $(document).on('click', '.reopen-task-button', function(e) {
                 e.preventDefault();
                 
                 reopen_task_modal.load($(this).attr('href'));
+                
+                reopen_task_callback = function() {
+                    task_list_box.load();
+                };
             });
             
             $(document).on('click', '.update-progress-task-button', function(e) {
@@ -94,7 +120,7 @@
 <%= render "general_infomation" %>
 
 <div class="card">
-    <%= render "menu_tab", title: 'Project Planing' %>
+    <%= render "menu_tab", title: 'Project Planning' %>
     
     <div class="card-body">
         <div class="text-right">
