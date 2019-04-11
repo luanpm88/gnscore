@@ -64,11 +64,20 @@ module GnsProject
       # DELETE /stages/1
       def destroy
         @stage.destroy
+        
+        if !@stage.errors.empty?
+          render json: {
+            status: 'error',
+            message: @stage.errors.full_messages.to_sentence,
+          }
+        else
+          render json: {
+            status: 'success',
+            message: 'Stage was successfully destroyed.',
+          }
+        end
           
-        render json: {
-          status: 'success',
-          message: 'Stage was successfully destroyed.',
-        }
+
       end
       
       # SELECT2 /stages

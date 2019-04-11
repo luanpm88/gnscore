@@ -3,6 +3,8 @@ module GnsProject
     belongs_to :category, class_name: 'GnsProject::Category'
     
     validates :name, :category_id, :presence => true
+    has_many :tasks, dependent: :restrict_with_error
+    
     
     # get select2 records
     def self.select2(params)
