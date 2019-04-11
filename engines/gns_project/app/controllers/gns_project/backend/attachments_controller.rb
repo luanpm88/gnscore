@@ -4,15 +4,6 @@ module GnsProject
       before_action :set_attachment, only: [:download, :edit, :update, :destroy,
                                             :logs, :logs_list, :log_download]
       
-      def history
-        render layout: nil
-      end
-  
-      ## GET /attachments
-      #def index
-      #  @attachments = Attachment.all
-      #end
-      
       # GET /attachments/1
       def show
         @attachment = Attachment.new
@@ -84,9 +75,10 @@ module GnsProject
             
             if fileinput.present?
               @attachment.upload(fileinput)
+              @attachment.log("gns_project.log.attachment.reupload", current_user, remark)
+            else
+              @attachment.log("gns_project.log.attachment.updated", current_user, remark)
             end
-            
-            @attachment.log("gns_project.log.attachment.updated", current_user, remark)
             
             render json: {
               status: 'success',
@@ -135,9 +127,12 @@ module GnsProject
       end
       
       def log_download
-        #@log = Log.find(params[:att_log_id]);
-        #"#{@log.getData['upload_dir']}/#{@log.getData['file']}",
-        #  filename: @attachment.original_name
+        @attachment_log = GnsProject::Log.find(params[:attachment_log_id])
+        
+        send_file(
+          "#{Attachment.upload_dir}/#{@attachment_log.get_data.file}",
+          filename: @attachment_log.get_data.original_name
+        )
       end
   
       private

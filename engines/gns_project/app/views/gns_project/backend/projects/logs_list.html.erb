@@ -17,7 +17,11 @@
                 <td><%= log.user.full_name %></td>
                 <td>
                     <% if log.class_name == "GnsProject::Attachment" %>
-                        <%= link_to log.get_data.original_name, gns_project.download_backend_attachments_path(log.get_data) %>
+                        <%= link_to '<i class="icon-file-download"></i> download'.html_safe,
+                            gns_project.log_download_backend_attachments_path(attachment_log_id: log),
+                            'data-popup': 'tooltip',
+                            title: log.get_data.original_name
+                        %>
                     <% end %>
                 </td>
             </tr>
