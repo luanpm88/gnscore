@@ -50,23 +50,26 @@ module GnsProject
   
       # PATCH/PUT /tasks/1
       def update
-        remark = params[:remark]
+        # check other model errors
+        @task.assign_attributes(task_params)
+        @task.valid?
         
-        if !remark.present?
+        # check if remark empty errors
+        if !params[:remark].present?
           @task.errors.add('remark', "not be blank")
         end
         
+        # check error empty?
         if @task.errors.empty?
-          if @task.update(task_params)
-            @task.log("gns_project.log.task.updated", current_user, remark)
-            
-            render json: {
-              status: 'success',
-              message: 'Task was successfully updated.',
-            }
-          else
-            render :edit
-          end
+          @task.save
+          
+          # project log
+          @task.log("gns_project.log.task.updated", current_user, params[:remark])
+          
+          render json: {
+            status: 'success',
+            message: 'Task was successfully updated.',
+          }
         else
           render :edit
         end
@@ -190,17 +193,17 @@ module GnsProject
       end
       
       # update progress for task action
-      def update_progress
-        progress = params[:progress]
-        remark = params[:remark]
-        
-        if request.post?          
+      def update_progress       
+        if request.post?
+          @task.progress = params[:progress]
+          remark = params[:remark]
+          
           if !remark.present?
             @task.errors.add('remark', "not be blank")
           end
           
           if @task.errors.empty?
-            @task.update_columns(progress: progress)
+            @task.save
             @task.log("gns_project.log.task.update_progress", current_user, remark)
             
             render json: {
