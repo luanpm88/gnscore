@@ -265,10 +265,27 @@ function applyJs(container) {
         });
     };
     
+    // Tooltip
+    var gComponentTooltip = function() {
+
+        // Initialize
+        container.find('[data-popup="tooltip"]').tooltip();
+
+        // Demo tooltips, remove in production
+        var demoTooltipSelector = '[data-popup="tooltip-demo"]';
+        if($(demoTooltipSelector).is(':visible')) {
+            $(demoTooltipSelector).tooltip('show');
+            setTimeout(function() {
+                $(demoTooltipSelector).tooltip('hide');
+            }, 2000);
+        }
+    };
+    
     gCardActionReload();
     gCardActionCollapse();
     gCardActionRemove();
     gCardActionFullscreen();
+    gComponentTooltip();
 }
 
 $(document).ready(function() {    
