@@ -98,15 +98,15 @@
 
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a href="<%= gns_project.backend_project_path(project) %>" class="dropdown-item">
-                                    <i class="icon-file-eye"></i> View
+                                    <i class="icon-file-eye"></i> Details
                                 </a>
                                 <a class="dropdown-item edit-project-button"
                                     href="<%= gns_project.edit_backend_project_path(project) %>">
                                     <i class="icon-pencil7"></i> Update
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item disabled"
-                                    href="javascript:void(0)">
+                                <a class="dropdown-item"
+                                    href="<%= gns_project.logs_backend_projects_path(project) %>">
                                     <i class="icon-file-text2"></i> Logs
                                 </a>
                                 <div class="dropdown-divider"></div>
