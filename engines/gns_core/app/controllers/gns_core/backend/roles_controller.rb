@@ -19,6 +19,25 @@ module GnsCore
       end
       
       def update_permissions
+        @role = Role.find(params[:id])
+        
+        if params[:permissions].present?
+          params[:permissions].each do |p|
+            if p[1] == 'true'
+              @role.add_permission(p[0])
+            else
+              @role.remove_permission(p[0])
+            end
+          end
+          
+          # Add notification
+          current_user.add_notification("gns_core.notification.role.update_permissions", {
+            name: @role.name
+          })
+          
+          flash[:success] = 'Role has been updated policies successfully.'
+          redirect_to gns_core.backend_roles_path
+        end
       end
   
       # GET /roles/new
