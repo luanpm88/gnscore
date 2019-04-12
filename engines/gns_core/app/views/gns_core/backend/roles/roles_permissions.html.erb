@@ -1,0 +1,88 @@
+<% content_for :title do %>
+    Role Permissions
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+    <a href="<%= gns_core.backend_roles_path %>" class="breadcrumb-item">Roles</a>
+    <span class="breadcrumb-item active">Permissions</span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Role</span>: <%= @role.name %> - Permissions</h4>
+<% end %>
+
+<%= form_for '', url: gns_core.update_permissions_backend_roles_path(id: @role.id), html: {multipart: false, class: 'update_permissions'} do |f| %>
+<div class="card">    
+    <div class="card-header bg-transparent header-elements-inline">
+        <h5 class="card-title">Policy Setting</h5>
+        
+        <div class="header-elements">            
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-light">
+        <ul class="nav nav-tabs nav-tabs-bottom mb-0">
+            <li class="nav-item">
+                <a href="#tabDashboard" class="nav-link active" data-toggle="tab">
+                    <span class="font-weight-semibold text-blue">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#tabContact" class="nav-link" data-toggle="tab">
+                    <span class="font-weight-semibold text-blue">Contact</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#tabProject" class="nav-link" data-toggle="tab">
+                    <span class="font-weight-semibold text-blue">Project</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#tabUser" class="nav-link" data-toggle="tab">
+                    <span class="font-weight-semibold text-blue">User </span>
+                </a>
+            </li>
+            
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                    <span class="font-weight-semibold text-blue">Others</span>
+                </a>
+                
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a href="#tabReport" tabindex="-1" class="dropdown-item" data-toggle="tab">
+                        Report
+                    </a>
+                    <a href="#tabSystem" tabindex="-1" class="dropdown-item" data-toggle="tab">
+                        System
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="card-body tab-content">
+        <%= render "gns_core/backend/roles/policy/dashboard", role: @role %>
+        
+        <%= render 'gns_core/backend/roles/policy/contacts', role: @role %>
+        
+        <%= render 'gns_core/backend/roles/policy/projects', role: @role %>
+        
+        <%= render 'gns_core/backend/roles/policy/users', role: @role %>
+        
+        <%= render 'gns_core/backend/roles/policy/report', role: @role %>
+        
+        <%= render 'gns_core/backend/roles/policy/system', role: @role %>
+    </div>
+</div>
+
+<div class="text-left">
+    <button type="submit" class="btn btn-primary">Apply</button>
+    <a class="btn btn-light ml-1" href="<%= gns_core.backend_roles_path %>">
+        Cancel
+    </a>
+</div>
+<% end %>

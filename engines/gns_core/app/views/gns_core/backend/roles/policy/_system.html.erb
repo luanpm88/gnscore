@@ -1,0 +1,64 @@
+<div class="tab-pane fade" id="tabSystem">
+    <div class="card-group-control card-group-control-left" id="accordion-control">
+
+        <div class="pt-2">
+            <h6 class="card-title">
+                <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
+                   href="#gnsSystem-backup-restore">Backup & Restore
+                </a>
+            </h6>
+            
+            <div id="gnsSystem-backup-restore" class="collapse show">
+                <div class="form-group">
+                    Coming Soon...
+                </div>
+            </div>
+        </div>
+        
+        <div class="pt-2">
+            <h6 class="card-title">
+                <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
+                   href="#gnsSystem-settings">Settings
+                </a>
+            </h6>
+
+            <div id="gnsSystem-settings" class="collapse show">
+                <div class="form-group">
+                    Coming Soon...
+                </div>
+            </div>
+        </div>
+        
+        <div class="pt-2">
+            <h6 class="card-title">
+                <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
+                   href="#gnsNotification-notifications">Notifications
+                </a>
+            </h6>
+
+            <div id="gnsNotification-notifications" class="collapse show">
+                <div class="form-group">                    
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_notification.notifications.read_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_notification.notifications.read_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_notification.notifications.read_own"
+                            <%= 'checked' if @role.has_permission?('gns_notification.notifications.read_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_notification.notifications.read_own">Read own</label>
+                    </div>
+                    
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_notification.notifications.read_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_notification.notifications.read_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_notification.notifications.read_other"
+                            <%= 'checked' if @role.has_permission?('gns_notification.notifications.read_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_notification.notifications.read_other">Read other</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

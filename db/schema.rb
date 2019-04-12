@@ -92,6 +92,29 @@ ActiveRecord::Schema.define(version: 2019_04_05_145454) do
     t.index ["parent_id"], name: "index_gns_contact_parent_contacts_on_parent_id"
   end
 
+  create_table "gns_core_roles", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "gns_core_roles_permissions", force: :cascade do |t|
+    t.bigint "role_id"
+    t.string "permission"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_gns_core_roles_permissions_on_role_id"
+  end
+
+  create_table "gns_core_roles_users", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_gns_core_roles_users_on_role_id"
+    t.index ["user_id"], name: "index_gns_core_roles_users_on_user_id"
+  end
+
   create_table "gns_core_users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -102,6 +125,7 @@ ActiveRecord::Schema.define(version: 2019_04_05_145454) do
     t.datetime "updated_at", null: false
     t.string "first_name"
     t.string "last_name"
+    t.string "cache_search"
     t.index ["email"], name: "index_gns_core_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_gns_core_users_on_reset_password_token", unique: true
   end

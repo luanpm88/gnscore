@@ -110,17 +110,28 @@
                     </ul>
                 </li>
                 <li class="nav-item nav-item-submenu">
-                    <a href="#" class="nav-link"><i class="icon-users2"></i> <span>User</span></a>
+                    <a href="#" class="nav-link"
+                        data-menu="
+                            gns_core/backend/users,
+                            gns_core/backend/roles
+                        "
+                    ><i class="icon-users2"></i> <span>User</span></a>
 
                     <ul class="nav nav-group-sub" data-submenu-title="User">
                         <li class="nav-item">
-                            <a href="#" class="nav-link disabled">Users
-                                <span class="badge bg-transparent align-self-center ml-auto">Coming soon</span>
+                            <a href="<%= gns_core.backend_users_path %>" class="nav-link"
+                                data-menu="
+                                    gns_core/backend/users
+                                "
+                            >Users
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link disabled">Roles
-                                <span class="badge bg-transparent align-self-center ml-auto">Coming soon</span>
+                            <a href="<%= gns_core.backend_roles_path %>" class="nav-link"
+                                data-menu="
+                                    gns_core/backend/roles
+                                "
+                            >Roles
                             </a>
                         </li>
                     </ul>

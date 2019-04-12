@@ -5,6 +5,13 @@ module GnsCore
     devise :database_authenticatable, :registerable,
            :recoverable, :rememberable, :validatable
     
+    validates_format_of :email, :presence => true,
+												:with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i,
+												:message => " is invalid (Eg. 'username@your-domain.com')"
+    # validates :password, :length => { :minimum => 6, :maximum => 40 }, :confirmation => true
+    
+    has_and_belongs_to_many :roles, class_name: 'GnsCore::Role'
+    
     def add_notification(phrase, data)
 			GnsNotification::Notification::create(
 				phrase: phrase,
@@ -28,6 +35,59 @@ module GnsCore
       return str.join(" ")
     end
     
+    # update contact cache search
+    after_save :update_cache_search
+		def update_cache_search
+			str = []
+			str << first_name.to_s.downcase.strip
+			str << last_name.to_s.downcase.strip
+			str << email.to_s.downcase.strip
+
+			self.update_column(:cache_search, str.join(" ") + " " + str.join(" ").to_ascii)
+		end
+    
+    # Filters
+    def self.filter(query, params)
+      params = params.to_unsafe_hash
+      
+      # filter by active
+      #if params[:active].present?
+      #  query = query.where(active: params[:active])
+      #end
+      
+      # filter by roles
+      if params[:role_ids].present?
+        query = query.joins(:roles).where(gns_core_roles_users: {role_id: params[:role_ids]})
+      end
+      
+      # single keyword
+      if params[:keyword].present?
+				keyword = params[:keyword].strip.downcase
+				keyword.split(' ').each do |q|
+					q = q.strip
+					query = query.where('LOWER(gns_core_users.cache_search) LIKE ?', '%'+q.to_ascii.downcase+'%')
+				end
+			end
+
+      return query
+    end
+    
+    # search
+    def self.search(params)
+      query = self.all
+      query = self.filter(query, params)
+
+      # order
+      if params[:sort_by].present?
+        order = params[:sort_by]
+        order += " #{params[:sort_direction]}" if params[:sort_direction].present?
+
+        query = query.order(order)
+      end
+
+      return query
+    end
+    
     # get select2 records
     def self.select2(params)
       per_page = 10
@@ -38,7 +98,7 @@ module GnsCore
       
       # keyword
       if params[:q].present?
-        query = query.where('LOWER(gns_core_users.email) LIKE ?', '%'+params[:q].to_ascii.downcase+'%')
+        query = query.where('LOWER(gns_core_users.cache_search) LIKE ?', '%'+params[:q].to_ascii.downcase+'%')
       end
       
       # pagination
@@ -52,6 +112,18 @@ module GnsCore
       end
       
       return data
+    end
+    
+    def has_permission?(permission)
+      #self.roles.each do |role|
+      #  if role.has_permission?(permission)
+      #    return true
+      #  end
+      #end
+      #
+      #return false
+      
+      return !GnsCore::RolesPermission.where(role_id: self.roles.select(:id)).where(permission: permission).empty?
     end
   end
 end

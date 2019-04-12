@@ -1,0 +1,249 @@
+<div class="tab-pane fade" id="tabContact">
+    <div class="card-group-control card-group-control-left" id="accordion-control">
+
+        <div class="pt-2">
+            <h6 class="card-title">
+                <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
+                   href="#gnsContact-contacts">Contacts
+                </a>
+            </h6>
+            
+            <div id="gnsContact-contacts" class="collapse show">
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_contact.contacts.create]" value="false">
+                        <input type="checkbox" name="permissions[gns_contact.contacts.create]" value="true"
+                            class="custom-control-input"
+                            id="gns_contact.contacts.create"
+                            <%= 'checked' if @role.has_permission?('gns_contact.contacts.create') %>
+                        >
+                        <label class="custom-control-label" for="gns_contact.contacts.create">Create</label>
+                    </div>
+                    
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_contact.contacts.read_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_contact.contacts.read_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_contact.contacts.read_own"
+                            <%= 'checked' if @role.has_permission?('gns_contact.contacts.read_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_contact.contacts.read_own">Read own</label>
+                    </div>
+                    
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_contact.contacts.read_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_contact.contacts.read_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_contact.contacts.read_other"
+                            <%= 'checked' if @role.has_permission?('gns_contact.contacts.read_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_contact.contacts.read_other">Read other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">                                
+                        <input type="hidden" name="permissions[gns_contact.contacts.update_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_contact.contacts.update_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_contact.contacts.update_own"
+                            <%= 'checked' if @role.has_permission?('gns_contact.contacts.update_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_contact.contacts.update_own">Update own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">                                
+                        <input type="hidden" name="permissions[gns_contact.contacts.update_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_contact.contacts.update_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_contact.contacts.update_other"
+                            <%= 'checked' if @role.has_permission?('gns_contact.contacts.update_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_contact.contacts.update_other">Update other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_contact.contacts.delete_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_contact.contacts.delete_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_contact.contacts.delete_own"
+                            <%= 'checked' if @role.has_permission?('gns_contact.contacts.delete_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_contact.contacts.delete_own">Delete own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_contact.contacts.delete_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_contact.contacts.delete_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_contact.contacts.delete_other"
+                            <%= 'checked' if @role.has_permission?('gns_contact.contacts.delete_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_contact.contacts.delete_other">Delete other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">                                
+                        <input type="hidden" name="permissions[gns_contact.contacts.activate_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_contact.contacts.activate_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_contact.contacts.activate_own"
+                            <%= 'checked' if @role.has_permission?('gns_contact.contacts.activate_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_contact.contacts.activate_own">Activate own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_contact.contacts.activate_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_contact.contacts.activate_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_contact.contacts.activate_other"
+                            <%= 'checked' if @role.has_permission?('gns_contact.contacts.activate_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_contact.contacts.activate_other">Activate other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_contact.contacts.deactivate_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_contact.contacts.deactivate_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_contact.contacts.deactivate_own"
+                            <%= 'checked' if @role.has_permission?('gns_contact.contacts.deactivate_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_contact.contacts.deactivate_own">De-activate own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_contact.contacts.deactivate_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_contact.contacts.deactivate_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_contact.contacts.deactivate_other"
+                            <%= 'checked' if @role.has_permission?('gns_contact.contacts.deactivate_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_contact.contacts.deactivate_other">De-activate other</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="pt-2">
+            <h6 class="card-title">
+                <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
+                   href="#gnsContact-categories">Categories
+                </a>
+            </h6>
+
+            <div id="gnsContact-categories" class="collapse show">
+                <div class="form-group">
+        
+                    <div class="custom-control custom-checkbox">                                
+                        <input type="hidden" name="permissions[gns_contact.categories.create]" value="false">
+                        <input type="checkbox" name="permissions[gns_contact.categories.create]" value="true"
+                            class="custom-control-input"
+                            id="gns_contact.categories.create"
+                            <%= 'checked' if @role.has_permission?('gns_contact.categories.create') %>
+                        >
+                        <label class="custom-control-label" for="gns_contact.categories.create">Create</label>
+                    </div>
+                    
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_contact.categories.read_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_contact.categories.read_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_contact.categories.read_own"
+                            <%= 'checked' if @role.has_permission?('gns_contact.categories.read_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_contact.categories.read_own">Read own</label>
+                    </div>
+                    
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_contact.categories.read_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_contact.categories.read_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_contact.categories.read_other"
+                            <%= 'checked' if @role.has_permission?('gns_contact.categories.read_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_contact.categories.read_other">Read other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">                                
+                        <input type="hidden" name="permissions[gns_contact.categories.update_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_contact.categories.update_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_contact.categories.update_own"
+                            <%= 'checked' if @role.has_permission?('gns_contact.categories.update_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_contact.categories.update_own">Update own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_contact.categories.update_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_contact.categories.update_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_contact.categories.update_other"
+                            <%= 'checked' if @role.has_permission?('gns_contact.categories.update_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_contact.categories.update_other">Update other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_contact.categories.delete_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_contact.categories.delete_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_contact.categories.delete_own"
+                            <%= 'checked' if @role.has_permission?('gns_contact.categories.delete_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_contact.categories.delete_own">Delete own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_contact.categories.delete_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_contact.categories.delete_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_contact.categories.delete_other"
+                            <%= 'checked' if @role.has_permission?('gns_contact.categories.delete_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_contact.categories.delete_other">Delete other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">                                
+                        <input type="hidden" name="permissions[gns_contact.categories.activate_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_contact.categories.activate_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_contact.categories.activate_own"
+                            <%= 'checked' if @role.has_permission?('gns_contact.categories.activate_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_contact.categories.activate_own">Activate own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_contact.categories.activate_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_contact.categories.activate_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_contact.categories.activate_other"
+                            <%= 'checked' if @role.has_permission?('gns_contact.categories.activate_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_contact.categories.activate_other">Activate other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_contact.categories.deactivate_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_contact.categories.deactivate_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_contact.categories.deactivate_own"
+                            <%= 'checked' if @role.has_permission?('gns_contact.categories.deactivate_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_contact.categories.deactivate_own">De-activate own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_contact.categories.deactivate_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_contact.categories.deactivate_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_contact.categories.deactivate_other"
+                            <%= 'checked' if @role.has_permission?('gns_contact.categories.deactivate_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_contact.categories.deactivate_other">De-activate other</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
