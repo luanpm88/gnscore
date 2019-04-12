@@ -25,7 +25,7 @@
                     <% else %>
                         <% values = user.roles.map {|r| {text: r.name, value: r.id}} %>
                         <% values.each do |value| %>
-                            <span class="badge badge-flat border-primary text-primary-600">Member</span>
+                            <span class="badge badge-flat border-primary text-primary-600"><%= value[:text] %></span>
                         <% end %>
                     <% end %>
                 </td>
