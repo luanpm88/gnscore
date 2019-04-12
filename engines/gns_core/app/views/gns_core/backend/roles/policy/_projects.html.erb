@@ -1,0 +1,505 @@
+<div class="tab-pane fade" id="tabProject">
+    <div class="card-group-control card-group-control-left" id="accordion-control">
+
+        <div class="pt-2">
+            <h6 class="card-title">
+                <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
+                   href="#gnsProject-projects">Projects
+                </a>
+            </h6>
+            
+            <div id="gnsProject-projects" class="collapse show">
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.projects.create]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.projects.create]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.projects.create"
+                            <%= 'checked' if @role.has_permission?('gns_project.projects.create') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.projects.create">Create</label>
+                    </div>
+                    
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.projects.read_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.projects.read_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.projects.read_own"
+                            <%= 'checked' if @role.has_permission?('gns_project.projects.read_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.projects.read_own">Read own</label>
+                    </div>
+                    
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.projects.read_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.projects.read_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.projects.read_other"
+                            <%= 'checked' if @role.has_permission?('gns_project.projects.read_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.projects.read_other">Read other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">                                
+                        <input type="hidden" name="permissions[gns_project.projects.update_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.projects.update_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.projects.update_own"
+                            <%= 'checked' if @role.has_permission?('gns_project.projects.update_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.projects.update_own">Update own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">                                
+                        <input type="hidden" name="permissions[gns_project.projects.update_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.projects.update_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.projects.update_other"
+                            <%= 'checked' if @role.has_permission?('gns_project.projects.update_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.projects.update_other">Update other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.projects.delete_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.projects.delete_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.projects.delete_own"
+                            <%= 'checked' if @role.has_permission?('gns_project.projects.delete_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.projects.delete_own">Delete own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.projects.delete_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.projects.delete_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.projects.delete_other"
+                            <%= 'checked' if @role.has_permission?('gns_project.projects.delete_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.projects.delete_other">Delete other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.projects.view_log]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.projects.view_log]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.projects.view_log"
+                            <%= 'checked' if @role.has_permission?('gns_project.projects.view_log') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.projects.view_log">View log</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">                                
+                        <input type="hidden" name="permissions[gns_project.projects.activate_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.projects.activate_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.projects.activate_own"
+                            <%= 'checked' if @role.has_permission?('gns_project.projects.activate_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.projects.activate_own">Activate own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.projects.activate_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.projects.activate_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.projects.activate_other"
+                            <%= 'checked' if @role.has_permission?('gns_project.projects.activate_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.projects.activate_other">Activate other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.projects.deactivate_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.projects.deactivate_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.projects.deactivate_own"
+                            <%= 'checked' if @role.has_permission?('gns_project.projects.deactivate_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.projects.deactivate_own">De-activate own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.projects.deactivate_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.projects.deactivate_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.projects.deactivate_other"
+                            <%= 'checked' if @role.has_permission?('gns_project.projects.deactivate_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.projects.deactivate_other">De-activate other</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="pt-2">
+            <h6 class="card-title">
+                <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
+                   href="#gnsProject-categories">Types
+                </a>
+            </h6>
+
+            <div id="gnsProject-categories" class="collapse show">
+                <div class="form-group">
+        
+                    <div class="custom-control custom-checkbox">                                
+                        <input type="hidden" name="permissions[gns_project.categories.create]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.categories.create]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.categories.create"
+                            <%= 'checked' if @role.has_permission?('gns_project.categories.create') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.categories.create">Create</label>
+                    </div>
+                    
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.categories.read_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.categories.read_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.categories.read_own"
+                            <%= 'checked' if @role.has_permission?('gns_project.categories.read_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.categories.read_own">Read own</label>
+                    </div>
+                    
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.categories.read_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.categories.read_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.categories.read_other"
+                            <%= 'checked' if @role.has_permission?('gns_project.categories.read_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.categories.read_other">Read other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">                                
+                        <input type="hidden" name="permissions[gns_project.categories.update_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.categories.update_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.categories.update_own"
+                            <%= 'checked' if @role.has_permission?('gns_project.categories.update_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.categories.update_own">Update own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.categories.update_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.categories.update_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.categories.update_other"
+                            <%= 'checked' if @role.has_permission?('gns_project.categories.update_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.categories.update_other">Update other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.categories.delete_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.categories.delete_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.categories.delete_own"
+                            <%= 'checked' if @role.has_permission?('gns_project.categories.delete_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.categories.delete_own">Delete own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.categories.delete_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.categories.delete_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.categories.delete_other"
+                            <%= 'checked' if @role.has_permission?('gns_project.categories.delete_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.categories.delete_other">Delete other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">                                
+                        <input type="hidden" name="permissions[gns_project.categories.activate_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.categories.activate_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.categories.activate_own"
+                            <%= 'checked' if @role.has_permission?('gns_project.categories.activate_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.categories.activate_own">Activate own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.categories.activate_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.categories.activate_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.categories.activate_other"
+                            <%= 'checked' if @role.has_permission?('gns_project.categories.activate_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.categories.activate_other">Activate other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.categories.deactivate_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.categories.deactivate_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.categories.deactivate_own"
+                            <%= 'checked' if @role.has_permission?('gns_project.categories.deactivate_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.categories.deactivate_own">De-activate own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.categories.deactivate_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.categories.deactivate_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.categories.deactivate_other"
+                            <%= 'checked' if @role.has_permission?('gns_project.categories.deactivate_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.categories.deactivate_other">De-activate other</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+                    
+        <div class="pt-2">
+            <h6 class="card-title">
+                <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
+                   href="#gnsProject-stages">Stages
+                </a>
+            </h6>
+
+            <div id="gnsProject-stages" class="collapse show">
+                <div class="form-group">
+        
+                    <div class="custom-control custom-checkbox">                                
+                        <input type="hidden" name="permissions[gns_project.stages.create]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.stages.create]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.stages.create"
+                            <%= 'checked' if @role.has_permission?('gns_project.stages.create') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.stages.create">Create</label>
+                    </div>
+                    
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.stages.read_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.stages.read_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.stages.read_own"
+                            <%= 'checked' if @role.has_permission?('gns_project.stages.read_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.stages.read_own">Read own</label>
+                    </div>
+                    
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.stages.read_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.stages.read_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.stages.read_other"
+                            <%= 'checked' if @role.has_permission?('gns_project.stages.read_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.stages.read_other">Read other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">                                
+                        <input type="hidden" name="permissions[gns_project.stages.update_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.stages.update_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.stages.update_own"
+                            <%= 'checked' if @role.has_permission?('gns_project.stages.update_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.stages.update_own">Update own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.stages.update_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.stages.update_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.stages.update_other"
+                            <%= 'checked' if @role.has_permission?('gns_project.stages.update_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.stages.update_other">Update other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.stages.delete_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.stages.delete_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.stages.delete_own"
+                            <%= 'checked' if @role.has_permission?('gns_project.stages.delete_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.stages.delete_own">Delete own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.stages.delete_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.stages.delete_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.stages.delete_other"
+                            <%= 'checked' if @role.has_permission?('gns_project.stages.delete_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.stages.delete_other">Delete other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">                                
+                        <input type="hidden" name="permissions[gns_project.stages.activate_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.stages.activate_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.stages.activate_own"
+                            <%= 'checked' if @role.has_permission?('gns_project.stages.activate_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.stages.activate_own">Activate own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.stages.activate_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.stages.activate_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.stages.activate_other"
+                            <%= 'checked' if @role.has_permission?('gns_project.stages.activate_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.stages.activate_other">Activate other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.stages.deactivate_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.stages.deactivate_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.stages.deactivate_own"
+                            <%= 'checked' if @role.has_permission?('gns_project.stages.deactivate_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.stages.deactivate_own">De-activate own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.stages.deactivate_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.stages.deactivate_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.stages.deactivate_other"
+                            <%= 'checked' if @role.has_permission?('gns_project.stages.deactivate_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.stages.deactivate_other">De-activate other</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="pt-2">
+            <h6 class="card-title">
+                <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
+                   href="#gnsProject-tasks">Tasks
+                </a>
+            </h6>
+
+            <div id="gnsProject-tasks" class="collapse show">
+                <div class="form-group">
+        
+                    <div class="custom-control custom-checkbox">                                
+                        <input type="hidden" name="permissions[gns_project.tasks.create]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.tasks.create]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.tasks.create"
+                            <%= 'checked' if @role.has_permission?('gns_project.tasks.create') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.tasks.create">Create</label>
+                    </div>
+                    
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.tasks.read_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.tasks.read_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.tasks.read_own"
+                            <%= 'checked' if @role.has_permission?('gns_project.tasks.read_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.tasks.read_own">Read own</label>
+                    </div>
+                    
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.tasks.read_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.tasks.read_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.tasks.read_other"
+                            <%= 'checked' if @role.has_permission?('gns_project.tasks.read_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.tasks.read_other">Read other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">                                
+                        <input type="hidden" name="permissions[gns_project.tasks.update_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.tasks.update_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.tasks.update_own"
+                            <%= 'checked' if @role.has_permission?('gns_project.tasks.update_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.tasks.update_own">Update own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.tasks.update_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.tasks.update_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.tasks.update_other"
+                            <%= 'checked' if @role.has_permission?('gns_project.tasks.update_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.tasks.update_other">Update other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.tasks.delete_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.tasks.delete_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.tasks.delete_own"
+                            <%= 'checked' if @role.has_permission?('gns_project.tasks.delete_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.tasks.delete_own">Delete own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.tasks.delete_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.tasks.delete_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.tasks.delete_other"
+                            <%= 'checked' if @role.has_permission?('gns_project.tasks.delete_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.tasks.delete_other">Delete other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">                                
+                        <input type="hidden" name="permissions[gns_project.tasks.activate_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.tasks.activate_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.tasks.activate_own"
+                            <%= 'checked' if @role.has_permission?('gns_project.tasks.activate_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.tasks.activate_own">Activate own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.tasks.activate_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.tasks.activate_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.tasks.activate_other"
+                            <%= 'checked' if @role.has_permission?('gns_project.tasks.activate_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.tasks.activate_other">Activate other</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.tasks.deactivate_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.tasks.deactivate_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.tasks.deactivate_own"
+                            <%= 'checked' if @role.has_permission?('gns_project.tasks.deactivate_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.tasks.deactivate_own">De-activate own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.tasks.deactivate_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.tasks.deactivate_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.tasks.deactivate_other"
+                            <%= 'checked' if @role.has_permission?('gns_project.tasks.deactivate_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.tasks.deactivate_other">De-activate other</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

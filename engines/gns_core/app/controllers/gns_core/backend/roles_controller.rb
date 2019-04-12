@@ -1,7 +1,7 @@
 module GnsCore
   module Backend
     class RolesController < GnsCore::Backend::BackendController
-      before_action :set_role, only: [:show, :edit, :update, :destroy]
+      before_action :set_role, only: [:roles_permissions, :edit, :update, :destroy]
   
       # GET /roles
       def index
@@ -15,7 +15,10 @@ module GnsCore
       end
   
       # GET /roles/1
-      def show
+      def roles_permissions
+      end
+      
+      def update_permissions
       end
   
       # GET /roles/new
@@ -49,7 +52,7 @@ module GnsCore
           
           flash[:success] = 'Role was successfully created.'
           render json: {
-            redirect: gns_core.backend_role_path(@role)
+            redirect: gns_core.roles_permissions_backend_roles_path(@role)
           }
         else
           render :new
@@ -84,10 +87,10 @@ module GnsCore
       end
   
       # DELETE /roles/1
-      def destroy
-        @role.destroy
-        redirect_to roles_url, notice: 'Role was successfully destroyed.'
-      end
+      #def destroy
+      #  @role.destroy
+      #  redirect_to roles_url, notice: 'Role was successfully destroyed.'
+      #end
       
       # select2 ajax
       def select2

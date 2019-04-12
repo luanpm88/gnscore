@@ -15,7 +15,7 @@
         <div class="form-group">
             <div class="form-check form-check-inline form-check-right form-check-switchery">
                 <label class="form-check-label">
-                    Allow:
+                    Set active:
                     <input type="hidden" name="role[active]" value="false" />
                     <input type="checkbox" class="form-check-input-switchery"
                         name="role[active]"
@@ -26,9 +26,7 @@
         </div>
     </fieldset>
     
-    <%= render 'policy', role: role %>
-    
-    <!--<hr class="mt-0">-->
+    <hr class="mt-0">
     <div class="text-left">
         <button type="submit" class="btn btn-primary">Save</button>
         <a class="btn btn-light ml-1" href="<%= gns_core.backend_roles_path %>">

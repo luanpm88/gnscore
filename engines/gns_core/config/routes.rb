@@ -22,6 +22,8 @@ GnsCore::Engine.routes.draw do
             collection do
                 post 'list'
                 get 'select2'
+                get ':id/roles_permissions', to: 'roles#roles_permissions', as: 'roles_permissions'
+                post ':id/update_permissions', to: 'roles#update_permissions', as: 'update_permissions'
             end
         end
     end
