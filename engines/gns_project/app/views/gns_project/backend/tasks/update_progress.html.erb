@@ -1,16 +1,16 @@
 <% content_for :title do %>
-    Close Task - <%= @task.name %>
+    Progress Update - <%= @task.name %>
 <% end %>
 
 <% content_for :page_script do %>
     <script>
         $(document).ready(function() {
-            $('.close_task').submit(function(e) {
+            $('.update_progress_task').submit(function(e) {
                 e.preventDefault();                
                 var form = $(this);
                 
                 // clear modal
-                close_task_modal.clear();
+                update_progress_task_modal.clear();
                 
                 $.ajax({
                     url: form.attr('action'),
@@ -19,14 +19,11 @@
                 }).done(function(response) {
                     if (typeof(response.status) !== 'undefined') {
                       showNotification(response.status, response.message);
-                      close_task_modal.hide();
-                      
+                      update_progress_task_modal.hide();
                       // load task list
-                      if (typeof(finish_task_callback) !== 'undefined') {
-                        close_task_callback();
-                      }
+                      task_list_box.load();
                     } else {
-                      close_task_modal.renderHtml(response);
+                      update_progress_task_modal.renderHtml(response);
                     }
                 });
                 
@@ -38,12 +35,19 @@
 
 <div class="card">
     <div class="card-body">
-        <%= form_for '', url: gns_project.close_backend_tasks_path(id: @task.id), html: {multipart: false, class: 'close_task'} do |f| %>
-            <h5>Do you want to close this task?</h5>
+        <%= form_for '', url: gns_project.update_progress_backend_tasks_path(id: @task.id), html: {multipart: false, class: 'update_progress_task'} do |f| %>
             
             <div class="form-group">
+                <input type="text" class="form-control" id="ion-percentage"
+                    name="progress"
+                    value="<%= @task.progress %>">
+                <label class="d-block">Slide to assign a percentage for progress</label>
+            </div>
+            
+            <div class="form-group">
+                <label class="d-block">Remark <span class="text-danger">*</span></label>
                 <textarea rows="2" cols="5"
-                    class="form-control <%= 'border-danger' if @task.errors.full_messages_for(:remark).present? %>"
+                    class="form-control font-weight-semibold <%= 'border-danger' if @task.errors.full_messages_for(:remark).present? %>"
                     placeholder="Enter your remark here"
                     name="remark"
                 ></textarea>
@@ -53,7 +57,7 @@
             </div>
             
             <div class="text-left">
-                <button type="submit" class="btn btn-primary">Close Confirm</button>
+                <button type="submit" class="btn btn-primary">Update</button>
             </div>
         <% end %>
     </div>

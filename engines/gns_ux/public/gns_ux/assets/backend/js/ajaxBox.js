@@ -27,4 +27,8 @@ function ajaxBox(obj, url, callback) {
             applyJs(main.box);
         });
     };
+    
+    this.loadHtml = function(html) {
+        main.box.html(html);
+    };
 }

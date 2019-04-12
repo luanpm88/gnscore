@@ -1,8 +1,8 @@
 module GnsProject
   module Backend
     class ProjectsController < GnsCore::Backend::BackendController
-      before_action :set_project, only: [:show, :edit, :update, :destroy,
-                                         :attachments, :task_planning, :task_attachment]
+      before_action :set_project, only: [:download_attachments, :show, :edit, :update, :destroy,
+                                         :attachments, :task_planning, :task_attachment, :logs, :logs_list]
   
       # GET /projects
       def index
@@ -33,6 +33,7 @@ module GnsProject
         @project = Project.new(project_params)
         
         @project.creator = current_user
+        @project.status = Project::STATUS_NEW
   
         if @project.save
           flash[:success] = 'Project was successfully created.'
@@ -90,15 +91,50 @@ module GnsProject
       
       # task list ajax table / project planning
       def task_planning
+        @tasks = @project.tasks.order(:custom_order)
+        
         render layout: nil
       end
       
       # task list ajax table / project planning
+      def attachments
+      end
+      
       def task_attachment
+        @tasks = @project.tasks.order(:custom_order)
+        
         render layout: nil
       end
       
-      def attachments
+      def logs_list
+        @logs = @project.logs.search(params).paginate(:page => params[:page], :per_page => params[:per_page])
+        
+        render layout: nil
+      end
+      
+      def download_attachments
+        authorize! :download_attachments, @project
+        
+        filename = "#{@project.code}.zip"
+        t = Tempfile.new(filename)
+        # Give the path of the temp file to the zip outputstream, it won't try to open it as an archive.
+        Zip::OutputStream.open(t.path) do |zos|
+          @project.tasks.each do |task|
+            task.attachments.each do |att|
+              file = File.read(att.file_path)
+              # Create a new entry with some arbitrary name
+              zos.put_next_entry(task.stage.name + '/' + task.name + '/' + att.original_name)
+              # Add the contents of the file, don't read the stuff linewise if its binary, instead use direct IO
+              zos.puts file
+            end
+          end
+        end
+        
+        # End of the block  automatically closes the file.
+        # Send it using the right mime type, with a download window and some nice file name.
+        send_file t.path, :type => 'application/zip', :disposition => 'attachment', :filename => "#{@project.code}.zip"
+        # The temp file will be deleted some time...
+        t.close
       end
   
       private

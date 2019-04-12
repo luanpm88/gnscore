@@ -19,22 +19,37 @@ module GnsProject
       employee.present? ? employee.full_name : ''
     end
     
+    # count attachments
+    def count_attachments
+      self.attachments.count
+    end
+    
+    # name with stage
+    def name_with_stage
+      "#{self.stage_name} / #{self.name}"
+    end
+    
     # get select2 records
     def self.select2(params)
       per_page = 10
       page = 1      
       data = {results: [], pagination: {more: false}}
       
-      query = self.order(:name)
+      query = self.includes(:stage).order("gns_project_stages.custom_order, gns_project_tasks.custom_order")
       
       # keyword
       if params[:q].present?
         query = query.where('LOWER(gns_project_tasks.name) LIKE ?', '%'+params[:q].to_ascii.strip.downcase+'%')
       end
       
-      # state
+      # stage
       if params[:stage_id].present?
         query = query.where(stage_id: params[:stage_id])
+      end
+      
+      # project
+      if params[:project_id].present?
+        query = query.where(project_id: params[:project_id])
       end
       
       # pagination
@@ -44,15 +59,44 @@ module GnsProject
       
       # render items
       query.each do |d|
-        data[:results] << {id: d.id, text: d.name}
+        name = params[:include_stage_name].present? ? d.name_with_stage : d.name
+        data[:results] << {id: d.id, text: name}
       end
       
       return data
     end
     
+    # update custom_order
+    def update_custom_order(current_task=nil)
+      tasks_query = Task.where(project_id: self.project_id)
+      max_order_num = tasks_query.maximum(:custom_order)
+      
+      if max_order_num == nil
+        self.update_columns(custom_order: 1)
+        
+      elsif current_task.present?
+        # tasks behind / update custom_order
+        tasks_query.where("custom_order > ?", current_task.custom_order).update_all("custom_order=custom_order + 1")
+        
+        # self / update custom_order
+        self.update_columns(custom_order: current_task.custom_order + 1)
+      else
+        self.update_columns(custom_order: max_order_num + 1)
+      end
+    end
+    
     # class const
     STATUS_OPEN = 'open'
     STATUS_CLOSED = 'closed'
+    
+    # check status: true/false
+    def is_open?
+			return self.status == Task::STATUS_OPEN
+		end
+    
+    def is_closed?
+			return self.status == Task::STATUS_CLOSED
+		end
     
     # set status
 		def set_open
@@ -72,8 +116,8 @@ module GnsProject
 			update_attributes(finished: false)
 		end
     
-    def log(phrase, user, remark)
-      GnsProject::Log::log(phrase, self, user, remark)
+    def log(phrase, user, remark=nil)
+      GnsProject::Log.add_new(self.project, phrase, self, user, remark)
     end
   end
 end

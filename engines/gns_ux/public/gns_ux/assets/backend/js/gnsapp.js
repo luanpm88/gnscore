@@ -101,6 +101,12 @@ function applyJs(container) {
         editable: false,
     });
     
+    container.find('#ion-percentage').ionRangeSlider({
+        min: 0,
+        max: 100,
+        postfix: '%'
+    });
+    
     // Datalist
     container.find('.datalist').datalist();
     
@@ -123,6 +129,29 @@ function applyJs(container) {
             }
         });
     });
+    
+    // check active menu
+    container.find('.nav-link').each(function() {
+        var menus = [];
+        var active = false;
+        
+        if (typeof($(this).attr('data-menu')) !== 'undefined') {
+            menus = $(this).attr('data-menu').split(',');
+        }
+        
+        menus.forEach(function(item) {
+            if (current_controller == item.trim() || full_path == item.trim()) {
+                active = true;
+                return;
+            }
+        });
+        
+        if(active) {
+            $(this).addClass('active');
+            $(this).closest('.nav-item-submenu').addClass('nav-item-open');
+            $(this).closest('.nav-group-sub').css('display', 'block');
+        }
+    });	
     
     // gLink
     new gLink(container.find('.g-link'));
@@ -236,10 +265,27 @@ function applyJs(container) {
         });
     };
     
+    // Tooltip
+    var gComponentTooltip = function() {
+
+        // Initialize
+        container.find('[data-popup="tooltip"]').tooltip();
+
+        // Demo tooltips, remove in production
+        var demoTooltipSelector = '[data-popup="tooltip-demo"]';
+        if($(demoTooltipSelector).is(':visible')) {
+            $(demoTooltipSelector).tooltip('show');
+            setTimeout(function() {
+                $(demoTooltipSelector).tooltip('hide');
+            }, 2000);
+        }
+    };
+    
     gCardActionReload();
     gCardActionCollapse();
     gCardActionRemove();
     gCardActionFullscreen();
+    gComponentTooltip();
 }
 
 $(document).ready(function() {    

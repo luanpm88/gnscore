@@ -2,8 +2,8 @@ module GnsProject
   module Backend
     class TasksController < GnsCore::Backend::BackendController
       before_action :set_task, only: [:show, :edit, :update, :destroy,
-                                      :reopen, :close, :finish, :unfinish,
-                                      :attachments]
+                                      :reopen, :close, :finish, :unfinish, :update_progress,
+                                      :attachments, :attachments_list, :download_attachments]
   
       # GET /tasks
       def index
@@ -28,7 +28,17 @@ module GnsProject
         @task = Task.new(task_params)
         
         @task.status = Task::STATUS_OPEN
+        
+        current_task_id = params.to_unsafe_hash[:task][:current_task_id]
+        if current_task_id.present?
+          current_task = Task.find(current_task_id)
+        end
+        
         if @task.save
+          # add below stage
+          @task.update_custom_order(current_task)
+          
+          @task.log("gns_project.log.task.created", current_user)
           render json: {
             status: 'success',
             message: 'Task was successfully created.',
@@ -40,7 +50,22 @@ module GnsProject
   
       # PATCH/PUT /tasks/1
       def update
-        if @task.update(task_params)
+        # check other model errors
+        @task.assign_attributes(task_params)
+        @task.valid?
+        
+        # check if remark empty errors
+        if !params[:remark].present?
+          @task.errors.add('remark', "not be blank")
+        end
+        
+        # check error empty?
+        if @task.errors.empty?
+          @task.save
+          
+          # project log
+          @task.log("gns_project.log.task.updated", current_user, params[:remark])
+          
           render json: {
             status: 'success',
             message: 'Task was successfully updated.',
@@ -67,11 +92,18 @@ module GnsProject
       
       # danh sach attachment cua task
       def attachments
+      end
+      
+      def attachments_list
+        @attachments = @task.attachments
+        
         render layout: nil
       end
       
       # Re-open action
       def reopen
+        authorize! :reopen, @task
+        
         remark = params[:remark]
         
         if request.post?
@@ -93,6 +125,8 @@ module GnsProject
       
       # Close action
       def close
+        authorize! :close, @task
+        
         remark = params[:remark]
         
         if request.post?
@@ -114,6 +148,8 @@ module GnsProject
       
       # Finish action
       def finish
+        authorize! :finish, @task
+        
         remark = params[:remark]
         
         if request.post?
@@ -135,6 +171,8 @@ module GnsProject
       
       # Close action
       def unfinish
+        authorize! :unfinish, @task
+        
         remark = params[:remark]
         
         if request.post?
@@ -153,6 +191,51 @@ module GnsProject
           end
         end
       end
+      
+      # update progress for task action
+      def update_progress       
+        if request.post?
+          @task.progress = params[:progress]
+          remark = params[:remark]
+          
+          if !remark.present?
+            @task.errors.add('remark', "not be blank")
+          end
+          
+          if @task.errors.empty?
+            @task.save
+            @task.log("gns_project.log.task.update_progress", current_user, remark)
+            
+            render json: {
+              status: 'success',
+              message: 'Task progress has been updated.',
+            }
+          end
+        end
+      end
+      
+      def download_attachments
+        authorize! :download_attachments, @task
+        
+        filename = "#{@task.name}.zip"
+        t = Tempfile.new(filename)
+        # Give the path of the temp file to the zip outputstream, it won't try to open it as an archive.
+        Zip::OutputStream.open(t.path) do |zos|
+          @task.attachments.each do |att|
+            file = File.read(att.file_path)
+            # Create a new entry with some arbitrary name
+            zos.put_next_entry(@task.stage.name + '/' + @task.name + '/' + att.original_name)
+            # Add the contents of the file, don't read the stuff linewise if its binary, instead use direct IO
+            zos.puts file
+          end
+        end
+        
+        # End of the block  automatically closes the file.
+        # Send it using the right mime type, with a download window and some nice file name.
+        send_file t.path, :type => 'application/zip', :disposition => 'attachment', :filename => filename
+        # The temp file will be deleted some time...
+        t.close
+      end
   
       private
         # Use callbacks to share common setup or constraints between actions.
@@ -162,7 +245,7 @@ module GnsProject
   
         # Only allow a trusted parameter "white list" through.
         def task_params
-          params.fetch(:task, {}).permit(:name, :project_id, :stage_id, :start_date, :end_date, :employee_id)
+          params.fetch(:task, {}).permit(:name, :project_id, :stage_id, :start_date, :end_date, :employee_id, :hours)
         end
     end
   end

@@ -2,5 +2,24 @@ en:
   gns_project:
     notification:
       project:
-        created: "Created new project: %{name}"
-        updated: "Updated project: %{name}"
+        created: "Create new project: %{name}"
+        updated: "Update project info: %{name}"
+    
+    # Project Logs
+    log:
+      project:
+        created: "Create new project: %{name}"
+        updated: "Update project info: %{name}"
+      task:
+        created: "Create new task: %{name}"
+        updated: "Update task info: %{name}"
+        close: "Close task: %{name}"
+        reopen: "Re-open task: %{name}"
+        finish: "Finish task: %{name}"
+        unfinish: "Un-finish task: %{name}"
+        update_progress: "Update progress task to %{progress}%: %{name}"
+      attachment:
+        created: "Add new attachment: %{name}"
+        updated: "Update attachment info: %{name}"
+        reupload: "Re-upload attachment: %{name}"
+        destroyed: "Destroy attachment: %{name}"

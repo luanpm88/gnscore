@@ -1,0 +1,212 @@
+<% content_for :title do %>
+    Project Management
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+    <a href="<%= gns_project.backend_projects_path %>" class="breadcrumb-item">Projects</a>
+    <span class="breadcrumb-item active">Logs</span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-history"></i> <span class="font-weight-semibold">Project Logs</span></h4>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        $(document).ready(function() {
+            // Select2 ajax
+            $('[name=stage_id]').each(function() {
+                var url = $(this).attr('data-url');
+                
+                $(this).select2({
+                    allowClear: true,
+                    ajax: {
+                        url: url,
+                        dataType: 'json',
+                        data: function (params) {
+                            console.log(params);
+                            var query = {
+                                q: params.term,
+                                page: params.page,
+                                type: 'public',
+                            }
+                      
+                            // Query parameters will be ?search=[term]&type=public
+                            return query;
+                        }
+                    }
+                }); 
+            });
+            
+            $('[name=task_id]').each(function() {
+                var url = $(this).attr('data-url');
+                
+                $(this).select2({
+                    allowClear: true,
+                    ajax: {
+                        url: url,
+                        dataType: 'json',
+                        data: function (params) {
+                            console.log(params);
+                            var query = {
+                                q: params.term,
+                                page: params.page,
+                                type: 'public',
+                                stage_id: $('[name=stage_id]').select2('val')
+                            }
+                      
+                            // Query parameters will be ?search=[term]&type=public
+                            return query;
+                        }
+                    }
+                }); 
+            });
+            
+            $('[name=attachment_id]').each(function() {
+                var url = $(this).attr('data-url');
+                
+                $(this).select2({
+                    allowClear: true,
+                    ajax: {
+                        url: url,
+                        dataType: 'json',
+                        data: function (params) {
+                            console.log(params);
+                            var query = {
+                                q: params.term,
+                                page: params.page,
+                                type: 'public',
+                                task_id: $('[name=task_id]').select2('val')
+                            }
+                      
+                            // Query parameters will be ?search=[term]&type=public
+                            return query;
+                        }
+                    }
+                }); 
+            });
+            
+            $('[name=task_id]').change(function() {
+                $('[name=attachment_id]').val(null).trigger('change');
+            });
+            
+            $('[name=stage_id]').change(function() {
+                $('[name=task_id]').val(null).trigger('change');
+                $('[name=attachment_id]').val(null).trigger('change');
+            });
+        });
+    </script>
+<% end %>
+
+<%= render "general_infomation" %>
+
+<div class="card">
+    <%= render "menu_tab", title: 'Project logs' %>
+    
+    <div class="datalist"
+        data-url="<%= gns_project.logs_list_backend_projects_path %>"
+    >
+        <form class="datalist-filters">
+            <div class="card-body pb-0">    
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text"
+                                    class="form-control font-weight-semibold datepicker"
+                                    placeholder="Select from date"
+                                    name="from_date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text"
+                                    class="form-control font-weight-semibold datepicker"
+                                    placeholder="Select to date"
+                                    name="to_date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <select name="log_type" data-placeholder="Select log type"
+                                class="form-control selectAllowClear"
+                                data-container-css-class="font-weight-semibold">
+                                <option></option>
+                                <option value="GnsProject::Project">Project</option>
+                                <option value="GnsProject::Task">Task</option>
+                                <option value="GnsProject::Attachment">Attachment</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <select name="stage_id" data-placeholder="Select stage name"
+                              class="form-control select-ajax"
+                              data-container-css-class="font-weight-semibold"
+                              data-url="<%= gns_project.select2_backend_stages_path(category_id: @project.category_id) %>">
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <select name="task_id" data-placeholder="Select task name"
+                              class="form-control select-ajax"
+                              data-container-css-class="font-weight-semibold"
+                              data-url="<%= gns_project.select2_backend_tasks_path(project_id: @project.id) %>">
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <select name="attachment_id" data-placeholder="Select attachment name"
+                              class="form-control select-ajax"
+                              data-container-css-class="font-weight-semibold"
+                              data-url="<%= gns_project.select2_backend_attachments_path %>">
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-1 text-right">
+                        <span class="btn btn-primary mb-3 datalist-search-button">Go</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-body">
+                <div class="datalist-header flex space-between">
+                    <div class="text-left text-nowrap flex"></div>
+                    <div class="text-right text-nowrap flex">
+                        <div class="sort-by-box flex align-center mr-3">
+                            <span class="mr-1">Sort by:</span>
+                            <select name="sort_by" data-placeholder="Sort by..." class="form-control selectPrimary sort-by-select">
+                                <option value="created_at">Date/Time</option>
+                            </select>
+                            <input class="sort-direction" type="hidden" name="sort_direction" value="desc" />
+                        </div>
+                        <div class="show-per-page flex align-center">
+                            <span class="mr-1">Per page:</span>
+                            <select name="per_page" class="form-control selectPrimary per-page-select">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="datalist-content">
+                
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,15 +1,18 @@
 <%= form_for([gns_project, :backend, task], html: {multipart: true}) do |f| %>
-
     <fieldset>
         <input type="hidden" name="task[project_id]" value="<%= @task.project.id %>">
+        <input type="hidden" name="task[current_task_id]" value="<%= params[:current_task_id] %>">
+        
         <div class="form-group">
+            <%= task.stage_id %>
             <label class="d-block">Stage <span class="text-danger">*</span></label>
             <select name="task[stage_id]" data-placeholder="Select stage..."
                 class="form-control select-ajax"
                 data-url="<%= gns_project.select2_backend_stages_path(category_id: @task.project.category_id) %>"
                 data-container-css-class="font-weight-semibold <%= 'border-danger' if task.errors.full_messages_for(:stage_id).present? %>"
             >
-                <option value="<%= task.stage_id %>"><%= task.stage_name %></option>
+                <option value=''>None</option>
+                <option selected value="<%= task.stage_id %>"><%= task.stage_name %></option>
             </select>
             <% if task.errors.full_messages_for(:stage_id).present? %>
                 <span class="form-text text-danger"><%= task.errors.full_messages_for(:stage_id).join('<br/>').html_safe %></span>
@@ -68,7 +71,7 @@
             <label class="d-block">Hours</label>
             <input type="text" class="form-control font-weight-semibold" placeholder="Hours (enter number)"
                 name="task[hours]"
-                value="<%= '' %>">
+                value="<%= task.hours %>">
         </div>
         
         <div class="form-group">
@@ -84,6 +87,20 @@
                 <span class="form-text text-danger"><%= task.errors.full_messages_for(:employee_id).join('<br/>').html_safe %></span>
             <% end %>
         </div>
+        
+        <% if !task.id.nil? %>
+            <div class="form-group">
+                <label class="d-block">Remark <span class="text-danger">*</span></label>
+                <textarea rows="2" cols="5"
+                    class="form-control font-weight-semibold <%= 'border-danger' if task.errors.full_messages_for(:remark).present? %>"
+                    placeholder="Enter your remark here"
+                    name="remark"
+                ></textarea>
+                <% if task.errors.full_messages_for(:remark).present? %>
+                    <span class="form-text text-danger"><%= task.errors.full_messages_for(:remark).join('<br/>').html_safe %></span>
+                <% end %>
+            </div>
+        <% end %>
         
     </fieldset>    
     <hr class="mt-0">

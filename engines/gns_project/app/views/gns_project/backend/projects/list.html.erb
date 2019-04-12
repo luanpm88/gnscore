@@ -38,7 +38,12 @@
         <% @projects.each do |project| %>
             <tr>
                 <% if params["show_columns"].include?("code") %>
-                    <td><%= project.code %></td>
+                    <td>
+                        <a href="<%= gns_project.backend_project_path(project) %>"
+                          class="modal-control" modal-size="full">
+                            <%= project.code %>
+                        </a>
+                    </td>
                 <% end %>
                 <% if params["show_columns"].include?("name") %>
                     <td><%= project.name %></td>
@@ -51,36 +56,37 @@
                 <% end %>
                 <% if params["show_columns"].include?("start_date") %>
                     <td>
-                        <%= Time.now.strftime("%d/%m/%Y") %>
+                        <%= project.start_date.strftime("%d/%m/%Y") %>
                     </td>
                 <% end %>
                 <% if params["show_columns"].include?("end_date") %>
                     <td>
-                        <%= Time.now.strftime("%d/%m/%Y") %>
+                        <%= project.end_date.strftime("%d/%m/%Y") %>
                     </td>
                 <% end %>
                 <% if params["show_columns"].include?("complete") %>
                     <td width="150px">
-                        <div class="progress rounded-round" title="20% Complete">
-                            <div class="progress-bar" style="width: 90%">
-                                <span>90%</span>
+                        <% num = project.progress_percent.round %>
+                        <div class="progress" title="<%= num %>% Complete">
+                            <div class="progress-bar bg-teal" style="width: <%= num %>%">
+                                <span><%= num %>%</span>
                             </div>
                         </div>
                     </td>
                 <% end %>
                 <% if params["show_columns"].include?("status") %>
                     <td>
-                        <span class="badge badge-success">Active</span>
+                        <span class="badge badge-<%= project.status %>"><%= t project.status %></span>
                     </td>
                 <% end %>
                 <% if params["show_columns"].include?("created_at") %>
                     <td>
-                        <%= Time.now.strftime("%d/%m/%Y") %>
+                        <%= project.created_at.strftime("%d/%m/%Y") %>
                     </td>
                 <% end %>
                 <% if params["show_columns"].include?("updated_at") %>
                     <td>
-                        <%= Time.now.strftime("%d/%m/%Y") %>
+                        <%= project.updated_at.strftime("%d/%m/%Y") %>
                     </td>
                 <% end %>
                 <td class="text-center">
@@ -92,7 +98,7 @@
 
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a href="<%= gns_project.backend_project_path(project) %>" class="dropdown-item">
-                                    <i class="icon-file-eye"></i> View
+                                    <i class="icon-file-eye"></i> Details
                                 </a>
                                 <a class="dropdown-item edit-project-button"
                                     href="<%= gns_project.edit_backend_project_path(project) %>">
@@ -100,7 +106,7 @@
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item"
-                                    href="javascript:void(0)">
+                                    href="<%= gns_project.logs_backend_projects_path(project) %>">
                                     <i class="icon-file-text2"></i> Logs
                                 </a>
                                 <div class="dropdown-divider"></div>

@@ -89,6 +89,12 @@
                 stage_modal.load($(this).attr('href'));
             });
             
+            $(document).on('click', '.insert-below-stage-button', function(e) {
+                e.preventDefault();
+                
+                stage_modal.load($(this).attr('href'));
+            });
+            
             $(document).on('click', '.edit-stage-button', function(e) {
                 e.preventDefault();
                 
