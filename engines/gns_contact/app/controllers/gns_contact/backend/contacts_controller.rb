@@ -47,6 +47,8 @@ module GnsContact
       # POST /contacts
       def create
         @contact = Contact.new(contact_params)
+        
+        @contact.contact_type = GnsContact::Contact::TYPE_COMPANY
   
         if @contact.save
           # Add notification
@@ -59,7 +61,6 @@ module GnsContact
             redirect: gns_contact.backend_contact_path(@contact)
           }
         else
-          logger.info @contact.errors.to_json
           render :new
         end
       end
@@ -69,7 +70,6 @@ module GnsContact
         @contact = Contact.new(contact_params)
         
         @contact.contact_type = GnsContact::Contact::TYPE_PERSON
-        @contact.code = "PERSON#{GnsContact::Contact.maximum(:id).next}"
   
         if @contact.save
           render json: {

@@ -17,6 +17,9 @@
             <% if params["show_columns"].include?("business_partner_type") %>
                 <th class="text-nowrap">Bus.P.Type</th>
             <% end %>
+            <% if params["show_columns"].include?("belongs_to") %>
+                <th class="text-nowrap">Belongs To</th>
+            <% end %>
             <% if params["show_columns"].include?("tax_code") %>
                 <th class="text-nowrap">Tax ID</th>
             <% end %>
@@ -45,7 +48,7 @@
         <% @contacts.each do |contact| %>
             <tr>
                 <% if params["show_columns"].include?("code") %>
-                    <td><%= contact.code %></td>
+                    <td><%= contact.code.present? ? contact.code : '--' %></td>
                 <% end %>
                 <% if params["show_columns"].include?("full_name") %>
                     <td>
@@ -63,6 +66,11 @@
                 <% end %>
                 <% if params["show_columns"].include?("business_partner_type") %>
                     <td><%= t contact.contact_type %></td>
+                <% end %>
+                <% if params["show_columns"].include?("belongs_to") %>
+                    <td>
+                        <%= contact.parent.map {|p| "#{p.full_name}"}.join('<br>').html_safe %>
+                    </td>
                 <% end %>
                 <% if params["show_columns"].include?("tax_code") %>
                     <td><%= contact.tax_code %></td>
@@ -102,10 +110,19 @@
                                 <a href="<%= gns_contact.backend_contact_path(contact) %>" class="dropdown-item">
                                     <i class="icon-file-eye"></i> View
                                 </a>
-                                <a class="dropdown-item edit-contact-button"
-                                    href="<%= gns_contact.edit_backend_contact_path(contact) %>">
-                                    <i class="icon-pencil7"></i> Update
-                                </a>
+                                <% if contact.contact_type == GnsContact::Contact::TYPE_COMPANY %>
+                                    <a class="dropdown-item edit-contact-button"
+                                        href="<%= gns_contact.edit_backend_contact_path(contact) %>">
+                                        <i class="icon-pencil7"></i> Update
+                                    </a>
+                                <% end %>
+                                <% if contact.contact_type == GnsContact::Contact::TYPE_PERSON %>
+                                    <a class="dropdown-item edit-contact-button"
+                                        href="<%= gns_contact.subcontact_edit_backend_contacts_path(contact) %>">
+                                        <i class="icon-pencil7"></i> Update
+                                    </a>
+                                <% end %>
+                                
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item ajax datalist-g-link"
                                     href="<%= gns_contact.backend_contact_path(contact) %>"

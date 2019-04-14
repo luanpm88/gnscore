@@ -1,6 +1,6 @@
 module GnsContact
   class Contact < ApplicationRecord
-    validates :code, uniqueness: true, allow_blank: true
+    #validates :code, uniqueness: true, presence: true#, allow_blank: true
     validates :full_name, :contact_type, presence: true
     
     belongs_to :country, class_name: 'GnsArea::Country', optional: true
@@ -15,6 +15,13 @@ module GnsContact
     has_many :children_contacts, class_name: 'GnsContact::ParentContact', foreign_key: :parent_id
     has_many :parent, class_name: 'GnsContact::Contact', through: :parent_contacts
     has_many :children, class_name: 'GnsContact::Contact', through: :children_contacts
+    
+    validate :code_required
+    def code_required
+      if !code.present? and contact_type == GnsContact::Contact::TYPE_COMPANY
+        errors.add(:code, :message)
+      end
+    end
     
     # get name
     def name
@@ -61,8 +68,8 @@ module GnsContact
     # get business type options
     def self.get_type_options()
       [
+        {text: 'Company', value: self::TYPE_COMPANY},
         {text: 'Person', value: self::TYPE_PERSON},
-        {text: 'Company', value: self::TYPE_COMPANY}
       ]
     end
     

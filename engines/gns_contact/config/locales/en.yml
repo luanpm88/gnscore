@@ -4,3 +4,11 @@ en:
       contact:
         created: "created new contact: %{name}"
         updated: "updated contact: %{name}"
+        
+  activerecord:
+    errors:
+      models:
+        gns_contact/contact:
+          attributes:
+            code:
+              message: "can't be blank"
