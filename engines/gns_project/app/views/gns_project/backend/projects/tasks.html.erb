@@ -1,12 +1,12 @@
 <% content_for :title do %>
-    Task Attachment
+    Project Planning
 <% end %>
 
 <% content_for :breadcrumb do %>
     <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
     <a href="<%= gns_project.backend_projects_path %>" class="breadcrumb-item">Projects</a>
     <a href="<%= gns_project.backend_project_path(@project) %>" class="breadcrumb-item"><%= @project.name %></a>
-    <span class="breadcrumb-item active">Attachment</span>
+    <span class="breadcrumb-item active">Planning</span>
 <% end %>
 
 <% content_for :page_title do %>
@@ -16,7 +16,7 @@
 <% content_for :page_script do %>
     <script>
         // global modal
-        var show_task_modal = new gModal();
+        var task_modal = new gModal({size: 'md'});
         var finish_task_modal = new gModal({size: 'md'});
         var finish_task_callback;
         var unfinish_task_modal = new gModal({size: 'md'});
@@ -25,24 +25,39 @@
         var close_task_callback;
         var reopen_task_modal = new gModal({size: 'md'});
         var reopen_task_callback;
+        var update_progress_task_modal = new gModal({size: 'md'});
         
-        // tab attachment -> danh sach cac task
-        var task_attachment_list_box = new ajaxBox(
-            $('.task-attachment-list'),
-            '<%= gns_project.attachments_list_backend_projects_path(@project.id) %>',
+        var task_list_box = new ajaxBox(
+            $('.task-planning-list'),
+            '<%= gns_project.tasks_list_backend_projects_path(@project.id) %>',
             function(box) {
                 // apply g-link
-                new gLink(box.find('.delete-task-button'), function(link) {
-                    task_attachment_list_box.load();
-                });
+                new gLink(box.find('.delete-task-button'),
+                    function(link) {
+                        task_list_box.load();
+                    }
+                );
             }
         );
         
         $(function() {
-            $(document).on('click', '.show-task-button', function(e) {
+            
+            $('.add-task-button').click(function(e) {
                 e.preventDefault();
                 
-                show_task_modal.load($(this).attr('href'));
+                task_modal.load($(this).attr('href'));
+            });
+            
+            $(document).on('click', '.edit-task-button', function(e) {
+                e.preventDefault();
+                
+                task_modal.load($(this).attr('href'));
+            });
+            
+            $(document).on('click', '.insert-below-task-button', function(e) {
+                e.preventDefault();
+                
+                task_modal.load($(this).attr('href'));
             });
             
             $(document).on('click', '.finish-task-button', function(e) {
@@ -51,7 +66,7 @@
                 finish_task_modal.load($(this).attr('href'));
                 
                 finish_task_callback = function() {
-                    task_attachment_list_box.load();
+                    task_list_box.load();
                 };
             });
             
@@ -61,7 +76,7 @@
                 unfinish_task_modal.load($(this).attr('href'));
                 
                 unfinish_task_callback = function() {
-                    task_attachment_list_box.load();
+                    task_list_box.load();
                 };
             });
             
@@ -71,7 +86,7 @@
                 close_task_modal.load($(this).attr('href'));
                 
                 close_task_callback = function() {
-                    task_attachment_list_box.load();
+                    task_list_box.load();
                 };
             });
             
@@ -81,31 +96,30 @@
                 reopen_task_modal.load($(this).attr('href'));
                 
                 reopen_task_callback = function() {
-                    task_attachment_list_box.load();
+                    task_list_box.load();
                 };
             });
             
-            // ajax box task attachment list
-            task_attachment_list_box.load();
+            $(document).on('click', '.update-progress-task-button', function(e) {
+                e.preventDefault();
+                
+                update_progress_task_modal.load($(this).attr('href'));
+            });
+            
+            // ajax box task list
+            task_list_box.load();
         });
     </script>
 <% end %>
 
 <div class="card">
-    <%= render "menu_tab", title: 'Attachment' %>
+    <%= render "menu_tab", title: 'Project Planning' %>
     
     <div class="card-body">
-        <% if can? :download_attachments, @project %>
-            <div class="text-right">
-                <a class="btn btn-light mr-3 mb-3"
-                   href="<%= gns_project.download_attachments_backend_projects_path(@project.id) %>"
-                   target="_blank">
-                    <i class="icon-download4 mr-2"></i> Download All
-                </a>
-            </div>
-        <% end %>
-        
-        <div class="task-attachment-list" style="position: relative; min-height: 130px"></div>
+        <div class="text-right">
+            <a href="<%= gns_project.new_backend_task_path(project_id: @project.id) %>" class="btn bg-blue mr-3 add-task-button">Add new task</a>
+        </div>
     </div>
-    
+        
+    <div class="task-planning-list" style="position: relative; min-height: 130px"></div>
 </div>

@@ -2,7 +2,8 @@ module GnsProject
   module Backend
     class ProjectsController < GnsCore::Backend::BackendController
       before_action :set_project, only: [:download_attachments, :show, :edit, :update, :destroy,
-                                         :attachments, :task_planning, :task_attachment, :logs, :logs_list]
+                                         :tasks, :tasks_list, :attachments, :attachments_list,
+                                         :logs, :logs_list, :authorization, :authorization_list]
   
       # GET /projects
       def index
@@ -90,7 +91,10 @@ module GnsProject
       end
       
       # task list ajax table / project planning
-      def task_planning
+      def tasks
+      end
+      
+      def tasks_list
         @tasks = @project.tasks.order(:custom_order)
         
         render layout: nil
@@ -100,7 +104,7 @@ module GnsProject
       def attachments
       end
       
-      def task_attachment
+      def attachments_list
         @tasks = @project.tasks.order(:custom_order)
         
         render layout: nil
@@ -110,6 +114,13 @@ module GnsProject
         @logs = @project.logs.search(params).paginate(:page => params[:page], :per_page => params[:per_page])
         
         render layout: nil
+      end
+      
+      # Authorization
+      def authorization
+      end
+      
+      def authorization_list
       end
       
       def download_attachments

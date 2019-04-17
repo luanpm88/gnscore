@@ -1,0 +1,29 @@
+<% content_for :title do %>
+    Project Authorization
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+    <a href="<%= gns_project.backend_projects_path %>" class="breadcrumb-item">Projects</a>
+    <a href="<%= gns_project.backend_project_path(@project) %>" class="breadcrumb-item"><%= @project.name %></a>
+    <span class="breadcrumb-item active">Authorization</span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Project</span>: <%= @project.name %></h4>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        
+    </script>
+<% end %>
+
+<div class="card">
+    <%= render "menu_tab", title: 'Authorization' %>
+    
+    <div class="card-body">        
+        <div class="authorization-list" style="position: relative; min-height: 130px"></div>
+    </div>
+    
+</div>
