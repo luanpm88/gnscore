@@ -56,5 +56,14 @@ GnsProject::Engine.routes.draw do
                 get ':id/log_download/:attachment_log_id', to: 'attachments#log_download', as: 'log_download'
             end
         end
+        
+        resources :roles do
+            collection do
+                post 'list'
+                get 'select2'
+                get ':id/permissions', to: 'roles#permissions', as: 'permissions'
+                post ':id/update_permissions', to: 'roles#update_permissions', as: 'update_permissions'
+            end
+        end
     end
 end

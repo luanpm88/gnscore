@@ -114,6 +114,7 @@ module GnsCore
       return data
     end
     
+    # has system permission
     def has_permission?(permission)
       #self.roles.each do |role|
       #  if role.has_permission?(permission)
@@ -125,5 +126,10 @@ module GnsCore
       
       return !GnsCore::RolesPermission.where(role_id: self.roles.select(:id)).where(permission: permission).empty?
     end
+    
+    ## has project permission
+    #def has_project_permission?(project, permission)
+    #  return !project.roles_permissions.where(user_id: self.id).where(permission: permission).empty?
+    #end
   end
 end

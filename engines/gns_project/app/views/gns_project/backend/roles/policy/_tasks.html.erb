@@ -1,0 +1,257 @@
+<div class="tab-pane fade show active" id="tabTask">
+    <div class="card-group-control card-group-control-left" id="accordion-control">
+
+        <div class="pt-2">
+            <h6 class="card-title">
+                <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
+                   href="#gnsProject-tasks">Tasks
+                </a>
+            </h6>
+            
+            <div id="gnsProject-tasks" class="collapse show">
+                <table class="table table-xs">
+                    <tbody>
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.tasks.create]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.tasks.create]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.tasks.create"
+                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.create') %>
+                                    >
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.create">Create/Insert</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>create</b> or <b>insert (below)</b> a task</td>
+                        </tr>
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.tasks.read_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.tasks.read_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.tasks.read_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.read_own') %>
+                                    >
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.read_own">Read own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>view</b> their own tasks</td>
+                        </tr>
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.tasks.read_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.tasks.read_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.tasks.read_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.read_other') %>
+                                    >
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.read_other">Read other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>view</b> other people's tasks</td>
+                        </tr>
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_project.tasks.update_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.tasks.update_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.tasks.update_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.update_own') %>
+                                    >
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_own">Update own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>update</b> their own tasks</td>
+                        </tr>
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_project.tasks.update_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.tasks.update_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.tasks.update_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.update_other') %>
+                                    >
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_other">Update other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>update</b> other people's tasks</td>
+                        </tr>
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.tasks.delete_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.tasks.delete_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.tasks.delete_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.delete_own') %>
+                                    >
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.delete_own">Delete own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>delete</b> their own tasks created</td>
+                        </tr>
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.tasks.delete_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.tasks.delete_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.tasks.delete_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.delete_other') %>
+                                    >
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.delete_other">Delete other</label>
+                                </div>
+                            </td>
+                            <td>Allows users to <b>delete</b> the task of others created</td>
+                        </tr>
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_project.tasks.update_progress_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.tasks.update_progress_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.tasks.update_progress_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.update_progress_own') %>
+                                    >
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_progress_own">Update progress own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>update progress</b> their own tasks</td>
+                        </tr>
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.tasks.update_progress_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.tasks.update_progress_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.tasks.update_progress_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.update_progress_other') %>
+                                    >
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_progress_other">Update progress other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>update progress</b> other people's tasks</td>
+                        </tr>
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.tasks.finish_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.tasks.finish_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.tasks.finish_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.finish_own') %>
+                                    >
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.finish_own">Finish own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>finish</b> their own tasks</td>
+                        </tr>
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.tasks.finish_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.tasks.finish_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.tasks.finish_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.finish_other') %>
+                                    >
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.finish_other">Finish other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>finish</b> other people's tasks</td>
+                        </tr>
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.tasks.unfinish_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.tasks.unfinish_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.tasks.unfinish_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.unfinish_own') %>
+                                    >
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.unfinish_own">Un-finish own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>un-finish</b> their own tasks</td>
+                        </tr>
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.tasks.unfinish_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.tasks.unfinish_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.tasks.unfinish_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.unfinish_other') %>
+                                    >
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.unfinish_other">Un-finish other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>un-finish</b> other people's tasks</td>
+                        </tr>
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.tasks.close_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.tasks.close_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.tasks.close_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.close_own') %>
+                                    >
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.close_own">Close own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>closes</b> their own tasks</td>
+                        </tr>
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.tasks.close_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.tasks.close_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.tasks.close_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.close_other') %>
+                                    >
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.close_other">Close other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>close</b> other people's tasks</td>
+                        </tr>
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.tasks.reopen_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.tasks.reopen_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.tasks.reopen_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.reopen_own') %>
+                                    >
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.reopen_own">Re-open own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>re-open</b> their own tasks</td>
+                        </tr>
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.tasks.reopen_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.tasks.reopen_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.tasks.reopen_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.reopen_other') %>
+                                    >
+                                    <label class="custom-control-label font-weight-semiboldss" for="gns_project.tasks.reopen_other">Re-open other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>re-open</b> other people's tasks</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

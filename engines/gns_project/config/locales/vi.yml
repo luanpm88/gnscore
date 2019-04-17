@@ -1,0 +1,25 @@
+vi:
+  gns_project:
+    notification:
+      project:
+        created: "Tạo mới thông tin dự án: %{name}"
+        updated: "Cập nhật thông tin dự án: %{name}"
+    
+    # Project Logs
+    log:
+      project:
+        created: "Tạo mới thông tin dự án: %{name}"
+        updated: "Cập nhật thông tin dự án: %{name}"
+      task:
+        created: "Tạo mới thông tin công việc: %{name}"
+        updated: "Cập nhật thông tin công việc: %{name}"
+        close: "Đóng công việc: %{name}"
+        reopen: "Mở lại công việc: %{name}"
+        finish: "Kết thúc công việc: %{name}"
+        unfinish: "Hoàn tác kết thúc công việc: %{name}"
+        update_progress: "Cập nhật tiến độ công việc là %{progress}%: %{name}"
+      attachment:
+        created: "Thêm mới tập tin đính kèm: %{name}"
+        updated: "Cập nhật thông tin đính kèm: %{name}"
+        reupload: "Tải lên bản cập nhật của tập tin đính kèm: %{name}"
+        destroyed: "Xóa thông tin tập tin đính kèm: %{name}"
