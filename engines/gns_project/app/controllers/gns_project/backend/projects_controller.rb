@@ -3,7 +3,8 @@ module GnsProject
     class ProjectsController < GnsCore::Backend::BackendController
       before_action :set_project, only: [:download_attachments, :show, :edit, :update, :destroy,
                                          :tasks, :tasks_list, :attachments, :attachments_list,
-                                         :logs, :logs_list, :authorization, :authorization_list]
+                                         :logs, :logs_list, :authorization, :authorization_list,
+                                         :add_authorization]
   
       # GET /projects
       def index
@@ -121,6 +122,19 @@ module GnsProject
       end
       
       def authorization_list
+        @project_user_roles = GnsProject::ProjectUserRole.all
+        render layout: nil
+      end
+      
+      # add authorization
+      def add_authorization
+        #authorization[project_id]
+        #authorization[user_id]
+        #authorization[role_ids][]
+        #
+        #add project_id ==> ProjectUser
+        #add user_id ==> ProjectUser
+        #add role_ids ==> ProjectUserRole
       end
       
       def download_attachments

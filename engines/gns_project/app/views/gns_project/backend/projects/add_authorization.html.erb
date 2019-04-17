@@ -1,0 +1,67 @@
+<% content_for :title do %>
+    Add authorization
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        $(document).ready(function() {
+            $('.add_authorization_project').submit(function(e) {
+                e.preventDefault();                
+                var form = $(this);
+                
+                // clear modal
+                add_authorization_modal.clear();
+                
+                $.ajax({
+                    url: form.attr('action'),
+                    method: form.attr('method'),
+                    data: form.serialize() + '&layout=modal',
+                }).done(function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                      showNotification(response.status, response.message);
+                      add_authorization_modal.hide();
+                      // load task list
+                      authorization_list_box.load();
+                    } else {
+                      add_authorization_modal.renderHtml(response);
+                    }
+                });
+                
+                return false;
+            });
+        });
+    </script>
+<% end %>
+
+<div class="card">
+    <div class="card-body">
+        <%= form_for '', url: gns_project.add_authorization_backend_projects_path(id: @project.id), html: {multipart: false, class: 'add_authorization_project'} do |f| %>
+            <input type="hidden" name="authorization[project_id]" value="<%= @project.id %>">
+            
+            <div class="form-group">
+                <label class="d-block">Employee <span class="text-danger">*</span></label>
+                <select name="authorization[user_id]"
+                    data-container-css-class="font-weight-semibold"
+                    data-placeholder="Select user"
+                    class="form-control select-ajax"
+                    data-url="<%= gns_core.select2_backend_users_path %>">
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label class="d-block">Project Roles <span class="text-danger">*</span></label>
+                <select name="authorization[role_ids][]"
+                    data-container-css-class="font-weight-semibold"
+                    data-placeholder="Select project roles"
+                    class="form-control select-ajax"
+                    data-url="<%= gns_project.select2_backend_roles_path %>"
+                    multiple>
+                </select>
+            </div>
+            
+            <div class="text-left">
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        <% end %>
+    </div>
+</div>

@@ -89,5 +89,11 @@ module GnsProject
     def has_permission?(permission)
       return !self.roles_permissions.where(permission: permission).empty?
     end
+    
+    # permissionsCount
+    def permissions_count
+      return 0 if self.roles_permissions.empty?
+      self.roles_permissions.count
+    end
   end
 end

@@ -90,6 +90,11 @@ module GnsProject
       #  @role.destroy
       #  redirect_to roles_url, notice: 'Role was successfully destroyed.'
       #end
+      
+      # SELECT2 /stages
+      def select2
+        render json: GnsProject::Role.select2(params)
+      end
   
       private
         # Use callbacks to share common setup or constraints between actions.

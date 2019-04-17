@@ -4,6 +4,7 @@ GnsProject::Engine.routes.draw do
             collection do
                 post 'list'
                 get ':id/authorization', to: 'projects#authorization', as: 'authorization'
+                get ':id/authorization_list', to: 'projects#authorization_list', as: 'authorization_list'
                 get ':id/tasks', to: 'projects#tasks', as: 'tasks'
                 get ':id/tasks_list', to: 'projects#tasks_list', as: 'tasks_list'
                 get ':id/attachments', to: 'projects#attachments', as: 'attachments'
@@ -11,6 +12,8 @@ GnsProject::Engine.routes.draw do
                 get ':id/download_attachments', to: 'projects#download_attachments', as: 'download_attachments'
                 get ':id/logs', to: 'projects#logs', as: 'logs'
                 post ':id/logs_list', to: 'projects#logs_list', as: 'logs_list'
+                get 'add_authorization'
+                post 'add_authorization'
             end
         end
         

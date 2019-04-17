@@ -15,14 +15,56 @@
 
 <% content_for :page_script do %>
     <script>
+        var authorization_list_box = new ajaxBox(
+            $('.authorization-list'),
+            '<%= gns_project.authorization_list_backend_projects_path(@project) %>',
+            function(box) {
+                // apply g-link
+                new gLink(box.find('.remove-authorization-button'),
+                    function(link) {
+                        authorization_list_box.load();
+                    }
+                );
+            }
+        );
         
+        var add_authorization_modal = new gModal({size: 'md'});
+        
+        $(function() {
+            
+            $('.add-authorization-button').click(function(e) {
+                e.preventDefault();
+                
+                add_authorization_modal.load($(this).attr('href'));
+            });
+            
+            $(document).on('click', '.edit-authorization-button', function(e) {
+                e.preventDefault();
+                
+                //add_authorization_modal.load($(this).attr('href'));
+            });
+            
+            $(document).on('click', '.remove-authorization-button', function(e) {
+                e.preventDefault();
+                
+                //authorization_modal.load($(this).attr('href'));
+            });
+            
+            // ajax box list
+            authorization_list_box.load();
+        });
     </script>
 <% end %>
 
 <div class="card">
     <%= render "menu_tab", title: 'Authorization' %>
     
-    <div class="card-body">        
+    <div class="card-body">
+        <div class="text-right">
+            <a href="<%= gns_project.add_authorization_backend_projects_path(id: @project) %>"
+                class="btn bg-light mb-3 add-authorization-button">Add new authorization
+            </a>
+        </div>
         <div class="authorization-list" style="position: relative; min-height: 130px"></div>
     </div>
     
