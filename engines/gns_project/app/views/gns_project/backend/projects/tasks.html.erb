@@ -117,9 +117,14 @@
     
     <div class="card-body">
         <div class="text-right">
-            <a href="<%= gns_project.new_backend_task_path(project_id: @project.id) %>" class="btn bg-blue mr-3 add-task-button">Add new task</a>
+            <a href="<%= gns_project.new_backend_task_path(project_id: @project.id) %>"
+                class="btn btn-sm bg-blue mb-3 add-task-button">
+                Add new task
+            </a>
         </div>
-    </div>
         
-    <div class="task-planning-list" style="position: relative; min-height: 130px"></div>
+        <div class="task-planning-list" style="position: relative; min-height: 130px"></div>
+    </div>
 </div>
+
+<%= render "comment_card", project: @project %>

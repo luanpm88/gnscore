@@ -6,6 +6,7 @@ module GnsProject
     belongs_to :category, class_name: 'GnsProject::Category'
     has_many :tasks, class_name: 'GnsProject::Task', dependent: :restrict_with_error
     has_many :logs, class_name: 'GnsProject::Log'
+    has_many :comments, class_name: "GnsProject::Comment"
     
     validates :code, :name, :priority, :start_date, :end_date,
               :category_id, :customer_id, :manager_id,

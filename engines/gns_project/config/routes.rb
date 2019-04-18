@@ -14,6 +14,7 @@ GnsProject::Engine.routes.draw do
                 post ':id/logs_list', to: 'projects#logs_list', as: 'logs_list'
                 get 'add_authorization'
                 post 'add_authorization'
+                get ':id/comments', to: 'projects#comments', as: 'comments'
             end
         end
         
@@ -59,6 +60,8 @@ GnsProject::Engine.routes.draw do
                 get ':id/log_download/:attachment_log_id', to: 'attachments#log_download', as: 'log_download'
             end
         end
+        
+        resources :comments
         
         resources :roles do
             collection do

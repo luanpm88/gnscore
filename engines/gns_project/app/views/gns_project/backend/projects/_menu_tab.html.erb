@@ -18,52 +18,54 @@
 <% end %>
 
 <div class="card-header bg-white pb-0 pt-sm-0 header-elements-sm-inline">
-    <h6 class="card-title"><%= title %></h6>
+    <% if false %>
+        <h6 class="card-title"><%= title %></h6>
+    <% end %>
+    <ul class="nav nav-tabs nav-tabs-bottom card-header-tabs mx-0">
+        <li class="nav-item">
+            <a href="<%= gns_project.tasks_backend_projects_path(@project.id) %>"
+                class="nav-link" modal-size="full"
+                data-menu="gns_project/backend/projects/tasks"
+            >
+                <i class="icon-clipboard3 mr-1"></i>
+                Planning
+            </a>
+        </li>
+        
+        <li class="nav-item">
+            <a
+                data-menu="gns_project/backend/projects/authorization"
+                href="<%= gns_project.authorization_backend_projects_path(@project.id) %>"
+                class="nav-link" modal-size="full">
+                    <i class="icon-user-check mr-1"></i>
+                    Authorization
+            </a>
+        </li>
+        
+        <li class="nav-item">
+            <a
+                data-menu="gns_project/backend/projects/attachments"
+                href="<%= gns_project.attachments_backend_projects_path(@project.id) %>"
+                class="nav-link" modal-size="full">
+                    <i class="icon-attachment mr-1"></i>
+                    Attachment
+            </a>
+        </li>
+        
+        <li class="nav-item mr-3">
+            <a
+                data-menu="gns_project/backend/projects/logs"
+                href="<%= gns_project.logs_backend_projects_path(@project.id) %>"
+                class="nav-link" modal-size="full">
+                    <i class="icon-history mr-1"></i>
+                    Logs
+            </a>
+        </li>
+    </ul>
+    
     <div class="header-elements">
-        <ul class="nav nav-tabs nav-tabs-bottom card-header-tabs mx-0">
-            <li class="nav-item">
-                <a href="<%= gns_project.tasks_backend_projects_path(@project.id) %>"
-                    class="nav-link" modal-size="full"
-                    data-menu="gns_project/backend/projects/tasks"
-                >
-                    <i class="icon-clipboard3 mr-1"></i>
-                    Planning
-                </a>
-            </li>
-            
-            <li class="nav-item">
-                <a
-                    data-menu="gns_project/backend/projects/authorization"
-                    href="<%= gns_project.authorization_backend_projects_path(@project.id) %>"
-                    class="nav-link" modal-size="full">
-                        <i class="icon-user-check mr-1"></i>
-                        Authorization
-                </a>
-            </li>
-            
-            <li class="nav-item">
-                <a
-                    data-menu="gns_project/backend/projects/attachments"
-                    href="<%= gns_project.attachments_backend_projects_path(@project.id) %>"
-                    class="nav-link" modal-size="full">
-                        <i class="icon-attachment mr-1"></i>
-                        Attachment
-                </a>
-            </li>
-            
-            <li class="nav-item mr-3">
-                <a
-                    data-menu="gns_project/backend/projects/logs"
-                    href="<%= gns_project.logs_backend_projects_path(@project.id) %>"
-                    class="nav-link" modal-size="full">
-                        <i class="icon-history mr-1"></i>
-                        Logs
-                </a>
-            </li>
-            
-            <div class="list-icons">
-                <a class="list-icons-item" data-action="collapse"></a>
-            </div>
-        </ul>
+        <div class="list-icons">
+            <a class="list-icons-item" data-action="collapse"></a>
+        </div>
     </div>
 </div>

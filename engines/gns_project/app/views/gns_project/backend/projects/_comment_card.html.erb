@@ -1,0 +1,61 @@
+<% content_for :page_script do %>
+    <script>
+        // global modal
+        var comment_modal = new gModal({size: 'md'});
+        
+        // comments list
+        var comments_list_box = new ajaxBox(
+            $('.comments-list'),
+            '<%= gns_project.comments_backend_projects_path(project.id) %>',
+            function(box) {
+                // apply g-link
+                new gLink(box.find('.delete-comment-button'), function(link) {
+                    comments_list_box.load();
+                });
+            }
+        );
+        
+        $(function() {
+            $('.add-comment-button').click(function(e) {
+                e.preventDefault();
+                
+                comment_modal.load($(this).attr('href'));
+            });
+            
+            $(document).on('click', '.edit-comment-button', function(e) {
+                e.preventDefault();
+                
+                comment_modal.load($(this).attr('href'));
+            });
+            
+            $(document).on('click', '.reply-comment-button', function(e) {
+                e.preventDefault();
+                
+                comment_modal.load($(this).attr('href'));
+            });
+            
+            // ajax box list
+            comments_list_box.load();
+        });
+    </script>
+<% end %>
+
+<!-- Comments -->
+<div class="card">
+    <div class="card-header header-elements-inline">
+        <h5 class="card-title">Discussion (Notes)</h5>
+        <div class="header-elements">
+            <div class="text-right">
+                <a href="<%= gns_project.new_backend_comment_path(project_id: project) %>"
+                    class="btn bg-blue btn-sm add-comment-button">
+                    <i class="icon-plus22 mr-1"></i> Add note
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="comments-list"></div>
+    </div>
+</div>
+<!-- /comments -->

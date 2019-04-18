@@ -68,6 +68,8 @@ function applyJs(container) {
     // Initialize
     container.find('.radio-button').uniform();
     
+    container.find('.file-input').uniform();
+    
     // Initialize multiple switches /switchery
     var elems = Array.prototype.slice.call(document.querySelectorAll('.form-check-input-switchery'));
     elems.forEach(function(html) {

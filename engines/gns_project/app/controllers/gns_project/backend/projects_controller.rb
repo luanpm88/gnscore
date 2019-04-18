@@ -4,7 +4,7 @@ module GnsProject
       before_action :set_project, only: [:download_attachments, :show, :edit, :update, :destroy,
                                          :tasks, :tasks_list, :attachments, :attachments_list,
                                          :logs, :logs_list, :authorization, :authorization_list,
-                                         :add_authorization]
+                                         :add_authorization, :comments]
   
       # GET /projects
       def index
@@ -161,6 +161,15 @@ module GnsProject
         # The temp file will be deleted some time...
         t.close
       end
+      
+      # note/comment      
+      def comments      
+        @comments = @project.comments.order('created_at DESC')
+          .where(parent_id: nil)
+          .paginate(:page => params[:page], :per_page => 5)
+      
+        render layout: nil
+      end
   
       private
         # Use callbacks to share common setup or constraints between actions.
@@ -172,6 +181,10 @@ module GnsProject
         def project_params
           params.fetch(:project, {}).permit(:code, :name, :category_id, :customer_id,
                                             :start_date, :end_date, :priority, :manager_id)
+          
+          def comment_params
+            params.fetch(:comment, {}).permit(:message, :file, :project_id, :parent_id)
+          end
         end
     end
   end
