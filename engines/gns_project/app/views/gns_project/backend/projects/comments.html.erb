@@ -2,14 +2,20 @@
     <% @project.comments.order('created_at DESC').where(parent_id: nil).each do |comment| %>
         <div class="media flex-column flex-md-row">
             <div class="mr-md-3 mb-2 mb-md-0">
-                <a href="#"><img src="/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg" class="rounded-circle" width="45" height="45" alt=""></a>
+                <a href="javascript:void(0)">
+                    <img src="/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg"
+                        class="rounded-circle" width="45" height="45" alt="">
+                </a>
             </div>
 
             <div class="media-body">
                 <div class="main">
                     <div class="media-title">
-                        <a href="#" class="font-weight-semibold"><%= comment.user_name %></a>
-                        <span class="font-size-sm text-muted ml-sm-2 mb-2 mb-sm-0 d-block d-sm-inline-block">7 minutes ago</span>
+                        <a href="javascript:void(0)" class="font-weight-semibold"><%= comment.user_name %></a>
+                        <span class="font-size-sm text-muted ml-sm-2 mb-2 mb-sm-0 d-block d-sm-inline-block"
+                            data-popup="tooltip" data-original-title="<%= comment.created_at.strftime('%d/%m/%Y %H:%M') %>">
+                            <%= time_ago_in_words(comment.created_at)  %>
+                        </span>
                     </div>
     
                     <p><%= simple_format(comment.message) %></p>
@@ -41,14 +47,20 @@
                     <% comment.children.order('created_at DESC').each do |child_comment| %>
                         <div class="media flex-column flex-md-row">
                             <div class="mr-md-3 mb-2 mb-md-0">
-                                <a href="#"><img src="/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg" class="rounded-circle" width="35" height="35" alt=""></a>
+                                <a href="javascript:void(0)">
+                                    <img src="/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg"
+                                        class="rounded-circle" width="35" height="35" alt="">
+                                </a>
                             </div>
     
                             <div class="media-body">
                                 <div class="sub">
                                     <div class="media-title">
-                                        <a href="#" class="font-weight-semibold"><%= child_comment.user_name %></a>
-                                        <span class="font-size-sm text-muted ml-sm-2 mb-2 mb-sm-0 d-block d-sm-inline-block">10 minutes ago</span>
+                                        <a href="javascript:void(0)" class="font-weight-semibold"><%= child_comment.user_name %></a>
+                                        <span class="font-size-sm text-muted ml-sm-2 mb-2 mb-sm-0 d-block d-sm-inline-block"
+                                            data-popup="tooltip" data-original-title="<%= child_comment.created_at.strftime('%d/%m/%Y %H:%M') %>">
+                                            <%= time_ago_in_words(child_comment.created_at) %>
+                                        </span>
                                     </div>
         
                                     <p><%= simple_format(child_comment.message) %></p>
