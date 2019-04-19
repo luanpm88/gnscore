@@ -6,7 +6,7 @@
             <div class="media flex-column flex-md-row">
                 <div class="mr-md-3 mb-2 mb-md-0">
                     <a href="javascript:void(0)">
-                        <img src="/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg"
+                        <img src="<%= comment.user.avatar.present? ? comment.user.avatar.system : url_for("/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg") %>"
                             class="rounded-circle" width="45" height="45" alt="">
                     </a>
                 </div>
@@ -51,7 +51,7 @@
                             <div class="media flex-column flex-md-row">
                                 <div class="mr-md-3 mb-2 mb-md-0">
                                     <a href="javascript:void(0)">
-                                        <img src="/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg"
+                                        <img src="<%= child_comment.user.avatar.present? ? child_comment.user.avatar.system : url_for("/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg") %>"
                                             class="rounded-circle" width="35" height="35" alt="">
                                     </a>
                                 </div>

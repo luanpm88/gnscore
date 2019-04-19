@@ -23,7 +23,9 @@
             <div class="card-body">
                 <div class="media">
                     <div class="mr-3">
-                        <a href="#"><img src="/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg" width="38" height="38" class="rounded-circle" alt=""></a>
+                        <img src="<%= current_user.avatar.present? ? current_user.avatar.system : url_for("/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg") %>"
+                            width="38" height="38" class="rounded-circle" alt="">
+                        </a>
                     </div>
 
                     <div class="media-body">
