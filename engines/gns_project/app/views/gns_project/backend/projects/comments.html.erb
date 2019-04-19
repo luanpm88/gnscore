@@ -1,8 +1,8 @@
-<% if @project.comments.empty? %>
+<% if @comments.empty? %>
     <p class="text-center text-warning pt-2">There are no notes to discuss</p>
 <% else %>
     <div class="comment-area mb-2">
-        <% @project.comments.order('created_at DESC').where(parent_id: nil).each do |comment| %>
+        <% @comments.each do |comment| %>
             <div class="media flex-column flex-md-row">
                 <div class="mr-md-3 mb-2 mb-md-0">
                     <a href="javascript:void(0)">
