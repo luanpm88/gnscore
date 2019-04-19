@@ -98,7 +98,7 @@
 
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a href="<%= gns_project.backend_project_path(project) %>" class="dropdown-item">
-                                    <i class="icon-file-eye"></i> Details
+                                    <i class="icon-file-eye"></i> Show Info
                                 </a>
                                 <a class="dropdown-item edit-project-button"
                                     href="<%= gns_project.edit_backend_project_path(project) %>">
@@ -106,8 +106,20 @@
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item"
+                                    href="<%= gns_project.tasks_backend_projects_path(project) %>">
+                                    <i class="icon-clipboard3"></i> Planning
+                                </a>
+                                <a class="dropdown-item"
+                                    href="<%= gns_project.attachments_backend_projects_path(project) %>">
+                                    <i class="icon-attachment"></i> Attachment
+                                </a>
+                                <a class="dropdown-item"
+                                    href="<%= gns_project.authorization_backend_projects_path(project) %>">
+                                    <i class="icon-user-check"></i> Authorization
+                                </a>
+                                <a class="dropdown-item"
                                     href="<%= gns_project.logs_backend_projects_path(project) %>">
-                                    <i class="icon-file-text2"></i> Logs
+                                    <i class="icon-history"></i> View logs
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item ajax datalist-g-link"

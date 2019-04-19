@@ -16,7 +16,27 @@
                     <% end %>
                 </div>          
             </div>
-            
+            <div class="col-md-6">                    
+                <div class="form-group">
+                    <label class="d-block">Contact Group <span class="text-danger">*</span></label>
+                    <select class="form-control select-ajax"
+                        data-container-css-class="font-weight-semibold <%= 'border-danger' if contact.errors.full_messages_for(:categories).present? %>"
+                        data-placeholder="Choose group"
+                        data-url="<%= gns_contact.select2_backend_categories_path %>"
+                        name="contact[category_ids][]"
+                    >
+                        <% values = contact.categories.map {|cat| {text: cat.name, value: cat.id}} %>
+                        <% values.each do |value| %>
+                            <% if value[:value].present? %>
+                                <option selected="selected" value="<%= value[:value] %>"><%= value[:text] %></option>
+                            <% end %>
+                        <% end %>
+                    </select>
+                    <% if contact.errors.full_messages_for(:categories).present? %>
+                        <span class="form-text text-danger"><%= contact.errors.full_messages_for(:categories).join('<br/>').html_safe %></span>
+                    <% end %>
+                </div>
+            </div>
         </div>
         
         <div class="row">
@@ -46,44 +66,28 @@
                 </div>
             </div>
         </div>
-                
-        <div class="row">
-            <div class="col-md-6">                    
-                <div class="form-group">
-                    <label class="d-block">Contact Group <span class="text-danger">*</span></label>
-                    <select class="form-control select-ajax"
-                        data-container-css-class="font-weight-semibold"
-                        data-placeholder="Choose group"
-                        data-url="<%= gns_contact.select2_backend_categories_path %>"
-                        name="contact[category_ids][]"
-                    >
-                        <% values = contact.categories.map {|cat| {text: cat.name, value: cat.id}} %>
-                        <% values.each do |value| %>
-                            <% if value[:value].present? %>
-                                <option selected="selected" value="<%= value[:value] %>"><%= value[:text] %></option>
+        
+        <% if false %>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="d-block">Business Partner Type <span class="text-danger">*</span></label>
+                        <select class="form-control selectAllowClear"
+                            data-container-css-class="font-weight-semibold"
+                            data-placeholder="Select business partner type"
+                            data-fouc
+                            name="contact[contact_type]"
+                        >
+                            <option></option>
+                            <% options = GnsContact::Contact::get_type_options() %>
+                            <% options.each do |option| %>
+                                <option <%= 'selected' if option[:value] == contact.contact_type %> value="<%= option[:value] %>"><%= option[:text] %></option>
                             <% end %>
-                        <% end %>
-                    </select>
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="d-block">Business Partner Type <span class="text-danger">*</span></label>
-                    <select class="form-control selectAllowClear"
-                        data-container-css-class="font-weight-semibold"
-                        data-placeholder="Select business partner type"
-                        data-fouc
-                        name="contact[contact_type]"
-                    >
-                        <option></option>
-                        <% options = GnsContact::Contact::get_type_options() %>
-                        <% options.each do |option| %>
-                            <option <%= 'selected' if option[:value] == contact.contact_type %> value="<%= option[:value] %>"><%= option[:text] %></option>
-                        <% end %>
-                    </select>
-                </div>
-            </div>
-        </div>
+        <% end %>
     </fieldset>
     
     <fieldset>
@@ -213,7 +217,7 @@
     
     <fieldset>
         <div class="form-group">
-            <label>Remark:</label>
+            <label class="d-block">Remark</label>
             <textarea rows="2" cols="5"
                 class="form-control"
                 placeholder="Enter your remark here"

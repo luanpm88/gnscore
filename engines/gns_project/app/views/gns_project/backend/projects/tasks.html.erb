@@ -1,0 +1,130 @@
+<% content_for :title do %>
+    Project Planning
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+    <a href="<%= gns_project.backend_projects_path %>" class="breadcrumb-item">Projects</a>
+    <a href="<%= gns_project.backend_project_path(@project) %>" class="breadcrumb-item"><%= @project.name %></a>
+    <span class="breadcrumb-item active">Planning</span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-design mr-2"></i> <span class="font-weight-semibold">Project</span>: <%= @project.name %></h4>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        // global modal
+        var task_modal = new gModal({size: 'md'});
+        var finish_task_modal = new gModal({size: 'md'});
+        var finish_task_callback;
+        var unfinish_task_modal = new gModal({size: 'md'});
+        var unfinish_task_callback;
+        var close_task_modal = new gModal({size: 'md'});
+        var close_task_callback;
+        var reopen_task_modal = new gModal({size: 'md'});
+        var reopen_task_callback;
+        var update_progress_task_modal = new gModal({size: 'md'});
+        
+        var task_list_box = new ajaxBox(
+            $('.task-planning-list'),
+            '<%= gns_project.tasks_list_backend_projects_path(@project.id) %>',
+            function(box) {
+                // apply g-link
+                new gLink(box.find('.delete-task-button'),
+                    function(link) {
+                        task_list_box.load();
+                    }
+                );
+            }
+        );
+        
+        $(function() {
+            
+            $('.add-task-button').click(function(e) {
+                e.preventDefault();
+                
+                task_modal.load($(this).attr('href'));
+            });
+            
+            $(document).on('click', '.edit-task-button', function(e) {
+                e.preventDefault();
+                
+                task_modal.load($(this).attr('href'));
+            });
+            
+            $(document).on('click', '.insert-below-task-button', function(e) {
+                e.preventDefault();
+                
+                task_modal.load($(this).attr('href'));
+            });
+            
+            $(document).on('click', '.finish-task-button', function(e) {
+                e.preventDefault();
+                
+                finish_task_modal.load($(this).attr('href'));
+                
+                finish_task_callback = function() {
+                    task_list_box.load();
+                };
+            });
+            
+            $(document).on('click', '.unfinish-task-button', function(e) {
+                e.preventDefault();
+                
+                unfinish_task_modal.load($(this).attr('href'));
+                
+                unfinish_task_callback = function() {
+                    task_list_box.load();
+                };
+            });
+            
+            $(document).on('click', '.close-task-button', function(e) {
+                e.preventDefault();
+                
+                close_task_modal.load($(this).attr('href'));
+                
+                close_task_callback = function() {
+                    task_list_box.load();
+                };
+            });
+            
+            $(document).on('click', '.reopen-task-button', function(e) {
+                e.preventDefault();
+                
+                reopen_task_modal.load($(this).attr('href'));
+                
+                reopen_task_callback = function() {
+                    task_list_box.load();
+                };
+            });
+            
+            $(document).on('click', '.update-progress-task-button', function(e) {
+                e.preventDefault();
+                
+                update_progress_task_modal.load($(this).attr('href'));
+            });
+            
+            // ajax box task list
+            task_list_box.load();
+        });
+    </script>
+<% end %>
+
+<div class="card">
+    <%= render "menu_tab", title: 'Project Planning' %>
+    
+    <div class="card-body">
+        <div class="text-right">
+            <a href="<%= gns_project.new_backend_task_path(project_id: @project.id) %>"
+                class="btn btn-sm bg-blue mb-3 add-task-button">
+                Add new task
+            </a>
+        </div>
+        
+        <div class="task-planning-list" style="position: relative; min-height: 130px"></div>
+    </div>
+</div>
+
+<%= render "comment_card", project: @project %>

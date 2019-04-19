@@ -54,16 +54,6 @@ module GnsCore
         @role = Role.new(role_params)
   
         if @role.save
-          if params[:permissions].present?
-            params[:permissions].each do |p|
-              if p[1] == true
-                @role.add_permission(p[0])
-              else
-                @role.remove_permission(p[0])
-              end
-            end
-          end
-          
           # Add notification
           current_user.add_notification("gns_core.notification.role.created", {
             name: @role.name
@@ -81,16 +71,6 @@ module GnsCore
       # PATCH/PUT /roles/1
       def update
         if @role.update(role_params)
-          if params[:permissions].present?
-            params[:permissions].each do |p|
-              if p[1] == true
-                @role.add_permission(p[0])
-              else
-                @role.remove_permission(p[0])
-              end
-            end
-          end
-          
           # Add notification
           current_user.add_notification("gns_core.notification.role.updated", {
             name: @role.name

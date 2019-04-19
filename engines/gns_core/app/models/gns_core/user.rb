@@ -11,6 +11,10 @@ module GnsCore
     # validates :password, :length => { :minimum => 6, :maximum => 40 }, :confirmation => true
     
     has_and_belongs_to_many :roles, class_name: 'GnsCore::Role'
+    has_many :project_users, class_name: 'GnsProject::ProjectUser'
+    has_many :project_user_roles, class_name: 'GnsProject::ProjectUserRole', through: :project_users
+    
+    mount_uploader :avatar, GnsCore::AvatarUploader
     
     def add_notification(phrase, data)
 			GnsNotification::Notification::create(
@@ -114,16 +118,21 @@ module GnsCore
       return data
     end
     
-    def has_permission?(permission)
-      #self.roles.each do |role|
-      #  if role.has_permission?(permission)
-      #    return true
-      #  end
-      #end
-      #
-      #return false
-      
+    # has system permission
+    def has_permission?(permission)      
       return !GnsCore::RolesPermission.where(role_id: self.roles.select(:id)).where(permission: permission).empty?
     end
+    
+    def has_project_permission?(project, permission)
+      # Lấy quyền chỉnh sửa từng project ra trước xem có không
+      # projet có quyền custom nào của user self không thì kiểm tra trước, có thì return luôn	
+      #return true if project.project_user.custom_permissions.include?(permission)
+
+      # Không có chỉnh sửa quyền gì hết thì lấy mặc định (nếu không sửa)
+      self.project_user_roles.includes(:project_user).where(gns_project_project_users: {project_id: project.id}).each do |project_role|
+        return project_role.role.has_permission?(permission)
+      end
+    end
+    
   end
 end

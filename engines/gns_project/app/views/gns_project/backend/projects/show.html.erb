@@ -5,11 +5,11 @@
 <% content_for :breadcrumb do %>
     <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
     <a href="<%= gns_project.backend_projects_path %>" class="breadcrumb-item">Projects</a>
-    <span class="breadcrumb-item active">Show</span>
+    <span class="breadcrumb-item active"><%= @project.name %></span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Project</span> - <%= @project.name %></h4>
+    <h4><i class="icon-design mr-2"></i> <span class="font-weight-semibold">Project</span>: <%= @project.name %></h4>
 <% end %>
 
 <% content_for :page_toolbar do %>
@@ -20,113 +20,232 @@
 
 <% content_for :page_script do %>
     <script>
-        // global modal
-        var task_modal = new gModal({size: 'md'});
-        var finish_task_modal = new gModal({size: 'md'});
-        var finish_task_callback;
-        var unfinish_task_modal = new gModal({size: 'md'});
-        var unfinish_task_callback;
-        var close_task_modal = new gModal({size: 'md'});
-        var close_task_callback;
-        var reopen_task_modal = new gModal({size: 'md'});
-        var reopen_task_callback;
-        var update_progress_task_modal = new gModal({size: 'md'});
-        
-        var task_list_box = new ajaxBox(
-            $('.task-planning-list'),
-            '<%= gns_project.task_planning_backend_projects_path(@project.id) %>',
-            function(box) {
-                // apply g-link
-                new gLink(box.find('.delete-task-button'),
-                    function(link) {
-                        task_list_box.load();
-                    }
-                );
-            }
-        );
+        var project_modal = new gModal();
+        var newProjectCallback;
         
         $(function() {
-            
-            $('.add-task-button').click(function(e) {
+            $('.add-project-button').click(function(e) {
                 e.preventDefault();
+                var button = $(this);
                 
-                task_modal.load($(this).attr('href'));
-            });
-            
-            $(document).on('click', '.edit-task-button', function(e) {
-                e.preventDefault();
+                project_modal.load(button.attr('href'));
                 
-                task_modal.load($(this).attr('href'));
-            });
-            
-            $(document).on('click', '.insert-below-task-button', function(e) {
-                e.preventDefault();
-                
-                task_modal.load($(this).attr('href'));
-            });
-            
-            $(document).on('click', '.finish-task-button', function(e) {
-                e.preventDefault();
-                
-                finish_task_modal.load($(this).attr('href'));
-                
-                finish_task_callback = function() {
-                    task_list_box.load();
+                newProjectCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // Hide modal
+                        project_modal.hide();
+                        datalists.forEach(function(datalist) {
+                            datalist.refresh();
+                        });     
+                    } else if (typeof(response.redirect) !== 'undefined') {
+                        window.location = response.redirect;
+                    } else {
+                        // validation error
+                        project_modal.renderHtml(response);
+                    }
                 };
             });
-            
-            $(document).on('click', '.unfinish-task-button', function(e) {
-                e.preventDefault();
-                
-                unfinish_task_modal.load($(this).attr('href'));
-                
-                unfinish_task_callback = function() {
-                    task_list_box.load();
-                };
-            });
-            
-            $(document).on('click', '.close-task-button', function(e) {
-                e.preventDefault();
-                
-                close_task_modal.load($(this).attr('href'));
-                
-                close_task_callback = function() {
-                    task_list_box.load();
-                };
-            });
-            
-            $(document).on('click', '.reopen-task-button', function(e) {
-                e.preventDefault();
-                
-                reopen_task_modal.load($(this).attr('href'));
-                
-                reopen_task_callback = function() {
-                    task_list_box.load();
-                };
-            });
-            
-            $(document).on('click', '.update-progress-task-button', function(e) {
-                e.preventDefault();
-                
-                update_progress_task_modal.load($(this).attr('href'));
-            });
-            
-            // ajax box task list
-            task_list_box.load();
         });
     </script>
 <% end %>
 
-<%= render "general_infomation" %>
-
 <div class="card">
-    <%= render "menu_tab", title: 'Project Planning' %>
-    
-    <div class="card-body">
-        <div class="text-right">
-            <a href="<%= gns_project.new_backend_task_path(project_id: @project.id) %>" class="btn bg-blue mr-3 add-task-button">Add new task</a>
+    <div class="card-header bg-white header-elements-sm-inline">
+        <h6 class="card-title">Project Details</h6>
+        <div class="header-elements">
+            <div class="list-icons">
+                <a href="<%= gns_project.tasks_backend_projects_path(@project) %>"
+                    class="btn btn-sm alpha-blue text-blue-800 border-blue-600">
+                    <i class="icon-clipboard3 mr-1"></i> Planning
+                </a>
+                
+                <a href="<%= gns_project.authorization_backend_projects_path(@project) %>"
+                    class="btn btn-sm alpha-blue text-blue-800 border-blue-600">
+                    <i class="icon-user-check mr-1"></i> Authorization
+                </a>
+                
+                <a href="<%= gns_project.attachments_backend_projects_path(@project) %>"
+                    class="btn btn-sm alpha-blue text-blue-800 border-blue-600">
+                    <i class="icon-attachment mr-1"></i> Attachment
+                </a>
+                
+                <a href="<%= gns_project.logs_backend_projects_path(@project) %>"
+                    class="btn btn-sm alpha-blue text-blue-800 border-blue-600">
+                    <i class="icon-history mr-1"></i> Logs
+                </a>
+                
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
         </div>
     </div>
+    <div class="card-body">
+        <ul class="media-list">
+            <div class="row">
+                <div class="col-md-6">
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Project Type:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center">
+                            <%= @project.category_name %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Project Code:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center text-blue-800">
+                            <%= @project.code %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Project Name:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center text-blue-800">
+                            <%= @project.name %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Start Date:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center text-muted">
+                            <%= @project.start_date.strftime('%A, %d/%m/%Y') %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">End Date:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center text-muted">
+                            <%= @project.end_date.strftime('%A, %d/%m/%Y') %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Status:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center text-blue-800">
+                            <span class="badge badge-<%= @project.status %>"><%= t @project.status %></span>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Priority:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center font-weight-semibold">
+                            <span class="badge badge-flat border-success"><%= t @project.priority %></span>
+                        </div>
+                    </li>
+                </div>
+                    
+                <div class="col-md-6">
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Customer Code:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center text-blue-800">
+                            <%= @project.customer_code %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Customer Name:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center text-blue-800">
+                            <%= @project.customer_name %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">PM (Project Manager):</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center">
+                            <%= @project.manager_name %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Created:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center text-muted">
+                            <%= @project.created_at.strftime('%d/%m/%Y - %T') %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Last Updated:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center text-muted">
+                            <%= @project.updated_at.strftime('%d/%m/%Y - %T') %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Added By:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center">
+                            <%= @project.creator_name %>
+                        </div>
+                    </li>
+                    
+                    <div class="row border-bottom-dotted">
+                        <div class="col-md-6">
+                            <li class="media mt-0 py-2 px-2">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Complete:</div>
+                                </div>
         
-    <div class="task-planning-list" style="position: relative; min-height: 130px"></div>
+                                <div class="ml-3 align-self-center" style="min-width: 120px">
+                                    <% num = @project.progress_percent.round %>
+                                    <div class="progress" title="<%= num %>% Complete">
+                                        <div class="progress-bar bg-teal" style="width: <%= num %>%">
+                                            <span><%= num %>%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </div>
+                        <div class="col-md-6">
+                            <li class="media mt-0 py-2 px-2">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Opening Activities:</div>
+                                </div>
+        
+                                <div class="ml-3 align-self-center font-weight-semibold">
+                                    <%= @project.open_tasks.count %>
+                                </div>
+                            </li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ul>
+    </div>
 </div>

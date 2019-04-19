@@ -1,0 +1,95 @@
+<% if @comments.empty? %>
+    <p class="text-center text-warning pt-2">There are no notes to discuss</p>
+<% else %>
+    <div class="comment-area mb-2">
+        <% @comments.each do |comment| %>
+            <div class="media flex-column flex-md-row">
+                <div class="mr-md-3 mb-2 mb-md-0">
+                    <a href="javascript:void(0)">
+                        <img src="<%= comment.user.avatar.present? ? comment.user.avatar.system : url_for("/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg") %>"
+                            class="rounded-circle" width="45" height="45" alt="">
+                    </a>
+                </div>
+    
+                <div class="media-body">
+                    <div class="main">
+                        <div class="media-title">
+                            <a href="javascript:void(0)" class="font-weight-semibold"><%= comment.user_name %></a>
+                            <span class="font-size-sm text-muted ml-sm-2 mb-2 mb-sm-0 d-block d-sm-inline-block"
+                                data-popup="tooltip" data-original-title="<%= comment.created_at.strftime('%d/%m/%Y %H:%M') %>">
+                                <%= time_ago_in_words(comment.created_at)  %>
+                            </span>
+                        </div>
+        
+                        <p><%= simple_format(comment.message) %></p>
+                    </div>
+        
+                    <ul class="list-inline font-size-sm mb-0">
+                        <!--<li class="list-inline-item">70 <a href="#"><i class="icon-arrow-up22 text-success"></i></a><a href="#"><i class="icon-arrow-down22 text-danger"></i></a></li>-->
+                        <li class="list-inline-item">
+                            <a href="<%= gns_project.new_backend_comment_path(project_id: @project, parent_id: comment) %>"
+                                class="reply-comment-button">
+                                Reply
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="<%= gns_project.edit_backend_comment_path(comment) %>"
+                                class="edit-comment-button">
+                                Edit
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#"
+                                class="delete-comment-button">
+                                Delete
+                            </a>
+                        </li>
+                    </ul>
+                    
+                    <% if comment.children.count > 0 %>
+                        <% comment.children.order('created_at DESC').each do |child_comment| %>
+                            <div class="media flex-column flex-md-row">
+                                <div class="mr-md-3 mb-2 mb-md-0">
+                                    <a href="javascript:void(0)">
+                                        <img src="<%= child_comment.user.avatar.present? ? child_comment.user.avatar.system : url_for("/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg") %>"
+                                            class="rounded-circle" width="35" height="35" alt="">
+                                    </a>
+                                </div>
+        
+                                <div class="media-body">
+                                    <div class="sub">
+                                        <div class="media-title">
+                                            <a href="javascript:void(0)" class="font-weight-semibold"><%= child_comment.user_name %></a>
+                                            <span class="font-size-sm text-muted ml-sm-2 mb-2 mb-sm-0 d-block d-sm-inline-block"
+                                                data-popup="tooltip" data-original-title="<%= child_comment.created_at.strftime('%d/%m/%Y %H:%M') %>">
+                                                <%= time_ago_in_words(child_comment.created_at) %>
+                                            </span>
+                                        </div>
+            
+                                        <p><%= simple_format(child_comment.message) %></p>
+                                    </div>
+            
+                                    <ul class="list-inline font-size-sm mb-0">
+                                        <!--<li class="list-inline-item">67 <a href="#"><i class="icon-arrow-up22 text-success"></i></a><a href="#"><i class="icon-arrow-down22 text-danger"></i></a></li>-->
+                                        <li class="list-inline-item">
+                                            <a href="<%= gns_project.edit_backend_comment_path(child_comment) %>"
+                                                class="edit-comment-button">
+                                                Edit
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="#"
+                                                class="delete-comment-button">
+                                                Delete
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        <% end %>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+<% end %>

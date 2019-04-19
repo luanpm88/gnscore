@@ -1,0 +1,33 @@
+<%= form_for([gns_project, :backend, comment], html: {multipart: true}) do |f| %>
+<div class="card">
+    <div class="card-body">
+        <fieldset>
+            <input type="hidden" name="comment[project_id]" value="<%= @comment.project_id %>">
+            <% if !@comment.parent_id.nil? %>
+                <input type="hidden" name="comment[parent_id]" value="<%= @comment.parent_id %>">
+            <% end %>
+            <div class="form-group">
+                <label>Description:</label>
+                <textarea rows="2" cols="5"
+                    class="form-control <%= 'border-danger' if comment.errors.full_messages_for(:message).present? %>"
+                    placeholder="Enter message"
+                    name="comment[message]"
+                ><%= comment.message %></textarea>
+                <% if comment.errors.full_messages_for(:message).present? %>
+                    <span class="form-text text-danger"><%= comment.errors.full_messages_for(:message).join('<br/>').html_safe %></span>
+                <% end %>
+            </div>
+            
+            <div class="form-group">
+                <label class="d-block font-weight-semibold">Add file:</label>
+                <input name="comment[file]" type="file" class="file-input">
+                <span class="form-text text-muted">Accepted formats: pdf, doc. Max file size 2Mb</span>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<div class="text-right">
+    <button type="submit" class="btn btn-primary"><i class="icon-paperplane mr-1"></i> Send</button>
+</div>
+<% end %>

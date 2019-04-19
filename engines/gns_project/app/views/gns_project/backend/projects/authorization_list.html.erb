@@ -1,0 +1,58 @@
+<table class="table table-hover">
+    <thead>
+        <tr class="alpha-primary">
+            <th class="text-nowrap">No.</th>
+            <th class="text-nowrap">Employee Name</th>
+            <th class="text-nowrap">Role Name</th>
+            <th class="text-nowrap text-center">Permissions</th>
+            <th class="text-nowrap text-right">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @project_user_roles.each_with_index do |pur,index| %>
+            <tr>
+                <td><%= index + 1 %></td>
+                <td><%= pur.project_user.user.full_name %></td>
+                <td><%= pur.role.name %></td>
+                <td class="text-center">
+                    <a href="#"
+                        class="">
+                        <span class="badge badge-flat badge-pill border-grey-800 text-default">
+                            <%= pur.role.permissions_count %>
+                        </span>
+                    </a>
+                </td>
+                <td class="text-right">
+                    <div class="list-icons">
+                        <div class="dropdown">
+                            <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                <i class="icon-menu9"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a href="#"
+                                   class="dropdown-item view-authorization-button">
+                                    <i class="icon-info3"></i> View permissions
+                                </a>
+                                
+                                <a href="#"
+                                    class="dropdown-item edit-authorization-button">
+                                    <i class="icon-pencil7"></i> Change roles
+                                </a>
+                                
+                                <div class="dropdown-divider"></div>
+                                
+                                <a class="dropdown-item ajax remove-authorization-button"
+                                    href="#"
+                                    data-method="DELETE"
+                                    data-confirm="You are about to remove a authorization"
+                                >
+                                    <i class="icon-bin"></i> Remove roles
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

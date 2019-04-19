@@ -1,0 +1,22 @@
+<%= form_for([gns_project, :backend, role], html: {multipart: false}) do |f| %>
+    <fieldset>
+        <div class="form-group">
+            <label class="d-block font-weight-semibold">Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control <%= 'border-danger' if role.errors.full_messages_for(:name).present? %>" placeholder="Enter role name"
+                name="role[name]"
+                value="<%= role.name %>"
+            >
+            <% if role.errors.full_messages_for(:name).present? %>
+                <span class="form-text text-danger"><%= role.errors.full_messages_for(:name).join('<br/>').html_safe %></span>
+            <% end %>
+        </div>
+    </fieldset>
+    
+    <hr class="mt-0">
+    <div class="text-left">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a class="btn btn-light ml-1" href="<%= gns_project.backend_roles_path %>">
+            Cancel
+        </a>
+    </div>
+<% end %>

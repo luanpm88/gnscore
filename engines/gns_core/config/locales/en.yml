@@ -1,4 +1,14 @@
 en:
+  activerecord:
+    attributes:
+      gns_core/user:
+        avatar: ''
+    errors:
+      messages:
+        record_invalid: 'Validation failed: %{errors}'
+        restrict_dependent_destroy:
+          has_one: Cannot delete record because a dependent %{record} exists
+          has_many: Cannot delete record because dependent %{record} exist
   will_paginate:
     page_entries_info:
       single_page:
@@ -11,3 +21,42 @@ en:
         other: "Showing %{count} entries"
       multi_page: "Showing %{from} to %{to} of %{count} entries"
       multi_page_html: "Showing %{from} to %{to} of %{count} entries"
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: "about 1 hour ago"
+        other: "about %{count} hours ago"
+      about_x_months:
+        one: "about 1 month ago"
+        other: "about %{count} months ago"
+      about_x_years:
+        one: "about 1 year ago"
+        other: "about %{count} years ago"
+      almost_x_years:
+        one: "almost 1 year ago"
+        other: "almost %{count} years ago"
+      half_a_minute: "half a minute"
+      less_than_x_seconds:
+        one: "just now"
+        other: "less than %{count} seconds ago"
+      less_than_x_minutes:
+        one: "just now"
+        other: "less than %{count} minutes ago"
+      over_x_years:
+        one: "over 1 year ago"
+        other: "over %{count} years ago"
+      x_seconds:
+        one: "1 second ago"
+        other: "%{count} seconds ago"
+      x_minutes:
+        one: "1 minute ago"
+        other: "%{count} minutes ago"
+      x_days:
+        one: "1 day ago"
+        other: "%{count} days ago"
+      x_months:
+        one: "1 month ago"
+        other: "%{count} months ago"
+      x_years:
+        one: "1 year ago"
+        other: "%{count} years ago"

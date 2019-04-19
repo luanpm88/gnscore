@@ -23,7 +23,9 @@
             <div class="card-body">
                 <div class="media">
                     <div class="mr-3">
-                        <a href="#"><img src="/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg" width="38" height="38" class="rounded-circle" alt=""></a>
+                        <img src="<%= current_user.avatar.present? ? current_user.avatar.system : url_for("/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg") %>"
+                            width="38" height="38" class="rounded-circle" alt="">
+                        </a>
                     </div>
 
                     <div class="media-body">
@@ -86,7 +88,8 @@
                     <a href="#" class="nav-link"
                         data-menu="
                             gns_project/backend/projects,
-                            gns_project/backend/categories
+                            gns_project/backend/categories,
+                            gns_project/backend/roles
                         "
                     ><i class="icon-task"></i> <span>Project</span></a>
 
@@ -105,6 +108,14 @@
                                     gns_project/backend/categories
                                 "
                             >Types
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<%= gns_project.backend_roles_path %>" class="nav-link"
+                                data-menu="
+                                    gns_project/backend/roles
+                                "
+                            >Roles (Default)
                             </a>
                         </li>
                     </ul>

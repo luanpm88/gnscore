@@ -82,7 +82,8 @@
             
             <li class="nav-item dropdown dropdown-user">
                 <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
-                    <img src="/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg" class="rounded-circle mr-2" height="34" alt="">
+                    <img src="<%= current_user.avatar.present? ? current_user.avatar.system : url_for("/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg") %>"
+                        class="rounded-circle mr-2" height="34" alt="">
                     <span><%= current_user.short_name %></span>
                 </a>
 

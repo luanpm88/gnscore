@@ -1,39 +1,71 @@
-<div class="card-header bg-white pb-0 pt-sm-0 header-elements-sm-inline">
-    <h6 class="card-title"><%= title %></h6>
-    <div class="header-elements">
-        <ul class="nav nav-tabs nav-tabs-bottom card-header-tabs mx-0">
-            <li class="nav-item">
-                <a href="<%= gns_project.backend_project_path(@project) %>"
-                    class="nav-link" modal-size="full"
-                    data-menu="gns_project/backend/projects/show"
-                >
-                    <i class="icon-clipboard3 mr-1"></i>
-                    Planning
-                </a>
-            </li>
-            <li class="nav-item">
-                <a
-                    data-menu="gns_project/backend/projects/attachments"
-                    href="<%= gns_project.attachments_backend_projects_path(@project.id) %>"
-                    class="nav-link" modal-size="full">
-                        <i class="icon-attachment mr-1"></i>
-                        Attachment
-                </a>
-            </li>
-            
-            <li class="nav-item mr-3">
-                <a
-                    data-menu="gns_project/backend/projects/logs"
-                    href="<%= gns_project.logs_backend_projects_path(@project.id) %>"
-                    class="nav-link" modal-size="full">
-                        <i class="icon-history mr-1"></i>
-                        Logs
-                </a>
-            </li>
-            
-            <div class="list-icons">
-                <a class="list-icons-item" data-action="collapse"></a>
+<% content_for :page_toolbar do %>
+    <div class="list-icons">
+        <a href="<%= gns_project.backend_project_path(@project) %>"
+            class="btn btn-success btn-labeled btn-labeled-left btn-sm modal-control"
+             modal-size="lg"><b><i class="icon-zoomin3"></i></b> Show Info
+        </a>
+        
+        <div class="btn-group ml-1">
+            <button type="button" class="btn btn-sm bg-transparent text-success border-success dropdown-toggle" data-toggle="dropdown">Actions</button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a href="#" class="dropdown-item"> Update Info</a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item"> In Progress</a>
+                <a href="#" class="dropdown-item"> Finish</a>
             </div>
-        </ul>
+        </div>
+    </div>
+<% end %>
+
+<div class="card-header bg-white pb-0 pt-sm-0 header-elements-sm-inline">
+    <% if false %>
+        <h6 class="card-title"><%= title %></h6>
+    <% end %>
+    <ul class="nav nav-tabs nav-tabs-bottom card-header-tabs mx-0">
+        <li class="nav-item">
+            <a href="<%= gns_project.tasks_backend_projects_path(@project.id) %>"
+                class="nav-link" modal-size="full"
+                data-menu="gns_project/backend/projects/tasks"
+            >
+                <i class="icon-clipboard3 mr-1"></i>
+                Planning
+            </a>
+        </li>
+        
+        <li class="nav-item">
+            <a
+                data-menu="gns_project/backend/projects/attachments"
+                href="<%= gns_project.attachments_backend_projects_path(@project.id) %>"
+                class="nav-link" modal-size="full">
+                    <i class="icon-attachment mr-1"></i>
+                    Attachment
+            </a>
+        </li>
+        
+        <li class="nav-item">
+            <a
+                data-menu="gns_project/backend/projects/authorization"
+                href="<%= gns_project.authorization_backend_projects_path(@project.id) %>"
+                class="nav-link" modal-size="full">
+                    <i class="icon-user-check mr-1"></i>
+                    Authorization
+            </a>
+        </li>
+        
+        <li class="nav-item mr-3">
+            <a
+                data-menu="gns_project/backend/projects/logs"
+                href="<%= gns_project.logs_backend_projects_path(@project.id) %>"
+                class="nav-link" modal-size="full">
+                    <i class="icon-history mr-1"></i>
+                    Logs
+            </a>
+        </li>
+    </ul>
+    
+    <div class="header-elements">
+        <div class="list-icons">
+            <a class="list-icons-item" data-action="collapse"></a>
+        </div>
     </div>
 </div>

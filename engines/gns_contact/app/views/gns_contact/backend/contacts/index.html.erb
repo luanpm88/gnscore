@@ -224,7 +224,6 @@
                         data-fouc
                         name="contact_type"
                     >
-                        <option></option>
                         <% options = GnsContact::Contact::get_type_options() %>
                         <% options.each do |option| %>
                             <option value="<%= option[:value] %>"><%= option[:text] %></option>
@@ -251,6 +250,7 @@
                             <option value="foreign_name">Foreign name</option>
                             <option value="contact_group" selected>Group</option>
                             <option value="business_partner_type">Business Partner Type</option>
+                            <option value="belongs_to">Belongs To</option>
                             <option value="tax_code" selected>Tax ID</option>
                             <option value="email">Email</option>
                             <option value="phone_number">Phone number</option>
