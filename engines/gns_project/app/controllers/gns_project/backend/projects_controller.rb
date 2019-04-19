@@ -166,7 +166,6 @@ module GnsProject
       def comments      
         @comments = @project.comments.order('created_at DESC')
           .where(parent_id: nil)
-          .paginate(:page => params[:page], :per_page => 5)
       
         render layout: nil
       end
