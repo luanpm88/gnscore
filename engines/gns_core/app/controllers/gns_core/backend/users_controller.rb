@@ -48,6 +48,11 @@ module GnsCore
   
       # PATCH/PUT /users/1
       def update
+        if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+          params[:user].delete(:password)
+          params[:user].delete(:password_confirmation)
+        end
+        
         if @user.update(user_params)
           # Add notification
           current_user.add_notification("gns_core.notification.user.updated", {
