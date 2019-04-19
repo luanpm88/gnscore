@@ -1,5 +1,13 @@
 <%= form_for([gns_core, :backend, user], html: {multipart: true, autocomplete: 'off'}) do |f| %>
-    <fieldset>    
+    <fieldset>
+        <div class="form-group">
+            <label class="d-block font-weight-semibold">Avatar:</label>
+            <input name="user[avatar]" type="file" class="file-input">
+            <% if user.errors.full_messages_for(:avatar).present? %>
+                <span class="form-text text-danger"><%= user.errors.full_messages_for(:avatar).join('<br/>').html_safe %></span>
+            <% end %>
+        </div>
+        
         <div class="form-group">
             <label class="d-block font-weight-semibold">Email <span class="text-danger">*</span></label>
             <input type="text" autocomplete="email"

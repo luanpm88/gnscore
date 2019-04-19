@@ -1,5 +1,8 @@
 en:
   activerecord:
+    attributes:
+      gns_core/user:
+        avatar: ''
     errors:
       messages:
         record_invalid: 'Validation failed: %{errors}'

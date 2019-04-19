@@ -14,6 +14,8 @@ module GnsCore
     has_many :project_users, class_name: 'GnsProject::ProjectUser'
     has_many :project_user_roles, class_name: 'GnsProject::ProjectUserRole', through: :project_users
     
+    mount_uploader :avatar, GnsCore::AvatarUploader
+    
     def add_notification(phrase, data)
 			GnsNotification::Notification::create(
 				phrase: phrase,
