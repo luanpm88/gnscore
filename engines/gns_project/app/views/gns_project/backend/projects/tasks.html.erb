@@ -113,18 +113,22 @@
 <% end %>
 
 <div class="card">
-    <%= render "menu_tab", title: 'Project Planning' %>
+    <%= render "menu_tab",
+        title: 'Project Planning'
+    %>
     
     <div class="card-body">
-        <div class="text-right">
-            <a href="<%= gns_project.new_backend_task_path(project_id: @project.id) %>"
-                class="btn btn-sm bg-blue mb-3 add-task-button">
-                Add new task
-            </a>
+        <div class="flex card-gtitle" style="">
+            <h5 class="mb-0">Tasks List</h5>
+            <div class="text-right">
+                <a href="<%= gns_project.new_backend_task_path(project_id: @project.id) %>"
+                    class="btn btn-sm bg-blue add-task-button">
+                    Add new task
+                </a>
+            </div>
         </div>
-        
-        <div class="task-planning-list" style="position: relative; min-height: 130px"></div>
     </div>
+    <div class="task-planning-list" style="position: relative;"></div>
 </div>
 
 <%= render "comment_card", project: @project %>

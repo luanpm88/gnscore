@@ -175,3 +175,7 @@
 .comment-area .media {
     margin-top: .5rem;
 }
+.card-gtitle {
+    align-items: center;
+    justify-content: space-between;
+}

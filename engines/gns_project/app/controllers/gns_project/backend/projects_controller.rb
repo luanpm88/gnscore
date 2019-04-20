@@ -180,10 +180,9 @@ module GnsProject
         def project_params
           params.fetch(:project, {}).permit(:code, :name, :category_id, :customer_id,
                                             :start_date, :end_date, :priority, :manager_id)
-          
-          def comment_params
-            params.fetch(:comment, {}).permit(:message, :file, :project_id, :parent_id)
-          end
+        end
+        def comment_params
+          params.fetch(:comment, {}).permit(:message, :file, :project_id, :parent_id)
         end
     end
   end
