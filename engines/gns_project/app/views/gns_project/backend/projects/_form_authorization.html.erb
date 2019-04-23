@@ -1,0 +1,31 @@
+<div class="form-group">
+    <label class="d-block">Employee <span class="text-danger">*</span></label>
+    <select name="authorization[user_id]"
+        data-container-css-class="font-weight-semibold <%= 'border-danger' if project_user.errors.full_messages_for(:user).present? %>"
+        data-placeholder="Select user"
+        class="form-control select-ajax"
+        data-url="<%= gns_core.select2_backend_users_path %>">
+        <option value="<%= project_user.user_id %>"><%= project_user.user_name %></option>
+    </select>
+    <% if project_user.errors.full_messages_for(:user).present? %>
+        <span class="form-text text-danger"><%= project_user.errors.full_messages_for(:user).join('<br/>').html_safe %></span>
+    <% end %>
+</div>
+
+<div class="form-group">
+    <label class="d-block">Project Roles <span class="text-danger">*</span></label>
+    <select name="authorization[role_ids][]" multiple
+        data-container-css-class="font-weight-semibold <%= 'border-danger' if project_user.errors.full_messages_for(:role_ids).present? %>"
+        data-placeholder="Select project roles"
+        class="form-control select-ajax"
+        data-url="<%= gns_project.select2_backend_roles_path %>"
+    >
+        <% roles = project_user.project_user_roles.map {|pur| pur.role} %>
+        <% roles.each do |role| %>
+            <option selected="selected" value="<%= role.id %>"><%= role.name %></option>
+        <% end %>
+    </select>
+    <% if project_user.errors.full_messages_for(:role_ids).present? %>
+        <span class="form-text text-danger"><%= project_user.errors.full_messages_for(:role_ids).join('<br/>').html_safe %></span>
+    <% end %>
+</div>

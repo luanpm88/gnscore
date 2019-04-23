@@ -4,7 +4,7 @@ module GnsProject
       before_action :set_project, only: [:download_attachments, :show, :edit, :update, :destroy,
                                          :tasks, :tasks_list, :attachments, :attachments_list,
                                          :logs, :logs_list, :authorization, :authorization_list,
-                                         :add_authorization, :comments]
+                                         :comments]
   
       # GET /projects
       def index
@@ -122,19 +122,66 @@ module GnsProject
       end
       
       def authorization_list
-        @project_user_roles = GnsProject::ProjectUserRole.all
+        @project_users = GnsProject::ProjectUser.where(project_id: @project.id)
         render layout: nil
       end
       
       # add authorization
       def add_authorization
-        #authorization[project_id]
-        #authorization[user_id]
-        #authorization[role_ids][]
-        #
-        #add project_id ==> ProjectUser
-        #add user_id ==> ProjectUser
-        #add role_ids ==> ProjectUserRole
+        @project = Project.find(params[:id])
+        @project_user = GnsProject::ProjectUser.new
+        
+        if request.post?
+          if !params[:authorization][:user_id].present?
+            @project_user.errors.add('user', "not be blank")
+          end
+          
+          if !params[:authorization][:role_ids].present?
+            @project_user.errors.add('role_ids', "not be blank")
+          end
+          
+          if @project_user.errors.empty?
+            params[:authorization][:role_ids].each do |rid|
+              @project.add_user_role(params[:authorization][:user_id], rid)
+            end
+            
+            #@project_user.log("gns_project.log.project_user.added", current_user)
+            
+            render json: {
+              status: 'success',
+              message: 'Authorization was successfully added.',
+            }
+          end
+        end
+      end
+      
+      # edit authorization
+      def edit_authorization
+        @project = Project.find(params[:project_id])
+        @project_user = GnsProject::ProjectUser.find(params[:project_user_id])
+        
+        if request.post?
+          if !params[:authorization][:user_id].present?
+            @project_user.errors.add('user', "not be blank")
+          end
+          
+          if !params[:authorization][:role_ids].present?
+            @project_user.errors.add('role_ids', "not be blank")
+          end
+          
+          if @project_user.errors.empty?
+            params[:authorization][:role_ids].each do |rid|
+              #@project.add_user_role(params[:authorization][:user_id], rid)
+            end
+            
+            #@project_user.log("gns_project.log.project_user.added", current_user)
+            
+            render json: {
+              status: 'success',
+              message: 'Authorization was successfully updated.',
+            }
+          end
+        end
       end
       
       def download_attachments

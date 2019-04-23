@@ -1,11 +1,11 @@
 <% content_for :title do %>
-    Add authorization
+    Edit authorization
 <% end %>
 
 <% content_for :page_script do %>
-    <script>
+    <script>        
         $(document).ready(function() {
-            $('.add_authorization_project').submit(function(e) {
+            $('.edit_authorization_project').submit(function(e) {
                 e.preventDefault();                
                 var form = $(this);
                 
@@ -35,11 +35,11 @@
 
 <div class="card">
     <div class="card-body">
-        <%= form_for '', url: gns_project.add_authorization_backend_projects_path(id: @project.id), html: {multipart: false, class: 'add_authorization_project'} do |f| %>            
+        <%= form_for '', url: gns_project.edit_authorization_backend_projects_path(project_id: @project.id, project_user_id: @project_user.id), html: {multipart: false, class: 'edit_authorization_project'} do |f| %>            
             <%= render 'form_authorization', project_user: @project_user %>
             
             <div class="text-left">
-                <button type="submit" class="btn btn-primary">Add</button>
+                <button type="submit" class="btn btn-primary">Update</button>
             </div>
         <% end %>
     </div>

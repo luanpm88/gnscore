@@ -14,6 +14,8 @@ GnsProject::Engine.routes.draw do
                 post ':id/logs_list', to: 'projects#logs_list', as: 'logs_list'
                 get 'add_authorization'
                 post 'add_authorization'
+                get 'edit_authorization'
+                post 'edit_authorization'
                 get ':id/comments', to: 'projects#comments', as: 'comments'
             end
         end

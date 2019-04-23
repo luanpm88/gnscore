@@ -9,16 +9,21 @@
         </tr>
     </thead>
     <tbody>
-        <% @project_user_roles.each_with_index do |pur,index| %>
+        <% @project_users.each_with_index do |project_user,index| %>
             <tr>
+                <% roles = project_user.project_user_roles.map {|pur| pur.role} %>
                 <td><%= index + 1 %></td>
-                <td><%= pur.project_user.user.full_name %></td>
-                <td><%= pur.role.name %></td>
+                <td><%= project_user.user.full_name %></td>
+                <td>
+                    <% roles.each do |role| %>
+                        <span class="badge badge-flat border-primary text-primary-600"><%= role.name %></span>
+                    <% end %>
+                </td>
                 <td class="text-center">
                     <a href="#"
                         class="">
                         <span class="badge badge-flat badge-pill border-grey-800 text-default">
-                            <%= pur.role.permissions_count %>
+                            <!--pur.role.permissions_count-->
                         </span>
                     </a>
                 </td>
@@ -31,12 +36,15 @@
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a href="#"
                                    class="dropdown-item view-authorization-button">
-                                    <i class="icon-info3"></i> View permissions
+                                    <i class="icon-info3"></i> View Permissions
                                 </a>
                                 
-                                <a href="#"
+                                <a href="<%= gns_project.edit_authorization_backend_projects_path(
+                                            project_id: project_user.project,
+                                            project_user_id: project_user
+                                        ) %>"
                                     class="dropdown-item edit-authorization-button">
-                                    <i class="icon-pencil7"></i> Change roles
+                                    <i class="icon-pencil7"></i> Update authorized
                                 </a>
                                 
                                 <div class="dropdown-divider"></div>
@@ -46,7 +54,7 @@
                                     data-method="DELETE"
                                     data-confirm="You are about to remove a authorization"
                                 >
-                                    <i class="icon-bin"></i> Remove roles
+                                    <i class="icon-bin"></i> Remove authorized
                                 </a>
                             </div>
                         </div>

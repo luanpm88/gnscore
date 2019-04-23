@@ -165,5 +165,20 @@ module GnsProject
     def log(phrase, object, user, remark=nil)
       GnsProject::Log.add_new(self, phrase, object, user, remark=nil)
     end
+    
+    def add_user_role(user_id, role_id)
+      project_user = GnsProject::ProjectUser.where(project_id: self.id, user_id: user_id).first
+      
+      if !project_user.present?
+        project_user = GnsProject::ProjectUser.new(project_id: self.id, user_id: user_id)
+        project_user.save
+      end
+
+      project_user_role = GnsProject::ProjectUserRole.where(project_user_id: project_user.id, role_id: role_id).first
+      if !project_user_role.present?
+        project_user_role = GnsProject::ProjectUserRole.new(project_user_id: project_user.id, role_id: role_id)
+        project_user_role.save
+      end
+    end
   end
 end
