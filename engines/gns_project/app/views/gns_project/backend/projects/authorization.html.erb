@@ -59,14 +59,16 @@
 <div class="card">
     <%= render "menu_tab", title: 'Authorization' %>
     
-    <div class="card-body">
+    <div class="card-header header-elements-inline">
+        <h5 class="mb-0">Authorized List</h5>
         <div class="text-right">
             <a href="<%= gns_project.add_authorization_backend_projects_path(id: @project) %>"
-                class="btn bg-light mb-3 add-authorization-button">Add new authorization
+                class="btn btn-sm bg-blue add-authorization-button">Add authorization
             </a>
         </div>
-        <div class="authorization-list" style="position: relative; min-height: 130px"></div>
     </div>
+    
+    <div class="authorization-list" style="position: relative; min-height: 130px"></div>
 </div>
 
 <%= render "comment_card", project: @project %>
