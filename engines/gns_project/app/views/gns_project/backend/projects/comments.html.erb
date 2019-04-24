@@ -7,7 +7,7 @@
                 <div class="mr-md-3 mb-2 mb-md-0">
                     <a href="javascript:void(0)">
                         <img src="<%= comment.user.avatar.present? ? comment.user.avatar.system : url_for("/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg") %>"
-                            class="rounded-circle" width="45" height="45" alt="">
+                            class="rounded-circle avatar" width="45" height="45" alt="">
                     </a>
                 </div>
     
@@ -21,10 +21,10 @@
                             </span>
                         </div>
         
-                        <p><%= simple_format(comment.message) %></p>
+                        <%= simple_format(comment.message) %>
                     </div>
         
-                    <ul class="list-inline font-size-sm mb-0">
+                    <ul class="list-inline font-size-sm mb-0 comment-action-link">
                         <!--<li class="list-inline-item">70 <a href="#"><i class="icon-arrow-up22 text-success"></i></a><a href="#"><i class="icon-arrow-down22 text-danger"></i></a></li>-->
                         <li class="list-inline-item">
                             <a href="<%= gns_project.new_backend_comment_path(project_id: @project, parent_id: comment) %>"
@@ -48,11 +48,11 @@
                     
                     <% if comment.children.count > 0 %>
                         <% comment.children.order('created_at DESC').each do |child_comment| %>
-                            <div class="media flex-column flex-md-row">
+                            <div class="media flex-column flex-md-row comment-reply">
                                 <div class="mr-md-3 mb-2 mb-md-0">
                                     <a href="javascript:void(0)">
                                         <img src="<%= child_comment.user.avatar.present? ? child_comment.user.avatar.system : url_for("/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg") %>"
-                                            class="rounded-circle" width="35" height="35" alt="">
+                                            class="rounded-circle avatar" width="35" height="35" alt="">
                                     </a>
                                 </div>
         
@@ -66,10 +66,10 @@
                                             </span>
                                         </div>
             
-                                        <p><%= simple_format(child_comment.message) %></p>
+                                        <%= simple_format(child_comment.message) %>
                                     </div>
             
-                                    <ul class="list-inline font-size-sm mb-0">
+                                    <ul class="list-inline font-size-sm mb-0 comment-action-link">
                                         <!--<li class="list-inline-item">67 <a href="#"><i class="icon-arrow-up22 text-success"></i></a><a href="#"><i class="icon-arrow-down22 text-danger"></i></a></li>-->
                                         <li class="list-inline-item">
                                             <a href="<%= gns_project.edit_backend_comment_path(child_comment) %>"

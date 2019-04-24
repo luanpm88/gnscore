@@ -148,33 +148,50 @@
     border-bottom: 1px dotted #eee;
 }
 
-.comment-area .media-body .main, .comment-area .media-body .sub {
+.comments-list .comment-area .media {
+    margin-top: .5rem;
+}
+
+.comments-list .comment-area .media-body .main, .comments-list .comment-area .media-body .sub {
     background-color: #f5f5f5;
     border-color: #f5f5f5;
     position: relative;
     padding: .625rem 1rem;
     width: auto;
     color: #333;
-    border-radius: .1875rem;
+    border-radius: .9rem;
     margin-bottom: .2rem;
 }
-.comment-area .media-body .main p, .comment-area .media-body .sub p {
-    margin-bottom: 0;
-}
-.comment-area .media-body .main:before, .comment-area .media-body .sub:before {
+
+.comments-list .comment-area .media-body .main:before, .comments-list .comment-area .media-body .sub:before {
     content: '';
-    left: -5px;
+    left: -8px;
     top: .93752rem;
     position: absolute;
     margin-left: 0;
     border-top: 5px solid transparent;
-    border-right: 5px solid;
+    border-right: 8px solid;
     border-right-color: inherit;
     border-bottom: 5px solid transparent;
 }
-.comment-area .media {
-    margin-top: .5rem;
+
+.comments-list .comment-area .media-body .main p, .comments-list .comment-area .media-body .sub p {
+    margin-bottom: 0;
 }
+
+.comments-list .comment-area .comment-action-link {
+    margin-left: 15px;
+    min-height: 15px;
+}
+
+.comments-list .comment-area .comment-reply {
+    padding-left: 15px;
+}
+
+.comments-list .comment-area img.avatar {
+    border: 1px solid #2196f3;
+}
+
 .card-gtitle {
     align-items: center;
     justify-content: space-between;
