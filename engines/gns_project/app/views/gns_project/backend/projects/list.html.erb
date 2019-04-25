@@ -40,7 +40,7 @@
                 <% if params["show_columns"].include?("code") %>
                     <td>
                         <a href="<%= gns_project.backend_project_path(project) %>"
-                          class="modal-control" modal-size="full">
+                          class="modal-control" modal-size="lg">
                             <%= project.code %>
                         </a>
                     </td>
@@ -97,31 +97,50 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a href="<%= gns_project.backend_project_path(project) %>" class="dropdown-item">
+                                <a href="<%= gns_project.backend_project_path(project) %>" class="dropdown-item modal-control"
+                                    modal-size="lg">
                                     <i class="icon-file-eye"></i> Show Info
                                 </a>
+                                
                                 <a class="dropdown-item edit-project-button"
                                     href="<%= gns_project.edit_backend_project_path(project) %>">
                                     <i class="icon-pencil7"></i> Update
                                 </a>
+                                
+                                <a class="dropdown-item start-progress-project-button"
+                                    href="<%= gns_project.start_progress_backend_projects_path(id: project) %>">
+                                    <i class="icon-pencil7"></i> Start project
+                                </a>
+                                
+                                <a class="dropdown-item finish-project-button"
+                                    href="<%= gns_project.finish_backend_projects_path(id: project) %>">
+                                    <i class="icon-pencil7"></i> Finish
+                                </a>
+                                
                                 <div class="dropdown-divider"></div>
+                                
                                 <a class="dropdown-item"
                                     href="<%= gns_project.tasks_backend_projects_path(project) %>">
                                     <i class="icon-clipboard3"></i> Planning
                                 </a>
+                                
                                 <a class="dropdown-item"
                                     href="<%= gns_project.attachments_backend_projects_path(project) %>">
                                     <i class="icon-attachment"></i> Attachment
                                 </a>
+                                
                                 <a class="dropdown-item"
                                     href="<%= gns_project.authorization_backend_projects_path(project) %>">
                                     <i class="icon-user-check"></i> Authorization
                                 </a>
+                                
                                 <a class="dropdown-item"
                                     href="<%= gns_project.logs_backend_projects_path(project) %>">
                                     <i class="icon-history"></i> View logs
                                 </a>
+                                
                                 <div class="dropdown-divider"></div>
+                                
                                 <a class="dropdown-item ajax datalist-g-link"
                                     href="<%= gns_project.backend_project_path(project) %>"
                                     data-method="DELETE"

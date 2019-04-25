@@ -4,7 +4,7 @@ module GnsProject
       before_action :set_project, only: [:download_attachments, :show, :edit, :update, :destroy,
                                          :tasks, :tasks_list, :attachments, :attachments_list,
                                          :logs, :logs_list, :authorization, :authorization_list,
-                                         :comments]
+                                         :comments, :start_progress, :finish]
   
       # GET /projects
       def index
@@ -215,6 +215,52 @@ module GnsProject
           .where(parent_id: nil)
       
         render layout: nil
+      end
+      
+      # Set InProgress action
+      def start_progress
+        #authorize! :set_in_progress, @project
+        
+        remark = params[:remark]
+        
+        if request.post?
+          if !remark.present?
+            @project.errors.add('remark', "not be blank")
+          end
+          
+          if @project.errors.empty?
+            @project.set_in_progress_for_status
+            @project.log("gns_project.log.project.start_progress", current_user, remark)
+            
+            render json: {
+              status: 'success',
+              message: 'The project has successfully updated the status is "in progress".',
+            }
+          end
+        end
+      end
+      
+      # Set Finished action
+      def finish
+        #authorize! :set_finished, @project
+        
+        remark = params[:remark]
+        
+        if request.post?
+          if !remark.present?
+            @project.errors.add('remark', "not be blank")
+          end
+          
+          if @project.errors.empty?
+            @project.set_finished_for_status
+            @project.log("gns_project.log.project.finish", current_user, remark)
+            
+            render json: {
+              status: 'success',
+              message: 'The project has successfully updated the status is "finished".',
+            }
+          end
+        end
       end
   
       private

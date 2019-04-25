@@ -1,0 +1,60 @@
+<% content_for :title do %>
+    Update Status to IN-PROGRESS
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        $(document).ready(function() {
+            $('.start_progress_project').submit(function(e) {
+                e.preventDefault();                
+                var form = $(this);
+                
+                // clear modal
+                start_progress_project_modal.clear();
+                
+                $.ajax({
+                    url: form.attr('action'),
+                    method: form.attr('method'),
+                    data: form.serialize() + '&layout=modal',
+                }).done(function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                      showNotification(response.status, response.message);
+                      start_progress_project_modal.hide();
+                      
+                      // load task list
+                      if (typeof(start_progress_project_modal) !== 'undefined') {
+                        start_progress_project_callback();
+                      }
+                    } else {
+                      start_progress_project_modal.renderHtml(response);
+                    }
+                });
+                
+                return false;
+            });
+        });
+    </script>
+<% end %>
+
+<div class="card">
+    <div class="card-body">
+        <%= form_for '', url: gns_project.start_progress_backend_projects_path(id: @project.id), html: {multipart: false, class: 'start_progress_project'} do |f| %>
+            <h5>Would you like to change the status of this project to In-Progress?</h5>
+            
+            <div class="form-group">
+                <textarea rows="2" cols="5"
+                    class="form-control <%= 'border-danger' if @project.errors.full_messages_for(:remark).present? %>"
+                    placeholder="Enter your remark here"
+                    name="remark"
+                ></textarea>
+                <% if @project.errors.full_messages_for(:remark).present? %>
+                    <span class="form-text text-danger"><%= @project.errors.full_messages_for(:remark).join('<br/>').html_safe %></span>
+                <% end %>
+            </div>
+            
+            <div class="text-left">
+                <button type="submit" class="btn btn-primary">Confirm</button>
+            </div>
+        <% end %>
+    </div>
+</div>

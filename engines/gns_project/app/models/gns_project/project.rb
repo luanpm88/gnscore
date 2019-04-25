@@ -48,9 +48,7 @@ module GnsProject
     PRIORITY_LOW = 'low'
     
     STATUS_NEW = 'new'
-    STATUS_WAITING_APPROVE = 'waiting_approve'
-    STATUS_PROGRESSING = 'progressing'
-    STATUS_PAUSED = 'paused'
+    STATUS_IN_PROGRESS = 'in_progress'
     STATUS_FINISHED = 'finished'
     STATUS_CANCELED = 'canceled'
     
@@ -145,6 +143,24 @@ module GnsProject
       return data
     end
     
+    # set status
+    def set_new_for_status
+			update_attributes(status: GnsProject::Project::STATUS_NEW)
+		end
+		
+    def set_in_progress_for_status
+			update_attributes(status: GnsProject::Project::STATUS_IN_PROGRESS)
+		end
+		
+		def set_finished_for_status
+			update_attributes(status: GnsProject::Project::STATUS_FINISHED)
+		end
+		
+		def set_canceled_for_status
+			update_attributes(status: GnsProject::Project::STATUS_CANCELED)
+		end
+    
+    # display progress percent
     def progress_percent
       result = 0
       
@@ -162,8 +178,8 @@ module GnsProject
       self.tasks.where(status: GnsProject::Task::STATUS_OPEN)
     end
     
-    def log(phrase, object, user, remark=nil)
-      GnsProject::Log.add_new(self, phrase, object, user, remark=nil)
+    def log(phrase, user, remark=nil)
+      GnsProject::Log.add_new(self, phrase, self, user, remark)
     end
     
     def add_user_role(user_id, role_id)

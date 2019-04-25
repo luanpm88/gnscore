@@ -24,6 +24,12 @@
         var updateProjectCallback;
         var newProjectCallback;
         
+        var start_progress_project_modal = new gModal({size: 'md'});
+        var start_progress_project_callback;
+        
+        var finish_project_modal = new gModal({size: 'md'});
+        var finish_project_callback;
+        
         $(function() {            
             $('.add-project-button').click(function(e) {
                 e.preventDefault();
@@ -38,7 +44,7 @@
                         project_modal.hide();
                         datalists.forEach(function(datalist) {
                             datalist.refresh();
-                        });     
+                        });
                     } else if (typeof(response.redirect) !== 'undefined') {
                         window.location = response.redirect;
                     } else {
@@ -71,6 +77,30 @@
                     }           
                 }
                     
+            });
+            
+            $(document).on('click', '.start-progress-project-button', function(e) {
+                e.preventDefault();
+                
+                var button = $(this);
+                
+                start_progress_project_modal.load($(this).attr('href'));
+                
+                start_progress_project_callback = function() {
+                    datalists[button.closest('.datalist').attr('data-id')].refresh();
+                };
+            });
+            
+            $(document).on('click', '.finish-project-button', function(e) {
+                e.preventDefault();
+                
+                var button = $(this);
+                
+                finish_project_modal.load($(this).attr('href'));
+                
+                finish_project_callback = function() {
+                    datalists[button.closest('.datalist').attr('data-id')].refresh();
+                };
             });
         });
     </script>

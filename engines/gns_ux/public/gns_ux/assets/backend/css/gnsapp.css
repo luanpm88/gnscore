@@ -117,9 +117,35 @@
     padding: 0.8rem 0;
     margin-right: 0;
 }
+.bg-new {
+    background-color: #2196f3;
+}
+.bg-in_progress {
+    background-color: #4caf50;
+}
+.bg-finished {
+    background-color: #00bcd4;
+}
+.border-new {
+    border-color: #2196f3;
+}
+.border-in_progress {
+    border-color: #4caf50;
+}
+.border-finished {
+    border-color: #00bcd4;
+}
 .badge-new {
     color: #fff;
     background-color: #2196f3;
+}
+.badge-in_progress {
+    color: #fff;
+    background-color: #4caf50;
+}
+.badge-finished {
+    color: #fff;
+    background-color: #00bcd4;
 }
 .badge-active {
     color: #fff;
@@ -195,4 +221,8 @@
 .card-gtitle {
     align-items: center;
     justify-content: space-between;
+}
+
+.page-title {
+    padding: 1.4rem 0;
 }

@@ -17,6 +17,10 @@ GnsProject::Engine.routes.draw do
                 get 'edit_authorization'
                 post 'edit_authorization'
                 get ':id/comments', to: 'projects#comments', as: 'comments'
+                get 'start_progress'
+                post 'start_progress'
+                get 'finish'
+                post 'finish'
             end
         end
         
