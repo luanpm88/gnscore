@@ -1,15 +1,36 @@
 en:
+  gns_core:
+    notification:
+      user:
+        created: "Create new user account: %{name}"
+        updated: "Update user account: %{name}"
+      role:
+        created: "Create new system role: %{name}"
+        updated: "Update system role information: %{name}"
+        update_permissions: "Update policies for the role: %{name}"
   gns_project:
     notification:
       project:
         created: "Create new project: %{name}"
         updated: "Update project info: %{name}"
+      project_user:
+        added: "Add/assign the roles of user (%{user_name}) to project (%{project_name})"
+        updated: "Update the roles of user (%{user_name}) to project (%{project_name})"
+        removed: "Remove the roles of user (%{user_name}) to project (%{project_name})"
+      role:
+        created: "Create new project role: %{name}"
+        updated: "Update project role information: %{name}"
+        update_permissions: "Update policies for the project role: %{name}"
     
     # Project Logs
     log:
       project:
         created: "Create new project: %{name}"
         updated: "Update project info: %{name}"
+        deleted: "Destroy/delete project: %{name}"
+        mark_as_new: "Mark the project status as new"
+        start_progress: "Mark the project status in progress"
+        finish: "Mark the project status as finished"
       task:
         created: "Create new task: %{name}"
         updated: "Update task info: %{name}"
@@ -21,5 +42,10 @@ en:
       attachment:
         created: "Add new attachment: %{name}"
         updated: "Update attachment info: %{name}"
+        uploaded: "Upload attachment: %{name}"
         reupload: "Re-upload attachment: %{name}"
         destroyed: "Destroy attachment: %{name}"
+      project_user:
+        added: "Add new authorization"
+        updated: "Update authorization"
+        removed: "Remove authorization"
