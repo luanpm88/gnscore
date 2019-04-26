@@ -226,3 +226,11 @@
 .page-title {
     padding: 1.4rem 0;
 }
+.card-group-control .card-title>a.collapsed:before {
+    content: '\edc5';
+}
+.card-group-control .card-title>a:before {
+    content: '\edc6';
+    margin-top: -.8rem;
+    font-size: 1.4rem;
+}
