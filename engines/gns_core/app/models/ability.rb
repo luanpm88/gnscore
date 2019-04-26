@@ -35,25 +35,64 @@ class Ability
       project.count_attachments > 0
     end
     
+    can :create_task, GnsProject::Project do |project|
+      user.has_project_permission?(project, 'gns_project.tasks.create')
+    end
+    
+    can :read, GnsProject::Task do |task|
+      (user.has_project_permission?(task.project, 'gns_project.tasks.read_own') and task.employee == user) or
+      (user.has_project_permission?(task.project, 'gns_project.tasks.read_other') and task.employee != user)
+    end
+    
+    can :update, GnsProject::Task do |task|
+      (user.has_project_permission?(task.project, 'gns_project.tasks.update_own') and task.employee == user) or
+      (user.has_project_permission?(task.project, 'gns_project.tasks.update_other') and task.employee != user)
+    end
+    
+    can :delete, GnsProject::Task do |task|
+      (user.has_project_permission?(task.project, 'gns_project.tasks.delete_own') and task.employee == user) or
+      (user.has_project_permission?(task.project, 'gns_project.tasks.delete_other') and task.employee != user)
+    end
+    
     # gns_project / tasks
     can :finish, GnsProject::Task do |task|
-      !task.finished? and task.progress == 100
+      (!task.finished? and task.progress == 100) and
+      (
+        (user.has_project_permission?(task.project, 'gns_project.tasks.finish_own') and task.employee == user) or
+        (user.has_project_permission?(task.project, 'gns_project.tasks.finish_other') and task.employee != user)
+      )
     end
     
     can :unfinish, GnsProject::Task do |task|
-      task.finished? and task.is_open?
+      (task.finished? and task.is_open?) and
+      (
+        (user.has_project_permission?(task.project, 'gns_project.tasks.unfinish_own') and task.employee == user) or
+        (user.has_project_permission?(task.project, 'gns_project.tasks.unfinish_other') and task.employee != user)
+      )
     end
     
     can :close, GnsProject::Task do |task|
-      task.finished? and task.is_open?
+      (task.finished? and task.is_open?) and
+      (
+        (user.has_project_permission?(task.project, 'gns_project.tasks.close_own') and task.employee == user) or
+        (user.has_project_permission?(task.project, 'gns_project.tasks.close_other') and task.employee != user)
+      )
     end
     
     can :reopen, GnsProject::Task do |task|
-      task.finished? and task.is_closed?
+      (task.finished? and task.is_closed?) and
+      (
+        (user.has_project_permission?(task.project, 'gns_project.tasks.reopen_own') and task.employee == user) or
+        (user.has_project_permission?(task.project, 'gns_project.tasks.reopen_other') and task.employee != user)
+      )
     end
     
     can :update_progress, GnsProject::Task do |task|
-      !task.finished?
+      !task.finished? and
+      (
+        (user.has_project_permission?(task.project, 'gns_project.tasks.update_progress_own') and task.employee == user) or
+        (user.has_project_permission?(task.project, 'gns_project.tasks.update_progress_other') and task.employee != user)
+      )
     end
     
     can :download_attachments, GnsProject::Task do |task|
