@@ -126,6 +126,10 @@ module GnsProject
         render layout: nil
       end
       
+      def authorization_permissions
+        @project_user = GnsProject::ProjectUser.find(params[:project_user_id])
+      end
+      
       # add authorization
       def add_authorization
         @project = Project.find(params[:id])
@@ -156,29 +160,55 @@ module GnsProject
       end
       
       # edit authorization
-      def edit_authorization
-        @project = Project.find(params[:project_id])
+      def update_authorization
         @project_user = GnsProject::ProjectUser.find(params[:project_user_id])
+        @project = @project_user.project
         
         if request.post?
-          if !params[:authorization][:user_id].present?
-            @project_user.errors.add('user', "not be blank")
+          uid = params[:authorization][:user_id]
+          role_ids = params[:authorization][:role_ids]
+          @user = GnsCore::User.find(uid)
+          
+          if !uid.present?
+            @project_user.errors.add('user_id', "not be blank")
           end
           
-          if !params[:authorization][:role_ids].present?
+          if !role_ids.present?
             @project_user.errors.add('role_ids', "not be blank")
           end
           
           if @project_user.errors.empty?
-            params[:authorization][:role_ids].each do |rid|
-              #@project.add_user_role(params[:authorization][:user_id], rid)
-            end
+            @project.update_user_roles(@user, role_ids)
             
-            #@project_user.log("gns_project.log.project_user.added", current_user)
+            #@project_user.log("gns_project.log.project_user.updated", current_user)
             
             render json: {
               status: 'success',
               message: 'Authorization was successfully updated.',
+            }
+          end
+        end
+      end
+      
+      # edit authorization
+      def remove_authorization
+        @project_user = GnsProject::ProjectUser.find(params[:project_user_id])
+        @project = @project_user.project
+        remark = params[:remark]
+        
+        if request.post?
+          if !remark.present?
+            @project_user.errors.add('remark', "not be blank")
+          end
+          
+          if @project_user.errors.empty?
+            #@project_user.log("gns_project.log.project_user.updated", current_user, remark)
+            
+            @project.remove_project_user(@project_user)
+            
+            render json: {
+              status: 'success',
+              message: 'Authorization was successfully removed.',
             }
           end
         end

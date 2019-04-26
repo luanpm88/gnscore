@@ -134,5 +134,15 @@ module GnsCore
       end
     end
     
+    def project_permissions(project)
+      project_user = self.project_users.where(project_id: project.id).first
+      role_ids = project_user.project_user_roles.includes(:role).select("role_id")
+      GnsProject::RolesPermission.where(role_id: role_ids).map(&:permission).uniq
+    end
+    
+    def project_permission_count(project)
+      self.project_permissions(project).count
+    end
+    
   end
 end

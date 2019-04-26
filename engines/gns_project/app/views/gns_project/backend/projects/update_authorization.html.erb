@@ -10,7 +10,7 @@
                 var form = $(this);
                 
                 // clear modal
-                add_authorization_modal.clear();
+                update_authorization_modal.clear();
                 
                 $.ajax({
                     url: form.attr('action'),
@@ -19,11 +19,11 @@
                 }).done(function(response) {
                     if (typeof(response.status) !== 'undefined') {
                       showNotification(response.status, response.message);
-                      add_authorization_modal.hide();
-                      // load task list
+                      update_authorization_modal.hide();
+                      // load authorization list
                       authorization_list_box.load();
                     } else {
-                      add_authorization_modal.renderHtml(response);
+                      update_authorization_modal.renderHtml(response);
                     }
                 });
                 
@@ -35,7 +35,7 @@
 
 <div class="card">
     <div class="card-body">
-        <%= form_for '', url: gns_project.edit_authorization_backend_projects_path(project_id: @project.id, project_user_id: @project_user.id), html: {multipart: false, class: 'edit_authorization_project'} do |f| %>            
+        <%= form_for '', url: gns_project.update_authorization_backend_projects_path(project_id: @project.id, project_user_id: @project_user.id), html: {multipart: false, class: 'edit_authorization_project'} do |f| %>            
             <%= render 'form_authorization', project_user: @project_user %>
             
             <div class="text-left">

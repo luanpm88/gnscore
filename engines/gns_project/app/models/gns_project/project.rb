@@ -184,7 +184,6 @@ module GnsProject
     
     def add_user_role(user_id, role_id)
       project_user = GnsProject::ProjectUser.where(project_id: self.id, user_id: user_id).first
-      
       if !project_user.present?
         project_user = GnsProject::ProjectUser.new(project_id: self.id, user_id: user_id)
         project_user.save
@@ -195,6 +194,29 @@ module GnsProject
         project_user_role = GnsProject::ProjectUserRole.new(project_user_id: project_user.id, role_id: role_id)
         project_user_role.save
       end
+    end
+    
+    def update_user_roles(user, role_ids)
+      current_project_user = user.project_users.where(project_id: self.id).first
+      
+      # Lay danh sach project_user_role hien tai
+      current_project_user_roles = user.project_user_roles.includes(:project_user).where(gns_project_project_users: {project_id: self.id})
+      
+      # Xoa nhung project_user_role can loai bo ra khoi danh sach hien tai
+      current_project_user_roles.where.not(role_id: role_ids).destroy_all
+      
+      role_ids.each do |rid|
+        # Kiem tra da co project_user_role chua, neu chua thi tao moi
+        new_project_user_role = GnsProject::ProjectUserRole.where(project_user_id: current_project_user.id, role_id: rid).first
+        if !new_project_user_role.present?
+          new_project_user_role = GnsProject::ProjectUserRole.new(project_user_id: current_project_user.id, role_id: rid)
+          new_project_user_role.save
+        end
+      end
+    end
+    
+    def remove_project_user(project_user)
+      GnsProject::ProjectUser.find(project_user.id).destroy
     end
   end
 end

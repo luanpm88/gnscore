@@ -12,15 +12,18 @@ GnsProject::Engine.routes.draw do
                 get ':id/download_attachments', to: 'projects#download_attachments', as: 'download_attachments'
                 get ':id/logs', to: 'projects#logs', as: 'logs'
                 post ':id/logs_list', to: 'projects#logs_list', as: 'logs_list'
-                get 'add_authorization'
-                post 'add_authorization'
-                get 'edit_authorization'
-                post 'edit_authorization'
                 get ':id/comments', to: 'projects#comments', as: 'comments'
                 get 'start_progress'
                 post 'start_progress'
                 get 'finish'
                 post 'finish'
+                get 'add_authorization'
+                post 'add_authorization'
+                get 'update_authorization'
+                post 'update_authorization'
+                get 'remove_authorization'
+                post 'remove_authorization'
+                get 'authorization_permissions' # view permissions list
             end
         end
         

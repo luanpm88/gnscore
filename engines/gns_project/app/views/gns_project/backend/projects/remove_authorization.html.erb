@@ -1,0 +1,57 @@
+<% content_for :title do %>
+    Remove authorization
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        $(document).ready(function() {
+            $('.remove_authorization_project').submit(function(e) {
+                e.preventDefault();                
+                var form = $(this);
+                
+                // clear modal
+                remove_authorization_modal.clear();
+                
+                $.ajax({
+                    url: form.attr('action'),
+                    method: form.attr('method'),
+                    data: form.serialize() + '&layout=modal',
+                }).done(function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                      showNotification(response.status, response.message);
+                      remove_authorization_modal.hide();
+                      // load authorization list
+                      authorization_list_box.load();
+                    } else {
+                      remove_authorization_modal.renderHtml(response);
+                    }
+                });
+                
+                return false;
+            });
+        });
+    </script>
+<% end %>
+
+<div class="card">
+    <div class="card-body">
+        <%= form_for '', url: gns_project.remove_authorization_backend_projects_path(project_id: @project.id, project_user_id: @project_user.id), html: {multipart: false, class: 'remove_authorization_project'} do |f| %>            
+            <h5>Do you want to remove this user from authorization?</h5>
+            
+            <div class="form-group">
+                <textarea rows="2" cols="5"
+                    class="form-control <%= 'border-danger' if @project_user.errors.full_messages_for(:remark).present? %>"
+                    placeholder="Enter your remark here"
+                    name="remark"
+                ></textarea>
+                <% if @project_user.errors.full_messages_for(:remark).present? %>
+                    <span class="form-text text-danger"><%= @project_user.errors.full_messages_for(:remark).join('<br/>').html_safe %></span>
+                <% end %>
+            </div>
+            
+            <div class="text-left">
+                <button type="submit" class="btn btn-primary">Remove Confirm</button>
+            </div>
+        <% end %>
+    </div>
+</div>

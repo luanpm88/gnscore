@@ -1,0 +1,23 @@
+<% content_for :title do %>
+    Permissions for <%= @project_user.user_name %>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Project Permissions</span>: <%= @project_user.user_name %></h4>
+<% end %>
+
+<div class="card">
+    <div class="card-header bg-transparent header-elements-inline">
+        <h5 class="card-title">See all policies</h5>
+        
+        <div class="header-elements">            
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body tab-content">
+        <%= render "gns_project/backend/projects/project_user_roles/policies", project_user: @project_user %>
+    </div>
+</div>

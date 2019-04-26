@@ -20,11 +20,10 @@
                     <% end %>
                 </td>
                 <td class="text-center">
-                    <a href="#"
-                        class="">
-                        <span class="badge badge-flat badge-pill border-grey-800 text-default">
-                            <!--pur.role.permissions_count-->
-                        </span>
+                    <a href="<%= gns_project.authorization_permissions_backend_projects_path(project_user_id: project_user) %>"
+                       class="badge badge-pill bg-pink modal-control"
+                       modal-size="lg">
+                        <%= project_user.user.project_permission_count(project_user.project) %>
                     </a>
                 </td>
                 <td class="text-right">
@@ -34,25 +33,26 @@
                                 <i class="icon-menu9"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a href="#"
-                                   class="dropdown-item view-authorization-button">
+                                <a href="<%= gns_project.authorization_permissions_backend_projects_path(project_user_id: project_user) %>"
+                                   class="dropdown-item modal-control"
+                                   modal-size="lg">
                                     <i class="icon-info3"></i> View Permissions
                                 </a>
                                 
-                                <a href="<%= gns_project.edit_authorization_backend_projects_path(
-                                            project_id: project_user.project,
+                                <a href="<%= gns_project.update_authorization_backend_projects_path(
                                             project_user_id: project_user
                                         ) %>"
-                                    class="dropdown-item edit-authorization-button">
+                                    class="dropdown-item edit-authorization-button"
+                                >
                                     <i class="icon-pencil7"></i> Update authorized
                                 </a>
                                 
                                 <div class="dropdown-divider"></div>
                                 
-                                <a class="dropdown-item ajax remove-authorization-button"
-                                    href="#"
-                                    data-method="DELETE"
-                                    data-confirm="You are about to remove a authorization"
+                                <a href="<%= gns_project.remove_authorization_backend_projects_path(
+                                            project_user_id: project_user
+                                        ) %>"
+                                    class="dropdown-item ajax remove-authorization-button"
                                 >
                                     <i class="icon-bin"></i> Remove authorized
                                 </a>
