@@ -38,9 +38,17 @@ module GnsProject
         @project.status = Project::STATUS_NEW
   
         if @project.save
+          # add log
+          @project.log("gns_project.log.project.created", current_user)
+          
+          # add notification
+          current_user.add_notification("gns_project.notification.project.created", {
+            name: @project.name
+          })
+          
           flash[:success] = 'Project was successfully created.'
           render json: {
-            redirect: gns_project.backend_project_path(@project)
+            redirect: gns_project.tasks_backend_projects_path(@project)
           }
         else
           render :new
@@ -50,6 +58,14 @@ module GnsProject
       # PATCH/PUT /projects/1
       def update
         if @project.update(project_params)
+          # add log
+          @project.log("gns_project.log.project.updated", current_user)
+          
+          # add notification
+          current_user.add_notification("gns_project.notification.project.updated", {
+            name: @project.name
+          })
+          
           render json: {
             status: 'success',
             message: 'Project was successfully updated.',
@@ -60,7 +76,15 @@ module GnsProject
       end
   
       # DELETE /projects/1
-      def destroy        
+      def destroy
+        # add log
+        @project.log("gns_project.log.project.deleted", current_user)
+        
+        # add notification
+        current_user.add_notification("gns_project.notification.project.deleted", {
+          name: @project.name
+        })
+        
         if @project.destroy
           respond_to do |format|
             format.html {
@@ -149,7 +173,14 @@ module GnsProject
               @project.add_user_role(params[:authorization][:user_id], rid)
             end
             
-            #@project_user.log("gns_project.log.project_user.added", current_user)
+            # add log
+            @project_user.log("gns_project.log.project_user.added", current_user)
+            
+            # add notification
+            current_user.add_notification("gns_project.notification.project_user.added", {
+              project_name: @project.name,
+              user_name: @project_user.user_name
+            })
             
             render json: {
               status: 'success',
@@ -180,7 +211,14 @@ module GnsProject
           if @project_user.errors.empty?
             @project.update_user_roles(@user, role_ids)
             
-            #@project_user.log("gns_project.log.project_user.updated", current_user)
+            # add log
+            @project_user.log("gns_project.log.project_user.updated", current_user)
+            
+            # add notification
+            current_user.add_notification("gns_project.notification.project_user.updated", {
+              project_name: @project.name,
+              user_name: @project_user.user_name
+            })
             
             render json: {
               status: 'success',
@@ -202,7 +240,14 @@ module GnsProject
           end
           
           if @project_user.errors.empty?
-            #@project_user.log("gns_project.log.project_user.updated", current_user, remark)
+            # add log
+            @project_user.log("gns_project.log.project_user.removed", current_user, remark)
+            
+            # add notification
+            current_user.add_notification("gns_project.notification.project_user.removed", {
+              project_name: @project.name,
+              user_name: @project_user.user_name
+            })
             
             @project.remove_project_user(@project_user)
             
@@ -260,7 +305,14 @@ module GnsProject
           
           if @project.errors.empty?
             @project.set_in_progress_for_status
+            
+            # add log
             @project.log("gns_project.log.project.start_progress", current_user, remark)
+            
+            # add notification
+            current_user.add_notification("gns_project.notification.project.start_progress", {
+              name: @project.name
+            })
             
             render json: {
               status: 'success',
@@ -283,7 +335,14 @@ module GnsProject
           
           if @project.errors.empty?
             @project.set_finished_for_status
+            
+            # add log
             @project.log("gns_project.log.project.finish", current_user, remark)
+            
+            # add notification
+            current_user.add_notification("gns_project.notification.project.finish", {
+              name: @project.name
+            })
             
             render json: {
               status: 'success',

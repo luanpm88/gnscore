@@ -13,5 +13,10 @@ module GnsProject
     def user_name
       user.present? ? user.full_name : ''
     end
+    
+    # add log
+    def log(phrase, user, remark=nil)
+      GnsProject::Log.add_new(self.project, phrase, self, user, remark)
+    end
   end
 end
