@@ -156,22 +156,28 @@ module GnsProject
       
       # add authorization
       def add_authorization
-        @project = Project.find(params[:id])
         @project_user = GnsProject::ProjectUser.new
+        @project = Project.find(params[:project_id])
         
         if request.post?
-          if !params[:authorization][:user_id].present?
+          uid = params[:authorization][:user_id]
+          role_ids = params[:authorization][:role_ids]
+          @user = GnsCore::User.find(uid)
+          
+          if !uid.present?
             @project_user.errors.add('user', "not be blank")
           end
           
-          if !params[:authorization][:role_ids].present?
+          if !role_ids.present?
             @project_user.errors.add('role_ids', "not be blank")
           end
           
           if @project_user.errors.empty?
-            params[:authorization][:role_ids].each do |rid|
-              @project.add_user_role(params[:authorization][:user_id], rid)
+            role_ids.each do |rid|
+              @project.add_user_role(uid, rid)
             end
+            
+            @project_user = GnsProject::ProjectUser.where(project_id: @project.id, user_id: uid).first
             
             # add log
             @project_user.log("gns_project.log.project_user.added", current_user)

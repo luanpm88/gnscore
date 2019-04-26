@@ -56,8 +56,9 @@
     <div class="card-header header-elements-inline">
         <h5 class="mb-0">Authorized List</h5>
         <div class="text-right">
-            <a href="<%= gns_project.add_authorization_backend_projects_path(id: @project) %>"
-                class="btn btn-sm bg-blue add-authorization-button">Add authorization
+            <a href="<%= gns_project.add_authorization_backend_projects_path(project_id: @project) %>"
+                class="btn btn-sm bg-blue add-authorization-button">
+                <i class="icon-plus22 mr-1"></i> Add authorization
             </a>
         </div>
     </div>
