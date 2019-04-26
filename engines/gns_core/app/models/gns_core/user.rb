@@ -129,7 +129,11 @@ module GnsCore
       #return true if project.project_user.custom_permissions.include?(permission)
 
       # Không có chỉnh sửa quyền gì hết thì lấy mặc định (nếu không sửa)
-      self.project_user_roles.includes(:project_user).where(gns_project_project_users: {project_id: project.id}).each do |project_role|
+      purs = self.project_user_roles.includes(:project_user).where(gns_project_project_users: {project_id: project.id})
+      
+      return false if purs.empty?
+      
+      purs.each do |project_role|
         return project_role.role.has_permission?(permission)
       end
     end
