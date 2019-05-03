@@ -81,9 +81,7 @@ module GnsProject
         @project.log("gns_project.log.project.deleted", current_user)
         
         # add notification
-        current_user.add_notification("gns_project.notification.project.deleted", {
-          name: @project.name
-        })
+        current_user.add_notification("gns_project.notification.project.deleted", @project.to_json)
         
         if @project.destroy
           respond_to do |format|
