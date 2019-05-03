@@ -97,25 +97,41 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a href="<%= gns_project.backend_project_path(project) %>" class="dropdown-item modal-control"
-                                    modal-size="lg">
-                                    <i class="icon-file-eye"></i> Show Info
-                                </a>
                                 
-                                <a class="dropdown-item edit-project-button"
-                                    href="<%= gns_project.edit_backend_project_path(project) %>">
-                                    <i class="icon-pencil7"></i> Update
-                                </a>
+                                <% if can? :read, project %>
+                                    <a href="<%= gns_project.backend_project_path(project) %>" class="dropdown-item modal-control"
+                                        modal-size="lg">
+                                        <i class="icon-file-eye"></i> Show Info
+                                    </a>
+                                <% end %>
                                 
-                                <a class="dropdown-item start-progress-project-button"
-                                    href="<%= gns_project.start_progress_backend_projects_path(id: project) %>">
-                                    <i class="icon-pencil7"></i> Start project
-                                </a>
+                                <% if can? :update, project %>
+                                    <a class="dropdown-item edit-project-button"
+                                        href="<%= gns_project.edit_backend_project_path(project) %>">
+                                        <i class="icon-pencil7"></i> Update
+                                    </a>
+                                <% end %>
                                 
-                                <a class="dropdown-item finish-project-button"
-                                    href="<%= gns_project.finish_backend_projects_path(id: project) %>">
-                                    <i class="icon-pencil7"></i> Finish
-                                </a>
+                                <% if can? :send_request, project %>
+                                    <a class="dropdown-item request-project-button"
+                                        href="<%= gns_project.send_request_backend_projects_path(id: project) %>">
+                                        <i class="icon-shift"></i> Request (Submit)
+                                    </a>
+                                <% end %>
+                                
+                                <% if can? :start_project, project %>
+                                    <a class="dropdown-item start-progress-project-button"
+                                        href="<%= gns_project.start_progress_backend_projects_path(id: project) %>">
+                                        <i class="icon-power2"></i> Start project
+                                    </a>
+                                <% end %>
+                                
+                                <% if can? :finish, project %>
+                                    <a class="dropdown-item finish-project-button"
+                                        href="<%= gns_project.finish_backend_projects_path(id: project) %>">
+                                        <i class="icon-finish"></i> Finish
+                                    </a>
+                                <% end %>
                                 
                                 <div class="dropdown-divider"></div>
                                 
@@ -139,15 +155,17 @@
                                     <i class="icon-history"></i> View logs
                                 </a>
                                 
-                                <div class="dropdown-divider"></div>
-                                
-                                <a class="dropdown-item ajax datalist-g-link"
-                                    href="<%= gns_project.backend_project_path(project) %>"
-                                    data-method="DELETE"
-                                    data-confirm="You are about to delete a project"
-                                >
-                                    <i class="icon-bin"></i> Delete
-                                </a>
+                                <% if can? :delete, project %>
+                                    <div class="dropdown-divider"></div>
+                                    
+                                    <a class="dropdown-item ajax datalist-g-link"
+                                        href="<%= gns_project.backend_project_path(project) %>"
+                                        data-method="DELETE"
+                                        data-confirm="You are about to delete a project"
+                                    >
+                                        <i class="icon-bin"></i> Delete
+                                    </a>
+                                <% end %>
                             </div>
                         </div>
                     </div>

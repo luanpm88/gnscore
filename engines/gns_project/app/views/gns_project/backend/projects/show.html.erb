@@ -24,6 +24,9 @@
         var project_modal = new gModal();
         var newProjectCallback;
         
+        var request_project_modal = new gModal({size: 'md'});
+        var request_project_callback;
+        
         var start_progress_project_modal = new gModal({size: 'md'});
         var start_progress_project_callback;
         
@@ -51,6 +54,18 @@
                         // validation error
                         project_modal.renderHtml(response);
                     }
+                };
+            });
+            
+            $('.request-project-button').click(function(e) {
+                e.preventDefault();
+                
+                var button = $(this);
+                
+                request_project_modal.load($(this).attr('href'));
+                
+                request_project_callback = function() {
+                    location.reload();
                 };
             });
             
@@ -174,21 +189,33 @@
                                 <a href="#" class="badge bg-<%= @project.status %> dropdown-toggle" data-toggle="dropdown"><%= t @project.status %></a>
 
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="#" class="dropdown-item">
-                                        <span class="badge badge-mark mr-2 border-new"></span>
-                                        <%= t('mark_as_new') %>
-                                    </a>
-                                    <a href="<%= gns_project.start_progress_backend_projects_path(id: @project) %>"
-                                        class="dropdown-item start-progress-project-button">
-                                        <span class="badge badge-mark mr-2 border-in_progress"></span>
-                                        <%= t('start_progress') %>
-                                    </a>
-                                    <a href="<%= gns_project.finish_backend_projects_path(id: @project) %>"
-                                       class="dropdown-item finish-project-button">
-                                        <span class="badge badge-mark mr-2 border-finished"></span>
-                                        <%= t('finish_project') %>
-                                    </a>
-                                    
+                                    <% if can? :mark_as_new, @project %>
+                                        <a href="#" class="dropdown-item">
+                                            <span class="badge badge-mark mr-2 border-new"></span>
+                                            <%= t('mark_as_new') %>
+                                        </a>
+                                    <% end %>
+                                    <% if can? :send_request, @project %>
+                                        <a href="<%= gns_project.send_request_backend_projects_path(id: @project) %>"
+                                            class="dropdown-item request-project-button">
+                                            <span class="badge badge-mark mr-2 border-pending"></span>
+                                            <%= 'Send/Submit Request' %>
+                                        </a>
+                                    <% end %>
+                                    <% if can? :start_project, @project %>
+                                        <a href="<%= gns_project.start_progress_backend_projects_path(id: @project) %>"
+                                            class="dropdown-item start-progress-project-button">
+                                            <span class="badge badge-mark mr-2 border-in_progress"></span>
+                                            <%= t('start_progress') %>
+                                        </a>
+                                    <% end %>
+                                    <% if can? :finish, @project %>
+                                        <a href="<%= gns_project.finish_backend_projects_path(id: @project) %>"
+                                           class="dropdown-item finish-project-button">
+                                            <span class="badge badge-mark mr-2 border-finished"></span>
+                                            <%= t('finish_project') %>
+                                        </a>
+                                    <% end %>
                                 </div>
                             </div>
                         </div>

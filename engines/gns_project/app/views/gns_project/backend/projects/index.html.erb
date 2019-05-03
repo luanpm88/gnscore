@@ -24,6 +24,9 @@
         var updateProjectCallback;
         var newProjectCallback;
         
+        var request_project_modal = new gModal({size: 'md'});
+        var request_project_callback;
+        
         var start_progress_project_modal = new gModal({size: 'md'});
         var start_progress_project_callback;
         
@@ -77,6 +80,18 @@
                     }           
                 }
                     
+            });
+            
+            $(document).on('click', '.request-project-button', function(e) {
+                e.preventDefault();
+                
+                var button = $(this);
+                
+                request_project_modal.load($(this).attr('href'));
+                
+                request_project_callback = function() {
+                    datalists[button.closest('.datalist').attr('data-id')].refresh();
+                };
             });
             
             $(document).on('click', '.start-progress-project-button', function(e) {

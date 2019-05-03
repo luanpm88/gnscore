@@ -120,6 +120,9 @@
 .bg-new {
     background-color: #2196f3;
 }
+.bg-pending {
+    background-color: #ff7043;
+}
 .bg-in_progress {
     background-color: #4caf50;
 }
@@ -128,6 +131,9 @@
 }
 .border-new {
     border-color: #2196f3;
+}
+.border-pending {
+    border-color: #ff7043;
 }
 .border-in_progress {
     border-color: #4caf50;
@@ -138,6 +144,10 @@
 .badge-new {
     color: #fff;
     background-color: #2196f3;
+}
+.badge-pending {
+    color: #fff;
+    background-color: #ff7043;
 }
 .badge-in_progress {
     color: #fff;

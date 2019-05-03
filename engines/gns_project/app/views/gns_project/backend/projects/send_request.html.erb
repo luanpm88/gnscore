@@ -1,0 +1,60 @@
+<% content_for :title do %>
+    Update Status to PENDING
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        $(document).ready(function() {
+            $('.request_project').submit(function(e) {
+                e.preventDefault();                
+                var form = $(this);
+                
+                // clear modal
+                request_project_modal.clear();
+                
+                $.ajax({
+                    url: form.attr('action'),
+                    method: form.attr('method'),
+                    data: form.serialize() + '&layout=modal',
+                }).done(function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                      showNotification(response.status, response.message);
+                      request_project_modal.hide();
+                      
+                      // load task list
+                      if (typeof(request_project_callback) !== 'undefined') {
+                        request_project_callback();
+                      }
+                    } else {
+                      request_project_modal.renderHtml(response);
+                    }
+                });
+                
+                return false;
+            });
+        });
+    </script>
+<% end %>
+
+<div class="card">
+    <div class="card-body">
+        <%= form_for '', url: gns_project.send_request_backend_projects_path(id: @project), html: {multipart: false, class: 'request_project'} do |f| %>
+            <h5>Do you want to submit a request for approval for this project?</h5>
+            
+            <div class="form-group">
+                <textarea rows="2" cols="5"
+                    class="form-control <%= 'border-danger' if @project.errors.full_messages_for(:remark).present? %>"
+                    placeholder="Enter your remark here"
+                    name="remark"
+                ></textarea>
+                <% if @project.errors.full_messages_for(:remark).present? %>
+                    <span class="form-text text-danger"><%= @project.errors.full_messages_for(:remark).join('<br/>').html_safe %></span>
+                <% end %>
+            </div>
+            
+            <div class="text-left">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        <% end %>
+    </div>
+</div>

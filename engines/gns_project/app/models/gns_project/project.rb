@@ -48,6 +48,7 @@ module GnsProject
     PRIORITY_LOW = 'low'
     
     STATUS_NEW = 'new'
+    STATUS_PENDING = 'pending'
     STATUS_IN_PROGRESS = 'in_progress'
     STATUS_FINISHED = 'finished'
     STATUS_CANCELED = 'canceled'
@@ -148,6 +149,10 @@ module GnsProject
 			update_attributes(status: GnsProject::Project::STATUS_NEW)
 		end
 		
+    def set_pending_for_status
+			update_attributes(status: GnsProject::Project::STATUS_PENDING)
+		end
+		
     def set_in_progress_for_status
 			update_attributes(status: GnsProject::Project::STATUS_IN_PROGRESS)
 		end
@@ -159,6 +164,23 @@ module GnsProject
 		def set_canceled_for_status
 			update_attributes(status: GnsProject::Project::STATUS_CANCELED)
 		end
+		
+		# check if status
+		def is_new?
+      return status == GnsProject::Project::STATUS_NEW
+    end
+		
+		def is_pending?
+      return status == GnsProject::Project::STATUS_PENDING
+    end
+		
+		def is_in_progress?
+      return status == GnsProject::Project::STATUS_IN_PROGRESS
+    end
+		
+		def is_canceled?
+      return status == GnsProject::Project::STATUS_CANCELED
+    end
     
     # display progress percent
     def progress_percent

@@ -4,7 +4,7 @@ module GnsProject
       before_action :set_project, only: [:download_attachments, :show, :edit, :update, :destroy,
                                          :tasks, :tasks_list, :attachments, :attachments_list,
                                          :logs, :logs_list, :authorization, :authorization_list,
-                                         :comments, :start_progress, :finish]
+                                         :comments, :send_request, :start_progress, :finish]
   
       # GET /projects
       def index
@@ -294,6 +294,36 @@ module GnsProject
           .where(parent_id: nil)
       
         render layout: nil
+      end
+      
+      # Set Pending action
+      def send_request
+        authorize! :send_request, @project
+        
+        remark = params[:remark]
+        
+        if request.post?
+          if !remark.present?
+            @project.errors.add('remark', "not be blank")
+          end
+          
+          if @project.errors.empty?
+            @project.set_pending_for_status
+            
+            # add log
+            @project.log("gns_project.log.project.request", current_user, remark)
+            
+            # add notification
+            current_user.add_notification("gns_project.notification.project.request", {
+              name: @project.name
+            })
+            
+            render json: {
+              status: 'success',
+              message: 'Request for approval for the project has been successfully submitted.',
+            }
+          end
+        end
       end
       
       # Set InProgress action
