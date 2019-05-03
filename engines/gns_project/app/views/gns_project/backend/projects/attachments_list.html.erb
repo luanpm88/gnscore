@@ -22,7 +22,15 @@
                 <tr>
                     <td class="font-weight-semibold"><%= index + 1 %></td>
                     <td><%= task.stage_name %></td>
-                    <td><%= task.name %></td>
+                    <td>
+                        <%= task.name %>
+                        <% if task.get_latest_remark_log.present? %>
+                            <span class="font-size-sm text-teal-400 ml-sm-1 mb-sm-0 d-sm-inline-block icon-comments"
+                                data-popup="tooltip"
+                                data-original-title="<%= task.get_latest_remark_log %>">
+                            </span>
+                        <% end %>
+                    </td>
                     <td>
                         <span class="badge badge-flat badge-<%= task.status %>"><%= t task.status %></span>
                     </td>

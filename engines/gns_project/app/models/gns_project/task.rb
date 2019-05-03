@@ -119,5 +119,18 @@ module GnsProject
     def log(phrase, user, remark=nil)
       GnsProject::Log.add_new(self.project, phrase, self, user, remark)
     end
+    
+    # get logs list
+    def logs
+      query = self.project.logs
+      query = query.where("data LIKE ?", "%GnsProject::Task%")
+                .where("data LIKE ? AND data LIKE ?", "%name: id___value_before_type_cast: #{self.id}%", "%name: stage_id___value_before_type_cast: #{self.stage_id}%")
+      # sap xep tu cu den moi
+      query = query.order('created_at asc')
+    end
+    
+    def get_latest_remark_log
+      logs.last.remark
+    end
   end
 end

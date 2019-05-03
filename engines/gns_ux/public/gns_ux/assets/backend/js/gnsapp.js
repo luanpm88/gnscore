@@ -271,7 +271,9 @@ function applyJs(container) {
     var gComponentTooltip = function() {
 
         // Initialize
-        container.find('[data-popup="tooltip"]').tooltip();
+        container.find('[data-popup="tooltip"]').tooltip({
+            //template: '<div class="tooltip"><div class="arrow border-info-700"></div><div class="tooltip-inner bg-info-700"></div></div>'
+        });
 
         // Demo tooltips, remove in production
         var demoTooltipSelector = '[data-popup="tooltip-demo"]';
