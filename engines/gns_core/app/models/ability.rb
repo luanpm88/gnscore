@@ -35,6 +35,39 @@ class Ability
       project.count_attachments > 0
     end
     
+    can :create, GnsProject::Project do |project|
+      true
+    end
+    
+    can :read, GnsProject::Project do |project|
+      true
+    end
+    
+    can :update, GnsProject::Project do |project|
+      true
+    end
+    
+    can :delete, GnsProject::Project do |project|
+      true
+    end
+    
+    can :mark_as_new, GnsProject::Project do |project|
+      false
+    end
+    
+    can :send_request, GnsProject::Project do |project|
+      project.is_new?
+    end
+    
+    can :start_project, GnsProject::Project do |project|
+      project.is_pending?
+    end
+    
+    can :finish, GnsProject::Project do |project|
+      project.is_in_progress?
+    end
+    
+    # gns_project / tasks
     can :create_task, GnsProject::Project do |project|
       user.has_project_permission?(project, 'gns_project.tasks.create')
     end
@@ -54,7 +87,6 @@ class Ability
       (user.has_project_permission?(task.project, 'gns_project.tasks.delete_other') and task.employee != user)
     end
     
-    # gns_project / tasks
     can :finish, GnsProject::Task do |task|
       (!task.finished? and task.progress == 100) and
       (
