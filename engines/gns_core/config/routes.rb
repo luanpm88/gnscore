@@ -26,5 +26,15 @@ GnsCore::Engine.routes.draw do
                 post ':id/update_permissions', to: 'roles#update_permissions', as: 'update_permissions'
             end
         end
+        resources :accounts do
+            collection do
+                get 'my_profile'
+                post 'update_profile'
+                
+                get 'my_account'
+                post 'update_account'
+                post 'update_password'
+            end
+        end
     end
 end

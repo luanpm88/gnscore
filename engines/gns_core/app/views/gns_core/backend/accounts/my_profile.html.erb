@@ -1,0 +1,165 @@
+<% content_for :title do %>
+    My Account
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+    <span class="breadcrumb-item active">My Account</span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-users mr-2"></i> <span class="font-weight-semibold">My Account</span></h4>
+<% end %>
+
+<!-- Inner container -->
+<div class="d-flex align-items-start flex-column flex-md-row">
+
+    <!-- Left content -->
+    <div class="tab-content w-100 overflow-auto order-2 order-md-1">
+        
+        <!-- Profile info -->
+        <div class="card">
+            <div class="card-header bg-transparent header-elements-inline">
+                <h5 class="card-title">Profile information</h5>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <form action="#">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Full name</label>
+                                <input type="text" readonly="readonly" value="Super Admin" class="form-control">
+                            </div>
+                            <div class="col-md-3">
+                                <label>Gender</label>
+                                <input type="text" readonly="readonly" value="Male" class="form-control">
+                            </div>
+                            <div class="col-md-3">
+                                <label>Date of birth</label>
+                                <input type="text" readonly="readonly" value="01/01/1999" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Deparment</label>
+                                <input type="text" readonly="readonly" value="Ring street 12" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label>Position</label>
+                                <input type="text" readonly="readonly" value="building D, flat #67" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Labor Contract Type</label>
+                                <input type="text" readonly="readonly" value="Formal Contract" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label>Starting Date</label>
+                                <input type="text" readonly="readonly" value="02/06/2015" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <fieldset>
+                        <legend><span class="font-weight-semibold text-uppercase font-size-sm text-info-700">Additional information</span></legend>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Telephone</label>
+                                    <input type="text" name="telephone" value="028 1234 1234" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Mobile</label>
+                                    <input type="text" name="mobilephone" value="090 000 0000" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Email</label>
+                                    <input type="text" name="email" value="eugene@kopyov.com" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label class="d-block">Country</label>
+                                    <select class="form-control font-weight-semibold select-ajax"
+                                        data-container-css-class="font-weight-semibold"
+                                        data-placeholder="Choose country"
+                                        data-url="<%= gns_area.select2_backend_countries_path %>"
+                                        name="country_id"
+                                    >
+                                        
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="d-block">State/Province</label>
+                                    <select class="form-control font-weight-semibold select-ajax"
+                                        data-container-css-class="font-weight-semibold"
+                                        data-placeholder="Choose state/province"
+                                        data-url="<%= gns_area.select2_backend_states_path %>"
+                                        name="state_id"
+                                    >
+                                        
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="d-block">District/Town/City</label>
+                                    <select class="form-control font-weight-semibold select-ajax"
+                                        data-container-css-class="font-weight-semibold"
+                                        data-placeholder="Choose district/town/city"
+                                        data-url="<%= gns_area.select2_backend_districts_path %>"
+                                        name="district_id"
+                                    >
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="d-block">Address</label>
+                            <input type="text" class="form-control font-weight-semibold" placeholder="Enter address"
+                                name="address"
+                                value=""
+                            >
+                        </div>
+                        
+                    </fieldset>
+
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary">Update info</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /profile info -->
+        
+    </div>
+    <!-- /left content -->
+
+
+    <!-- Right sidebar component -->
+    <div class="sidebar sidebar-light bg-transparent sidebar-component sidebar-component-right wmin-300 border-0 shadow-0 order-1 order-md-2 sidebar-expand-md">
+
+        <%= render "sidebar", title: 'Profile information' %>
+
+    </div>
+    <!-- /right sidebar component -->
+
+</div>
+<!-- /inner container -->

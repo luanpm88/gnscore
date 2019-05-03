@@ -1,0 +1,116 @@
+<% content_for :title do %>
+    My Account
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+    <span class="breadcrumb-item active">My Account</span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-users mr-2"></i> <span class="font-weight-semibold">My Account</span></h4>
+<% end %>
+
+<!-- Inner container -->
+<div class="d-flex align-items-start flex-column flex-md-row">
+
+    <!-- Left content -->
+    <div class="tab-content w-100 overflow-auto order-2 order-md-1">
+        
+        <!-- Account settings -->
+        <div class="card">
+            <div class="card-header bg-transparent header-elements-inline">
+                <h5 class="card-title">Account settings</h5>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <%= form_for '', url: gns_core.update_account_backend_accounts_path, html: {multipart: true} do |f| %>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="d-block font-weight-semibold">Avatar</label>
+                                <input name="avatar" type="file" class="file-input">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label>Username <span class="text-danger">*</span></label>
+                                <input type="text" name="username" value="<%= '' %>" class="form-control">
+                                <% if @account.errors.full_messages_for(:username).present? %>
+                                    <span class="form-text text-danger"><%= @account.errors.full_messages_for(:username).join('<br/>').html_safe %></span>
+                                <% end %>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <label>Email <span class="text-danger">*</span></label>
+                                <input type="text" value="<%= current_user.email %>" readonly="readonly" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary">Update info</button>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+        <!-- /account settings -->
+        
+        <!-- Account settings -->
+        <div class="card">
+            <div class="card-header bg-transparent header-elements-inline">
+                <h5 class="card-title">Change Password</h5>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <form action="#">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>New password <span class="text-danger">*</span></label>
+                                <input type="password" placeholder="Enter new password" class="form-control">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label>Repeat password <span class="text-danger">*</span></label>
+                                <input type="password" placeholder="Repeat new password" class="form-control">
+                            </div>
+
+                            <div class="col-md-4">
+                                <label>Current password <span class="text-danger">*</span></label>
+                                <input type="password" placeholder="Enter current password" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /account settings -->
+        
+    </div>
+    <!-- /left content -->
+
+
+    <!-- Right sidebar component -->
+    <div class="sidebar sidebar-light bg-transparent sidebar-component sidebar-component-right wmin-300 border-0 shadow-0 order-1 order-md-2 sidebar-expand-md">
+
+        <%= render "sidebar", title: 'Profile information' %>
+
+    </div>
+    <!-- /right sidebar component -->
+
+</div>
+<!-- /inner container -->
