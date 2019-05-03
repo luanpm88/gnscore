@@ -1,0 +1,234 @@
+<%= form_for([gns_employee, :backend, employee], html: {multipart: true, autocomplete: 'off'}) do |f| %>
+    <fieldset>
+        <div class="form-group">
+            <label class="d-block font-weight-semibold">Code <span class="text-danger">*</span></label>
+            <input type="text" autocomplete="code"
+                class="form-control <%= 'border-danger' if employee.errors.full_messages_for(:code).present? %>" placeholder="Enter code (or automatically generate)"
+                name="employee[code]"
+                value="<%= employee.code %>"
+            >
+            <% if employee.errors.full_messages_for(:code).present? %>
+                <span class="form-text text-danger"><%= employee.errors.full_messages_for(:code).join('<br/>').html_safe %></span>
+            <% end %>
+        </div>
+        
+        <div class="form-group">
+            <label class="d-block font-weight-semibold">Name <span class="text-danger">*</span></label>
+            <input type="text" autocomplete="name"
+                class="form-control <%= 'border-danger' if employee.errors.full_messages_for(:name).present? %>" placeholder="Enter name"
+                name="employee[name]"
+                value="<%= employee.name %>"
+            >
+            <% if employee.errors.full_messages_for(:name).present? %>
+                <span class="form-text text-danger"><%= employee.errors.full_messages_for(:name).join('<br/>').html_safe %></span>
+            <% end %>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-block font-weight-semibold">Department</label>
+                    <input type="text" autocomplete="department"
+                        class="form-control" placeholder="Enter department"
+                        name="employee[department]"
+                        value="<%= employee.department %>"
+                    >
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-block font-weight-semibold">Position</label>
+                    <input type="text" autocomplete="position"
+                        class="form-control" placeholder="Enter position"
+                        name="employee[position]"
+                        value="<%= employee.position %>"
+                    >
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    
+    <fieldset>
+        <a class="collapsed text-default" data-toggle="collapse" href="#collapsible-control-group">
+            <legend><span class="font-weight-semibold text-uppercase font-size-sm text-info-700">Other Information</span> (more here)</legend>
+        </a>
+        <div id="collapsible-control-group" class="collapse">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="d-block">Telephone</label>
+                        <input type="text" class="form-control font-weight-semibold" placeholder="Enter telephone number"
+                            name="employee[phone]"
+                            value="<%= employee.phone %>"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label class="d-block">Mobile</label>
+                        <input type="text" class="form-control font-weight-semibold" placeholder="Enter mobile number"
+                            name="employee[mobile]"
+                            value="<%= employee.mobile %>"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label class="d-block">Email</label>
+                        <input type="text" class="form-control font-weight-semibold" placeholder="Eg: name@sao-ee.vn"
+                            name="employee[email]"
+                            value="<%= employee.email %>"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label class="d-block">Labor Contract Type</label>
+                        <select class="form-control selectAllowClear"
+                            data-container-css-class="font-weight-semibold"
+                            data-placeholder="Select labor contract type"
+                            data-fouc
+                            name="employee[labor_contract_type]"
+                        >
+                            <option></option>
+                            <% options = GnsEmployee::Employee::get_labor_contract_type_options() %>
+                            <% options.each do |option| %>
+                                <option <%= 'selected' if option[:value] == employee.labor_contract_type %> value="<%= option[:value] %>"><%= option[:text] %></option>
+                            <% end %>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="d-block">Country</label>
+                        <select class="form-control font-weight-semibold select-ajax"
+                            data-container-css-class="font-weight-semibold"
+                            data-placeholder="Choose country"
+                            data-url="<%= gns_area.select2_backend_countries_path %>"
+                            name="employee[country_id]"
+                        >
+                            <option value="<%= employee.country_id %>"><%= employee.country_name %></option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="d-block">State/Province</label>
+                        <select class="form-control font-weight-semibold select-ajax"
+                            data-container-css-class="font-weight-semibold"
+                            data-placeholder="Choose state/province"
+                            data-url="<%= gns_area.select2_backend_states_path %>"
+                            name="employee[state_id]"
+                        >
+                            <option value="<%= employee.state_id %>"><%= employee.state_name %></option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="d-block">District/Town/City</label>
+                        <select class="form-control font-weight-semibold select-ajax"
+                            data-container-css-class="font-weight-semibold"
+                            data-placeholder="Choose district/town/city"
+                            data-url="<%= gns_area.select2_backend_districts_path %>"
+                            name="employee[district_id]"
+                        >
+                            <option value="<%= employee.district_id %>"><%= employee.district_name %></option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="d-block">Address</label>
+                        <input type="text" class="form-control font-weight-semibold" placeholder="Enter address"
+                            name="employee[address]"
+                            value="<%= employee.address %>"
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    
+    <fieldset>
+        <div class="form-group">
+            <div class="form-check form-check-inline form-check-right form-check-switchery">
+                <label class="form-check-label">
+                    Active:
+                    <input type="hidden" name="employee[active]" value="false" />
+                    <input type="checkbox" class="form-check-input-switchery"
+                        name="employee[active]"
+                        value="true"
+                        <%= 'checked' if employee.active? %>
+                    >
+                </label>
+            </div>
+        </div>
+    </fieldset>
+    
+    <hr class="mt-0">
+    <div class="text-left">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a class="btn btn-light ml-1" href="<%= gns_employee.backend_employees_path %>">
+            Cancel
+        </a>
+    </div>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        $(document).ready(function() {
+            // Select2 ajax
+            $('select[name="employee[state_id]"]').each(function() {
+                var url = $(this).attr('data-url');
+                
+                $(this).select2({
+                    allowClear: true,
+                    dropdownParent: $(this).parent(),
+                    ajax: {
+                        url: url,
+                        dataType: 'json',
+                        data: function (params) {
+                            console.log(params);
+                            var query = {
+                                q: params.term,
+                                page: params.page,
+                                type: 'public',
+                                country_id: $('select[name="employee[country_id]"]').select2('val'),
+                            }
+                      
+                            // Query parameters will be ?search=[term]&type=public
+                            return query;
+                        }
+                    }
+                }); 
+            });
+            
+            $('select[name="employee[district_id]"]').each(function() {
+                var url = $(this).attr('data-url');
+                
+                $(this).select2({
+                    allowClear: true,
+                    dropdownParent: $(this).parent(),
+                    ajax: {
+                        url: url,
+                        dataType: 'json',
+                        data: function (params) {
+                            console.log(params);
+                            var query = {
+                                q: params.term,
+                                page: params.page,
+                                type: 'public',
+                                state_id: $('select[name="employee[state_id]"]').select2('val')
+                            }
+                      
+                            // Query parameters will be ?search=[term]&type=public
+                            return query;
+                        }
+                    }
+                }); 
+            });
+            
+            $('select[name="employee[state_id]"]').change(function() {
+                $('select[name="employee[district_id]"]').val(null).trigger('change');
+            });
+            
+            $('select[name="employee[country_id]"]').change(function() {
+                $('select[name="employee[state_id]').val(null).trigger('change');
+                $('select[name="employee[district_id]').val(null).trigger('change');
+            });
+        });
+    </script>
+<% end %>

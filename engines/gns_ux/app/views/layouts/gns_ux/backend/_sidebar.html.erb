@@ -51,7 +51,7 @@
                 <!-- Main -->
                 <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Main menu</div> <i class="icon-menu" title="Main"></i></li>
                 <li class="nav-item">
-                    <a href="index.html" class="nav-link">
+                    <a href="#" class="nav-link">
                         <i class="icon-home4"></i>
                         <span>
                             Dashboard
@@ -65,7 +65,7 @@
                             gns_contact/backend/categories
                         "
                     >
-                        <i class="icon-address-book"></i> <span>Contact</span></a>
+                        <i class="icon-address-book"></i> <span>Business Partner</span></a>
 
                     <ul class="nav nav-group-sub" data-submenu-title="Contact">
                         <li class="nav-item">
@@ -73,14 +73,14 @@
                                 data-menu="
                                     gns_contact/backend/contacts
                                 "
-                            >Contacts</a>
+                            >Contact List</a>
                         </li>
                         <li class="nav-item">
                             <a href="<%= gns_contact.backend_categories_path %>" class="nav-link"
                                 data-menu="
                                     gns_contact/backend/categories
                                 "
-                            >Groups</a>
+                            >Contact Groups</a>
                         </li>
                     </ul>
                 </li>
@@ -91,15 +91,15 @@
                             gns_project/backend/categories,
                             gns_project/backend/roles
                         "
-                    ><i class="icon-task"></i> <span>Project</span></a>
+                    ><i class="icon-task"></i> <span>Project Management</span></a>
 
                     <ul class="nav nav-group-sub" data-submenu-title="Project">
                         <li class="nav-item">
-                            <a href="<%= gns_project.backend_projects_path %>" class="nav-link"
+                            <a href="<%= gns_project.backend_roles_path %>" class="nav-link"
                                 data-menu="
-                                    gns_project/backend/projects
+                                    gns_project/backend/roles
                                 "
-                            >Projects
+                            >Project Roles (Default)
                             </a>
                         </li>
                         <li class="nav-item">
@@ -107,15 +107,15 @@
                                 data-menu="
                                     gns_project/backend/categories
                                 "
-                            >Types
+                            >Project Types
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<%= gns_project.backend_roles_path %>" class="nav-link"
+                            <a href="<%= gns_project.backend_projects_path %>" class="nav-link"
                                 data-menu="
-                                    gns_project/backend/roles
+                                    gns_project/backend/projects
                                 "
-                            >Roles (Default)
+                            >Project List
                             </a>
                         </li>
                     </ul>
@@ -123,26 +123,17 @@
                 <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link"
                         data-menu="
-                            gns_core/backend/users,
-                            gns_core/backend/roles
+                            gns_employee/backend/employees
                         "
-                    ><i class="icon-users2"></i> <span>User</span></a>
+                    ><i class="icon-collaboration"></i> <span>Employee Management</span></a>
 
-                    <ul class="nav nav-group-sub" data-submenu-title="User">
+                    <ul class="nav nav-group-sub" data-submenu-title="Employee">
                         <li class="nav-item">
-                            <a href="<%= gns_core.backend_users_path %>" class="nav-link"
+                            <a href="<%= gns_employee.backend_employees_path %>" class="nav-link"
                                 data-menu="
-                                    gns_core/backend/users
+                                    gns_employee/backend/employees
                                 "
-                            >Users
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<%= gns_core.backend_roles_path %>" class="nav-link"
-                                data-menu="
-                                    gns_core/backend/roles
-                                "
-                            >Roles
+                            >Employee List
                             </a>
                         </li>
                     </ul>
@@ -167,20 +158,51 @@
                     </ul>
                 </li>
                 <li class="nav-item nav-item-submenu">
-                    <a href="#" class="nav-link"><i class="icon-hammer-wrench"></i> <span>System</span></a>
+                    <a href="#" class="nav-link"
+                       data-menu="
+                            gns_core/backend/users,
+                            gns_core/backend/roles
+                        "
+                    >
+                        <i class="icon-hammer-wrench"></i> <span>System</span>
+                    </a>
                     <ul class="nav nav-group-sub" data-submenu-title="System">
+                        <li class="nav-item nav-item-submenu">
+                            <a href="#" class="nav-link"
+                                data-menu="
+                                    gns_core/backend/users,
+                                    gns_core/backend/roles
+                                "
+                            >
+                                <i class="icon-user-check"></i><span>Account & Security</span>
+                            </a>
+                            <ul class="nav nav-group-sub">
+                                <li class="nav-item">
+                                    <a href="<%= gns_core.backend_users_path %>" class="nav-link"
+                                        data-menu="
+                                            gns_core/backend/users
+                                        "
+                                    ><i></i> Users</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<%= gns_core.backend_roles_path %>" class="nav-link"
+                                        data-menu="
+                                            gns_core/backend/roles
+                                        "
+                                    ><i></i> Roles
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link disabled">Backup & Restore
+                            <a href="#" class="nav-link disabled">
+                                <i class="icon-cogs"></i> Settings
                                 <span class="badge bg-transparent align-self-center ml-auto">Coming soon</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link disabled">Settings
-                                <span class="badge bg-transparent align-self-center ml-auto">Coming soon</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link disabled">Notifications
+                            <a href="#" class="nav-link disabled">
+                                <i class="icon-database-edit2"></i> Backup & Restore
                                 <span class="badge bg-transparent align-self-center ml-auto">Coming soon</span>
                             </a>
                         </li>

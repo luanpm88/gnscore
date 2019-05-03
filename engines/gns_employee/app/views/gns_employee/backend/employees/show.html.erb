@@ -1,0 +1,200 @@
+<% content_for :title do %>
+    Show Employee
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+    <a href="<%= gns_employee.backend_employees_path %>" class="breadcrumb-item">Employees</a>
+    <span class="breadcrumb-item active"><%= @employee.name %></span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-design mr-2"></i> <span class="font-weight-semibold">Employee</span>: <%= @employee.name %></h4>
+<% end %>
+
+<div class="card">
+    <div class="card-header bg-white header-elements-sm-inline">
+        <h6 class="card-title">Employee Details</h6>
+        <div class="header-elements">
+            <div class="list-icons">
+                <div class="form-check form-check-inline form-check-right form-check-switchery mr-3">
+                    <label class="form-check-label">
+                        Active:
+                        <input type="hidden" name="employee[active]" value="false" />
+                        <input type="checkbox" class="form-check-input-switchery"
+                            name="employee[active]"
+                            value="true"
+                            <%= 'checked' %>
+                        >
+                    </label>
+                </div>
+                
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <ul class="media-list">
+            <div class="row">
+                <div class="col-md-6">
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Employee Code/ID:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center">
+                            <%= @employee.code %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Full Name:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center">
+                            <%= @employee.name %>
+                        </div>
+                    </li>
+                    
+                    <div class="row border-bottom-dotted">
+                        <div class="col-md-7">
+                            <li class="media mt-0 py-2 px-2">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Date of birth:</div>
+                                </div>
+        
+                                <div class="ml-3 align-self-center">
+                                    
+                                </div>
+                            </li>
+                        </div>
+                        <div class="col-md-5">
+                            <li class="media mt-0 py-2 px-2">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Gender:</div>
+                                </div>
+        
+                                <div class="ml-3 align-self-center">
+                                    
+                                </div>
+                            </li>
+                        </div>
+                    </div>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Department:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center">
+                            <%= @employee.department %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Position:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center">
+                            <%= @employee.position %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Labor Contract Type:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center">
+                            <%= t(".#{@employee.labor_contract_type}") %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Starting Date:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center">
+                            <%= @employee.starting_date.strftime('%d/%m/%Y') if @employee.starting_date.present? %>
+                        </div>
+                    </li>
+                </div>
+                    
+                <div class="col-md-6">
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Telephone:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center">
+                            <%= @employee.phone %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Mobile Phone:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center">
+                            <%= @employee.mobile %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Email:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center">
+                            <%= @employee.email %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Added By:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center">
+                            <%= '' %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Created:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center text-muted">
+                            <%= @employee.created_at.strftime('%d/%m/%Y - %T') %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Last Updated:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center text-muted">
+                            <%= @employee.updated_at.strftime('%d/%m/%Y - %T') %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Address:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center">
+                            <%= display_address(@employee) %>
+                        </div>
+                    </li>
+                </div>
+            </div>
+        </ul>
+    </div>
+</div>

@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   mount GnsContact::Engine => "/", as: 'gns_contact'
   mount GnsProject::Engine => "/", as: 'gns_project'
   mount GnsNotification::Engine => "/", as: 'gns_notification'
+  mount GnsEmployee::Engine => "/", as: 'gns_employee'
 end

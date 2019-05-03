@@ -1,0 +1,141 @@
+<% params["show_columns"] = [] if !params["show_columns"].present? %>
+<table class="table table-hover">
+    <thead>
+        <tr class="bg-info-700">
+            <% if params["show_columns"].include?("code") %>
+                <th class="text-nowrap">Code</th>
+            <% end %>
+            <% if params["show_columns"].include?("name") %>
+                <th class="text-nowrap">Name</th>
+            <% end %>
+            <% if params["show_columns"].include?("department") %>
+                <th class="text-nowrap">Department</th>
+            <% end %>
+            <% if params["show_columns"].include?("position") %>
+                <th class="text-nowrap">Position</th>
+            <% end %>
+            <% if params["show_columns"].include?("labor_contract_type") %>
+                <th class="text-nowrap">Labor Contract Type</th>
+            <% end %>
+            <% if params["show_columns"].include?("starting_date") %>
+                <th class="text-nowrap">Starting Date</th>
+            <% end %>
+            <% if params["show_columns"].include?("phone") %>
+                <th class="text-nowrap">Telephone</th>
+            <% end %>
+            <% if params["show_columns"].include?("mobile") %>
+                <th class="text-nowrap">Mobile Phone</th>
+            <% end %>
+            <% if params["show_columns"].include?("email") %>
+                <th class="text-nowrap">Email</th>
+            <% end %>
+            <% if params["show_columns"].include?("address") %>
+                <th class="text-nowrap">Address</th>
+            <% end %>
+            <% if params["show_columns"].include?("status") %>
+                <th class="text-nowrap">Status</th>
+            <% end %>
+            <% if params["show_columns"].include?("created_at") %>
+                <th class="text-nowrap">Created Date</th>
+            <% end %>
+            <% if params["show_columns"].include?("updated_at") %>
+                <th class="text-nowrap">Updated Date</th>
+            <% end %>
+            <th class="text-nowrap text-right">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @employees.each do |employee| %>
+            <tr>
+                <% if params["show_columns"].include?("code") %>
+                    <td><%= employee.code %></td>
+                <% end %>
+                <% if params["show_columns"].include?("name") %>
+                    <td>
+                        <a href="<%= gns_employee.backend_employee_path(employee) %>"
+                          class="modal-control" modal-size="lg">
+                            <%= employee.name %>
+                        </a>
+                    </td>
+                <% end %>
+                <% if params["show_columns"].include?("department") %>
+                    <td><%= employee.department %></td>
+                <% end %>
+                <% if params["show_columns"].include?("position") %>
+                    <td><%= employee.position %></td>
+                <% end %>
+                <% if params["show_columns"].include?("labor_contract_type") %>
+                    <td><%= t(".#{employee.labor_contract_type}") if employee.labor_contract_type.present? %></td>
+                <% end %>
+                <% if params["show_columns"].include?("starting_date") %>
+                    <td><%= employee.starting_date.strftime("%d/%m/%Y") %></td>
+                <% end %>
+                <% if params["show_columns"].include?("phone") %>
+                    <td><%= employee.phone %></td>
+                <% end %>
+                <% if params["show_columns"].include?("mobile") %>
+                    <td><%= employee.mobile %></td>
+                <% end %>
+                <% if params["show_columns"].include?("email") %>
+                    <td><%= employee.email %></td>
+                <% end %>
+                <% if params["show_columns"].include?("address") %>
+                    <td><%= display_address(employee) %></td>
+                <% end %>
+                <% if params["show_columns"].include?("status") %>
+                    <td>
+                        <%= display_active(employee.active) %>
+                    </td>
+                <% end %>
+                <% if params["show_columns"].include?("created_at") %>
+                    <td>
+                        <%= employee.created_at.strftime("%d/%m/%Y") %>
+                    </td>
+                <% end %>
+                <% if params["show_columns"].include?("updated_at") %>
+                    <td>
+                        <%= employee.updated_at.strftime("%d/%m/%Y") %>
+                    </td>
+                <% end %>
+                <td class="text-right">
+                    <div class="list-icons">
+                        <div class="dropdown">
+                            <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                <i class="icon-menu9"></i>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item edit-employee-button"
+                                    href="<%= gns_employee.edit_backend_employee_path(employee) %>">
+                                    <i class="icon-pencil7"></i> Update Info
+                                </a>
+                                <a class="dropdown-item"
+                                    href="#">
+                                    <i class="icon-user"></i> Add/Edit Account
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item ajax datalist-g-link"
+                                    href="<%= gns_employee.backend_employee_path(employee) %>"
+                                    data-method="DELETE"
+                                    data-confirm="You are about to delete a employee"
+                                >
+                                    <i class="icon-bin"></i> Delete
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<div class="pagination-area">
+    <div class="page_entries_info">
+        <%= page_entries_info @employees %>
+    </div>
+
+    <div class="pagination_style paging_simple_numbers">
+        <%= will_paginate @employees, previous_label: 'Prev'.html_safe, next_label: 'Next'.html_safe, renderer: BootstrapPagination::Rails, class: 'align-self-center' %>
+    </div>
+</div>
