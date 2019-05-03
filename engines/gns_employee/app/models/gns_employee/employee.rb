@@ -1,10 +1,16 @@
 module GnsEmployee
   class Employee < ApplicationRecord
-    validates :code, :name, presence: true
+    validates :name, presence: true
+    validate :must_have_code
     
     belongs_to :country, class_name: 'GnsArea::Country', optional: true
     belongs_to :state, class_name: 'GnsArea::State', optional: true
     belongs_to :district, class_name: 'GnsArea::District', optional: true
+    
+    # custom validate
+    def must_have_code
+      errors.add(:code, "can't be blank") if (id.present? and !code.present?)
+    end
     
     # get coutry name
     def country_name
@@ -131,5 +137,17 @@ module GnsEmployee
       
       return data
     end
+    
+    # force generate code
+    after_create :generate_code
+    def generate_code
+      
+      query = GnsEmployee::Employee.all
+      
+      num = query.where('created_at <= ?', self.created_at).count
+
+      self.code = "E#{num.to_s.rjust(4, '0')}"
+      self.save
+		end
   end
 end
