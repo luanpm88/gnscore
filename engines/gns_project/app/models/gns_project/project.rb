@@ -204,6 +204,7 @@ module GnsProject
       GnsProject::Log.add_new(self, phrase, self, user, remark)
     end
     
+    # add new user role
     def add_user_role(user_id, role_id)
       project_user = GnsProject::ProjectUser.where(project_id: self.id, user_id: user_id).first
       if !project_user.present?
@@ -218,6 +219,7 @@ module GnsProject
       end
     end
     
+    # edit user role
     def update_user_roles(user, role_ids)
       current_project_user = user.project_users.where(project_id: self.id).first
       
@@ -237,8 +239,17 @@ module GnsProject
       end
     end
     
+    # remove user role
     def remove_project_user(project_user)
       GnsProject::ProjectUser.find(project_user.id).destroy
+    end
+    
+    # check start date vs end date
+    validate :check_start_date_vs_end_date
+    def check_start_date_vs_end_date
+      if end_date.present? and start_date.present? and end_date < start_date
+        errors.add(:end_date, :cannot_take_place_before)
+      end
     end
   end
 end

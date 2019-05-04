@@ -132,5 +132,31 @@ module GnsProject
     def get_latest_remark_log
       logs.last.remark
     end
+    
+    # check start date vs end date
+    validate :check_start_date_vs_end_date
+    def check_start_date_vs_end_date
+      if start_date.present?
+        if start_date < project.start_date
+          errors.add(:start_date, :cannot_take_place_before_the_project_start_date)
+        end
+        
+        if start_date > project.end_date
+          errors.add(:start_date, :cannot_take_place_after_the_project_has_ended)
+        end
+      end
+      
+      if end_date.present?
+        if end_date > project.end_date
+          errors.add(:end_date, :must_take_place_before_the_project_end_date)
+        end
+      end
+      
+      if end_date.present? and start_date.present?  
+        if end_date < start_date
+          errors.add(:end_date, :cannot_take_place_before)
+        end
+      end
+    end
   end
 end

@@ -49,3 +49,18 @@ en:
         added: "Add new authorization"
         updated: "Update authorization"
         removed: "Remove authorization"
+  activerecord:
+    errors:
+      models:
+        gns_project/project:
+          attributes:
+            end_date:
+              cannot_take_place_before: "must not take place before start date"
+        gns_project/task:
+          attributes:
+            start_date:
+              cannot_take_place_before_the_project_start_date: "can't take place before the project start date"
+              cannot_take_place_after_the_project_has_ended: "can't take place after the project has ended"
+            end_date:
+              cannot_take_place_before: "must not take place before start date"
+              must_take_place_before_the_project_end_date: "must take place before the project end date"
