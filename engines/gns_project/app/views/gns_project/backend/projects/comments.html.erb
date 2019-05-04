@@ -26,28 +26,50 @@
         
                     <ul class="list-inline font-size-sm mb-0 comment-action-link">
                         <!--<li class="list-inline-item">70 <a href="#"><i class="icon-arrow-up22 text-success"></i></a><a href="#"><i class="icon-arrow-down22 text-danger"></i></a></li>-->
-                        <li class="list-inline-item">
-                            <a href="<%= gns_project.new_backend_comment_path(project_id: @project, parent_id: comment) %>"
-                                class="reply-comment-button">
-                                Reply
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="<%= gns_project.edit_backend_comment_path(comment) %>"
-                                class="edit-comment-button">
-                                Edit
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#"
-                                class="delete-comment-button">
-                                Delete
-                            </a>
-                        </li>
+                        <% if can? :reply, comment %>
+                            <li class="list-inline-item">
+                                <a href="<%= gns_project.new_backend_comment_path(project_id: @project, parent_id: comment) %>"
+                                    class="reply-comment-button">
+                                    Reply
+                                </a>
+                            </li>
+                        <% end %>
+                        
+                        <% if can? :update, comment %>
+                            <li class="list-inline-item">
+                                <a href="<%= gns_project.edit_backend_comment_path(comment) %>"
+                                    class="edit-comment-button">
+                                    Edit
+                                </a>
+                            </li>
+                        <% end %>
+                        
+                        <% if can? :delete, comment %>
+                            <li class="list-inline-item">
+                                <a href="<%= gns_project.backend_comment_path(comment) %>"
+                                    class="ajax delete-comment-button"
+                                    data-method="DELETE"
+                                    data-confirm="You are about to delete a comment. The replies to this comment will also be deleted."
+                                >
+                                    Delete
+                                </a>
+                            </li>
+                        <% end %>
+                        
+                        <% if can? :download, comment %>
+                            <li class="list-inline-item">
+                                <a href="#"
+                                    data-popup="tooltip"
+                                    data-original-title="Click to download the attachment"
+                                >
+                                    <i class="font-size-sm icon-download4"></i> (6)
+                                </a>
+                            </li>
+                        <% end %>
                     </ul>
                     
                     <% if comment.children.count > 0 %>
-                        <% comment.children.order('created_at DESC').each do |child_comment| %>
+                        <% comment.children.order('created_at asc').each do |child_comment| %>
                             <div class="media flex-column flex-md-row comment-reply">
                                 <div class="mr-md-3 mb-2 mb-md-0">
                                     <a href="javascript:void(0)">
@@ -71,18 +93,37 @@
             
                                     <ul class="list-inline font-size-sm mb-0 comment-action-link">
                                         <!--<li class="list-inline-item">67 <a href="#"><i class="icon-arrow-up22 text-success"></i></a><a href="#"><i class="icon-arrow-down22 text-danger"></i></a></li>-->
-                                        <li class="list-inline-item">
-                                            <a href="<%= gns_project.edit_backend_comment_path(child_comment) %>"
-                                                class="edit-comment-button">
-                                                Edit
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="#"
-                                                class="delete-comment-button">
-                                                Delete
-                                            </a>
-                                        </li>
+                                        <% if can? :update, child_comment %>
+                                            <li class="list-inline-item">
+                                                <a href="<%= gns_project.edit_backend_comment_path(child_comment) %>"
+                                                    class="edit-comment-button">
+                                                    Edit
+                                                </a>
+                                            </li>
+                                        <% end %>
+                                        
+                                        <% if can? :delete, child_comment %>
+                                            <li class="list-inline-item">
+                                                <a href="<%= gns_project.backend_comment_path(child_comment) %>"
+                                                    class="ajax delete-comment-button"
+                                                    data-method="DELETE"
+                                                    data-confirm="You are about to delete a reply of the comment."
+                                                >
+                                                    Delete
+                                                </a>
+                                            </li>
+                                        <% end %>
+                                        
+                                        <% if can? :download, child_comment %>
+                                            <li class="list-inline-item">
+                                                <a href="#"
+                                                    data-popup="tooltip"
+                                                    data-original-title="Click to download the attachment"
+                                                >
+                                                    <i class="font-size-sm icon-download4"></i> (6)
+                                                </a>
+                                            </li>
+                                        <% end %>
                                     </ul>
                                 </div>
                             </div>

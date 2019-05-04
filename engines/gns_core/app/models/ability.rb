@@ -135,5 +135,26 @@ class Ability
     can :download, GnsProject::Attachment do |att|
       true
     end
+    
+    # gns_project / comments
+    can :add_new_commnet, GnsProject::Project do |project|
+      true
+    end
+    
+    can :reply, GnsProject::Comment do |comment|
+      true
+    end
+    
+    can :update, GnsProject::Comment do |comment|
+      true
+    end
+    
+    can :delete, GnsProject::Comment do |comment|
+      true
+    end
+    
+    can :download, GnsProject::Comment do |comment|
+      false
+    end
   end
 end

@@ -1,7 +1,7 @@
 module GnsProject
   module Backend
     class CommentsController < GnsCore::Backend::BackendController
-      before_action :set_comment, only: [:edit, :update]
+      before_action :set_comment, only: [:edit, :update, :destroy]
   
       # GET /comments/new
       def new
@@ -43,6 +43,16 @@ module GnsProject
         else
           render :edit
         end
+      end
+  
+      # DELETE /comments/1
+      def destroy
+        @comment.destroy
+        
+        render json: {
+          status: 'success',
+          message: 'Comment was successfully destroyed.',
+        }
       end
   
       private

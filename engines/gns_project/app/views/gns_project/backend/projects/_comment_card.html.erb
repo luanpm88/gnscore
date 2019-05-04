@@ -44,12 +44,14 @@
 <div class="card">
     <div class="card-header header-elements-inline">
         <h5 class="mb-0">Discussion/Notes</h5>
-        <div class="text-right">
-            <a href="<%= gns_project.new_backend_comment_path(project_id: project) %>"
-                class="btn bg-info-800 btn-sm add-comment-button">
-                <i class="icon-plus22 mr-1"></i> Add new note
-            </a>
-        </div>
+        <% if can? :add_new_commnet, project %>
+            <div class="text-right">
+                <a href="<%= gns_project.new_backend_comment_path(project_id: project) %>"
+                    class="btn bg-info-800 btn-sm add-comment-button">
+                    <i class="icon-plus22 mr-1"></i> Add new note
+                </a>
+            </div>
+        <% end %>
     </div>
     <div class="card-body">
         <div class="comments-list" style="min-height: 90px"></div>

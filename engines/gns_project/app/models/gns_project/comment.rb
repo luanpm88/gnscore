@@ -3,7 +3,7 @@ module GnsProject
     belongs_to :project, class_name: "GnsProject::Project"
     belongs_to :parent, class_name: "GnsProject::Comment", optional: true
     belongs_to :user, class_name: "GnsCore::User"
-    has_many :children, class_name: "GnsProject::Comment", foreign_key: "parent_id", dependent: :restrict_with_error
+    has_many :children, class_name: "GnsProject::Comment", foreign_key: "parent_id", dependent: :destroy
     validates :message, :presence => true
     
     # get project name
