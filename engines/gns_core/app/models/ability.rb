@@ -64,7 +64,7 @@ class Ability
     end
     
     can :finish, GnsProject::Project do |project|
-      project.is_in_progress?
+      project.is_in_progress? and project.get_tasks_not_closed.count == 0
     end
     
     # gns_project / tasks

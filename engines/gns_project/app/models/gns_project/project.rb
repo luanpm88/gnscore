@@ -200,6 +200,10 @@ module GnsProject
       self.tasks.where(status: GnsProject::Task::STATUS_OPEN)
     end
     
+    def get_tasks_not_closed
+      self.tasks.where.not(status: GnsProject::Task::STATUS_CLOSED)
+    end
+    
     def log(phrase, user, remark=nil)
       GnsProject::Log.add_new(self, phrase, self, user, remark)
     end
