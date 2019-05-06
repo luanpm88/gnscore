@@ -139,21 +139,34 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <select name="category_id" data-placeholder="Filter by category..."
-                          class="form-control select-ajax"
-                          data-url="<%= gns_project.select2_backend_categories_path %>">
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
                         <select name="customer_id" data-placeholder="Filter by customer..."
                           class="form-control select-ajax"
                           data-url="<%= gns_contact.select2_backend_contacts_path %>">
                         </select>
                     </div>
                 </div>
-                <div class="col-md-6 text-right">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select name="category_id" data-placeholder="Filter by type..."
+                          class="form-control select-ajax"
+                          data-url="<%= gns_project.select2_backend_categories_path %>">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-control selectAllowClear"
+                        data-placeholder="Filter by status..."
+                        data-fouc
+                        name="status"
+                    >
+                        <option></option>
+                        <option value="<%= GnsProject::Project::STATUS_NEW %>"><%= 'New' %></option>
+                        <option value="<%= GnsProject::Project::STATUS_PENDING %>"><%= 'Pending' %></option>
+                        <option value="<%= GnsProject::Project::STATUS_IN_PROGRESS %>"><%= 'In progress' %></option>
+                        <option value="<%= GnsProject::Project::STATUS_FINISHED %>"><%= 'Finished' %></option>
+                    </select>
+                </div>
+                <div class="col-md-3 text-right">
                     <span class="btn btn-primary mb-3 datalist-search-button">Go</span>
                 </div>
             </div>

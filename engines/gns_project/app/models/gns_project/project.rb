@@ -86,6 +86,11 @@ module GnsProject
         query = query.where(customer_id: params[:customer_id])
       end
       
+      # filter by status
+      if params[:status].present?
+        query = query.where(status: params[:status])
+      end
+      
       # single keyword
       if params[:keyword].present?
 				keyword = params[:keyword].strip.downcase
