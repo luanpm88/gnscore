@@ -1,3 +1,6 @@
+.sidebar:not(.sidebar-component) .sidebar-content {
+    overflow-y: auto;
+}
 .pagination-area {
     border-top: 1px solid #b7b7b7;
     padding: 1.25rem 1.25rem 0 1.25rem;
