@@ -1,5 +1,5 @@
 <% content_for :title do %>
-    Task Attachments
+    Attachments
 <% end %>
 
 <% content_for :breadcrumb do %>
@@ -15,6 +15,11 @@
 <% content_for :page_script do %>
     <script>
         var attachment_modal = new gModal({size: 'md'});
+        
+        var attachment_actions_box = new ajaxBox(
+            $('.attachment-actions'),
+            '<%= gns_project.attachment_actions_backend_tasks_path(@task.id) %>'
+        );
         
         var attachment_list_box = new ajaxBox(
             $('.attachments-list'),
@@ -78,12 +83,17 @@
             });
             
             $(document).on('change', '[name="task_id"]', function(e) {
-                var url = '<%= gns_project.attachments_list_backend_tasks_path('ID') %>';
+                var url_list = '<%= gns_project.attachments_list_backend_tasks_path('ID') %>';
+                var url_act = '<%= gns_project.attachment_actions_backend_tasks_path('ID') %>';
                 
                 if ($(this).val()) {
-                    url = url.replace('ID', $(this).val());
-                    attachment_list_box.url = url;
+                    url_list = url_list.replace('ID', $(this).val());
+                    attachment_list_box.url = url_list;
                     attachment_list_box.load();
+                    
+                    url_act = url_act.replace('ID', $(this).val());
+                    attachment_actions_box.url = url_act;
+                    attachment_actions_box.load();
                 } else {
                     attachment_list_box.loadHtml('<div class="alert alert-warning">No task selected!</div>');
                 }
@@ -92,6 +102,7 @@
             
             // Danh sach attachment /cac phien ban moi nhat
             attachment_list_box.load();
+            attachment_actions_box.load();
             
             $(document).on('click', '.attachment-logs-list-button', function(e) {
                 e.preventDefault();
@@ -107,9 +118,13 @@
 
 <div class="card">
     <div class="card-header bg-white header-elements-inline">
-        <h6 class="card-title">Attachment list</h6>
-        <div class="header-elements">            
+        <h6 class="card-title">Attached details</h6>
+        <div class="header-elements">
             <div class="list-icons">
+                <div class="attachment-actions">
+                    
+                </div>
+                
                 <a class="list-icons-item" data-action="collapse"></a>
             </div>
         </div>
@@ -117,20 +132,17 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-12">
-                <div class="form-group">
-                    <label class="d-blocks">Task Description</label>
-                    <select name="task_id" data-placeholder="Filter by stage..."
-                        class="form-control select-ajax"
-                        data-url="<%= gns_project.select2_backend_tasks_path(project_id: @task.project_id, include_stage_name: true) %>"
-                        data-container-css-class="font-weight-semibold"
-                    >
-                        <option value="<%= @task.id %>"><%= @task.name_with_stage %></option>
-                    </select>
-                </div>
+                <label class="d-blocks">Stage Name/Task Description</label>
+                <select name="task_id" data-placeholder="Filter by stage..."
+                    class="form-control select-ajax"
+                    data-url="<%= gns_project.select2_backend_tasks_path(project_id: @task.project_id, include_stage_name: true) %>"
+                    data-container-css-class="font-weight-semibold"
+                >
+                    <option value="<%= @task.id %>"><%= @task.name_with_stage %></option>
+                </select>
             </div>
         </div>
     </div>
-    <div class="card-body">
-        <div class="attachments-list" style="position: relative"></div>
-    </div>
+    
+    <div class="attachments-list" style="position: relative"></div>
 </div>

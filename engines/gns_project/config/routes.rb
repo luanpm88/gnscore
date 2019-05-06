@@ -50,6 +50,7 @@ GnsProject::Engine.routes.draw do
                 get 'select2'
                 get ':id/attachments', to: 'tasks#attachments', as: 'attachments'
                 get ':id/attachments_list', to: 'tasks#attachments_list', as: 'attachments_list'
+                get ':id/attachment_actions', to: 'tasks#attachment_actions', as: 'attachment_actions'
                 get 'reopen'
                 post 'reopen'
                 get 'close'

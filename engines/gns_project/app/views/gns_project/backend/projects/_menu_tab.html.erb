@@ -116,17 +116,7 @@
                 data-menu="gns_project/backend/projects/tasks"
             >
                 <i class="icon-clipboard3 mr-1"></i>
-                Planning
-            </a>
-        </li>
-        
-        <li class="nav-item">
-            <a
-                data-menu="gns_project/backend/projects/attachments"
-                href="<%= gns_project.attachments_backend_projects_path(@project.id) %>"
-                class="nav-link" modal-size="full">
-                    <i class="icon-attachment mr-1"></i>
-                    Attachment
+                Task planning
             </a>
         </li>
         
@@ -136,7 +126,7 @@
                 href="<%= gns_project.authorization_backend_projects_path(@project.id) %>"
                 class="nav-link" modal-size="full">
                     <i class="icon-user-check mr-1"></i>
-                    Authorization
+                    Manpower
             </a>
         </li>
         
@@ -146,7 +136,7 @@
                 href="<%= gns_project.logs_backend_projects_path(@project.id) %>"
                 class="nav-link" modal-size="full">
                     <i class="icon-history mr-1"></i>
-                    Logs
+                    View logs
             </a>
         </li>
     </ul>

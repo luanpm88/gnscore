@@ -1,0 +1,12 @@
+<a href="<%= gns_project.new_backend_attachment_path(task_id: @task.id) %>"
+    class="btn btn-sm bg-blue-600 add-attachment-button">
+    <i class="icon-upload4 mr-1"></i> Upload new attach file
+</a>
+
+<% if can? :download_attachments, @task %>
+    <a class="btn btn-sm btn-light ml-2"
+       href="<%= gns_project.download_attachments_backend_tasks_path(task_id: @task.id) %>"
+       target="_blank">
+        <i class="icon-download4 mr-1"></i> Download all
+    </a>
+<% end %>

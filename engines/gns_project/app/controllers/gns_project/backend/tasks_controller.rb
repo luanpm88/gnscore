@@ -3,7 +3,8 @@ module GnsProject
     class TasksController < GnsCore::Backend::BackendController
       before_action :set_task, only: [:show, :edit, :update, :destroy,
                                       :reopen, :close, :finish, :unfinish, :update_progress,
-                                      :attachments, :attachments_list, :download_attachments]
+                                      :attachments, :attachments_list,
+                                      :attachment_actions, :download_attachments]
   
       # GET /tasks
       def index
@@ -92,6 +93,10 @@ module GnsProject
       
       # danh sach attachment cua task
       def attachments
+      end
+      
+      def attachment_actions
+        render layout: nil
       end
       
       def attachments_list

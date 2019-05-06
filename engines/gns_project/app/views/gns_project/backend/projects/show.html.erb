@@ -1,5 +1,5 @@
 <% content_for :title do %>
-    Show Project
+    Project Information
 <% end %>
 
 <% content_for :breadcrumb do %>
@@ -98,27 +98,22 @@
 
 <div class="card">
     <div class="card-header bg-white header-elements-sm-inline">
-        <h6 class="card-title">Project Details</h6>
+        <h6 class="card-title">Details</h6>
         <div class="header-elements">
             <div class="list-icons">
                 <a href="<%= gns_project.tasks_backend_projects_path(@project) %>"
                     class="btn btn-sm alpha-blue text-blue-800 border-blue-600">
-                    <i class="icon-clipboard3 mr-1"></i> Planning
+                    <i class="icon-clipboard3 mr-1"></i> Task planning
                 </a>
                 
                 <a href="<%= gns_project.authorization_backend_projects_path(@project) %>"
                     class="btn btn-sm alpha-blue text-blue-800 border-blue-600">
-                    <i class="icon-user-check mr-1"></i> Authorization
-                </a>
-                
-                <a href="<%= gns_project.attachments_backend_projects_path(@project) %>"
-                    class="btn btn-sm alpha-blue text-blue-800 border-blue-600">
-                    <i class="icon-attachment mr-1"></i> Attachment
+                    <i class="icon-user-check mr-1"></i> Manpower
                 </a>
                 
                 <a href="<%= gns_project.logs_backend_projects_path(@project) %>"
                     class="btn btn-sm alpha-blue text-blue-800 border-blue-600">
-                    <i class="icon-history mr-1"></i> Logs
+                    <i class="icon-history mr-1"></i> View logs
                 </a>
                 
                 <a class="list-icons-item" data-action="collapse"></a>
@@ -144,7 +139,7 @@
                             <div class="font-weight-semibold">Project Code:</div>
                         </div>
 
-                        <div class="ml-3 align-self-center text-blue-800">
+                        <div class="ml-3 align-self-center">
                             <%= @project.code %>
                         </div>
                     </li>
@@ -154,7 +149,7 @@
                             <div class="font-weight-semibold">Project Name:</div>
                         </div>
 
-                        <div class="ml-3 align-self-center text-blue-800">
+                        <div class="ml-3 align-self-center">
                             <%= @project.name %>
                         </div>
                     </li>
@@ -164,7 +159,7 @@
                             <div class="font-weight-semibold">Start Date:</div>
                         </div>
 
-                        <div class="ml-3 align-self-center text-muted">
+                        <div class="ml-3 align-self-center">
                             <%= @project.start_date.strftime('%A, %d/%m/%Y') %>
                         </div>
                     </li>
@@ -174,7 +169,7 @@
                             <div class="font-weight-semibold">End Date:</div>
                         </div>
 
-                        <div class="ml-3 align-self-center text-muted">
+                        <div class="ml-3 align-self-center">
                             <%= @project.end_date.strftime('%A, %d/%m/%Y') %>
                         </div>
                     </li>
@@ -240,7 +235,7 @@
                             <div class="font-weight-semibold">Customer Code:</div>
                         </div>
 
-                        <div class="ml-3 align-self-center text-blue-800">
+                        <div class="ml-3 align-self-center">
                             <%= @project.customer_code %>
                         </div>
                     </li>
@@ -250,7 +245,7 @@
                             <div class="font-weight-semibold">Customer Name:</div>
                         </div>
 
-                        <div class="ml-3 align-self-center text-blue-800">
+                        <div class="ml-3 align-self-center">
                             <%= @project.customer_name %>
                         </div>
                     </li>
@@ -270,7 +265,7 @@
                             <div class="font-weight-semibold">Created:</div>
                         </div>
 
-                        <div class="ml-3 align-self-center text-muted">
+                        <div class="ml-3 align-self-center">
                             <%= @project.created_at.strftime('%d/%m/%Y - %T') %>
                         </div>
                     </li>
@@ -280,7 +275,7 @@
                             <div class="font-weight-semibold">Last Updated:</div>
                         </div>
 
-                        <div class="ml-3 align-self-center text-muted">
+                        <div class="ml-3 align-self-center">
                             <%= @project.updated_at.strftime('%d/%m/%Y - %T') %>
                         </div>
                     </li>
