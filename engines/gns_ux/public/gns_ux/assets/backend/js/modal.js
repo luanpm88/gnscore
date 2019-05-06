@@ -13,7 +13,7 @@ function gModal(options) {
     // init
     this.modal = $('#'+this.id);
     if (this.modal.length === 0) {
-        var html = '<div id="'+this.id+'" class="modal fade" tabindex="-1">' +
+        var html = '<div id="'+this.id+'" class="modal fade" tabindex="-1" data-backdrop="static">' +
             '<div class="modal-dialog modal-'+this.size+'">' +
                 '<div class="modal-content">' +
                 '</div>' +
