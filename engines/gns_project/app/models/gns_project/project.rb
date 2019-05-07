@@ -213,6 +213,10 @@ module GnsProject
       GnsProject::Log.add_new(self, phrase, self, user, remark)
     end
     
+    def self.get_waiting_projects
+      GnsProject::Project.where('gns_project_projects.status IN (?)', [GnsProject::Project::STATUS_NEW, GnsProject::Project::STATUS_PENDING])
+    end
+    
     # add new user role
     def add_user_role(user_id, role_id)
       project_user = GnsProject::ProjectUser.where(project_id: self.id, user_id: user_id).first

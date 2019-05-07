@@ -1,0 +1,48 @@
+<div class="card">
+    <div class="card-header header-elements-inline">
+        <h6 class="card-title">Waiting Projects</h6>
+        <div class="header-elements">
+            <span class="font-weight-bold text-danger-600 ml-2"><%= GnsProject::Project.get_waiting_projects.count %></span>
+            <div class="list-icons ml-3">
+                <div class="list-icons-item dropdown">
+                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-cog3"></i></a>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item"><i class="icon-sync"></i> Update data</a>
+                        <a href="#" class="dropdown-item"><i class="icon-list-unordered"></i> Detailed log</a>
+                        <a href="#" class="dropdown-item"><i class="icon-pie5"></i> Statistics</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item"><i class="icon-cross3"></i> Clear list</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-nowrap">Project name</th>
+                <th class="text-nowrap">Status</th>
+                <th class="text-nowrap" width="10%">Updated at</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% GnsProject::Project.get_waiting_projects.each do |project| %>
+                <tr>
+                    <td>
+                        <a href="#">
+                            <div class="text-default font-weight-semibold"><%= project.name %></div>
+                            <span class="text-muted font-size-sm"><%= project.code %></span>
+                        </a>
+                    </td>
+                    <td>
+                        <span class="badge badge-<%= project.status %>"><%= t project.status %></span>
+                    </td>
+                    <td>
+                        <span class="text-muted font-size-sm"><%= project.updated_at.strftime("%d/%m/%Y") %></span>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>

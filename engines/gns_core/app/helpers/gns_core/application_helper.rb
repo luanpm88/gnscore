@@ -13,6 +13,10 @@ module GnsCore
       end
     end
     
+    def badge_mark(status)
+      "<span class=\"badge badge-mark border-#{status} mr-1\"></span> #{t(status)}".html_safe
+    end
+    
     def display_address(object)
       str = []
       str << object.address if object.address.present?

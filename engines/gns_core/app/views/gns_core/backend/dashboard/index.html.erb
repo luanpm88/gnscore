@@ -1,4 +1,12 @@
-<h6 class="mb-0 font-weight-semibold">
-    Welcome, <%= current_user.full_name %>
-</h6>
-<span class="text-muted d-block">Dashboard layout here</span>
+<!-- Dashboard content -->
+<div class="row">
+    <div class="col-xl-8">
+        <%= render 'todo_list' %>
+        <%= render 'wait_for_approval' %>
+    </div>
+    
+    <div class="col-xl-4">
+        <%= render 'waiting_projects' %>
+        <%= render 'recent_activities' %>
+    </div>
+</div>

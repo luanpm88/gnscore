@@ -1,0 +1,63 @@
+<% @tasks = GnsProject::Task.get_wait_for_approval(current_user).order('updated_at desc') %>
+
+<div class="card">
+    <div class="card-header header-elements-sm-inline">
+        <h6 class="card-title">WAIT FOR APPROVAL</h6>
+        <div class="header-elements">
+            <span class="badge bg-success badge-pill"><%= @tasks.count %> task(s)</span>
+            
+            <div class="list-icons ml-3">
+                <a href="#" class="list-icons-item"><i class="icon-sync"></i></a>
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-nowrap">Project Name</th>
+                <th class="text-nowrap">Tasks</th>
+                <th class="text-nowrap">Who do it</th>
+                <th class="text-nowrap">Remark</th>
+                <th class="text-nowrap text-center">Status</th>
+                <th class="text-nowrap text-center">Finished</th>
+                <th class="text-nowrap">Updated at</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @tasks.each do |task| %>
+                <tr>
+                    <td>
+                            <%= task.project.name %>
+                    </td>
+                    <td>
+                        <a href="">
+                            <div class="text-default font-weight-semibold"><%= task.name %></div>
+                            <span class="text-muted font-size-sm"><%= task.stage_name %></span>
+                        </a>
+                    </td>
+                    <td>
+                        <%= task.employee_name %>
+                    </td>
+                    <td>
+                        <%= task.get_latest_remark_log %>
+                    </td>
+                    <td class="text-center">
+                        <span class="badge badge-flat badge-pill badge-<%= task.status %>"><%= t task.status %></span>
+                    </td>
+                    <td class="text-center">
+                        <% if task.finished? %>
+                            <i class="icon-checkmark-circle text-success"></i>
+                        <% else %>
+                            <i class="icon-cancel-circle2 text-danger"></i>
+                        <% end %>
+                    </td>
+                    <td>
+                        <%= task.updated_at.strftime("%d/%m/%Y") %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
