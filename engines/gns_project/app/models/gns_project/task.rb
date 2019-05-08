@@ -188,6 +188,8 @@ module GnsProject
     def self.open_of_all_rate
       all_count = self.all_tasks.count
       open_count = self.all_tasks(status: GnsProject::Task::STATUS_OPEN).count
+      
+      return 0 if all_count == 0
       return (open_count.to_f/all_count.to_f)*100
     end
     
@@ -195,6 +197,8 @@ module GnsProject
     def self.closed_of_all_rate
       all_count = self.all_tasks.count
       closed_count = self.all_tasks(status: GnsProject::Task::STATUS_CLOSED).count
+      
+      return 0 if all_count == 0
       return (closed_count.to_f/all_count.to_f)*100
     end
     
