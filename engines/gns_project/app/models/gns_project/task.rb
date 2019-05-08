@@ -130,7 +130,11 @@ module GnsProject
     end
     
     def get_latest_remark_log
-      logs.last.remark
+      if logs.empty?
+        return nil
+      else
+        logs.last.remark
+      end
     end
     
     # check start date vs end date
