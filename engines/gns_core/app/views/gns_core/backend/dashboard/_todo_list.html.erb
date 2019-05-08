@@ -56,4 +56,9 @@
             <% end %>
         </tbody>
     </table>
+    <% if @todo_list.empty? %>
+        <div class="alert text-center text-warning mb-0">
+            There is no task on the list to do
+        </div>
+    <% end %>
 </div>

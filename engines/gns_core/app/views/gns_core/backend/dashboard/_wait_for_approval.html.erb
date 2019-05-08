@@ -62,4 +62,9 @@
             <% end %>
         </tbody>
     </table>
+    <% if @tasks.empty? %>
+        <div class="alert text-center text-warning mb-0">
+            No task in the list is waiting for approval
+        </div>
+    <% end %>
 </div>
