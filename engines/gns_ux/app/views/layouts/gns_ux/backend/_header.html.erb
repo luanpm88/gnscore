@@ -10,15 +10,17 @@
     </div>
     <!-- /breadcrumb line -->
     
-    <div class="page-header-content header-elements-md-inline">
-        <div class="page-title d-flex">
-            <%= yield :page_title %>
-            <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+    <% if content_for?(:page_title) or content_for?(:page_toolbar) %>
+        <div class="page-header-content header-elements-md-inline">
+            <div class="page-title d-flex">
+                <%= yield :page_title %>
+                <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+            </div>
+            
+            <div class="header-elements d-none">
+                <%= yield :page_toolbar %>
+            </div>
         </div>
-        
-        <div class="header-elements d-none">
-            <%= yield :page_toolbar %>
-        </div>
-    </div>
+    <% end %>
 </div>
 <!-- /page header -->

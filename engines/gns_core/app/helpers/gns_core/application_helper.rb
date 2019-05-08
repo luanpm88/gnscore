@@ -14,7 +14,7 @@ module GnsCore
     end
     
     def badge_mark(status)
-      "<span class=\"badge badge-mark border-#{status} mr-1\"></span> #{t(status)}".html_safe
+      "<div class=\"text-muted font-size-sm\"><span class=\"badge badge-mark border-#{status} mr-1\"></span> #{(status)}</div>".html_safe
     end
     
     def display_address(object)
@@ -24,6 +24,11 @@ module GnsCore
       str << object.state_name if object.state_name.present?
       str << object.country_name if object.country_name.present?
       return str.join(", ")
+    end
+    
+    
+    def format_percentage(num)
+      "%g" % ("%.2f" % num)
     end
   end
 end

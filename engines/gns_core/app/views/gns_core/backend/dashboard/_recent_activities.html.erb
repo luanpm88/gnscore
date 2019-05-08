@@ -1,90 +1,41 @@
+<% notifications = GnsNotification::Notification.all %>
 <div class="card">
     <div class="card-header header-elements-inline">
         <h6 class="card-title">Recent Activities</h6>
         <div class="header-elements">
-            <span><i class="icon-history text-warning mr-2"></i> Jul 7, 10:30</span>
-            <span class="badge bg-success align-self-start ml-3">Online</span>
+            <a href="#" class="badge bg-orange align-self-start ml-3">View all</a>
+            
+            <div class="list-icons ml-3">
+                <a href="#" class="list-icons-item"><i class="icon-sync"></i></a>
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
         </div>
     </div>
     
     <div class="card-body">
         <ul class="media-list">
-            <li class="media">
-                <div class="mr-3 position-relative">
-                    <img src="/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg" class="rounded-circle" width="36" height="36" alt="">
-                    <span class="badge bg-danger-400 badge-pill badge-float border-2 border-white">8</span>
-                </div>
-
-                <div class="media-body">
-                    <div class="d-flex justify-content-between">
-                        <a href="#">James Alexander</a>
-                        <span class="font-size-sm text-muted">14:58</span>
+            <% notifications.order('created_at desc').limit(10).each do |notification| %>
+                <li class="media">
+                    <div class="mr-3 position-relative">
+                        <img src="<%= notification.user.avatar.present? ? notification.user.avatar.system : url_for("/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg") %>"
+                            width="36" height="36" class="rounded-circle" alt=""
+                        >
                     </div>
-
-                    The constitutionally inventoried precariously...
-                </div>
-            </li>
-
-            <li class="media">
-                <div class="mr-3 position-relative">
-                    <img src="/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg" class="rounded-circle" width="36" height="36" alt="">
-                    <span class="badge bg-danger-400 badge-pill badge-float border-2 border-white">6</span>
-                </div>
-
-                <div class="media-body">
-                    <div class="d-flex justify-content-between">
-                        <a href="#">Margo Baker</a>
-                        <span class="font-size-sm text-muted">12:16</span>
+    
+                    <div class="media-body">
+                        <div class="d-flex justify-content-between">
+                            <a href="#"><%= notification.user_name %></a>
+                            <span class="font-size-sm text-muted"><%= time_ago_in_words(notification.created_at)  %></span>
+                        </div>
+    
+                        <span data-popup="tooltip"
+                            data-original-title="<%= t(notification.phrase, notification.get_data) %>"
+                        >
+                            <%= t(notification.phrase, notification.get_data).truncate(50, separator: /\s/) %>
+                        </span>
                     </div>
-
-                    Pinched a well more moral chose goodness...
-                </div>
-            </li>
-
-            <li class="media">
-                <div class="mr-3">
-                    <img src="/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg" class="rounded-circle" width="36" height="36" alt="">
-                </div>
-
-                <div class="media-body">
-                    <div class="d-flex justify-content-between">
-                        <a href="#">Jeremy Victorino</a>
-                        <span class="font-size-sm text-muted">09:48</span>
-                    </div>
-
-                    Pert thickly mischievous clung frowned well...
-                </div>
-            </li>
-
-            <li class="media">
-                <div class="mr-3">
-                    <img src="/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg" class="rounded-circle" width="36" height="36" alt="">
-                </div>
-
-                <div class="media-body">
-                    <div class="d-flex justify-content-between">
-                        <a href="#">Beatrix Diaz</a>
-                        <span class="font-size-sm text-muted">05:54</span>
-                    </div>
-
-                    Nightingale taped hello bucolic fussily cardinal...
-                </div>
-            </li>
-
-            <li class="media">
-                <div class="mr-3">
-                    <img src="/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg" class="rounded-circle" width="36" height="36" alt="">
-                </div>
-
-                <div class="media-body">												
-                    <div class="d-flex justify-content-between">
-                        <a href="#">Richard Vango</a>
-                        <span class="font-size-sm text-muted">01:43</span>
-                    </div>
-
-                    Amidst roadrunner distantly pompously where...
-                </div>
-            </li>
+                </li>
+            <% end %>
         </ul>
     </div>
 </div>

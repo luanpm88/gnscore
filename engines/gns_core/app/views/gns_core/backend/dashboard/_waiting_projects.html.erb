@@ -2,18 +2,11 @@
     <div class="card-header header-elements-inline">
         <h6 class="card-title">Waiting Projects</h6>
         <div class="header-elements">
-            <span class="font-weight-bold text-danger-600 ml-2"><%= GnsProject::Project.get_waiting_projects.count %></span>
+            <span class="badge bg-success badge-pill"><%= GnsProject::Project.get_waiting_projects.count %> project(s)</span>
+            
             <div class="list-icons ml-3">
-                <div class="list-icons-item dropdown">
-                    <a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><i class="icon-cog3"></i></a>
-                    <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item"><i class="icon-sync"></i> Update data</a>
-                        <a href="#" class="dropdown-item"><i class="icon-list-unordered"></i> Detailed log</a>
-                        <a href="#" class="dropdown-item"><i class="icon-pie5"></i> Statistics</a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item"><i class="icon-cross3"></i> Clear list</a>
-                    </div>
-                </div>
+                <a href="#" class="list-icons-item"><i class="icon-sync"></i></a>
+                <a class="list-icons-item" data-action="collapse"></a>
             </div>
         </div>
     </div>
@@ -30,8 +23,11 @@
             <% GnsProject::Project.get_waiting_projects.each do |project| %>
                 <tr>
                     <td>
-                        <a href="#">
-                            <div class="text-default font-weight-semibold"><%= project.name %></div>
+                        <a href="<%= gns_project.tasks_backend_projects_path(project) %>"
+                            data-popup="tooltip"
+                            data-original-title="<%= project.name %> (<%= project.code %>)"
+                        >
+                            <div class="text-default font-weight-semibold"><%= project.name.truncate(26, separator: /\s/) %></div>
                             <span class="text-muted font-size-sm"><%= project.code %></span>
                         </a>
                     </td>

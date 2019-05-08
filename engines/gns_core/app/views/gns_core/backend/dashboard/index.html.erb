@@ -1,6 +1,15 @@
+<% content_for :title do %>
+    Dashboard
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home4 mr-2"></i> Home - Dashboard</a>
+<% end %>
+
 <!-- Dashboard content -->
 <div class="row">
     <div class="col-xl-8">
+        <%= render 'task_statistics_boxes' %>
         <%= render 'todo_list' %>
         <%= render 'wait_for_approval' %>
     </div>

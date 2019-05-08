@@ -18,10 +18,8 @@
             <tr>
                 <th class="text-nowrap">Project Name</th>
                 <th class="text-nowrap">Tasks</th>
-                <th class="text-nowrap">Who do it</th>
                 <th class="text-nowrap">Remark</th>
-                <th class="text-nowrap text-center">Status</th>
-                <th class="text-nowrap text-center">Finished</th>
+                <th class="text-nowrap">Status</th>
                 <th class="text-nowrap">Updated at</th>
             </tr>
         </thead>
@@ -32,25 +30,23 @@
                             <%= task.project.name %>
                     </td>
                     <td>
-                        <a href="">
+                        <a href="#">
                             <div class="text-default font-weight-semibold"><%= task.name %></div>
                             <span class="text-muted font-size-sm"><%= task.stage_name %></span>
                         </a>
                     </td>
                     <td>
-                        <%= task.employee_name %>
-                    </td>
-                    <td>
                         <%= task.get_latest_remark_log %>
                     </td>
-                    <td class="text-center">
-                        <span class="badge badge-flat badge-pill badge-<%= task.status %>"><%= t task.status %></span>
-                    </td>
-                    <td class="text-center">
+                    <td>
+                        <% if task.status == GnsProject::Task::STATUS_OPEN %>
+                            <div class="text-muted font-size-sm text-nowrap"><span class="badge badge-mark border-blue mr-1"></span> Opening</div>
+                        <% end %>                        
+                        
                         <% if task.finished? %>
-                            <i class="icon-checkmark-circle text-success"></i>
+                            <div class="text-muted font-size-sm text-nowrap"><span class="badge badge-mark border-success mr-1"></span> Finished</div>
                         <% else %>
-                            <i class="icon-cancel-circle2 text-danger"></i>
+                            <div class="text-muted font-size-sm text-nowrap"><span class="badge badge-mark border-danger mr-1"></span> Working</div>
                         <% end %>
                     </td>
                     <td>

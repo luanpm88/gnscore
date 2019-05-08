@@ -1,0 +1,55 @@
+<% @tasks = GnsProject::Task.all %>
+<div class="row">
+    <div class="col-lg-4">
+
+        <div class="card bg-teal-400">
+            <div class="card-body">
+                <div class="d-flex">
+                    <h3 class="font-weight-semibold mb-0"><%= @tasks.all_tasks.count %></h3>
+                    <div class="list-icons ml-auto">
+                        <a class="list-icons-item" data-action="reload"></a>
+                    </div>
+                </div>
+                
+                <div>
+                    Total tasks
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-lg-4">
+
+        <div class="card bg-success-400">
+            <div class="card-body">
+                <div class="d-flex">
+                    <h3 class="font-weight-semibold mb-0"><%= @tasks.all_tasks(status: GnsProject::Task::STATUS_CLOSED).count %></h3>
+                    <span class="badge bg-success-800 badge-pill align-self-center ml-auto"><%= format_percentage(@tasks.closed_of_all_rate) %>% tasks</span>
+                </div>
+                
+                <div>
+                    Tasks are closed
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-lg-4">
+
+        <div class="card bg-blue-400">
+            <div class="card-body">
+                <div class="d-flex">
+                    <h3 class="font-weight-semibold mb-0"><%= @tasks.all_tasks(status: GnsProject::Task::STATUS_OPEN).count %></h3>
+                    <span class="badge bg-blue-800 badge-pill align-self-center ml-auto"><%= format_percentage(@tasks.open_of_all_rate) %>% tasks</span>
+                </div>
+                
+                <div>
+                    Tasks are open
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

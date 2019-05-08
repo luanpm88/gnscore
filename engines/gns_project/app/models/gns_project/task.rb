@@ -159,16 +159,51 @@ module GnsProject
       end
     end
     
+    # get all tasks
+    def self.all_tasks(params={})
+      query = GnsProject::Task.all
+      
+      if params[:status].present?
+        query = query.where(status: params[:status])
+      end
+      
+      if params[:finished].present?
+        query = query.where(finished: params[:finished])
+      end
+      
+      return query
+    end
+    
+    def self.finished_of_all_rate
+      all_count = self.all_tasks.count
+      finished_count = self.all_tasks(finished: 'true').count
+      return (finished_count.to_f/all_count.to_f)*100
+    end
+    
+    # count/tasks are open
+    def self.open_of_all_rate
+      all_count = self.all_tasks.count
+      open_count = self.all_tasks(status: GnsProject::Task::STATUS_OPEN).count
+      return (open_count.to_f/all_count.to_f)*100
+    end
+    
+    # count/tasks are open
+    def self.closed_of_all_rate
+      all_count = self.all_tasks.count
+      closed_count = self.all_tasks(status: GnsProject::Task::STATUS_CLOSED).count
+      return (closed_count.to_f/all_count.to_f)*100
+    end
+    
     # get todo list
     def self.get_todo_list(user)
       # can cap nhat lai theo employee/user he thong
       GnsProject::Task.where(employee_id: user.id).where(status: GnsProject::Task::STATUS_OPEN)
     end
     
-    # get todo list
+    # get wait for approval
     def self.get_wait_for_approval(user)
       # can cap nhat lai theo employee/user he thong
-      GnsProject::Task.where(employee_id: user.id).where(status: GnsProject::Task::STATUS_OPEN).where(finished: true)
+      GnsProject::Task.where(status: GnsProject::Task::STATUS_OPEN).where(finished: true)
     end
   end
 end
