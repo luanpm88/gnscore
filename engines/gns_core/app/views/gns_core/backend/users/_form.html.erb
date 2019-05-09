@@ -1,13 +1,6 @@
 <%= form_for([gns_core, :backend, user], html: {multipart: true, autocomplete: 'off'}) do |f| %>
     <fieldset>
-        <div class="form-group">
-            <label class="d-block font-weight-semibold">Avatar:</label>
-            <input name="user[avatar]" type="file" class="file-input">
-            <% if user.errors.full_messages_for(:avatar).present? %>
-                <span class="form-text text-danger"><%= user.errors.full_messages_for(:avatar).join('<br/>').html_safe %></span>
-            <% end %>
-        </div>
-        
+        <input type="hidden" name="user[employee_id]" value="<%= @user.employee_id %>">
         <div class="form-group">
             <label class="d-block font-weight-semibold">Email <span class="text-danger">*</span></label>
             <input type="text" autocomplete="email"
@@ -52,34 +45,7 @@
             </div>
         </div>
         
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="d-block font-weight-semibold">First Name <span class="text-danger">*</span></label>
-                    <input type="text" autocomplete="first-name"
-                        class="form-control <%= 'border-danger' if user.errors.full_messages_for(:first_name).present? %>" placeholder="Enter first name"
-                        name="user[first_name]"
-                        value="<%= user.first_name %>"
-                    >
-                    <% if user.errors.full_messages_for(:first_name).present? %>
-                        <span class="form-text text-danger"><%= user.errors.full_messages_for(:first_name).join('<br/>').html_safe %></span>
-                    <% end %>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="d-block font-weight-semibold">Last Name <span class="text-danger">*</span></label>
-                    <input type="text" autocomplete="last-name"
-                        class="form-control <%= 'border-danger' if user.errors.full_messages_for(:last_name).present? %>" placeholder="Enter first name"
-                        name="user[last_name]"
-                        value="<%= user.last_name %>"
-                    >
-                    <% if user.errors.full_messages_for(:last_name).present? %>
-                        <span class="form-text text-danger"><%= user.errors.full_messages_for(:last_name).join('<br/>').html_safe %></span>
-                    <% end %>
-                </div>
-            </div>
-        </div>
+        
             
         <div class="form-group">
             <label class="d-block">Roles</label>

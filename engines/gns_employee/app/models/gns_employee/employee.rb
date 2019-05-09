@@ -3,6 +3,7 @@ module GnsEmployee
     validates :name, presence: true
     validate :must_have_code
     
+    has_one :user, class_name: 'GnsCore::User'
     belongs_to :country, class_name: 'GnsArea::Country', optional: true
     belongs_to :state, class_name: 'GnsArea::State', optional: true
     belongs_to :district, class_name: 'GnsArea::District', optional: true

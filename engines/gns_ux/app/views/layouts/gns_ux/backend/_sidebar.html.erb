@@ -164,39 +164,20 @@
                 <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link"
                        data-menu="
-                            gns_core/backend/users,
                             gns_core/backend/roles
                         "
                     >
                         <i class="icon-hammer-wrench"></i> <span>System</span>
                     </a>
                     <ul class="nav nav-group-sub" data-submenu-title="System">
-                        <li class="nav-item nav-item-submenu">
-                            <a href="#" class="nav-link"
+                        <li class="nav-item">
+                            <a href="<%= gns_core.backend_roles_path %>" class="nav-link"
                                 data-menu="
-                                    gns_core/backend/users,
                                     gns_core/backend/roles
                                 "
                             >
-                                <i class="icon-user-check"></i><span>Account & Security</span>
+                                <i class="icon-user-check"></i><span>Configure user roles</span>
                             </a>
-                            <ul class="nav nav-group-sub">
-                                <li class="nav-item">
-                                    <a href="<%= gns_core.backend_users_path %>" class="nav-link"
-                                        data-menu="
-                                            gns_core/backend/users
-                                        "
-                                    ><i></i> Users</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<%= gns_core.backend_roles_path %>" class="nav-link"
-                                        data-menu="
-                                            gns_core/backend/roles
-                                        "
-                                    ><i></i> Roles
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link disabled">

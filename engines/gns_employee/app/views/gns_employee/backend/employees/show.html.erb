@@ -12,6 +12,44 @@
     <h4><i class="icon-design mr-2"></i> <span class="font-weight-semibold">Employee</span>: <%= @employee.name %></h4>
 <% end %>
 
+<% content_for :page_script do %>
+    <script>
+        // global modal
+        var user_modal = new gModal({size: 'md'});
+        var new_user_callback;
+        
+        var account_infomation_box = new ajaxBox(
+            $('.account-infomation'),
+            '<%= gns_employee.account_box_backend_employees_path(@employee.id) %>'
+        );
+        
+        $(function() {
+            
+            $('.create-user-button').click(function(e) {
+                e.preventDefault();
+                
+                user_modal.load($(this).attr('href'));
+                
+                new_user_callback = function() {
+                    account_infomation_box.load();
+                };
+            });
+            
+            $(document).on('click', '.update-user-button', function(e) {
+                e.preventDefault();
+                
+                user_modal.load($(this).attr('href'));
+                
+                update_user_callback = function() {
+                    account_infomation_box.load();
+                };
+            });
+            
+            account_infomation_box.load();
+        });
+    </script>
+<% end %>
+
 <div class="card">
     <div class="card-header bg-white header-elements-sm-inline">
         <h6 class="card-title">Employee Details</h6>
@@ -197,4 +235,17 @@
             </div>
         </ul>
     </div>
+</div>
+
+<div class="card">
+    <div class="card-header bg-white header-elements-sm-inline">
+        <h6 class="card-title">User Account</h6>
+        <div class="header-elements">
+            <div class="list-icons">
+                
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+    <div class="account-infomation"></div>
 </div>

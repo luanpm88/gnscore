@@ -1,7 +1,8 @@
 module GnsEmployee
   module Backend
     class EmployeesController < GnsCore::Backend::BackendController
-      before_action :set_employee, only: [:show, :edit, :update, :destroy]
+      before_action :set_employee, only: [:show, :edit, :update, :destroy,
+                                          :account_box]
   
       # GET /employees
       def index
@@ -16,6 +17,10 @@ module GnsEmployee
   
       # GET /employees/1
       def show
+      end
+      
+      def account_box
+        render layout: nil
       end
   
       # GET /employees/new

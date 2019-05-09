@@ -21,6 +21,8 @@ module GnsCore
       # GET /users/new
       def new
         @user = User.new
+        
+        @user.employee_id = params[:employee_id].present? ? params[:employee_id] : nil
       end
   
       # GET /users/1/edit
@@ -37,9 +39,9 @@ module GnsCore
             name: @user.full_name
           })
           
-          flash[:success] = 'User was successfully created.'
           render json: {
-            redirect: gns_core.backend_user_path(@user)
+            status: 'success',
+            message: 'User was successfully created.',
           }
         else
           render :new
@@ -80,7 +82,7 @@ module GnsCore
   
         # Only allow a trusted parameter "white list" through.
         def user_params
-          params.fetch(:user, {}).permit(:avatar, :first_name, :last_name, :email, :password,
+          params.fetch(:user, {}).permit(:avatar, :email, :password, :employee_id,
                                          role_ids: [])
         end
     end

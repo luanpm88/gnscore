@@ -13,8 +13,7 @@
         <% @users.each do |user| %>
             <tr>
                 <td>
-                    <a href="<%= gns_core.backend_user_path(user) %>"
-                      class="modal-control" modal-size="full">
+                    <a href="<%= gns_core.backend_user_path(user) %>">
                         <%= user.full_name %>
                     </a>
                 </td>
