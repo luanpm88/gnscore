@@ -39,11 +39,12 @@ function gModal(options) {
     this.load = function(url) {
         // loading effect
         thisModal.clear();
+        thisModal.url = url;
     
         this.modal.modal('show');
         
         $.ajax({
-            url: url,
+            url: thisModal.url,
             method: 'GET',
             data: {
                 layout: 'modal'
@@ -51,6 +52,11 @@ function gModal(options) {
         }).done(function(response) {
             thisModal.renderHtml(response);
         });
+    };
+    
+    // load url to modal
+    this.refresh = function() {
+        thisModal.load(thisModal.url);
     };
     
     // load url to modal

@@ -247,3 +247,10 @@
     margin-top: -.8rem;
     font-size: 1.4rem;
 }
+.inline-ellipse-list-item-50 {
+    max-width: 50%;
+    overflow: hidden;
+    display: inline-block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
