@@ -281,7 +281,9 @@
                         </div>
 
                         <div class="ml-3 align-self-center">
-                            <%= "%g" % ("%.2f" % @task.hours) %>
+                            <% @task.hours.present? %>
+                                <%= "%g" % ("%.2f" % @task.hours) %>
+                            <% end %>
                         </div>
                     </li>
                 </div>
