@@ -16,7 +16,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th class="text-nowrap">Project Name</th>
                 <th class="text-nowrap">Tasks</th>
                 <th class="text-nowrap">Remark</th>
                 <th class="text-nowrap">Status</th>
@@ -27,13 +26,18 @@
             <% @todo_list.each do |task| %>
                 <tr>
                     <td>
-                            <%= task.project.name %>
-                    </td>
-                    <td>
-                        <a href="#">
-                            <div class="text-default font-weight-semibold"><%= task.name %></div>
-                            <span class="text-muted font-size-sm"><%= task.stage_name %></span>
+                        <a href="<%= gns_project.backend_task_path(task) %>"
+                           data-popup="tooltip" data-original-title="Go to task"
+                        >
+                            <span class="text-default font-weight-semibold"
+                            ><%= task.name %> <i class="icon-new-tab2 text-primary"></i>
+                            </span>
                         </a>
+                        
+                        <div class="text-muted font-size-sm">
+                            <span class="inline-ellipse-list-item-50" data-popup="tooltip" data-original-title="<%= task.project.name %>"><%= task.project.name %></span>
+                            <span class="inline-ellipse-list-item-50" data-popup="tooltip" data-original-title="<%= task.stage_name %>"><i class="icon-arrow-right22"></i><%= task.stage_name %></span>
+                        </div>
                     </td>
                     <td>
                         <%= task.get_latest_remark_log %>
@@ -62,3 +66,18 @@
         </div>
     <% end %>
 </div>
+
+<% content_for :page_script do %>
+    <script>
+        var task_detail_modal = new gModal({size: 'lg'});
+        var task_detail_callback;
+        
+        $(function() {
+            $(document).on('click', '.show-task-detail-button', function(e) {
+                e.preventDefault();
+                
+                task_detail_modal.load($(this).attr('href'));
+            });
+        });
+    </script>
+<% end %>
