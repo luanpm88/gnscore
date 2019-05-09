@@ -1,0 +1,403 @@
+<% content_for :title do %>
+    Task: <%= @task.name %>
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+    <a href="<%= gns_project.backend_projects_path %>" class="breadcrumb-item">Projects</a>
+    <a href="<%= gns_project.tasks_backend_projects_path(@task.project) %>" class="breadcrumb-item"><%= @task.project_name %></a>
+    <span class="breadcrumb-item active"><%= @task.name %></span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-task mr-2"></i> <span class="font-weight-semibold">Task</span>: <%= @task.name %></h4>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        // Actions for task
+        var task_modal = new gModal({size: 'md'});
+        var update_task_callback;
+        var finish_task_modal = new gModal({size: 'md'});
+        var finish_task_callback;
+        var unfinish_task_modal = new gModal({size: 'md'});
+        var unfinish_task_callback;
+        var close_task_modal = new gModal({size: 'md'});
+        var close_task_callback;
+        var reopen_task_modal = new gModal({size: 'md'});
+        var reopen_task_callback;
+        var update_progress_task_modal = new gModal({size: 'md'});
+        var update_progress_task_callback;
+        
+        $(function() {
+            $(document).on('click', '.edit-task-button', function(e) {
+                e.preventDefault();
+                
+                task_modal.load($(this).attr('href'));
+                
+                update_task_callback = function() {
+                    location.reload();
+                };
+            });
+            
+            $(document).on('click', '.finish-task-button', function(e) {
+                e.preventDefault();
+                
+                finish_task_modal.load($(this).attr('href'));
+                
+                finish_task_callback = function() {
+                    location.reload();
+                };
+            });
+            
+            $(document).on('click', '.unfinish-task-button', function(e) {
+                e.preventDefault();
+                
+                unfinish_task_modal.load($(this).attr('href'));
+                
+                unfinish_task_callback = function() {
+                     location.reload();
+                };
+            });
+            
+            $(document).on('click', '.close-task-button', function(e) {
+                e.preventDefault();
+                
+                close_task_modal.load($(this).attr('href'));
+                
+                close_task_callback = function() {
+                    location.reload();
+                };
+            });
+            
+            $(document).on('click', '.reopen-task-button', function(e) {
+                e.preventDefault();
+                
+                reopen_task_modal.load($(this).attr('href'));
+                
+                reopen_task_callback = function() {
+                    location.reload();
+                };
+            });
+            
+            $(document).on('click', '.update-progress-task-button', function(e) {
+                e.preventDefault();
+                
+                update_progress_task_modal.load($(this).attr('href'));
+                
+                update_progress_task_callback = function() {
+                    location.reload();
+                };
+            });
+        });
+    </script>
+    <script>
+        // Attachments list
+        var attachment_modal = new gModal({size: 'md'});
+        
+        var attachment_actions_box = new ajaxBox(
+            $('.attachment-actions'),
+            '<%= gns_project.attachment_actions_backend_tasks_path(@task.id) %>'
+        );
+        
+        var attachment_list_box = new ajaxBox(
+            $('.attachments-list'),
+            '<%= gns_project.attachments_list_backend_tasks_path(@task.id) %>',
+            function(box) {
+                // apply g-link
+                new gLink(box.find('.delete-attachment-button, .remove-attachment-button'), function(link) {
+                    attachment_list_box.load();
+                });
+            }
+        );
+        
+        var attachment_logs_modal = new gModal();
+        var attachment_logs_list_box = new ajaxBox(
+            $('.attachment-logs-list'),
+            '<%= gns_project.logs_list_backend_attachments_path %>'
+        );
+        
+        $(function() {
+            $(document).on('click', '.add-attachment-button', function(e) {
+                e.preventDefault();
+                var button = $(this);
+                
+                attachment_modal.load(button.attr('href'));
+                
+                newAttachmentCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // Hide modal
+                        attachment_modal.hide();
+                        
+                        attachment_list_box.load();
+                    } else {
+                        // validation error
+                        attachment_modal.renderHtml(response);
+                    }
+                };
+            });
+            
+            $(document).on('click', '.edit-attachment-button', function(e) {
+                e.preventDefault();
+                
+                var button = $(this);
+                
+                // load modal
+                attachment_modal.load(button.attr('href'));
+                
+                // after update category event
+                updateAttachmentCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // Hide modal
+                        attachment_modal.hide();
+                        
+                        attachment_list_box.load();
+                    } else {
+                        // validation error
+                        attachment_modal.renderHtml(response);
+                    }
+                }
+            });            
+            
+            // Danh sach attachment /cac phien ban moi nhat
+            attachment_list_box.load();
+            attachment_actions_box.load();
+            
+            $(document).on('click', '.attachment-logs-list-button', function(e) {
+                e.preventDefault();
+                
+                attachment_logs_modal.load($(this).attr('href'));
+            });
+        });
+    </script>
+<% end %>
+
+<div class="card">
+    <div class="card-header bg-white header-elements-sm-inline">
+        <h6 class="card-title">Task Details</h6>
+        <div class="header-elements">
+            <div class="list-icons">
+                <% if can? :finish, @task %>
+                    <a href="<%= gns_project.finish_backend_tasks_path(id: @task) %>"
+                        class="btn btn-sm btn-primary ml-1 finish-task-button">
+                        <i class="icon-checkmark3 mr-1"></i> Finish
+                    </a>
+                <% end %>
+                
+                <% if can? :unfinish, @task %>
+                    <a href="<%= gns_project.unfinish_backend_tasks_path(id: @task) %>"
+                        class="btn btn-sm btn-primary ml-1 unfinish-task-button">
+                        <i class="icon-x mr-1"></i> Un-finish
+                    </a>
+                <% end %>
+                
+                <% if can? :close, @task %>
+                    <a href="<%= gns_project.close_backend_tasks_path(id: @task) %>"
+                        class="btn btn-sm btn-primary ml-1 close-task-button">
+                        <i class="icon-lock5 mr-1"></i> Close
+                    </a>
+                <% end %>
+                
+                <% if can? :reopen, @task %>
+                    <a href="<%= gns_project.reopen_backend_tasks_path(id: @task) %>"
+                        class="btn btn-sm btn-primary ml-1 reopen-task-button">
+                        <i class="icon-rotate-ccw2 mr-1"></i> Re-open
+                    </a>
+                <% end %>
+                
+                <% if can? :update, @task %>
+                    <a href="<%= gns_project.edit_backend_task_path(@task) %>"
+                        class="btn btn-sm btn-primary ml-1 edit-task-button">
+                        <i class="icon-pencil7 mr-1"></i> Update Info
+                    </a>
+                <% end %>
+                
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <ul class="media-list">
+            <div class="row">
+                <div class="col-md-6">
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Project Name:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center"
+                            data-popup="tooltip"
+                            data-original-title="<%= @task.project_code %>"
+                        >
+                            <%= @task.project_name %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Stage Name:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center">
+                            <%= @task.stage_name %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Task Description:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center text-success-800 font-weight-semibold">
+                            <%= @task.name %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Start Date:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center">
+                            <%= @task.start_date.strftime('%A, %d/%m/%Y') %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">End Date:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center">
+                            <%= @task.end_date.strftime('%A, %d/%m/%Y') %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Hours:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center">
+                            <%= "%g" % ("%.2f" % @task.hours) %>
+                        </div>
+                    </li>
+                </div>
+                    
+                <div class="col-md-6">
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Responsible Person:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center">
+                            <%= @task.employee_name %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Progress (Complete):</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center" style="min-width: 120px">                            
+                            <% if can? :update_progress, @task %>
+                                <a href="<%= gns_project.update_progress_backend_tasks_path(id: @task) %>"
+                                    class="update-progress-task-button">
+                                    <div class="progress" title="<%= @task.progress %>% progress of the task has been completed">
+                                        <div class="progress-bar bg-teal" style="width: <%= @task.progress %>%">
+                                            <span><%= @task.progress %>%</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            <% else %>
+                                <div class="progress" title="<%= @task.progress %>% progress of the task has been completed">
+                                    <div class="progress-bar bg-teal" style="width: <%= @task.progress %>%">
+                                        <span><%= @task.progress %>%</span>
+                                    </div>
+                                </div>
+                            <% end %>
+                        </div>
+                    </li>
+                    
+                    <div class="row border-bottom-dotted">
+                        <div class="col-md-6">
+                            <li class="media mt-0 py-2 px-2">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Status:</div>
+                                </div>
+        
+                                <div class="ml-3 align-self-center">
+                                    <span class="badge badge-flat badge-pill badge-<%= @task.status %>"><%= t(@task.status) %></span>
+                                </div>
+                            </li>
+                        </div>
+                        <div class="col-md-6">
+                            <li class="media mt-0 py-2 px-2">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Finished:</div>
+                                </div>
+        
+                                <div class="ml-3 align-self-center font-weight-semibold">
+                                    <% if @task.finished? %>
+                                        <i class="icon-checkmark-circle text-success"></i>
+                                    <% else %>
+                                        <i class="icon-cancel-circle2 text-danger"></i>
+                                    <% end %>
+                                </div>
+                            </li>
+                        </div>
+                    </div>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Created:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center">
+                            <%= @task.created_at.strftime('%d/%m/%Y - %T') %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Last Updated:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center">
+                            <%= @task.updated_at.strftime('%d/%m/%Y - %T') %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
+                            <div class="font-weight-semibold">Added By:</div>
+                        </div>
+
+                        <div class="ml-3 align-self-center">
+                            <%= '' %>
+                        </div>
+                    </li>
+                </div>
+            </div>
+        </ul>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header bg-white header-elements-sm-inline">
+        <h6 class="card-title">Attached details</h6>
+        <div class="header-elements">
+            <div class="list-icons">
+                <div class="attachment-actions">
+                    
+                </div>
+                
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+    <div class="attachments-list" style="position: relative; min-height: 100px"></div>
+</div>

@@ -21,7 +21,11 @@
                       showNotification(response.status, response.message);
                       update_progress_task_modal.hide();
                       // load task list
-                      task_list_box.load();
+                      if (typeof(update_progress_task_callback) !== 'undefined') {
+                        update_progress_task_callback();
+                      } else {
+                        task_list_box.load();
+                      }
                     } else {
                       update_progress_task_modal.renderHtml(response);
                     }

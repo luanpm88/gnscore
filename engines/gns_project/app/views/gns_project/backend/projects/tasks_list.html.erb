@@ -9,8 +9,7 @@
         <thead>
             <tr class="alpha-primary">
                 <th>No.</th>
-                <th class="text-nowrap" width="20%">Stage Name</th>
-                <th class="text-nowrap" width="20%">Task Description</th>
+                <th class="text-nowrap">Task Description</th>
                 <th class="text-nowrap">Start Date</th>
                 <th class="text-nowrap">End Date</th>
                 <th class="text-nowrap">Complete</th>
@@ -26,15 +25,19 @@
             <% @tasks.each_with_index do |task,index| %>
                 <tr>
                     <td class="font-weight-semibold"><%= index + 1 %></td>
-                    <td><%= task.stage_name %></td>
                     <td>
-                        <%= task.name %>
-                        <% if task.get_latest_remark_log.present? %>
-                            <span class="font-size-sm text-teal-400 mb-sm-0 d-sm-inline-block icon-comments"
-                                data-popup="tooltip"
-                                data-original-title="<%= task.get_latest_remark_log %>">
-                            </span>
-                        <% end %>
+                        <span class="text-default font-weight-semibold text-nowrap">
+                            <%= task.name %>
+                            <% if task.get_latest_remark_log.present? %>
+                                <i class="font-size-sm text-teal-400 mb-sm-0 d-sm-inline-block icon-comments"
+                                    data-popup="tooltip"
+                                    data-original-title="<%= task.get_latest_remark_log %>">
+                                </i>
+                            <% end %>
+                        </span>
+                        <div class="text-muted font-size-sm">
+                            <span data-popup="tooltip" data-original-title="<%= task.stage_name %>"><i class="icon-primitive-dot"></i><%= task.stage_name %></span>
+                        </div>
                     </td>
                     <td><%= task.start_date.strftime("%d/%m/%Y") if task.start_date.present? %></td>
                     <td><%= task.end_date.strftime("%d/%m/%Y") if task.end_date.present? %></td>
@@ -152,7 +155,13 @@
                                         </a>
                                     <% end %>
                                     
+                                    <a href="<%= gns_project.backend_task_path(task) %>"
+                                        class="dropdown-item">
+                                        <i class="icon-new-tab2"></i> Go to task
+                                    </a>
+                                    
                                     <div class="dropdown-divider"></div>
+                                    
                                     <a href="<%= gns_project.attachments_backend_tasks_path(task) %>"
                                         class="dropdown-item attachment-list-button">
                                         <i class="icon-attachment"></i> Attachments

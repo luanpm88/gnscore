@@ -14,6 +14,16 @@ module GnsProject
       stage.present? ? stage.name : ''
     end
     
+    # get project name
+    def project_name
+      project.present? ? project.name : ''
+    end
+    
+    # get project code
+    def project_code
+      project.present? ? project.code : ''
+    end
+    
     # get employee name
     def employee_name
       employee.present? ? employee.full_name : ''

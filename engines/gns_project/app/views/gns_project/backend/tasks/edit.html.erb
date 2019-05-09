@@ -37,7 +37,11 @@
                       showNotification(response.status, response.message);
                       task_modal.hide();
                       // load task list
-                      task_list_box.load();
+                      if (typeof(update_task_callback) !== 'undefined') {
+                        update_task_callback();
+                      } else {
+                        task_list_box.load();
+                      }
                     } else {
                       task_modal.renderHtml(response);
                     }
