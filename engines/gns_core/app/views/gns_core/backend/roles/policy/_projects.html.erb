@@ -129,6 +129,26 @@
                         >
                         <label class="custom-control-label" for="gns_project.projects.deactivate_other">De-activate other</label>
                     </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.projects.authorize_own]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.projects.authorize_own]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.projects.authorize_own"
+                            <%= 'checked' if @role.has_permission?('gns_project.projects.authorize_own') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.projects.authorize_own">Manpower (authorize) own</label>
+                    </div>
+        
+                    <div class="custom-control custom-checkbox">
+                        <input type="hidden" name="permissions[gns_project.projects.authorize_other]" value="false">
+                        <input type="checkbox" name="permissions[gns_project.projects.authorize_other]" value="true"
+                            class="custom-control-input"
+                            id="gns_project.projects.authorize_other"
+                            <%= 'checked' if @role.has_permission?('gns_project.projects.authorize_other') %>
+                        >
+                        <label class="custom-control-label" for="gns_project.projects.authorize_other">Manpower (authorize) other</label>
+                    </div>
                 </div>
             </div>
         </div>

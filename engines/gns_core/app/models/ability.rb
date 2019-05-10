@@ -67,6 +67,11 @@ class Ability
       project.is_in_progress? and project.get_tasks_not_closed.count == 0
     end
     
+    can :manpower_authorize, GnsProject::Project do |project|
+      user.has_permission?('gns_project.projects.authorize_own') or
+      user.has_permission?('gns_project.projects.authorize_other')
+    end
+    
     # gns_project / tasks
     can :create_task, GnsProject::Project do |project|
       user.has_project_permission?(project, 'gns_project.tasks.create')

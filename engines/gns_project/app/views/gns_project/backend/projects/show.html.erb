@@ -106,10 +106,12 @@
                     <i class="icon-clipboard3 mr-1"></i> Task planning
                 </a>
                 
-                <a href="<%= gns_project.authorization_backend_projects_path(@project) %>"
-                    class="btn btn-sm alpha-blue text-blue-800 border-blue-600">
-                    <i class="icon-user-check mr-1"></i> Manpower
-                </a>
+                <% if can? :manpower_authorize, @project %>
+                    <a href="<%= gns_project.authorization_backend_projects_path(@project) %>"
+                        class="btn btn-sm alpha-blue text-blue-800 border-blue-600">
+                        <i class="icon-user-check mr-1"></i> Manpower
+                    </a>
+                <% end %>
                 
                 <a href="<%= gns_project.logs_backend_projects_path(@project) %>"
                     class="btn btn-sm alpha-blue text-blue-800 border-blue-600">
