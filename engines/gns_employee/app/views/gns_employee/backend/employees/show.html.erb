@@ -25,7 +25,7 @@
         
         $(function() {
             
-            $('.create-user-button').click(function(e) {
+            $(document).on('click', '.create-user-button', function(e) {
                 e.preventDefault();
                 
                 user_modal.load($(this).attr('href'));

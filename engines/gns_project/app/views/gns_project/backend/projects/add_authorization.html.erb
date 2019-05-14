@@ -36,7 +36,7 @@
 <div class="card">
     <div class="card-body">
         <%= form_for '', url: gns_project.add_authorization_backend_projects_path(project_id: @project.id), html: {multipart: false, class: 'add_authorization_project'} do |f| %>
-            <%= render 'form_authorization', project_user: @project_user %>
+            <%= render 'form_authorization', project_employee: @project_employee %>
             
             <div class="text-left">
                 <button type="submit" class="btn btn-primary">Add</button>

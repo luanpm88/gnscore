@@ -144,46 +144,46 @@ module GnsProject
       end
       
       def authorization_list
-        @project_users = GnsProject::ProjectUser.where(project_id: @project.id)
+        @project_employees = GnsProject::ProjectEmployee.where(project_id: @project.id)
         render layout: nil
       end
       
       def authorization_permissions
-        @project_user = GnsProject::ProjectUser.find(params[:project_user_id])
+        @project_employee = GnsProject::ProjectEmployee.find(params[:project_employee_id])
       end
       
       # add authorization
       def add_authorization
-        @project_user = GnsProject::ProjectUser.new
+        @project_employee = GnsProject::ProjectEmployee.new
         @project = Project.find(params[:project_id])
         
         if request.post?
-          uid = params[:authorization][:user_id]
+          eid = params[:authorization][:employee_id]
           role_ids = params[:authorization][:role_ids]
-          @user = GnsCore::User.find(uid)
+          #@employee = GnsEmployee::Employee.find(eid)
           
-          if !uid.present?
-            @project_user.errors.add('user', "not be blank")
+          if !eid.present?
+            @project_employee.errors.add('employee', "not be blank")
           end
           
           if !role_ids.present?
-            @project_user.errors.add('role_ids', "not be blank")
+            @project_employee.errors.add('role_ids', "not be blank")
           end
           
-          if @project_user.errors.empty?
+          if @project_employee.errors.empty?
             role_ids.each do |rid|
-              @project.add_user_role(uid, rid)
+              @project.add_employee_role(eid, rid)
             end
             
-            @project_user = GnsProject::ProjectUser.where(project_id: @project.id, user_id: uid).first
+            @project_employee = GnsProject::ProjectEmployee.where(project_id: @project.id, employee_id: eid).first
             
             # add log
-            @project_user.log("gns_project.log.project_user.added", current_user)
+            @project_employee.log("gns_project.log.project_employee.added", current_user)
             
             # add notification
-            current_user.add_notification("gns_project.notification.project_user.added", {
+            current_user.add_notification("gns_project.notification.project_employee.added", {
               project_name: @project.name,
-              user_name: @project_user.user_name
+              user_name: @project_employee.employee_name
             })
             
             render json: {
@@ -196,32 +196,32 @@ module GnsProject
       
       # edit authorization
       def update_authorization
-        @project_user = GnsProject::ProjectUser.find(params[:project_user_id])
-        @project = @project_user.project
+        @project_employee = GnsProject::ProjectEmployee.find(params[:project_employee_id])
+        @project = @project_employee.project
         
         if request.post?
-          uid = params[:authorization][:user_id]
+          eid = params[:authorization][:employee_id]
           role_ids = params[:authorization][:role_ids]
-          @user = GnsCore::User.find(uid)
+          @employee = GnsEmployee::Employee.find(eid)
           
-          if !uid.present?
-            @project_user.errors.add('user_id', "not be blank")
+          if !eid.present?
+            @project_employee.errors.add('employee_id', "not be blank")
           end
           
           if !role_ids.present?
-            @project_user.errors.add('role_ids', "not be blank")
+            @project_employee.errors.add('role_ids', "not be blank")
           end
           
-          if @project_user.errors.empty?
-            @project.update_user_roles(@user, role_ids)
+          if @project_employee.errors.empty?
+            @project.update_employee_roles(@employee, role_ids)
             
             # add log
-            @project_user.log("gns_project.log.project_user.updated", current_user)
+            @project_employee.log("gns_project.log.project_employee.updated", current_user)
             
             # add notification
-            current_user.add_notification("gns_project.notification.project_user.updated", {
+            current_user.add_notification("gns_project.notification.project_employee.updated", {
               project_name: @project.name,
-              user_name: @project_user.user_name
+              user_name: @project_employee.employee_name
             })
             
             render json: {
@@ -234,26 +234,26 @@ module GnsProject
       
       # edit authorization
       def remove_authorization
-        @project_user = GnsProject::ProjectUser.find(params[:project_user_id])
-        @project = @project_user.project
+        @project_employee = GnsProject::ProjectEmployee.find(params[:project_employee_id])
+        @project = @project_employee.project
         remark = params[:remark]
         
         if request.post?
           if !remark.present?
-            @project_user.errors.add('remark', "not be blank")
+            @project_employee.errors.add('remark', "not be blank")
           end
           
-          if @project_user.errors.empty?
+          if @project_employee.errors.empty?
             # add log
-            @project_user.log("gns_project.log.project_user.removed", current_user, remark)
+            @project_employee.log("gns_project.log.project_employee.removed", current_user, remark)
             
             # add notification
-            current_user.add_notification("gns_project.notification.project_user.removed", {
+            current_user.add_notification("gns_project.notification.project_employee.removed", {
               project_name: @project.name,
-              user_name: @project_user.user_name
+              user_name: @project_employee.employee_name
             })
             
-            @project.remove_project_user(@project_user)
+            @project.remove_project_employee(@project_employee)
             
             render json: {
               status: 'success',

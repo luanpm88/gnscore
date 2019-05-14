@@ -18,7 +18,7 @@
                         <p class="media-title text-primary mb-1"><%= @employee.name %></p>
                         <footer class="blockquote-footer">Email: <span class="font-weight-semibold"><%= @employee.user.email %></span></footer>
                         <footer class="blockquote-footer">System roles:
-                            <% if @employee.user.roles.empty? %>>
+                            <% if @employee.user.roles.empty? %>
                                 <span class="font-weight-semibold">No Access</span>
                             <% else %>
                                 <%= @employee.user.roles.map {|r| "<span class=\"font-weight-semibold\">#{r.name}</span>"}.join(', ').html_safe %>
@@ -28,7 +28,7 @@
                 </div>
 
                 <ul class="list list-unstyled mb-0 mt-3 mt-sm-0 ml-auto text-right">
-                    <li><span class="text-muted">Added by: Nguyễn Tôn Hùng</span></li>
+                    <li><span class="text-muted" data-popup="tooltip" title="<%= @employee.user.creator_name %>: <%= @employee.user.creator_email %>">Added by: <%= @employee.user.creator_short_name %></span></li>
                     <li class="dropdown">
                         Access right: &nbsp; 
                         <a href="#" class="badge bg-success-400 align-top dropdown-toggle" data-toggle="dropdown">Allowed</a>

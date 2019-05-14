@@ -18,7 +18,7 @@
                 
                 <div class="form-group">
                     <label class="d-block">Project Code <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:code).present? %>" placeholder="Enter name"
+                    <input type="text" class="form-control font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:code).present? %>" placeholder="Enter code"
                         name="project[code]"
                         value="<%= project.code %>"
                     >
@@ -91,7 +91,7 @@
                         data-container-css-class="font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:manager_id).present? %>"
                         data-placeholder="Select manager"
                         class="form-control select-ajax"
-                        data-url="<%= gns_core.select2_backend_users_path %>">
+                        data-url="<%= gns_employee.select2_backend_employees_path %>">
                         <option value="<%= project.manager_id %>"><%= project.manager_name %></option>
                     </select>
                     <% if project.errors.full_messages_for(:customer_id).present? %>

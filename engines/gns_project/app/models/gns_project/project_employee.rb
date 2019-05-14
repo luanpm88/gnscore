@@ -1,17 +1,17 @@
 module GnsProject
-  class ProjectUser < ApplicationRecord
+  class ProjectEmployee < ApplicationRecord
     belongs_to :project, class_name: 'GnsProject::Project'
-    belongs_to :user, class_name: 'GnsCore::User'
-    has_many :project_user_roles, class_name: 'GnsProject::ProjectUserRole', dependent: :destroy
+    belongs_to :employee, class_name: 'GnsEmployee::Employee'
+    has_many :project_employee_roles, class_name: 'GnsProject::ProjectEmployeeRole', dependent: :destroy
     
     # get project name
     def project_name
       project.present? ? project.name : ''
     end
     
-    # get user name
-    def user_name
-      user.present? ? user.full_name : ''
+    # get employee name
+    def employee_name
+      employee.present? ? employee.name : ''
     end
     
     # add log

@@ -10,13 +10,42 @@ module GnsCore
 												:message => " is invalid (Eg. 'username@your-domain.com')"
     # validates :password, :length => { :minimum => 6, :maximum => 40 }, :confirmation => true
     
+    belongs_to :creator, class_name: "GnsCore::User", optional: true
     has_and_belongs_to_many :roles, class_name: 'GnsCore::Role'
-    has_many :project_users, class_name: 'GnsProject::ProjectUser'
-    has_many :project_user_roles, class_name: 'GnsProject::ProjectUserRole', through: :project_users
-    belongs_to :employee, class_name: "GnsEmployee::Employee"
+    belongs_to :employee, class_name: "GnsEmployee::Employee", optional: true
     validates :employee_id, uniqueness: true
     
     mount_uploader :avatar, GnsCore::AvatarUploader
+    
+    def creator_name
+      creator.present? ? creator.name : ''
+    end
+    
+    def creator_short_name
+      creator.present? ? creator.short_name : ''
+    end
+    
+    def creator_email
+      creator.present? ? creator.email : ''
+    end
+    
+    # display name for user
+    def name
+      name = ''
+      if employee.present?
+        name = employee.name
+      else
+        name = email.rpartition('@').first
+      end
+      return name.downcase.titleize
+    end
+    
+    def short_name
+      str = []
+      str << name.partition(' ').first
+      str << name.rpartition(' ').last if !name.partition(' ').last.empty?
+      return str.join(" ").downcase.titleize
+    end
     
     def add_notification(phrase, data)
 			GnsNotification::Notification::create(
@@ -26,27 +55,11 @@ module GnsCore
 			)
 		end
     
-    # display name for user
-    def short_name
-      str = []
-      str << first_name.split(' ').last if first_name?
-      str << last_name.split(' ').first if last_name?
-      return str.join(" ")
-    end
-    
-    def full_name
-      str = []
-      str << first_name if first_name?
-      str << last_name if last_name?
-      return str.join(" ")
-    end
-    
     # update contact cache search
     after_save :update_cache_search
 		def update_cache_search
 			str = []
-			str << first_name.to_s.downcase.strip
-			str << last_name.to_s.downcase.strip
+			str << name.to_s.downcase.strip #@todo cap nhat moi khi thay doi thong tin employee
 			str << email.to_s.downcase.strip
 
 			self.update_column(:cache_search, str.join(" ") + " " + str.join(" ").to_ascii)
@@ -100,7 +113,7 @@ module GnsCore
       page = 1      
       data = {results: [], pagination: {more: false}}
       
-      query = self.order(:first_name)
+      query = self.order(:email)
       
       # keyword
       if params[:q].present?
@@ -114,7 +127,7 @@ module GnsCore
       
       # render items
       query.each do |user|
-        data[:results] << {id: user.id, text: user.full_name}
+        data[:results] << {id: user.id, text: user.name}
       end
       
       return data
@@ -126,28 +139,9 @@ module GnsCore
     end
     
     def has_project_permission?(project, permission)
-      # Lấy quyền chỉnh sửa từng project ra trước xem có không
-      # projet có quyền custom nào của user self không thì kiểm tra trước, có thì return luôn	
-      #return true if project.project_user.custom_permissions.include?(permission)
-
-      # Không có chỉnh sửa quyền gì hết thì lấy mặc định (nếu không sửa)
-      purs = self.project_user_roles.includes(:project_user).where(gns_project_project_users: {project_id: project.id})
+      return false if self.employee.nil?
       
-      return false if purs.empty?
-      
-      purs.each do |project_role|
-        return project_role.role.has_permission?(permission)
-      end
-    end
-    
-    def project_permissions(project)
-      project_user = self.project_users.where(project_id: project.id).first
-      role_ids = project_user.project_user_roles.includes(:role).select("role_id")
-      GnsProject::RolesPermission.where(role_id: role_ids).map(&:permission).uniq
-    end
-    
-    def project_permission_count(project)
-      self.project_permissions(project).count
+      return self.employee.has_project_permission?(project, permission)
     end
     
   end

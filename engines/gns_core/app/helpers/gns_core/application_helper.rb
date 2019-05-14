@@ -26,6 +26,9 @@ module GnsCore
       return str.join(", ")
     end
     
+    def creator_name(creator)
+      creator.present? ? creator.name : '--'
+    end
     
     def format_percentage(num)
       "%g" % ("%.2f" % num)

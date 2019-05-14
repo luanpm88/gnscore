@@ -13,7 +13,7 @@ en:
       project:
         created: "Create new project: %{name}"
         updated: "Update project info: %{name}"
-      project_user:
+      project_employee:
         added: "Add/assign the roles of user (%{user_name}) to project (%{project_name})"
         updated: "Update the roles of user (%{user_name}) to project (%{project_name})"
         removed: "Remove the roles of user (%{user_name}) to project (%{project_name})"
@@ -45,7 +45,7 @@ en:
         uploaded: "Upload attachment: %{name}"
         reupload: "Re-upload attachment: %{name}"
         destroyed: "Destroy attachment: %{name}"
-      project_user:
+      project_employee:
         added: "Add new authorization"
         updated: "Update authorization"
         removed: "Remove authorization"

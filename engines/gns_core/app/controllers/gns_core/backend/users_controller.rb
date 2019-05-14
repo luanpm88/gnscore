@@ -32,11 +32,13 @@ module GnsCore
       # POST /users
       def create
         @user = User.new(user_params)
+        
+        @user.creator = current_user
   
         if @user.save
           # Add notification
           current_user.add_notification("gns_core.notification.user.created", {
-            name: @user.full_name
+            name: @user.name
           })
           
           render json: {
@@ -58,7 +60,7 @@ module GnsCore
         if @user.update(user_params)
           # Add notification
           current_user.add_notification("gns_core.notification.user.updated", {
-            name: @user.full_name
+            name: @user.name
           })
           
           render json: {

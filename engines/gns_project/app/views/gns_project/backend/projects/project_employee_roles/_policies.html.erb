@@ -16,7 +16,7 @@
                                 <input type="checkbox" name="permissions[gns_project.tasks.create]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.tasks.create"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.tasks.create') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.tasks.create') %>
                                 >
                                 <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.create">Create/Insert</label>
                             </div>
@@ -30,7 +30,7 @@
                                 <input type="checkbox" name="permissions[gns_project.tasks.read_own]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.tasks.read_own"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.tasks.read_own') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.tasks.read_own') %>
                                 >
                                 <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.read_own">Read own</label>
                             </div>
@@ -44,7 +44,7 @@
                                 <input type="checkbox" name="permissions[gns_project.tasks.read_other]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.tasks.read_other"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.tasks.read_other') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.tasks.read_other') %>
                                 >
                                 <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.read_other">Read other</label>
                             </div>
@@ -58,7 +58,7 @@
                                 <input type="checkbox" name="permissions[gns_project.tasks.update_own]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.tasks.update_own"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.tasks.update_own') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.tasks.update_own') %>
                                 >
                                 <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_own">Update own</label>
                             </div>
@@ -72,7 +72,7 @@
                                 <input type="checkbox" name="permissions[gns_project.tasks.update_other]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.tasks.update_other"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.tasks.update_other') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.tasks.update_other') %>
                                 >
                                 <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_other">Update other</label>
                             </div>
@@ -86,7 +86,7 @@
                                 <input type="checkbox" name="permissions[gns_project.tasks.delete_own]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.tasks.delete_own"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.tasks.delete_own') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.tasks.delete_own') %>
                                 >
                                 <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.delete_own">Delete own</label>
                             </div>
@@ -100,7 +100,7 @@
                                 <input type="checkbox" name="permissions[gns_project.tasks.delete_other]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.tasks.delete_other"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.tasks.delete_other') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.tasks.delete_other') %>
                                 >
                                 <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.delete_other">Delete other</label>
                             </div>
@@ -114,7 +114,7 @@
                                 <input type="checkbox" name="permissions[gns_project.tasks.update_progress_own]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.tasks.update_progress_own"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.tasks.update_progress_own') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.tasks.update_progress_own') %>
                                 >
                                 <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_progress_own">Update progress own</label>
                             </div>
@@ -128,7 +128,7 @@
                                 <input type="checkbox" name="permissions[gns_project.tasks.update_progress_other]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.tasks.update_progress_other"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.tasks.update_progress_other') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.tasks.update_progress_other') %>
                                 >
                                 <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_progress_other">Update progress other</label>
                             </div>
@@ -142,7 +142,7 @@
                                 <input type="checkbox" name="permissions[gns_project.tasks.finish_own]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.tasks.finish_own"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.tasks.finish_own') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.tasks.finish_own') %>
                                 >
                                 <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.finish_own">Finish own</label>
                             </div>
@@ -156,7 +156,7 @@
                                 <input type="checkbox" name="permissions[gns_project.tasks.finish_other]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.tasks.finish_other"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.tasks.finish_other') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.tasks.finish_other') %>
                                 >
                                 <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.finish_other">Finish other</label>
                             </div>
@@ -170,7 +170,7 @@
                                 <input type="checkbox" name="permissions[gns_project.tasks.unfinish_own]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.tasks.unfinish_own"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.tasks.unfinish_own') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.tasks.unfinish_own') %>
                                 >
                                 <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.unfinish_own">Un-finish own</label>
                             </div>
@@ -184,7 +184,7 @@
                                 <input type="checkbox" name="permissions[gns_project.tasks.unfinish_other]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.tasks.unfinish_other"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.tasks.unfinish_other') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.tasks.unfinish_other') %>
                                 >
                                 <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.unfinish_other">Un-finish other</label>
                             </div>
@@ -198,7 +198,7 @@
                                 <input type="checkbox" name="permissions[gns_project.tasks.close_own]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.tasks.close_own"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.tasks.close_own') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.tasks.close_own') %>
                                 >
                                 <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.close_own">Close own</label>
                             </div>
@@ -212,7 +212,7 @@
                                 <input type="checkbox" name="permissions[gns_project.tasks.close_other]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.tasks.close_other"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.tasks.close_other') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.tasks.close_other') %>
                                 >
                                 <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.close_other">Close other</label>
                             </div>
@@ -226,7 +226,7 @@
                                 <input type="checkbox" name="permissions[gns_project.tasks.reopen_own]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.tasks.reopen_own"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.tasks.reopen_own') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.tasks.reopen_own') %>
                                 >
                                 <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.reopen_own">Re-open own</label>
                             </div>
@@ -240,7 +240,7 @@
                                 <input type="checkbox" name="permissions[gns_project.tasks.reopen_other]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.tasks.reopen_other"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.tasks.reopen_other') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.tasks.reopen_other') %>
                                 >
                                 <label class="custom-control-label font-weight-semiboldss" for="gns_project.tasks.reopen_other">Re-open other</label>
                             </div>
@@ -271,7 +271,7 @@
                                 <input type="checkbox" name="permissions[gns_project.attachments.create]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.attachments.create"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.attachments.create') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.attachments.create') %>
                                 >
                                 <label class="custom-control-label" for="gns_project.attachments.create">Create/Upload</label>
                             </div>
@@ -285,7 +285,7 @@
                                 <input type="checkbox" name="permissions[gns_project.attachments.read_own]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.attachments.read_own"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.attachments.read_own') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.attachments.read_own') %>
                                 >
                                 <label class="custom-control-label" for="gns_project.attachments.read_own">Read own</label>
                             </div>
@@ -299,7 +299,7 @@
                                 <input type="checkbox" name="permissions[gns_project.attachments.read_other]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.attachments.read_other"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.attachments.read_other') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.attachments.read_other') %>
                                 >
                                 <label class="custom-control-label" for="gns_project.attachments.read_other">Read other</label>
                             </div>
@@ -313,7 +313,7 @@
                                 <input type="checkbox" name="permissions[gns_project.attachments.update_own]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.attachments.update_own"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.attachments.update_own') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.attachments.update_own') %>
                                 >
                                 <label class="custom-control-label" for="gns_project.attachments.update_own">Update/Re-upload own</label>
                             </div>
@@ -327,7 +327,7 @@
                                 <input type="checkbox" name="permissions[gns_project.attachments.update_other]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.attachments.update_other"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.attachments.update_other') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.attachments.update_other') %>
                                 >
                                 <label class="custom-control-label" for="gns_project.attachments.update_other">Update/Re-upload other</label>
                             </div>
@@ -341,7 +341,7 @@
                                 <input type="checkbox" name="permissions[gns_project.attachments.delete_own]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.attachments.delete_own"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.attachments.delete_own') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.attachments.delete_own') %>
                                 >
                                 <label class="custom-control-label" for="gns_project.attachments.delete_own">Delete own</label>
                             </div>
@@ -355,7 +355,7 @@
                                 <input type="checkbox" name="permissions[gns_project.attachments.delete_other]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.attachments.delete_other"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.attachments.delete_other') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.attachments.delete_other') %>
                                 >
                                 <label class="custom-control-label" for="gns_project.attachments.delete_other">Delete other</label>
                             </div>
@@ -369,7 +369,7 @@
                                 <input type="checkbox" name="permissions[gns_project.attachments.download_own]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.attachments.download_own"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.attachments.download_own') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.attachments.download_own') %>
                                 >
                                 <label class="custom-control-label" for="gns_project.attachments.download_own">Download own</label>
                             </div>
@@ -383,7 +383,7 @@
                                 <input type="checkbox" name="permissions[gns_project.attachments.download_other]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.attachments.download_other"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.attachments.download_other') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.attachments.download_other') %>
                                 >
                                 <label class="custom-control-label" for="gns_project.attachments.download_other">Download other</label>
                             </div>
@@ -414,7 +414,7 @@
                                 <input type="checkbox" name="permissions[gns_project.logs.read]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.logs.read"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.logs.read') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.logs.read') %>
                                 >
                                 <label class="custom-control-label font-weight-semibold" for="gns_project.logs.read">View logs</label>
                             </div>
@@ -428,7 +428,7 @@
                                 <input type="checkbox" name="permissions[gns_project.logs.download]" value="true"
                                     class="custom-control-input"
                                     id="gns_project.logs.download"
-                                    <%= 'checked' if project_user.user.has_project_permission?(project_user.project, 'gns_project.logs.download') %>
+                                    <%= 'checked' if project_employee.user.has_project_permission?(project_employee.project, 'gns_project.logs.download') %>
                                 >
                                 <label class="custom-control-label font-weight-semibold" for="gns_project.logs.download">Download logs</label>
                             </div>

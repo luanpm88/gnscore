@@ -1,8 +1,9 @@
 module GnsProject
   class Task < ApplicationRecord
+    belongs_to :creator, class_name: 'GnsCore::User'
     belongs_to :stage, class_name: 'GnsProject::Stage'
     belongs_to :project, class_name: 'GnsProject::Project'
-    belongs_to :employee, class_name: 'GnsCore::User'
+    belongs_to :employee, class_name: 'GnsEmployee::Employee'
     has_many :attachments, dependent: :restrict_with_error
     
     validates :name, :start_date, :end_date,
@@ -26,7 +27,7 @@ module GnsProject
     
     # get employee name
     def employee_name
-      employee.present? ? employee.full_name : ''
+      employee.present? ? employee.name : ''
     end
     
     # count attachments

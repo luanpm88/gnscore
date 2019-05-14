@@ -14,7 +14,7 @@
                 <td><%= log.created_at.strftime("%a, %d/%m/%Y %I:%M %p") %></td>
                 <td><%= t(log.phrase, log.get_data.attributes.symbolize_keys) %></td>
                 <td><%= log.remark %></td>
-                <td><%= log.user.full_name %></td>
+                <td><%= log.user_name %></td>
                 <td>
                     <% if log.class_name == "GnsProject::Attachment" %>
                         <%= link_to '<i class="icon-file-download"></i> download'.html_safe,

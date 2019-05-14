@@ -15,7 +15,7 @@ module GnsNotification
 		end
 		
 		def user_name
-      user.present? ? user.full_name : ''
+      user.present? ? user.name : ''
     end
   end
 end

@@ -52,6 +52,8 @@ module GnsProject
       # POST /roles
       def create
         @role = Role.new(role_params)
+        
+        @role.creator = current_user
   
         if @role.save
           # Add notification

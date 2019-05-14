@@ -28,6 +28,7 @@ module GnsProject
       def create
         @task = Task.new(task_params)
         
+        @task.creator = current_user
         @task.status = Task::STATUS_OPEN
         
         current_task_id = params.to_unsafe_hash[:task][:current_task_id]

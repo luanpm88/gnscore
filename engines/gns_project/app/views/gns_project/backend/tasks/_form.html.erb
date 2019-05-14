@@ -77,7 +77,7 @@
             <label class="d-blocks">Responsible <span class="text-danger">*</span></label>
             <select name="task[employee_id]" data-placeholder="The person responsible..."
                 class="form-control select-ajax"
-                data-url="<%= gns_core.select2_backend_users_path %>"
+                data-url="<%= gns_employee.select2_backend_employees_path %>"
                 data-container-css-class="font-weight-semibold <%= 'border-danger' if task.errors.full_messages_for(:employee_id).present? %>"
             >
                 <option value="<%= task.employee_id %>"><%= task.employee_name %></option>

@@ -35,6 +35,7 @@ module GnsEmployee
       # POST /employees
       def create
         @employee = Employee.new(employee_params)
+        @employee.creator = current_user
   
         if @employee.save
           render json: {

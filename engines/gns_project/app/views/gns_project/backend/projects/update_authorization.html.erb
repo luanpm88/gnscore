@@ -35,8 +35,8 @@
 
 <div class="card">
     <div class="card-body">
-        <%= form_for '', url: gns_project.update_authorization_backend_projects_path(project_id: @project.id, project_user_id: @project_user.id), html: {multipart: false, class: 'edit_authorization_project'} do |f| %>            
-            <%= render 'form_authorization', project_user: @project_user %>
+        <%= form_for '', url: gns_project.update_authorization_backend_projects_path(project_id: @project.id, project_employee_id: @project_employee.id), html: {multipart: false, class: 'edit_authorization_project'} do |f| %>            
+            <%= render 'form_authorization', project_employee: @project_employee %>
             
             <div class="text-left">
                 <button type="submit" class="btn btn-primary">Update</button>
