@@ -27,12 +27,7 @@
     <div class="bg-light">
         <ul class="nav nav-tabs nav-tabs-bottom mb-0">
             <li class="nav-item">
-                <a href="#tabDashboard" class="nav-link active" data-toggle="tab">
-                    <span class="font-weight-semibold text-blue">Dashboard</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#tabContact" class="nav-link" data-toggle="tab">
+                <a href="#tabContact" class="nav-link active" data-toggle="tab">
                     <span class="font-weight-semibold text-blue">Contact</span>
                 </a>
             </li>
@@ -42,14 +37,14 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#tabUser" class="nav-link" data-toggle="tab">
-                    <span class="font-weight-semibold text-blue">User </span>
+                <a href="#tabEmployee" class="nav-link" data-toggle="tab">
+                    <span class="font-weight-semibold text-blue">Employee</span>
                 </a>
             </li>
             
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                    <span class="font-weight-semibold text-blue">Others</span>
+                    <span class="font-weight-semibold text-blue">Advanced</span>
                 </a>
                 
                 <div class="dropdown-menu dropdown-menu-right">
@@ -64,14 +59,12 @@
         </ul>
     </div>
 
-    <div class="card-body tab-content">
-        <%= render "gns_core/backend/roles/policy/dashboard", role: @role %>
-        
+    <div class="card-body tab-content">        
         <%= render 'gns_core/backend/roles/policy/contacts', role: @role %>
         
         <%= render 'gns_core/backend/roles/policy/projects', role: @role %>
         
-        <%= render 'gns_core/backend/roles/policy/users', role: @role %>
+        <%= render 'gns_core/backend/roles/policy/employees', role: @role %>
         
         <%= render 'gns_core/backend/roles/policy/report', role: @role %>
         
