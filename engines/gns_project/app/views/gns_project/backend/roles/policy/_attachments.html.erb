@@ -12,7 +12,7 @@
                 <table class="table table-xs">
                     <tbody>
                         <tr>
-                            <td class="wmin-md-200">
+                            <td width="30%">
                                 <div class="custom-control custom-checkbox">
                                     <input type="hidden" name="permissions[gns_project.attachments.create]" value="false">
                                     <input type="checkbox" name="permissions[gns_project.attachments.create]" value="true"
@@ -25,36 +25,9 @@
                             </td>
                             <td>Allow users to <b>create</b> and <b>upload</b> new attachment</td>
                         </tr>
+                        
                         <tr>
-                            <td class="wmin-md-200">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="hidden" name="permissions[gns_project.attachments.read_own]" value="false">
-                                    <input type="checkbox" name="permissions[gns_project.attachments.read_own]" value="true"
-                                        class="custom-control-input"
-                                        id="gns_project.attachments.read_own"
-                                        <%= 'checked' if @role.has_permission?('gns_project.attachments.read_own') %>
-                                    >
-                                    <label class="custom-control-label" for="gns_project.attachments.read_own">Read own</label>
-                                </div>
-                            </td>
-                            <td>Allow users to <b>read/view</b> their own attachments</td>
-                        </tr>
-                        <tr>
-                            <td class="wmin-md-200">                                
-                                <div class="custom-control custom-checkbox">
-                                    <input type="hidden" name="permissions[gns_project.attachments.read_other]" value="false">
-                                    <input type="checkbox" name="permissions[gns_project.attachments.read_other]" value="true"
-                                        class="custom-control-input"
-                                        id="gns_project.attachments.read_other"
-                                        <%= 'checked' if @role.has_permission?('gns_project.attachments.read_other') %>
-                                    >
-                                    <label class="custom-control-label" for="gns_project.attachments.read_other">Read other</label>
-                                </div>
-                            </td>
-                            <td>Allow users to <b>read/view</b> other people's attachments</td>
-                        </tr>
-                        <tr>
-                            <td class="wmin-md-200">                    
+                            <td width="30%">
                                 <div class="custom-control custom-checkbox">                                
                                     <input type="hidden" name="permissions[gns_project.attachments.update_own]" value="false">
                                     <input type="checkbox" name="permissions[gns_project.attachments.update_own]" value="true"
@@ -67,8 +40,9 @@
                             </td>
                             <td>Allow users to <b>update info</b> or <b>re-upload file</b> their own attachments</td>
                         </tr>
+                        
                         <tr>
-                            <td class="wmin-md-200">                    
+                            <td width="30%">
                                 <div class="custom-control custom-checkbox">                                
                                     <input type="hidden" name="permissions[gns_project.attachments.update_other]" value="false">
                                     <input type="checkbox" name="permissions[gns_project.attachments.update_other]" value="true"
@@ -81,36 +55,9 @@
                             </td>
                             <td>Allow users to <b>update info</b> or <b>re-upload file</b> other people's attachments</td>
                         </tr>
+                        
                         <tr>
-                            <td class="wmin-md-200">                    
-                                <div class="custom-control custom-checkbox">
-                                    <input type="hidden" name="permissions[gns_project.attachments.delete_own]" value="false">
-                                    <input type="checkbox" name="permissions[gns_project.attachments.delete_own]" value="true"
-                                        class="custom-control-input"
-                                        id="gns_project.attachments.delete_own"
-                                        <%= 'checked' if @role.has_permission?('gns_project.attachments.delete_own') %>
-                                    >
-                                    <label class="custom-control-label" for="gns_project.attachments.delete_own">Delete own</label>
-                                </div>
-                            </td>
-                            <td>Allow users to <b>delete</b> their own attachments created</td>
-                        </tr>
-                        <tr>
-                            <td class="wmin-md-200">                    
-                                <div class="custom-control custom-checkbox">
-                                    <input type="hidden" name="permissions[gns_project.attachments.delete_other]" value="false">
-                                    <input type="checkbox" name="permissions[gns_project.attachments.delete_other]" value="true"
-                                        class="custom-control-input"
-                                        id="gns_project.attachments.delete_other"
-                                        <%= 'checked' if @role.has_permission?('gns_project.attachments.delete_other') %>
-                                    >
-                                    <label class="custom-control-label" for="gns_project.attachments.delete_other">Delete other</label>
-                                </div>
-                            </td>
-                            <td>Allow users to <b>delete</b> other people's attachments</td>
-                        </tr>
-                        <tr>
-                            <td class="wmin-md-200">                    
+                            <td width="30%">
                                 <div class="custom-control custom-checkbox">
                                     <input type="hidden" name="permissions[gns_project.attachments.download_own]" value="false">
                                     <input type="checkbox" name="permissions[gns_project.attachments.download_own]" value="true"
@@ -123,8 +70,9 @@
                             </td>
                             <td>Allow users to <b>download</b> their own attachments</td>
                         </tr>
+                        
                         <tr>
-                            <td class="wmin-md-200">                    
+                            <td width="30%">
                                 <div class="custom-control custom-checkbox">
                                     <input type="hidden" name="permissions[gns_project.attachments.download_other]" value="false">
                                     <input type="checkbox" name="permissions[gns_project.attachments.download_other]" value="true"
@@ -136,6 +84,66 @@
                                 </div>
                             </td>
                             <td>Allow users to <b>download</b> other people's attachments</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.attachments.view_logs_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.attachments.view_logs_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.attachments.view_logs_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.attachments.view_logs_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.attachments.view_logs_own">View logs own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>view logs</b> their own attachments</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.attachments.view_logs_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.attachments.view_logs_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.attachments.view_logs_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.attachments.view_logs_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.attachments.view_logs_other">View logs other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>view logs</b> other people's attachments</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.attachments.delete_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.attachments.delete_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.attachments.delete_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.attachments.delete_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.attachments.delete_own">Delete own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>delete</b> their own attachments created</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.attachments.delete_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.attachments.delete_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.attachments.delete_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.attachments.delete_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.attachments.delete_other">Delete other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>delete</b> other people's attachments</td>
                         </tr>
                     </tbody>
                 </table>
