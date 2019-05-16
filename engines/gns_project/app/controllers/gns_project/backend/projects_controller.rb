@@ -24,10 +24,11 @@ module GnsProject
       # GET /projects/new
       def new
         @project = Project.new
-      end
-  
-      # GET /projects/1/edit
-      def edit
+        
+        date = []
+        date << Time.now.beginning_of_day.strftime('%d/%m/%Y')
+        date << Time.now.end_of_day.strftime('%d/%m/%Y')
+        @date_of_implementation = date.join(" - ")
       end
   
       # POST /projects
@@ -36,6 +37,13 @@ module GnsProject
         
         @project.creator = current_user
         @project.status = Project::STATUS_NEW
+        
+        if params[:project][:date_of_implementation].present?
+          @project.start_date = params[:project][:date_of_implementation].to_s.split('-')[0].to_date
+          @project.end_date = params[:project][:date_of_implementation].to_s.split('-')[1].to_date
+        else
+          @project.errors.add('date', "not be blank")
+        end
   
         if @project.save
           # add log
@@ -55,9 +63,24 @@ module GnsProject
         end
       end
   
+      # GET /projects/1/edit
+      def edit
+        date = []
+        date << @project.start_date.strftime('%d/%m/%Y')
+        date << @project.end_date.strftime('%d/%m/%Y')
+        @date_of_implementation = date.join(" - ")
+      end
+  
       # PATCH/PUT /projects/1
       def update
-        if @project.update(project_params)
+        if params[:project][:date_of_implementation].present?
+          @project.start_date = params[:project][:date_of_implementation].to_s.split('-')[0].to_date
+          @project.end_date = params[:project][:date_of_implementation].to_s.split('-')[1].to_date
+        else
+          @project.errors.add('date', "not be blank")
+        end
+        
+        if @project.update(project_params)          
           # add log
           @project.log("gns_project.log.project.updated", current_user)
           

@@ -18,10 +18,11 @@ module GnsProject
       def new
         @task = Task.new
         @task.project = Project.find(params[:project_id])
-      end
-  
-      # GET /tasks/1/edit
-      def edit
+        
+        working_date = []
+        working_date << Time.now.beginning_of_day.strftime('%d/%m/%Y')
+        working_date << Time.now.end_of_day.strftime('%d/%m/%Y')
+        @workday = working_date.join(" - ")
       end
   
       # POST /tasks
@@ -30,6 +31,13 @@ module GnsProject
         
         @task.creator = current_user
         @task.status = Task::STATUS_OPEN
+        
+        if params[:task][:workday].present?
+          @task.start_date = params[:task][:workday].to_s.split('-')[0].to_date
+          @task.end_date = params[:task][:workday].to_s.split('-')[1].to_date
+        else
+          @task.errors.add('workday', "not be blank")
+        end
         
         current_task_id = params.to_unsafe_hash[:task][:current_task_id]
         if current_task_id.present?
@@ -46,8 +54,18 @@ module GnsProject
             message: 'Task was successfully created.',
           }
         else
+          logger.info '====================='
+          logger.info @task.errors.to_json
           render :new
         end
+      end
+  
+      # GET /tasks/1/edit
+      def edit
+        working_date = []
+        working_date << @task.start_date.strftime('%d/%m/%Y')
+        working_date << @task.end_date.strftime('%d/%m/%Y')
+        @workday = working_date.join(" - ")
       end
   
       # PATCH/PUT /tasks/1
@@ -59,6 +77,13 @@ module GnsProject
         # check if remark empty errors
         if !params[:remark].present?
           @task.errors.add('remark', "not be blank")
+        end
+        
+        if params[:task][:workday].present?
+          @task.start_date = params[:task][:workday].to_s.split('-')[0].to_date
+          @task.end_date = params[:task][:workday].to_s.split('-')[1].to_date
+        else
+          @task.errors.add('workday', "not be blank")
         end
         
         # check error empty?

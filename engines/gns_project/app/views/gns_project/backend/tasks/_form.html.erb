@@ -3,88 +3,85 @@
         <input type="hidden" name="task[project_id]" value="<%= @task.project.id %>">
         <input type="hidden" name="task[current_task_id]" value="<%= params[:current_task_id] %>">
         
-        <div class="form-group">
-            <label class="d-block">Stage <span class="text-danger">*</span></label>
-            <select name="task[stage_id]" data-placeholder="Select stage..."
-                class="form-control select-ajax"
-                data-url="<%= gns_project.select2_backend_stages_path(category_id: @task.project.category_id) %>"
-                data-container-css-class="font-weight-semibold <%= 'border-danger' if task.errors.full_messages_for(:stage_id).present? %>"
-            >
-                <option value=''>None</option>
-                <option selected value="<%= task.stage_id %>"><%= task.stage_name %></option>
-            </select>
-            <% if task.errors.full_messages_for(:stage_id).present? %>
-                <span class="form-text text-danger"><%= task.errors.full_messages_for(:stage_id).join('<br/>').html_safe %></span>
-            <% end %>
-        </div>
-        
-        <div class="form-group">
-            <label class="d-block">Task Description <span class="text-danger">*</span></label>
-            <input type="text" class="form-control font-weight-semibold <%= 'border-danger' if task.errors.full_messages_for(:name).present? %>" placeholder="Enter name"
-                name="task[name]"
-                value="<%= task.name %>"
-            >
-            <% if task.errors.full_messages_for(:name).present? %>
-                <span class="form-text text-danger"><%= task.errors.full_messages_for(:name).join('<br/>').html_safe %></span>
-            <% end %>
-        </div>
-        
         <div class="row">
-            <div class="col-md-6">                
-                <div class="form-group">
-                    <label class="d-block">Start Date <span class="text-danger">*</span></label>
-                    <div class="input-group">
-                        <span class="input-group-prepend">
-                            <span class="input-group-text"><i class="icon-calendar22"></i></span>
-                        </span>
-                        <input type="text"
-                            class="form-control font-weight-semibold datepicker <%= 'border-danger' if task.errors.full_messages_for(:start_date).present? %>"
-                            name="task[start_date]"
-                            value="<%= task.start_date.strftime('%Y/%m/%d, %a') if task.start_date.present? %>">
-                    </div>
-                    <% if task.errors.full_messages_for(:start_date).present? %>
-                        <span class="form-text text-danger"><%= task.errors.full_messages_for(:start_date).join('<br/>').html_safe %></span>
-                    <% end %>
-                </div>
-            </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="d-block">End Date <span class="text-danger">*</span></label>
-                    <div class="input-group">
-                        <span class="input-group-prepend">
-                            <span class="input-group-text"><i class="icon-calendar22"></i></span>
-                        </span>
-                        <input type="text"
-                            class="form-control font-weight-semibold datepicker <%= 'border-danger' if task.errors.full_messages_for(:end_date).present? %>"
-                            name="task[end_date]"
-                            value="<%= task.end_date.strftime('%Y/%m/%d, %a') if task.end_date.present? %>">
-                    </div>
-                    <% if task.errors.full_messages_for(:end_date).present? %>
-                        <span class="form-text text-danger"><%= task.errors.full_messages_for(:end_date).join('<br/>').html_safe %></span>
+                    <label class="d-block">Stage <span class="text-danger">*</span></label>
+                    <select name="task[stage_id]" data-placeholder="Choose a stage"
+                        class="form-control select-ajax"
+                        data-url="<%= gns_project.select2_backend_stages_path(category_id: @task.project.category_id) %>"
+                        data-container-css-class="font-weight-semibold <%= 'border-danger' if task.errors.full_messages_for(:stage_id).present? %>"
+                    >
+                        <option value=''>None</option>
+                        <option selected value="<%= task.stage_id %>"><%= task.stage_name %></option>
+                    </select>
+                    <% if task.errors.full_messages_for(:stage_id).present? %>
+                        <span class="form-text text-danger"><%= task.errors.full_messages_for(:stage_id).join('<br/>').html_safe %></span>
+                    <% end %>
+                </div>
+                
+                <div class="form-group">
+                    <label class="d-block">Task Description <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control font-weight-semibold <%= 'border-danger' if task.errors.full_messages_for(:name).present? %>"
+                        placeholder="Enter the task description"
+                        name="task[name]"
+                        value="<%= task.name %>"
+                    >
+                    <% if task.errors.full_messages_for(:name).present? %>
+                        <span class="form-text text-danger"><%= task.errors.full_messages_for(:name).join('<br/>').html_safe %></span>
                     <% end %>
                 </div>
             </div>
-        </div>
-        
-        <div class="form-group">
-            <label class="d-block">Hours</label>
-            <input type="text" class="form-control font-weight-semibold" placeholder="Hours (enter number)"
-                name="task[hours]"
-                value="<%= task.hours %>">
-        </div>
-        
-        <div class="form-group">
-            <label class="d-blocks">Responsible <span class="text-danger">*</span></label>
-            <select name="task[employee_id]" data-placeholder="The person responsible..."
-                class="form-control select-ajax"
-                data-url="<%= gns_employee.select2_backend_employees_path %>"
-                data-container-css-class="font-weight-semibold <%= 'border-danger' if task.errors.full_messages_for(:employee_id).present? %>"
-            >
-                <option value="<%= task.employee_id %>"><%= task.employee_name %></option>
-            </select>
-            <% if task.errors.full_messages_for(:employee_id).present? %>
-                <span class="form-text text-danger"><%= task.errors.full_messages_for(:employee_id).join('<br/>').html_safe %></span>
-            <% end %>
+                
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-blocks">Responsible person <span class="text-danger">*</span></label>
+                    <select name="task[employee_id]" data-placeholder="Choose an employee"
+                        class="form-control select-ajax"
+                        data-url="<%= gns_employee.select2_backend_employees_path %>"
+                        data-container-css-class="font-weight-semibold <%= 'border-danger' if task.errors.full_messages_for(:employee_id).present? %>"
+                    >
+                        <option value="<%= task.employee_id %>"><%= task.employee_name %></option>
+                    </select>
+                    <% if task.errors.full_messages_for(:employee_id).present? %>
+                        <span class="form-text text-danger"><%= task.errors.full_messages_for(:employee_id).join('<br/>').html_safe %></span>
+                    <% end %>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <label class="d-block">Workday <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <span class="input-group-text"><i class="icon-calendar22"></i></span>
+                                </span>
+                                <input type="text" class="form-control daterange-dual font-weight-semibold"
+                                    value="<%= @workday %>"
+                                    name="task[workday]"> 
+                            </div>
+                            <% if task.errors.full_messages_for(:workday).present? %>
+                                <span class="form-text text-danger"><%= task.errors.full_messages_for(:workday).join('<br/>').html_safe %></span>
+                            <% end %>
+                            <% if task.errors.full_messages_for(:start_date).present? %>
+                                <span class="form-text text-danger"><%= task.errors.full_messages_for(:start_date).join('<br/>').html_safe %></span>
+                            <% end %>
+                            <% if task.errors.full_messages_for(:end_date).present? %>
+                                <span class="form-text text-danger"><%= task.errors.full_messages_for(:end_date).join('<br/>').html_safe %></span>
+                            <% end %>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="d-block">Hours</label>
+                            <input type="text" class="form-control font-weight-semibold" placeholder="Enter hours worked"
+                                name="task[hours]"
+                                value="<%= task.hours %>">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         
         <% if !task.id.nil? %>
