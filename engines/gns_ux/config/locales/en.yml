@@ -1,0 +1,34 @@
+en:
+  close: "Close"
+  layouts:
+    gns_ux:
+      backend:
+        main:
+          tail_title: "ERP System | SAO-EE JSC"
+        main_navbar:
+          notifications: "Notifications"
+          mark_all_as_read: "Mark All as Read"
+          see_all: "See All"
+          my_account: "My account"
+          logout: "Logout"
+        sidebar:
+          navigation: "Navigation"
+          account_settings: "Account Settings"
+          main_menu: "Main menu"
+          dashboard: "Dashboard"
+          contact: "Business Partner"
+          contacts: "Contact list"
+          contact_categories: "Contact groups"
+          project: "Project"
+          projects: "Project list"
+          project_types: "Project types"
+          project_roles: "Project roles (default)"
+          employee: "Employee"
+          employees: "Employees"
+          advanced: "Advanced"
+          report: "Report"
+          system: "System"
+          configure_user_roles: "Configure User Roles"
+        footer:
+          support: "Support"
+          user_guide: "User Guide"
