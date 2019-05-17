@@ -67,63 +67,68 @@ class Ability
       project.is_in_progress? and project.get_tasks_not_closed.count == 0
     end
     
+    can :manpower_authorize, GnsProject::Project do |project|
+      user.has_permission?('gns_project.projects.authorize_own') or
+      user.has_permission?('gns_project.projects.authorize_other')
+    end
+    
     # gns_project / tasks
     can :create_task, GnsProject::Project do |project|
       user.has_project_permission?(project, 'gns_project.tasks.create')
     end
     
     can :read, GnsProject::Task do |task|
-      (user.has_project_permission?(task.project, 'gns_project.tasks.read_own') and task.employee == user) or
-      (user.has_project_permission?(task.project, 'gns_project.tasks.read_other') and task.employee != user)
+      (user.has_project_permission?(task.project, 'gns_project.tasks.read_own') and task.employee == user.employee) or
+      (user.has_project_permission?(task.project, 'gns_project.tasks.read_other') and task.employee != user.employee)
     end
     
     can :update, GnsProject::Task do |task|
-      (user.has_project_permission?(task.project, 'gns_project.tasks.update_own') and task.employee == user) or
-      (user.has_project_permission?(task.project, 'gns_project.tasks.update_other') and task.employee != user)
+      (user.has_project_permission?(task.project, 'gns_project.tasks.update_own') and task.employee == user.employee) or
+      (user.has_project_permission?(task.project, 'gns_project.tasks.update_other') and task.employee != user.employee)
     end
     
     can :delete, GnsProject::Task do |task|
-      (user.has_project_permission?(task.project, 'gns_project.tasks.delete_own') and task.employee == user) or
-      (user.has_project_permission?(task.project, 'gns_project.tasks.delete_other') and task.employee != user)
+      (user.has_project_permission?(task.project, 'gns_project.tasks.delete_own') and task.employee == user.employee) or
+      (user.has_project_permission?(task.project, 'gns_project.tasks.delete_other') and task.employee != user.employee)
     end
     
     can :finish, GnsProject::Task do |task|
       (!task.finished? and task.progress == 100) and
       (
-        (user.has_project_permission?(task.project, 'gns_project.tasks.finish_own') and task.employee == user) or
-        (user.has_project_permission?(task.project, 'gns_project.tasks.finish_other') and task.employee != user)
+        (user.has_project_permission?(task.project, 'gns_project.tasks.finish_own') and task.employee == user.employee) or
+        (user.has_project_permission?(task.project, 'gns_project.tasks.finish_other') and task.employee != user.employee)
       )
     end
     
     can :unfinish, GnsProject::Task do |task|
       (task.finished? and task.is_open?) and
       (
-        (user.has_project_permission?(task.project, 'gns_project.tasks.unfinish_own') and task.employee == user) or
-        (user.has_project_permission?(task.project, 'gns_project.tasks.unfinish_other') and task.employee != user)
+        (user.has_project_permission?(task.project, 'gns_project.tasks.unfinish_own') and task.employee == user.employee) or
+        (user.has_project_permission?(task.project, 'gns_project.tasks.unfinish_other') and task.employee != user.employee)
       )
     end
     
     can :close, GnsProject::Task do |task|
       (task.finished? and task.is_open?) and
       (
-        (user.has_project_permission?(task.project, 'gns_project.tasks.close_own') and task.employee == user) or
-        (user.has_project_permission?(task.project, 'gns_project.tasks.close_other') and task.employee != user)
+        (user.has_project_permission?(task.project, 'gns_project.tasks.close_own') and task.employee == user.employee) or
+        (user.has_project_permission?(task.project, 'gns_project.tasks.close_other') and task.employee != user.employee)
       )
     end
     
     can :reopen, GnsProject::Task do |task|
       (task.finished? and task.is_closed?) and
       (
-        (user.has_project_permission?(task.project, 'gns_project.tasks.reopen_own') and task.employee == user) or
-        (user.has_project_permission?(task.project, 'gns_project.tasks.reopen_other') and task.employee != user)
+        (user.has_project_permission?(task.project, 'gns_project.tasks.reopen_own') and task.employee == user.employee) or
+        (user.has_project_permission?(task.project, 'gns_project.tasks.reopen_other') and task.employee != user.employee)
       )
     end
     
     can :update_progress, GnsProject::Task do |task|
       !task.finished? and
       (
-        (user.has_project_permission?(task.project, 'gns_project.tasks.update_progress_own') and task.employee == user) or
-        (user.has_project_permission?(task.project, 'gns_project.tasks.update_progress_other') and task.employee != user)
+        (user.has_project_permission?(task.project, 'gns_project.tasks.update_progress_own') and task.employee == user.employee) or
+        (user.has_project_permission?(task.project, 'gns_project.tasks.update_progress_other') and task.employee != user.employee)
       )
     end
     

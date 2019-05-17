@@ -3,6 +3,8 @@ GnsEmployee::Engine.routes.draw do
         resources :employees do
             collection do
                 post 'list'
+                get 'select2'
+                get ':id/account', to: 'employees#account_box', as: 'account_box'
             end
         end
     end

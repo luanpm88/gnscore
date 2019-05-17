@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title><%= yield(:title) %> | Project Management Module | ERP System</title>
+	<title><%= yield(:title) %> | <%= t(".tail_title") %></title>
     
     <%= csrf_meta_tags %>
 	
@@ -19,6 +19,7 @@
     <%= stylesheet_link_tag "/gns_ux/assets/backend/layout1/css/layout.min.css" %>
     <%= stylesheet_link_tag "/gns_ux/assets/backend/layout1/css/components.min.css" %>
     <%= stylesheet_link_tag "/gns_ux/assets/backend/layout1/css/colors.min.css" %>
+	<%= stylesheet_link_tag '/gns_ux/assets/backend/lib/daterangepicker/daterangepicker.css' %>
 	<!-- /global stylesheets -->
 	
 	<!-- GNSAPP stylesheets -->
@@ -31,14 +32,7 @@
 	<%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/loaders/blockui.min.js' %>
 	<!-- /core JS files -->
 	
-	<!-- Theme JS files -->
-    <% if false %>
-    <!-- TẠM THỜI ẨN NHỮNG FILE JS NÀY DO CHƯA BIẾT NÓ DÙNG ĐỂ LÀM GÌ-->
-    <%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/visualization/d3/d3.min.js' %>
-    <%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/visualization/d3/d3_tooltip.js' %>
-    <%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/forms/styling/switchery.min.js' %>
-    <% end %>
-	
+	<!-- Theme JS files -->	
 	<%= javascript_include_tag '/gns_ux/assets/backend/js/app.js' %>
     <%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/ui/moment/moment.min.js' %>
 	<%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/forms/styling/uniform.min.js' %>
@@ -49,10 +43,7 @@
 	<%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/forms/styling/switchery.min.js' %>
 	<%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/forms/styling/switch.min.js' %>
 	<%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/sliders/ion_rangeslider.min.js' %>
-	<%= javascript_include_tag '/gns_ux/assets/backend/lib/pickadate-3.6.2/picker.js' %>
-	<%= javascript_include_tag '/gns_ux/assets/backend/lib/pickadate-3.6.2/picker.date.js' %>
-	<%= javascript_include_tag '/gns_ux/assets/backend/lib/pickadate-3.6.2/picker.time.js' %>
-	<%= javascript_include_tag '/gns_ux/assets/backend/lib/pickadate-3.6.2/legacy.js' %>
+	<%= javascript_include_tag '/gns_ux/assets/backend/lib/daterangepicker/daterangepicker.min.js' %>
 	<!-- /theme JS files -->
 	
 	<script>

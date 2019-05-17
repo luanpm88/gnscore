@@ -1,9 +1,9 @@
 <% content_for :title do %>
-    Permissions for <%= @project_user.user_name %>
+    Permissions for <%= @project_employee.employee_name %>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Project Permissions</span>: <%= @project_user.user_name %></h4>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Project Permissions</span>: <%= @project_employee.employee_name %></h4>
 <% end %>
 
 <div class="card">
@@ -18,6 +18,6 @@
     </div>
 
     <div class="card-body tab-content">
-        <%= render "gns_project/backend/projects/project_user_roles/policies", project_user: @project_user %>
+        <%= render "gns_project/backend/projects/project_employee_roles/policies", project_employee: @project_employee %>
     </div>
 </div>

@@ -1,0 +1,302 @@
+<div class="tab-pane fade" id="tabEmployee">
+    <div class="card-group-control card-group-control-left" id="accordion-control">
+
+        <div class="pt-2 pb-2">
+            <h6 class="card-title mb-1">
+                <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
+                   href="#gnsEmployee-employees">Employees
+                </a>
+            </h6>
+            
+            <div id="gnsEmployee-employees" class="collapse show">
+                <table class="table table-xs">
+                    <tbody>
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_employee.employees.create]" value="false">
+                                    <input type="checkbox" name="permissions[gns_employee.employees.create]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_employee.employees.create"
+                                        <%= 'checked' if @role.has_permission?('gns_employee.employees.create') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_employee.employees.create">Create</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>create</b> a new employee</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_employee.employees.read_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_employee.employees.read_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_employee.employees.read_own"
+                                        <%= 'checked' if @role.has_permission?('gns_employee.employees.read_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_employee.employees.read_own">Read own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>view/read</b> their own employees</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_employee.employees.read_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_employee.employees.read_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_employee.employees.read_other"
+                                        <%= 'checked' if @role.has_permission?('gns_employee.employees.read_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_employee.employees.read_other">Read other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>view/read</b> other people's employees</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_employee.employees.update_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_employee.employees.update_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_employee.employees.update_own"
+                                        <%= 'checked' if @role.has_permission?('gns_employee.employees.update_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_employee.employees.update_own">Update own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>update info</b> their own employees</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_employee.employees.update_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_employee.employees.update_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_employee.employees.update_other"
+                                        <%= 'checked' if @role.has_permission?('gns_employee.employees.update_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_employee.employees.update_other">Update other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>update info</b> other people's employees</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_employee.employees.activate_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_employee.employees.activate_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_employee.employees.activate_own"
+                                        <%= 'checked' if @role.has_permission?('gns_employee.employees.activate_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_employee.employees.activate_own">Activate own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>activate</b> their own employees</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_employee.employees.activate_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_employee.employees.activate_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_employee.employees.activate_other"
+                                        <%= 'checked' if @role.has_permission?('gns_employee.employees.activate_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_employee.employees.activate_other">Activate other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>activate</b> other people's employees</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_employee.employees.deactivate_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_employee.employees.deactivate_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_employee.employees.deactivate_own"
+                                        <%= 'checked' if @role.has_permission?('gns_employee.employees.deactivate_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_employee.employees.deactivate_own">De-activate own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>de-activate</b> their own employees</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_employee.employees.deactivate_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_employee.employees.deactivate_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_employee.employees.deactivate_other"
+                                        <%= 'checked' if @role.has_permission?('gns_employee.employees.deactivate_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_employee.employees.deactivate_other">De-activate other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>de-activate</b> other people's employees</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="pt-2 pb-2">
+            <h6 class="card-title mb-1">
+                <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
+                   href="#gnsCore-users">User Account
+                </a>
+            </h6>
+            
+            <div id="gnsCore-users" class="collapse show">
+                <table class="table table-xs">
+                    <tbody>
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_core.users.create]" value="false">
+                                    <input type="checkbox" name="permissions[gns_core.users.create]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_core.users.create"
+                                        <%= 'checked' if @role.has_permission?('gns_core.users.create') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_core.users.create">Create</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>create</b> an account for employees</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_core.users.read_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_core.users.read_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_core.users.read_own"
+                                        <%= 'checked' if @role.has_permission?('gns_core.users.read_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_core.users.read_own">Read own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>view/read</b> their own accounts</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_core.users.read_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_core.users.read_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_core.users.read_other"
+                                        <%= 'checked' if @role.has_permission?('gns_core.users.read_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_core.users.read_other">Read other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>view/read</b> other people's accounts</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_core.users.update_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_core.users.update_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_core.users.update_own"
+                                        <%= 'checked' if @role.has_permission?('gns_core.users.update_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_core.users.update_own">Update own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>update info/change password</b> their own accounts</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_core.users.update_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_core.users.update_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_core.users.update_other"
+                                        <%= 'checked' if @role.has_permission?('gns_core.users.update_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_core.users.update_other">Update other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>update info/change password</b> other people's accounts</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_core.users.deactivate_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_core.users.deactivate_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_core.users.deactivate_own"
+                                        <%= 'checked' if @role.has_permission?('gns_core.users.deactivate_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_core.users.deactivate_own">Lock/Deactivate own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>lock/ban/block</b> their own accounts</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_core.users.deactivate_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_core.users.deactivate_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_core.users.deactivate_other"
+                                        <%= 'checked' if @role.has_permission?('gns_core.users.deactivate_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_core.users.deactivate_other">Lock/Deactivate other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>lock/ban/block</b> other people's accounts</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_core.users.activate_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_core.users.activate_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_core.users.activate_own"
+                                        <%= 'checked' if @role.has_permission?('gns_core.users.activate_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_core.users.activate_own">Unlock/Activate own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>unlock</b> their own accounts</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_core.users.activate_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_core.users.activate_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_core.users.activate_other"
+                                        <%= 'checked' if @role.has_permission?('gns_core.users.activate_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_core.users.activate_other">Unlock/Activate other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>unlock</b> other people's accounts</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

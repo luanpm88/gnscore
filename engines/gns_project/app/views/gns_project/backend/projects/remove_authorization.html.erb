@@ -35,17 +35,17 @@
 
 <div class="card">
     <div class="card-body">
-        <%= form_for '', url: gns_project.remove_authorization_backend_projects_path(project_id: @project.id, project_user_id: @project_user.id), html: {multipart: false, class: 'remove_authorization_project'} do |f| %>            
+        <%= form_for '', url: gns_project.remove_authorization_backend_projects_path(project_id: @project.id, project_employee_id: @project_employee.id), html: {multipart: false, class: 'remove_authorization_project'} do |f| %>            
             <h5>Do you want to remove this user from authorization?</h5>
             
             <div class="form-group">
                 <textarea rows="2" cols="5"
-                    class="form-control <%= 'border-danger' if @project_user.errors.full_messages_for(:remark).present? %>"
+                    class="form-control <%= 'border-danger' if @project_employee.errors.full_messages_for(:remark).present? %>"
                     placeholder="Enter your remark here"
                     name="remark"
                 ></textarea>
-                <% if @project_user.errors.full_messages_for(:remark).present? %>
-                    <span class="form-text text-danger"><%= @project_user.errors.full_messages_for(:remark).join('<br/>').html_safe %></span>
+                <% if @project_employee.errors.full_messages_for(:remark).present? %>
+                    <span class="form-text text-danger"><%= @project_employee.errors.full_messages_for(:remark).join('<br/>').html_safe %></span>
                 <% end %>
             </div>
             

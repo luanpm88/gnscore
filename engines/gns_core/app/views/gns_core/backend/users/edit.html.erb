@@ -1,15 +1,15 @@
 <% content_for :title do %>
-    Edit Employee
+    Update User
 <% end %>
 
 <% content_for :breadcrumb do %>
     <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-    <a href="<%= gns_core.backend_users_path %>" class="breadcrumb-item">Employees</a>
+    <a href="<%= gns_core.backend_users_path %>" class="breadcrumb-item">Users</a>
     <span class="breadcrumb-item active">Edit</span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-users mr-2"></i> <span class="font-weight-semibold">Employee</span> - <%= @user.email %></h4>
+    <h4><i class="icon-users mr-2"></i> <span class="font-weight-semibold">User</span> - <%= @user.email %></h4>
 <% end %>
 
 <% content_for :page_script do %>
@@ -32,9 +32,16 @@
                     processData: false,
                     contentType: false,
                 }).done(function(response) {
-                    // do something
-                    if (typeof(updateUserCallback) !== 'undefined') {
-                        updateUserCallback(response);
+                    if (typeof(response.status) !== 'undefined') {
+                      showNotification(response.status, response.message);
+                      user_modal.hide();
+                      
+                      // load task list
+                      if (typeof(update_user_callback) !== 'undefined') {
+                        update_user_callback();
+                      }
+                    } else {
+                      user_modal.renderHtml(response);
                     }
                 });
                 

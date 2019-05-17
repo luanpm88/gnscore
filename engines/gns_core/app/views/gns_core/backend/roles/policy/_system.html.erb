@@ -1,63 +1,298 @@
 <div class="tab-pane fade" id="tabSystem">
     <div class="card-group-control card-group-control-left" id="accordion-control">
 
-        <div class="pt-2">
-            <h6 class="card-title">
+        <div class="pt-2 pb-2">
+            <h6 class="card-title mb-1">
                 <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
-                   href="#gnsSystem-backup-restore">Backup & Restore
+                   href="#gnsCore-roles">Configure user roles
                 </a>
             </h6>
             
-            <div id="gnsSystem-backup-restore" class="collapse show">
-                <div class="form-group">
-                    Coming Soon...
-                </div>
+            <div id="gnsCore-roles" class="collapse show">
+                <table class="table table-xs">
+                    <tbody>
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_core.roles.create]" value="false">
+                                    <input type="checkbox" name="permissions[gns_core.roles.create]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_core.roles.create"
+                                        <%= 'checked' if @role.has_permission?('gns_core.roles.create') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_core.roles.create">Create</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>create</b> a system role</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_core.roles.set_permissions_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_core.roles.set_permissions_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_core.roles.set_permissions_own"
+                                        <%= 'checked' if @role.has_permission?('gns_core.roles.set_permissions_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_core.roles.set_permissions_own">Configure permissions own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>configure permissions</b> their own system roles</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_core.roles.set_permissions_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_core.roles.set_permissions_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_core.roles.set_permissions_other"
+                                        <%= 'checked' if @role.has_permission?('gns_core.roles.set_permissions_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_core.roles.set_permissions_other">Configure permissions other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>configure permissions</b> other people's system roles</td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_core.roles.read_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_core.roles.read_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_core.roles.read_own"
+                                        <%= 'checked' if @role.has_permission?('gns_core.roles.read_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_core.roles.read_own">Read own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>view/read</b> their own system roles</td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_core.roles.read_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_core.roles.read_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_core.roles.read_other"
+                                        <%= 'checked' if @role.has_permission?('gns_core.roles.read_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_core.roles.read_other">Read other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>view/read</b> other people's system roles</td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_core.roles.update_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_core.roles.update_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_core.roles.update_own"
+                                        <%= 'checked' if @role.has_permission?('gns_core.roles.update_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_core.roles.update_own">Update own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>update info</b> their own system roles</td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_core.roles.update_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_core.roles.update_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_core.roles.update_other"
+                                        <%= 'checked' if @role.has_permission?('gns_core.roles.update_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_core.roles.update_other">Update other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>update info</b> other people's system roles</td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_core.roles.activate_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_core.roles.activate_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_core.roles.activate_own"
+                                        <%= 'checked' if @role.has_permission?('gns_core.roles.activate_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_core.roles.activate_own">Activate own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>activate</b> their own system roles</td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_core.roles.activate_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_core.roles.activate_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_core.roles.activate_other"
+                                        <%= 'checked' if @role.has_permission?('gns_core.roles.activate_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_core.roles.activate_other">Activate other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>activate</b> other people's system roles</td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_core.roles.deactivate_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_core.roles.deactivate_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_core.roles.deactivate_own"
+                                        <%= 'checked' if @role.has_permission?('gns_core.roles.deactivate_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_core.roles.deactivate_own">De-activate own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>de-activate</b> their own system roles</td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_core.roles.deactivate_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_core.roles.deactivate_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_core.roles.deactivate_other"
+                                        <%= 'checked' if @role.has_permission?('gns_core.roles.deactivate_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_core.roles.deactivate_other">De-activate other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>de-activate</b> other people's system roles</td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_core.roles.delete_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_core.roles.delete_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_core.roles.delete_own"
+                                        <%= 'checked' if @role.has_permission?('gns_core.roles.delete_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_core.roles.delete_own">Delete own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>delete</b> their own system roles</td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_core.roles.delete_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_core.roles.delete_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_core.roles.delete_other"
+                                        <%= 'checked' if @role.has_permission?('gns_core.roles.delete_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_core.roles.delete_other">Delete other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>delete</b> other people's system roles</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
         
-        <div class="pt-2">
-            <h6 class="card-title">
-                <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
-                   href="#gnsSystem-settings">Settings
-                </a>
-            </h6>
-
-            <div id="gnsSystem-settings" class="collapse show">
-                <div class="form-group">
-                    Coming Soon...
-                </div>
-            </div>
-        </div>
-        
-        <div class="pt-2">
-            <h6 class="card-title">
+        <div class="pt-2 pb-2">
+            <h6 class="card-title mb-1">
                 <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
                    href="#gnsNotification-notifications">Notifications
                 </a>
             </h6>
 
             <div id="gnsNotification-notifications" class="collapse show">
-                <div class="form-group">                    
-                    <div class="custom-control custom-checkbox">
-                        <input type="hidden" name="permissions[gns_notification.notifications.read_own]" value="false">
-                        <input type="checkbox" name="permissions[gns_notification.notifications.read_own]" value="true"
-                            class="custom-control-input"
-                            id="gns_notification.notifications.read_own"
-                            <%= 'checked' if @role.has_permission?('gns_notification.notifications.read_own') %>
-                        >
-                        <label class="custom-control-label" for="gns_notification.notifications.read_own">Read own</label>
-                    </div>
-                    
-                    <div class="custom-control custom-checkbox">
-                        <input type="hidden" name="permissions[gns_notification.notifications.read_other]" value="false">
-                        <input type="checkbox" name="permissions[gns_notification.notifications.read_other]" value="true"
-                            class="custom-control-input"
-                            id="gns_notification.notifications.read_other"
-                            <%= 'checked' if @role.has_permission?('gns_notification.notifications.read_other') %>
-                        >
-                        <label class="custom-control-label" for="gns_notification.notifications.read_other">Read other</label>
-                    </div>
-                </div>
+                <table class="table table-xs">
+                    <tbody>
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_notification.notifications.read_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_notification.notifications.read_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_notification.notifications.read_own"
+                                        <%= 'checked' if @role.has_permission?('gns_notification.notifications.read_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_notification.notifications.read_own">Read own</label>
+                                </div>
+                            </td>
+                            <td></td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="wmin-md-200">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_notification.notifications.read_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_notification.notifications.read_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_notification.notifications.read_other"
+                                        <%= 'checked' if @role.has_permission?('gns_notification.notifications.read_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_notification.notifications.read_other">Read other</label>
+                                </div>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="pt-2 pb-2">
+            <h6 class="card-title mb-1">
+                <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
+                   href="#gnsSystem-settings">Settings
+                </a>
+            </h6>
+
+            <div id="gnsSystem-settings" class="collapse show">
+                <table class="table table-xs">
+                    <tbody>
+                        <tr>
+                            <td class="wmin-md-200">
+                                Coming Soon...
+                            </td>
+                            <div></div>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="pt-2 pb-2">
+            <h6 class="card-title mb-1">
+                <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
+                   href="#gnsSystem-backup-restore">Backup & Restore
+                </a>
+            </h6>
+            
+            <div id="gnsSystem-backup-restore" class="collapse show">
+                <table class="table table-xs">
+                    <tbody>
+                        <tr>
+                            <td class="wmin-md-200">
+                                Coming Soon...
+                            </td>
+                            <div></div>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

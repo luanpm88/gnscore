@@ -5,7 +5,7 @@ module GnsProject
     
     # get user name
     def user_name
-      user.present? ? user.full_name : ''
+      user.present? ? user.name : ''
     end
     
     # add log

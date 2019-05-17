@@ -120,15 +120,17 @@
             </a>
         </li>
         
-        <li class="nav-item">
-            <a
-                data-menu="gns_project/backend/projects/authorization"
-                href="<%= gns_project.authorization_backend_projects_path(@project.id) %>"
-                class="nav-link" modal-size="full">
-                    <i class="icon-user-check mr-1"></i>
-                    Manpower
-            </a>
-        </li>
+        <% if can? :manpower_authorize, @project %>
+            <li class="nav-item">
+                <a
+                    data-menu="gns_project/backend/projects/authorization"
+                    href="<%= gns_project.authorization_backend_projects_path(@project.id) %>"
+                    class="nav-link" modal-size="full">
+                        <i class="icon-user-check mr-1"></i>
+                        Manpower
+                </a>
+            </li>
+        <% end %>
         
         <li class="nav-item mr-3">
             <a

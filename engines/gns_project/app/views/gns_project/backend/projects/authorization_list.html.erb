@@ -9,21 +9,21 @@
         </tr>
     </thead>
     <tbody>
-        <% @project_users.each_with_index do |project_user,index| %>
+        <% @project_employees.each_with_index do |project_employee,index| %>
             <tr>
-                <% roles = project_user.project_user_roles.map {|pur| pur.role} %>
+                <% roles = project_employee.project_employee_roles.map {|pur| pur.role} %>
                 <td><%= index + 1 %></td>
-                <td><%= project_user.user.full_name %></td>
+                <td><%= project_employee.employee_name %></td>
                 <td>
                     <% roles.each do |role| %>
                         <span class="badge badge-flat border-primary text-primary-600"><%= role.name %></span>
                     <% end %>
                 </td>
                 <td class="text-center">
-                    <a href="<%= gns_project.authorization_permissions_backend_projects_path(project_user_id: project_user) %>"
+                    <a href="<%= gns_project.authorization_permissions_backend_projects_path(project_employee_id: project_employee) %>"
                        class="badge badge-pill bg-pink modal-control"
                        modal-size="lg">
-                        <%= project_user.user.project_permission_count(project_user.project) %>
+                        <%= project_employee.employee.project_permission_count(project_employee.project) %>
                     </a>
                 </td>
                 <td class="text-right">
@@ -33,14 +33,14 @@
                                 <i class="icon-menu9"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a href="<%= gns_project.authorization_permissions_backend_projects_path(project_user_id: project_user) %>"
+                                <a href="<%= gns_project.authorization_permissions_backend_projects_path(project_employee_id: project_employee) %>"
                                    class="dropdown-item modal-control"
                                    modal-size="lg">
                                     <i class="icon-info3"></i> View Permissions
                                 </a>
                                 
                                 <a href="<%= gns_project.update_authorization_backend_projects_path(
-                                            project_user_id: project_user
+                                            project_employee_id: project_employee
                                         ) %>"
                                     class="dropdown-item edit-authorization-button"
                                 >
@@ -50,7 +50,7 @@
                                 <div class="dropdown-divider"></div>
                                 
                                 <a href="<%= gns_project.remove_authorization_backend_projects_path(
-                                            project_user_id: project_user
+                                            project_employee_id: project_employee
                                         ) %>"
                                     class="dropdown-item ajax remove-authorization-button"
                                 >

@@ -6,7 +6,7 @@
         <a href="#" class="sidebar-mobile-main-toggle">
             <i class="icon-arrow-left8"></i>
         </a>
-        Navigation
+        <%= t(".navigation") %>
         <a href="#" class="sidebar-mobile-expand">
             <i class="icon-screen-full"></i>
             <i class="icon-screen-normal"></i>
@@ -29,14 +29,17 @@
                     </div>
 
                     <div class="media-body">
-                        <div class="media-title font-weight-semibold"><%= current_user.full_name %></div>
+                        <div class="media-title font-weight-semibold"><%= current_user.name %></div>
                         <div class="font-size-xs opacity-50">
                             <%= current_user.email %>
                         </div>
                     </div>
 
                     <div class="ml-3 align-self-center">
-                        <a href="#" class="text-white" title="Account settings"><i class="icon-cog3"></i></a>
+                        <a href="<%= gns_core.my_profile_backend_accounts_path %>"
+                            class="text-white" title="<%= t(".account_settings") %>">
+                            <i class="icon-cog3"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -49,7 +52,7 @@
             <ul class="nav nav-sidebar" data-nav-type="accordion">
 
                 <!-- Main -->
-                <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Main menu</div> <i class="icon-menu" title="Main"></i></li>
+                <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs"><%= t(".main_menu") %></div> <i class="icon-menu" title="Main"></i></li>
                 <li class="nav-item">
                     <a href="<%= gns_core.root_path %>" class="nav-link"
                         data-menu="
@@ -58,7 +61,7 @@
                     >
                         <i class="icon-home4"></i>
                         <span>
-                            Dashboard
+                            <%= t(".dashboard") %>
                         </span>
                     </a>
                 </li>
@@ -69,7 +72,7 @@
                             gns_contact/backend/categories
                         "
                     >
-                        <i class="icon-address-book"></i> <span>Business Partner</span></a>
+                        <i class="icon-address-book"></i> <span><%= t(".contact") %></span></a>
 
                     <ul class="nav nav-group-sub" data-submenu-title="Contact">
                         <li class="nav-item">
@@ -77,14 +80,14 @@
                                 data-menu="
                                     gns_contact/backend/contacts
                                 "
-                            >Contact List</a>
+                            ><%= t(".contacts") %></a>
                         </li>
                         <li class="nav-item">
                             <a href="<%= gns_contact.backend_categories_path %>" class="nav-link"
                                 data-menu="
                                     gns_contact/backend/categories
                                 "
-                            >Contact Groups</a>
+                            ><%= t(".contact_categories") %></a>
                         </li>
                     </ul>
                 </li>
@@ -95,15 +98,15 @@
                             gns_project/backend/categories,
                             gns_project/backend/roles
                         "
-                    ><i class="icon-task"></i> <span>Project Management</span></a>
+                    ><i class="icon-task"></i> <span><%= t(".project") %></span></a>
 
                     <ul class="nav nav-group-sub" data-submenu-title="Project">
                         <li class="nav-item">
-                            <a href="<%= gns_project.backend_roles_path %>" class="nav-link"
+                            <a href="<%= gns_project.backend_projects_path %>" class="nav-link"
                                 data-menu="
-                                    gns_project/backend/roles
+                                    gns_project/backend/projects
                                 "
-                            >Project Roles (Default)
+                            ><%= t(".projects") %>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -111,15 +114,15 @@
                                 data-menu="
                                     gns_project/backend/categories
                                 "
-                            >Project Types
+                            ><%= t(".project_types") %>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<%= gns_project.backend_projects_path %>" class="nav-link"
+                            <a href="<%= gns_project.backend_roles_path %>" class="nav-link"
                                 data-menu="
-                                    gns_project/backend/projects
+                                    gns_project/backend/roles
                                 "
-                            >Project List
+                            ><%= t(".project_roles") %>
                             </a>
                         </li>
                     </ul>
@@ -129,7 +132,7 @@
                         data-menu="
                             gns_employee/backend/employees
                         "
-                    ><i class="icon-collaboration"></i> <span>Employee Management</span></a>
+                    ><i class="icon-collaboration"></i> <span><%= t(".employee") %></span></a>
 
                     <ul class="nav nav-group-sub" data-submenu-title="Employee">
                         <li class="nav-item">
@@ -137,7 +140,7 @@
                                 data-menu="
                                     gns_employee/backend/employees
                                 "
-                            >Employee List
+                            ><%= t(".employees") %>
                             </a>
                         </li>
                     </ul>
@@ -145,9 +148,9 @@
                 <!-- /main -->
 
                 <!-- Advanced -->
-                <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">advanced</div> <i class="icon-menu" title="Forms"></i></li>
+                <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs"><%= t(".advanced") %></div> <i class="icon-menu" title="Forms"></i></li>
                 <li class="nav-item nav-item-submenu">
-                    <a href="#" class="nav-link"><i class="icon-stats-dots"></i> <span>Report</span></a>
+                    <a href="#" class="nav-link"><i class="icon-stats-dots"></i> <span><%= t(".report") %></span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Report">
                         <li class="nav-item">
                             <a href="#" class="nav-link disabled">Projects Tracing
@@ -164,39 +167,20 @@
                 <li class="nav-item nav-item-submenu">
                     <a href="#" class="nav-link"
                        data-menu="
-                            gns_core/backend/users,
                             gns_core/backend/roles
                         "
                     >
-                        <i class="icon-hammer-wrench"></i> <span>System</span>
+                        <i class="icon-hammer-wrench"></i> <span><%= t(".system") %></span>
                     </a>
                     <ul class="nav nav-group-sub" data-submenu-title="System">
-                        <li class="nav-item nav-item-submenu">
-                            <a href="#" class="nav-link"
+                        <li class="nav-item">
+                            <a href="<%= gns_core.backend_roles_path %>" class="nav-link"
                                 data-menu="
-                                    gns_core/backend/users,
                                     gns_core/backend/roles
                                 "
                             >
-                                <i class="icon-user-check"></i><span>Account & Security</span>
+                                <i class="icon-user-check"></i><span><%= t(".configure_user_roles") %></span>
                             </a>
-                            <ul class="nav nav-group-sub">
-                                <li class="nav-item">
-                                    <a href="<%= gns_core.backend_users_path %>" class="nav-link"
-                                        data-menu="
-                                            gns_core/backend/users
-                                        "
-                                    ><i></i> Users</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="<%= gns_core.backend_roles_path %>" class="nav-link"
-                                        data-menu="
-                                            gns_core/backend/roles
-                                        "
-                                    ><i></i> Roles
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link disabled">

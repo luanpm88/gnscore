@@ -29,6 +29,7 @@ module GnsProject::Backend
     # POST /categories
     def create
       @category = GnsProject::Category.new(category_params)
+      
       @category.creator = current_user
 
       if @category.save

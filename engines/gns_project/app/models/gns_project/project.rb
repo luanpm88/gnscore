@@ -1,7 +1,7 @@
 module GnsProject
   class Project < ApplicationRecord
     belongs_to :creator, class_name: 'GnsCore::User'
-    belongs_to :manager, class_name: 'GnsCore::User', foreign_key: :manager_id
+    belongs_to :manager, class_name: 'GnsEmployee::Employee', foreign_key: :manager_id
     belongs_to :customer, class_name: 'GnsContact::Contact'
     belongs_to :category, class_name: 'GnsProject::Category'
     has_many :tasks, class_name: 'GnsProject::Task', dependent: :restrict_with_error
@@ -29,7 +29,7 @@ module GnsProject
     
     # get manager name
     def manager_name
-      manager.present? ? manager.full_name : ''
+      manager.present? ? manager.name : ''
     end
     
     # get creator name
@@ -218,43 +218,43 @@ module GnsProject
     end
     
     # add new user role
-    def add_user_role(user_id, role_id)
-      project_user = GnsProject::ProjectUser.where(project_id: self.id, user_id: user_id).first
-      if !project_user.present?
-        project_user = GnsProject::ProjectUser.new(project_id: self.id, user_id: user_id)
-        project_user.save
+    def add_employee_role(employee_id, role_id)
+      project_employee = GnsProject::ProjectEmployee.where(project_id: self.id, employee_id: employee_id).first
+      if !project_employee.present?
+        project_employee = GnsProject::ProjectEmployee.new(project_id: self.id, employee_id: employee_id)
+        project_employee.save
       end
 
-      project_user_role = GnsProject::ProjectUserRole.where(project_user_id: project_user.id, role_id: role_id).first
-      if !project_user_role.present?
-        project_user_role = GnsProject::ProjectUserRole.new(project_user_id: project_user.id, role_id: role_id)
-        project_user_role.save
+      project_employee_role = GnsProject::ProjectEmployeeRole.where(project_employee_id: project_employee.id, role_id: role_id).first
+      if !project_employee_role.present?
+        project_employee_role = GnsProject::ProjectEmployeeRole.new(project_employee_id: project_employee.id, role_id: role_id)
+        project_employee_role.save
       end
     end
     
-    # edit user role
-    def update_user_roles(user, role_ids)
-      current_project_user = user.project_users.where(project_id: self.id).first
+    # edit employee role
+    def update_employee_roles(employee, role_ids)
+      current_project_employee = employee.project_employees.where(project_id: self.id).first
       
-      # Lay danh sach project_user_role hien tai
-      current_project_user_roles = user.project_user_roles.includes(:project_user).where(gns_project_project_users: {project_id: self.id})
+      # Lay danh sach project_employee_role hien tai
+      current_project_employee_roles = employee.project_employee_roles.includes(:project_employee).where(gns_project_project_employees: {project_id: self.id})
       
-      # Xoa nhung project_user_role can loai bo ra khoi danh sach hien tai
-      current_project_user_roles.where.not(role_id: role_ids).destroy_all
+      # Xoa nhung project_employee_role can loai bo ra khoi danh sach hien tai
+      current_project_employee_roles.where.not(role_id: role_ids).destroy_all
       
       role_ids.each do |rid|
-        # Kiem tra da co project_user_role chua, neu chua thi tao moi
-        new_project_user_role = GnsProject::ProjectUserRole.where(project_user_id: current_project_user.id, role_id: rid).first
-        if !new_project_user_role.present?
-          new_project_user_role = GnsProject::ProjectUserRole.new(project_user_id: current_project_user.id, role_id: rid)
-          new_project_user_role.save
+        # Kiem tra da co project_employee_role chua, neu chua thi tao moi
+        new_project_employee_role = GnsProject::ProjectEmployeeRole.where(project_employee_id: current_project_employee.id, role_id: rid).first
+        if !new_project_employee_role.present?
+          new_project_employee_role = GnsProject::ProjectEmployeeRole.new(project_employee_id: current_project_employee.id, role_id: rid)
+          new_project_employee_role.save
         end
       end
     end
     
     # remove user role
-    def remove_project_user(project_user)
-      GnsProject::ProjectUser.find(project_user.id).destroy
+    def remove_project_employee(project_employee)
+      GnsProject::ProjectEmployee.find(project_employee.id).destroy
     end
     
     # check start date vs end date

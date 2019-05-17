@@ -1,0 +1,45 @@
+<div class="card-body">
+    <% if @employee.user.nil? %>
+        <div class="alert alert-warning border-0 alert-dismissible text-center mb-0">
+            This employee not have an account to log in to the system.
+            <a href="<%= gns_core.new_backend_user_path(employee_id: @employee.id) %>"
+                class="alert-link text-primary create-user-button">
+                Click here
+            </a> to create an account.
+        </div>
+    <% else %>            
+        <div class="card card-body bg-light rounded-left-0 border-left-3 border-left-warning">
+            <div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+                <div class="d-flex mb-0">
+                    <div class="mr-3">
+                        <img class="rounded" src="/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg" width="70" height="70" alt="">
+                    </div>
+                    <div>
+                        <p class="media-title text-primary mb-1"><%= @employee.name %></p>
+                        <footer class="blockquote-footer">Email: <span class="font-weight-semibold"><%= @employee.user.email %></span></footer>
+                        <footer class="blockquote-footer">System roles:
+                            <% if @employee.user.roles.empty? %>
+                                <span class="font-weight-semibold">No Access</span>
+                            <% else %>
+                                <%= @employee.user.roles.map {|r| "<span class=\"font-weight-semibold\">#{r.name}</span>"}.join(', ').html_safe %>
+                            <% end %>
+                        </footer>
+                    </div>
+                </div>
+
+                <ul class="list list-unstyled mb-0 mt-3 mt-sm-0 ml-auto text-right">
+                    <li><span class="text-muted" data-popup="tooltip" title="<%= @employee.user.creator_name %>: <%= @employee.user.creator_email %>">Added by: <%= @employee.user.creator_short_name %></span></li>
+                    <li class="dropdown">
+                        Access right: &nbsp; 
+                        <a href="#" class="badge bg-success-400 align-top dropdown-toggle" data-toggle="dropdown">Allowed</a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a href="#" class="dropdown-item"><span class="badge badge-mark mr-2 border-danger"></span> Lock account</a>
+                            <!--<a href="#" class="dropdown-item"><span class="badge badge-mark mr-2 border-success"></span> Unlock account</a>-->
+                        </div>
+                    </li>
+                    <li><a href="<%= gns_core.edit_backend_user_path(@employee.user) %>" class="btn btn-sm btn-primary update-user-button">Update/Setting</a></li>
+                </ul>
+            </div>
+        </div>
+    <% end %>
+</div>

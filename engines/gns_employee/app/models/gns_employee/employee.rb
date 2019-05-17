@@ -3,9 +3,13 @@ module GnsEmployee
     validates :name, presence: true
     validate :must_have_code
     
+    belongs_to :creator, class_name: 'GnsCore::User'
+    has_one :user, class_name: 'GnsCore::User'
     belongs_to :country, class_name: 'GnsArea::Country', optional: true
     belongs_to :state, class_name: 'GnsArea::State', optional: true
     belongs_to :district, class_name: 'GnsArea::District', optional: true
+    has_many :project_employees, class_name: 'GnsProject::ProjectEmployee'
+    has_many :project_employee_roles, class_name: 'GnsProject::ProjectEmployeeRole', through: :project_employees
     
     # custom validate
     def must_have_code
@@ -132,7 +136,7 @@ module GnsEmployee
       
       # render items
       query.each do |e|
-        data[:results] << {id: e.ie, text: e.name}
+        data[:results] << {id: e.id, text: e.name}
       end
       
       return data
@@ -149,5 +153,31 @@ module GnsEmployee
       self.code = "E#{num.to_s.rjust(4, '0')}"
       self.save
 		end
+    
+    # Has project permission
+    def has_project_permission?(project, permission)
+      # Lấy quyền chỉnh sửa từng project ra trước xem có không
+      # projet có quyền custom nào của user self không thì kiểm tra trước, có thì return luôn	
+      #return true if project.project_employee.custom_permissions.include?(permission)
+
+      # Không có chỉnh sửa quyền gì hết thì lấy mặc định (nếu không sửa)
+      pers = self.project_employee_roles.includes(:project_employee).where(gns_project_project_employees: {project_id: project.id})
+      
+      return false if pers.empty?
+      
+      pers.each do |project_role|
+        return project_role.role.has_permission?(permission)
+      end
+    end
+    
+    def project_permissions(project)
+      project_employee = self.project_employees.where(project_id: project.id).first
+      role_ids = project_employee.project_employee_roles.includes(:role).select("role_id")
+      GnsProject::RolesPermission.where(role_id: role_ids).map(&:permission).uniq
+    end
+    
+    def project_permission_count(project)
+      self.project_permissions(project).count
+    end
   end
 end

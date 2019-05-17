@@ -82,25 +82,85 @@ function applyJs(container) {
     // Multi select initialization
     container.find('.multiselect').multiselect();
     
-    container.find('.datepicker').pickadate({
-        format: 'yyyy/mm/dd, ddd',
-        //min: [2019,3,20],
-        //max: [2019,3,30],
-        editable: false,
-        selectYears: true,
-        selectMonths: true,
-        labelMonthNext: 'Next month',
-        labelMonthPrev: 'Previous month',
-        today: 'Today',
-        clear: 'Clear',
-        close: 'Close',
-        klass: {},
+    container.find('.daterange-single').daterangepicker({
+        "singleDatePicker": true,
+        "linkedCalendars": false,
+        "showCustomRangeLabel": false,
+        "opens": "left",
+        "applyClass": "bg-slate-600",
+        "cancelClass": "btn-light",
+        "locale": {
+            "format": "DD/MM/YYYY",
+            "separator": " - ",
+            "weekLabel": "W",
+            "daysOfWeek": [
+                "Su",
+                "Mo",
+                "Tu",
+                "We",
+                "Th",
+                "Fr",
+                "Sa"
+            ],
+            "monthNames": [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+            ],
+            "firstDay": 1
+        },
     });
     
-    container.find('.timepicker').pickatime({
-        format: 'HH:i',
-        formatSubmit: 'HH:i',
-        editable: false,
+    container.find('.daterange-dual').daterangepicker({
+        "linkedCalendars": false,
+        //"timePicker": true,
+        "showCustomRangeLabel": false,
+        "opens": "left",
+        "applyClass": "bg-slate-600",
+        "cancelClass": "btn-light",
+        "locale": {
+            "format": "DD/MM/YYYY",
+            "separator": " - ",
+            "applyLabel": "Apply",
+            "cancelLabel": "Cancel",
+            "fromLabel": "From",
+            "toLabel": "To",
+            "customRangeLabel": "Custom",
+            "weekLabel": "W",
+            "daysOfWeek": [
+                "Su",
+                "Mo",
+                "Tu",
+                "We",
+                "Th",
+                "Fr",
+                "Sa"
+            ],
+            "monthNames": [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+            ],
+            "firstDay": 1
+        },
     });
     
     container.find('#ion-percentage').ionRangeSlider({
