@@ -2,7 +2,7 @@ module GnsEmployee
   module Backend
     class EmployeesController < GnsCore::Backend::BackendController
       before_action :set_employee, only: [:show, :edit, :update, :destroy,
-                                          :account_box]
+                                          :account_box, :activate, :deactivate]
   
       # GET /employees
       def index
@@ -73,6 +73,40 @@ module GnsEmployee
       def select2
         render json: GnsEmployee::Employee.select2(params)
       end
+      
+      # ACTIVATE /roles/1
+      def activate
+        authorize! :activate, @employee
+        
+        @employee.activate
+        
+        # Add notification
+        current_user.add_notification("gns_project.notification.employee.activate", {
+          name: @employee.name
+        })
+        
+        render json: {
+          status: 'success',
+          message: 'Employee was successfully activated.',
+        }
+      end
+      
+      # DEACTIVATE /roles/1
+      def deactivate
+        authorize! :deactivate, @employee
+        
+        @employee.deactivate
+        
+        # Add notification
+        current_user.add_notification("gns_project.notification.employee.deactivate", {
+          name: @employee.name
+        })
+        
+        render json: {
+          status: 'success',
+          message: 'Employee was successfully deactivated.',
+        }
+      end
   
       private
         # Use callbacks to share common setup or constraints between actions.
@@ -82,10 +116,10 @@ module GnsEmployee
   
         # Only allow a trusted parameter "white list" through.
         def employee_params
-          params.fetch(:employee, {}).permit(:code, :name, :department, :position, :starting_date,
+          params.fetch(:employee, {}).permit(:code, :name, :gender, :birthday,
+                                             :department, :position, :starting_date,
                                              :phone, :mobile, :email, :labor_contract_type,
-                                             :address, :country_id, :state_id, :district_id,
-                                             :active)
+                                             :address, :country_id, :state_id, :district_id)
         end
     end
   end

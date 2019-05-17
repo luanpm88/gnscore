@@ -11,6 +11,18 @@ module GnsEmployee
     has_many :project_employees, class_name: 'GnsProject::ProjectEmployee'
     has_many :project_employee_roles, class_name: 'GnsProject::ProjectEmployeeRole', through: :project_employees
     
+    # class const
+    GENDER_MALE = 'male'
+    GENDER_FEMALE = 'female'
+    
+    # get gender
+    def self.get_gender_options()
+      [
+        {text: I18n.t('male'),value: self::GENDER_MALE},
+        {text: I18n.t('female'),value: self::GENDER_FEMALE}
+      ]
+    end
+    
     # custom validate
     def must_have_code
       errors.add(:code, "can't be blank") if (id.present? and !code.present?)
@@ -152,6 +164,16 @@ module GnsEmployee
 
       self.code = "E#{num.to_s.rjust(4, '0')}"
       self.save
+		end
+    
+    # activate
+    def activate
+			update_attributes(active: true)
+		end
+    
+    # deactivate
+    def deactivate
+			update_attributes(active: false)
 		end
     
     # Has project permission

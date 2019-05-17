@@ -106,7 +106,20 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
+        <% if !project.id.nil? %>
+            <div class="form-group">
+                <label class="d-block">Remark <span class="text-danger">*</span></label>
+                <textarea rows="2" cols="5"
+                    class="form-control font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:remark).present? %>"
+                    placeholder="Enter your remark here"
+                    name="remark"
+                ></textarea>
+                <% if project.errors.full_messages_for(:remark).present? %>
+                    <span class="form-text text-danger"><%= project.errors.full_messages_for(:remark).join('<br/>').html_safe %></span>
+                <% end %>
+            </div>
+        <% end %>
     </fieldset>
     
     <hr class="mt-0">

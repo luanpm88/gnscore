@@ -27,13 +27,13 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item edit-role-button"
-                                    href="<%= gns_core.edit_backend_role_path(role) %>">
-                                    <i class="icon-pencil7"></i> Update
-                                </a>
                                 <a class="dropdown-item"
                                     href="<%= gns_core.roles_permissions_backend_roles_path(role) %>">
-                                    <i class="icon-gear"></i> Policy Setting
+                                    <i class="icon-gear"></i> Setting permissions
+                                </a>
+                                <a class="dropdown-item edit-role-button"
+                                    href="<%= gns_core.edit_backend_role_path(role) %>">
+                                    <i class="icon-pencil7"></i> Update Info
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item ajax datalist-g-link"
