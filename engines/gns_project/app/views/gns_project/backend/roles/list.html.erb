@@ -2,7 +2,7 @@
     <thead>
         <tr class="bg-info-700">
             <th>Role Name</th>
-            <th class="text-center">Number of policies</th>
+            <th class="text-center">Permissions</th>
             <th>Status</th>
             <th>Created At</th>
             <th class="text-right">Actions</th>
@@ -21,30 +21,61 @@
                 </td>
                 <td class="text-right">
                     <div class="list-icons">
-                        <div class="dropdown">
-                            <a href="#" class="list-icons-item" data-toggle="dropdown">
-                                <i class="icon-menu9"></i>
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item edit-project-role-button"
-                                    href="<%= gns_project.edit_backend_role_path(role) %>">
-                                    <i class="icon-pencil7"></i> Update Info
+                        <% if (can? :update, role) or (can? :set_permissions, role) or
+                                (can? :activate, role) or (can? :deactivate, role) or (can? :delete, role) %>
+                            <div class="dropdown">
+                                <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
                                 </a>
-                                <a class="dropdown-item"
-                                    href="<%= gns_project.permissions_backend_roles_path(role) %>">
-                                    <i class="icon-gear"></i> Policy Setting
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item ajax datalist-g-link"
-                                    href="<%= gns_project.backend_role_path(role) %>"
-                                    data-method="DELETE"
-                                    data-confirm="You are about to delete a role"
-                                >
-                                    <i class="icon-bin"></i> Delete
-                                </a>
+    
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <% if can? :update, role %>
+                                        <a class="dropdown-item edit-project-role-button"
+                                            href="<%= gns_project.edit_backend_role_path(role) %>">
+                                            <i class="icon-pencil7"></i> Update Info
+                                        </a>
+                                    <% end %>
+                                    
+                                    <% if can? :set_permissions, role %>
+                                        <a class="dropdown-item"
+                                            href="<%= gns_project.permissions_backend_roles_path(role) %>">
+                                            <i class="icon-gear"></i> Setting permissions
+                                        </a>
+                                    <% end %>
+                                    
+                                    <% if can? :activate, role %>
+                                        <a class="dropdown-item ajax datalist-g-link"
+                                            href="<%= gns_project.activate_backend_roles_path(id: role) %>"
+                                            data-method="PUT"
+                                            data-confirm="This role will work for users assigned to it"
+                                        >
+                                            <i class="icon-checkmark4"></i> Activate
+                                        </a>
+                                    <% end %>
+                                    
+                                    <% if can? :deactivate, role %>
+                                        <a class="dropdown-item ajax datalist-g-link"
+                                            href="<%= gns_project.deactivate_backend_roles_path(id: role) %>"
+                                            data-method="PUT"
+                                            data-confirm="This role will no longer work for the user assigned to it"
+                                        >
+                                            <i class="icon-blocked"></i> De-activate
+                                        </a>
+                                    <% end %>
+                                    
+                                    <% if can? :delete, role %>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item ajax datalist-g-link"
+                                            href="<%= gns_project.backend_role_path(role) %>"
+                                            data-method="DELETE"
+                                            data-confirm="You are about to delete a role"
+                                        >
+                                            <i class="icon-bin"></i> Delete
+                                        </a>
+                                    <% end %>
+                                </div>
                             </div>
-                        </div>
+                        <% end %>
                     </div>
                 </td>
             </tr>
