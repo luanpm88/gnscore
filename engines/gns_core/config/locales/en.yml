@@ -1,4 +1,6 @@
 en:
+  male: "Male"
+  female: "Female"
   activerecord:
     attributes:
       gns_core/user:

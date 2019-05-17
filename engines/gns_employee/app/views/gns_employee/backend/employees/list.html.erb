@@ -51,12 +51,7 @@
                     <td><%= employee.code %></td>
                 <% end %>
                 <% if params["show_columns"].include?("name") %>
-                    <td>
-                        <a href="<%= gns_employee.backend_employee_path(employee) %>"
-                          class="modal-control" modal-size="lg">
-                            <%= employee.name %>
-                        </a>
-                    </td>
+                    <td class="font-weight-semibold"><%= employee.name %></td>
                 <% end %>
                 <% if params["show_columns"].include?("department") %>
                     <td><%= employee.department %></td>
@@ -68,7 +63,7 @@
                     <td><%= t(".#{employee.labor_contract_type}") if employee.labor_contract_type.present? %></td>
                 <% end %>
                 <% if params["show_columns"].include?("starting_date") %>
-                    <td><%= employee.starting_date.strftime("%d/%m/%Y") %></td>
+                    <td><%= employee.starting_date.strftime("%d/%m/%Y") if employee.starting_date.present? %></td>
                 <% end %>
                 <% if params["show_columns"].include?("phone") %>
                     <td><%= employee.phone %></td>
@@ -99,30 +94,62 @@
                 <% end %>
                 <td class="text-right">
                     <div class="list-icons">
-                        <div class="dropdown">
-                            <a href="#" class="list-icons-item" data-toggle="dropdown">
-                                <i class="icon-menu9"></i>
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item edit-employee-button"
-                                    href="<%= gns_employee.edit_backend_employee_path(employee) %>">
-                                    <i class="icon-pencil7"></i> Update Info
+                        <% if (can? :read, employee) or (can? :update, employee) or (can? :delete, employee) or
+                            (can? :activate, employee) or (can? :deactivate, employee)
+                        %>
+                            <div class="dropdown">
+                                <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
                                 </a>
-                                <a class="dropdown-item"
-                                    href="#">
-                                    <i class="icon-user"></i> Add/Edit Account
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item ajax datalist-g-link"
-                                    href="<%= gns_employee.backend_employee_path(employee) %>"
-                                    data-method="DELETE"
-                                    data-confirm="You are about to delete a employee"
-                                >
-                                    <i class="icon-bin"></i> Delete
-                                </a>
+    
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <% if can? :read, employee %>
+                                        <a class="dropdown-item"
+                                            href="<%= gns_employee.backend_employee_path(employee) %>">
+                                            <i class="icon-file-eye"></i> View details
+                                        </a>
+                                    <% end %>
+                                    
+                                    <% if can? :update, employee %>
+                                        <a class="dropdown-item edit-employee-button"
+                                            href="<%= gns_employee.edit_backend_employee_path(employee) %>">
+                                            <i class="icon-pencil7"></i> Update Info
+                                        </a>
+                                    <% end %>
+                                    
+                                    <% if can? :activate, employee %>
+                                        <a class="dropdown-item ajax datalist-g-link"
+                                            href="<%= gns_employee.activate_backend_employees_path(id: employee) %>"
+                                            data-method="PUT"
+                                            data-confirm="You want to activate an employee"
+                                        >
+                                            <i class="icon-checkmark4"></i> Activate
+                                        </a>
+                                    <% end %>
+                                    
+                                    <% if can? :deactivate, employee %>
+                                        <a class="dropdown-item ajax datalist-g-link"
+                                            href="<%= gns_employee.deactivate_backend_employees_path(id: employee) %>"
+                                            data-method="PUT"
+                                            data-confirm="Deactivate this employee will also block access by their account"
+                                        >
+                                            <i class="icon-blocked"></i> De-activate
+                                        </a>
+                                    <% end %>
+                                    
+                                    <% if can? :delete, employee %>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item ajax datalist-g-link"
+                                            href="<%= gns_employee.backend_employee_path(employee) %>"
+                                            data-method="DELETE"
+                                            data-confirm="You are about to delete a employee"
+                                        >
+                                            <i class="icon-bin"></i> Delete
+                                        </a>
+                                    <% end %>
+                                </div>
                             </div>
-                        </div>
+                        <% end %>
                     </div>
                 </td>
             </tr>

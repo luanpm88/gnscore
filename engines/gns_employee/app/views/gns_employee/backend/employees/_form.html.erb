@@ -3,7 +3,7 @@
         <div class="form-group">
             <label class="d-block font-weight-semibold">Code <span class="text-danger">*</span></label>
             <input type="text" autocomplete="code"
-                class="form-control <%= 'border-danger' if employee.errors.full_messages_for(:code).present? %>" placeholder="Enter code (or automatically generate)"
+                class="form-control font-weight-semibold <%= 'border-danger' if employee.errors.full_messages_for(:code).present? %>" placeholder="Enter code (or automatically generate)"
                 name="employee[code]"
                 value="<%= employee.code %>"
             >
@@ -15,7 +15,7 @@
         <div class="form-group">
             <label class="d-block font-weight-semibold">Name <span class="text-danger">*</span></label>
             <input type="text" autocomplete="name"
-                class="form-control <%= 'border-danger' if employee.errors.full_messages_for(:name).present? %>" placeholder="Enter name"
+                class="form-control font-weight-semibold <%= 'border-danger' if employee.errors.full_messages_for(:name).present? %>" placeholder="Enter name"
                 name="employee[name]"
                 value="<%= employee.name %>"
             >
@@ -27,22 +27,33 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="d-block font-weight-semibold">Department</label>
-                    <input type="text" autocomplete="department"
-                        class="form-control" placeholder="Enter department"
-                        name="employee[department]"
-                        value="<%= employee.department %>"
-                    >
+                    <label class="d-block">Date of birth</label>
+                    <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-calendar22"></i></span>
+                        </span>
+                        <input type="text" class="form-control daterange-single font-weight-semibold"
+                            value="<%= employee.birthday.strftime('%d/%m/%Y') if employee.birthday.present? %>"
+                            name="employee[birthday]">
+                    </div>
                 </div>
             </div>
+            
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="d-block font-weight-semibold">Position</label>
-                    <input type="text" autocomplete="position"
-                        class="form-control" placeholder="Enter position"
-                        name="employee[position]"
-                        value="<%= employee.position %>"
-                    >
+                    <label class="d-block">Gender</label>
+                    <div class="input-group">
+                        <select class="form-control selectAllowClear"
+                            data-container-css-class="font-weight-semibold"
+                            data-placeholder="Choose gender"
+                            name="employee[gender]"
+                        >
+                            <% options = GnsEmployee::Employee::get_gender_options() %>
+                            <% options.each do |option| %>
+                                <option <%= 'selected' if option[:value] == employee.gender %> value="<%= option[:value] %>"><%= option[:text] %></option>
+                            <% end %>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
@@ -53,25 +64,58 @@
             <legend><span class="font-weight-semibold text-uppercase font-size-sm text-info-700">Other Information</span> (more here)</legend>
         </a>
         <div id="collapsible-control-group" class="collapse">
+            <div class="form-group">
+                <label class="d-block">Starting Date</label>
+                <div class="input-group">
+                    <span class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-calendar22"></i></span>
+                    </span>
+                    <input type="text" class="form-control daterange-single font-weight-semibold"
+                        value="<%= employee.starting_date.strftime('%d/%m/%Y') if employee.starting_date.present? %>"
+                        name="employee[starting_date]">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="d-block font-weight-semibold">Department</label>
+                <input type="text" autocomplete="department"
+                    class="form-control font-weight-semibold" placeholder="Enter department"
+                    name="employee[department]"
+                    value="<%= employee.department %>"
+                >
+            </div>
+            
+            <div class="form-group">
+                <label class="d-block font-weight-semibold">Position</label>
+                <input type="text" autocomplete="position"
+                    class="form-control font-weight-semibold" placeholder="Enter position"
+                    name="employee[position]"
+                    value="<%= employee.position %>"
+                >
+            </div>
+            
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="d-block">Telephone</label>
-                        <input type="text" class="form-control font-weight-semibold" placeholder="Enter telephone number"
+                        <input type="text" class="form-control font-weight-semibold"
+                            placeholder="Enter telephone number"
                             name="employee[phone]"
                             value="<%= employee.phone %>"
                         >
                     </div>
                     <div class="form-group">
                         <label class="d-block">Mobile</label>
-                        <input type="text" class="form-control font-weight-semibold" placeholder="Enter mobile number"
+                        <input type="text" class="form-control font-weight-semibold"
+                            placeholder="Enter mobile number"
                             name="employee[mobile]"
                             value="<%= employee.mobile %>"
                         >
                     </div>
                     <div class="form-group">
                         <label class="d-block">Email</label>
-                        <input type="text" class="form-control font-weight-semibold" placeholder="Eg: name@sao-ee.vn"
+                        <input type="text" class="form-control font-weight-semibold"
+                            placeholder="Eg: name@sao-ee.vn"
                             name="employee[email]"
                             value="<%= employee.email %>"
                         >
@@ -81,7 +125,6 @@
                         <select class="form-control selectAllowClear"
                             data-container-css-class="font-weight-semibold"
                             data-placeholder="Select labor contract type"
-                            data-fouc
                             name="employee[labor_contract_type]"
                         >
                             <option></option>
@@ -139,26 +182,11 @@
                     </div>
                 </div>
             </div>
+            
+            <hr class="mt-0">
         </div>
     </fieldset>
     
-    <fieldset>
-        <div class="form-group">
-            <div class="form-check form-check-inline form-check-right form-check-switchery">
-                <label class="form-check-label">
-                    Active:
-                    <input type="hidden" name="employee[active]" value="false" />
-                    <input type="checkbox" class="form-check-input-switchery"
-                        name="employee[active]"
-                        value="true"
-                        <%= 'checked' if employee.active? %>
-                    >
-                </label>
-            </div>
-        </div>
-    </fieldset>
-    
-    <hr class="mt-0">
     <div class="text-left">
         <button type="submit" class="btn btn-primary">Save</button>
         <a class="btn btn-light ml-1" href="<%= gns_employee.backend_employees_path %>">

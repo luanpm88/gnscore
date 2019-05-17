@@ -20,13 +20,19 @@ class Ability
     end
     
     can :activate, GnsEmployee::Employee do |employee|
-      (user.has_permission?('gns_employee.employees.activate_own') and employee.creator == user) or
-      (user.has_permission?('gns_employee.employees.activate_other') and employee.creator != user)
+      !employee.active? and
+      (
+        (user.has_permission?('gns_employee.employees.activate_own') and employee.creator == user) or
+        (user.has_permission?('gns_employee.employees.activate_other') and employee.creator != user)
+      )
     end
     
     can :deactivate, GnsEmployee::Employee do |employee|
-      (user.has_permission?('gns_employee.employees.deactivate_own') and employee.creator == user) or
-      (user.has_permission?('gns_employee.employees.deactivate_other') and employee.creator != user)
+      employee.active? and
+      (
+        (user.has_permission?('gns_employee.employees.deactivate_own') and employee.creator == user) or
+        (user.has_permission?('gns_employee.employees.deactivate_other') and employee.creator != user)
+      )
     end
     # --------------------------
     

@@ -54,19 +54,7 @@
     <div class="card-header bg-white header-elements-sm-inline">
         <h6 class="card-title">Employee Details</h6>
         <div class="header-elements">
-            <div class="list-icons">
-                <div class="form-check form-check-inline form-check-right form-check-switchery mr-3">
-                    <label class="form-check-label">
-                        Active:
-                        <input type="hidden" name="employee[active]" value="false" />
-                        <input type="checkbox" class="form-check-input-switchery"
-                            name="employee[active]"
-                            value="true"
-                            <%= 'checked' %>
-                        >
-                    </label>
-                </div>
-                
+            <div class="list-icons">                
                 <a class="list-icons-item" data-action="collapse"></a>
             </div>
         </div>
@@ -103,7 +91,7 @@
                                 </div>
         
                                 <div class="ml-3 align-self-center">
-                                    
+                                    <%= @employee.birthday.strftime('%d/%m/%Y') if @employee.birthday.present? %>
                                 </div>
                             </li>
                         </div>
@@ -114,7 +102,7 @@
                                 </div>
         
                                 <div class="ml-3 align-self-center">
-                                    
+                                    <%= t("#{@employee.gender}") if @employee.gender.present? %>
                                 </div>
                             </li>
                         </div>
@@ -146,7 +134,7 @@
                         </div>
 
                         <div class="ml-3 align-self-center">
-                            <%= t(".#{@employee.labor_contract_type}") %>
+                            <%= t(".#{@employee.labor_contract_type}") if @employee.labor_contract_type.present? %>
                         </div>
                     </li>
                     
