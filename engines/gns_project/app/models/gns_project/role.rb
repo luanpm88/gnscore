@@ -97,5 +97,15 @@ module GnsProject
       return 0 if self.roles_permissions.empty?
       self.roles_permissions.count
     end
+    
+    # activate
+    def activate
+			update_attributes(active: true)
+		end
+    
+    # deactivate
+    def deactivate
+			update_attributes(active: false)
+		end
   end
 end

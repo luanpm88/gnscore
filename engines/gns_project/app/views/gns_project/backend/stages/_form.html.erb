@@ -12,6 +12,15 @@
                 <span class="form-text text-danger"><%= stage.errors.full_messages_for(:name).join('<br/>').html_safe %></span>
             <% end %>
         </div>
+        
+        <div class="form-group">
+            <label>Description:</label>
+            <textarea rows="2" cols="5"
+                class="form-control"
+                placeholder="Enter description"
+                name="stage[description]"
+            ><%= stage.description %></textarea>
+        </div>
     </fieldset>    
     <hr class="mt-0">
     <div class="text-left">

@@ -4,7 +4,7 @@
 
 <% content_for :breadcrumb do %>
     <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-    <a href="<%= gns_core.backend_roles_path %>" class="breadcrumb-item">Project Roles</a>
+    <a href="<%= gns_project.backend_roles_path %>" class="breadcrumb-item">Project Roles</a>
     <span class="breadcrumb-item active">Permissions</span>
 <% end %>
 
@@ -15,7 +15,7 @@
 <%= form_for '', url: gns_project.update_permissions_backend_roles_path(id: @role.id), html: {multipart: false, class: 'update_permissions'} do |f| %>
 <div class="card">    
     <div class="card-header bg-transparent header-elements-inline">
-        <h5 class="card-title">Policy Setting</h5>
+        <h5 class="card-title">Setting Permissions</h5>
         
         <div class="header-elements">            
             <div class="list-icons">
@@ -59,4 +59,22 @@
         Cancel
     </a>
 </div>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        $(document).on('click', '.select_all_permissions_on', function(e) {
+            e.stopPropagation();
+    
+            var box = $(this).closest('.permissions-box');
+            box.find('input[value="true"]').prop('checked', true);
+        });
+        
+        $(document).on('click', '.select_all_permissions_off', function(e) {
+            e.stopPropagation();
+    
+            var box = $(this).closest('.permissions-box');
+            box.find('input[value="true"]').prop('checked', false);
+        });
+    </script>
 <% end %>

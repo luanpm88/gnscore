@@ -23,6 +23,8 @@ module GnsProject
   
       # GET /projects/new
       def new
+        authorize! :create, GnsProject::Project
+        
         @project = Project.new
         
         date = []
@@ -33,6 +35,8 @@ module GnsProject
   
       # POST /projects
       def create
+        authorize! :create, GnsProject::Project
+        
         @project = Project.new(project_params)
         
         @project.creator = current_user
@@ -65,6 +69,8 @@ module GnsProject
   
       # GET /projects/1/edit
       def edit
+        authorize! :update, @project
+        
         date = []
         date << @project.start_date.strftime('%d/%m/%Y')
         date << @project.end_date.strftime('%d/%m/%Y')
@@ -73,6 +79,8 @@ module GnsProject
   
       # PATCH/PUT /projects/1
       def update
+        authorize! :update, @project
+        
         if params[:project][:date_of_implementation].present?
           @project.start_date = params[:project][:date_of_implementation].to_s.split('-')[0].to_date
           @project.end_date = params[:project][:date_of_implementation].to_s.split('-')[1].to_date
@@ -100,6 +108,8 @@ module GnsProject
   
       # DELETE /projects/1
       def destroy
+        authorize! :delete, @project
+        
         # add log
         @project.log("gns_project.log.project.deleted", current_user)
         

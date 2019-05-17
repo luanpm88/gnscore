@@ -13,9 +13,11 @@
 <% end %>
 
 <% content_for :page_toolbar do %>
-    <a class="btn btn-primary" href="<%= gns_project.new_backend_project_path %>">
-        <b><i class="icon-plus22"></i></b> Create project
-    </a>
+    <% if can? :create, GnsProject::Project %>
+        <a class="btn btn-primary" href="<%= gns_project.new_backend_project_path %>">
+            <b><i class="icon-plus22"></i></b> Create project
+        </a>
+    <% end %>
 <% end %>
 
 <% content_for :page_script do %>

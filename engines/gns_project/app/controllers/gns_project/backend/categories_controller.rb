@@ -1,6 +1,7 @@
 module GnsProject::Backend
   class CategoriesController < GnsCore::Backend::BackendController
-    before_action :set_category, only: [:stages, :show, :edit, :update, :destroy]
+    before_action :set_category, only: [:stages, :show, :edit, :update, :destroy,
+                                        :activate, :deactivate]
 
     # GET /categories
     def index
@@ -88,6 +89,30 @@ module GnsProject::Backend
     # SELECT2 /categories
     def select2
       render json: GnsProject::Category.select2(params)
+    end
+    
+    # ACTIVATE /roles/1
+    def activate
+      authorize! :activate, @category
+      
+      @category.activate
+      
+      render json: {
+        status: 'success',
+        message: 'Project type was successfully activated.',
+      }
+    end
+    
+    # DEACTIVATE /roles/1
+    def deactivate
+      authorize! :deactivate, @category
+      
+      @category.deactivate
+      
+      render json: {
+        status: 'success',
+        message: 'Project type was successfully deactivated.',
+      }
     end
     
     def stages

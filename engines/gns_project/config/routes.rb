@@ -35,6 +35,8 @@ GnsProject::Engine.routes.draw do
             collection do
                 post 'list'
                 get 'select2'
+                put 'activate'
+				put 'deactivate'
                 get ':id/stages', to: 'categories#stages', as: 'stages'
             end
         end
@@ -81,6 +83,8 @@ GnsProject::Engine.routes.draw do
             collection do
                 post 'list'
                 get 'select2'
+                put 'activate'
+				put 'deactivate'
                 get ':id/permissions', to: 'roles#permissions', as: 'permissions'
                 post ':id/update_permissions', to: 'roles#update_permissions', as: 'update_permissions'
             end

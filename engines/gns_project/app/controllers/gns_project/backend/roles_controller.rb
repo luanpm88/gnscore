@@ -1,7 +1,8 @@
 module GnsProject
   module Backend
     class RolesController < GnsCore::Backend::BackendController
-      before_action :set_role, only: [:permissions, :edit, :update, :destroy]
+      before_action :set_role, only: [:permissions, :edit, :update, :destroy,
+                                      :activate, :deactivate]
   
       # GET /roles
       def index
@@ -93,9 +94,43 @@ module GnsProject
       #  redirect_to roles_url, notice: 'Role was successfully destroyed.'
       #end
       
-      # SELECT2 /stages
+      # SELECT2 /roles
       def select2
         render json: GnsProject::Role.select2(params)
+      end
+      
+      # ACTIVATE /roles/1
+      def activate
+        authorize! :activate, @role
+        
+        @role.activate
+        
+        # Add notification
+        current_user.add_notification("gns_project.notification.role.activate", {
+          name: @role.name
+        })
+        
+        render json: {
+          status: 'success',
+          message: 'Project role was successfully activated.',
+        }
+      end
+      
+      # DEACTIVATE /roles/1
+      def deactivate
+        authorize! :deactivate, @role
+        
+        @role.deactivate
+        
+        # Add notification
+        current_user.add_notification("gns_project.notification.role.deactivate", {
+          name: @role.name
+        })
+        
+        render json: {
+          status: 'success',
+          message: 'Project role was successfully deactivated.',
+        }
       end
   
       private

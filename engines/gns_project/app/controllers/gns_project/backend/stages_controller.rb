@@ -76,8 +76,6 @@ module GnsProject
             message: 'Stage was successfully destroyed.',
           }
         end
-          
-
       end
       
       # SELECT2 /stages
@@ -93,7 +91,7 @@ module GnsProject
   
         # Only allow a trusted parameter "white list" through.
         def stage_params
-          params.fetch(:stage, {}).permit(:category_id, :name)
+          params.fetch(:stage, {}).permit(:category_id, :name, :description)
         end
     end
   end

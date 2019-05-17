@@ -93,5 +93,14 @@ module GnsProject
       return data
     end
     
+    # activate
+    def activate
+			update_attributes(active: true)
+		end
+    
+    # deactivate
+    def deactivate
+			update_attributes(active: false)
+		end
   end
 end

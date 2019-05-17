@@ -13,9 +13,11 @@
 <% end %>
 
 <% content_for :page_toolbar do %>
-    <a class="btn btn-primary add-category-button" href="<%= gns_project.new_backend_category_path %>">
-        <b><i class="icon-plus22"></i></b> Create Category
-    </a>
+    <% if can? :create, GnsProject::Category %>
+        <a class="btn btn-primary add-category-button" href="<%= gns_project.new_backend_category_path %>">
+            <b><i class="icon-plus22"></i></b> Create Category
+        </a>
+    <% end %>
 <% end %>
 
 <% content_for :page_script do %>
@@ -108,7 +110,7 @@
 <% end %>
 
 <div class="row">
-    <div class="col-lg-7 col-md-12 col-ms-12">
+    <div class="col-lg-12 col-md-12 col-ms-12">
         
         <!-- Bottom tabs -->
         <div class="card">
@@ -116,15 +118,19 @@
             <div class="card-header bg-white header-elements-sm-inline">
                 <h6 class="card-title font-weight-semibold">Category Details</h6>
                 <div class="header-elements">
-                    <div class="btn-group mr-3">
-                        <button type="button" class="btn bg-blue-600 btn-sm dropdown-toggle" data-toggle="dropdown">Actions</button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item edit-category-button"
-                                href="<%= gns_project.edit_backend_category_path(@category) %>">
-                                <i class="icon-pencil5"></i> Update
-                            </a>
+                    <% if (can? :update, @category) %>
+                        <div class="btn-group mr-3">
+                            <button type="button" class="btn bg-blue-600 btn-sm dropdown-toggle" data-toggle="dropdown">Actions</button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <% if can? :update, @category %>
+                                    <a class="dropdown-item edit-category-button"
+                                        href="<%= gns_project.edit_backend_category_path(@category) %>">
+                                        <i class="icon-pencil5"></i> Update
+                                    </a>
+                                <% end %>
+                            </div>
                         </div>
-                    </div>
+                    <% end %>
                     
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="collapse"></a>
@@ -204,7 +210,9 @@
             <div class="card-header header-elements-inline">
                 <h6 class="card-title font-weight-semibold">Stage List</h6>
                 <div class="header-elements">
-                    <a href="<%= gns_project.new_backend_stage_path(category_id: @category.id) %>" class="btn bg-blue btn-sm mr-3 add-stage-button">Add stage</a>
+                    <% if can? :create, GnsProject::Stage %>
+                        <a href="<%= gns_project.new_backend_stage_path(category_id: @category.id) %>" class="btn bg-blue btn-sm mr-3 add-stage-button">Add stage</a>
+                    <% end %>
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="collapse"></a>
                     </div>

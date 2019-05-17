@@ -54,8 +54,6 @@ module GnsProject
             message: 'Task was successfully created.',
           }
         else
-          logger.info '====================='
-          logger.info @task.errors.to_json
           render :new
         end
       end
