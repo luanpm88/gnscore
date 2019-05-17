@@ -35,6 +35,8 @@ GnsProject::Engine.routes.draw do
             collection do
                 post 'list'
                 get 'select2'
+                put 'activate'
+				put 'deactivate'
                 get ':id/stages', to: 'categories#stages', as: 'stages'
             end
         end

@@ -8,35 +8,43 @@
     <table class="table">
         <thead>
             <tr class="alpha-primary">
+                <th>No.</th>
                 <th>Stage name</th>
                 <th>Description</th>
                 <th class="text-center" style="width: 100px;">Actions</th>
             </tr>
         </thead>
         <tbody>
-            <% @stages.each do |stage| %>
+            <% @stages.each_with_index do |stage, index| %>
                 <tr>
+                    <td class="font-weight-semibold" width="5%"><%= index + 1 %></td>
                     <td><%= stage.name %></td>
                     <td><%= stage.description %></td>
                     <td class="text-center">
                         <div class="list-icons">
-                            <a class="list-icons-item mr-2 insert-below-stage-button" title="Insert below"
-                                href="<%= gns_project.new_backend_stage_path(category_id: @category.id, current_stage_id: stage.id) %>">
-                                <i class="icon-plus-circle2"></i>
-                            </a>
+                            <% if can? :create, GnsProject::Stage %>
+                                <a class="list-icons-item mr-2 insert-below-stage-button" title="Insert below"
+                                    href="<%= gns_project.new_backend_stage_path(category_id: @category.id, current_stage_id: stage.id) %>">
+                                    <i class="icon-plus-circle2"></i>
+                                </a>
+                            <% end %>
                             
-                            <a class="list-icons-item edit-stage-button" title="Update stage"
-                               href="<%= gns_project.edit_backend_stage_path(stage) %>">
-                                <i class="icon-pencil7"></i>
-                            </a>
-        
-                            <a class="list-icons-item ajax delete-stage-button" title="Remove stage"
-                                href="<%= gns_project.backend_stage_path(stage) %>"
-                                data-method="DELETE"
-                                data-confirm="You are about to delete a stage"
-                            >
-                                <i class="icon-bin"></i>
-                            </a>
+                            <% if can? :update, stage %>
+                                <a class="list-icons-item edit-stage-button" title="Update stage"
+                                   href="<%= gns_project.edit_backend_stage_path(stage) %>">
+                                    <i class="icon-pencil7"></i>
+                                </a>
+                            <% end %>
+                            
+                            <% if can? :delete, stage %>
+                                <a class="list-icons-item ajax delete-stage-button" title="Remove stage"
+                                    href="<%= gns_project.backend_stage_path(stage) %>"
+                                    data-method="DELETE"
+                                    data-confirm="You are about to delete a stage"
+                                >
+                                    <i class="icon-bin"></i>
+                                </a>
+                            <% end %>
                         </div>
                     </td>
                 </tr>

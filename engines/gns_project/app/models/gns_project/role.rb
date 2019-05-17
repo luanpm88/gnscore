@@ -98,7 +98,6 @@ module GnsProject
       self.roles_permissions.count
     end
     
-    
     # activate
     def activate
 			update_attributes(active: true)
