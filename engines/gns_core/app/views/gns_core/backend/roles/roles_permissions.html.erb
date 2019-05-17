@@ -1,21 +1,21 @@
 <% content_for :title do %>
-    Role Permissions
+    System Role Permissions
 <% end %>
 
 <% content_for :breadcrumb do %>
     <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-    <a href="<%= gns_core.backend_roles_path %>" class="breadcrumb-item">Roles</a>
+    <a href="<%= gns_core.backend_roles_path %>" class="breadcrumb-item">System Roles</a>
     <span class="breadcrumb-item active">Permissions</span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Role</span>: <%= @role.name %> - Permissions</h4>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">System Role</span>: <%= @role.name %> - Permissions</h4>
 <% end %>
 
 <%= form_for '', url: gns_core.update_permissions_backend_roles_path(id: @role.id), html: {multipart: false, class: 'update_permissions'} do |f| %>
 <div class="card">    
     <div class="card-header bg-transparent header-elements-inline">
-        <h5 class="card-title">Policy Setting</h5>
+        <h5 class="card-title">Setting Permissions</h5>
         
         <div class="header-elements">            
             <div class="list-icons">
