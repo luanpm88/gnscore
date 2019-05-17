@@ -79,3 +79,21 @@
     </a>
 </div>
 <% end %>
+
+<% content_for :page_script do %>
+    <script>
+        $(document).on('click', '.select_all_permissions_on', function(e) {
+            e.stopPropagation();
+    
+            var box = $(this).closest('.permissions-box');
+            box.find('input[value="true"]').prop('checked', true);
+        });
+        
+        $(document).on('click', '.select_all_permissions_off', function(e) {
+            e.stopPropagation();
+    
+            var box = $(this).closest('.permissions-box');
+            box.find('input[value="true"]').prop('checked', false);
+        });
+    </script>
+<% end %>
