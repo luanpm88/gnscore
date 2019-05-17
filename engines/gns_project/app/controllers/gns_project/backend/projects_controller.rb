@@ -81,6 +81,15 @@ module GnsProject
       def update
         authorize! :update, @project
         
+        # check other model errors
+        @project.assign_attributes(project_params)
+        @project.valid?
+        
+        # check if remark empty errors
+        if !params[:remark].present?
+          @project.errors.add('remark', "not be blank")
+        end
+        
         if params[:project][:date_of_implementation].present?
           @project.start_date = params[:project][:date_of_implementation].to_s.split('-')[0].to_date
           @project.end_date = params[:project][:date_of_implementation].to_s.split('-')[1].to_date
@@ -88,9 +97,12 @@ module GnsProject
           @project.errors.add('date', "not be blank")
         end
         
-        if @project.update(project_params)          
+        # check error empty?
+        if @project.errors.empty?
+          @project.save
+          
           # add log
-          @project.log("gns_project.log.project.updated", current_user)
+          @project.log("gns_project.log.project.updated", current_user, params[:remark])
           
           # add notification
           current_user.add_notification("gns_project.notification.project.updated", {
