@@ -16,7 +16,7 @@
                     </div>
                     <div>
                         <p class="media-title text-primary mb-1"><%= @employee.name %></p>
-                        <footer class="blockquote-footer">Email: <span class="font-weight-semibold"><%= @employee.user.email %></span></footer>
+                        <footer class="blockquote-footer">Email (login): <span class="font-weight-semibold"><%= @employee.user.email %></span></footer>
                         <footer class="blockquote-footer">System roles:
                             <% if @employee.user.roles.empty? %>
                                 <span class="font-weight-semibold">No Access</span>

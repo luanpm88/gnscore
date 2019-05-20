@@ -117,7 +117,7 @@ module GnsEmployee
         # Only allow a trusted parameter "white list" through.
         def employee_params
           params.fetch(:employee, {}).permit(:code, :name, :gender, :birthday,
-                                             :department, :position, :starting_date,
+                                             :department, :position, :starting_date, :leaving_date,
                                              :phone, :mobile, :email, :labor_contract_type,
                                              :address, :country_id, :state_id, :district_id)
         end
