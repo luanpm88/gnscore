@@ -20,7 +20,10 @@
             
             <div class="form-group">
                 <label class="d-block font-weight-semibold">Add file:</label>
-                <input name="comment[file]" type="file" class="file-input">
+                <div class="custom-file">
+                    <input type="file" name="comment[file][]" class="custom-file-input" multiple>
+                    <label class="custom-file-label">Choose file</label>
+                </div>
                 <span class="form-text text-muted">Accepted formats: pdf, doc. Max file size 2Mb</span>
             </div>
         </fieldset>
@@ -30,4 +33,22 @@
 <div class="text-right">
     <button type="submit" class="btn btn-primary"><i class="icon-paperplane mr-1"></i> Send</button>
 </div>
+<% end %>
+
+<% content_for :page_script do %>
+<script>
+    // The name of the file appear on select
+    $(".custom-file-input").on("change", function() {        
+        if (typeof(this.files[0]) !== 'undefined') {
+            var names = [];
+            for (var i = 0; i < $(this).get(0).files.length; ++i) {
+                names.push($(this).get(0).files[i].name);
+            }
+            fileCount = $(this).get(0).files.length;
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileCount  + ' file(s) selected');
+        } else {
+            $(this).siblings(".custom-file-label").removeClass("selected").html('Choose file');
+        }
+    });
+</script>
 <% end %>
