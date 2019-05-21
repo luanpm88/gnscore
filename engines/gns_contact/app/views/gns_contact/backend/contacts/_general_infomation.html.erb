@@ -5,10 +5,12 @@
             <div class="btn-group mr-3">
                 <button type="button" class="btn bg-blue-600 dropdown-toggle" data-toggle="dropdown">Actions</button>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item add-current-contact-button"
-                        href="<%= gns_contact.edit_backend_contact_path(@contact) %>">
-                        <i class="icon-pencil5"></i> Update
-                    </a>
+                    <% if can? :update, @contact %>
+                        <a class="dropdown-item add-current-contact-button"
+                            href="<%= gns_contact.edit_backend_contact_path(@contact) %>">
+                            <i class="icon-pencil5"></i> Update Info
+                        </a>
+                    <% end %>
                 </div>
             </div>
             
@@ -78,7 +80,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Belongs To/Company:</div>
+                            <div class="font-weight-semibold">Company:</div>
                         </div>
     
                         <div class="ml-3 align-self-center text-blue-800">
@@ -92,7 +94,7 @@
                         </div>
     
                         <div class="ml-3 align-self-center text-blue-800">
-                            <%= @contact.get_full_address %>
+                            <%= display_address(@contact) %>
                         </div>
                     </li>
                     
@@ -175,7 +177,7 @@
                         </div>
     
                         <div class="ml-3 align-self-center text-blue-800">
-                            <span class="badge badge-<%= @contact.get_status_label %>"><%= t @contact.get_status_label %></span>
+                            <%= display_active(@contact.active) %>
                         </div>
                     </li>
                     

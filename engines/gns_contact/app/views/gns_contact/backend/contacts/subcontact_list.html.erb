@@ -36,19 +36,23 @@
                                 </a>
     
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item edit-subcontact-button"
-                                        href="<%= gns_contact.subcontact_edit_backend_contacts_path(child) %>">
-                                        <i class="icon-pencil7"></i> Update infomation
-                                    </a>
+                                    <% if can? :update, child %>
+                                        <a class="dropdown-item edit-subcontact-button"
+                                            href="<%= gns_contact.subcontact_edit_backend_contacts_path(child) %>">
+                                            <i class="icon-pencil7"></i> Update infomation
+                                        </a>
+                                    <% end %>
                                     
                                     <!--<div class="dropdown-divider"></div>-->
-                                    <a class="dropdown-item ajax remove-subcontact-button"
-                                        href="<%= gns_contact.remove_subcontact_backend_contacts_path(child, current_parent_id: @contact.id) %>"
-                                        data-method="PUT"
-                                        data-confirm="You want to remove a contact from the contact persons"
-                                    >
-                                        <i class="icon-subtract"></i> Remove from list
-                                    </a>
+                                    <% if can? :update, @contact %>
+                                        <a class="dropdown-item ajax remove-subcontact-button"
+                                            href="<%= gns_contact.remove_subcontact_backend_contacts_path(child, current_parent_id: @contact.id) %>"
+                                            data-method="PUT"
+                                            data-confirm="You want to remove a contact from the contact persons"
+                                        >
+                                            <i class="icon-subtract"></i> Remove from list
+                                        </a>
+                                    <% end %>
                                 </div>
                             </div>
                         </div>

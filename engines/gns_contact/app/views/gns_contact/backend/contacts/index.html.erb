@@ -12,9 +12,11 @@
 <% end %>
 
 <% content_for :page_toolbar do %>
-    <a class="btn btn-primary add-contact-button" href="<%= gns_contact.new_backend_contact_path %>">
-        <b><i class="icon-plus22"></i></b> Create Contact
-    </a>
+    <% if can? :create, GnsContact::Contact %>
+        <a class="btn btn-primary add-contact-button" href="<%= gns_contact.new_backend_contact_path %>">
+            <b><i class="icon-plus22"></i></b> Create Contact
+        </a>
+    <% end %>
 <% end %>
 
 <% content_for :page_script do %>
@@ -205,8 +207,8 @@
                     <div class="form-group">
                         <select name="active" data-placeholder="Filter by status..."
                             class="form-control selectAllowClear" data-fouc>
-                            <option value="true">Active</option>
-                            <option value="false">Inactive</option>
+                            <option value="true"><%= t('active') %></option>
+                            <option value="false"><%= t('inactive') %></option>
                         </select>
                     </div>
                 </div>
@@ -284,7 +286,7 @@
             </div>
         </div>
     
-        <div class="table-responsive datalist-content">
+        <div class="datalist-content">
             
         </div>
     </form>

@@ -123,8 +123,13 @@
             <%= render "contact_menu", title: 'Contact Person' %>
             <div class="card-body">
                 <div class="text-right">
-                    <a href="<%= gns_contact.subcontact_new_backend_contacts_path(parent_id: @contact.id) %>" class="btn bg-blue mr-3 add-new-subcontact-button">Add new contact</a>
-                    <a href="<%= gns_contact.add_subcontact_backend_contacts_path %>" class="btn bg-blue add-subcontact-exist-button">Add contact already exists</a>
+                    <% if can? :create, GnsContact::Contact %>
+                        <a href="<%= gns_contact.subcontact_new_backend_contacts_path(parent_id: @contact.id) %>" class="btn bg-blue mr-3 add-new-subcontact-button">Add new contact</a>
+                    <% end %>
+                    
+                    <% if can? :update, @contact %>
+                        <a href="<%= gns_contact.add_subcontact_backend_contacts_path %>" class="btn bg-blue add-subcontact-exist-button">Add contact already exists</a>
+                    <% end %>
                 </div>
             </div>
             <div class="children-contact-list" style="position: relative; min-height: 130px">
