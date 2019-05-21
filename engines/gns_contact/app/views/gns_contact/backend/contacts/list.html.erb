@@ -101,65 +101,69 @@
                 <% end %>
                 <td class="text-right">
                     <div class="list-icons">
-                        <div class="dropdown">
-                            <a href="#" class="list-icons-item" data-toggle="dropdown">
-                                <i class="icon-menu9"></i>
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <% if can? :read, contact %>
-                                    <a href="<%= gns_contact.backend_contact_path(contact) %>" class="dropdown-item">
-                                        <i class="icon-file-eye"></i> View details
-                                    </a>
-                                <% end %>
-                                
-                                <% if can? :update, contact %>
-                                    <% if contact.contact_type == GnsContact::Contact::TYPE_COMPANY %>
-                                        <a class="dropdown-item edit-contact-button"
-                                            href="<%= gns_contact.edit_backend_contact_path(contact) %>">
-                                            <i class="icon-pencil7"></i> Update Info
+                        <% if (can? :read, contact) or (can? :update, contact) or
+                            (can? :activate, contact) or (can? :deactivate, contact) or
+                            (can? :delete, contact) %>
+                            <div class="dropdown">
+                                <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+    
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <% if can? :read, contact %>
+                                        <a href="<%= gns_contact.backend_contact_path(contact) %>" class="dropdown-item">
+                                            <i class="icon-file-eye"></i> View details
                                         </a>
                                     <% end %>
-                                    <% if contact.contact_type == GnsContact::Contact::TYPE_PERSON %>
-                                        <a class="dropdown-item edit-contact-button"
-                                            href="<%= gns_contact.subcontact_edit_backend_contacts_path(contact) %>">
-                                            <i class="icon-pencil7"></i> Update Info
+                                    
+                                    <% if can? :update, contact %>
+                                        <% if contact.contact_type == GnsContact::Contact::TYPE_COMPANY %>
+                                            <a class="dropdown-item edit-contact-button"
+                                                href="<%= gns_contact.edit_backend_contact_path(contact) %>">
+                                                <i class="icon-pencil7"></i> Update Info
+                                            </a>
+                                        <% end %>
+                                        <% if contact.contact_type == GnsContact::Contact::TYPE_PERSON %>
+                                            <a class="dropdown-item edit-contact-button"
+                                                href="<%= gns_contact.subcontact_edit_backend_contacts_path(contact) %>">
+                                                <i class="icon-pencil7"></i> Update Info
+                                            </a>
+                                        <% end %>
+                                    <% end %>
+                                    
+                                    <% if can? :activate, contact %>
+                                        <a class="dropdown-item ajax datalist-g-link"
+                                            href="<%= gns_contact.activate_backend_contacts_path(id: contact) %>"
+                                            data-method="PUT"
+                                            data-confirm="You want to activate a contact"
+                                        >
+                                            <i class="icon-checkmark4"></i> Activate
                                         </a>
                                     <% end %>
-                                <% end %>
-                                
-                                <% if can? :activate, contact %>
-                                    <a class="dropdown-item ajax datalist-g-link"
-                                        href="<%= gns_contact.activate_backend_contacts_path(id: contact) %>"
-                                        data-method="PUT"
-                                        data-confirm="You want to activate a contact"
-                                    >
-                                        <i class="icon-checkmark4"></i> Activate
-                                    </a>
-                                <% end %>
-                                
-                                <% if can? :deactivate, contact %>
-                                    <a class="dropdown-item ajax datalist-g-link"
-                                        href="<%= gns_contact.deactivate_backend_contacts_path(id: contact) %>"
-                                        data-method="PUT"
-                                        data-confirm="You are about to de-activate a contact"
-                                    >
-                                        <i class="icon-blocked"></i> De-activate
-                                    </a>
-                                <% end %>
-                                
-                                <% if can? :delete, contact %>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item ajax datalist-g-link"
-                                        href="<%= gns_contact.backend_contact_path(contact) %>"
-                                        data-method="DELETE"
-                                        data-confirm="You are about to delete a contact"
-                                    >
-                                        <i class="icon-bin"></i> Delete
-                                    </a>
-                                <% end %>
+                                    
+                                    <% if can? :deactivate, contact %>
+                                        <a class="dropdown-item ajax datalist-g-link"
+                                            href="<%= gns_contact.deactivate_backend_contacts_path(id: contact) %>"
+                                            data-method="PUT"
+                                            data-confirm="You are about to de-activate a contact"
+                                        >
+                                            <i class="icon-blocked"></i> De-activate
+                                        </a>
+                                    <% end %>
+                                    
+                                    <% if can? :delete, contact %>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item ajax datalist-g-link"
+                                            href="<%= gns_contact.backend_contact_path(contact) %>"
+                                            data-method="DELETE"
+                                            data-confirm="You are about to delete a contact"
+                                        >
+                                            <i class="icon-bin"></i> Delete
+                                        </a>
+                                    <% end %>
+                                </div>
                             </div>
-                        </div>
+                        <% end %>
                     </div>
                 </td>
             </tr>
