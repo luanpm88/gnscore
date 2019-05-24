@@ -16,19 +16,20 @@ module GnsProject::Backend
 
     # GET /categories/1
     def show
+      authorize! :read, @category
     end
 
     # GET /categories/new
     def new
+      authorize! :create, GnsProject::Category
+      
       @category = GnsProject::Category.new
-    end
-
-    # GET /categories/1/edit
-    def edit
     end
 
     # POST /categories
     def create
+      authorize! :create, GnsProject::Category
+      
       @category = GnsProject::Category.new(category_params)
       
       @category.creator = current_user
@@ -43,8 +44,15 @@ module GnsProject::Backend
       end
     end
 
+    # GET /categories/1/edit
+    def edit
+      authorize! :update, @category
+    end
+
     # PATCH/PUT /categories/1
     def update
+      authorize! :update, @category
+      
       if @category.update(category_params)
         render json: {
           status: 'success',
@@ -57,6 +65,8 @@ module GnsProject::Backend
 
     # DELETE /categories/1
     def destroy
+      authorize! :delete, @category
+      
       if @category.destroy
         respond_to do |format|
           format.html {
@@ -129,7 +139,7 @@ module GnsProject::Backend
 
       # Only allow a trusted parameter "white list" through.
       def category_params
-        params.fetch(:category, {}).permit(:name, :description, :active)
+        params.fetch(:category, {}).permit(:name, :description)
       end
   end
 end

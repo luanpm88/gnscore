@@ -4,12 +4,14 @@ module GnsEmployee
     validate :must_have_code
     
     belongs_to :creator, class_name: 'GnsCore::User'
-    has_one :user, class_name: 'GnsCore::User'
+    has_one :user, class_name: 'GnsCore::User', dependent: :restrict_with_error
     belongs_to :country, class_name: 'GnsArea::Country', optional: true
     belongs_to :state, class_name: 'GnsArea::State', optional: true
     belongs_to :district, class_name: 'GnsArea::District', optional: true
-    has_many :project_employees, class_name: 'GnsProject::ProjectEmployee'
-    has_many :project_employee_roles, class_name: 'GnsProject::ProjectEmployeeRole', through: :project_employees
+    has_many :project_employees, class_name: 'GnsProject::ProjectEmployee', dependent: :restrict_with_error
+    has_many :project_employee_roles, class_name: 'GnsProject::ProjectEmployeeRole', through: :project_employees, dependent: :restrict_with_error
+    has_many :projects, class_name: 'GnsProject::Project', foreign_key: :manager_id, dependent: :restrict_with_error
+    has_many :task, class_name: 'GnsProject::Task', foreign_key: :employee_id, dependent: :restrict_with_error
     
     # class const
     GENDER_MALE = 'male'
@@ -26,6 +28,11 @@ module GnsEmployee
     # custom validate
     def must_have_code
       errors.add(:code, "can't be blank") if (id.present? and !code.present?)
+    end
+    
+    # get coutry name
+    def creator_name
+      creator.present? ? creator.name : ''
     end
     
     # get coutry name

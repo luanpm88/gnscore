@@ -35,6 +35,9 @@
             <% if params["show_columns"].include?("status") %>
                 <th class="text-nowrap">Status</th>
             <% end %>
+            <% if params["show_columns"].include?("creator") %>
+                <th class="text-nowrap">Added By</th>
+            <% end %>
             <% if params["show_columns"].include?("created_at") %>
                 <th class="text-nowrap">Created Date</th>
             <% end %>
@@ -80,6 +83,11 @@
                 <% if params["show_columns"].include?("status") %>
                     <td>
                         <%= display_active(employee.active) %>
+                    </td>
+                <% end %>
+                <% if params["show_columns"].include?("creator") %>
+                    <td>
+                        <%= employee.creator_name %>
                     </td>
                 <% end %>
                 <% if params["show_columns"].include?("created_at") %>

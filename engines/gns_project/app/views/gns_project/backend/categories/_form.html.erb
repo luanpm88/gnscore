@@ -25,9 +25,7 @@
     </fieldset>    
     <hr class="mt-0">
     <div class="text-left">
-        <button type="submit" class="btn btn-primary">Save</button>
-        <a class="btn btn-light ml-1" href="<%= gns_project.backend_categories_path %>">
-            Cancel
-        </a>
+        <button type="submit" class="btn btn-primary"><%= t('save') %></button>
+        <button type="button" class="btn btn-light ml-1" data-dismiss="modal"><%= t('cancel') %></button>
     </div>
 <% end %>

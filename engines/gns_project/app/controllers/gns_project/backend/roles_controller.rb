@@ -17,9 +17,12 @@ module GnsProject
       
       # GET /roles/1
       def permissions
+        authorize! :set_permissions, @role
       end
       
       def update_permissions
+        authorize! :set_permissions, @role
+        
         @role = Role.find(params[:id])
         
         if params[:permissions].present?
@@ -43,15 +46,15 @@ module GnsProject
   
       # GET /roles/new
       def new
+        authorize! :create, GnsProject::Role
+        
         @role = Role.new
-      end
-  
-      # GET /roles/1/edit
-      def edit
       end
   
       # POST /roles
       def create
+        authorize! :create, GnsProject::Role
+        
         @role = Role.new(role_params)
         
         @role.creator = current_user
@@ -71,8 +74,15 @@ module GnsProject
         end
       end
   
+      # GET /roles/1/edit
+      def edit
+        authorize! :update, @role
+      end
+  
       # PATCH/PUT /roles/1
       def update
+        authorize! :update, @role
+        
         if @role.update(role_params)
           # Add notification
           current_user.add_notification("gns_project.notification.role.updated", {

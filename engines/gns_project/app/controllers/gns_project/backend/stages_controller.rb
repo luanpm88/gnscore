@@ -10,20 +10,21 @@ module GnsProject
   
       # GET /stages/1
       def show
+        authorize! :read, @stage
       end
   
       # GET /stages/new
       def new
+        authorize! :create, GnsProject::Stage
+        
         @stage = Stage.new
         @stage.category = Category.find(params[:category_id])
       end
   
-      # GET /stages/1/edit
-      def edit
-      end
-  
       # POST /stages
       def create
+        authorize! :create, GnsProject::Stage
+        
         @stage = Stage.new(stage_params)
         
         current_stage_id = params.to_unsafe_hash[:stage][:current_stage_id]
@@ -47,8 +48,15 @@ module GnsProject
         end
       end
   
+      # GET /stages/1/edit
+      def edit
+        authorize! :update, @stage
+      end
+  
       # PATCH/PUT /stages/1
       def update
+        authorize! :update, @stage
+        
         if @stage.update(stage_params)
           flash[:success] = 'Stage was successfully updated.'
           
@@ -63,6 +71,8 @@ module GnsProject
   
       # DELETE /stages/1
       def destroy
+        authorize! :delete, @stage
+        
         @stage.destroy
         
         if !@stage.errors.empty?

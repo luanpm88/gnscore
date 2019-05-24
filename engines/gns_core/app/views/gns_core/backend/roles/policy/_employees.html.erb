@@ -152,6 +152,36 @@
                             </td>
                             <td>Allow users to <b>de-activate</b> other people's employees</td>
                         </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_employee.employees.delete_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_employee.employees.delete_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_employee.employees.delete_own"
+                                        <%= 'checked' if @role.has_permission?('gns_employee.employees.delete_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_employee.employees.delete_own">Delete own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>delete</b> their own employees</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_employee.employees.delete_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_employee.employees.delete_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_employee.employees.delete_other"
+                                        <%= 'checked' if @role.has_permission?('gns_employee.employees.delete_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_employee.employees.delete_other">Delete other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>delete</b> other people's employees</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

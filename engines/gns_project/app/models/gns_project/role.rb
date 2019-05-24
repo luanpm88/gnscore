@@ -4,6 +4,11 @@ module GnsProject
     belongs_to :creator, class_name: 'GnsCore::User'
     has_many :roles_permissions, class_name: 'GnsProject::RolesPermission'
     
+    # get creator name
+    def creator_name
+      creator.present? ? creator.name : ''
+    end
+    
     def get_status_label
       active? ? 'active' : 'inactive'
     end

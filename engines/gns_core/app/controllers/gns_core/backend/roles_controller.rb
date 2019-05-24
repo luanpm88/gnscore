@@ -1,7 +1,8 @@
 module GnsCore
   module Backend
     class RolesController < GnsCore::Backend::BackendController
-      before_action :set_role, only: [:roles_permissions, :edit, :update, :destroy]
+      before_action :set_role, only: [:roles_permissions, :edit, :update, :destroy,
+                                      :activate, :deactivate]
   
       # GET /roles
       def index
@@ -16,9 +17,12 @@ module GnsCore
   
       # GET /roles/1
       def roles_permissions
+        authorize! :set_permissions, @role
       end
       
       def update_permissions
+        authorize! :set_permissions, @role
+        
         @role = Role.find(params[:id])
         
         if params[:permissions].present?
@@ -42,16 +46,22 @@ module GnsCore
   
       # GET /roles/new
       def new
+        authorize! :create, GnsCore::Role
+        
         @role = Role.new
       end
   
       # GET /roles/1/edit
       def edit
+        authorize! :update, @role
       end
   
       # POST /roles
       def create
+        authorize! :create, GnsCore::Role
+        
         @role = Role.new(role_params)
+        @role.creator = current_user
   
         if @role.save
           # Add notification
@@ -70,6 +80,8 @@ module GnsCore
   
       # PATCH/PUT /roles/1
       def update
+        authorize! :update, @role
+        
         if @role.update(role_params)
           # Add notification
           current_user.add_notification("gns_core.notification.role.updated", {
@@ -84,16 +96,61 @@ module GnsCore
           render :edit
         end
       end
-  
+      
       # DELETE /roles/1
-      #def destroy
-      #  @role.destroy
-      #  redirect_to roles_url, notice: 'Role was successfully destroyed.'
-      #end
+      def destroy
+        authorize! :delete, @role
+        
+        if @role.destroy
+          render json: {
+            status: 'success',
+            message: 'The role was successfully destroyed.',
+          }
+        else
+          render json: {
+            status: 'warning',
+            message: @role.errors.full_messages.to_sentence
+          }
+        end
+      end
       
       # select2 ajax
       def select2
         render json: Role.select2(params)
+      end
+      
+      # ACTIVATE /roles/1
+      def activate
+        authorize! :activate, @role
+        
+        @role.activate
+        
+        # Add notification
+        current_user.add_notification("gns_project.notification.role.activate", {
+          name: @role.name
+        })
+        
+        render json: {
+          status: 'success',
+          message: 'Employee was successfully activated.',
+        }
+      end
+      
+      # DEACTIVATE /roles/1
+      def deactivate
+        authorize! :deactivate, @role
+        
+        @role.deactivate
+        
+        # Add notification
+        current_user.add_notification("gns_project.notification.role.deactivate", {
+          name: @role.name
+        })
+        
+        render json: {
+          status: 'success',
+          message: 'Employee was successfully deactivated.',
+        }
       end
   
       private

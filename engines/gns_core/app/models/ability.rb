@@ -2,6 +2,76 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    # gns_core /users
+    can :create, GnsCore::User if user.has_permission?('gns_core.users.create')
+    
+    can :read, GnsCore::User do |account|
+      (user.has_permission?('gns_core.users.read_own') and account.creator == user) or
+      (user.has_permission?('gns_core.users.read_other') and account.creator != user)
+    end
+    
+    can :update, GnsCore::User do |account|
+      (user.has_permission?('gns_core.users.update_own') and account.creator == user) or
+      (user.has_permission?('gns_core.users.update_other') and account.creator != user)
+    end
+    
+    can :lock, GnsCore::User do |account|
+      #!account.active? and
+      (
+        (user.has_permission?('gns_core.users.deactivate_own') and account.creator == user) or
+        (user.has_permission?('gns_core.users.deactivate_other') and account.creator != user)
+      )
+    end
+    
+    can :unlock, GnsCore::User do |account|
+      #account.active? and
+      (
+        (user.has_permission?('gns_core.users.activate_own') and account.creator == user) or
+        (user.has_permission?('gns_core.users.activate_other') and account.creator != user)
+      )
+    end
+    # --------------------------
+    
+    # gns_core /roles
+    can :create, GnsCore::Role if user.has_permission?('gns_core.roles.create')
+    
+    can :read, GnsCore::Role do |role|
+      (user.has_permission?('gns_core.roles.read_own') and role.creator == user) or
+      (user.has_permission?('gns_core.roles.read_other') and role.creator != user)
+    end
+    
+    can :set_permissions, GnsCore::Role do |role|
+      (user.has_permission?('gns_core.roles.set_permissions_own') and role.creator == user) or
+      (user.has_permission?('gns_core.roles.set_permissions_other') and role.creator != user)
+    end
+    
+    can :update, GnsCore::Role do |role|
+      (user.has_permission?('gns_core.roles.update_own') and role.creator == user) or
+      (user.has_permission?('gns_core.roles.update_other') and role.creator != user)
+    end
+    
+    can :delete, GnsCore::Role do |role|
+      (user.has_permission?('gns_core.roles.delete_own') and role.creator == user) or
+      (user.has_permission?('gns_core.roles.delete_other') and role.creator != user)
+    end
+    
+    can :activate, GnsCore::Role do |role|
+      !role.active? and
+      (
+        (user.has_permission?('gns_core.roles.activate_own') and role.creator == user) or
+        (user.has_permission?('gns_core.roles.activate_other') and role.creator != user)
+      )
+    end
+    
+    can :deactivate, GnsCore::Role do |role|
+      role.active? and
+      (
+        (user.has_permission?('gns_core.roles.deactivate_own') and role.creator == user) or
+        (user.has_permission?('gns_core.roles.deactivate_other') and role.creator != user)
+      )
+    end
+    # --------------------------
+    
     # gns_employee /employees
     can :create, GnsEmployee::Employee if user.has_permission?('gns_employee.employees.create')
     
@@ -16,7 +86,8 @@ class Ability
     end
     
     can :delete, GnsEmployee::Employee do |employee|
-      false
+      (user.has_permission?('gns_employee.employees.delete_own') and employee.creator == user) or
+      (user.has_permission?('gns_employee.employees.delete_other') and employee.creator != user)
     end
     
     can :activate, GnsEmployee::Employee do |employee|
@@ -55,13 +126,19 @@ class Ability
     end
     
     can :activate, GnsContact::Contact do |contact|
-      (user.has_permission?('gns_contact.contacts.activate_own') and contact.creator == user) or
-      (user.has_permission?('gns_contact.contacts.activate_other') and contact.creator != user)
+      !contact.active? and
+      (
+        (user.has_permission?('gns_contact.contacts.activate_own') and contact.creator == user) or
+        (user.has_permission?('gns_contact.contacts.activate_other') and contact.creator != user)
+      )
     end
     
     can :deactivate, GnsContact::Contact do |contact|
-      (user.has_permission?('gns_contact.contacts.deactivate_own') and contact.creator == user) or
-      (user.has_permission?('gns_contact.contacts.deactivate_other') and contact.creator != user)
+      contact.active? and
+      (
+        (user.has_permission?('gns_contact.contacts.deactivate_own') and contact.creator == user) or
+        (user.has_permission?('gns_contact.contacts.deactivate_other') and contact.creator != user)
+      )
     end
     # --------------------------
     
@@ -84,13 +161,19 @@ class Ability
     end
     
     can :activate, GnsContact::Category do |category|
-      (user.has_permission?('gns_contact.categories.activate_own') and category.creator == user) or
-      (user.has_permission?('gns_contact.categories.activate_other') and category.creator != user)
+      !category.active? and
+      (
+        (user.has_permission?('gns_contact.categories.activate_own') and category.creator == user) or
+        (user.has_permission?('gns_contact.categories.activate_other') and category.creator != user)
+      )
     end
     
     can :deactivate, GnsContact::Category do |category|
-      (user.has_permission?('gns_contact.categories.deactivate_own') and category.creator == user) or
-      (user.has_permission?('gns_contact.categories.deactivate_other') and category.creator != user)
+      category.active? and
+      (
+        (user.has_permission?('gns_contact.categories.deactivate_own') and category.creator == user) or
+        (user.has_permission?('gns_contact.categories.deactivate_other') and category.creator != user)
+      )
     end
     # --------------------------
     

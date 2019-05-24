@@ -12,9 +12,11 @@
 <% end %>
 
 <% content_for :page_toolbar do %>
-    <a class="btn btn-primary add-project-role-button" href="<%= gns_project.new_backend_role_path %>">
-        <b><i class="icon-plus22"></i></b> Create Project Role
-    </a>
+    <% if can? :create, GnsProject::Role %>
+        <a class="btn btn-primary add-project-role-button" href="<%= gns_project.new_backend_role_path %>">
+            <b><i class="icon-plus22"></i></b> Create Project Role
+        </a>
+    <% end %>
 <% end %>
 
 <% content_for :page_script do %>
@@ -81,7 +83,7 @@
     data-url="<%= gns_project.list_backend_roles_path %>"
 >
     <div class="card-header header-elements-inline">
-        <h5 class="card-title">Project Role list</h5>
+        <h5 class="card-title">Project Role List</h5>
         <div class="header-elements">
             <div class="list-icons">
                 <a class="list-icons-item" data-action="collapse"></a>
@@ -90,6 +92,23 @@
     </div>
     
     <form class="datalist-filters">
+        <div class="card-body pb-0">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select name="active" data-placeholder="Filter by status..."
+                            class="form-control selectAllowClear">
+                            <option value="true"><%= t('active') %></option>
+                            <option value="false"><%= t('inactive') %></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-9 text-right">
+                    <span class="btn btn-primary mb-3 datalist-search-button">Go</span>
+                </div>
+            </div>
+        </div>
+        
         <div class="card-body">
             <div class="datalist-header flex space-between">
                 <div class="keyword-search mr-2">
@@ -117,7 +136,7 @@
             </div>
         </div>
     
-        <div class="table-responsive datalist-content">
+        <div class="datalist-content">
             
         </div>
     </form>

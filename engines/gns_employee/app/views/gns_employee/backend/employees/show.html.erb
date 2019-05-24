@@ -240,15 +240,17 @@
     </div>
 </div>
 
-<div class="card">
-    <div class="card-header bg-white header-elements-sm-inline">
-        <h6 class="card-title">User Account</h6>
-        <div class="header-elements">
-            <div class="list-icons">
-                
-                <a class="list-icons-item" data-action="collapse"></a>
+<% if can? :read, @employee.user %>
+    <div class="card">
+        <div class="card-header bg-white header-elements-sm-inline">
+            <h6 class="card-title">User Account</h6>
+            <div class="header-elements">
+                <div class="list-icons">
+                    
+                    <a class="list-icons-item" data-action="collapse"></a>
+                </div>
             </div>
         </div>
+        <div class="account-infomation"></div>
     </div>
-    <div class="account-infomation"></div>
-</div>
+<% end %>

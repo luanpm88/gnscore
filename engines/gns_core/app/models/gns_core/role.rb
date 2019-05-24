@@ -1,18 +1,24 @@
 module GnsCore
   class Role < ApplicationRecord
     #has_many :users_roles, class_name: 'GnsCore::UsersRole', dependent: :restrict_with_error
+    belongs_to :creator, class_name: 'GnsCore::User'
     has_and_belongs_to_many :users, class_name: 'GnsCore::User'
+    has_many :roles_users, class_name: 'GnsCore::RolesUser', dependent: :restrict_with_error
+    has_many :roles_permissions, class_name: 'GnsCore::RolesPermission', dependent: :restrict_with_error
     
-    has_many :roles_permissions, class_name: 'GnsCore::RolesPermission'
+    # get all active
+    def self.get_active
+			self.where(active: true)
+		end
     
     # Filters
     def self.filter(query, params)
       params = params.to_unsafe_hash
       
       # filter by active
-      #if params[:active].present?
-      #  query = query.where(active: params[:active])
-      #end
+      if params[:active].present?
+        query = query.where(active: params[:active])
+      end
       
       # single keyword
       if params[:keyword].present?
@@ -48,7 +54,8 @@ module GnsCore
       page = 1      
       data = {results: [], pagination: {more: false}}
       
-      query = self.order(:name)
+      query = self.get_active
+      query = query.order(:name)
       
       # keyword
       if params[:q].present?
@@ -88,5 +95,15 @@ module GnsCore
     def has_permission?(permission)
       return !self.roles_permissions.where(permission: permission).empty?
     end
+    
+    # activate
+    def activate
+			update_attributes(active: true)
+		end
+    
+    # deactivate
+    def deactivate
+			update_attributes(active: false)
+		end
   end
 end

@@ -1,20 +1,22 @@
 <% content_for :title do %>
-    Employee Management
+    User
 <% end %>
 
 <% content_for :breadcrumb do %>
     <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-    <span class="breadcrumb-item active">Employees</span>
+    <span class="breadcrumb-item active">Users</span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-users mr-2"></i> <span class="font-weight-semibold">Employee</span></h4>
+    <h4><i class="icon-users mr-2"></i> <span class="font-weight-semibold">User</span></h4>
 <% end %>
 
 <% content_for :page_toolbar do %>
-    <a class="btn btn-primary add-user-button" href="<%= gns_core.new_backend_user_path %>">
-        <b><i class="icon-plus22"></i></b> Create Employee
-    </a>
+    <% if can? :create, GnsCore::User %>
+        <a class="btn btn-primary add-user-button" href="<%= gns_core.new_backend_user_path %>">
+            <b><i class="icon-plus22"></i></b> Create New User
+        </a>
+    <% end %>
 <% end %>
 
 <% content_for :page_script do %>
@@ -164,7 +166,7 @@
     data-url="<%= gns_core.list_backend_users_path %>"
 >
     <div class="card-header header-elements-inline">
-        <h5 class="card-title">Employee list</h5>
+        <h5 class="card-title">User list</h5>
         <div class="header-elements">
             <div class="list-icons">
                 <a class="list-icons-item" data-action="collapse"></a>
@@ -230,7 +232,7 @@
             </div>
         </div>
     
-        <div class="table-responsive datalist-content">
+        <div class="datalist-content">
             
         </div>
     </form>
