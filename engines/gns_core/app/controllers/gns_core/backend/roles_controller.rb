@@ -1,7 +1,8 @@
 module GnsCore
   module Backend
     class RolesController < GnsCore::Backend::BackendController
-      before_action :set_role, only: [:roles_permissions, :edit, :update, :destroy,
+      before_action :set_role, only: [:edit, :update, :destroy,
+                                      :roles_permissions, :update_permissions,
                                       :activate, :deactivate]
   
       # GET /roles
@@ -22,8 +23,6 @@ module GnsCore
       
       def update_permissions
         authorize! :set_permissions, @role
-        
-        @role = Role.find(params[:id])
         
         if params[:permissions].present?
           params[:permissions].each do |p|
