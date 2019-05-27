@@ -2,6 +2,7 @@ module GnsContact
   module Backend
     class ContactsController < GnsCore::Backend::BackendController
       before_action :set_contact, only: [:edit, :update, :destroy,
+                                         :activate, :deactivate,
                                          :add_subcontact, :subcontact_edit, :subcontact_update,
                                          :remove_subcontact, :subcontact_list, :show, :projects]
   
@@ -26,11 +27,15 @@ module GnsContact
   
       # GET /contacts/new
       def new
+        authorize! :create, Contact
+        
         @contact = Contact.new
       end
       
       # GET /contacts/subcontact_new
       def subcontact_new
+        authorize! :create, Contact
+        
         @contact = Contact.new
         @contact.parent_ids = params[:parent_id]
         @contact.category_ids = Contact.find(params[:parent_id]).category_ids
@@ -38,16 +43,21 @@ module GnsContact
   
       # GET /contacts/1/edit
       def edit
+        authorize! :update, @contact
       end
       
       # GET /contacts/subcontact_edit
       def subcontact_edit
+        authorize! :update, @contact
       end
   
       # POST /contacts
       def create
+        authorize! :create, Contact
+        
         @contact = Contact.new(contact_params)
         
+        @contact.creator = current_user
         @contact.contact_type = GnsContact::Contact::TYPE_COMPANY
   
         if @contact.save
@@ -67,8 +77,11 @@ module GnsContact
       
       # POST /contacts
       def subcontact_create
+        authorize! :create, Contact
+        
         @contact = Contact.new(contact_params)
         
+        @contact.creator = current_user
         @contact.contact_type = GnsContact::Contact::TYPE_PERSON
   
         if @contact.save
@@ -83,6 +96,8 @@ module GnsContact
   
       # PATCH/PUT /contacts/1
       def update
+        authorize! :update, @contact
+        
         if @contact.update(contact_params)
           # Add notification
           current_user.add_notification("gns_contact.notification.contact.updated", {
@@ -100,6 +115,8 @@ module GnsContact
   
       # PATCH/PUT /contacts/1
       def subcontact_update
+        authorize! :update, @contact
+        
         if @contact.update(contact_params)
           # Add notification
           current_user.add_notification("gns_contact.notification.contact.updated", {
@@ -117,6 +134,8 @@ module GnsContact
   
       # DELETE /contacts/1
       def destroy
+        authorize! :delete, @contact
+        
         if @contact.destroy
           respond_to do |format|
             format.html {
@@ -150,7 +169,43 @@ module GnsContact
         render json: Contact.select2(params)
       end
       
+      # ACTIVATE /roles/1
+      def activate
+        authorize! :activate, @contact
+        
+        @contact.activate
+        
+        # Add notification
+        current_user.add_notification("gns_contact.notification.contact.activate", {
+          name: @contact.full_name
+        })
+        
+        render json: {
+          status: 'success',
+          message: 'Contact was successfully activated.',
+        }
+      end
+      
+      # DEACTIVATE /roles/1
+      def deactivate
+        authorize! :deactivate, @contact
+        
+        @contact.deactivate
+        
+        # Add notification
+        current_user.add_notification("gns_contact.notification.contact.deactivate", {
+          name: @contact.full_name
+        })
+        
+        render json: {
+          status: 'success',
+          message: 'Contact was successfully deactivated.',
+        }
+      end
+      
       def add_subcontact
+        authorize! :update, @contact
+        
         @child_contact = @contact.children_contacts.new(contact_id: params[:contact_id])
   
         if request.post?
@@ -174,6 +229,8 @@ module GnsContact
       
       # @todo: xoa sub-contact khoi contact cha hien tai
       def remove_subcontact
+        authorize! :update, @contact
+        
         @contact.parent.delete(params[:current_parent_id])
         render json: {
           status: 'success',

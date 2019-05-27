@@ -2,10 +2,12 @@
     <% if @employee.user.nil? %>
         <div class="alert alert-warning border-0 alert-dismissible text-center mb-0">
             This employee not have an account to log in to the system.
-            <a href="<%= gns_core.new_backend_user_path(employee_id: @employee.id) %>"
-                class="alert-link text-primary create-user-button">
-                Click here
-            </a> to create an account.
+            <% if can? :create, GnsCore::User %>
+                <a href="<%= gns_core.new_backend_user_path(employee_id: @employee.id) %>"
+                    class="alert-link text-primary create-user-button">
+                    Click here
+                </a> to create an account.
+            <% end %>
         </div>
     <% else %>            
         <div class="card card-body bg-light rounded-left-0 border-left-3 border-left-warning">
@@ -16,7 +18,7 @@
                     </div>
                     <div>
                         <p class="media-title text-primary mb-1"><%= @employee.name %></p>
-                        <footer class="blockquote-footer">Email: <span class="font-weight-semibold"><%= @employee.user.email %></span></footer>
+                        <footer class="blockquote-footer">Email (login): <span class="font-weight-semibold"><%= @employee.user.email %></span></footer>
                         <footer class="blockquote-footer">System roles:
                             <% if @employee.user.roles.empty? %>
                                 <span class="font-weight-semibold">No Access</span>
@@ -30,14 +32,28 @@
                 <ul class="list list-unstyled mb-0 mt-3 mt-sm-0 ml-auto text-right">
                     <li><span class="text-muted" data-popup="tooltip" title="<%= @employee.user.creator_name %>: <%= @employee.user.creator_email %>">Added by: <%= @employee.user.creator_short_name %></span></li>
                     <li class="dropdown">
-                        Access right: &nbsp; 
-                        <a href="#" class="badge bg-success-400 align-top dropdown-toggle" data-toggle="dropdown">Allowed</a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a href="#" class="dropdown-item"><span class="badge badge-mark mr-2 border-danger"></span> Lock account</a>
-                            <!--<a href="#" class="dropdown-item"><span class="badge badge-mark mr-2 border-success"></span> Unlock account</a>-->
-                        </div>
+                        Access right: &nbsp;
+                        <% if (can? :lock, @employee.user) or (can? :unlock, @employee.user) %>
+                            <a href="#" class="badge bg-success-400 align-top dropdown-toggle" data-toggle="dropdown">Allowed</a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <% if can? :lock, @employee.user %>
+                                    <a href="#" class="dropdown-item"><span class="badge badge-mark mr-2 border-danger"></span> Lock account</a>
+                                <% end %>
+                                <% if can? :unlock, @employee.user %>
+                                    <a href="#" class="dropdown-item"><span class="badge badge-mark mr-2 border-success"></span> Unlock account</a>
+                                <% end %>
+                            </div>
+                        <% else %>
+                            <span class="badge bg-success-400 align-top">Allowed</span>
+                        <% end %>
                     </li>
-                    <li><a href="<%= gns_core.edit_backend_user_path(@employee.user) %>" class="btn btn-sm btn-primary update-user-button">Update/Setting</a></li>
+                    <% if can? :update, @employee.user %>
+                        <li>
+                            <a href="<%= gns_core.edit_backend_user_path(@employee.user) %>"
+                                class="btn btn-sm btn-primary update-user-button">Update/Setting
+                            </a>
+                        </li>
+                    <% end %>
                 </ul>
             </div>
         </div>

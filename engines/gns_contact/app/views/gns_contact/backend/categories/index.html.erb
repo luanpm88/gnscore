@@ -12,9 +12,13 @@
 <% end %>
 
 <% content_for :page_toolbar do %>
-    <a class="btn btn-primary add-contact-category-button" href="<%= gns_contact.new_backend_category_path %>">
-        <b><i class="icon-plus22"></i></b> Create Category
-    </a>
+    <% if can? :create, GnsContact::Category %>
+        <a href="<%= gns_contact.new_backend_category_path %>"
+            class="btn btn-primary add-contact-category-button"
+        >
+            <b><i class="icon-plus22"></i></b> Create Category
+        </a>
+    <% end %>
 <% end %>
 
 <% content_for :page_script do %>
@@ -85,12 +89,36 @@
         <div class="header-elements">
             <div class="list-icons">
                 <a class="list-icons-item" data-action="collapse"></a>
-                <a class="list-icons-item" data-action="remove"></a>
             </div>
         </div>
     </div>
     
     <form class="datalist-filters">
+        <div class="card-body pb-0">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select name="active" data-placeholder="Filter by status..."
+                            class="form-control selectAllowClear" data-fouc>
+                            <option value="true"><%= t('active') %></option>
+                            <option value="false"><%= t('inactive') %></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select name="parent_id" data-placeholder="Filter by parent group..."
+                          class="form-control select-ajax"
+                          data-url="<%= gns_contact.select2_backend_categories_path %>">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 text-right">
+                    <span class="btn btn-primary mb-3 datalist-search-button">Go</span>
+                </div>
+            </div>
+        </div>
+        
         <div class="card-body">
             <div class="datalist-header flex space-between">
                 <div class="keyword-search mr-2">
@@ -118,7 +146,7 @@
             </div>
         </div>
     
-        <div class="table-responsive datalist-content">
+        <div class="datalist-content">
             
         </div>
     </form>

@@ -1,25 +1,41 @@
 <%= form_for([gns_contact, :backend, category], html: {multipart: true}) do |f| %>
-
     <fieldset>
-        
-        <div class="form-group">
-            <label class="d-block font-weight-semibold">Name <span class="text-danger">*</span></label>
-            <input type="text" class="form-control <%= 'border-danger' if category.errors.full_messages_for(:name).present? %>" placeholder="Enter name"
-                name="category[name]"
-                value="<%= category.name %>"
-            >
-            <% if category.errors.full_messages_for(:name).present? %>
-                <span class="form-text text-danger"><%= category.errors.full_messages_for(:name).join('<br/>').html_safe %></span>
-            <% end %>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-block">Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control font-weight-semibold <%= 'border-danger' if category.errors.full_messages_for(:name).present? %>"
+                        placeholder="Enter group name"
+                        name="category[name]"
+                        value="<%= category.name %>"
+                    >
+                    <% if category.errors.full_messages_for(:name).present? %>
+                        <span class="form-text text-danger"><%= category.errors.full_messages_for(:name).join('<br/>').html_safe %></span>
+                    <% end %>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-block">Parent Group</label>
+                    <select class="form-control select-ajax"
+                        data-container-css-class="font-weight-semibold"
+                        data-placeholder="Choose group (parent)"
+                        data-url="<%= gns_contact.select2_backend_categories_path(current_category_id: category.id) %>"
+                        name="category[parent_id]"
+                    >
+                        <option value="<%= category.parent_id %>"><%= category.parent_full_name %></option>
+                    </select>
+                </div>
+            </div>
         </div>
-        
     </fieldset>
     
     <hr class="mt-0">
     <div class="text-left">
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary"><%= t('save') %></button>
         <a class="btn btn-light ml-1" href="<%= gns_contact.backend_categories_path %>">
-            Cancel
+            <%= t('cancel') %>
         </a>
     </div>
 <% end %>

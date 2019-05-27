@@ -3,6 +3,7 @@ module GnsContact
     #validates :code, uniqueness: true, presence: true#, allow_blank: true
     validates :full_name, :contact_type, presence: true
     
+    belongs_to :creator, class_name: 'GnsCore::User'
     belongs_to :country, class_name: 'GnsArea::Country', optional: true
     belongs_to :state, class_name: 'GnsArea::State', optional: true
     belongs_to :district, class_name: 'GnsArea::District', optional: true
@@ -183,5 +184,15 @@ module GnsContact
       
       return data
     end
+    
+    # activate
+    def activate
+			update_attributes(active: true)
+		end
+    
+    # deactivate
+    def deactivate
+			update_attributes(active: false)
+		end
   end
 end

@@ -1,13 +1,9 @@
 module GnsContact
   module Backend
     class CategoriesController < GnsCore::Backend::BackendController
-      before_action :set_category, only: [:show, :edit, :update, :destroy]
-  
-      # GET /categories
-      def index
-        @categories = Category.all
-      end
-    
+      before_action :set_category, only: [:show, :edit, :update, :destroy,
+                                          :activate, :deactivate]
+      
       # POST /categories/list
       def list
         @categories = Category.search(params).paginate(:page => params[:page], :per_page => params[:per_page])
@@ -17,20 +13,22 @@ module GnsContact
   
       # GET /categories/1
       def show
+        authorize! :read, @category
       end
   
       # GET /categories/new
       def new
+        authorize! :create, Category
         @category = Category.new
-      end
-  
-      # GET /categories/1/edit
-      def edit
       end
   
       # POST /categories
       def create
+        authorize! :create, Category
+        
         @category = Category.new(category_params)
+        
+        @category.creator = current_user
   
         if @category.save
           render json: {
@@ -42,8 +40,15 @@ module GnsContact
         end
       end
   
+      # GET /categories/1/edit
+      def edit
+        authorize! :update, @category
+      end
+  
       # PATCH/PUT /categories/1
       def update
+        authorize! :update, @category
+        
         if @category.update(category_params)
           render json: {
             status: 'success',
@@ -56,6 +61,8 @@ module GnsContact
   
       # DELETE /categories/1
       def destroy
+        authorize! :delete, @category
+        
         if @category.destroy
           respond_to do |format|
             format.html {
@@ -89,6 +96,40 @@ module GnsContact
       def select2
         render json: Category.select2(params)
       end
+      
+      # ACTIVATE /categories/1
+      def activate
+        authorize! :activate, @category
+        
+        @category.activate
+        
+        # Add notification
+        current_user.add_notification("gns_contact.notification.category.activate", {
+          name: @category.name
+        })
+        
+        render json: {
+          status: 'success',
+          message: 'Contact group was successfully activated.',
+        }
+      end
+      
+      # DEACTIVATE /categories/1
+      def deactivate
+        authorize! :deactivate, @category
+        
+        @category.deactivate
+        
+        # Add notification
+        current_user.add_notification("gns_contact.notification.category.deactivate", {
+          name: @category.name
+        })
+        
+        render json: {
+          status: 'success',
+          message: 'Contact group was successfully deactivated.',
+        }
+      end
   
       private
         # Use callbacks to share common setup or constraints between actions.
@@ -98,7 +139,7 @@ module GnsContact
   
         # Only allow a trusted parameter "white list" through.
         def category_params
-          params.fetch(:category, {}).permit(:name)
+          params.fetch(:category, {}).permit(:name, :parent_id)
         end
     end
   end

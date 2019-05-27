@@ -16,21 +16,26 @@ module GnsCore
   
       # GET /users/1
       def show
+        authorize! :read, @user
       end
   
       # GET /users/new
       def new
-        @user = User.new
+        authorize! :create, GnsCore::User
         
+        @user = User.new
         @user.employee_id = params[:employee_id].present? ? params[:employee_id] : nil
       end
   
       # GET /users/1/edit
       def edit
+        authorize! :update, @user
       end
   
       # POST /users
       def create
+        authorize! :create, GnsCore::User
+        
         @user = User.new(user_params)
         
         @user.creator = current_user
@@ -52,6 +57,8 @@ module GnsCore
   
       # PATCH/PUT /users/1
       def update
+        authorize! :update, @user
+        
         if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
           params[:user].delete(:password)
           params[:user].delete(:password_confirmation)

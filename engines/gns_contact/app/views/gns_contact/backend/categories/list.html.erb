@@ -10,35 +10,62 @@
     <tbody>
         <% @categories.each do |category| %>
             <tr>
-                <td><%= category.name %></td>
+                <td><%= category.full_name %></td>
                 <td>
-                    <span class="badge badge-success">Active</span>
+                    <%= display_active(category.active) %>
                 </td>
                 <td title="<%= category.created_at.strftime("%d/%m/%Y - %T") %>">
                     <%= category.created_at.strftime("%d/%m/%Y") %>
                 </td>
                 <td class="text-right">
                     <div class="list-icons">
-                        <div class="dropdown">
-                            <a href="#" class="list-icons-item" data-toggle="dropdown">
-                                <i class="icon-menu9"></i>
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item edit-contact-category-button"
-                                    href="<%= gns_contact.edit_backend_category_path(category) %>">
-                                    <i class="icon-pencil7"></i> Update
+                        <% if (can? :update, category) or (can? :activate, category) or (can? :deactivate, category) or (can? :delete, category) %>
+                            <div class="dropdown">
+                                <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
                                 </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item ajax datalist-g-link"
-                                    href="<%= gns_contact.backend_category_path(category) %>"
-                                    data-method="DELETE"
-                                    data-confirm="You are about to delete a category"
-                                >
-                                    <i class="icon-bin"></i> Delete
-                                </a>
+    
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <% if can? :update, category %>
+                                        <a class="dropdown-item edit-contact-category-button"
+                                            href="<%= gns_contact.edit_backend_category_path(category) %>">
+                                            <i class="icon-pencil7"></i> Update
+                                        </a>
+                                    <% end %>
+                                    
+                                    <% if can? :activate, category %>
+                                        <a class="dropdown-item ajax datalist-g-link"
+                                            href="<%= gns_contact.activate_backend_categories_path(id: category) %>"
+                                            data-method="PUT"
+                                            data-confirm="You want to activate a category"
+                                        >
+                                            <i class="icon-checkmark4"></i> Activate
+                                        </a>
+                                    <% end %>
+                                    
+                                    <% if can? :deactivate, category %>
+                                        <a class="dropdown-item ajax datalist-g-link"
+                                            href="<%= gns_contact.deactivate_backend_categories_path(id: category) %>"
+                                            data-method="PUT"
+                                            data-confirm="You are about to de-activate a category"
+                                        >
+                                            <i class="icon-blocked"></i> De-activate
+                                        </a>
+                                    <% end %>
+                                    
+                                    <% if can? :delete, category %>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item ajax datalist-g-link"
+                                            href="<%= gns_contact.backend_category_path(category) %>"
+                                            data-method="DELETE"
+                                            data-confirm="You are about to delete a category"
+                                        >
+                                            <i class="icon-bin"></i> Delete
+                                        </a>
+                                    <% end %>
+                                </div>
                             </div>
-                        </div>
+                        <% end %>
                     </div>
                 </td>
             </tr>
@@ -48,7 +75,6 @@
 
 <div class="pagination-area">
     <div class="page_entries_info">
-        <!-- Showing 1 to 10 of 19 entries -->
         <%= page_entries_info @categories %>
     </div>
 

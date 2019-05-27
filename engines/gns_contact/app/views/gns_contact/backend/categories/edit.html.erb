@@ -12,12 +12,6 @@
     <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Category</span> - Edit: <%= @category.name %></h4>
 <% end %>
 
-<% content_for :page_toolbar do %>
-    <a class="btn btn-primary" href="<%= gns_contact.new_backend_category_path %>">
-        <b><i class="icon-plus22"></i></b> Create category
-    </a>
-<% end %>
-
 <% content_for :page_script do %>
     <script>
         $(document).ready(function() {
@@ -47,7 +41,7 @@
 <% end %>
 
 <div class="row">
-    <div class="col-lg-7 col-md-12">
+    <div class="col-lg-12 col-md-12">
         
         <% if @category.errors.any? %>
             <div class="alert alert-danger alert-dismissible">
@@ -57,13 +51,11 @@
         <% end %>
         
         <div class="card">
-            <div class="card-header header-elements-inline">
+            <div class="card-header header-elements-inline bg-white">
                 <h5 class="card-title">Details</h5>
                 <div class="header-elements">
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="collapse"></a>
-                        <a class="list-icons-item" data-action="reload"></a>
-                        <a class="list-icons-item" data-action="remove"></a>
                     </div>
                 </div>
             </div>

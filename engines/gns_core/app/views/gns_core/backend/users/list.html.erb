@@ -13,9 +13,7 @@
         <% @users.each do |user| %>
             <tr>
                 <td>
-                    <a href="<%= gns_core.backend_user_path(user) %>">
-                        <%= user.name %>
-                    </a>
+                    <%= user.name %>
                 </td>
                 <td><%= user.email %></td>
                 <td>
@@ -36,26 +34,32 @@
                 </td>
                 <td class="text-right">
                     <div class="list-icons">
-                        <div class="dropdown">
-                            <a href="#" class="list-icons-item" data-toggle="dropdown">
-                                <i class="icon-menu9"></i>
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item edit-user-button"
-                                    href="<%= gns_core.edit_backend_user_path(user) %>">
-                                    <i class="icon-pencil7"></i> Update
+                        <% if (can? :update, user) or (can? :delete, user) %>
+                            <div class="dropdown">
+                                <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
                                 </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item ajax datalist-g-link"
-                                    href="<%= gns_core.backend_user_path(user) %>"
-                                    data-method="DELETE"
-                                    data-confirm="You are about to delete a employee"
-                                >
-                                    <i class="icon-bin"></i> Delete
-                                </a>
+                                
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <% if can? :update, user %>
+                                        <a class="dropdown-item edit-user-button"
+                                            href="<%= gns_core.edit_backend_user_path(user) %>">
+                                            <i class="icon-pencil7"></i> Update
+                                        </a>
+                                    <% end %>
+                                    
+                                    <% if can? :delete, user %>
+                                        <a class="dropdown-item ajax datalist-g-link"
+                                            href="<%= gns_core.backend_user_path(user) %>"
+                                            data-method="DELETE"
+                                            data-confirm="You are about to delete a employee"
+                                        >
+                                            <i class="icon-bin"></i> Delete
+                                        </a>
+                                    <% end %>
+                                </div>
                             </div>
-                        </div>
+                        <% end %>
                     </div>
                 </td>
             </tr>

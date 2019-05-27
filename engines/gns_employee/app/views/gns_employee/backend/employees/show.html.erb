@@ -138,15 +138,30 @@
                         </div>
                     </li>
                     
-                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
-                        <div class="media-body">
-                            <div class="font-weight-semibold">Starting Date:</div>
+                    <div class="row border-bottom-dotted">
+                        <div class="col-md-6">
+                            <li class="media mt-0 py-2 px-2">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Starting Date:</div>
+                                </div>
+        
+                                <div class="ml-3 align-self-center">
+                                    <%= @employee.starting_date.strftime('%d/%m/%Y') if @employee.starting_date.present? %>
+                                </div>
+                            </li>
                         </div>
-
-                        <div class="ml-3 align-self-center">
-                            <%= @employee.starting_date.strftime('%d/%m/%Y') if @employee.starting_date.present? %>
+                        <div class="col-md-6">
+                            <li class="media mt-0 py-2 px-2">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Leaving Date:</div>
+                                </div>
+        
+                                <div class="ml-3 align-self-center">
+                                    <%= @employee.leaving_date.strftime('%d/%m/%Y') if @employee.leaving_date.present? %>
+                                </div>
+                            </li>
                         </div>
-                    </li>
+                    </div>                        
                 </div>
                     
                 <div class="col-md-6">
@@ -186,7 +201,7 @@
                         </div>
 
                         <div class="ml-3 align-self-center">
-                            <%= '' %>
+                            <%= creator_name(@employee.creator) %>
                         </div>
                     </li>
                     
@@ -225,15 +240,17 @@
     </div>
 </div>
 
-<div class="card">
-    <div class="card-header bg-white header-elements-sm-inline">
-        <h6 class="card-title">User Account</h6>
-        <div class="header-elements">
-            <div class="list-icons">
-                
-                <a class="list-icons-item" data-action="collapse"></a>
+<% if can? :read, @employee.user %>
+    <div class="card">
+        <div class="card-header bg-white header-elements-sm-inline">
+            <h6 class="card-title">User Account</h6>
+            <div class="header-elements">
+                <div class="list-icons">
+                    
+                    <a class="list-icons-item" data-action="collapse"></a>
+                </div>
             </div>
         </div>
+        <div class="account-infomation"></div>
     </div>
-    <div class="account-infomation"></div>
-</div>
+<% end %>

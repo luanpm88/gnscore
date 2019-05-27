@@ -4,6 +4,8 @@ GnsContact::Engine.routes.draw do
             collection do
                 post 'list'
                 get 'select2'
+                put 'activate'
+                put 'deactivate'
                 get ':id/projects', to: 'contacts#projects', as: 'projects'
                 get ':id/subcontact_list', to: 'contacts#subcontact_list', as: 'subcontact_list'
                 put ':id/remove', to: 'contacts#remove_subcontact', as: 'remove_subcontact'
@@ -19,6 +21,8 @@ GnsContact::Engine.routes.draw do
             collection do
                 post 'list'
                 get 'select2'
+                put 'activate'
+                put 'deactivate'
             end
         end
     end

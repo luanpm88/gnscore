@@ -17,6 +17,7 @@ module GnsEmployee
   
       # GET /employees/1
       def show
+        authorize! :read, @employee
       end
       
       def account_box
@@ -25,15 +26,19 @@ module GnsEmployee
   
       # GET /employees/new
       def new
+        authorize! :create, GnsEmployee::Employee
         @employee = Employee.new
       end
   
       # GET /employees/1/edit
       def edit
+        authorize! :update, @employee
       end
   
       # POST /employees
       def create
+        authorize! :create, GnsEmployee::Employee
+        
         @employee = Employee.new(employee_params)
         @employee.creator = current_user
   
@@ -49,6 +54,8 @@ module GnsEmployee
   
       # PATCH/PUT /employees/1
       def update
+        authorize! :update, @employee
+        
         if @employee.update(employee_params)
           render json: {
             status: 'success',
@@ -61,12 +68,19 @@ module GnsEmployee
   
       # DELETE /employees/1
       def destroy
-        @employee.destroy
+        authorize! :delete, @employee
         
-        render json: {
-          status: 'success',
-          message: 'The employee was successfully destroyed.',
-        }
+        if @employee.destroy
+          render json: {
+            status: 'success',
+            message: 'The employee was successfully destroyed.',
+          }
+        else
+          render json: {
+            status: 'warning',
+            message: @employee.errors.full_messages.to_sentence
+          }
+        end
       end
       
       # SELECT2 /categories
@@ -117,7 +131,7 @@ module GnsEmployee
         # Only allow a trusted parameter "white list" through.
         def employee_params
           params.fetch(:employee, {}).permit(:code, :name, :gender, :birthday,
-                                             :department, :position, :starting_date,
+                                             :department, :position, :starting_date, :leaving_date,
                                              :phone, :mobile, :email, :labor_contract_type,
                                              :address, :country_id, :state_id, :district_id)
         end

@@ -18,15 +18,14 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label class="d-block">Date Of Birth</label>
+                <label class="d-block">Date Of Birth</label>                
                 <div class="input-group">
                     <span class="input-group-prepend">
                         <span class="input-group-text"><i class="icon-calendar22"></i></span>
                     </span>
-                    <input type="text"
-                        class="form-control font-weight-semibold datepicker"
-                        name="contact[birthday]"
-                        value="<%= contact.birthday.strftime('%Y/%m/%d, %a') if contact.birthday.present? %>">
+                    <input type="text" class="form-control font-weight-semibold"
+                        value="<%= contact.birthday.strftime('%d/%m/%Y') if contact.birthday.present? %>"
+                        name="contact[birthday]">
                 </div>
             </div>
         </div>
@@ -146,6 +145,30 @@
 
 <% content_for :page_script do %>
     <script>
+        $(function() {
+            $('input[name="contact[birthday]"]').daterangepicker({
+                singleDatePicker: true,
+                autoUpdateInput: false,
+                showDropdowns: true,
+                minYear: 1901,
+                maxDate: moment(),
+                locale: {
+                    format: "DD/MM/YYYY"
+                }
+            }, function(start, end, label) {
+                var years = moment().diff(start, 'years');
+                console.log(years + " years old!");
+                
+                $('input[name="contact[birthday]"]').on('hideCalendar.daterangepicker', function(e) {
+                  $('input[name="contact[birthday]"]').val('');
+                });
+                
+                $('input[name="contact[birthday]"]').on('showCalendar.daterangepicker', function(e) {
+                      $('input[name="contact[birthday]"]').val(start.format('DD/MM/YYYY'));
+                });
+            });
+        });
+        
         $(document).ready(function() {
             // Select2 ajax
             $('select[name="contact[state_id]"]').each(function() {
