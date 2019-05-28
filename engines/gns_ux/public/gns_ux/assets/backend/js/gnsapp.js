@@ -70,6 +70,11 @@ function applyJs(container) {
     
     container.find('.file-input').uniform();
     
+    // Image lightbox
+    container.find('[data-popup="lightbox"]').fancybox({
+        padding: 3
+    });
+    
     // Initialize multiple switches /switchery
     var elems = Array.prototype.slice.call(document.querySelectorAll('.form-check-input-switchery'));
     elems.forEach(function(html) {
