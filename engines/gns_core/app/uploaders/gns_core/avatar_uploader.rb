@@ -29,9 +29,13 @@ module GnsCore
     #   # do something
     # end
   
-    # Create different versions of your uploaded files:    
+    # Create different versions of your uploaded files:
     version :system do
       process resize_to_fill: [60, 60]
+    end
+    
+    version :avatar_400_400 do
+      process resize_to_fill: [400, 400]
     end
   
     # Add a white list of extensions which are allowed to be uploaded.
@@ -40,9 +44,9 @@ module GnsCore
     end
     
     # Size range which are allowed to be uploaded.
-    def size_range
-      0..2.megabytes
-    end
+    #def size_range
+    #  0..2.megabytes
+    #end
   
     # Override the filename of the uploaded files:
     # Avoid using model.id or version_name here, see uploader/store.rb for details.

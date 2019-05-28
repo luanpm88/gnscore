@@ -29,122 +29,128 @@
             </div>
 
             <div class="card-body">
-                <form action="#">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Full name</label>
-                                <input type="text" readonly="readonly" value="Super Admin" class="form-control">
-                            </div>
-                            <div class="col-md-3">
-                                <label>Gender</label>
-                                <input type="text" readonly="readonly" value="Male" class="form-control">
-                            </div>
-                            <div class="col-md-3">
-                                <label>Date of birth</label>
-                                <input type="text" readonly="readonly" value="01/01/1999" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Deparment</label>
-                                <input type="text" readonly="readonly" value="Ring street 12" class="form-control">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Position</label>
-                                <input type="text" readonly="readonly" value="building D, flat #67" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Labor Contract Type</label>
-                                <input type="text" readonly="readonly" value="Formal Contract" class="form-control">
-                            </div>
-                            <div class="col-md-6">
-                                <label>Starting Date</label>
-                                <input type="text" readonly="readonly" value="02/06/2015" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <fieldset>
-                        <legend><span class="font-weight-semibold text-uppercase font-size-sm text-info-700">Additional information</span></legend>
-
+                <% if @profile.present? %>
+                    <%= form_for '', url: gns_core.update_profile_backend_accounts_path do |f| %>
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-4">
-                                    <label>Telephone</label>
-                                    <input type="text" name="telephone" value="028 1234 1234" class="form-control">
+                                <div class="col-md-6">
+                                    <label>Full name</label>
+                                    <input type="text" readonly="readonly" value="<%= @profile.name %>" class="form-control font-weight-semibold">
                                 </div>
-                                <div class="col-md-4">
-                                    <label>Mobile</label>
-                                    <input type="text" name="mobilephone" value="090 000 0000" class="form-control">
+                                <div class="col-md-3">
+                                    <label>Gender</label>
+                                    <input type="text" readonly="readonly" value="<%= t("#{@profile.gender}") %>" class="form-control font-weight-semibold">
                                 </div>
-                                <div class="col-md-4">
-                                    <label>Email</label>
-                                    <input type="text" name="email" value="eugene@kopyov.com" class="form-control">
+                                <div class="col-md-3">
+                                    <label>Date of birth</label>
+                                    <input type="text" readonly="readonly" value="<%= @profile.birthday.strftime("%d/%m/%Y") if @profile.birthday.present? %>" class="form-control font-weight-semibold">
                                 </div>
                             </div>
                         </div>
-                        
+    
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-4">
-                                    <label class="d-block">Country</label>
-                                    <select class="form-control font-weight-semibold select-ajax"
-                                        data-container-css-class="font-weight-semibold"
-                                        data-placeholder="Choose country"
-                                        data-url="<%= gns_area.select2_backend_countries_path %>"
-                                        name="country_id"
-                                    >
-                                        
-                                    </select>
+                                <div class="col-md-6">
+                                    <label>Deparment</label>
+                                    <input type="text" readonly="readonly" value="<%= @profile.department %>" class="form-control font-weight-semibold">
                                 </div>
-                                <div class="col-md-4">
-                                    <label class="d-block">State/Province</label>
-                                    <select class="form-control font-weight-semibold select-ajax"
-                                        data-container-css-class="font-weight-semibold"
-                                        data-placeholder="Choose state/province"
-                                        data-url="<%= gns_area.select2_backend_states_path %>"
-                                        name="state_id"
-                                    >
-                                        
-                                    </select>
+                                <div class="col-md-6">
+                                    <label>Position</label>
+                                    <input type="text" readonly="readonly" value="<%= @profile.position %>" class="form-control font-weight-semibold">
                                 </div>
-                                <div class="col-md-4">
-                                    <label class="d-block">District/Town/City</label>
-                                    <select class="form-control font-weight-semibold select-ajax"
-                                        data-container-css-class="font-weight-semibold"
-                                        data-placeholder="Choose district/town/city"
-                                        data-url="<%= gns_area.select2_backend_districts_path %>"
-                                        name="district_id"
-                                    >
-                                        
-                                    </select>
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Labor Contract Type</label>
+                                    <input type="text" readonly="readonly" value="<%= t(".#{@profile.labor_contract_type}") if @profile.labor_contract_type.present? %>" class="form-control font-weight-semibold">
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Starting Date</label>
+                                    <input type="text" readonly="readonly" value="<%= @profile.starting_date.strftime("%d/%m/%Y") if @profile.starting_date.present? %>" class="form-control font-weight-semibold">
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="form-group">
-                            <label class="d-block">Address</label>
-                            <input type="text" class="form-control font-weight-semibold" placeholder="Enter address"
-                                name="address"
-                                value=""
-                            >
+                        <fieldset>
+                            <legend><span class="font-weight-semibold text-uppercase font-size-sm text-info-700">Additional information</span></legend>
+    
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Telephone</label>
+                                        <input type="text" name="profile[phone]" value="<%= @profile.phone %>" class="form-control font-weight-semibold">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Mobile</label>
+                                        <input type="text" name="profile[mobile]" value="<%= @profile.mobile %>" class="form-control font-weight-semibold">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Email</label>
+                                        <input type="text" name="profile[email]" value="<%= @profile.email %>" class="form-control font-weight-semibold">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label class="d-block">Country</label>
+                                        <select class="form-control font-weight-semibold select-ajax"
+                                            data-container-css-class="font-weight-semibold"
+                                            data-placeholder="Choose country"
+                                            data-url="<%= gns_area.select2_backend_countries_path %>"
+                                            name="profile[country_id]"
+                                        >
+                                            <option value="<%= @profile.country_id %>"><%= @profile.country_name %></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="d-block">State/Province</label>
+                                        <select class="form-control font-weight-semibold select-ajax"
+                                            data-container-css-class="font-weight-semibold"
+                                            data-placeholder="Choose state/province"
+                                            data-url="<%= gns_area.select2_backend_states_path %>"
+                                            name="profile[state_id]"
+                                        >
+                                            <option value="<%= @profile.state_id %>"><%= @profile.state_name %></option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="d-block">District/Town/City</label>
+                                        <select class="form-control font-weight-semibold select-ajax"
+                                            data-container-css-class="font-weight-semibold"
+                                            data-placeholder="Choose district/town/city"
+                                            data-url="<%= gns_area.select2_backend_districts_path %>"
+                                            name="profile[district_id]"
+                                        >
+                                            <option value="<%= @profile.district_id %>"><%= @profile.district_name %></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="d-block">Address</label>
+                                <input type="text" class="form-control font-weight-semibold" placeholder="Enter address"
+                                    name="profile[address]"
+                                    value="<%= @profile.address %>"
+                                >
+                            </div>
+                            
+                        </fieldset>
+    
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary">Update info</button>
                         </div>
-                        
-                    </fieldset>
-
-                    <div class="text-right">
-                        <button type="submit" class="btn btn-primary">Update info</button>
+                    <% end %>
+                <% else %>
+                    <div class="alert alert-warning border-0 alert-dismissible text-center mb-0">
+                        Your profile is not initialized.
                     </div>
-                </form>
+                <% end %>
             </div>
         </div>
         <!-- /profile info -->
@@ -163,3 +169,69 @@
 
 </div>
 <!-- /inner container -->
+
+<% content_for :page_script do %>
+    <script>
+        $(document).ready(function() {
+            // Select2 ajax
+            $('select[name="profile[state_id]"]').each(function() {
+                var url = $(this).attr('data-url');
+                
+                $(this).select2({
+                    allowClear: true,
+                    dropdownParent: $(this).parent(),
+                    ajax: {
+                        url: url,
+                        dataType: 'json',
+                        data: function (params) {
+                            console.log(params);
+                            var query = {
+                                q: params.term,
+                                page: params.page,
+                                type: 'public',
+                                country_id: $('select[name="profile[country_id]"]').select2('val'),
+                            }
+                      
+                            // Query parameters will be ?search=[term]&type=public
+                            return query;
+                        }
+                    }
+                }); 
+            });
+            
+            $('select[name="profile[district_id]"]').each(function() {
+                var url = $(this).attr('data-url');
+                
+                $(this).select2({
+                    allowClear: true,
+                    dropdownParent: $(this).parent(),
+                    ajax: {
+                        url: url,
+                        dataType: 'json',
+                        data: function (params) {
+                            console.log(params);
+                            var query = {
+                                q: params.term,
+                                page: params.page,
+                                type: 'public',
+                                state_id: $('select[name="profile[state_id]"]').select2('val')
+                            }
+                      
+                            // Query parameters will be ?search=[term]&type=public
+                            return query;
+                        }
+                    }
+                }); 
+            });
+            
+            $('select[name="profile[state_id]"]').change(function() {
+                $('select[name="profile[district_id]"]').val(null).trigger('change');
+            });
+            
+            $('select[name="profile[country_id]"]').change(function() {
+                $('select[name="profile[state_id]').val(null).trigger('change');
+                $('select[name="profile[district_id]').val(null).trigger('change');
+            });
+        });
+    </script>
+<% end %>
