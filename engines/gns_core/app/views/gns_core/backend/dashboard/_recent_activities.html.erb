@@ -29,9 +29,9 @@
                         </div>
     
                         <span data-popup="tooltip"
-                            data-original-title="<%= t(notification.phrase, notification.get_data) %>"
+                            data-original-title="<%= t(notification.phrase, notification.get_data.attributes.symbolize_keys) %>"
                         >
-                            <%= t(notification.phrase, notification.get_data).truncate(50, separator: /\s/) %>
+                            <%= t(notification.phrase, notification.get_data.attributes.symbolize_keys).truncate(50, separator: /\s/) %>
                         </span>
                     </div>
                 </li>
