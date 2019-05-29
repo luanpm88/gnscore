@@ -3,11 +3,17 @@ ActiveRecord::Base.logger = nil
 # Create countries
 if GnsArea::Country.where(name: 'Việt Nam').empty?
   vn = GnsArea::Country.create(name: 'Việt Nam')
-  puts "Total #{GnsArea::Country.count} countries in the table"
 else
   vn = GnsArea::Country.find_by_name('Việt Nam')
-  puts "Total #{GnsArea::Country.count} countries in the table"
 end
+
+if GnsArea::Country.where(name: 'Japan').empty?
+  jp = GnsArea::Country.create(name: 'Japan')
+else
+  jp = GnsArea::Country.find_by_name('Japan')
+end
+
+puts "Total #{GnsArea::Country.count} countries in the table"
 
 # =====================================================================================================
 # Import states
@@ -18,7 +24,7 @@ xlsx_states.each_with_pagename do |name, sheet|
   
   sheet.each_row_streaming do |row|
     if row[1].value == vn.id # kiem tra xem co phai ma quoc gia la cua Viet Nam khong (ID Viet Nam vua tao o tren)
-      if GnsArea::State.where(name: "#{row[0].value}").empty? # kiem tra xem ten tinh/thanhpho da ton tai chua /neu chua thi tao
+      if GnsArea::State.where(name: "#{row[0].value}", country_id: vn.id).empty? # kiem tra xem ten tinh/thanhpho da ton tai chua /neu chua thi tao
         st = GnsArea::State.create(
           name: row[0].value,
           country_id: row[1].value
@@ -28,7 +34,7 @@ xlsx_states.each_with_pagename do |name, sheet|
     end    
   end
   puts '-----'
-  puts "#{thutu_tinh} states have been imported"
+  puts "#{thutu_tinh} states (Vietnam) have been imported"
   puts "Total #{GnsArea::State.count} states in the table"
 end
 
@@ -48,8 +54,30 @@ xlsx_districts.each_with_pagename do |name, sheet|
     end
   end
   puts '-----'
-  puts "#{thutu_huyen} districts have been imported"
+  puts "#{thutu_huyen} districts (Vietnam) have been imported"
   puts "Total #{GnsArea::District.count} districts in the table"
+end
+
+# =====================================================================================================
+# Import states /nhat ban
+xlsx_states = Roo::Spreadsheet.open('engines/gns_area/database/danh_sach_cap_tinh_nhat_ban_2019.xlsx')
+# Read excel file. sheet tabs loop
+xlsx_states.each_with_pagename do |name, sheet|
+  thutu_tinh = 0
+  
+  sheet.each_row_streaming do |row|
+    if row[1].value == jp.id # kiem tra xem co phai ma quoc gia la cua Japan (Nhat Ban) khong (ID Japan vua tao o tren)
+      if GnsArea::State.where(name: "#{row[0].value}", country_id: jp.id).empty? # kiem tra xem ten tinh/thanhpho da ton tai chua /neu chua thi tao
+        st = GnsArea::State.create(
+          name: row[0].value,
+          country_id: row[1].value
+        )
+        thutu_tinh += 1
+      end
+    end    
+  end
+  puts '-----'
+  puts "#{thutu_tinh} states (Japan) have been imported"
 end
 
 # Update cache search
