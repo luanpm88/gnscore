@@ -35,6 +35,9 @@ module GnsProject::Backend
       @category.creator = current_user
 
       if @category.save
+        # Add notification
+        current_user.add_notification("gns_project.notification.category.created", @category)
+        
         flash[:success] = 'Category was successfully created.'
         render json: {
           redirect: gns_project.backend_category_path(@category)
@@ -54,9 +57,12 @@ module GnsProject::Backend
       authorize! :update, @category
       
       if @category.update(category_params)
+        # Add notification
+        current_user.add_notification("gns_project.notification.category.updated", @category)
+        
         render json: {
           status: 'success',
-          message: 'Category was successfully deleted.',
+          message: 'Category was successfully updated.',
         }
       else
         render :edit
@@ -66,6 +72,9 @@ module GnsProject::Backend
     # DELETE /categories/1
     def destroy
       authorize! :delete, @category
+      
+      # Add notification
+      current_user.add_notification("gns_project.notification.category.destroyed", @category)
       
       if @category.destroy
         respond_to do |format|
@@ -107,6 +116,9 @@ module GnsProject::Backend
       
       @category.activate
       
+      # Add notification
+      current_user.add_notification("gns_project.notification.category.activated", @category)
+      
       render json: {
         status: 'success',
         message: 'Project type was successfully activated.',
@@ -118,6 +130,9 @@ module GnsProject::Backend
       authorize! :deactivate, @category
       
       @category.deactivate
+      
+      # Add notification
+      current_user.add_notification("gns_project.notification.category.deactivated", @category)
       
       render json: {
         status: 'success',

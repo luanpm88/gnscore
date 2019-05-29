@@ -34,9 +34,7 @@ module GnsCore
           end
           
           # Add notification
-          current_user.add_notification("gns_core.notification.role.update_permissions", {
-            name: @role.name
-          })
+          current_user.add_notification("gns_core.notification.role.update_permissions", @role)
           
           flash[:success] = 'Role has been updated policies successfully.'
           redirect_to gns_core.backend_roles_path
@@ -64,9 +62,7 @@ module GnsCore
   
         if @role.save
           # Add notification
-          current_user.add_notification("gns_core.notification.role.created", {
-            name: @role.name
-          })
+          current_user.add_notification("gns_core.notification.role.created", @role)
           
           flash[:success] = 'Role was successfully created.'
           render json: {
@@ -83,9 +79,7 @@ module GnsCore
         
         if @role.update(role_params)
           # Add notification
-          current_user.add_notification("gns_core.notification.role.updated", {
-            name: @role.name
-          })
+          current_user.add_notification("gns_core.notification.role.updated", @role)
           
           render json: {
             status: 'success',
@@ -99,6 +93,9 @@ module GnsCore
       # DELETE /roles/1
       def destroy
         authorize! :delete, @role
+        
+        # Add notification
+        current_user.add_notification("gns_core.notification.role.delete", @role)
         
         if @role.destroy
           render json: {
@@ -125,9 +122,7 @@ module GnsCore
         @role.activate
         
         # Add notification
-        current_user.add_notification("gns_project.notification.role.activate", {
-          name: @role.name
-        })
+        current_user.add_notification("gns_core.notification.role.activate", @role)
         
         render json: {
           status: 'success',
@@ -142,9 +137,7 @@ module GnsCore
         @role.deactivate
         
         # Add notification
-        current_user.add_notification("gns_project.notification.role.deactivate", {
-          name: @role.name
-        })
+        current_user.add_notification("gns_core.notification.role.deactivate", @role)
         
         render json: {
           status: 'success',

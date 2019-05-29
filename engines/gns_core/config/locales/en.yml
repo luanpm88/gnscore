@@ -5,6 +5,17 @@ en:
   inactive: "Inactive"
   male: "Male"
   female: "Female"
+  gns_core:
+    notification:
+      user:
+        created: "Create new account for %{name} staff"
+        updated: "Update account of %{name} staff"
+      role:
+        created: "Create new system role: %{name}"
+        updated: "Update system role information: %{name}"
+        update_permissions: "Update policies for the role: %{name}"
+        activate: "Activate system role: %{name}"
+        deactivate: "De-activate system role: %{name}"
   activerecord:
     attributes:
       gns_core/user:

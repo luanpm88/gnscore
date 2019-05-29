@@ -34,9 +34,7 @@ module GnsProject
           end
           
           # Add notification
-          current_user.add_notification("gns_project.notification.role.update_permissions", {
-            name: @role.name
-          })
+          current_user.add_notification("gns_project.notification.role.update_permissions", @role)
           
           flash[:success] = 'Project role has been updated policies successfully.'
           redirect_to gns_project.backend_roles_path
@@ -60,9 +58,7 @@ module GnsProject
   
         if @role.save
           # Add notification
-          current_user.add_notification("gns_project.notification.role.created", {
-            name: @role.name
-          })
+          current_user.add_notification("gns_project.notification.role.created", @role)
           
           flash[:success] = 'Project role was successfully created.'
           render json: {
@@ -84,9 +80,7 @@ module GnsProject
         
         if @role.update(role_params)
           # Add notification
-          current_user.add_notification("gns_project.notification.role.updated", {
-            name: @role.name
-          })
+          current_user.add_notification("gns_project.notification.role.updated", @role)
           
           render json: {
             status: 'success',
@@ -115,9 +109,7 @@ module GnsProject
         @role.activate
         
         # Add notification
-        current_user.add_notification("gns_project.notification.role.activate", {
-          name: @role.name
-        })
+        current_user.add_notification("gns_project.notification.role.activate", @role)
         
         render json: {
           status: 'success',
@@ -132,9 +124,7 @@ module GnsProject
         @role.deactivate
         
         # Add notification
-        current_user.add_notification("gns_project.notification.role.deactivate", {
-          name: @role.name
-        })
+        current_user.add_notification("gns_project.notification.role.deactivate", @role)
         
         render json: {
           status: 'success',

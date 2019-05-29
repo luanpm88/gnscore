@@ -1,0 +1,9 @@
+en:
+  gns_employee:
+    notification:
+      employee:
+        created: "Create new employee: %{name}"
+        updated: "Update employee: %{name}"
+        deleted: "Delete employee: %{name}"
+        activate: "Activate employee: %{name}"
+        deactivate: "De-activate employee: %{name}"

@@ -2,8 +2,17 @@ en:
   gns_contact:
     notification:
       contact:
-        created: "created new contact: %{name}"
-        updated: "updated contact: %{name}"
+        created: "created new contact: %{full_name}"
+        updated: "updated contact: %{full_name}"
+        deleted: "deleted contact: %{full_name}"
+        activate: "activate contact: %{full_name}"
+        deactivate: "de-activate contact: %{full_name}"
+      category:
+        created: "created new contact group: %{name}"
+        updated: "updated contact group: %{name}"
+        deleted: "deleted contact group: %{name}"
+        activate: "activate contact group: %{name}"
+        deactivate: "de-activate contact group: %{name}"
         
   activerecord:
     errors:

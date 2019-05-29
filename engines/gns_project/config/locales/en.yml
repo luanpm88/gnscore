@@ -1,18 +1,15 @@
 en:
-  gns_core:
-    notification:
-      user:
-        created: "Create new user account: %{name}"
-        updated: "Update user account: %{name}"
-      role:
-        created: "Create new system role: %{name}"
-        updated: "Update system role information: %{name}"
-        update_permissions: "Update policies for the role: %{name}"
   gns_project:
     notification:
       project:
         created: "Create new project: %{name}"
         updated: "Update project info: %{name}"
+        deleted: "Delete project: %{name}"
+        activate: "Activate project: %{name}"
+        deactivate: "De-activate project: %{name}"
+        request: "Submit project approval request: %{name}"
+        start_progress: "Start the project: %{name}"
+        finish: "Finish the project: %{name}"
       project_employee:
         added: "Add/assign the roles of user (%{user_name}) to project (%{project_name})"
         updated: "Update the roles of user (%{user_name}) to project (%{project_name})"
