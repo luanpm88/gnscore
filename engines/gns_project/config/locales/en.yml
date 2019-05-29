@@ -11,9 +11,9 @@ en:
         start_progress: "Start the project: %{name}"
         finish: "Finish the project: %{name}"
       project_employee:
-        added: "Add/assign the roles of user (%{user_name}) to project (%{project_name})"
-        updated: "Update the roles of user (%{user_name}) to project (%{project_name})"
-        removed: "Remove the roles of user (%{user_name}) to project (%{project_name})"
+        added: "Add/assign the roles of user to project"
+        updated: "Update the roles of user to project"
+        removed: "Remove the roles of user to project"
       role:
         created: "Create new project role: %{name}"
         updated: "Update project role information: %{name}"
