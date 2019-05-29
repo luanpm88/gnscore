@@ -32,22 +32,13 @@
                 <%= form_for '', url: gns_core.update_account_backend_accounts_path, html: {multipart: true} do |f| %>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-4">
-                                <label class="d-block font-weight-semibold">Avatar</label>
-                                <input name="avatar" type="file" class="file-input">
-                            </div>
-
-                            <div class="col-md-4">
-                                <label>Username <span class="text-danger">*</span></label>
-                                <input type="text" name="username" value="<%= '' %>" class="form-control">
-                                <% if @account.errors.full_messages_for(:username).present? %>
-                                    <span class="form-text text-danger"><%= @account.errors.full_messages_for(:username).join('<br/>').html_safe %></span>
-                                <% end %>
-                            </div>
-                            
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label>Email <span class="text-danger">*</span></label>
                                 <input type="text" value="<%= current_user.email %>" readonly="readonly" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="d-block font-weight-semibold">Avatar</label>
+                                <input name="account[avatar]" type="file" class="file-input">
                             </div>
                         </div>
                     </div>
@@ -72,22 +63,31 @@
             </div>
 
             <div class="card-body">
-                <form action="#">
+                <%= form_for '', url: gns_core.update_password_backend_accounts_path do |f| %>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-4">
+                                <label>Current password <span class="text-danger">*</span></label>
+                                <input type="password" class="form-control"
+                                    name="account[current_password]"
+                                    placeholder="Enter current password"
+                                >
+                            </div>
+                            
+                            <div class="col-md-4">
                                 <label>New password <span class="text-danger">*</span></label>
-                                <input type="password" placeholder="Enter new password" class="form-control">
+                                <input type="password" class="form-control"
+                                    name="account[password]"
+                                    placeholder="Enter new password"
+                                >
                             </div>
 
                             <div class="col-md-4">
                                 <label>Repeat password <span class="text-danger">*</span></label>
-                                <input type="password" placeholder="Repeat new password" class="form-control">
-                            </div>
-
-                            <div class="col-md-4">
-                                <label>Current password <span class="text-danger">*</span></label>
-                                <input type="password" placeholder="Enter current password" class="form-control">
+                                <input type="password" class="form-control"
+                                    name="account[password_confirmation]"
+                                    placeholder="Repeat new password"
+                                >
                             </div>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
-                </form>
+                <% end %>
             </div>
         </div>
         <!-- /account settings -->

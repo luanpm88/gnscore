@@ -1,4 +1,10 @@
 vi:
+  save: "Lưu"
+  cancel: "Hủy"
+  active: "Đang kích hoạt"
+  inactive: "Không kích hoạt"
+  male: "Nam"
+  female: "Nữ"
   gns_project:
     notification:
       project:

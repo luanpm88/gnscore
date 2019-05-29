@@ -5,13 +5,15 @@
     <div class="card">
         <div class="card-body text-center">
             <div class="card-img-actions d-inline-block mb-3">
-                <img class="img-fluid rounded-circle" src="/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg" width="170" height="170" alt="">
+                <img class="img-fluid rounded-circle"
+                     src="<%= current_user.avatar.present? ? current_user.avatar.avatar_400_400 : url_for("/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg") %>"
+                     width="170" height="170" alt=""
+                >
                 <div class="card-img-actions-overlay card-img rounded-circle">
-                    <a href="#" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round">
+                    <a href="<%= current_user.avatar.present? ? current_user.avatar : url_for("/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg") %>"
+                        class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round"
+                        data-popup="lightbox">
                         <i class="icon-plus3"></i>
-                    </a>
-                    <a href="user_pages_profile.html" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round ml-2">
-                        <i class="icon-link"></i>
                     </a>
                 </div>
             </div>

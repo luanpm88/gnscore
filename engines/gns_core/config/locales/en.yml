@@ -1,4 +1,8 @@
 en:
+  save: "Save"
+  cancel: "Cancel"
+  active: "Active"
+  inactive: "Inactive"
   male: "Male"
   female: "Female"
   activerecord:
