@@ -54,9 +54,7 @@ module GnsProject
           @project.log("gns_project.log.project.created", current_user)
           
           # add notification
-          current_user.add_notification("gns_project.notification.project.created", {
-            name: @project.name
-          })
+          current_user.add_notification("gns_project.notification.project.created", @project)
           
           flash[:success] = 'Project was successfully created.'
           render json: {
@@ -105,9 +103,7 @@ module GnsProject
           @project.log("gns_project.log.project.updated", current_user, params[:remark])
           
           # add notification
-          current_user.add_notification("gns_project.notification.project.updated", {
-            name: @project.name
-          })
+          current_user.add_notification("gns_project.notification.project.updated", @project)
           
           render json: {
             status: 'success',
@@ -126,7 +122,7 @@ module GnsProject
         @project.log("gns_project.log.project.deleted", current_user)
         
         # add notification
-        current_user.add_notification("gns_project.notification.project.deleted", @project.to_json)
+        current_user.add_notification("gns_project.notification.project.deleted", @project)
         
         if @project.destroy
           respond_to do |format|
@@ -226,10 +222,7 @@ module GnsProject
             @project_employee.log("gns_project.log.project_employee.added", current_user)
             
             # add notification
-            current_user.add_notification("gns_project.notification.project_employee.added", {
-              project_name: @project.name,
-              user_name: @project_employee.employee_name
-            })
+            current_user.add_notification("gns_project.notification.project_employee.added", @project_employee)
             
             render json: {
               status: 'success',
@@ -264,10 +257,7 @@ module GnsProject
             @project_employee.log("gns_project.log.project_employee.updated", current_user)
             
             # add notification
-            current_user.add_notification("gns_project.notification.project_employee.updated", {
-              project_name: @project.name,
-              user_name: @project_employee.employee_name
-            })
+            current_user.add_notification("gns_project.notification.project_employee.updated", @project_employee)
             
             render json: {
               status: 'success',
@@ -293,10 +283,7 @@ module GnsProject
             @project_employee.log("gns_project.log.project_employee.removed", current_user, remark)
             
             # add notification
-            current_user.add_notification("gns_project.notification.project_employee.removed", {
-              project_name: @project.name,
-              user_name: @project_employee.employee_name
-            })
+            current_user.add_notification("gns_project.notification.project_employee.removed", @project_employee)
             
             @project.remove_project_employee(@project_employee)
             
@@ -359,9 +346,7 @@ module GnsProject
             @project.log("gns_project.log.project.request", current_user, remark)
             
             # add notification
-            current_user.add_notification("gns_project.notification.project.request", {
-              name: @project.name
-            })
+            current_user.add_notification("gns_project.notification.project.request", @project)
             
             render json: {
               status: 'success',
@@ -389,9 +374,7 @@ module GnsProject
             @project.log("gns_project.log.project.start_progress", current_user, remark)
             
             # add notification
-            current_user.add_notification("gns_project.notification.project.start_progress", {
-              name: @project.name
-            })
+            current_user.add_notification("gns_project.notification.project.start_progress", @project)
             
             render json: {
               status: 'success',
@@ -419,9 +402,7 @@ module GnsProject
             @project.log("gns_project.log.project.finish", current_user, remark)
             
             # add notification
-            current_user.add_notification("gns_project.notification.project.finish", {
-              name: @project.name
-            })
+            current_user.add_notification("gns_project.notification.project.finish", @project)
             
             render json: {
               status: 'success',

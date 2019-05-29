@@ -42,9 +42,7 @@ module GnsCore
   
         if @user.save
           # Add notification
-          current_user.add_notification("gns_core.notification.user.created", {
-            name: @user.name
-          })
+          current_user.add_notification("gns_core.notification.user.created", @user.employee)
           
           render json: {
             status: 'success',
@@ -66,9 +64,7 @@ module GnsCore
         
         if @user.update(user_params)
           # Add notification
-          current_user.add_notification("gns_core.notification.user.updated", {
-            name: @user.name
-          })
+          current_user.add_notification("gns_core.notification.user.updated", @user.employee)
           
           render json: {
             status: 'success',

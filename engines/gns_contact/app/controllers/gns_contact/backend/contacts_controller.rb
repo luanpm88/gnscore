@@ -62,9 +62,7 @@ module GnsContact
   
         if @contact.save
           # Add notification
-          current_user.add_notification("gns_contact.notification.contact.created", {
-            name: @contact.full_name
-          })
+          current_user.add_notification("gns_contact.notification.contact.created", @contact)
           
           flash[:success] = 'Contact was successfully created.'
           render json: {
@@ -85,6 +83,9 @@ module GnsContact
         @contact.contact_type = GnsContact::Contact::TYPE_PERSON
   
         if @contact.save
+          # add notification
+          current_user.add_notification("gns_contact.notification.contact.created", @contact)
+          
           render json: {
             status: 'success',
             message: 'Sub-contact was successfully created.',
@@ -100,9 +101,7 @@ module GnsContact
         
         if @contact.update(contact_params)
           # Add notification
-          current_user.add_notification("gns_contact.notification.contact.updated", {
-            name: @contact.full_name
-          })
+          current_user.add_notification("gns_contact.notification.contact.updated", @contact)
           
           render json: {
             status: 'success',
@@ -119,9 +118,7 @@ module GnsContact
         
         if @contact.update(contact_params)
           # Add notification
-          current_user.add_notification("gns_contact.notification.contact.updated", {
-            name: @contact.full_name
-          })
+          current_user.add_notification("gns_contact.notification.contact.updated", @contact)
           
           render json: {
             status: 'success',
@@ -135,6 +132,9 @@ module GnsContact
       # DELETE /contacts/1
       def destroy
         authorize! :delete, @contact
+        
+        # Add notification
+        current_user.add_notification("gns_contact.notification.contact.deleted", @contact)
         
         if @contact.destroy
           respond_to do |format|
@@ -176,9 +176,7 @@ module GnsContact
         @contact.activate
         
         # Add notification
-        current_user.add_notification("gns_contact.notification.contact.activate", {
-          name: @contact.full_name
-        })
+        current_user.add_notification("gns_contact.notification.contact.activate", @contact)
         
         render json: {
           status: 'success',
@@ -193,9 +191,7 @@ module GnsContact
         @contact.deactivate
         
         # Add notification
-        current_user.add_notification("gns_contact.notification.contact.deactivate", {
-          name: @contact.full_name
-        })
+        current_user.add_notification("gns_contact.notification.contact.deactivate", @contact)
         
         render json: {
           status: 'success',

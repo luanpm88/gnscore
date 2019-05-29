@@ -31,6 +31,9 @@ module GnsContact
         @category.creator = current_user
   
         if @category.save
+          # add notification
+          current_user.add_notification("gns_contact.notification.category.created", @category)
+          
           render json: {
             status: 'success',
             message: 'Category was successfully created.',
@@ -50,6 +53,9 @@ module GnsContact
         authorize! :update, @category
         
         if @category.update(category_params)
+          # add notification
+          current_user.add_notification("gns_contact.notification.category.updated", @category)
+          
           render json: {
             status: 'success',
             message: 'The category was successfully deleted.',
@@ -62,6 +68,9 @@ module GnsContact
       # DELETE /categories/1
       def destroy
         authorize! :delete, @category
+        
+        # add notification
+        current_user.add_notification("gns_contact.notification.category.deleted", @category)
         
         if @category.destroy
           respond_to do |format|
@@ -104,9 +113,7 @@ module GnsContact
         @category.activate
         
         # Add notification
-        current_user.add_notification("gns_contact.notification.category.activate", {
-          name: @category.name
-        })
+        current_user.add_notification("gns_contact.notification.category.activate", @category)
         
         render json: {
           status: 'success',
@@ -121,9 +128,7 @@ module GnsContact
         @category.deactivate
         
         # Add notification
-        current_user.add_notification("gns_contact.notification.category.deactivate", {
-          name: @category.name
-        })
+        current_user.add_notification("gns_contact.notification.category.deactivate", @category)
         
         render json: {
           status: 'success',

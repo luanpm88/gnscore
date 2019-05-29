@@ -47,14 +47,6 @@ module GnsCore
       return str.join(" ").downcase.titleize
     end
     
-    def add_notification(phrase, data)
-			GnsNotification::Notification::create(
-				phrase: phrase,
-				user_id: self.id,
-				data: data.to_json
-			)
-		end
-    
     # update contact cache search
     after_save :update_cache_search
 		def update_cache_search
@@ -131,6 +123,11 @@ module GnsCore
       end
       
       return data
+    end
+    
+    # add notification
+    def add_notification(phrase, object, remark=nil)
+      GnsNotification::Notification.add_new(phrase, object, self, remark)
     end
     
     # has system permission

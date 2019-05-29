@@ -43,6 +43,9 @@ module GnsEmployee
         @employee.creator = current_user
   
         if @employee.save
+          # Add notification
+          current_user.add_notification("gns_employee.notification.employee.created", @employee)
+          
           render json: {
             status: 'success',
             message: 'Category was successfully created.',
@@ -57,6 +60,9 @@ module GnsEmployee
         authorize! :update, @employee
         
         if @employee.update(employee_params)
+          # Add notification
+          current_user.add_notification("gns_employee.notification.employee.updated", @employee)
+          
           render json: {
             status: 'success',
             message: 'Employee was successfully updated.',
@@ -69,6 +75,9 @@ module GnsEmployee
       # DELETE /employees/1
       def destroy
         authorize! :delete, @employee
+        
+        # Add notification
+        current_user.add_notification("gns_employee.notification.employee.deleted", @employee)
         
         if @employee.destroy
           render json: {
@@ -95,9 +104,7 @@ module GnsEmployee
         @employee.activate
         
         # Add notification
-        current_user.add_notification("gns_project.notification.employee.activate", {
-          name: @employee.name
-        })
+        current_user.add_notification("gns_employee.notification.employee.activate", @employee)
         
         render json: {
           status: 'success',
@@ -112,9 +119,7 @@ module GnsEmployee
         @employee.deactivate
         
         # Add notification
-        current_user.add_notification("gns_project.notification.employee.deactivate", {
-          name: @employee.name
-        })
+        current_user.add_notification("gns_employee.notification.employee.deactivate", @employee)
         
         render json: {
           status: 'success',

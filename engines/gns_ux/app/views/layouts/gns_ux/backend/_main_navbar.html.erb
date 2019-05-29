@@ -49,29 +49,29 @@
 
                     <div class="dropdown-content-body dropdown-scrollable">
                         <ul class="media-list">
-                            <% if false %>
-                                <% notifications.order('created_at desc').each do |notification| %>
-                                    <li class="media">
-                                        <div class="mr-3 position-relative">
-                                            <img src="<%= notification.user.avatar.present? ? notification.user.avatar.system : url_for("/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg") %>"
-                                                width="40" height="40" class="rounded-circle" alt=""
-                                            >
-                                        </div>
+                            <% notifications.order('created_at desc').each do |notification| %>
+                                <li class="media">
+                                    <div class="mr-3 position-relative">
+                                        <img src="<%= notification.user.avatar.present? ? notification.user.avatar.system : url_for("/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg") %>"
+                                            width="40" height="40" class="rounded-circle" alt=""
+                                        >
+                                    </div>
+                                    
+                                    <div class="media-body">
+                                        <a href="#">
+                                            <div class="media-title">
+                                                <span class="text-info"><%= notification.user_name %></span>
+                                                <span class="text-muted float-right font-size-sm">
+                                                    <%= time_ago_in_words(notification.created_at)  %>
+                                                </span>
+                                            </div>
     
-                                        <div class="media-body">
-                                            <a href="#">
-                                                <div class="media-title">
-                                                    <span class="text-info"><%= notification.user_name %></span>
-                                                    <span class="text-muted float-right font-size-sm">
-                                                        <%= time_ago_in_words(notification.created_at)  %>
-                                                    </span>
-                                                </div>
-        
-                                                <span class="text-grey-600"><%= t(notification.phrase, notification.get_data) %></span>
-                                            </a>
-                                        </div>
-                                    </li>
-                                <% end %>
+                                            <span class="text-grey-600">
+                                                <%= t(notification.phrase, notification.get_data.attributes.symbolize_keys) %>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </li>
                             <% end %>
                         </ul>
                     </div>

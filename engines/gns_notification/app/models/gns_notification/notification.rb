@@ -1,21 +1,28 @@
 module GnsNotification
   class Notification < ApplicationRecord
     belongs_to :user, class_name: 'GnsCore::User'
-    
-    def self.add_new(phrase, user, data)
-			GnsNotification::Notification::create(
-				phrase: phrase,
-				user: user.id,
-				data: data
-			)
-		end
-
-		def get_data
-			ActiveSupport::JSON.decode(self.data).symbolize_keys
-		end
 		
-		def user_name
+		# get user name
+    def user_name
       user.present? ? user.name : ''
+    end
+    
+    # add notification
+    def self.add_new(phrase, object, user, remark=nil)
+      notification = GnsNotification::Notification.new
+      notification.phrase = phrase
+      notification.data = object.to_yaml
+      notification.class_name = object.class.name
+      notification.user = user
+      #notification.remark = remark
+      
+      notification.save
+    end
+    
+    # data decode
+    def get_data
+      self.class_name.constantize.new
+      YAML.load(self.data)
     end
   end
 end
