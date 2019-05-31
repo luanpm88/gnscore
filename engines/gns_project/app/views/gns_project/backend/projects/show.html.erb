@@ -182,10 +182,9 @@
                         </div>
 
                         <div class="ml-3 align-self-center">
-                            <div class="dropdown">
-                                <a href="#" class="badge bg-<%= @project.status %> dropdown-toggle" data-toggle="dropdown"><%= t @project.status %></a>
-                                
-                                <% if (can? :mark_as_new, @project) or (can? :send_request, @project) or (can? :start_project, @project) or (can? :finish, @project) %>
+                            <% if (can? :mark_as_new, @project) or (can? :send_request, @project) or (can? :start_project, @project) or (can? :finish, @project) %>
+                                <div class="dropdown">
+                                    <a href="#" class="badge bg-<%= @project.status %> dropdown-toggle" data-toggle="dropdown"><%= t @project.status %></a>
                                     <div class="dropdown-menu dropdown-menu-right">
                                         <% if can? :mark_as_new, @project %>
                                             <a href="#" class="dropdown-item">
@@ -215,8 +214,10 @@
                                             </a>
                                         <% end %>
                                     </div>
-                                <% end %>
-                            </div>
+                                </div>
+                            <% else %>
+                                <span class="badge bg-<%= @project.status %>"><%= t @project.status %></span>
+                            <% end %>
                         </div>
                     </li>
                     
@@ -226,7 +227,7 @@
                         </div>
 
                         <div class="ml-3 align-self-center font-weight-semibold">
-                            <span class="badge badge-flat border-success"><%= t @project.priority %></span>
+                            <span class="badge badge-flat border-success"><%= t("#{@project.priority}") if @project.priority.present? %></span>
                         </div>
                     </li>
                 </div>

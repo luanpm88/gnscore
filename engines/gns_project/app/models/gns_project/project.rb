@@ -184,6 +184,10 @@ module GnsProject
       return status == GnsProject::Project::STATUS_IN_PROGRESS
     end
 		
+		def is_finished?
+      return status == GnsProject::Project::STATUS_FINISHED
+    end
+		
 		def is_canceled?
       return status == GnsProject::Project::STATUS_CANCELED
     end

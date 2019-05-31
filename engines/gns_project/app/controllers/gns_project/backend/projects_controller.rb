@@ -358,7 +358,7 @@ module GnsProject
       
       # Set InProgress action
       def start_progress
-        #authorize! :set_in_progress, @project
+        authorize! :start_project, @project
         
         remark = params[:remark]
         
@@ -372,6 +372,8 @@ module GnsProject
             
             # add log
             @project.log("gns_project.log.project.start_progress", current_user, remark)
+            #send_log_email(t('gns_project.log.project.start_progress.title').html_sàfe, 'gns_project.log.project.start_progress.email')
+            # ProjectMailJob.perform_later('log_email', t('gns_project.log.project.start_progress.title').html_sàfe, 'gns_project.log.project.start_progress.email')
             
             # add notification
             current_user.add_notification("gns_project.notification.project.start_progress", @project)
@@ -386,7 +388,7 @@ module GnsProject
       
       # Set Finished action
       def finish
-        #authorize! :set_finished, @project
+        authorize! :finish, @project
         
         remark = params[:remark]
         
