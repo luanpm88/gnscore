@@ -1,0 +1,470 @@
+<% content_for :title do %>
+    Gantt chart work
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+    <span class="breadcrumb-item">Report</span>
+    <span class="breadcrumb-item active">Employees Schedule</span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class=""></i> <span class="font-weight-semibold">Employees Schedule</span></h4>
+<% end %>
+
+<% content_for :page_stylesheets do %>
+<%= stylesheet_link_tag "/gns_ux/assets/backend/css/schedule.css" %>
+<% end %>
+
+<% content_for :page_script do %>
+    <script src='https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js'></script>
+    <script src='https://cdn.datatables.net/fixedcolumns/3.2.2/js/dataTables.fixedColumns.min.js'></script>
+    <script>
+        var resourceScheduleTable;
+        
+        $(document).ready(function() {
+            resourceScheduleTable = $('#resource-schedule-table').DataTable({
+                "scrollY": "100%",
+                "scrollX": true,
+                "scrollCollapse": true,
+                "paging": false,
+                "info": false,
+                "language.search": "Filter",
+                "autoWidth": false,
+                "fixedColumns": {
+                    "leftColumns": 1
+                },
+                "columnDefs": [{
+                        "width": "250px",
+                        "targets": [0]
+                    },
+                    {
+                        "width": "110px",
+                        "targets": ['_all']
+                    }
+                ]
+            });
+        });
+    </script>
+<% end %>
+
+<div class="card">
+    <div class="card-header header-elements-inline bg-white">
+        <h5 class="card-title">Employees Schedule</h5>
+        <div class="header-elements">
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+    
+    <form class="datalist-filters">
+        <div class="card-body pb-0">    
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select name="customer_id" data-placeholder="All employees..."
+                          class="form-control select-ajax"
+                          data-url="<%= gns_employee.select2_backend_employees_path %>">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 text-right">
+                    <span class="btn btn-primary mb-3 datalist-search-button">Go</span>
+                </div>
+            </div>
+        </div>
+    
+        <table id="resource-schedule-table" class="display nowrap" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Resources</th>
+                    <th>August 1, 2016</th>
+                    <th>August 2, 2016</th>
+                    <th>August 3, 2016</th>
+                    <th>August 4, 2016</th>
+                    <th>August 5, 2016</th>
+                    <th>August 6, 2016</th>
+                    <th>August 7, 2016</th>
+                    <th>August 8, 2016</th>
+                    <th>August 9, 2016</th>
+                    <th>August 10, 2016</th>
+                    <th>August 11, 2016</th>
+                    <th>August 12, 2016</th>
+                    <th>August 13, 2016</th>
+                    <th>August 14, 2016</th>
+                    <th>August 15, 2016</th>
+                    <th>August 16, 2016</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="resource-column">
+                      <img class="resource-image" src="http://placehold.it/75x75" align="left">
+                      <p class="resource-name">John Smith</p>
+                      <p class="resource-role">Visual Designer</p>
+                      <p class="resource-office">Atlanta, GA</p>
+                    </td>
+                    <td>
+                      <div class="commitment pto">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">Agency PTO<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment pto">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">Agency PTO<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment pto">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">Agency PTO<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment pto">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">Agency PTO<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment pto">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">Agency PTO<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment pto">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">Agency PTO<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment pto">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">Agency PTO<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment pto">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">Agency PTO<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment pto">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">Agency PTO<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment pto">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">Agency PTO<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment pto">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">Agency PTO<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment pto">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">Agency PTO<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment pto">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">Agency PTO<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment pto">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">Agency PTO<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment pto">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">Agency PTO<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment pto">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">Agency PTO<p>
+                      </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="resource-column">
+                      <img class="resource-image" src="http://placehold.it/75x75" align="left">
+                      <p class="resource-name">Alisha Jammer</p>
+                      <p class="resource-role">User Researcher</p>
+                      <p class="resource-office">Atlanta, GA</p>
+                    </td>
+                    <td>
+                      <div class="commitment assigned">
+                        <span class="hours-meter half"></span>
+                        <p class="commitment-hours">4 Hours<p>
+                        <p class="commitment-type">NASCO - PMR Redesign<p>
+                      </div>
+                      <div class="commitment assigned">
+                        <span class="hours-meter half"></span>
+                        <p class="commitment-hours">4 Hours<p>
+                        <p class="commitment-type">NASCO - UX Strategy<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment assigned">
+                        <span class="hours-meter half"></span>
+                        <p class="commitment-hours">4 Hours<p>
+                        <p class="commitment-type">NASCO - PMR Redesign<p>
+                      </div>
+                      <div class="commitment assigned">
+                        <span class="hours-meter half"></span>
+                        <p class="commitment-hours">4 Hours<p>
+                        <p class="commitment-type">DTCC<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment assigned">
+                        <span class="hours-meter half"></span>
+                        <p class="commitment-hours">4 Hours<p>
+                        <p class="commitment-type">NASCO - PMR Redesign<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment assigned">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">NASCO - PMR Redesign<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment assigned">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">NASCO - PMR Redesign<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment assigned">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">NASCO - PMR Redesign<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment assigned">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">NASCO - PMR Redesign<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment assigned">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">NASCO - PMR Redesign<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment assigned">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">NASCO - PMR Redesign<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment assigned">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">NASCO - PMR Redesign<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment assigned">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">NASCO - PMR Redesign<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment assigned">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">NASCO - PMR Redesign<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment assigned">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">NASCO - PMR Redesign<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment assigned">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">NASCO - PMR Redesign<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment assigned">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">NASCO - PMR Redesign<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment assigned">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">NASCO - PMR Redesign<p>
+                      </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="resource-column">
+                      <img class="resource-image" src="http://placehold.it/75x75" align="left">
+                      <p class="resource-name">Tyler Durden</p>
+                      <p class="resource-role">Content Strategist</p>
+                      <p class="resource-office">Atlanta, GA</p>
+                    </td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>
+                      <div class="commitment assigned">
+                        <span class="hours-meter half"></span>
+                        <p class="commitment-hours">4 Hours<p>
+                        <p class="commitment-type">AAA - Mobile App<p>
+                      </div>
+                      <div class="commitment assigned">
+                        <span class="hours-meter quarter"></span>
+                        <p class="commitment-hours">2 Hours<p>
+                        <p class="commitment-type">Analog - Site Redesign<p>
+                      </div>
+                      <div class="commitment assigned">
+                        <span class="hours-meter quarter"></span>
+                        <p class="commitment-hours">2 Hours<p>
+                        <p class="commitment-type">Bright Horizons<p>
+                      </div>
+                    </td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                </tr>
+                <tr>
+                    <td class="resource-column">
+                      <img class="resource-image" src="http://placehold.it/75x75" align="left">
+                      <p class="resource-name">Brandon Thompson</p>
+                      <p class="resource-role">Project Manager</p>
+                      <p class="resource-office">Atlanta, GA</p>
+                    </td>
+                    <td>&nbsp</td>
+                    <td>
+                      <div class="commitment assigned">
+                        <span class="hours-meter half"></span>
+                        <p class="commitment-hours">4 Hours<p>
+                        <p class="commitment-type">AAA - Mobile App<p>
+                      </div>
+                      <div class="commitment assigned">
+                        <span class="hours-meter quarter"></span>
+                        <p class="commitment-hours">2 Hours<p>
+                        <p class="commitment-type">Analog - Site Redesign<p>
+                      </div>
+                      <div class="commitment assigned">
+                        <span class="hours-meter quarter"></span>
+                        <p class="commitment-hours">2 Hours<p>
+                        <p class="commitment-type">Bright Horizons<p>
+                      </div>
+                    </td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>
+                      <div class="commitment pto">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">Agency PTO<p>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="commitment pto">
+                        <span class="hours-meter full"></span>
+                        <p class="commitment-hours">8 Hours<p>
+                        <p class="commitment-type">Agency PTO<p>
+                      </div>
+                    </td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                </tr>
+                <tr>
+                    <td class="resource-column">
+                      <img class="resource-image" src="http://placehold.it/75x75" align="left">
+                      <p class="resource-name">John Smith</p>
+                      <p class="resource-role">Visual Designer</p>
+                      <p class="resource-office">Atlanta, GA</p>
+                    </td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                    <td>&nbsp</td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
