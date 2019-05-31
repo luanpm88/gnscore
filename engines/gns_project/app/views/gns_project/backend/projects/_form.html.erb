@@ -59,7 +59,7 @@
                         <span class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-calendar22"></i></span>
                         </span>
-                        <input type="text" class="form-control daterange-dual"
+                        <input type="text" class="form-control font-weight-semibold daterange-dual"
                             value="<%= @date_of_implementation %>"
                             name="project[date_of_implementation]"> 
                     </div>
@@ -79,8 +79,8 @@
                                 data-url="<%= gns_employee.select2_backend_employees_path %>">
                                 <option value="<%= project.manager_id %>"><%= project.manager_name %></option>
                             </select>
-                            <% if project.errors.full_messages_for(:customer_id).present? %>
-                                <span class="form-text text-danger"><%= project.errors.full_messages_for(:customer_id).join('<br/>').html_safe %></span>
+                            <% if project.errors.full_messages_for(:manager_id).present? %>
+                                <span class="form-text text-danger"><%= project.errors.full_messages_for(:manager_id).join('<br/>').html_safe %></span>
                             <% end %>
                         </div>
                     </div>

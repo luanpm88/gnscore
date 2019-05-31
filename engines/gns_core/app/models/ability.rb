@@ -304,7 +304,7 @@ class Ability
     end
     
     can :send_request, GnsProject::Project do |project|
-      project.is_new? and
+      (project.is_new? and project.tasks.count > 0) and
       (
         (user.has_permission?('gns_project.projects.setpending_own') and project.creator == user) or
         (user.has_permission?('gns_project.projects.setpending_other') and project.creator != user)
@@ -312,7 +312,7 @@ class Ability
     end
     
     can :start_project, GnsProject::Project do |project|
-      project.is_pending? and
+      (project.is_pending? and project.tasks.count > 0) and
       (
         (user.has_permission?('gns_project.projects.setinprogress_own') and project.creator == user) or
         (user.has_permission?('gns_project.projects.setinprogress_other') and project.creator != user)
@@ -320,7 +320,7 @@ class Ability
     end
     
     can :finish, GnsProject::Project do |project|
-      (project.is_in_progress? and project.get_tasks_not_closed.count == 0) and
+      (project.is_in_progress? and (project.get_tasks_not_closed.count == 0 and project.progress_percent == 100)) and
       (
         (user.has_permission?('gns_project.projects.setfinished_own') and project.creator == user) or
         (user.has_permission?('gns_project.projects.setfinished_other') and project.creator != user)
@@ -339,6 +339,7 @@ class Ability
     
     # gns_project / tasks
     can :create_task, GnsProject::Project do |project|
+      (!project.is_finished?) and
       user.has_project_permission?(project, 'gns_project.tasks.create')
     end
     
@@ -348,13 +349,19 @@ class Ability
     end
     
     can :update, GnsProject::Task do |task|
-      (user.has_project_permission?(task.project, 'gns_project.tasks.update_own') and task.employee == user.employee) or
-      (user.has_project_permission?(task.project, 'gns_project.tasks.update_other') and task.employee != user.employee)
+      (!task.project.is_finished?) and
+      (
+        (user.has_project_permission?(task.project, 'gns_project.tasks.update_own') and task.employee == user.employee) or
+        (user.has_project_permission?(task.project, 'gns_project.tasks.update_other') and task.employee != user.employee)
+      )
     end
     
     can :delete, GnsProject::Task do |task|
-      (user.has_project_permission?(task.project, 'gns_project.tasks.delete_own') and task.employee == user.employee) or
-      (user.has_project_permission?(task.project, 'gns_project.tasks.delete_other') and task.employee != user.employee)
+      (task.attachments.count == 0 and !task.project.is_finished?) and
+      (
+        (user.has_project_permission?(task.project, 'gns_project.tasks.delete_own') and task.employee == user.employee) or
+        (user.has_project_permission?(task.project, 'gns_project.tasks.delete_other') and task.employee != user.employee)
+      )
     end
     
     can :finish, GnsProject::Task do |task|
@@ -390,7 +397,7 @@ class Ability
     end
     
     can :update_progress, GnsProject::Task do |task|
-      !task.finished? and
+      (task.project.is_in_progress? and !task.finished?) and
       (
         (user.has_project_permission?(task.project, 'gns_project.tasks.update_progress_own') and task.employee == user.employee) or
         (user.has_project_permission?(task.project, 'gns_project.tasks.update_progress_other') and task.employee != user.employee)

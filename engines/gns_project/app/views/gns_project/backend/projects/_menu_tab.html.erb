@@ -3,6 +3,9 @@
         var project_modal = new gModal();
         var updateProjectCallback;
         
+        var request_project_modal = new gModal({size: 'md'});
+        var request_project_callback;
+        
         var start_progress_project_modal = new gModal({size: 'md'});
         var start_progress_project_callback;
         
@@ -29,6 +32,18 @@
                         // validation error
                         project_modal.renderHtml(response);
                     }
+                };
+            });
+            
+            $('.send-request-project-button').click(function(e) {
+                e.preventDefault();
+                
+                var button = $(this);
+                
+                request_project_modal.load($(this).attr('href'));
+                
+                request_project_callback = function() {
+                    location.reload();
                 };
             });
             
@@ -82,8 +97,8 @@
                         <div class="dropdown-divider"></div>
                         
                         <% if can? :send_request, @project %>
-                            <a href="<%= gns_project.start_progress_backend_projects_path(id: @project) %>"
-                               class="dropdown-item start-progress-project-button"
+                            <a href="<%= gns_project.send_request_backend_projects_path(id: @project) %>"
+                               class="dropdown-item send-request-project-button"
                             > Send request (submit)</a>
                         <% end %>
                         

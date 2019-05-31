@@ -101,13 +101,18 @@ module GnsProject
       end
   
       # DELETE /tasks/1
-      def destroy
-        @task.destroy
-        
-        render json: {
-          status: 'success',
-          message: 'Task was successfully destroyed.',
-        }
+      def destroy        
+        if @task.destroy
+          render json: {
+            status: 'success',
+            message: 'Task was successfully destroyed.',
+          }
+        else
+          render json: {
+            status: 'warning',
+            message: @task.errors.full_messages.to_sentence
+          }
+        end
       end
       
       # SELECT2 /tasks
@@ -222,11 +227,10 @@ module GnsProject
       end
       
       # update progress for task action
-      def update_progress       
+      def update_progress
         if request.post?
           @task.progress = params[:progress]
           remark = params[:remark]
-          
           if !remark.present?
             @task.errors.add('remark', "not be blank")
           end
