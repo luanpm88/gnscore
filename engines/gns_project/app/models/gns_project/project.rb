@@ -8,9 +8,10 @@ module GnsProject
     has_many :logs, class_name: 'GnsProject::Log'
     has_many :comments, class_name: "GnsProject::Comment"
     
-    validates :code, :name, :priority, :start_date, :end_date,
+    validates :code, uniqueness: true, presence: true
+    validates :name, :priority, :start_date, :end_date,
               :category_id, :customer_id, :manager_id,
-              :presence => true
+              presence: true
     
     # get customer code
     def customer_code
