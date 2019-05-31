@@ -217,6 +217,10 @@ module GnsProject
       GnsProject::Project.where('gns_project_projects.status IN (?)', [GnsProject::Project::STATUS_NEW, GnsProject::Project::STATUS_PENDING])
     end
     
+    def self.get_nearly_expired_projects
+      GnsProject::Project.where(status: GnsProject::Project::STATUS_IN_PROGRESS)
+    end
+    
     # add new user role
     def add_employee_role(employee_id, role_id)
       project_employee = GnsProject::ProjectEmployee.where(project_id: self.id, employee_id: employee_id).first

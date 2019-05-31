@@ -1,0 +1,54 @@
+<% @projects = GnsProject::Project.get_nearly_expired_projects.order('end_date asc').limit(10) %>
+
+<div class="card">
+    <div class="card-header header-elements-inline">
+        <h6 class="card-title">Nearly Expired Projects</h6>
+        <div class="header-elements">
+            <span class="badge bg-success badge-pill"><%= GnsProject::Project.get_nearly_expired_projects.count %> project(s)</span>
+            
+            <div class="list-icons ml-3">
+                <a href="#" class="list-icons-item"><i class="icon-sync"></i></a>
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-nowrap">Project name</th>
+                <th class="text-nowrap" width="10%">Start date</th>
+                <th class="text-nowrap" width="10%">End date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @projects.each do |project| %>
+                <% time_remaining = (project.end_date.to_datetime - Time.now.to_datetime).to_i %>
+                <tr>
+                    <td>
+                        <a href="<%= gns_project.tasks_backend_projects_path(project) %>"
+                            data-popup="tooltip"
+                            data-original-title="<%= project.name %> (<%= project.code %>)"
+                        >
+                            <div class="text-default font-weight-semibold"><%= project.name.truncate(26, separator: /\s/) %></div>
+                            <span class="text-muted font-size-sm"><%= project.code %></span>
+                        </a>
+                    </td>
+                    <td>
+                        <span class="font-size-sm"><%= project.start_date.strftime("%d/%m/%Y") %></span>
+                    </td>
+                    <td>
+                        <span class="font-size-sm <%= time_remaining <= 15 ? 'text-danger font-weight-semibold' : '' %>">
+                            <%= project.end_date.strftime("%d/%m/%Y") %>
+                        </span>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <% if @projects.empty? %>
+        <div class="alert text-center text-warning mb-0">
+            There are no projects on the nearly expired
+        </div>
+    <% end %>
+</div>
