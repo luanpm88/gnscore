@@ -25,6 +25,10 @@
 	<!-- GNSAPP stylesheets -->
 	<%= stylesheet_link_tag "/gns_ux/assets/backend/css/gnsapp.css" %>
 	<!-- /gnsapp stylesheets -->
+	
+	<!-- page stylesheets -->
+	<%= yield :page_stylesheets %>
+	<!-- /page stylesheets -->
     
     <!-- Core JS files -->
 	<%= javascript_include_tag '/gns_ux/assets/backend/global/js/main/jquery.min.js' %>

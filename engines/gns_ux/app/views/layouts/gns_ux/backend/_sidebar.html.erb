@@ -150,16 +150,28 @@
                 <!-- Advanced -->
                 <li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs"><%= t(".advanced") %></div> <i class="icon-menu" title="Forms"></i></li>
                 <li class="nav-item nav-item-submenu">
-                    <a href="#" class="nav-link"><i class="icon-stats-dots"></i> <span><%= t(".report") %></span></a>
+                    <a href="#" class="nav-link"
+                        data-menu="
+                            gns_report/backend/reports
+                        "
+                    ><i class="icon-stats-dots"></i> <span><%= t(".report") %></span></a>
                     <ul class="nav nav-group-sub" data-submenu-title="Report">
                         <li class="nav-item">
-                            <a href="#" class="nav-link disabled">Projects Tracing
-                                <span class="badge bg-transparent align-self-center ml-auto">Coming soon</span>
+                            <a href="<%= gns_report.gantt_chart_backend_reports_path %>" class="nav-link"
+                                data-menu="
+                                    gns_report/backend/reports/gantt_chart
+                                "
+                            >
+                                Employee's tasks (gantt chart)
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link disabled">User Statistics
-                                <span class="badge bg-transparent align-self-center ml-auto">Coming soon</span>
+                            <a href="<%= gns_report.employees_schedule_backend_reports_path %>" class="nav-link"
+                                data-menu="
+                                    gns_report/backend/reports/employees_schedule
+                                "
+                            >
+                                Employee's tasks (schedule)
                             </a>
                         </li>
                     </ul>
