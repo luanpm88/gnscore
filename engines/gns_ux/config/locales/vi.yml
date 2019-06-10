@@ -1,2 +1,34 @@
 vi:
-  
+  close: "Đóng"
+  layouts:
+    gns_ux:
+      backend:
+        main:
+          tail_title: "ERP System | SAO-EE JSC"
+        main_navbar:
+          notifications: "Thông báo"
+          mark_all_as_read: "Đánh dấu đã đọc tất cả"
+          see_all: "Xem tất cả"
+          my_account: "Tài khoản của tôi"
+          logout: "Đăng xuất"
+        sidebar:
+          navigation: "Navigation"
+          account_settings: "Cài đặt tài khoản"
+          main_menu: "Menu chính"
+          dashboard: "Bảng điều khiển"
+          contact: "Khách hàng"
+          contacts: "Địa chỉ liên hệ"
+          contact_categories: "Nhóm khách hàng"
+          project: "Dự án"
+          projects: "Danh sách dự án"
+          project_types: "Loại dự án"
+          project_roles: "Vai trò dự án (mặc định)"
+          employee: "Nhân viên"
+          employees: "Danh sách nhân viên"
+          advanced: "Nâng cao"
+          report: "Báo cáo/Thống kê"
+          system: "Hệ thống"
+          configure_user_roles: "Vai trò người dùng"
+        footer:
+          support: "Hỗ trợ"
+          user_guide: "Hướng dẫn"
