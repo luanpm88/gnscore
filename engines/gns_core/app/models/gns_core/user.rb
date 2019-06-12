@@ -130,8 +130,14 @@ module GnsCore
       GnsNotification::Notification.add_new(phrase, object, self, remark)
     end
     
+    def supreme_administrator?
+      # hard code
+      return true if self.id == 1
+    end
+    
     # has system permission
-    def has_permission?(permission)      
+    def has_permission?(permission)
+      return true if self.supreme_administrator?
       return !GnsCore::RolesPermission.where(role_id: self.roles.select(:id)).where(permission: permission).empty?
     end
     
