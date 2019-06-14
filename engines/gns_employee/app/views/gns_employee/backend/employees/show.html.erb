@@ -1,15 +1,15 @@
 <% content_for :title do %>
-    Show Employee
+    <%= t(".show_employee") %>
 <% end %>
 
 <% content_for :breadcrumb do %>
-    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-    <a href="<%= gns_employee.backend_employees_path %>" class="breadcrumb-item">Employees</a>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i><%= t("home") %></a>
+    <a href="<%= gns_employee.backend_employees_path %>" class="breadcrumb-item"><%= t(".employees") %></a>
     <span class="breadcrumb-item active"><%= @employee.name %></span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-design mr-2"></i> <span class="font-weight-semibold">Employee</span>: <%= @employee.name %></h4>
+    <h4><i class="icon-design mr-2"></i> <span class="font-weight-semibold"><%= t(".employee") %></span>: <%= @employee.name %></h4>
 <% end %>
 
 <% content_for :page_script do %>
@@ -52,7 +52,7 @@
 
 <div class="card">
     <div class="card-header bg-white header-elements-sm-inline">
-        <h6 class="card-title">Employee Details</h6>
+        <h6 class="card-title"><%= t(".employee_details") %></h6>
         <div class="header-elements">
             <div class="list-icons">                
                 <a class="list-icons-item" data-action="collapse"></a>
@@ -65,7 +65,7 @@
                 <div class="col-md-6">
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Employee Code/ID:</div>
+                            <div class="font-weight-semibold"><%= t(".employee_code_id") %></div>
                         </div>
 
                         <div class="ml-3 align-self-center">
@@ -75,7 +75,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Full Name:</div>
+                            <div class="font-weight-semibold"><%= t(".full_name") %></div>
                         </div>
 
                         <div class="ml-3 align-self-center">
@@ -87,7 +87,7 @@
                         <div class="col-md-7">
                             <li class="media mt-0 py-2 px-2">
                                 <div class="media-body">
-                                    <div class="font-weight-semibold">Date of birth:</div>
+                                    <div class="font-weight-semibold"><%= t(".date_of_birth") %></div>
                                 </div>
         
                                 <div class="ml-3 align-self-center">
@@ -98,7 +98,7 @@
                         <div class="col-md-5">
                             <li class="media mt-0 py-2 px-2">
                                 <div class="media-body">
-                                    <div class="font-weight-semibold">Gender:</div>
+                                    <div class="font-weight-semibold"><%= t(".gender") %></div>
                                 </div>
         
                                 <div class="ml-3 align-self-center">
@@ -110,7 +110,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Department:</div>
+                            <div class="font-weight-semibold"><%= t(".department") %></div>
                         </div>
 
                         <div class="ml-3 align-self-center">
@@ -120,7 +120,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Position:</div>
+                            <div class="font-weight-semibold"><%= t(".position") %></div>
                         </div>
 
                         <div class="ml-3 align-self-center">
@@ -130,7 +130,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Labor Contract Type:</div>
+                            <div class="font-weight-semibold"><%= t(".labor_contract_type") %></div>
                         </div>
 
                         <div class="ml-3 align-self-center">
@@ -142,7 +142,7 @@
                         <div class="col-md-6">
                             <li class="media mt-0 py-2 px-2">
                                 <div class="media-body">
-                                    <div class="font-weight-semibold">Starting Date:</div>
+                                    <div class="font-weight-semibold"><%= t(".starting_date") %></div>
                                 </div>
         
                                 <div class="ml-3 align-self-center">
@@ -153,7 +153,7 @@
                         <div class="col-md-6">
                             <li class="media mt-0 py-2 px-2">
                                 <div class="media-body">
-                                    <div class="font-weight-semibold">Leaving Date:</div>
+                                    <div class="font-weight-semibold"><%= t(".leaving_date") %></div>
                                 </div>
         
                                 <div class="ml-3 align-self-center">
@@ -167,7 +167,7 @@
                 <div class="col-md-6">
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Telephone:</div>
+                            <div class="font-weight-semibold"><%= t(".telephone") %></div>
                         </div>
 
                         <div class="ml-3 align-self-center">
@@ -177,7 +177,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Mobile Phone:</div>
+                            <div class="font-weight-semibold"><%= t(".mobile_phone") %></div>
                         </div>
 
                         <div class="ml-3 align-self-center">
@@ -187,7 +187,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Email:</div>
+                            <div class="font-weight-semibold"><%= t(".email") %></div>
                         </div>
 
                         <div class="ml-3 align-self-center">
@@ -197,7 +197,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Added By:</div>
+                            <div class="font-weight-semibold"><%= t(".added_by") %></div>
                         </div>
 
                         <div class="ml-3 align-self-center">
@@ -207,7 +207,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Created:</div>
+                            <div class="font-weight-semibold"><%= t(".created") %></div>
                         </div>
 
                         <div class="ml-3 align-self-center text-muted">
@@ -217,7 +217,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Last Updated:</div>
+                            <div class="font-weight-semibold"><%= t(".last_updated") %></div>
                         </div>
 
                         <div class="ml-3 align-self-center text-muted">
@@ -227,7 +227,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Address:</div>
+                            <div class="font-weight-semibold"><%= t(".address") %></div>
                         </div>
 
                         <div class="ml-3 align-self-center">
@@ -242,7 +242,7 @@
 
 <div class="card">
     <div class="card-header bg-white header-elements-sm-inline">
-        <h6 class="card-title">User Account</h6>
+        <h6 class="card-title"><%= t(".user_account") %></h6>
         <div class="header-elements">
             <div class="list-icons">
                 <a class="list-icons-item" data-action="collapse"></a>
