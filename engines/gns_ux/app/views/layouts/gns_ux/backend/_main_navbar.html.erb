@@ -28,9 +28,15 @@
         
         <ul class="navbar-nav ml-md-auto">
             <li class="nav-item">
-                <a href="#" class="navbar-nav-link">
-                    <img src="/gns_ux/assets/backend/global/images/lang/gb.png" class="img-flag" alt="">
-                </a>
+                <% if I18n.locale == :vi %>
+                    <%= link_to url_for(locale: :en), class: 'navbar-nav-link' do %>
+                        <img src="/gns_ux/assets/backend/images/lang/en.png" class="img-flag" alt="">
+                    <% end %>
+                <% else %>
+                    <%= link_to url_for(locale: :vi), class: 'navbar-nav-link' do %>
+                        <img src="/gns_ux/assets/backend/images/lang/vi.png" class="img-flag" alt="">
+                    <% end %>
+                <% end %>
             </li>
             
             <li class="nav-item dropdown">

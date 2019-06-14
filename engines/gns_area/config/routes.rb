@@ -1,21 +1,23 @@
 GnsArea::Engine.routes.draw do
-    namespace :backend, module: "backend", path: "backend/area" do
-        resources :countries do
-            collection do
-                post 'list'
-                get 'select2'
+    scope "(:locale)", locale: /en|vi/ do
+        namespace :backend, module: "backend", path: "backend/area" do
+            resources :countries do
+                collection do
+                    post 'list'
+                    get 'select2'
+                end
             end
-        end
-        resources :states do
-            collection do
-                post 'list'
-                get 'select2'
+            resources :states do
+                collection do
+                    post 'list'
+                    get 'select2'
+                end
             end
-        end
-        resources :districts do
-            collection do
-                post 'list'
-                get 'select2'
+            resources :districts do
+                collection do
+                    post 'list'
+                    get 'select2'
+                end
             end
         end
     end
