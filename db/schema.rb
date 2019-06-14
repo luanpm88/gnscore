@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_05_145454) do
+ActiveRecord::Schema.define(version: 2019_05_28_094739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,11 @@ ActiveRecord::Schema.define(version: 2019_04_05_145454) do
     t.text "cache_search"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "parent_id"
+    t.boolean "active", default: true
+    t.bigint "creator_id"
+    t.index ["creator_id"], name: "index_gns_contact_categories_on_creator_id"
+    t.index ["parent_id"], name: "index_gns_contact_categories_on_parent_id"
   end
 
   create_table "gns_contact_categories_contacts", force: :cascade do |t|
@@ -78,7 +83,9 @@ ActiveRecord::Schema.define(version: 2019_04_05_145454) do
     t.datetime "birthday"
     t.string "department"
     t.string "position"
+    t.bigint "creator_id"
     t.index ["country_id"], name: "index_gns_contact_contacts_on_country_id"
+    t.index ["creator_id"], name: "index_gns_contact_contacts_on_creator_id"
     t.index ["district_id"], name: "index_gns_contact_contacts_on_district_id"
     t.index ["state_id"], name: "index_gns_contact_contacts_on_state_id"
   end
@@ -96,6 +103,9 @@ ActiveRecord::Schema.define(version: 2019_04_05_145454) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "creator_id"
+    t.boolean "active", default: true
+    t.index ["creator_id"], name: "index_gns_core_roles_on_creator_id"
   end
 
   create_table "gns_core_roles_permissions", force: :cascade do |t|
@@ -126,8 +136,41 @@ ActiveRecord::Schema.define(version: 2019_04_05_145454) do
     t.string "first_name"
     t.string "last_name"
     t.string "cache_search"
+    t.string "avatar"
+    t.bigint "employee_id"
+    t.bigint "creator_id"
+    t.index ["creator_id"], name: "index_gns_core_users_on_creator_id"
     t.index ["email"], name: "index_gns_core_users_on_email", unique: true
+    t.index ["employee_id"], name: "index_gns_core_users_on_employee_id", unique: true
     t.index ["reset_password_token"], name: "index_gns_core_users_on_reset_password_token", unique: true
+  end
+
+  create_table "gns_employee_employees", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.string "department"
+    t.string "position"
+    t.datetime "starting_date"
+    t.string "phone"
+    t.string "mobile"
+    t.string "email"
+    t.string "labor_contract_type"
+    t.string "address"
+    t.bigint "country_id"
+    t.bigint "state_id"
+    t.bigint "district_id"
+    t.string "cache_search"
+    t.boolean "active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "creator_id"
+    t.string "gender"
+    t.datetime "birthday"
+    t.datetime "leaving_date"
+    t.index ["country_id"], name: "index_gns_employee_employees_on_country_id"
+    t.index ["creator_id"], name: "index_gns_employee_employees_on_creator_id"
+    t.index ["district_id"], name: "index_gns_employee_employees_on_district_id"
+    t.index ["state_id"], name: "index_gns_employee_employees_on_state_id"
   end
 
   create_table "gns_notification_notifications", force: :cascade do |t|
@@ -136,6 +179,7 @@ ActiveRecord::Schema.define(version: 2019_04_05_145454) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "class_name"
     t.index ["user_id"], name: "index_gns_notification_notifications_on_user_id"
   end
 
@@ -163,6 +207,18 @@ ActiveRecord::Schema.define(version: 2019_04_05_145454) do
     t.index ["creator_id"], name: "index_gns_project_categories_on_creator_id"
   end
 
+  create_table "gns_project_comments", force: :cascade do |t|
+    t.text "message"
+    t.string "file"
+    t.integer "parent_id"
+    t.bigint "project_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_gns_project_comments_on_project_id"
+    t.index ["user_id"], name: "index_gns_project_comments_on_user_id"
+  end
+
   create_table "gns_project_logs", force: :cascade do |t|
     t.bigint "project_id"
     t.string "class_name"
@@ -174,6 +230,25 @@ ActiveRecord::Schema.define(version: 2019_04_05_145454) do
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_gns_project_logs_on_project_id"
     t.index ["user_id"], name: "index_gns_project_logs_on_user_id"
+  end
+
+  create_table "gns_project_project_employee_roles", force: :cascade do |t|
+    t.bigint "project_employee_id"
+    t.bigint "role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_employee_id"], name: "index_gns_project_project_employee_roles_on_project_employee_id"
+    t.index ["role_id"], name: "index_gns_project_project_employee_roles_on_role_id"
+  end
+
+  create_table "gns_project_project_employees", force: :cascade do |t|
+    t.bigint "project_id"
+    t.bigint "employee_id"
+    t.text "custom_permissions"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_gns_project_project_employees_on_employee_id"
+    t.index ["project_id"], name: "index_gns_project_project_employees_on_project_id"
   end
 
   create_table "gns_project_projects", force: :cascade do |t|
@@ -196,12 +271,30 @@ ActiveRecord::Schema.define(version: 2019_04_05_145454) do
     t.index ["manager_id"], name: "index_gns_project_projects_on_manager_id"
   end
 
+  create_table "gns_project_roles", force: :cascade do |t|
+    t.string "name"
+    t.boolean "active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "creator_id"
+    t.index ["creator_id"], name: "index_gns_project_roles_on_creator_id"
+  end
+
+  create_table "gns_project_roles_permissions", force: :cascade do |t|
+    t.bigint "role_id"
+    t.string "permission"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_gns_project_roles_permissions_on_role_id"
+  end
+
   create_table "gns_project_stages", force: :cascade do |t|
     t.string "name"
     t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "custom_order"
+    t.text "description"
     t.index ["category_id"], name: "index_gns_project_stages_on_category_id"
   end
 
@@ -218,6 +311,9 @@ ActiveRecord::Schema.define(version: 2019_04_05_145454) do
     t.boolean "finished", default: false
     t.float "hours"
     t.integer "progress", default: 0
+    t.integer "custom_order"
+    t.bigint "creator_id"
+    t.index ["creator_id"], name: "index_gns_project_tasks_on_creator_id"
     t.index ["employee_id"], name: "index_gns_project_tasks_on_employee_id"
     t.index ["project_id"], name: "index_gns_project_tasks_on_project_id"
     t.index ["stage_id"], name: "index_gns_project_tasks_on_stage_id"
