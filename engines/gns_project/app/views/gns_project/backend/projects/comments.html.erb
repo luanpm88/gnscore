@@ -1,5 +1,5 @@
 <% if @comments.empty? %>
-    <p class="text-center text-warning pt-2">There are no notes to discuss</p>
+    <p class="text-center text-warning pt-2"><%= t('.no_note') %></p>
 <% else %>
     <div class="comment-area mb-2">
         <% @comments.each do |comment| %>
@@ -30,7 +30,7 @@
                             <li class="list-inline-item">
                                 <a href="<%= gns_project.new_backend_comment_path(project_id: @project, parent_id: comment) %>"
                                     class="reply-comment-button">
-                                    Reply
+                                    <%= t('.reply') %>
                                 </a>
                             </li>
                         <% end %>
@@ -39,7 +39,7 @@
                             <li class="list-inline-item">
                                 <a href="<%= gns_project.edit_backend_comment_path(comment) %>"
                                     class="edit-comment-button">
-                                    Edit
+                                    <%= t('.edit') %>
                                 </a>
                             </li>
                         <% end %>
@@ -51,7 +51,7 @@
                                     data-method="DELETE"
                                     data-confirm="You are about to delete a comment. The replies to this comment will also be deleted."
                                 >
-                                    Delete
+                                    <%= t('.delete') %>
                                 </a>
                             </li>
                         <% end %>
@@ -97,7 +97,7 @@
                                             <li class="list-inline-item">
                                                 <a href="<%= gns_project.edit_backend_comment_path(child_comment) %>"
                                                     class="edit-comment-button">
-                                                    Edit
+                                                    <%= t('.edit') %>
                                                 </a>
                                             </li>
                                         <% end %>
@@ -109,7 +109,7 @@
                                                     data-method="DELETE"
                                                     data-confirm="You are about to delete a reply of the comment."
                                                 >
-                                                    Delete
+                                                    <%= t('.delete') %>
                                                 </a>
                                             </li>
                                         <% end %>

@@ -11,3 +11,43 @@ vi:
         other: "Hiển thị tất cả %{count} mục"
       multi_page: "Hiển thị từ %{from} đến %{to} trên tổng số %{count} mục"
       multi_page_html: "Hiển thị từ %{from} đến %{to} trên tổng số %{count} mục"
+      
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: "khoảng 1 giờ trước"
+        other: "khoảng %{count} giờ trước"
+      about_x_months:
+        one: "khoảng 1 tháng trước"
+        other: "khoảng %{count} tháng trước"
+      about_x_years:
+        one: "khoảng 1 năm trước"
+        other: "khoảng %{count} năm trước"
+      almost_x_years:
+        one: "gần 1 năm trước"
+        other: "gần %{count} năm trước"
+      half_a_minute: "nửa phút"
+      less_than_x_seconds:
+        one: "vừa mới"
+        other: "ít hơn %{count} giây trước"
+      less_than_x_minutes:
+        one: "vừa mới"
+        other: "ít hơn %{count} phút trước"
+      over_x_years:
+        one: "hơn 1 năm trước"
+        other: "hơn %{count} năm trước"
+      x_seconds:
+        one: "1 giây trước"
+        other: "%{count} giây trước"
+      x_minutes:
+        one: "1 phút trước"
+        other: "%{count} phút trước"
+      x_days:
+        one: "1 ngày trước"
+        other: "%{count} ngày trước"
+      x_months:
+        one: "1 tháng trước"
+        other: "%{count} tháng trước"
+      x_years:
+        one: "1 năm trước"
+        other: "%{count} năm trước"

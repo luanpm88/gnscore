@@ -1,5 +1,5 @@
 <% content_for :title do %>
-    Update Status to PENDING
+    <%= t('.update_pending') %>
 <% end %>
 
 <% content_for :page_script do %>
@@ -39,12 +39,12 @@
 <div class="card">
     <div class="card-body">
         <%= form_for '', url: gns_project.send_request_backend_projects_path(id: @project), html: {multipart: false, class: 'request_project'} do |f| %>
-            <h5>Do you want to submit a request for approval for this project?</h5>
+            <h5><%= t('.update_pending_confirm') %></h5>
             
             <div class="form-group">
                 <textarea rows="2" cols="5"
                     class="form-control <%= 'border-danger' if @project.errors.full_messages_for(:remark).present? %>"
-                    placeholder="Enter your remark here"
+                    placeholder="<%= t('.enter_remark_here') %>"
                     name="remark"
                 ></textarea>
                 <% if @project.errors.full_messages_for(:remark).present? %>
@@ -53,7 +53,7 @@
             </div>
             
             <div class="text-left">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary"><%= t('.submit') %></button>
             </div>
         <% end %>
     </div>

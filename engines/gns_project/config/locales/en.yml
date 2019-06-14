@@ -1,5 +1,522 @@
 en:
   gns_project:
+    backend:
+      comments:
+        form:          
+          description: "Description:"
+          enter_message: "Enter message"
+          add_file: "Add file"
+          choose_file: "Choose file"
+          accepted: "Accepted formats: pdf, doc. Max file size 2Mb"
+          send: "Send"
+          
+        edit:
+          edit_project_note: "Edit project note"
+          comments: "Comments"
+          edit: "Edit"
+          create_comment: "Create comments"
+        index:
+          comments: "Comments"
+        new:
+          comments: "Comments"
+          add: "Add"
+          create: "Create"
+      attachments:
+        form:
+          document_name: "Document Name:"
+          enter_name: "Enter name..."
+          attach_files: "Attach files"
+          choose_file: "Choose file"
+          remark: "Remark:"
+          enter_remark_here: "Enter remark here..."
+          upload: "Upload"
+          
+        edit:
+          edit_attachment: "Edit Attachment"
+          project_attachments: "Project Attachments"
+          attachment: "Attachment"
+          
+        index:
+          attachments: "Attachments"
+          
+        logs:
+          attachment_logs: "Attachment Logs"
+          attachments: "Attachments"
+          show: "Show"
+          details: "Details"
+          task_description: "Task description"
+          document_name: "Document name"
+          
+        logs_list:
+          no: "No."
+          document: "Document"
+          update_date: "Update date"
+          change_description: "Change description"
+          remark: "Remark"
+          change_by: "Change by"
+          
+        new:
+          new_attachment: "New attachment"
+          attachment: "Attachment"
+          create: "Create"
+          
+          
+    
+      projects:
+        index:
+          project_manager: "Project Management"
+          project: "Project"
+          project_list: "Project List"
+          go: "Go"
+          create_project: "Create Project"
+          show_column: "Show Columns:"
+          sort_by: "Sort By:"
+          per_page: "Per Page:"
+          code: "Code"
+          name: "Name"
+          customer: "Custommer"
+          type: "Type"
+          start_date: "Start Date"
+          end_date: "End Date"
+          complete: "% Complete"
+          status: "Status"
+          create_at: "Create at"
+          update_at: "Update at"
+          create_at: "Create at"     
+          10: "10"
+          25: "25"
+          50: "50"
+          100: "100"
+          new: "New"
+          pending: "Pending"
+          inprogress: "In Progress"
+          finished: "Finished"
+          type_to_search: "Type to search..."
+          filter_by_customer: "Filter by customer..."
+          filter_by_type: "Filter by type..."
+          filter_by_status: "Filter by status..."
+          
+        list:
+          code: "Code"
+          name: "Name"
+          customer: "Customer"
+          type: "Type"
+          start_date: "Start Date"
+          end_date: "End Date"
+          complete: "Complete"
+          status: "Status"
+          create_at: "Create At"
+          update_at: "Update At"
+          actions: "Actions"
+          show_info: "Show Info"
+          update_info: "Update Info"
+          task_planning: "Task Planning"
+          manpower: "Manpower"
+          view_logs: "View logs"
+          delete: "Delete"
+          finish: "Finish"
+          start_project: 'Start Project'
+          request_submit: "Request (Submit)"
+          active_confirm: "You are about to delete a project"
+        new:
+          new_project: "New Project"
+          details: "Details"
+        form:
+          project_type: "Project Type"
+          select_category: "Select category..."
+          project_code: "Project Code"
+          enter_code: "Enter code"
+          project_name: "Project Name"
+          enter_name: "Enter name"
+          customer: "Customer"
+          select_customer: "Select customer"
+          date_of_implementation: "Date of implementation"
+          project_manager: "Project Manager"
+          select_manager: "Select manager"
+          priority: "Priority"
+          select_priority_level: "Select priority level"
+          remark: "Remark"
+          enter_remark: "Enter your remark here"
+          save: "Save"
+          cancel: "Cancel"
+          
+        show:
+          project_information: "Project Information"
+          details: "Details"
+          task_planning: "Task Planning"
+          manpower: "Manpower"
+          view_logs: "View Logs"
+          project_type: "Project Type:"
+          project_code: "Project Code:"
+          project_name: "Project Name:"
+          start_date: "Start Date:"
+          end_date: "End Date:"
+          status: "Status:"
+          priority: "Priority:"
+          customer_code: "Customer Code:"
+          customer_name: "Customer Name:"
+          project_manager: "PM (Project Manager):"
+          created: "Created:"
+          last_update: "Last Update:"
+          added_by: "Added By:"
+          complete: "Complete:"
+          opening_activities: "Opening Activities:"
+          
+        comments:
+          no_note: "There are no notes to discuss"
+          reply: "Reply"
+          edit: "Edit"
+          delete: "Delete"
+          
+        edit:
+          edit_project: "Edit Project"
+          details: "Details"
+          
+        finish:
+          update_status_finish: "Update Status to FINISHED"
+          update_status_finish_confirm: "Would you like to change the status of this project to Finished?"
+          confirm: "Confirm"
+          
+        tasks:
+          task_list: "Task List"
+          task_planning: "Task Planning"
+          planning: "Planning"
+          projects: "Projects"
+          add_new_task: "Add New Task"
+          download_all: "Download All"
+        tasks_list:
+          no: "No."
+          task_description: "Task Description"
+          start_date: "Start Date"
+          end_date: "End Date"
+          complete: "Complete"
+          hours: "Hours"
+          responsible: "Responsible"
+          status: "Status"
+          finished: "Finished"
+          attached: "Attached"
+          actions: "Actions"
+          no_file: "No file"
+          insert_below: "Insert below"
+          update_info: "Update Info"
+          finish_task: "Finish task"
+          un_finish_task: "Un-finish task"
+          close_task: "Close task"
+          re_open_task: "Re-open task"
+          go_to_task: "Go to task"
+          attachments: "Attachments"
+          delete: "Delete"
+          no_task_description: "There are no task description"
+          
+        start_progress:
+          update_status: "Update Status to IN-PROGRESS"
+          confirm: "Confirm"
+          
+        send_request:
+          update_pending: "Update Status to PENDING"
+          update_pending_confirm: "Do you want to submit a request for approval for this project?"
+          enter_remark_here: "Enter your remark here"
+          submit: "Submit"
+          
+        remove_authorization:
+          remove_authorization: "Remove authorization"
+          authorization_confirm: "Do you want to remove this user from authorization?"
+          removes_confirm: "Remove Confirm"
+          enter_your_remark_here: "Enter your remark here..."
+          
+          
+        menu_tab:
+          show_info: "Show Info"
+          actions: "Actions"
+          update_info: "Update Info"
+          send_request: "Send request (Submit)"
+          start_progress: "Start progress"
+          finish_to_project: "Finish to project"
+          task_planning: "Task planning"
+          manpower: "Manpower"
+          view_logs: "View logs"
+          
+        authorization:
+          manpower: "Manpower"
+          authorization: "Authorization"
+          projects: "Projects"
+          project: "Project"
+          authorized_list: "Authorized List"
+          add_authorization: "Add authorization"
+          
+        authorization_list:
+          no: "No."
+          employee_name: "Employee name"
+          role_name: "Role name"
+          permissions: "Permissions"
+          actions: "Actions"
+          view_permissions: "View permissions"
+          update_authorized: "Update authorized"
+          remove_authorized: "Remove authorized"
+          
+        add_authorization:
+          add_authorization: "Add authorization"
+          add: "Add"
+          
+        attachments:
+          task_attachment: "Task attachment"
+          attachment: "Attachment"
+          download_all: "Download All"
+          
+          
+        attachments_list:
+          no_task_description: "There are no task description"
+          stage: "Stage"
+          task_description: "Task Description"
+          status: "Status"
+          finished: "Finished"
+          attached: "Attached"
+          actions: "Actions"
+          no_file_yet: "No file yet"
+          view_attachs: "View attachs"
+          finish_task: "Finish task"
+          unfinish_task: "Un-finish task"
+          close_task: "Close task"
+          reopen_task: "Re-open task"
+        
+        form_authorization:
+          employee_name: "Employee name"
+          select_employee: "Select employee..."
+          project_roles: "Project role"
+          select_project_roles: "Select project roles..."
+          
+        update_authorization:
+          edit_authorization: "Edit authorization"
+          update: "Update"
+          
+        project_employee_roles:
+          policies:
+            tasks: "Tasks"
+            attachment: "Attachment"
+            logs: "Logs(Project/Attached)"
+            gns_project:
+              tasks:
+                creates: "Creates"
+                read_owns: "Read Own"
+                read_others: "Read Other"
+                update_owns: "Update Own"
+                update_others: "update_other"
+                delete_owns: "Delete Own"
+                delete_others: "Delete Other"
+                update_progress_owns: "Update Progress Own"
+                update_progress_others: "Update Progress Other"
+                finish_owns: "Finish Own"
+                finish_others: "Finish Other"
+                unfinish_owns: "Unfinish Own"
+                unfinish_others: "Unfinish Other"
+                close_owns: "Close Own"
+                close_others: "Close Other"
+                reopen_owns: "Reopen Own"
+                reopen_others: "Reopen Other"
+                create:
+                  decription: "Allow employees to <b>create</b> or <b>insert (below)</b> a task"
+                read_own:
+                  decription: "Allow employees to <b>view</b> their own tasks"
+                read_other:
+                  decription: "Allow employees to <b>view</b> other people's tasks"
+                update_own:
+                  decription: "Allow employees to <b>update</b> their own tasks"
+                update_other:
+                  decription: "Allow employees to <b>update</b> other people's tasks"
+                delete_own:
+                  decription: "Allow employees to <b>delete</b> their own tasks created"
+                delete_other:
+                  decription: "Allows employees to <b>delete</b> the task of others created"
+                update_progress_own:
+                  decription: "Allow employees to <b>update progress</b> their own tasks"
+                update_progress_other:
+                  decription: "Allow employees to <b>update progress</b> other people's tasks"
+                finish_own:
+                  decription: "Allow employees to <b>finish</b> their own tasks"
+                finish_other:
+                  decription: "Allow employees to <b>finish</b> other people's tasks"
+                unfinish_own:
+                  decription: "Allow employees to <b>un-finish</b> their own tasks"
+                unfinish_other:
+                  decription: "Allow employees to <b>un-finish</b> other people's tasks"
+                close_own:
+                  decription: "Allow employees to <b>closes</b> their own tasks"
+                close_other:
+                  decription: "Allow employees to <b>close</b> other people's tasks"
+                reopen_own:
+                  decription: "Allow employees to <b>re-open</b> their own tasks"
+                reopen_other:
+                  decription: "Allow employees to <b>re-open</b> other people's tasks"
+              
+              attachments:
+                creates: "Create"
+                read_owns: "Read Own"
+                read_others: "Read Other"
+                update_owns: "Update Own"
+                update_others: "Update Other"
+                delete_owns: "Delete Own"
+                delete_others: "Delete Other"
+                download_owns: "Download Own"
+                download_others: "Download Other"
+                create:
+                  decription: "Allow employees to <b>create</b> and <b>upload</b> new attachment"
+                read_own:
+                  decription: "Allow employees to <b>read/view</b> their own attachments"
+                read_other:
+                  decription: "Allow employees to <b>read/view</b> other people's attachments"
+                update_own:
+                  decription: "Allow employees to <b>update info</b> or <b>re-upload file</b> their own attachments"
+                update_other:
+                  decription: "Allow employees to <b>update info</b> or <b>re-upload file</b> other people's attachments"
+                delete_own:
+                  decription: "Allow employees to <b>delete</b> their own attachments created"
+                delete_other:
+                  decription: "Allow employees to <b>delete</b> other people's attachments"
+                download_own:
+                  decription: "Allow employees to <b>download</b> their own attachments"
+                download_other:
+                  decription: "Allow employees to <b>download</b> other people's attachments"
+                  
+              logs:
+                reads: "Read"
+                downloads: "Download"
+                read:
+                  decription: "Allow employees to <b>view logs</b> of projects/tasks/attachments"
+                download:
+                  decription: "Allow employees to <b>download</b> the attachment of the log"
+                 
+        authorization_permissions:
+          permissions_for: "Permissions for"
+          see_all_policies: "See All Policies"
+          
+        logs:
+          project_logs: "Project logs"
+          home: "Home"
+          projects: "Projects"
+          project: "Project"
+          logs: "Logs"
+          select_from_date: "Select from date"
+          select_to_date: "Select to date"
+          select_log_type: "Select log type"
+          select_stage_name: "Select stage name"
+          select_task_name: "Select task name"
+          select_attachment_name: "Select attachment name"          
+          task: "Task"
+          attachment: "Attachment"
+          go: "Go"
+          sort_by: "Sort by:"
+          date_time: "Date/Time:"
+          per_page: "Per page:"
+          10: "10"
+          25: "25"
+          50: "50"
+          100: "100"
+        logs_list:
+          date_time: "Date/Time"
+          content_of_changes: "Content of changes"
+          remark: "Remark"
+          by: "By"
+          attached_file: "Attached file"
+          
+        comment_card:
+          discussion_note: "Discussion/Notes"
+          add_new_note: "Add new note"
+          
+      tasks:
+        new:
+          new_task: "New Task"
+          details: "Details"
+        form:
+          stage: "Stage"
+          choose_a_stage: "Choose a stage"
+          task_description: "Task Description"
+          enter_the_task_description: "Enter the task description"
+          responsible_person: "Responsible person"
+          choose_an_employee: "Choose an employee"
+          workday: "Workday"
+          hours: "Hours"
+          enter_hours_worked: "Enter hours worked"
+          remark: "Remark"
+          enter_your_remark_here: "Enter your remark here"
+          save: "Save"
+          cancel: "Cancel"
+        attachment_actions:
+          upload_new_attach_file: "Upload new attach file"
+          download_all: "Download all"
+          
+        attachments:
+          attachments: "Attachments"
+          tasks: "Tasks"
+          task: "Task"
+          attached_details: "Attached details"
+          stage_name_task_description: "Stage name/Task description"
+          
+        attachments_list:
+          num: "No."
+          attached_file: "Attached file"
+          size: "Size"
+          upload_at: "Upload at"
+          actions: "Actions"
+          upload_reupload: "Upload/Re-upload"
+          download: "Download"
+          logs_attached: "Logs attached"
+          remove: "Remove"
+          not_attachment_upload: "No attached upload"
+        
+        close:
+          close_task: "Close task"
+          confirm_close: "Do you want to close this task?"
+          enter_your_remark_here: "Enter your remark here"
+          close_confirm: "Confirm close"
+           
+        edit:
+          edit_task: "Edit task"
+          edit: "Edit"
+          task: "Task"
+          create_task: "Create task"
+          details: "Details"
+          
+        finish:
+          finish_task: "Finish task"
+          finish_confirm: "Do you want to finish this task?"
+          enter_your_remark_here: "Enter your remark here"
+          finish_confirm: "Finish confirm"
+        show:
+          task: "Task:"
+          projects: "Projects"
+          task_details: "Task Details"
+          finish: "Finish"
+          unfinish: "Un-finish"
+          close: "Close"
+          reopen: "Re_open"
+          update_info: "Update Info"
+          project_name: "Projects Name:"
+          stage_name: "Stage Name:"
+          task_description: "Task Description:"
+          start_date: "Start Date:"
+          end_date: "End Date:"
+          hours: "Hours:"
+          responsible_person: "Responsible Person:"
+          project_complete: "Progress (Complete):"
+          status: "Status:"
+          created: "Created:"
+          added_by: "Added by"
+          last_updated: "Last Updated:"
+          attached_details: "Attached details"
+                   
+        unfinish:
+          unfinish_task: "Un-finish Task"
+          unfinish_task_confirm: "Do you want to un-finish this task?"
+          enter_your_remark_here: "Enter your remark here..."
+          unfinish_confirm: "Un-finish Confirm"
+        update_progress:
+          progress_update: "Progress Update"
+          progress: "Slide to assign a percentage for progress"
+          remark: "Remark"
+          enter_your_remark_here: "Enter your remark here..."
+          update: "Update"
+             
+          
     notification:
       project:
         created: "Create new project: %{name}"

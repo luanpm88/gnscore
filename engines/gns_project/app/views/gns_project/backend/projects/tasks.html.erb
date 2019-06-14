@@ -1,16 +1,16 @@
 <% content_for :title do %>
-    Task Planning
+    <%= t('.task_planning') %>
 <% end %>
 
 <% content_for :breadcrumb do %>
-    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-    <a href="<%= gns_project.backend_projects_path %>" class="breadcrumb-item">Projects</a>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> <%= t('home') %></a>
+    <a href="<%= gns_project.backend_projects_path %>" class="breadcrumb-item"><%= t('.projects') %></a>
     <a href="<%= gns_project.backend_project_path(@project) %>" class="breadcrumb-item"><%= @project.name %></a>
-    <span class="breadcrumb-item active">Planning</span>
+    <span class="breadcrumb-item active"><%= t('.planning') %></span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-design mr-2"></i> <span class="font-weight-semibold">Project</span>: <%= @project.name %></h4>
+    <h4><i class="icon-design mr-2"></i> <span class="font-weight-semibold"><%= t('.projects') %></span>: <%= @project.name %></h4>
 <% end %>
 
 <% content_for :page_script do %>
@@ -123,20 +123,20 @@
     <%= render "menu_tab" %>
     
     <div class="card-header header-elements-inline">
-        <h5 class="mb-0">Tasks List</h5>
+        <h5 class="mb-0"><%= t('.task_list') %></h5>
         <% if (can? :create_task, @project) || (can? :download_attachments, @project) %>
             <div class="text-right">
                 <% if can? :create_task, @project %>
                     <a href="<%= gns_project.new_backend_task_path(project_id: @project.id) %>"
                         class="btn btn-sm bg-blue add-task-button">
-                        <i class="icon-plus22 mr-1"></i> Add new task
+                        <i class="icon-plus22 mr-1"></i> <%= t('.add_new_task') %>
                     </a>
                 <% end %>
                 <% if can? :download_attachments, @project %>
                         <a class="btn btn-sm btn-light ml-2"
                            href="<%= gns_project.download_attachments_backend_projects_path(@project.id) %>"
                            target="_blank">
-                            <i class="icon-download4 mr-1"></i> Download All
+                            <i class="icon-download4 mr-1"></i> <%= t('.download_all') %>
                         </a>
                 <% end %>
             </div>

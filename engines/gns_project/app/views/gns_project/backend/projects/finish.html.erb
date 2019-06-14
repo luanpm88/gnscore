@@ -1,5 +1,5 @@
 <% content_for :title do %>
-    Update Status to FINISHED
+    <%= t('.update_status_finish') %>
 <% end %>
 
 <% content_for :page_script do %>
@@ -39,7 +39,7 @@
 <div class="card">
     <div class="card-body">
         <%= form_for '', url: gns_project.finish_backend_projects_path(id: @project), html: {multipart: false, class: 'finish_project'} do |f| %>
-            <h5>Would you like to change the status of this project to Finished?</h5>
+            <h5><%= t('.update_status_finish_confirm') %></h5>
             
             <div class="form-group">
                 <textarea rows="2" cols="5"
@@ -53,7 +53,7 @@
             </div>
             
             <div class="text-left">
-                <button type="submit" class="btn btn-primary">Confirm</button>
+                <button type="submit" class="btn btn-primary"><%= t('.confirm') %></button>
             </div>
         <% end %>
     </div>

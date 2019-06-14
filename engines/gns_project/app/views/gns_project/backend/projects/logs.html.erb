@@ -1,16 +1,16 @@
 <% content_for :title do %>
-    Project Logs
+    <%= t('.project_logs')%>
 <% end %>
 
 <% content_for :breadcrumb do %>
-    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-    <a href="<%= gns_project.backend_projects_path %>" class="breadcrumb-item">Projects</a>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> <%= t('.home')%></a>
+    <a href="<%= gns_project.backend_projects_path %>" class="breadcrumb-item"> <%= t('.projects')%></a>
     <a href="<%= gns_project.backend_project_path(@project) %>" class="breadcrumb-item"><%= @project.name %></a>
-    <span class="breadcrumb-item active">Logs</span>
+    <span class="breadcrumb-item active"> <%= t('.logs')%></span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-design mr-2"></i> <span class="font-weight-semibold">Project</span>: <%= @project.name %></h4>
+    <h4><i class="icon-design mr-2"></i> <span class="font-weight-semibold"> <%= t('.project')%></span>: <%= @project.name %></h4>
 <% end %>
 
 <% content_for :page_script do %>
@@ -114,7 +114,7 @@
                             <div class="input-group">
                                 <input type="text"
                                     class="form-control font-weight-semibold daterange-single"
-                                    placeholder="Select from date"
+                                    placeholder=" <%= t('.select_from_date')%>"
                                     name="from_date">
                             </div>
                         </div>
@@ -124,20 +124,20 @@
                             <div class="input-group">
                                 <input type="text"
                                     class="form-control font-weight-semibold daterange-single"
-                                    placeholder="Select to date"
+                                    placeholder=" <%= t('.select_to_date')%>"
                                     name="to_date">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <select name="log_type" data-placeholder="Select log type"
+                            <select name="log_type" data-placeholder=" <%= t('.select_log_type')%>"
                                 class="form-control selectAllowClear"
                                 data-container-css-class="font-weight-semibold">
                                 <option></option>
-                                <option value="GnsProject::Project">Project</option>
-                                <option value="GnsProject::Task">Task</option>
-                                <option value="GnsProject::Attachment">Attachment</option>
+                                <option value="GnsProject::Project"> <%= t('.project')%></option>
+                                <option value="GnsProject::Task"> <%= t('.task')%></option>
+                                <option value="GnsProject::Attachment"> <%= t('.attachment')%></option>
                             </select>
                         </div>
                     </div>
@@ -145,7 +145,7 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <select name="stage_id" data-placeholder="Select stage name"
+                            <select name="stage_id" data-placeholder="<%= t('.select_stage_name')%>"
                               class="form-control select-ajax"
                               data-container-css-class="font-weight-semibold"
                               data-url="<%= gns_project.select2_backend_stages_path(category_id: @project.category_id) %>">
@@ -155,7 +155,7 @@
                     
                     <div class="col-md-3">
                         <div class="form-group">
-                            <select name="task_id" data-placeholder="Select task name"
+                            <select name="task_id" data-placeholder=" <%= t('.select_task_name')%>"
                               class="form-control select-ajax"
                               data-container-css-class="font-weight-semibold"
                               data-url="<%= gns_project.select2_backend_tasks_path(project_id: @project.id) %>">
@@ -165,7 +165,7 @@
                     
                     <div class="col-md-3">
                         <div class="form-group">
-                            <select name="attachment_id" data-placeholder="Select attachment name"
+                            <select name="attachment_id" data-placeholder=" <%= t('.select_attachment_name')%>"
                               class="form-control select-ajax"
                               data-container-css-class="font-weight-semibold"
                               data-url="<%= gns_project.select2_backend_attachments_path %>">
@@ -174,7 +174,7 @@
                     </div>
                     
                     <div class="col-md-3 text-right">
-                        <span class="btn btn-primary mb-3 datalist-search-button">Go</span>
+                        <span class="btn btn-primary mb-3 datalist-search-button"> <%= t('.go')%></span>
                     </div>
                 </div>
             </div>
@@ -184,19 +184,19 @@
                     <div class="text-left text-nowrap flex"></div>
                     <div class="text-right text-nowrap flex">
                         <div class="sort-by-box flex align-center mr-3">
-                            <span class="mr-1">Sort by:</span>
+                            <span class="mr-1"><%= t('.sort_by') %></span>
                             <select name="sort_by" data-placeholder="Sort by..." class="form-control selectPrimary sort-by-select">
-                                <option value="created_at">Date/Time</option>
+                                <option value="created_at"><%= t('.date_time') %></option>
                             </select>
                             <input class="sort-direction" type="hidden" name="sort_direction" value="desc" />
                         </div>
                         <div class="show-per-page flex align-center">
-                            <span class="mr-1">Per page:</span>
+                            <span class="mr-1"><%= t('.per_page') %></span>
                             <select name="per_page" class="form-control selectPrimary per-page-select">
-                                <option value="10">10</option>
-                                <option value="25">25</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
+                                <option value="10"><%= t('.10') %></option>
+                                <option value="25"><%= t('.25') %></option>
+                                <option value="50"><%= t('.50') %></option>
+                                <option value="100"><%= t('.100') %></option>
                             </select>
                         </div>
                     </div>

@@ -1,16 +1,16 @@
 <% content_for :title do %>
-    Task: <%= @task.name %>
+    <%= t('.task') %><%= @task.name %>
 <% end %>
 
 <% content_for :breadcrumb do %>
     <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-    <a href="<%= gns_project.backend_projects_path %>" class="breadcrumb-item">Projects</a>
+    <a href="<%= gns_project.backend_projects_path %>" class="breadcrumb-item"><%= t('.projects') %></a>
     <a href="<%= gns_project.tasks_backend_projects_path(@task.project) %>" class="breadcrumb-item"><%= @task.project_name %></a>
     <span class="breadcrumb-item active"><%= @task.name %></span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-task mr-2"></i> <span class="font-weight-semibold">Task</span>: <%= @task.name %></h4>
+    <h4><i class="icon-task mr-2"></i> <span class="font-weight-semibold"><%= t('.task') %></span> <%= @task.name %></h4>
 <% end %>
 
 <% content_for :page_script do %>
@@ -176,41 +176,41 @@
 
 <div class="card">
     <div class="card-header bg-white header-elements-sm-inline">
-        <h6 class="card-title">Task Details</h6>
+        <h6 class="card-title"><%= t('.task_details') %></h6>
         <div class="header-elements">
             <div class="list-icons">
                 <% if can? :finish, @task %>
                     <a href="<%= gns_project.finish_backend_tasks_path(id: @task) %>"
                         class="btn btn-sm btn-primary ml-1 finish-task-button">
-                        <i class="icon-checkmark3 mr-1"></i> Finish
+                        <i class="icon-checkmark3 mr-1"></i> <%= t('.finish') %>
                     </a>
                 <% end %>
                 
                 <% if can? :unfinish, @task %>
                     <a href="<%= gns_project.unfinish_backend_tasks_path(id: @task) %>"
                         class="btn btn-sm btn-primary ml-1 unfinish-task-button">
-                        <i class="icon-x mr-1"></i> Un-finish
+                        <i class="icon-x mr-1"></i> <%= t('.unfinish') %>
                     </a>
                 <% end %>
                 
                 <% if can? :close, @task %>
                     <a href="<%= gns_project.close_backend_tasks_path(id: @task) %>"
                         class="btn btn-sm btn-primary ml-1 close-task-button">
-                        <i class="icon-lock5 mr-1"></i> Close
+                        <i class="icon-lock5 mr-1"></i> <%= t('.close') %>
                     </a>
                 <% end %>
                 
                 <% if can? :reopen, @task %>
                     <a href="<%= gns_project.reopen_backend_tasks_path(id: @task) %>"
                         class="btn btn-sm btn-primary ml-1 reopen-task-button">
-                        <i class="icon-rotate-ccw2 mr-1"></i> Re-open
+                        <i class="icon-rotate-ccw2 mr-1"></i> <%= t('.reopen') %>
                     </a>
                 <% end %>
                 
                 <% if can? :update, @task %>
                     <a href="<%= gns_project.edit_backend_task_path(@task) %>"
                         class="btn btn-sm btn-primary ml-1 edit-task-button">
-                        <i class="icon-pencil7 mr-1"></i> Update Info
+                        <i class="icon-pencil7 mr-1"></i> <%= t('.update_info') %>
                     </a>
                 <% end %>
                 
@@ -224,7 +224,7 @@
                 <div class="col-md-6">
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Project Name:</div>
+                            <div class="font-weight-semibold"><%= t('.project_name') %></div>
                         </div>
 
                         <div class="ml-3 align-self-center"
@@ -237,7 +237,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Stage Name:</div>
+                            <div class="font-weight-semibold"><%= t('.stage_name') %></div>
                         </div>
 
                         <div class="ml-3 align-self-center">
@@ -247,7 +247,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Task Description:</div>
+                            <div class="font-weight-semibold"><%= t('.task_description') %></div>
                         </div>
 
                         <div class="ml-3 align-self-center text-success-800 font-weight-semibold">
@@ -257,7 +257,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Start Date:</div>
+                            <div class="font-weight-semibold"><%= t('.start_date') %></div>
                         </div>
 
                         <div class="ml-3 align-self-center">
@@ -267,7 +267,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">End Date:</div>
+                            <div class="font-weight-semibold"><%= t('.end_date') %></div>
                         </div>
 
                         <div class="ml-3 align-self-center">
@@ -277,7 +277,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Hours:</div>
+                            <div class="font-weight-semibold"><%= t('.hours') %></div>
                         </div>
 
                         <div class="ml-3 align-self-center">
@@ -291,7 +291,7 @@
                 <div class="col-md-6">
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Responsible Person:</div>
+                            <div class="font-weight-semibold"><%= t('.responsible_person') %></div>
                         </div>
 
                         <div class="ml-3 align-self-center">
@@ -301,7 +301,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Progress (Complete):</div>
+                            <div class="font-weight-semibold"><%= t('.project_complete') %></div>
                         </div>
 
                         <div class="ml-3 align-self-center" style="min-width: 120px">                            
@@ -328,7 +328,7 @@
                         <div class="col-md-6">
                             <li class="media mt-0 py-2 px-2">
                                 <div class="media-body">
-                                    <div class="font-weight-semibold">Status:</div>
+                                    <div class="font-weight-semibold"><%= t('.status') %></div>
                                 </div>
         
                                 <div class="ml-3 align-self-center">
@@ -339,7 +339,7 @@
                         <div class="col-md-6">
                             <li class="media mt-0 py-2 px-2">
                                 <div class="media-body">
-                                    <div class="font-weight-semibold">Finished:</div>
+                                    <div class="font-weight-semibold"><%= t('.finished') %></div>
                                 </div>
         
                                 <div class="ml-3 align-self-center font-weight-semibold">
@@ -355,7 +355,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Created:</div>
+                            <div class="font-weight-semibold"><%= t('.created') %></div>
                         </div>
 
                         <div class="ml-3 align-self-center">
@@ -365,7 +365,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Last Updated:</div>
+                            <div class="font-weight-semibold"><%= t('.last_updated') %></div>
                         </div>
 
                         <div class="ml-3 align-self-center">
@@ -375,7 +375,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Added By:</div>
+                            <div class="font-weight-semibold"><%= t('.added_by') %></div>
                         </div>
 
                         <div class="ml-3 align-self-center">
@@ -390,7 +390,7 @@
 
 <div class="card">
     <div class="card-header bg-white header-elements-sm-inline">
-        <h6 class="card-title">Attached details</h6>
+        <h6 class="card-title"><%= t('.attached_details') %></h6>
         <div class="header-elements">
             <div class="list-icons">
                 <div class="attachment-actions">

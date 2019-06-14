@@ -1,12 +1,12 @@
 <% content_for :title do %>
-    Task Attachment
+    <%= t('.task_attachment') %>
 <% end %>
 
 <% content_for :breadcrumb do %>
     <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
     <a href="<%= gns_project.backend_projects_path %>" class="breadcrumb-item">Projects</a>
     <a href="<%= gns_project.backend_project_path(@project) %>" class="breadcrumb-item"><%= @project.name %></a>
-    <span class="breadcrumb-item active">Attachment</span>
+    <span class="breadcrumb-item active"><%= t('.attachment') %></span>
 <% end %>
 
 <% content_for :page_title do %>
@@ -95,13 +95,13 @@
     <%= render "menu_tab", title: 'Attachment' %>
     
     <div class="card-header header-elements-inline">
-        <h5 class="mb-0">Attached List Of Tasks</h5>
+        <h5 class="mb-0"><%= t('.attached_list_of_tasks') %>s</h5>
         <% if can? :download_attachments, @project %>
             <div class="text-right">
                 <a class="btn btn-sm btn-light"
                    href="<%= gns_project.download_attachments_backend_projects_path(@project.id) %>"
                    target="_blank">
-                    <i class="icon-download4 mr-2"></i> Download All
+                    <i class="icon-download4 mr-2"></i><%= t('.download_all') %>l
                 </a>
             </div>
         <% end %>

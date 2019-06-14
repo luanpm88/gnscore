@@ -2,8 +2,8 @@
     <fieldset>
         <input type="hidden" name="attachment[task_id]" value="<%= attachment.task_id %>">
         <div class="form-group">
-            <label class="d-block font-weight-semibold">Document Name <span class="text-danger">*</span></label>
-            <input type="text" class="form-control <%= 'border-danger' if attachment.errors.full_messages_for(:name).present? %>" placeholder="Enter name"
+            <label class="d-block font-weight-semibold"><%= t('.document_name') %> <span class="text-danger">*</span></label>
+            <input type="text" class="form-control <%= 'border-danger' if attachment.errors.full_messages_for(:name).present? %>" placeholder="<%= t('.enter_name') %>"
                 name="attachment[name]"
                 value="<%= attachment.name %>"
             >
@@ -13,10 +13,10 @@
         </div>
         
         <div class="form-group">
-            <label class="d-block font-weight-semibold">Attach files<span class="text-danger">*</span></label>
+            <label class="d-block font-weight-semibold"><%= t('.attach_files') %><span class="text-danger">*</span></label>
             <div class="custom-file">
                 <input type="file" class="custom-file-input" name="attachment[file]">
-                <label class="custom-file-label">Choose file</label>
+                <label class="custom-file-label"><%= t('.choose_file') %></label>
             </div>
             <% if attachment.errors.full_messages_for(:file).present? %>
                 <span class="form-text text-danger"><%= attachment.errors.full_messages_for(:file).join('<br/>').html_safe %></span>
@@ -24,10 +24,10 @@
         </div>
         
         <div class="form-group">
-            <label>Remark:</label>
+            <label><%= t('.remark') %></label>
             <textarea rows="2" cols="5"
                 class="form-control <%= 'border-danger' if attachment.errors.full_messages_for(:remark).present? %>"
-                placeholder="Enter your remark here"
+                placeholder="<%= t('.enter_remark_here') %>"
                 name="attachment[remark]"
             ></textarea>
             <% if attachment.errors.full_messages_for(:remark).present? %>
@@ -38,7 +38,7 @@
     </fieldset>    
     <hr class="mt-0">
     <div class="text-left">
-        <button type="submit" class="btn btn-primary">Upload</button>
+        <button type="submit" class="btn btn-primary"><%= t('.upload') %></button>
     </div>
 <% end %>
 

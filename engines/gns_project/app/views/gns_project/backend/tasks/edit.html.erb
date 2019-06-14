@@ -1,20 +1,20 @@
 <% content_for :title do %>
-    Edit Task
+    <%= t('.edit_task') %>
 <% end %>
 
 <% content_for :breadcrumb do %>
-    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-    <a href="<%= gns_project.backend_tasks_path %>" class="breadcrumb-item">Tasks</a>
-    <span class="breadcrumb-item active">Edit</span>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> <%= t('home') %></a>
+    <a href="<%= gns_project.backend_tasks_path %>" class="breadcrumb-item"><%= t('tasks') %></a>
+    <span class="breadcrumb-item active"><%= t('.edit') %></span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Task</span> - Edit: <%= @task.name %></h4>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold"><%= t('.task') %></span> - <%= t('.edit') %>: <%= @task.name %></h4>
 <% end %>
 
 <% content_for :page_toolbar do %>
     <a class="btn btn-primary" href="<%= gns_project.new_backend_task_path %>">
-        <b><i class="icon-plus22"></i></b> Create task
+        <b><i class="icon-plus22"></i></b> <%= t('.create_task') %>
     </a>
 <% end %>
 
@@ -65,7 +65,7 @@
         
         <div class="card">
             <div class="card-header header-elements-inline">
-                <h5 class="card-title">Details</h5>
+                <h5 class="card-title"><%= t('.details') %></h5>
                 <div class="header-elements">
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="collapse"></a>

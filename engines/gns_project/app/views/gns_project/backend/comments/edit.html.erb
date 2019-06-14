@@ -1,20 +1,20 @@
 <% content_for :title do %>
-    Edit Project Note
+    <%= t('.edit_project_note') %>
 <% end %>
 
 <% content_for :breadcrumb do %>
     <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-    <a href="<%= gns_project.backend_comments_path %>" class="breadcrumb-item">Comments</a>
-    <span class="breadcrumb-item active">Edit</span>
+    <a href="<%= gns_project.backend_comments_path %>" class="breadcrumb-item"><%= t('.comments') %></a>
+    <span class="breadcrumb-item active"><%= t('.edit') %></span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-comment-discussion mr-2"></i> <span class="font-weight-semibold">Comment</span> - Edit</h4>
+    <h4><i class="icon-comment-discussion mr-2"></i> <span class="font-weight-semibold"><%= t('.comments') %></span> - <%= t('.edit') %></h4>
 <% end %>
 
 <% content_for :page_toolbar do %>
     <a class="btn btn-primary" href="<%= gns_project.new_backend_comment_path %>">
-        <b><i class="icon-plus22"></i></b> Create Comment
+        <b><i class="icon-plus22"></i></b><%= t('.create_comment') %>
     </a>
 <% end %>
 
