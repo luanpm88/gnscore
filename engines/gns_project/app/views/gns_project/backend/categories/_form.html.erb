@@ -3,8 +3,9 @@
     <fieldset>
         
         <div class="form-group">
-            <label class="d-block font-weight-semibold">Name <span class="text-danger">*</span></label>
-            <input type="text" class="form-control <%= 'border-danger' if category.errors.full_messages_for(:name).present? %>" placeholder="Enter name"
+            <label class="d-block font-weight-semibold"><%= t('.name')%><span class="text-danger">*</span></label>
+            <input type="text" class="form-control <%= 'border-danger' if category.errors.full_messages_for(:name).present? %>"
+                placeholder="<%= t('.enter_name') %>"
                 name="category[name]"
                 value="<%= category.name %>"
             >
@@ -14,10 +15,10 @@
         </div>
         
         <div class="form-group">
-            <label>Description:</label>
+            <label><%= t('.description') %>:</label>
             <textarea rows="2" cols="5"
                 class="form-control"
-                placeholder="Enter description"
+                placeholder="<%= t('.enter_description') %>"
                 name="category[description]"
             ><%= category.description %></textarea>
         </div>
@@ -25,7 +26,7 @@
     </fieldset>    
     <hr class="mt-0">
     <div class="text-left">
-        <button type="submit" class="btn btn-primary"><%= t('save') %></button>
-        <button type="button" class="btn btn-light ml-1" data-dismiss="modal"><%= t('cancel') %></button>
+        <button type="submit" class="btn btn-primary"><%= t('.save') %></button>
+        <button type="button" class="btn btn-light ml-1" data-dismiss="modal"><%= t('.cancel') %></button>
     </div>
 <% end %>

@@ -5,13 +5,13 @@
             <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
                 <h6 class="card-title mb-1">
                     <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
-                       href="#gnsProject-tasks">Tasks
+                       href="#gnsProject-tasks"><%= t('.tasks')%>
                     </a>
                 </h6>
                 <div>
-                    <button type="button" class="btn btn-link p-0 select_all_permissions_on">Select all</button>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_on"><%= t('.select_all')%></button>
                     <i class="icon-primitive-dot text-muted font-size-sm"></i>
-                    <button type="button" class="btn btn-link p-0 select_all_permissions_off">Deselect all</button>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_off"><%= t('.deselect_all')%></button>
                 </div>
             </div>
             
@@ -27,10 +27,10 @@
                                         id="gns_project.tasks.create"
                                         <%= 'checked' if @role.has_permission?('gns_project.tasks.create') %>
                                     >
-                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.create">Create/Insert</label>
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.create"><%= t('.create_insert')%></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>create</b> or <b>insert (below)</b> a task</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.create')%></b> <%= t('.or')%> <b><%= t('.insert_below')%></b> <%= t('.a_task')%></td>
                         </tr>
                         
                         <tr>
@@ -42,10 +42,10 @@
                                         id="gns_project.tasks.read_own"
                                         <%= 'checked' if @role.has_permission?('gns_project.tasks.read_own') %>
                                     >
-                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.read_own">Read own</label>
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.read_own"><%= t('.read_own')%></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>view</b> their own tasks</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.view')%></b> <%= t('.their_own_tasks')%></td>
                         </tr>
                         <tr>
                             <td width="30%">
@@ -56,10 +56,10 @@
                                         id="gns_project.tasks.read_other"
                                         <%= 'checked' if @role.has_permission?('gns_project.tasks.read_other') %>
                                     >
-                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.read_other">Read other</label>
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.read_other"><%= t('.read_other')%></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>view</b> other people's tasks</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.view')%></b> <%= t('.other_peoples_tasks')%></td>
                         </tr>
                         
                         <tr>
@@ -71,10 +71,10 @@
                                         id="gns_project.tasks.update_own"
                                         <%= 'checked' if @role.has_permission?('gns_project.tasks.update_own') %>
                                     >
-                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_own">Update own</label>
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_own"><%= t('.update_own')%></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>update</b> their own tasks</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.update')%></b> <%= t('.their_own_tasks')%></td>
                         </tr>
                         
                         <tr>
@@ -86,10 +86,10 @@
                                         id="gns_project.tasks.update_other"
                                         <%= 'checked' if @role.has_permission?('gns_project.tasks.update_other') %>
                                     >
-                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_other">Update other</label>
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_other"><%= t('.update_other')%></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>update</b> other people's tasks</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.update')%></b> <%= t('.other_peoples_tasks')%></td>
                         </tr>
                         
                         <tr>
@@ -101,10 +101,10 @@
                                         id="gns_project.tasks.delete_own"
                                         <%= 'checked' if @role.has_permission?('gns_project.tasks.delete_own') %>
                                     >
-                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.delete_own">Delete own</label>
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.delete_own"><%= t('.delete_own')%></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>delete</b> their own tasks created</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.delete')%></b> <%= t('.their_own_tasks_created')%></td>
                         </tr>
                         
                         <tr>
@@ -116,10 +116,10 @@
                                         id="gns_project.tasks.delete_other"
                                         <%= 'checked' if @role.has_permission?('gns_project.tasks.delete_other') %>
                                     >
-                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.delete_other">Delete other</label>
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.delete_other"><%= t('.delete_other')%></label>
                                 </div>
                             </td>
-                            <td>Allows users to <b>delete</b> the task of others created</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.delete')%></b> <%= t('.the_task_of_others_created')%></td>
                         </tr>
                         
                         <tr>
@@ -131,10 +131,10 @@
                                         id="gns_project.tasks.update_progress_own"
                                         <%= 'checked' if @role.has_permission?('gns_project.tasks.update_progress_own') %>
                                     >
-                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_progress_own">Update progress own</label>
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_progress_own"><%= t('.update_progress_own')%></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>update progress</b> their own tasks</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.update_progress')%></b> <%= t('.their_own_tasks')%></td>
                         </tr>
                         
                         <tr>
@@ -146,10 +146,10 @@
                                         id="gns_project.tasks.update_progress_other"
                                         <%= 'checked' if @role.has_permission?('gns_project.tasks.update_progress_other') %>
                                     >
-                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_progress_other">Update progress other</label>
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_progress_other"><%= t('.update_progress_other')%></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>update progress</b> other people's tasks</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.update_progress')%></b> <%= t('.other_peoples_tasks')%></td>
                         </tr>
                         
                         <tr>
@@ -161,10 +161,10 @@
                                         id="gns_project.tasks.finish_own"
                                         <%= 'checked' if @role.has_permission?('gns_project.tasks.finish_own') %>
                                     >
-                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.finish_own">Finish own</label>
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.finish_own"><%= t('.finish_own')%></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>finish</b> their own tasks</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.finish')%></b> <%= t('.their_own_tasks')%></td>
                         </tr>
                         
                         <tr>
@@ -176,10 +176,10 @@
                                         id="gns_project.tasks.finish_other"
                                         <%= 'checked' if @role.has_permission?('gns_project.tasks.finish_other') %>
                                     >
-                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.finish_other">Finish other</label>
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.finish_other"><%= t('.finish_other')%></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>finish</b> other people's tasks</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.finish')%></b> <%= t('.other_peoples_tasks')%></td>
                         </tr>
                         
                         <tr>
@@ -191,10 +191,10 @@
                                         id="gns_project.tasks.unfinish_own"
                                         <%= 'checked' if @role.has_permission?('gns_project.tasks.unfinish_own') %>
                                     >
-                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.unfinish_own">Un-finish own</label>
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.unfinish_own"><%= t('.unfinish_own')%></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>un-finish</b> their own tasks</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.unfinish') %></b> <%= t('.their_own_tasks')%></td>
                         </tr>
                         
                         <tr>
@@ -206,10 +206,10 @@
                                         id="gns_project.tasks.unfinish_other"
                                         <%= 'checked' if @role.has_permission?('gns_project.tasks.unfinish_other') %>
                                     >
-                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.unfinish_other">Un-finish other</label>
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.unfinish_other"><%= t('.unfinish_other')%></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>un-finish</b> other people's tasks</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.unfinish') %></b> <%= t('.other_peoples_tasks')%></td>
                         </tr>
                         
                         <tr>
@@ -221,10 +221,10 @@
                                         id="gns_project.tasks.close_own"
                                         <%= 'checked' if @role.has_permission?('gns_project.tasks.close_own') %>
                                     >
-                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.close_own">Close own</label>
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.close_own"><%= t('.close_own')%></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>closes</b> their own tasks</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.closes')%></b> <%= t('.their_own_tasks')%></td>
                         </tr>
                         
                         <tr>
@@ -236,10 +236,10 @@
                                         id="gns_project.tasks.close_other"
                                         <%= 'checked' if @role.has_permission?('gns_project.tasks.close_other') %>
                                     >
-                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.close_other">Close other</label>
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.close_other"><%= t('.close_other')%></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>close</b> other people's tasks</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.closes')%></b> <%= t('.other_peoples_tasks')%></td>
                         </tr>
                         
                         <tr>
@@ -251,10 +251,10 @@
                                         id="gns_project.tasks.reopen_own"
                                         <%= 'checked' if @role.has_permission?('gns_project.tasks.reopen_own') %>
                                     >
-                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.reopen_own">Re-open own</label>
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.reopen_own"><%= t('.reopen_own')%></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>re-open</b> their own tasks</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.reopen')%></b> <%= t('.their_own_tasks')%></td>
                         </tr>
                         
                         <tr>
@@ -266,10 +266,10 @@
                                         id="gns_project.tasks.reopen_other"
                                         <%= 'checked' if @role.has_permission?('gns_project.tasks.reopen_other') %>
                                     >
-                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.reopen_other">Re-open other</label>
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.reopen_other"><%= t('.reopen_other')%></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>re-open</b> other people's tasks</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.reopen')%></b> <%= t('.other_peoples_tasks')%></td>
                         </tr>
                     </tbody>
                 </table>

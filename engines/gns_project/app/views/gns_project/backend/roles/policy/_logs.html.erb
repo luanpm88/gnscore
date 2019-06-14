@@ -5,13 +5,13 @@
             <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
                 <h6 class="card-title mb-1">
                     <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
-                       href="#gnsProject-logs">Logs (Project/Attached)
+                       href="#gnsProject-logs"><%= t('.logs_project_attached')%>
                     </a>
                 </h6>
                 <div>
-                    <button type="button" class="btn btn-link p-0 select_all_permissions_on">Select all</button>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_on"><%= t('.select_all')%></button>
                     <i class="icon-primitive-dot text-muted font-size-sm"></i>
-                    <button type="button" class="btn btn-link p-0 select_all_permissions_off">Deselect all</button>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_off"><%= t('.deselect_all')%></button>
                 </div>
             </div>
             
@@ -27,10 +27,10 @@
                                         id="gns_project.logs.read"
                                         <%= 'checked' if @role.has_permission?('gns_project.logs.read') %>
                                     >
-                                    <label class="custom-control-label font-weight-semibold" for="gns_project.logs.read">View logs</label>
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.logs.read"><%= t('.vview_logs')%></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>view logs</b> of projects/tasks/attachments</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.view_logs')%></b> <%= t('.of_projects_tasks_attachments')%></td>
                         </tr>
                         <tr>
                             <td class="wmin-md-200">
@@ -41,10 +41,10 @@
                                         id="gns_project.logs.download"
                                         <%= 'checked' if @role.has_permission?('gns_project.logs.download') %>
                                     >
-                                    <label class="custom-control-label font-weight-semibold" for="gns_project.logs.download">Download logs</label>
+                                    <label class="custom-control-label font-weight-semibold" for="gns_project.logs.download"><%= t('.download_logs')%></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>download</b> the attachment of the log</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.download')%></b> <%= t('.the_attachment_of_the_log')%></td>
                         </tr>
                     </tbody>
                 </table>

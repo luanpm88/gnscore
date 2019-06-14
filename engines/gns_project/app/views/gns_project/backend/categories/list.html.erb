@@ -1,12 +1,12 @@
 <table class="table table-hover">
     <thead>
         <tr class="bg-info-700">
-            <th>Type Name</th>
-            <th>Description</th>
-            <th>Status</th>
-            <th>Creator</th>
-            <th>Created At</th>
-            <th class="text-right">Actions</th>
+            <th><%= t('.type_name') %></th>
+            <th><%= t('.description') %></th>
+            <th><%= t('.status') %></th>
+            <th><%= t('.creator')%></th>
+            <th><%= t('.created_at')%></th>
+            <th class="text-right"><%= t('.actions')%></th>
         </tr>
     </thead>
     <tbody>
@@ -34,14 +34,14 @@
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <% if can? :read, category %>
                                         <a href="<%= gns_project.backend_category_path(category) %>" class="dropdown-item">
-                                            <i class="icon-file-eye"></i> View details
+                                            <i class="icon-file-eye"></i> <%= t('.view_details')%>
                                         </a>
                                     <% end %>
                                     
                                     <% if can? :update, category %>
                                         <a class="dropdown-item edit-category-button"
                                             href="<%= gns_project.edit_backend_category_path(category) %>">
-                                            <i class="icon-pencil7"></i> Update Info
+                                            <i class="icon-pencil7"></i> <%= t('.update_info')%>
                                         </a>
                                     <% end %>
                                     
@@ -49,9 +49,9 @@
                                         <a class="dropdown-item ajax datalist-g-link"
                                             href="<%= gns_project.activate_backend_categories_path(id: category) %>"
                                             data-method="PUT"
-                                            data-confirm="You are about to activate a category"
+                                            data-confirm="<%= t('.activate_confirm')%>"
                                         >
-                                            <i class="icon-checkmark4"></i> Activate
+                                            <i class="icon-checkmark4"></i> <%= t('.activate')%>
                                         </a>
                                     <% end %>
                                     
@@ -59,9 +59,9 @@
                                         <a class="dropdown-item ajax datalist-g-link"
                                             href="<%= gns_project.deactivate_backend_categories_path(id: category) %>"
                                             data-method="PUT"
-                                            data-confirm="You are about to deactivate a category"
+                                            data-confirm="<%= t('.deactivate_confirm')%>"
                                         >
-                                            <i class="icon-blocked"></i> De-activate
+                                            <i class="icon-blocked"></i> <%= t('.de_activate')%>
                                         </a>
                                     <% end %>
                                     
@@ -70,9 +70,9 @@
                                         <a class="dropdown-item ajax datalist-g-link"
                                             href="<%= gns_project.backend_category_path(category) %>"
                                             data-method="DELETE"
-                                            data-confirm="You are about to delete a category"
+                                            data-confirm="<%= t('.delete_confirm')%>"
                                         >
-                                            <i class="icon-bin"></i> Delete
+                                            <i class="icon-bin"></i> <%= t('.delete')%>
                                         </a>
                                     <% end %>
                                 </div>
