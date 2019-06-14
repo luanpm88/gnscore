@@ -1,15 +1,15 @@
 <% content_for :title do %>
-    Edit Contact Person
+    <%= t('.edit_contact_person') %>
 <% end %>
 
 <% content_for :breadcrumb do %>
-    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-    <a href="<%= gns_contact.backend_contacts_path %>" class="breadcrumb-item">Contacts</a>
-    <span class="breadcrumb-item active">Edit</span>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i><%= t('home') %></a>
+    <a href="<%= gns_contact.backend_contacts_path %>" class="breadcrumb-item"><%= t(".contacts") %></a>
+    <span class="breadcrumb-item active"><%= t(".edit") %></span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Contact</span> - Edit: <%= @contact.full_name %></h4>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold"><%= t(".contact") %></span> - <%= t(".edit") %>: <%= @contact.full_name %></h4>
 <% end %>
 
 <% content_for :page_script do %>
@@ -46,7 +46,7 @@
         <% if @contact.errors.any? %>
             <div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                <span class="font-weight-semibold">Oh snap!</span> Check a few things up (below) and try submitting again.
+                <span class="font-weight-semibold"><%= t('.oh_snap')%></span><%= t('.check_a_few')%>
             </div>
         <% end %>
         
@@ -64,7 +64,7 @@
                 <%= form_for(@contact, url: gns_contact.subcontact_update_backend_contacts_path(id: @contact.id), html: {multipart: true, method: 'put'}) do |f| %>
                     <%= render 'subcontact_form', contact: @contact %>
                     <div class="text-left">
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-primary"><%= t('.update')%></button>
                     </div>
                 <% end %>
             </div>

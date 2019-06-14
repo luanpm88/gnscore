@@ -1,15 +1,15 @@
 <% content_for :title do %>
-    Show Contact
+    <%= t('.show_contact') %>
 <% end %>
 
 <% content_for :breadcrumb do %>
-    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-    <a href="<%= gns_contact.backend_contacts_path %>" class="breadcrumb-item">Contacts</a>
-    <span class="breadcrumb-item active">Show</span>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i><%= t('home') %></a>
+    <a href="<%= gns_contact.backend_contacts_path %>" class="breadcrumb-item"><%= t(".contacts") %></a>
+    <span class="breadcrumb-item active"><%= t(".show") %></span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Contact</span> - Show: <%= @contact.full_name %></h4>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold"><%= t(".contact") %></span> - <%= t(".show") %>: <%= @contact.full_name %></h4>
 <% end %>
 
 <% content_for :page_script do %>
@@ -120,15 +120,15 @@
         <%= render "general_infomation" %>
         
         <div class="card">
-            <%= render "contact_menu", title: 'Contact Person' %>
+            <%= render "contact_menu", title: I18n.t('contact_person') %>
             <div class="card-body">
                 <div class="text-right">
                     <% if can? :create, GnsContact::Contact %>
-                        <a href="<%= gns_contact.subcontact_new_backend_contacts_path(parent_id: @contact.id) %>" class="btn bg-blue mr-3 add-new-subcontact-button">Add new contact</a>
+                        <a href="<%= gns_contact.subcontact_new_backend_contacts_path(parent_id: @contact.id) %>" class="btn bg-blue mr-3 add-new-subcontact-button"><%= t('.add_new_contact') %></a>
                     <% end %>
                     
                     <% if can? :update, @contact %>
-                        <a href="<%= gns_contact.add_subcontact_backend_contacts_path %>" class="btn bg-blue add-subcontact-exist-button">Add contact already exists</a>
+                        <a href="<%= gns_contact.add_subcontact_backend_contacts_path %>" class="btn bg-blue add-subcontact-exist-button"><%= t('.add_contact_already_exists') %></a>
                     <% end %>
                 </div>
             </div>

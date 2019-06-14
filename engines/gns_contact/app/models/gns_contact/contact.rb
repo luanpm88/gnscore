@@ -69,8 +69,8 @@ module GnsContact
     # get business type options
     def self.get_type_options()
       [
-        {text: 'Company', value: self::TYPE_COMPANY},
-        {text: 'Person', value: self::TYPE_PERSON},
+        {text: I18n.t('company'), value: self::TYPE_COMPANY},
+        {text: I18n.t('person'), value: self::TYPE_PERSON},
       ]
     end
     

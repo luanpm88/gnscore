@@ -8,7 +8,7 @@
                     data-menu="gns_contact/backend/contacts/show"
                 >
                     <i class="icon-info22 mr-1"></i>
-                    Contact person
+                    <%= t('.contact_person') %>
                 </a>
             </li>
             <li class="nav-item mr-3">
@@ -17,7 +17,7 @@
                     href="<%= gns_contact.projects_backend_contacts_path(@contact.id) %>"
                     class="nav-link <%= 'modal-control' if request.xhr? %>" modal-size="full">
                         <i class="icon-design mr-1"></i>
-                        Project list
+                        <%= t('.project_list') %>
                 </a>
             </li>
             
