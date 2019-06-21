@@ -683,6 +683,192 @@
             <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
                 <h6 class="card-title mb-1">
                     <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
+                       href="#gnsProject-templates">Templates
+                    </a>
+                </h6>
+                <div>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_on">Select all</button>
+                    <i class="icon-primitive-dot text-muted font-size-sm"></i>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_off">Deselect all</button>
+                </div>
+            </div>
+            
+            <div id="gnsProject-templates" class="collapse show">
+                <table class="table table-xs">
+                    <tbody>
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.templates.create]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.templates.create]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.templates.create"
+                                        <%= 'checked' if @role.has_permission?('gns_project.templates.create') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.templates.create">Create</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>create</b> a template</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.templates.read_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.templates.read_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.templates.read_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.templates.read_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.templates.read_own">Read own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>view/read</b> their own templates</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.templates.read_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.templates.read_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.templates.read_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.templates.read_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.templates.read_other">Read other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>view/read</b> other people's templates</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_project.templates.update_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.templates.update_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.templates.update_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.templates.update_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.templates.update_own">Update own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>update info</b> their own templates</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_project.templates.update_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.templates.update_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.templates.update_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.templates.update_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.templates.update_other">Update other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>update info</b> other people's templates</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.templates.delete_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.templates.delete_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.templates.delete_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.templates.delete_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.templates.delete_own">Delete own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>delete</b> their own templates</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.templates.delete_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.templates.delete_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.templates.delete_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.templates.delete_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.templates.delete_other">Delete other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>delete</b> other people's templates</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">                                
+                                    <input type="hidden" name="permissions[gns_project.templates.activate_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.templates.activate_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.templates.activate_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.templates.activate_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.templates.activate_own">Activate own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>activate/cancel</b> their own templates</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.templates.activate_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.templates.activate_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.templates.activate_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.templates.activate_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.templates.activate_other">Activate other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>activate/cancel</b> other people's templates</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.templates.deactivate_own]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.templates.deactivate_own]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.templates.deactivate_own"
+                                        <%= 'checked' if @role.has_permission?('gns_project.templates.deactivate_own') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.templates.deactivate_own">De-activate own</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>de-activate/re-activate</b> their own templates</td>
+                        </tr>
+                        
+                        <tr>
+                            <td width="30%">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="hidden" name="permissions[gns_project.templates.deactivate_other]" value="false">
+                                    <input type="checkbox" name="permissions[gns_project.templates.deactivate_other]" value="true"
+                                        class="custom-control-input"
+                                        id="gns_project.templates.deactivate_other"
+                                        <%= 'checked' if @role.has_permission?('gns_project.templates.deactivate_other') %>
+                                    >
+                                    <label class="custom-control-label" for="gns_project.templates.deactivate_other">De-activate other</label>
+                                </div>
+                            </td>
+                            <td>Allow users to <b>de-activate/re-activate</b> other people's templates</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="pt-2 pb-2 permissions-box">
+            <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+                <h6 class="card-title mb-1">
+                    <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
                        href="#gnsProject-roles">Roles (Default)
                     </a>
                 </h6>

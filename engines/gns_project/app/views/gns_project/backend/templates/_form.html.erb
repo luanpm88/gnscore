@@ -1,0 +1,55 @@
+<%= form_for([gns_project, :backend, template], html: {multipart: true}) do |f| %>
+    <fieldset>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-block">Template Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control font-weight-semibold <%= 'border-danger' if template.errors.full_messages_for(:name).present? %>" placeholder="Enter name"
+                        name="template[name]"
+                        value="<%= template.name %>"
+                    >
+                    <% if template.errors.full_messages_for(:name).present? %>
+                        <span class="form-text text-danger"><%= template.errors.full_messages_for(:name).join('<br/>').html_safe %></span>
+                    <% end %>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-block">Project Type <span class="text-danger">*</span></label>
+                    <select name="template[category_id]"
+                        class="form-control select-ajax"
+                        data-container-css-class="font-weight-semibold <%= 'border-danger' if template.errors.full_messages_for(:category_id).present? %>"
+                        data-placeholder="Select category..."
+                        data-url="<%= gns_project.select2_backend_categories_path %>">
+                        <option value="<%= template.category_id %>"><%= template.category_name %></option>
+                    </select>
+                    <% if template.errors.full_messages_for(:category_id).present? %>
+                        <span class="form-text text-danger"><%= template.errors.full_messages_for(:category_id).join('<br/>').html_safe %></span>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="d-block">Description</label>
+            <textarea rows="2" cols="5"
+                class="form-control font-weight-semibold"
+                placeholder="Enter your description here"
+                name="template[description]"
+            ><%= template.description %></textarea>
+        </div>
+    </fieldset>
+    
+    <hr class="mt-0">
+    <div class="text-left">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a class="btn btn-light ml-1" href="<%= gns_project.backend_templates_path %>">
+            Cancel
+        </a>
+    </div>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        
+    </script>
+<% end %>

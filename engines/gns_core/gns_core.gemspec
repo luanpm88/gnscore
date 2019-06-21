@@ -36,4 +36,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency	'cancan'
   spec.add_dependency 'carrierwave'
   spec.add_dependency 'mini_magick'
+  spec.add_dependency 'rubyXL'
 end

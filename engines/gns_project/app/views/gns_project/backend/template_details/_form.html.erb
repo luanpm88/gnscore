@@ -1,0 +1,38 @@
+<%= form_for([gns_project, :backend, template_detail], html: {multipart: true}) do |f| %>
+    <fieldset>
+        <input type="hidden" name="template_detail[template_id]" value="<%= @template_detail.template.id %>">
+        <input type="hidden" name="template_detail[current_template_detail_id]" value="<%= params[:current_template_detail_id] %>">
+        
+        <div class="form-group">
+            <label class="d-block">Stage <span class="text-danger">*</span></label>
+            <select name="template_detail[stage_id]" data-placeholder="Choose a stage"
+                class="form-control select-ajax"
+                data-url="<%= gns_project.select2_backend_stages_path(category_id: @template_detail.template.category_id) %>"
+                data-container-css-class="font-weight-semibold <%= 'border-danger' if template_detail.errors.full_messages_for(:stage_id).present? %>"
+            >
+                <option value=''>None</option>
+                <option selected value="<%= template_detail.stage_id %>"><%= template_detail.stage_name %></option>
+            </select>
+            <% if template_detail.errors.full_messages_for(:stage_id).present? %>
+                <span class="form-text text-danger"><%= template_detail.errors.full_messages_for(:stage_id).join('<br/>').html_safe %></span>
+            <% end %>
+        </div>
+        
+        <div class="form-group">
+            <label class="d-block">Task Description <span class="text-danger">*</span></label>
+            <input type="text" class="form-control font-weight-semibold <%= 'border-danger' if template_detail.errors.full_messages_for(:task_description).present? %>"
+                placeholder="Enter the task description"
+                name="template_detail[task_description]"
+                value="<%= template_detail.task_description %>"
+            >
+            <% if template_detail.errors.full_messages_for(:task_description).present? %>
+                <span class="form-text text-danger"><%= template_detail.errors.full_messages_for(:task_description).join('<br/>').html_safe %></span>
+            <% end %>
+        </div>
+    </fieldset>    
+    <hr class="mt-0">
+    <div class="text-left">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-light ml-1" data-dismiss="modal">Cancel</button>
+    </div>
+<% end %>

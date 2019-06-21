@@ -1,0 +1,77 @@
+<% content_for :title do %>
+    Edit Template
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+    <a href="<%= gns_project.backend_template_path %>" class="breadcrumb-item">Templates</a>
+    <span class="breadcrumb-item active">Edit</span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Template</span> - Edit: <%= @template.name %></h4>
+<% end %>
+
+<% content_for :page_toolbar do %>
+    <% if can? :create, GnsProject::Template %>
+        <a class="btn btn-primary" href="<%= gns_project.new_backend_template_path %>">
+            <b><i class="icon-plus22"></i></b> Create template
+        </a>
+    <% end %>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        $(document).ready(function() {
+            $('.edit_template').submit(function(e) {
+                e.preventDefault();
+                
+                var form = $(this);
+                
+                // clear modal before ajax running
+                template_modal.clear();
+                
+                $.ajax({
+                    url: form.attr('action'),
+                    method: form.attr('method'),
+                    data: form.serialize() + '&layout=modal',
+                }).done(function(response) {
+                    // do something
+                    if (typeof(updateTemplateCallback) !== 'undefined') {
+                        updateTemplateCallback(response);
+                    }
+                });
+                
+                return false;
+            });
+        });
+    </script>
+<% end %>
+
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        
+        <% if @template.errors.any? %>
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                <span class="font-weight-semibold">Oh snap!</span> Check a few things up (below) and try submitting again.
+            </div>
+        <% end %>
+        
+        <div class="card">
+            <div class="card-header header-elements-inline">
+                <h5 class="card-title">Details</h5>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <%= render 'form', template: @template %>
+            </div>
+        </div>
+        
+    </div>
+</div>

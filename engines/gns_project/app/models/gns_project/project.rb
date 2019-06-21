@@ -129,12 +129,7 @@ module GnsProject
       
       # keyword
       if params[:q].present?
-        query = query.where('LOWER(gns_area_districts.cache_search) LIKE ?', '%'+params[:q].to_ascii.strip.downcase+'%')
-      end     
-      
-      # state
-      if params[:state_id].present?
-        query = query.where(state_id: params[:state_id])
+        query = query.where('LOWER(gns_project_projects.cache_search) LIKE ?', '%'+params[:q].to_ascii.strip.downcase+'%')
       end
       
       # pagination

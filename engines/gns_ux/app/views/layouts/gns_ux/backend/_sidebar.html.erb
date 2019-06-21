@@ -96,7 +96,8 @@
                         data-menu="
                             gns_project/backend/projects,
                             gns_project/backend/categories,
-                            gns_project/backend/roles
+                            gns_project/backend/roles,
+                            gns_project/backend/templates
                         "
                     ><i class="icon-task"></i> <span><%= t(".project") %></span></a>
 
@@ -115,6 +116,14 @@
                                     gns_project/backend/categories
                                 "
                             ><%= t(".project_types") %>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<%= gns_project.backend_templates_path %>" class="nav-link"
+                                data-menu="
+                                    gns_project/backend/templates
+                                "
+                            ><%= t(".project_templates") %>
                             </a>
                         </li>
                         <li class="nav-item">
