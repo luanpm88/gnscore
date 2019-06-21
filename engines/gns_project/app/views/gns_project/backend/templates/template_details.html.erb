@@ -1,0 +1,64 @@
+<% if @template.template_details.empty? %>
+    <div class="card-body">
+        <p class="text-center text-warning pt-2">
+            There are no template detail
+        </p>
+    </div>
+<% else %>
+    <table class="table">
+        <thead>
+            <tr class="alpha-primary">
+                <th>No.</th>
+                <th class="text-nowrap">Stage Name</th>
+                <th class="text-nowrap">Task Description</th>
+                <th class="text-center" style="width: 100px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @template_details.each_with_index do |template_detail,index| %>
+                <tr>
+                    <td class="font-weight-semibold"><%= index + 1 %></td>
+                    <td>
+                        <span class="text-default font-weight-semibold text-nowrap">
+                            <%= template_detail.stage_name %>
+                        </span>
+                    </td>
+                    <td>
+                        <span class="text-default font-weight-semibold text-nowrap">
+                            <%= template_detail.task_description %>
+                        </span>
+                    </td>
+                    <td class="text-center">
+                        <div class="list-icons">
+                            <div class="dropdown">
+                                <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="<%= gns_project.new_backend_template_detail_path(template_id: @template.id, current_template_detail_id: template_detail.id) %>"
+                                       class="dropdown-item insert-below-template-detail-button">
+                                        <i class="icon-add-to-list"></i> Insert below
+                                    </a>
+                                    <a href="<%= gns_project.edit_backend_template_detail_path(template_detail) %>"
+                                        class="dropdown-item edit-template-detail-button">
+                                        <i class="icon-pencil7"></i> Update Info
+                                    </a>
+                                    
+                                    <div class="dropdown-divider"></div>
+                                    
+                                    <a class="dropdown-item ajax delete-template-detail-button"
+                                        href="<%= gns_project.backend_template_detail_path(template_detail) %>"
+                                        data-method="DELETE"
+                                        data-confirm="You are about to delete a template detail"
+                                    >
+                                        <i class="icon-bin"></i> Delete
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+<% end %>

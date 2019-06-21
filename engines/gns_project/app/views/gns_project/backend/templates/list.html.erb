@@ -1,0 +1,95 @@
+<table class="table table-hover">
+    <thead>
+        <tr class="bg-info-700">
+            <th>Name</th>
+            <th>Project Type</th>
+            <th>Description</th>
+            <th>Creator</th>
+            <th>Created At</th>
+            <th class="text-right">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @templates.each do |template| %>
+            <tr>
+                <td><%= template.name %></td>
+                <td><%= template.category_name %></td>
+                <td><%= template.description %></td>
+                <td>
+                    <%= template.creator_name %>
+                </td>
+                <td title="<%= template.created_at.strftime("%d/%m/%Y - %T") %>">
+                    <%= template.created_at.strftime("%d/%m/%Y") %>
+                </td>
+                <td class="text-right">
+                    <div class="list-icons">
+                        <% if (can? :read, template) or (can? :update, template) or (can? :delete, template) %>
+                            <div class="dropdown">
+                                <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+    
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <% if can? :read, template %>
+                                        <a href="<%= gns_project.backend_template_path(template) %>" class="dropdown-item">
+                                            <i class="icon-file-eye"></i> View details
+                                        </a>
+                                    <% end %>
+                                    
+                                    <% if can? :update, template %>
+                                        <a class="dropdown-item edit-template-button"
+                                            href="<%= gns_project.edit_backend_template_path(template) %>">
+                                            <i class="icon-pencil7"></i> Update Info
+                                        </a>
+                                    <% end %>
+                                    
+                                    <% if can? :activate, template %>
+                                        <a class="dropdown-item ajax datalist-g-link"
+                                            href="<%= gns_project.activate_backend_templates_path(id: template) %>"
+                                            data-method="PUT"
+                                            data-confirm="You are about to activate a template"
+                                        >
+                                            <i class="icon-checkmark4"></i> Activate
+                                        </a>
+                                    <% end %>
+                                    
+                                    <% if can? :deactivate, template %>
+                                        <a class="dropdown-item ajax datalist-g-link"
+                                            href="<%= gns_project.deactivate_backend_templates_path(id: template) %>"
+                                            data-method="PUT"
+                                            data-confirm="You are about to deactivate a template"
+                                        >
+                                            <i class="icon-blocked"></i> De-activate
+                                        </a>
+                                    <% end %>
+                                    
+                                    <% if can? :delete, template %>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item ajax datalist-g-link"
+                                            href="<%= gns_project.backend_template_path(template) %>"
+                                            data-method="DELETE"
+                                            data-confirm="You are about to delete a template"
+                                        >
+                                            <i class="icon-bin"></i> Delete
+                                        </a>
+                                    <% end %>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<div class="pagination-area">
+    <div class="page_entries_info">
+        <!-- Showing 1 to 10 of 19 entries -->
+        <%= page_entries_info @templates %>
+    </div>
+
+    <div class="pagination_style paging_simple_numbers">
+        <%= will_paginate @templates, previous_label: 'Prev'.html_safe, next_label: 'Next'.html_safe, renderer: BootstrapPagination::Rails, class: 'align-self-center' %>
+    </div>
+</div>

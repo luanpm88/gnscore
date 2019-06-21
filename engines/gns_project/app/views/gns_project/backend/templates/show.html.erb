@@ -1,0 +1,229 @@
+<% content_for :title do %>
+    Show Template
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+    <a href="<%= gns_project.backend_templates_path %>" class="breadcrumb-item">Project Template</a>
+    <span class="breadcrumb-item active">Show</span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Project Template</span> - <%= @template.name %></h4>
+<% end %>
+
+<% content_for :page_toolbar do %>
+    <% if can? :create, GnsProject::Template %>
+        <a class="btn btn-primary add-template-button" href="<%= gns_project.new_backend_template_path %>">
+            <b><i class="icon-plus22"></i></b> Create Template
+        </a>
+    <% end %>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        // global modal
+        var template_detail_modal = new gModal({size: 'md'});
+        var template_detail_list_box = new ajaxBox(
+            $('.template-detail-list'),
+            '<%= gns_project.template_details_backend_templates_path(@template.id) %>',
+            function(box) {
+                // apply g-link for delete stage button
+                new gLink(box.find('.delete-template-detail-button'), function(link) {
+                    template_detail_list_box.load();
+                });
+            }
+        );
+        
+        var template_modal = new gModal({size: 'md'});
+        var newTemplateCallback;
+        
+        $(function() {
+            $('.add-template-button').click(function(e) {
+                e.preventDefault();
+                var button = $(this);
+                
+                template_modal.load(button.attr('href'));
+                
+                newTemplateCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // Hide modal
+                        template_modal.hide();
+                        datalists.forEach(function(datalist) {
+                            datalist.refresh();
+                        });     
+                    } else if (typeof(response.redirect) !== 'undefined') {
+                        window.location = response.redirect;
+                    } else {
+                        // validation error
+                        template_modal.renderHtml(response);
+                    }
+                };
+            });
+            
+            $(document).on('click', '.edit-template-button', function(e) {
+                e.preventDefault();
+                
+                var button = $(this);
+                
+                // load modal edit category
+                template_modal.load(button.attr('href'));
+                
+                // after update category event
+                updateTemplateCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        // Hide modal
+                        template_modal.hide();
+                        location.reload();
+                    } else {
+                        // validation error
+                        template_modal.renderHtml(response);
+                    }
+                }
+                
+            });
+            
+            $('.add-template-detail-button').click(function(e) {
+                e.preventDefault();
+                
+                template_detail_modal.load($(this).attr('href'));
+            });
+            
+            $(document).on('click', '.edit-template-detail-button', function(e) {
+                e.preventDefault();
+                
+                template_detail_modal.load($(this).attr('href'));
+            });
+            
+            $(document).on('click', '.insert-below-template-detail-button', function(e) {
+                e.preventDefault();
+                
+                template_detail_modal.load($(this).attr('href'));
+            });
+            
+            // ajax box stage list
+            template_detail_list_box.load();
+        });
+    </script>
+<% end %>
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-ms-12">
+        
+        <!-- Bottom tabs -->
+        <div class="card">
+            
+            <div class="card-header bg-white header-elements-sm-inline">
+                <h6 class="card-title font-weight-semibold">Template Details</h6>
+                <div class="header-elements">
+                    <% if (can? :update, @template) %>
+                        <div class="btn-group mr-3">
+                            <button type="button" class="btn bg-blue-600 btn-sm dropdown-toggle" data-toggle="dropdown">Actions</button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <% if can? :update, @template %>
+                                    <a class="dropdown-item edit-template-button"
+                                        href="<%= gns_project.edit_backend_template_path(@template) %>">
+                                        <i class="icon-pencil5"></i> Update
+                                    </a>
+                                <% end %>
+                            </div>
+                        </div>
+                    <% end %>
+                    
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card-body">
+                <ul class="media-list">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <li class="media mt-0 py-2 px-2">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Template name:</div>
+                                </div>
+        
+                                <div class="ml-3 align-self-center text-blue-800">
+                                    <%= @template.name %>
+                                </div>
+                            </li>
+                            <li class="media mt-0 py-2 px-2">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Discription:</div>
+                                </div>
+        
+                                <div class="ml-3 align-self-center text-blue-800">
+                                    <%= @template.description %>
+                                </div>
+                            </li>
+                            <li class="media mt-0 py-2 px-2">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Project type:</div>
+                                </div>
+        
+                                <div class="ml-3 align-self-center text-blue-800">
+                                    <%= @template.category_name %>
+                                </div>
+                            </li>
+                        </div>
+                            
+                        <div class="col-md-6">
+                            <li class="media mt-0 py-2 px-2">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Added by:</div>
+                                </div>
+        
+                                <div class="ml-3 align-self-center text-blue-800">
+                                    <%= @template.creator_name %>
+                                </div>
+                            </li>
+                            <li class="media mt-0 py-2 px-2">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Created:</div>
+                                </div>
+        
+                                <div class="ml-3 align-self-center text-muted">
+                                    <%= @template.created_at.strftime('%d %b, %Y') %>
+                                </div>
+                            </li>
+                            <li class="media mt-0 py-2 px-2">
+                                <div class="media-body">
+                                    <div class="font-weight-semibold">Updated:</div>
+                                </div>
+        
+                                <div class="ml-3 align-self-center text-muted">
+                                    <%= @template.updated_at.strftime('%d %b, %Y') %>
+                                </div>
+                            </li>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+        <!-- /bottom tabs -->
+        
+        <div class="card">
+            <div class="card-header header-elements-inline">
+                <h6 class="card-title font-weight-semibold">Template details</h6>
+                <div class="header-elements">
+                    <a href="<%= gns_project.new_backend_template_detail_path(template_id: @template.id) %>"
+                        class="btn btn-sm bg-blue add-template-detail-button mr-2">
+                        <i class="icon-plus22 mr-1"></i> Add new template detail
+                    </a>
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="template-detail-list" style="position: relative; min-height: 130px">
+                
+            </div>
+        </div>
+        
+    </div>
+</div>

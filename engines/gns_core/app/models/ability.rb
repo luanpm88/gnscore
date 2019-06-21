@@ -294,13 +294,19 @@ class Ability
     end
     
     can :delete, GnsProject::Project do |project|
-      (user.has_permission?('gns_project.projects.delete_own') and project.creator == user) or
-      (user.has_permission?('gns_project.projects.delete_other') and project.creator != user)
+      project.is_new? and
+      (
+        (user.has_permission?('gns_project.projects.delete_own') and project.creator == user) or
+        (user.has_permission?('gns_project.projects.delete_other') and project.creator != user)
+      )
     end
     
     can :mark_as_new, GnsProject::Project do |project|
-      (user.has_permission?('gns_project.projects.setnew_own') and project.creator == user) or
-      (user.has_permission?('gns_project.projects.setnew_other') and project.creator != user)
+      !project.is_new? and
+      (
+        (user.has_permission?('gns_project.projects.setnew_own') and project.creator == user) or
+        (user.has_permission?('gns_project.projects.setnew_other') and project.creator != user)
+      )
     end
     
     can :send_request, GnsProject::Project do |project|
@@ -435,6 +441,41 @@ class Ability
     can :download, GnsProject::Comment do |comment|
       false
     end
+    # --------------------------
+    
+    # gns_project /templates
+    can :create, GnsProject::Template if user.has_permission?('gns_project.templates.create')
+    
+    can :read, GnsProject::Template do |template|
+      (user.has_permission?('gns_project.templates.read_own') and template.creator == user) or
+      (user.has_permission?('gns_project.templates.read_other') and template.creator != user)
+    end
+    
+    can :update, GnsProject::Template do |template|
+      (user.has_permission?('gns_project.templates.update_own') and template.creator == user) or
+      (user.has_permission?('gns_project.templates.update_other') and template.creator != user)
+    end
+    
+    can :delete, GnsProject::Template do |template|
+      (user.has_permission?('gns_project.templates.delete_own') and template.creator == user) or
+      (user.has_permission?('gns_project.templates.delete_other') and template.creator != user)
+    end
+    
+    #can :activate, GnsProject::Template do |template|
+    #  !template.active? and
+    #  (
+    #    (user.has_permission?('gns_project.templates.activate_own') and template.creator == user) or
+    #    (user.has_permission?('gns_project.templates.activate_other') and template.creator != user)
+    #  )
+    #end
+    #
+    #can :deactivate, GnsProject::Template do |template|
+    #  template.active? and
+    #  (
+    #    (user.has_permission?('gns_project.template.deactivate_own') and template.creator == user) or
+    #    (user.has_permission?('gns_project.template.deactivate_other') and template.creator != user)
+    #  )
+    #end
     # --------------------------
   end
 end
