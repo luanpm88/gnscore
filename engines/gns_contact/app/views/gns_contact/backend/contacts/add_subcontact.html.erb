@@ -1,5 +1,5 @@
 <% content_for :title do %>
-    Add Contact Person
+    <%= t('.add_contact_person') %>
 <% end %>
 
 <% content_for :page_script do %>
@@ -36,7 +36,7 @@
         <% if @contact.errors.any? %>
             <div class="alert alert-danger alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                <span class="font-weight-semibold">Oh snap!</span> Check a few things up (below) and try submitting again.
+                <span class="font-weight-semibold"><%= t('.oh_snap')%></span><%= t('.check_a_few')%>
             </div>
         <% end %>
         
@@ -59,7 +59,7 @@
                             </div>
                         </div>
                         <div class="col-md-2 text-right">
-                            <button type="submit" class="btn btn-primary">Add</button>
+                            <button type="submit" class="btn btn-primary"><%= t('.add') %></button>
                         </div>
                     </div>
                 <% end %>
