@@ -5,6 +5,8 @@ require "roo"
 require "cancan"
 require "carrierwave"
 require "mini_magick"
+require "rubyXL"
+require 'rubyXL/convenience_methods'
 
 
 module GnsCore
