@@ -1,4 +1,8 @@
 en:
+
+  show_columns: "Show Columns"
+  sort_by: "Sort By"
+  per_page: "Per Page"
   gns_employee:
     notification:
       employee:
@@ -7,3 +11,159 @@ en:
         deleted: "Delete employee: %{name}"
         activate: "Activate employee: %{name}"
         deactivate: "De-activate employee: %{name}"
+        
+    backend:
+      employees:
+        index:
+          employee_management: "Employee Management"
+          employees: "Employees"
+          employee: "Employee"
+          employee_list: "Employee list"
+          create_employee: "Create Employee"
+          placeholder_employee: "Filter by status..."
+          go: "Go"
+          placeholder_keyword_search: "Type to filter..."
+          code: "Code"
+          name: "Name"
+          department: "Department"
+          position: "Position"
+          labor_contract_type: "Labor Contract Type"
+          starting_date: "Starting Date"
+          telephone: "Telephone"
+          mobile: "Mobile"
+          email: "Email"
+          address: "Address"
+          status: "Status"
+          added_by: "Added By"
+          created_at: "Created At"
+          updated_at: "Updated At"
+          created_date: "Created Date"
+          code_id: "Code/ID"  
+        
+        list:
+          code: "Code"
+          name: "Name"
+          department: "Department"
+          position: "Position"
+          labor_contract_type: "Labor Contract Type"
+          starting_date: "Starting Date"
+          telephone: "Telephone"
+          mobile_phone: "Mobile"
+          email: "Email"
+          address: "Address"
+          status: "Status"
+          added_by: "Added By"
+          created_date: "Created Date"
+          updated_date: "Updated Date"
+          actions: "Actions"
+          view_details: "View Details"
+          update_info: "Update Info"
+          activate: "Activate"
+          de_activate: "De-activate"
+          delete: "Delete"
+          de_confirm: "Deactivate this employee will also block access by their account"
+          de_delete: "You are about to delete a employee"
+          active: "Active"
+          inactive: "Inactive"
+          
+        new:
+          new_employee: "New Employee"
+          details: "Details"
+        
+        form:
+          name: "Name"
+          placeholder_name: "Enter name..."
+          date_of_birth: "Date of birth"
+          gender: "Gender"
+          placeholder_gender: "Choose gender"
+          contact_information: "Contact Information"
+          telephone: "Telephone"
+          placeholder_telephone: "Enter telephone number"
+          mobile: "Mobile"
+          placeholder_mobile: "Enter mobile number"
+          email: "Email"
+          placeholder_email: "Eg: name@sao-ee.vn"
+          country: "Country"
+          placeholder_country: "Choose country"
+          state_province: "State/Province"
+          placeholder_state_country: "Choose state/province"
+          district_town_city: "District/Town/City"
+          placeholder_district_town_city: "Choose district/town/city"
+          address: "Address"
+          placeholder_address: "Enter Address"
+          employment_information: "Employment Information"
+          department: "Department"
+          placeholder_department: "Enter Department"
+          position: "Position"
+          placeholder_position: "Enter Position"
+          starting_date: "Starting Date"
+          leaving_date: "Leaving Date"
+          labor_contract_type: "Labor Contract Type"
+          save: "Save"
+          cancel: "Cancel"
+        
+        show:
+          show_employee: "Show Employee"
+          employees: "Employees"
+          employee: "Employee"
+          employee_details: "Employee Details"
+          employee_code_id: "Employee Code/ID:"
+          full_name: "Full Name:"
+          date_of_birth: "Date of birth:"
+          gender: "Gender:"
+          department: "Department:"
+          position: "Position:"
+          labor_contract_type: "Labor Contract Type:"
+          starting_date: "Starting Date:"
+          leaving_date: "Leaving Date:"
+          telephone: "Telephone:"
+          mobile_phone: "Mobile Phone:"
+          email: "Email:"
+          added_by: "Added By:"
+          created: "Created:"
+          last_updated: "Last Updated"
+          address: "Address:"
+          user_account: "User Account"
+          
+        account_box:
+          alert_account_empty: "This employee not have an account to log in to the system."
+          click_here: "Click here"
+          alert_empty: "to create an account."
+          email_login: "Email(login):"
+          system_roles: "System Roles:"
+          added_by: "Added by:"
+          allowed: "Allowed"
+          access_right: "Access right:"
+          lock_account: "Lock Account"
+          unlock_account: "Unlock Account"
+          update_setting: "Update/Setting"
+          
+        edit:
+          edit_employee: "Edit Employee"
+          details: "Details"
+          
+  gns_core:
+    backend:
+      users:
+        new:
+          create_new_user: "Create New User"
+          details: "Details"
+        
+        form:
+          email: "Email"
+          placeholder_email: "Enter Email..."
+          new_password: "New Password"
+          placeholder_new_password: "Enter New Password..."
+          repeat_password: "Repeat Password"
+          placeholder_repeat_new_password: "Repeat new password"
+          roles: "Roles"
+          save: "Save"
+          cancel: "Cancel"
+          
+        edit:
+          update_user: "Update User"
+          details: "Details"
+          users: "Users"
+          edit: "Edit"
+          user: "User"
+          

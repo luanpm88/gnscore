@@ -1,9 +1,9 @@
 <% content_for :title do %>
-    Create New User
+    <%= t(".create_new_user") %>
 <% end %>
 
 <% content_for :breadcrumb do %>
-    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i><%= t("home") %></a>
     <a href="<%= gns_contact.backend_contacts_path %>" class="breadcrumb-item">Users</a>
     <span class="breadcrumb-item active">Create</span>
 <% end %>
@@ -60,7 +60,7 @@
 
 <div class="card">
     <div class="card-header header-elements-inline bg-white">
-        <h5 class="card-title">Details</h5>
+        <h5 class="card-title"><%= t(".details") %></h5>
         <div class="header-elements">
             <div class="list-icons">
                 <a class="list-icons-item" data-action="collapse"></a>
