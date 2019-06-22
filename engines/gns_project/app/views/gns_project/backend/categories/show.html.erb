@@ -1,21 +1,21 @@
 <% content_for :title do %>
-    Show Contact
+    <%= t('.show_contact')%>
 <% end %>
 
 <% content_for :breadcrumb do %>
-    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-    <a href="<%= gns_project.backend_categories_path %>" class="breadcrumb-item">Project Category</a>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> <%= t('.home') %></a>
+    <a href="<%= gns_project.backend_categories_path %>" class="breadcrumb-item"><%= t('.project_category') %></a>
     <span class="breadcrumb-item active">Show</span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Project Category</span> - <%= @category.name %></h4>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold"><%= t('.project_category') %> </span> - <%= @category.name %></h4>
 <% end %>
 
 <% content_for :page_toolbar do %>
     <% if can? :create, GnsProject::Category %>
         <a class="btn btn-primary add-category-button" href="<%= gns_project.new_backend_category_path %>">
-            <b><i class="icon-plus22"></i></b> Create Category
+            <b><i class="icon-plus22"></i></b><%= t('.create_category') %>
         </a>
     <% end %>
 <% end %>
@@ -116,16 +116,16 @@
         <div class="card">
             
             <div class="card-header bg-white header-elements-sm-inline">
-                <h6 class="card-title font-weight-semibold">Category Details</h6>
+                <h6 class="card-title font-weight-semibold"><%= t('.category_details')%></h6>
                 <div class="header-elements">
                     <% if (can? :update, @category) %>
                         <div class="btn-group mr-3">
-                            <button type="button" class="btn bg-blue-600 btn-sm dropdown-toggle" data-toggle="dropdown">Actions</button>
+                            <button type="button" class="btn bg-blue-600 btn-sm dropdown-toggle" data-toggle="dropdown"><%= t('.actions')%></button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <% if can? :update, @category %>
                                     <a class="dropdown-item edit-category-button"
                                         href="<%= gns_project.edit_backend_category_path(@category) %>">
-                                        <i class="icon-pencil5"></i> Update
+                                        <i class="icon-pencil5"></i> <%= t('.update')%>
                                     </a>
                                 <% end %>
                             </div>
@@ -144,7 +144,7 @@
                         <div class="col-md-6">
                             <li class="media mt-0 py-2 px-2">
                                 <div class="media-body">
-                                    <div class="font-weight-semibold">Category name:</div>
+                                    <div class="font-weight-semibold"><%= t('.category_name')%>:</div>
                                 </div>
         
                                 <div class="ml-3 align-self-center text-blue-800">
@@ -153,7 +153,7 @@
                             </li>
                             <li class="media mt-0 py-2 px-2">
                                 <div class="media-body">
-                                    <div class="font-weight-semibold">Discription:</div>
+                                    <div class="font-weight-semibold"><%= t('.discription')%>:</div>
                                 </div>
         
                                 <div class="ml-3 align-self-center text-blue-800">
@@ -162,7 +162,7 @@
                             </li>
                             <li class="media mt-0 py-2 px-2">
                                 <div class="media-body">
-                                    <div class="font-weight-semibold">Status:</div>
+                                    <div class="font-weight-semibold"><%= t('.status')%>:</div>
                                 </div>
         
                                 <div class="ml-3 align-self-center text-blue-800">
@@ -174,7 +174,7 @@
                         <div class="col-md-6">
                             <li class="media mt-0 py-2 px-2">
                                 <div class="media-body">
-                                    <div class="font-weight-semibold">Added by:</div>
+                                    <div class="font-weight-semibold"><%= t('.added_by')%>:</div>
                                 </div>
         
                                 <div class="ml-3 align-self-center text-blue-800">
@@ -183,7 +183,7 @@
                             </li>
                             <li class="media mt-0 py-2 px-2">
                                 <div class="media-body">
-                                    <div class="font-weight-semibold">Created:</div>
+                                    <div class="font-weight-semibold"><%= t('.created')%>:</div>
                                 </div>
         
                                 <div class="ml-3 align-self-center text-muted">
@@ -192,7 +192,7 @@
                             </li>
                             <li class="media mt-0 py-2 px-2">
                                 <div class="media-body">
-                                    <div class="font-weight-semibold">Updated:</div>
+                                    <div class="font-weight-semibold"><%= t('.updated')%>:</div>
                                 </div>
         
                                 <div class="ml-3 align-self-center text-muted">
@@ -208,10 +208,10 @@
         
         <div class="card">
             <div class="card-header header-elements-inline">
-                <h6 class="card-title font-weight-semibold">Stage List</h6>
+                <h6 class="card-title font-weight-semibold"><%= t('.updated')%></h6>
                 <div class="header-elements">
                     <% if can? :create, GnsProject::Stage %>
-                        <a href="<%= gns_project.new_backend_stage_path(category_id: @category.id) %>" class="btn bg-blue btn-sm mr-3 add-stage-button">Add stage</a>
+                        <a href="<%= gns_project.new_backend_stage_path(category_id: @category.id) %>" class="btn bg-blue btn-sm mr-3 add-stage-button"><%= t('.add_stage')%></a>
                     <% end %>
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="collapse"></a>

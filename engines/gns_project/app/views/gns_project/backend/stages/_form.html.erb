@@ -3,8 +3,9 @@
     <input type="hidden" name="stage[current_stage_id]" value="<%= params[:current_stage_id] %>" />
     <fieldset>
         <div class="form-group">
-            <label class="d-block font-weight-semibold">Name <span class="text-danger">*</span></label>
-            <input type="text" class="form-control <%= 'border-danger' if stage.errors.full_messages_for(:name).present? %>" placeholder="Enter name"
+            <label class="d-block font-weight-semibold"><%= t('.name') %> <span class="text-danger">*</span></label>
+            <input type="text" class="form-control <%= 'border-danger' if stage.errors.full_messages_for(:name).present? %>"
+            placeholder="<%= t('.enter_name') %>"
                 name="stage[name]"
                 value="<%= stage.name %>"
             >
@@ -14,10 +15,10 @@
         </div>
         
         <div class="form-group">
-            <label>Description:</label>
+            <label><%= t('.description') %>:</label>
             <textarea rows="2" cols="5"
                 class="form-control"
-                placeholder="Enter description"
+                placeholder="<%= t('.enter_description') %>"
                 name="stage[description]"
             ><%= stage.description %></textarea>
         </div>
