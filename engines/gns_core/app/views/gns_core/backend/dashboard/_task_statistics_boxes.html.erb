@@ -12,7 +12,7 @@
                 </div>
                 
                 <div>
-                    Total tasks
+                    <%= t('.total_tasks') %>
                 </div>
             </div>
         </div>
@@ -25,11 +25,11 @@
             <div class="card-body">
                 <div class="d-flex">
                     <h3 class="font-weight-semibold mb-0"><%= @tasks.all_tasks(status: GnsProject::Task::STATUS_CLOSED).count %></h3>
-                    <span class="badge bg-success-800 badge-pill align-self-center ml-auto"><%= format_percentage(@tasks.closed_of_all_rate) %>% tasks</span>
+                    <span class="badge bg-success-800 badge-pill align-self-center ml-auto"><%= format_percentage(@tasks.closed_of_all_rate) %>% <%= t('.tasks') %></span>
                 </div>
                 
                 <div>
-                    Tasks are closed
+                    <%= t('.tasks_are_closed') %>
                 </div>
             </div>
         </div>
@@ -42,11 +42,11 @@
             <div class="card-body">
                 <div class="d-flex">
                     <h3 class="font-weight-semibold mb-0"><%= @tasks.all_tasks(status: GnsProject::Task::STATUS_OPEN).count %></h3>
-                    <span class="badge bg-blue-800 badge-pill align-self-center ml-auto"><%= format_percentage(@tasks.open_of_all_rate) %>% tasks</span>
+                    <span class="badge bg-blue-800 badge-pill align-self-center ml-auto"><%= format_percentage(@tasks.open_of_all_rate) %>% <%= t('.tasks') %></span>
                 </div>
                 
                 <div>
-                    Tasks are open
+                     <%= t('.tasks_are_open') %>
                 </div>
             </div>
         </div>

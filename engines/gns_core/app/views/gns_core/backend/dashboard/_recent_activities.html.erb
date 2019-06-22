@@ -1,9 +1,9 @@
 <% notifications = GnsNotification::Notification.all %>
 <div class="card">
     <div class="card-header header-elements-inline">
-        <h6 class="card-title">Recent Activities</h6>
+        <h6 class="card-title"><%= t('.recent_activities') %></h6>
         <div class="header-elements">
-            <a href="#" class="badge bg-orange align-self-start ml-3">View all</a>
+            <a href="#" class="badge bg-orange align-self-start ml-3"><%= t('.view_all') %></a>
             
             <div class="list-icons ml-3">
                 <a href="#" class="list-icons-item"><i class="icon-sync"></i></a>

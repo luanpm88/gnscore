@@ -1,11 +1,11 @@
 <table class="table table-hover">
     <thead>
         <tr class="bg-info-700">
-            <th>Role Name</th>
-            <th class="text-center">Permissions</th>
-            <th>Status</th>
-            <th>Created At</th>
-            <th class="text-right">Actions</th>
+            <th><%= t('.role_name') %></th>
+            <th class="text-center"><%= t('.permissions') %></th>
+            <th><%= t('.status') %></th>
+            <th><%= t('.created_at') %></th>
+            <th class="text-right"><%= t('.actions') %></th>
         </tr>
     </thead>
     <tbody>
@@ -32,14 +32,14 @@
                                     <% if can? :set_permissions, role %>
                                         <a class="dropdown-item"
                                             href="<%= gns_core.roles_permissions_backend_roles_path(role) %>">
-                                            <i class="icon-gear"></i> Setting permissions
+                                            <i class="icon-gear"></i> <%= t('.settings_permissions') %>
                                         </a>
                                     <% end %>
                                     
                                     <% if can? :update, role %>
                                         <a class="dropdown-item edit-role-button"
                                             href="<%= gns_core.edit_backend_role_path(role) %>">
-                                            <i class="icon-pencil7"></i> Update Info
+                                            <i class="icon-pencil7"></i> <%= t('.update_info') %>
                                         </a>
                                     <% end %>
                                     
@@ -47,9 +47,9 @@
                                         <a class="dropdown-item ajax datalist-g-link"
                                             href="<%= gns_core.activate_backend_roles_path(id: role) %>"
                                             data-method="PUT"
-                                            data-confirm="You want to activate an role"
+                                            data-confirm="<%= t('.activate_confirm') %>"
                                         >
-                                            <i class="icon-checkmark4"></i> Activate
+                                            <i class="icon-checkmark4"></i> <%= t('.activate') %>
                                         </a>
                                     <% end %>
                                     
@@ -57,9 +57,9 @@
                                         <a class="dropdown-item ajax datalist-g-link"
                                             href="<%= gns_core.deactivate_backend_roles_path(id: role) %>"
                                             data-method="PUT"
-                                            data-confirm="You are about to de-activate a role. Permissions will no longer be applied to users"
+                                            data-confirm="<%= t('.deactivate_confirm') %>"
                                         >
-                                            <i class="icon-blocked"></i> De-activate
+                                            <i class="icon-blocked"></i> <%= t('.de_activate') %>
                                         </a>
                                     <% end %>
                                     
@@ -67,9 +67,9 @@
                                         <a class="dropdown-item ajax datalist-g-link"
                                             href="<%= gns_core.backend_role_path(role) %>"
                                             data-method="DELETE"
-                                            data-confirm="You are about to delete a role"
+                                            data-confirm="<%= t('.delete_confirm') %>"
                                         >
-                                            <i class="icon-bin"></i> Delete
+                                            <i class="icon-bin"></i> <%= t('.delete') %>
                                         </a>
                                     <% end %>
                                 </div>

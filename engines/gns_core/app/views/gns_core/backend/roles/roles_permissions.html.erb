@@ -1,21 +1,21 @@
 <% content_for :title do %>
-    System Role Permissions
+    <%= t('.system_role_permissions') %>
 <% end %>
 
 <% content_for :breadcrumb do %>
-    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-    <a href="<%= gns_core.backend_roles_path %>" class="breadcrumb-item">System Roles</a>
-    <span class="breadcrumb-item active">Permissions</span>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> <%= t('.home') %></a>
+    <a href="<%= gns_core.backend_roles_path %>" class="breadcrumb-item"> <%= t('.system_roles') %></a>
+    <span class="breadcrumb-item active"> <%= t('.permissions') %></span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">System Role</span>: <%= @role.name %> - Permissions</h4>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold"><%= t('.system_role') %></span>: <%= @role.name %> - <%= t('.permissions') %></h4>
 <% end %>
 
 <%= form_for '', url: gns_core.update_permissions_backend_roles_path(id: @role.id), html: {multipart: false, class: 'update_permissions'} do |f| %>
 <div class="card">    
     <div class="card-header bg-transparent header-elements-inline">
-        <h5 class="card-title">Setting Permissions</h5>
+        <h5 class="card-title"><%= t('.settings_permissions') %></h5>
         
         <div class="header-elements">            
             <div class="list-icons">
@@ -28,31 +28,31 @@
         <ul class="nav nav-tabs nav-tabs-bottom mb-0">
             <li class="nav-item">
                 <a href="#tabContact" class="nav-link active" data-toggle="tab">
-                    <span class="font-weight-semibold text-blue">Contact</span>
+                    <span class="font-weight-semibold text-blue"><%= t('.contact') %></span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="#tabProject" class="nav-link" data-toggle="tab">
-                    <span class="font-weight-semibold text-blue">Project</span>
+                    <span class="font-weight-semibold text-blue"><%= t('.project') %></span>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="#tabEmployee" class="nav-link" data-toggle="tab">
-                    <span class="font-weight-semibold text-blue">Employee</span>
+                    <span class="font-weight-semibold text-blue"><%= t('.employee') %></span>
                 </a>
             </li>
             
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                    <span class="font-weight-semibold text-blue">Advanced</span>
+                    <span class="font-weight-semibold text-blue"><%= t('.advanced') %></span>
                 </a>
                 
                 <div class="dropdown-menu dropdown-menu-right">
                     <a href="#tabReport" tabindex="-1" class="dropdown-item" data-toggle="tab">
-                        Report
+                        <%= t('.report') %>
                     </a>
                     <a href="#tabSystem" tabindex="-1" class="dropdown-item" data-toggle="tab">
-                        System
+                        <%= t('.system') %>
                     </a>
                 </div>
             </li>
