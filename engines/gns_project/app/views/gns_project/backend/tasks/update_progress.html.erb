@@ -1,5 +1,5 @@
 <% content_for :title do %>
-    Progress Update - <%= @task.name %>
+    <%= t('.progress_update') %> - <%= @task.name %>
 <% end %>
 
 <% content_for :page_script do %>
@@ -45,14 +45,14 @@
                 <input type="text" class="form-control" id="ion-percentage"
                     name="progress"
                     value="<%= @task.progress %>">
-                <label class="d-block">Slide to assign a percentage for progress</label>
+                <label class="d-block"><%= t('.progress') %></label>
             </div>
             
             <div class="form-group">
-                <label class="d-block">Remark <span class="text-danger">*</span></label>
+                <label class="d-block"><%= t('.remark') %>  <span class="text-danger">*</span></label>
                 <textarea rows="2" cols="5"
                     class="form-control font-weight-semibold <%= 'border-danger' if @task.errors.full_messages_for(:remark).present? %>"
-                    placeholder="Enter your remark here"
+                    placeholder="<%= t('.enter_your_remark_here') %>"
                     name="remark"
                 ></textarea>
                 <% if @task.errors.full_messages_for(:remark).present? %>
@@ -61,7 +61,7 @@
             </div>
             
             <div class="text-left">
-                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary"><%= t('.update') %> </button>
             </div>
         <% end %>
     </div>

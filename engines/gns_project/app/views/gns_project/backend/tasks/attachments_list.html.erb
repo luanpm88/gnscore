@@ -1,11 +1,11 @@
 <table class="table">
     <thead>
         <tr class="alpha-primary">
-            <th>No.</th>
-            <th>Attached File</th>
-            <th>Size</th>
-            <th>Uploaded At</th>
-            <th class="text-center" style="width: 100px;">Actions</th>
+            <th><%= t('.num') %></th>
+            <th><%= t('.attached_file') %></th>
+            <th><%= t('.size') %></th>
+            <th><%= t('.upload_at') %></th>
+            <th class="text-center" style="width: 100px;"><%= t('.actions') %></th>
         </tr>
     </thead>
     <tbody>
@@ -24,19 +24,19 @@
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item edit-attachment-button"
                                     href="<%= gns_project.edit_backend_attachment_path(attachment) %>">
-                                    <i class="icon-pencil7"></i> Update/Re-upload
+                                    <i class="icon-pencil7"></i><%= t('.upload_reupload') %>
                                 </a>
                                 
                                 <% if can? :download, attachment %>
                                     <a class="dropdown-item"
                                        href="<%= gns_project.download_backend_attachments_path(attachment) %>">
-                                        <i class="icon-download"></i> Download
+                                        <i class="icon-download"></i><%= t('.download') %>
                                     </a>
                                 <% end %>
                                 
                                 <a class="dropdown-item attachment-logs-list-button"
                                    href="<%= gns_project.logs_backend_attachments_path(attachment) %>">
-                                    <i class="icon-history"></i> Logs attached
+                                    <i class="icon-history"></i><%= t('.logs_attached') %>
                                 </a>
                                 
                                 <% if false %>
@@ -47,7 +47,7 @@
                                     data-method="DELETE"
                                     data-confirm="You are about to delete a attachment"
                                 >
-                                    <i class="icon-bin"></i> Remove
+                                    <i class="icon-bin"></i><%= t('.remove') %>
                                 </a>
                                 <% end %>
                             </div>
@@ -60,5 +60,5 @@
 </table>
 
 <% if @attachments.empty? %>
-    <div class="text-center mt-3 text-danger">No attachments uploaded</div>
+    <div class="text-center mt-3 text-danger"><%= t('.no_attachment_upload') %></div>
 <% end %>

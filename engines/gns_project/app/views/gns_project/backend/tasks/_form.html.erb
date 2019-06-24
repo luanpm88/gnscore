@@ -6,8 +6,8 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="d-block">Stage <span class="text-danger">*</span></label>
-                    <select name="task[stage_id]" data-placeholder="Choose a stage"
+                    <label class="d-block"><%= t('.stage') %><span class="text-danger">*</span></label>
+                    <select name="task[stage_id]" data-placeholder="<%= t('.choose_a_stage') %>"
                         class="form-control select-ajax"
                         data-url="<%= gns_project.select2_backend_stages_path(category_id: @task.project.category_id) %>"
                         data-container-css-class="font-weight-semibold <%= 'border-danger' if task.errors.full_messages_for(:stage_id).present? %>"
@@ -21,9 +21,9 @@
                 </div>
                 
                 <div class="form-group">
-                    <label class="d-block">Task Description <span class="text-danger">*</span></label>
+                    <label class="d-block"><%= t('.task_description') %><span class="text-danger">*</span></label>
                     <input type="text" class="form-control font-weight-semibold <%= 'border-danger' if task.errors.full_messages_for(:name).present? %>"
-                        placeholder="Enter the task description"
+                        placeholder="<%= t('.enter_the_task_description') %>"
                         name="task[name]"
                         value="<%= task.name %>"
                     >
@@ -35,8 +35,8 @@
                 
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="d-blocks">Responsible person <span class="text-danger">*</span></label>
-                    <select name="task[employee_id]" data-placeholder="Choose an employee"
+                    <label class="d-blocks"><%= t('.responsible_person') %> <span class="text-danger">*</span></label>
+                    <select name="task[employee_id]" data-placeholder="<%= t('.choose_an_employee') %>"
                         class="form-control select-ajax"
                         data-url="<%= gns_employee.select2_backend_employees_path %>"
                         data-container-css-class="font-weight-semibold <%= 'border-danger' if task.errors.full_messages_for(:employee_id).present? %>"
@@ -51,7 +51,7 @@
                 <div class="row">
                     <div class="col-md-7">
                         <div class="form-group">
-                            <label class="d-block">Workday <span class="text-danger">*</span></label>
+                            <label class="d-block"><%= t('.workday') %> <span class="text-danger">*</span></label>
                             <div class="input-group">
                                 <span class="input-group-prepend">
                                     <span class="input-group-text"><i class="icon-calendar22"></i></span>
@@ -74,8 +74,8 @@
                     
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label class="d-block">Hours</label>
-                            <input type="text" class="form-control font-weight-semibold" placeholder="Enter hours worked"
+                            <label class="d-block"><%= t('.hours') %></label>
+                            <input type="text" class="form-control font-weight-semibold" placeholder="<%= t('.enter_hours_worked') %>"
                                 name="task[hours]"
                                 value="<%= task.hours %>">
                         </div>
@@ -86,10 +86,10 @@
         
         <% if !task.id.nil? %>
             <div class="form-group">
-                <label class="d-block">Remark <span class="text-danger">*</span></label>
+                <label class="d-block"><%= t('.remark') %> <span class="text-danger">*</span></label>
                 <textarea rows="2" cols="5"
                     class="form-control font-weight-semibold <%= 'border-danger' if task.errors.full_messages_for(:remark).present? %>"
-                    placeholder="Enter your remark here"
+                    placeholder="<%= t('.enter_your_remark_here') %>"
                     name="remark"
                 ></textarea>
                 <% if task.errors.full_messages_for(:remark).present? %>
@@ -101,7 +101,7 @@
     </fieldset>    
     <hr class="mt-0">
     <div class="text-left">
-        <button type="submit" class="btn btn-primary">Save</button>
-        <button type="button" class="btn btn-light ml-1" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary"><%= t('.save') %></button>
+        <button type="button" class="btn btn-light ml-1" data-dismiss="modal"><%= t('.cancel') %></button>
     </div>
 <% end %>

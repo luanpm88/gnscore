@@ -1,15 +1,15 @@
 <% content_for :title do %>
-    Attachments
+    <%= t('.attachments') %>
 <% end %>
 
 <% content_for :breadcrumb do %>
     <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-    <a href="<%= gns_project.backend_tasks_path %>" class="breadcrumb-item">Tasks</a>
-    <span class="breadcrumb-item active">Attachments</span>
+    <a href="<%= gns_project.backend_tasks_path %>" class="breadcrumb-item"><%= t('.tasks') %></a>
+    <span class="breadcrumb-item active"><%= t('.attachments') %></span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Task</span> - <%= @task.name %> - Attachments</h4>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold"><%= t('.task') %></span> - <%= @task.name %> - Attachments</h4>
 <% end %>
 
 <% content_for :page_script do %>
@@ -118,7 +118,7 @@
 
 <div class="card">
     <div class="card-header bg-white header-elements-inline">
-        <h6 class="card-title">Attached details</h6>
+        <h6 class="card-title"><%= t('.attached_details') %></h6>
         <div class="header-elements">
             <div class="list-icons">
                 <div class="attachment-actions">
@@ -132,7 +132,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-12">
-                <label class="d-blocks">Stage Name/Task Description</label>
+                <label class="d-blocks"><%= t('.stage_name_task_description') %></label>
                 <select name="task_id" data-placeholder="Filter by stage..."
                     class="form-control select-ajax"
                     data-url="<%= gns_project.select2_backend_tasks_path(project_id: @task.project_id, include_stage_name: true) %>"

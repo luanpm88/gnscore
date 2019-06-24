@@ -2,7 +2,7 @@
     <div class="pt-2 pb-2">
         <h6 class="card-title">
             <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
-               href="#gnsProject-tasks">Tasks
+               href="#gnsProject-tasks"><%= t('.tasks') %>
             </a>
         </h6>
         
@@ -18,10 +18,10 @@
                                     id="gns_project.tasks.create"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.tasks.create') %>
                                 >
-                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.create">Create/Insert</label>
+                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.create"><%= t('.gns_project.tasks.creates') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>create</b> or <b>insert (below)</b> a task</td>
+                        <td> <%= t('.gns_project.tasks.create.decription').html_safe %> </td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -32,10 +32,10 @@
                                     id="gns_project.tasks.read_own"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.tasks.read_own') %>
                                 >
-                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.read_own">Read own</label>
+                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.read_own"><%= t('.gns_project.tasks.read_owns') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>view</b> their own tasks</td>
+                        <td><%= t('.gns_project.tasks.read_own.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -46,10 +46,10 @@
                                     id="gns_project.tasks.read_other"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.tasks.read_other') %>
                                 >
-                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.read_other">Read other</label>
+                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.read_other"><%= t('.gns_project.tasks.read_others') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>view</b> other people's tasks</td>
+                        <td><%= t('.gns_project.tasks.read_other.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -60,10 +60,10 @@
                                     id="gns_project.tasks.update_own"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.tasks.update_own') %>
                                 >
-                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_own">Update own</label>
+                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_own"><%= t('.gns_project.tasks.update_owns') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>update</b> their own tasks</td>
+                        <td><%= t('.gns_project.tasks.update_own.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -74,10 +74,10 @@
                                     id="gns_project.tasks.update_other"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.tasks.update_other') %>
                                 >
-                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_other">Update other</label>
+                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_other"><%= t('.gns_project.tasks.update_others') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>update</b> other people's tasks</td>
+                        <td><%= t('.gns_project.tasks.update_other.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -88,10 +88,10 @@
                                     id="gns_project.tasks.delete_own"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.tasks.delete_own') %>
                                 >
-                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.delete_own">Delete own</label>
+                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.delete_own"><%= t('.gns_project.tasks.delete_owns') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>delete</b> their own tasks created</td>
+                        <td><%= t('.gns_project.tasks.delete_own.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -102,10 +102,10 @@
                                     id="gns_project.tasks.delete_other"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.tasks.delete_other') %>
                                 >
-                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.delete_other">Delete other</label>
+                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.delete_other"><%= t('.gns_project.tasks.delete_others') %></label>
                             </div>
                         </td>
-                        <td>Allows employees to <b>delete</b> the task of others created</td>
+                        <td><%= t('.gns_project.tasks.delete_other.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -116,10 +116,10 @@
                                     id="gns_project.tasks.update_progress_own"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.tasks.update_progress_own') %>
                                 >
-                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_progress_own">Update progress own</label>
+                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_progress_own"><%= t('.gns_project.tasks.update_progress_owns') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>update progress</b> their own tasks</td>
+                        <td><%= t('.gns_project.tasks.update_progress_own.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -130,10 +130,10 @@
                                     id="gns_project.tasks.update_progress_other"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.tasks.update_progress_other') %>
                                 >
-                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_progress_other">Update progress other</label>
+                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.update_progress_other"><%= t('.gns_project.tasks.update_progress_others') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>update progress</b> other people's tasks</td>
+                        <td><%= t('.gns_project.tasks.update_progress_other.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -144,10 +144,10 @@
                                     id="gns_project.tasks.finish_own"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.tasks.finish_own') %>
                                 >
-                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.finish_own">Finish own</label>
+                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.finish_own"><%= t('.gns_project.tasks.finish_owns') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>finish</b> their own tasks</td>
+                        <td><%= t('.gns_project.tasks.finish_own.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -158,10 +158,10 @@
                                     id="gns_project.tasks.finish_other"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.tasks.finish_other') %>
                                 >
-                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.finish_other">Finish other</label>
+                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.finish_other"><%= t('.gns_project.tasks.finish_others') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>finish</b> other people's tasks</td>
+                        <td><%= t('.gns_project.tasks.finish_other.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -172,10 +172,10 @@
                                     id="gns_project.tasks.unfinish_own"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.tasks.unfinish_own') %>
                                 >
-                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.unfinish_own">Un-finish own</label>
+                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.unfinish_own"><%= t('.gns_project.tasks.unfinish_owns') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>un-finish</b> their own tasks</td>
+                        <td><%= t('.gns_project.tasks.unfinish_own.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -186,10 +186,10 @@
                                     id="gns_project.tasks.unfinish_other"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.tasks.unfinish_other') %>
                                 >
-                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.unfinish_other">Un-finish other</label>
+                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.unfinish_other"><%= t('.gns_project.tasks.unfinish_others') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>un-finish</b> other people's tasks</td>
+                        <td><%= t('.gns_project.tasks.unfinish_other.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -200,10 +200,10 @@
                                     id="gns_project.tasks.close_own"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.tasks.close_own') %>
                                 >
-                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.close_own">Close own</label>
+                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.close_own"><%= t('.gns_project.tasks.close_owns') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>closes</b> their own tasks</td>
+                        <td><%= t('.gns_project.tasks.close_own.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -214,10 +214,10 @@
                                     id="gns_project.tasks.close_other"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.tasks.close_other') %>
                                 >
-                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.close_other">Close other</label>
+                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.close_other"><%= t('.gns_project.tasks.close_others') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>close</b> other people's tasks</td>
+                        <td><%= t('.gns_project.tasks.close_other.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -228,10 +228,10 @@
                                     id="gns_project.tasks.reopen_own"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.tasks.reopen_own') %>
                                 >
-                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.reopen_own">Re-open own</label>
+                                <label class="custom-control-label font-weight-semibold" for="gns_project.tasks.reopen_own"><%= t('.gns_project.tasks.reopen_owns') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>re-open</b> their own tasks</td>
+                        <td><%= t('.gns_project.tasks.reopen_own.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -242,10 +242,10 @@
                                     id="gns_project.tasks.reopen_other"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.tasks.reopen_other') %>
                                 >
-                                <label class="custom-control-label font-weight-semiboldss" for="gns_project.tasks.reopen_other">Re-open other</label>
+                                <label class="custom-control-label font-weight-semiboldss" for="gns_project.tasks.reopen_other"><%= t('.gns_project.tasks.reopen_others') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>re-open</b> other people's tasks</td>
+                        <td><%= t('.gns_project.tasks.reopen_other.decription').html_safe %></td>
                     </tr>
                 </tbody>
             </table>
@@ -257,7 +257,7 @@
     <div class="pt-2 pb-2">
         <h6 class="card-title">
             <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
-               href="#gnsProject-attachments">Attachments
+               href="#gnsProject-attachments"><%= t('.attachment') %>
             </a>
         </h6>
         
@@ -273,10 +273,10 @@
                                     id="gns_project.attachments.create"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.attachments.create') %>
                                 >
-                                <label class="custom-control-label" for="gns_project.attachments.create">Create/Upload</label>
+                                <label class="custom-control-label" for="gns_project.attachments.create"><%= t('.gns_project.attachments.creates') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>create</b> and <b>upload</b> new attachment</td>
+                        <td><%= t('.gns_project.attachments.create.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -287,10 +287,10 @@
                                     id="gns_project.attachments.read_own"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.attachments.read_own') %>
                                 >
-                                <label class="custom-control-label" for="gns_project.attachments.read_own">Read own</label>
+                                <label class="custom-control-label" for="gns_project.attachments.read_own"><%= t('.gns_project.attachments.read_owns') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>read/view</b> their own attachments</td>
+                        <td><%= t('.gns_project.attachments.read_own.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">                                
@@ -301,10 +301,10 @@
                                     id="gns_project.attachments.read_other"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.attachments.read_other') %>
                                 >
-                                <label class="custom-control-label" for="gns_project.attachments.read_other">Read other</label>
+                                <label class="custom-control-label" for="gns_project.attachments.read_other"><%= t('.gns_project.attachments.read_others') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>read/view</b> other people's attachments</td>
+                        <td><%= t('.gns_project.attachments.read_other.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">                    
@@ -315,10 +315,10 @@
                                     id="gns_project.attachments.update_own"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.attachments.update_own') %>
                                 >
-                                <label class="custom-control-label" for="gns_project.attachments.update_own">Update/Re-upload own</label>
+                                <label class="custom-control-label" for="gns_project.attachments.update_own"><%= t('.gns_project.attachments.update_owns') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>update info</b> or <b>re-upload file</b> their own attachments</td>
+                        <td><%= t('.gns_project.attachments.update_own.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">                    
@@ -329,10 +329,10 @@
                                     id="gns_project.attachments.update_other"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.attachments.update_other') %>
                                 >
-                                <label class="custom-control-label" for="gns_project.attachments.update_other">Update/Re-upload other</label>
+                                <label class="custom-control-label" for="gns_project.attachments.update_other"><%= t('.gns_project.attachments.update_others') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>update info</b> or <b>re-upload file</b> other people's attachments</td>
+                        <td><%= t('.gns_project.attachments.update_other.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">                    
@@ -343,10 +343,10 @@
                                     id="gns_project.attachments.delete_own"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.attachments.delete_own') %>
                                 >
-                                <label class="custom-control-label" for="gns_project.attachments.delete_own">Delete own</label>
+                                <label class="custom-control-label" for="gns_project.attachments.delete_own"><%= t('.gns_project.attachments.delete_owns') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>delete</b> their own attachments created</td>
+                        <td><%= t('.gns_project.attachments.delete_own.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">                    
@@ -357,10 +357,10 @@
                                     id="gns_project.attachments.delete_other"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.attachments.delete_other') %>
                                 >
-                                <label class="custom-control-label" for="gns_project.attachments.delete_other">Delete other</label>
+                                <label class="custom-control-label" for="gns_project.attachments.delete_other"><%= t('.gns_project.attachments.delete_others') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>delete</b> other people's attachments</td>
+                        <td><%= t('.gns_project.attachments.delete_other.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">                    
@@ -371,10 +371,10 @@
                                     id="gns_project.attachments.download_own"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.attachments.download_own') %>
                                 >
-                                <label class="custom-control-label" for="gns_project.attachments.download_own">Download own</label>
+                                <label class="custom-control-label" for="gns_project.attachments.download_own"><%= t('.gns_project.attachments.download_owns') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>download</b> their own attachments</td>
+                        <td><%= t('.gns_project.attachments.download_own.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">                    
@@ -385,10 +385,10 @@
                                     id="gns_project.attachments.download_other"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.attachments.download_other') %>
                                 >
-                                <label class="custom-control-label" for="gns_project.attachments.download_other">Download other</label>
+                                <label class="custom-control-label" for="gns_project.attachments.download_other"><%= t('.gns_project.attachments.download_others') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>download</b> other people's attachments</td>
+                        <td><%= t('.gns_project.attachments.download_other.decription').html_safe %></td>
                     </tr>
                 </tbody>
             </table>
@@ -400,7 +400,7 @@
     <div class="pt-2 pb-2">
         <h6 class="card-title">
             <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
-               href="#gnsProject-logs">Logs (Project/Attached)
+               href="#gnsProject-logs"><%= t('.logs') %>
             </a>
         </h6>
         
@@ -416,10 +416,10 @@
                                     id="gns_project.logs.read"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.logs.read') %>
                                 >
-                                <label class="custom-control-label font-weight-semibold" for="gns_project.logs.read">View logs</label>
+                                <label class="custom-control-label font-weight-semibold" for="gns_project.logs.read"><%= t('.gns_project.logs.reads') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>view logs</b> of projects/tasks/attachments</td>
+                        <td><%= t('.gns_project.logs.read.decription').html_safe %></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -430,10 +430,10 @@
                                     id="gns_project.logs.download"
                                     <%= 'checked' if project_employee.employee.has_project_permission?(project_employee.project, 'gns_project.logs.download') %>
                                 >
-                                <label class="custom-control-label font-weight-semibold" for="gns_project.logs.download">Download logs</label>
+                                <label class="custom-control-label font-weight-semibold" for="gns_project.logs.download"><%= t('.gns_project.logs.downloads') %></label>
                             </div>
                         </td>
-                        <td>Allow employees to <b>download</b> the attachment of the log</td>
+                        <td><%= t('.gns_project.logs.download.decription').html_safe %></td>
                     </tr>
                 </tbody>
             </table>

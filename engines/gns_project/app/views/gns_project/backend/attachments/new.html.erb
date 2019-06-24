@@ -1,15 +1,15 @@
 <% content_for :title do %>
-    New Attachment
+    <%= t('.new_attachment') %>
 <% end %>
 
 <% content_for :breadcrumb do %>
     <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-    <a href="<%= gns_project.backend_attachments_path %>" class="breadcrumb-item">Attachments</a>
-    <span class="breadcrumb-item active">Create</span>
+    <a href="<%= gns_project.backend_attachments_path %>" class="breadcrumb-item"><%= t('.attachment') %></a>
+    <span class="breadcrumb-item active"><%= t('.create') %></span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Attachment</span> - Create</h4>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold"><%= t('.new_attachment') %></span> - <%= t('.create') %></h4>
 <% end %>
 
 <% content_for :page_script do %>

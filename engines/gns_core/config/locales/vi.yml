@@ -475,4 +475,3 @@ vi:
         x_years:
           one: "1 năm trước"
           other: "%{count} năm trước"
-   

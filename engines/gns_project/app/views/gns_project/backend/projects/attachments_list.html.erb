@@ -1,7 +1,7 @@
 <% if @project.tasks.empty? %>
     <div class="card-body">
         <p class="text-center text-warning pt-2">
-            There are no task description
+            <%= t('.no_task_description') %>
         </p>
     </div>
 <% else %>
@@ -9,12 +9,12 @@
         <thead>
             <tr class="alpha-primary">
                 <th>No.</th>
-                <th class="text-nowrap">Stage</th>
-                <th class="text-nowrap">Task Description</th>
-                <th class="text-nowrap">Status</th>
-                <th class="text-nowrap text-center">Finished</th>
-                <th class="text-nowrap">Attached</th>
-                <th class="text-center" style="width: 100px;">Actions</th>
+                <th class="text-nowrap"><%= t('.stage') %></th>
+                <th class="text-nowrap"><%= t('.task_description') %></th>
+                <th class="text-nowrap"><%= t('.status') %></th>
+                <th class="text-nowrap text-center"><%= t('.finished') %></th>
+                <th class="text-nowrap"><%= t('.attached') %></th>
+                <th class="text-center" style="width: 100px;"><%= t('.actions') %></th>
             </tr>
         </thead>
         <tbody>
@@ -70,7 +70,7 @@
                             <a href="<%= gns_project.attachments_backend_tasks_path(task) %>"
                                 class="badge badge-light badge-striped badge-striped-left border-left-danger text-warning-600 show-task-button"
                             >
-                                No files yet
+                                <%= t('.no_file_yet') %>
                             </a>
                         <% end %>
                     </td>
@@ -84,34 +84,34 @@
                                     
                                     <a href="<%= gns_project.attachments_backend_tasks_path(task) %>"
                                         class="dropdown-item show-task-button">
-                                        <i class="icon-eye4"></i> View attachs
+                                        <i class="icon-eye4"></i><%= t('.view_attachs') %>
                                     </a>
                                     
                                     <% if can? :finish, task %>
                                         <a href="<%= gns_project.finish_backend_tasks_path(id: task) %>"
                                             class="dropdown-item finish-task-button">
-                                            <i class="icon-checkmark3"></i> Finish Task
+                                            <i class="icon-checkmark3"></i><%= t('.finish_task') %>
                                         </a>
                                     <% end %>
                                     
                                     <% if can? :unfinish, task %>
                                         <a href="<%= gns_project.unfinish_backend_tasks_path(id: task) %>"
                                             class="dropdown-item unfinish-task-button">
-                                            <i class="icon-x"></i> Un-finish Task
+                                            <i class="icon-x"></i><%= t('.unfinish_task') %>
                                         </a>
                                     <% end %>
                                     
                                     <% if can? :close, task %>
                                         <a href="<%= gns_project.close_backend_tasks_path(id: task) %>"
                                             class="dropdown-item close-task-button">
-                                            <i class="icon-lock5"></i> Close Task
+                                            <i class="icon-lock5"></i><%= t('.close_task') %>
                                         </a>
                                     <% end %>
                                     
                                     <% if can? :reopen, task %>
                                         <a href="<%= gns_project.reopen_backend_tasks_path(id: task) %>"
                                             class="dropdown-item reopen-task-button">
-                                            <i class="icon-rotate-ccw2"></i> Re-open Task
+                                            <i class="icon-rotate-ccw2"></i><%= t('.reopen_task') %>
                                         </a>
                                     <% end %>
                                 </div>

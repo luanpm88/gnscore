@@ -1,20 +1,20 @@
 <% content_for :title do %>
-    Project Management
+    <%= t('.project_manager') %>
 <% end %>
 
 <% content_for :breadcrumb do %>
-    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-    <span class="breadcrumb-item active">Projects</span>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i><%= t('home') %></a>
+    <span class="breadcrumb-item active"><%= t('.project') %></span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-address-book"></i> <span class="font-weight-semibold">Project</span></h4>
+    <h4><i class="icon-address-book"></i> <span class="font-weight-semibold"><%= t('.project') %></span></h4>
 <% end %>
 
 <% content_for :page_toolbar do %>
     <% if can? :create, GnsProject::Project %>
         <a class="btn btn-primary add-project-button" href="<%= gns_project.new_backend_project_path %>">
-            <b><i class="icon-plus22"></i></b> Create project
+            <b><i class="icon-plus22"></i></b><%= t('.create_project') %>
         </a>
     <% end %>
 <% end %>
@@ -32,8 +32,8 @@
         var start_progress_project_modal = new gModal({size: 'md'});
         var start_progress_project_callback;
         
-        var finish_project_modal = new gModal({size: 'md'});
-        var finish_project_callback;
+        var finiproject_modal = new gModal({size: 'md'});
+        var finiproject_callback;
         
         $(function() {            
             $('.add-project-button').click(function(e) {
@@ -100,7 +100,7 @@
                 e.preventDefault();
                 
                 var button = $(this);
-                
+    
                 start_progress_project_modal.load($(this).attr('href'));
                 
                 start_progress_project_callback = function() {
@@ -113,9 +113,9 @@
                 
                 var button = $(this);
                 
-                finish_project_modal.load($(this).attr('href'));
+                finiproject_modal.load($(this).attr('href'));
                 
-                finish_project_callback = function() {
+                finiproject_callback = function() {
                     datalists[button.closest('.datalist').attr('data-id')].refresh();
                 };
             });
@@ -128,7 +128,7 @@
     data-url="<%= gns_project.list_backend_projects_path %>"
 >
     <div class="card-header header-elements-inline">
-        <h5 class="card-title">Project list</h5>
+        <h5 class="card-title"><%= t('.project_list') %></h5>
         <div class="header-elements">
             <div class="list-icons">
                 <a class="list-icons-item" data-action="collapse"></a>
@@ -141,7 +141,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <select name="customer_id" data-placeholder="Filter by customer..."
+                        <select name="customer_id" data-placeholder="<%= t('.filter_by_customer') %>"
                           class="form-control select-ajax"
                           data-url="<%= gns_contact.select2_backend_contacts_path %>">
                         </select>
@@ -149,7 +149,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <select name="category_id" data-placeholder="Filter by type..."
+                        <select name="category_id" data-placeholder="<%= t('.filter_by_type') %>"
                           class="form-control select-ajax"
                           data-url="<%= gns_project.select2_backend_categories_path %>">
                         </select>
@@ -157,19 +157,18 @@
                 </div>
                 <div class="col-md-3">
                     <select class="form-control selectAllowClear"
-                        data-placeholder="Filter by status..."
-                        data-fouc
-                        name="status"
-                    >
+                        data-placeholder="<%= t('.filter_by_status') %>"
+                        data-fouc   
+                        name="status">
                         <option></option>
-                        <option value="<%= GnsProject::Project::STATUS_NEW %>"><%= 'New' %></option>
-                        <option value="<%= GnsProject::Project::STATUS_PENDING %>"><%= 'Pending' %></option>
-                        <option value="<%= GnsProject::Project::STATUS_IN_PROGRESS %>"><%= 'In progress' %></option>
-                        <option value="<%= GnsProject::Project::STATUS_FINISHED %>"><%= 'Finished' %></option>
+                        <option value="<%= GnsProject::Project::STATUS_NEW %>"><%= t('.new') %></option>
+                        <option value="<%= GnsProject::Project::STATUS_PENDING %>"><%= t('.pending') %></option>
+                        <option value="<%= GnsProject::Project::STATUS_IN_PROGRESS %>"><%= t('.inprogress') %></option>
+                        <option value="<%= GnsProject::Project::STATUS_FINISHED %>"><%= t('.finished') %></option>
                     </select>
                 </div>
                 <div class="col-md-3 text-right">
-                    <span class="btn btn-primary mb-3 datalist-search-button">Go</span>
+                    <span class="btn btn-primary mb-3 datalist-search-button"><%= t('.go') %></span>
                 </div>
             </div>
         </div>
@@ -178,41 +177,41 @@
             <div class="datalist-header flex space-between">
                 <div class="text-left text-nowrap flex">
                     <div class="keyword-search flex align-center mr-3">
-                        <input class="form-control keyword-input" name="keyword" type="search" placeholder="Type to search...">
+                        <input class="form-control keyword-input" name="keyword" type="search" placeholder="<%= t('.type_to_search') %>">
                     </div>
-                    <div class="flex align-center">
-                        <span class="mr-1">Show columns:</span>
+                    <div class="flex align-center"> 
+                        <span class="mr-1"><%= t('.show_column') %></span>
                         <select name="show_columns[]" class="form-control multiselect show-columns-select" multiple="multiple">
-                            <option value="code" selected>Code</option>
-                            <option value="name" selected>Name</option>
-                            <option value="customer">Customer</option>
-                            <option value="project_type" selected>Type</option>
-                            <option value="start_date" selected>Start Date</option>
-                            <option value="end_date" selected>End Date</option>
-                            <option value="complete" selected>% Complete</option>
-                            <option value="status" selected>Status</option>
-                            <option value="created_at">Created at</option>
-                            <option value="updated_at">Updated at</option>
+                            <option value="code" selected><%= t('.code') %></option>
+                            <option value="name" selected><%= t('.name') %></option>
+                            <option value="customer"><%= t('.customer') %></option>
+                            <option value="project_type" selected><%= t('.type') %></option>
+                            <option value="start_date" selected><%= t('.start_date') %></option>
+                            <option value="end_date" selected><%= t('.end_date') %></option>
+                            <option value="complete" selected><%= t('.complete') %></option>
+                            <option value="status" selected><%= t('.status') %></option>
+                            <option value="created_at"><%= t('.create_at') %></option>
+                            <option value="updated_at"><%= t('.update_at') %></option>
                         </select>
                     </div>
                 </div>
                 <div class="text-right text-nowrap flex">
                     <div class="sort-by-box flex align-center mr-3">
-                        <span class="mr-1">Sort by:</span>
+                        <span class="mr-1"><%= t('.sort_by') %></span>
                         <select name="sort_by" data-placeholder="Sort by..." class="form-control selectPrimary sort-by-select" data-fouc>
-                            <option value="created_at">Created At</option>
-                            <option value="code">Code</option>
-                            <option value="name">Name</option>
+                            <option value="created_at"><%= t('.create_at') %></option>
+                            <option value="code"><%= t('.code') %></option>
+                            <option value="name"><%= t('.name') %></option>
                         </select>
                         <input class="sort-direction" type="hidden" name="sort_direction" value="desc" />
                     </div>
                     <div class="show-per-page flex align-center">
-                        <span class="mr-1">Per page:</span>
+                        <span class="mr-1"><%= t('.per_page') %></span>
                         <select name="per_page" class="form-control selectPrimary per-page-select">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
+                            <option value="10"><%= t('.10') %></option>
+                            <option value="25"><%= t('.25') %></option>
+                            <option value="50"><%= t('.50') %></option>
+                            <option value="100"><%= t('.100') %></option>
                         </select>
                     </div>
                 </div>
