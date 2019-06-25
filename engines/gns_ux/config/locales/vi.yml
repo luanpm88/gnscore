@@ -18,6 +18,17 @@ vi:
   inactive: "Không kích hoạt"
   male: "Nam"
   female: "Nữ"
+  high: "Cao"
+  normal: "Bình thường"
+  low: "Thấp"
+  
+  new: "Mới"
+  pending: "Chờ duyệt"
+  in_progress: "Đang thực hiện"
+  done: "Đã hoàn thành"
+  finished: "Đã kết thúc"
+  canceled: "Đã bị hủy"
+  
   layouts:
     gns_ux:
       backend:

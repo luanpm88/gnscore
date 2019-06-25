@@ -1,5 +1,34 @@
 en:
+  home: "Home"
+  keyword_search: 'Type to filter...'
+  show_columns: "Show columns"
+  sort_by: "Sort by"
+  per_page: "Per page"
+  go: "Go"
+  
+  status: "Status"
+  created_at: "Created date"
+  updated_at: "Updated date"
+  actions: "Actions"
+  
+  save: "Save"
+  cancel: "Cancel"
   close: "Close"
+  active: "Active"
+  inactive: "Inactive"
+  male: "Male"
+  female: "Female"
+  high: "High"
+  normal: "Normal"
+  low: "Low"
+  
+  new: "New"
+  pending: "Pending"
+  in_progress: "In Progress"
+  done: "Done"
+  finished: "Finished"
+  canceled: "Canceled"
+  
   layouts:
     gns_ux:
       backend:
