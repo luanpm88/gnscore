@@ -120,7 +120,7 @@
         <%= render "general_infomation" %>
         
         <div class="card">
-            <%= render "contact_menu", title: I18n.t('contact_person') %>
+            <%= render "contact_menu", title: t('.contact_person') %>
             <div class="card-body">
                 <div class="text-right">
                     <% if can? :create, GnsContact::Contact %>

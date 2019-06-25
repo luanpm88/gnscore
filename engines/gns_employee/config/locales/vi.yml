@@ -1,7 +1,4 @@
 vi:
-  show_columns: "Hiển thị cột"
-  sort_by: "Sắp xếp theo"
-  per_page: "Trên một trang"
   gns_employee:
     notification:
       employee:

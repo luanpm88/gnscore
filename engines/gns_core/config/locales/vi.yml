@@ -1,10 +1,4 @@
 vi:
-  save: "Lưu"
-  cancel: "Hủy"
-  active: "Đang kích hoạt"
-  inactive: "Không kích hoạt"
-  male: "Nam"
-  female: "Nữ"
   layouts:
     gns_core:
       backend:

@@ -1,17 +1,12 @@
 vi:
   contact_person: 'Khách hàng cá nhân'
   project_list: 'Danh sách dự án'
-  go: 'Tìm kiếm'
-  home: 'Trang chủ'
-  company: 'Tổ chức'
+  company: 'Tổ chức/Công ty'
   person: 'Cá nhân'
-  show_columns: 'Cột hiển thị'
-  sort_by: 'Sắp xếp theo'
-  per_page: 'Số lượng hiển thị'
   gns_contact:
     notification:
       contact:
-        created: "Thêm mới liên hệ: %{full_name}"
+        created: "Tạo mới liên hệ: %{full_name}"
         updated: "Cập nhật liên hệ: %{full_name}"
         deleted: "Xóa liên hệ: %{full_name}"
         activate: "Kích hoạt liên hệ: %{full_name}"
@@ -36,40 +31,38 @@ vi:
           placeholder_business_partner: 'Chọn theo đối tác kinh doanh...'
           keyword_search: 'Nhập từ khóa tìm kiếm'
           code: 'Mã khách hàng'
-          full_name: 'Tên đầy đủ'
-          foreign_name: 'Tên khác'
+          full_name: 'Tên khách hàng'
+          foreign_name: 'Tên quốc tế'
           group: 'Nhóm'
           business_partner_type: 'Loại đối tác'
-          belongs_to: 'Thuộc về'
-          tax_id: 'Số Tax'
+          belongs_to: 'Trực thuộc'
+          tax_id: 'MST/GPĐKKD'
           email: 'Email'
-          phone_number: 'Số điện thoại'
+          phone_number: 'Điện thoại'
           address: 'Địa chỉ'
           status: 'Trạng thái'
-          created_at: 'Thời gian tạo'
-          updated_at: 'Thời gian cập nhật'
+          created_at: 'Ngày tạo'
+          updated_at: 'Ngày sửa'
           placeholder_sort_by: 'Sắp xếp theo'
-          go: 'Tìm kiếm'
         list:
           code: "Mã khách hàng"
-          full_name: 'Tên đầy đủ'
-          foreign_name: 'Tên khác'
+          full_name: 'Tên khách hàng'
+          foreign_name: 'Tên quốc tế'
           group: "Nhóm"
           bus_p_type: "Loại đối tác"
           belongs_to: "Thuộc về"
-          tax_id: "Số Tax"
+          tax_id: "MST/GPĐKKD"
           email: "Email"
-          phone_number: "Số điện thoại"
+          phone_number: "Điện thoại"
           address: "Địa chỉ"
           status: "Trạng thái"
-          created_at: "Thời gian tạo"
-          updated_at: "Thời gian cập nhật"
-          actions: "Thao tác"
+          created_at: "Ngày tạo"
+          updated_at: "Ngày sửa"
           view_details: 'Xem thông tin'
           update_info: 'Cập nhật thông tin'
           activate: 'Kích hoạt'
           de-activate: 'Hủy kích hoạt'
-          delete: 'Xóa'
+          delete: 'Xóa liên hệ'
         new:
           new_contact: 'Thêm mới khách hàng'
           contacts: 'Danh sách khách hàng'
@@ -85,24 +78,24 @@ vi:
           show: 'Hiển thị'
           add_new: 'Thêm mới'
         show:
-          show_contact: 'Hiển thị khách hàng'
-          contacts: 'Danh sách khách hàng'
+          show_contact: 'Chi tiết khách hàng'
+          contacts: 'Danh sách liên hệ'
           contact: 'Khách hàng'
           show: 'Hiển thị'
           add_new_contact: 'Thêm mới khách hàng'
           add_contact_already_exists: 'Thêm khách hàng đã có sẵn'
-          contact_person: 'Khách hàng cá nhân'
+          contact_person: 'Danh sách liên hệ'
         subcontact_edit:
-          edit_contact_person: 'Chỉnh sửa liên hệ cá nhân'
+          edit_contact_person: 'Chỉnh sửa thông tin liên hệ'
           contacts: 'Danh sách khách hàng'
           contact: 'Khách hàng'
           edit: 'Chỉnh sửa'
           oh_snap: 'Có lỗi!'
-          check_a_few: ' Kiểm tra một vài thứ(bên dưới) và thêm mới lại.'
+          check_a_few: ' Kiểm tra một vài thứ (bên dưới) và thêm mới lại.'
           update: 'Cập nhật'
         subcontact_list:
-          there_are_no_children: 'Không có khách hàng con'
-          person_name: 'Tên cá nhân'
+          there_are_no_children: 'Không có liên hệ nào trong danh sách'
+          person_name: 'Tên liên hệ'
           mobile_phone: 'Số điện thoại'
           email: 'Email'
           address: 'Địa chỉ'
@@ -112,12 +105,12 @@ vi:
           update_information: 'Cập nhật thông tin'
           remove_from_list: 'Xóa khỏi danh sách'
         subcontact_new:
-          add_new_contact_person: 'Thêm mới khách hàng cá nhân'
+          add_new_contact_person: 'Thêm mới liên hệ'
           contacts: 'Danh sách khách hàng'
           contact: 'Khách hàng'
           create: 'Tạo'
           oh_snap: 'Có lỗi!'
-          check_a_few: ' Kiểm tra một vài thứ(bên dưới) và thêm mới lại.'
+          check_a_few: ' Kiểm tra một vài thứ (bên dưới) và thêm mới lại.'
           details: 'Thông tin'
           add: 'Thêm'
         edit:
@@ -126,16 +119,16 @@ vi:
           contact: 'Khách hàng'
           edit: 'Chỉnh sửa'
           oh_snap: 'Lỗi!'
-          check_a_few: ' Kiểm tra một vài thứ(bên dưới) và thêm mới lại.'
+          check_a_few: ' Kiểm tra một vài thứ (bên dưới) và thêm mới lại.'
           details: 'Thông tin'
         add_subcontact:
           add_contact_person: 'Thêm mới khách hàng cá nhân'
           oh_snap: 'Lỗi!'
-          check_a_few: ' Kiểm tra một vài thứ(bên dưới) và thêm mới lại.'
+          check_a_few: ' Kiểm tra một vài thứ (bên dưới) và thêm mới lại.'
           add: 'Thêm'
         subcontact_form:
-          full_name: 'Tên đầy đủ'
-          placeholder_enter_full_name: 'Nhập tên đầy đủ'
+          full_name: 'Tên liên hệ'
+          placeholder_enter_full_name: 'Nhập tên liên hệ'
           date_of_birth: 'Ngày sinh'
           mobile: 'Điện thoại'
           placeholder_enter_mobile_number: 'Nhập số điện thoại'
@@ -162,14 +155,14 @@ vi:
           foreign_name: 'Tên khác:'
           contact_group: 'Nhóm khách hàng:'
           business_partner_type: 'Loại đối tác:'
-          company: 'Tổ chứ:'
+          company: 'Thuộc tổ chức/công ty:'
           address: 'Địa chỉ:'
           email: 'Email:'
           telephone: 'Điện thoại:'
           mobile: 'Điện thoại di động:'
           fax: 'Số Fax:'
-          tax_id: 'Số Tax:'
-          invoice_address: 'Địa chỉ thanh toán hóa đơn:'
+          tax_id: 'MST/GPĐKD:'
+          invoice_address: 'Địa chỉ xuất hóa đơn:'
           status: 'Trạng thái:'
           added_by: 'Thêm mới bởi:'
           created: 'Đã tạo:'
@@ -178,28 +171,29 @@ vi:
           active: 'Đã kích hoạt'
           inactive: 'Không kích hoạt'
         contact_menu:
-          contact_person: 'Khách hàng cá nhân'
+          contact_person: 'Người liên hệ/đại diện'
           project_list: 'Dánh sách dự án'
         form:
           code: 'Mã khách hàng'
+          placeholder_code: 'Nhập mã khách hàng. Ví dụ: PDS'
           contact_group: 'Nhóm khách hàng'
-          placeholder_choose_group: 'Choose group'
-          full_name: 'Tên đầy đủ'
-          placeholder_enter_full_name: 'Nhập tên đây đủ'
-          foreign_name: 'Tên khác'
-          placeholder_enter_foreign_name: 'Nhập tên khác'
+          placeholder_choose_group: 'Chọn nhóm khách hàng'
+          full_name: 'Tên khách hàng'
+          placeholder_enter_full_name: 'Nhập tên khách hàng'
+          foreign_name: 'Tên quốc tế'
+          placeholder_enter_foreign_name: 'Nhập tên giao dịch quốc tế'
           business_partner_type: 'Loại đối tác kinh doanh'
           placeholder_select_business_partner_type: 'Chọn loại đối tác kinh doanh'
-          other_information: 'Thông tin thêm'
-          more_here: '(Nhiều hơn)'
+          other_information: 'Thông tin khác'
+          more_here: 'Xem thêm'
           telephone: 'Điện thoại'
           placeholder_enter_telephone_number: 'Nhập số điện thoại'
           mobile: 'Điện thoại di động'
           placeholder_enter_mobile_number: 'Nhập số điện thoại di động'
           fax: 'Số Fax'
           placeholder_enter_fax_number: 'Nhập số Fax'
-          tax_code: 'Số Tax'
-          placeholder_enter_tax_code: 'Nhập số Tax'
+          tax_code: 'MST/GPĐKKD'
+          placeholder_enter_tax_code: 'Nhập mã số thuế/giấy phép ĐKKD'
           email: 'Email'
           placeholder_email: 'Ví dụ: name@sao-ee.vn'
           website: 'Trang web'
@@ -211,18 +205,18 @@ vi:
           district_town_city: 'Quận/Huyện/Thành phố'
           placeholder_choose_district_town_city: 'Chọn quận/huyện/thành phố'
           address: 'Địa chỉ'
-          placeholder_enter_address: 'Nhập địa chỉ'
-          invoice_address: 'Địa chỉ thanh toán hóa đơn'
-          placeholder_enter_address_for_invoice: 'Nhập địa chỉ thanh toán hóa đơn'
-          belongsto_parent: 'Thuộc về nhóm'
-          placeholder_choose_group: 'Chọn nhóm'
-          remark: 'Nhận xét'
-          placeholder_enter_your_remark_here: 'Nhập nhận xét của bạn ở đây'
-          set_active: 'Cài đặt kích hoạt'
+          placeholder_enter_address: 'Nhập địa chỉ: Số nhà, tên đường, phường/xã'
+          invoice_address: 'Địa chỉ xuất hóa đơn'
+          placeholder_enter_address_for_invoice: 'Nhập địa chỉ xuất hóa đơn'
+          belongsto_parent: 'Công ty/Tổ chức (trực thuộc)'
+          placeholder_belongsto_parent: 'Chọn liên hệ trực thuộc'
+          remark: 'Ghi chú'
+          placeholder_enter_your_remark_here: 'Nhập nội dung ghi chú'
+          set_active: 'Bật kích hoạt'
       
       categories:
         form:
-          name: 'Tên'
+          name: 'Tên nhóm'
           placeholder_enter_group_name: 'Nhập tên nhóm'
           parent_group: 'Nhóm khách hàng'
           placeholder_choose_group_parent: 'Nhóm khách hàng'
@@ -232,7 +226,7 @@ vi:
           edit: 'Chỉnh sửa:'
           category: 'Danh mục'
           oh_snap: 'Lỗi!'
-          check_a_few: ' Kiểm tra một vài thứ(bên dưới) và thêm mới lại.'
+          check_a_few: 'Kiểm tra một vài thứ (bên dưới) và thêm mới lại.'
           details: 'Danh sách thông tin'
         index:  
           contact_category: 'Danh mục khách hàng'
@@ -244,9 +238,9 @@ vi:
           placeholder_filter_by_parent_group: 'Tìm kiếm theo nhóm khách hàng'
           placeholder_type_to_filter: 'Nhập từ khóa tìm kiếm'
           created_at: 'Thời gian tạo'
-          name: 'Tên'
+          name: 'Tên nhóm'
         list:
-          name: 'Tên'
+          name: 'Tên nhóm'
           status: 'Trạng thái'
           created_at: 'Thời gian tạo'
           actions: 'Thao tác'
@@ -262,7 +256,7 @@ vi:
           category: 'Danh mục'
           create: 'Tạo'
           oh_snap: 'Lỗi!'
-          check_a_few: ' Kiểm tra một vài thứ(bên dưới) và thêm mới lại.'
+          check_a_few: ' Kiểm tra một vài thứ (bên dưới) và thêm mới lại.'
           details: 'Thông tin'
           
   activerecord:
@@ -271,4 +265,4 @@ vi:
         gns_contact/contact:
           attributes:
             code:
-              message: "Không thể bỏ trống"
+              message: "không được bỏ trống"

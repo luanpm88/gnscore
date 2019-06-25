@@ -7,7 +7,7 @@
                     <label class="d-block"><%= t('.code') %> <span class="text-danger">*</span></label>
                     <input type="text"
                         class="form-control font-weight-semibold <%= 'border-danger' if contact.errors.full_messages_for(:code).present? %>"
-                        placeholder="Enter code"
+                        placeholder="<%= t('.placeholder_code') %>"
                         name="contact[code]"
                         value="<%= contact.code %>"
                     >
@@ -92,7 +92,7 @@
     
     <fieldset>
         <a class="collapsed text-default" data-toggle="collapse" href="#collapsible-control-group">
-            <legend><span class="font-weight-semibold text-uppercase font-size-sm text-info-700"><%= t('.other_information') %></span><%= t('.more_here') %></legend>
+            <legend><span class="font-weight-semibold text-uppercase font-size-sm text-info-700"><%= t('.other_information') %></span> (<%= t('.more_here') %>)</legend>
         </a>
         <div id="collapsible-control-group" class="collapse">
             <div class="row">
@@ -198,7 +198,7 @@
                         <label class="d-block"><%= t('.belongsto_parent') %></label>
                         <select class="form-control select-ajax"
                             data-container-css-class="font-weight-semibold"
-                            data-placeholder="<%= t('.placeholder_choose_group') %>"
+                            data-placeholder="<%= t('.placeholder_belongsto_parent') %>"
                             data-url="<%= gns_contact.select2_backend_contacts_path(current_contact_id: contact.id) %>"
                             name="contact[parent_ids][]"
                         >

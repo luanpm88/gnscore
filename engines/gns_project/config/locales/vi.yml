@@ -1,12 +1,4 @@
 vi:
-  open: "Mở"
-  save: "Lưu"
-  cancel: "Hủy"
-  active: "Đang kích hoạt"
-  inactive: "Không kích hoạt"
-  male: "Nam"
-  female: "Nữ"
-  
   gns_project:
     backend:
       categories:
@@ -33,7 +25,7 @@ vi:
           go: "Thực hiện"
           type_to_filter: "Nhập để lọc"
           sort_by: "Sắp xếp theo"
-          name: "tên"
+          name: "Tên dự án"
           created_at: "Thời gian tạo"
           per_page: "Số dự án/1 trang"
         list:
@@ -299,8 +291,8 @@ vi:
           show_column: "Cột hiển thị:"
           sort_by: "Sắp xếp theo:"
           per_page: "Dự án/trang:"
-          code: "Mã"
-          name: "Tên"
+          code: "Mã dự án"
+          name: "Tên dự án"
           customer: "Khách hàng"
           type: "Loại"
           start_date: "Ngày bắt đầu"
@@ -324,13 +316,13 @@ vi:
           filter_by_status: "Lọc theo trạng thái..."
           
         list:
-          code: "Mã"
-          name: "Tên"
+          code: "Mã dự án"
+          name: "Tên dự án"
           customer: "Khách hàng"
           type: "Loại"
           start_date: "Ngày bắt đầu"
           end_date: "Ngày kết thúc"
-          complete: "Hoàn thành"
+          complete: "Tiến độ thực hiện"
           status: "Trạng thái"
           create_at: "Ngày tạo"
           update_at: "Ngày cập nhật"
