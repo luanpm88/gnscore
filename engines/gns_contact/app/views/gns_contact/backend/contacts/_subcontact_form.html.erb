@@ -3,10 +3,10 @@
     <input type="hidden" name="contact[category_ids][]" value="<%= @contact.category_ids.first %>">
     
     <div class="form-group">
-        <label class="d-block">Full Name <span class="text-danger">*</span></label>
+        <label class="d-block"><%= t('.full_name') %> <span class="text-danger">*</span></label>
         <input type="text"
             class="form-control font-weight-semibold <%= 'border-danger' if contact.errors.full_messages_for(:full_name).present? %>"
-            placeholder="Enter full name"
+            placeholder="<%= t('.placeholder_enter_full_name') %>"
             name="contact[full_name]"
             value="<%= contact.full_name %>"
         >
@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label class="d-block">Date Of Birth</label>                
+                <label class="d-block"><%= t('.date_of_birth') %></label>                
                 <div class="input-group">
                     <span class="input-group-prepend">
                         <span class="input-group-text"><i class="icon-calendar22"></i></span>
@@ -31,8 +31,8 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label class="d-block">Mobile</label>
-                <input type="text" class="form-control font-weight-semibold" placeholder="Enter mobile number"
+                <label class="d-block"><%= t('.mobile') %></label>
+                <input type="text" class="form-control font-weight-semibold" placeholder="<%= t('.placeholder_enter_mobile_number') %>"
                     name="contact[mobile]"
                     value="<%= contact.mobile %>"
                 >
@@ -41,8 +41,8 @@
     </div>
     
     <div class="form-group">
-        <label class="d-block">Email</label>
-        <input type="text" class="form-control font-weight-semibold" placeholder="Eg: name@sao-ee.vn"
+        <label class="d-block"><%= t('.email') %></label>
+        <input type="text" class="form-control font-weight-semibold" placeholder="<%= t('.placeholder_eg') %>"
             name="contact[email]"
             value="<%= contact.email %>"
         >
@@ -51,8 +51,8 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label class="d-block">Department</label>
-                <input type="text" class="form-control font-weight-semibold" placeholder="Enter department"
+                <label class="d-block"><%= t('.department') %></label>
+                <input type="text" class="form-control font-weight-semibold" placeholder="<%= t('.placeholder_enter_department') %>"
                     name="contact[department]"
                     value="<%= contact.department %>"
                 >
@@ -61,8 +61,8 @@
         
         <div class="col-md-6">
             <div class="form-group">
-                <label class="d-block">Position</label>
-                <input type="text" class="form-control font-weight-semibold" placeholder="Enter position"
+                <label class="d-block"><%= t('.position') %></label>
+                <input type="text" class="form-control font-weight-semibold" placeholder="<%= t('.placeholder_enter_position') %>"
                     name="contact[position]"
                     value="<%= contact.position %>"
                 >
@@ -73,10 +73,10 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label class="d-block">Country</label>
+                <label class="d-block"><%= t('.country') %></label>
                 <select class="form-control font-weight-semibold select-ajax"
                     data-container-css-class="font-weight-semibold"
-                    data-placeholder="Choose country"
+                    data-placeholder="<%= t('.placeholder_choose_country') %>"
                     data-url="<%= gns_area.select2_backend_countries_path %>"
                     name="contact[country_id]"
                 >
@@ -87,10 +87,10 @@
         
         <div class="col-md-6">
             <div class="form-group">
-                <label class="d-block">State/Province</label>
+                <label class="d-block"><%= t('.state_province') %></label>
                 <select class="form-control font-weight-semibold select-ajax"
                     data-container-css-class="font-weight-semibold"
-                    data-placeholder="Choose state/province"
+                    data-placeholder="<%= t('.placeholder_choose_state_province') %>"
                     data-url="<%= gns_area.select2_backend_states_path %>"
                     name="contact[state_id]"
                 >
@@ -103,10 +103,10 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-                <label class="d-block">District/Town/City</label>
+                <label class="d-block"><%= t('.district_town_city') %></label>
                 <select class="form-control font-weight-semibold select-ajax"
                     data-container-css-class="font-weight-semibold"
-                    data-placeholder="Choose district/town/city"
+                    data-placeholder="<%= t('.placeholder_choose_district_town_city') %>"
                     data-url="<%= gns_area.select2_backend_districts_path %>"
                     name="contact[district_id]"
                 >
@@ -117,8 +117,8 @@
         
         <div class="col-md-6">
             <div class="form-group">
-                <label class="d-block">Address</label>
-                <input type="text" class="form-control font-weight-semibold" placeholder="Enter address"
+                <label class="d-block"><%= t('.address') %></label>
+                <input type="text" class="form-control font-weight-semibold" placeholder="<%= t('.placeholder_enter_address') %>"
                     name="contact[address]"
                     value="<%= contact.address %>"
                 >

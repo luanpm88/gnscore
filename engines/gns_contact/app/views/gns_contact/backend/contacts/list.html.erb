@@ -3,45 +3,45 @@
     <thead>
         <tr class="bg-info-700">
             <% if params["show_columns"].include?("code") %>
-                <th class="text-nowrap">Code</th>
+                <th class="text-nowrap"><%= t(".code") %></th>
             <% end %>
             <% if params["show_columns"].include?("full_name") %>
-                <th class="text-nowrap">Full Name</th>
+                <th class="text-nowrap"><%= t(".full_name") %></th>
             <% end %>
             <% if params["show_columns"].include?("foreign_name") %>
-                <th class="text-nowrap">Foreign Name</th>
+                <th class="text-nowrap"><%= t(".foreign_name") %></th>
             <% end %>
             <% if params["show_columns"].include?("contact_group") %>
-                <th class="text-nowrap">Group</th>
+                <th class="text-nowrap"><%= t(".group") %></th>
             <% end %>
             <% if params["show_columns"].include?("business_partner_type") %>
-                <th class="text-nowrap">Bus.P.Type</th>
+                <th class="text-nowrap"><%= t(".bus_p_type") %></th>
             <% end %>
             <% if params["show_columns"].include?("belongs_to") %>
-                <th class="text-nowrap">Belongs To</th>
+                <th class="text-nowrap"><%= t(".belongs_to") %></th>
             <% end %>
             <% if params["show_columns"].include?("tax_code") %>
-                <th class="text-nowrap">Tax ID</th>
+                <th class="text-nowrap"><%= t(".tax_id") %></th>
             <% end %>
             <% if params["show_columns"].include?("email") %>
-                <th class="text-nowrap">Email</th>
+                <th class="text-nowrap"><%= t(".email") %></th>
             <% end %>
             <% if params["show_columns"].include?("phone_number") %>
-                <th class="text-nowrap">Phone Number</th>
+                <th class="text-nowrap"><%= t(".phone_number") %></th>
             <% end %>
             <% if params["show_columns"].include?("address") %>
-                <th class="text-nowrap">Address</th>
+                <th class="text-nowrap"><%= t(".address") %></th>
             <% end %>
             <% if params["show_columns"].include?("status") %>
-                <th class="text-nowrap">Status</th>
+                <th class="text-nowrap"><%= t("status") %></th>
             <% end %>
             <% if params["show_columns"].include?("created_at") %>
-                <th class="text-nowrap">Created At</th>
+                <th class="text-nowrap"><%= t("created_at") %></th>
             <% end %>
             <% if params["show_columns"].include?("updated_at") %>
-                <th class="text-nowrap">Updated At</th>
+                <th class="text-nowrap"><%= t("updated_at") %></th>
             <% end %>
-            <th class="text-nowrap text-right">Actions</th>
+            <th class="text-nowrap text-right"><%= t("actions") %></th>
         </tr>
     </thead>
     <tbody>
@@ -112,7 +112,7 @@
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <% if can? :read, contact %>
                                         <a href="<%= gns_contact.backend_contact_path(contact) %>" class="dropdown-item">
-                                            <i class="icon-file-eye"></i> View details
+                                            <i class="icon-file-eye"></i><%= t('.view_details') %>
                                         </a>
                                     <% end %>
                                     
@@ -120,13 +120,13 @@
                                         <% if contact.contact_type == GnsContact::Contact::TYPE_COMPANY %>
                                             <a class="dropdown-item edit-contact-button"
                                                 href="<%= gns_contact.edit_backend_contact_path(contact) %>">
-                                                <i class="icon-pencil7"></i> Update Info
+                                                <i class="icon-pencil7"></i><%= t('.update_info') %> 
                                             </a>
                                         <% end %>
                                         <% if contact.contact_type == GnsContact::Contact::TYPE_PERSON %>
                                             <a class="dropdown-item edit-contact-button"
                                                 href="<%= gns_contact.subcontact_edit_backend_contacts_path(contact) %>">
-                                                <i class="icon-pencil7"></i> Update Info
+                                                <i class="icon-pencil7"></i><%= t('.update_info') %>
                                             </a>
                                         <% end %>
                                     <% end %>
@@ -137,7 +137,7 @@
                                             data-method="PUT"
                                             data-confirm="You want to activate a contact"
                                         >
-                                            <i class="icon-checkmark4"></i> Activate
+                                            <i class="icon-checkmark4"></i><%= t('.activate') %> 
                                         </a>
                                     <% end %>
                                     
@@ -147,7 +147,7 @@
                                             data-method="PUT"
                                             data-confirm="You are about to de-activate a contact"
                                         >
-                                            <i class="icon-blocked"></i> De-activate
+                                            <i class="icon-blocked"></i><%= t('.de-activate') %> 
                                         </a>
                                     <% end %>
                                     
@@ -158,7 +158,7 @@
                                             data-method="DELETE"
                                             data-confirm="You are about to delete a contact"
                                         >
-                                            <i class="icon-bin"></i> Delete
+                                            <i class="icon-bin"></i><%= t('.delete') %> 
                                         </a>
                                     <% end %>
                                 </div>

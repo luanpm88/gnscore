@@ -1,17 +1,17 @@
 <% if @category.stages.empty? %>
     <div class="card-body">
         <p class="text-center text-warning pt-2">
-            There are no stage
+            <%= t('.there_are_no_stage')%>
         </p>
     </div>
 <% else %>
     <table class="table">
         <thead>
             <tr class="alpha-primary">
-                <th>No.</th>
-                <th>Stage name</th>
-                <th>Description</th>
-                <th class="text-center" style="width: 100px;">Actions</th>
+                <th><%= t('.noo') %></th>
+                <th><%= t('.stage_name')%></th>
+                <th><%= t('.description')%></th>
+                <th class="text-center" style="width: 100px;"><%= t('.actions')%></th>
             </tr>
         </thead>
         <tbody>

@@ -5,13 +5,13 @@
             <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
                 <h6 class="card-title mb-1">
                     <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
-                       href="#gnsCore-roles">Configure user roles
+                       href="#gnsCore-roles"><%= t('.configure_user_roles') %>
                     </a>
                 </h6>
                 <div>
-                    <button type="button" class="btn btn-link p-0 select_all_permissions_on">Select all</button>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_on"><%= t('.select_all') %></button>
                     <i class="icon-primitive-dot text-muted font-size-sm"></i>
-                    <button type="button" class="btn btn-link p-0 select_all_permissions_off">Deselect all</button>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_off"><%= t('.deselect_all') %></button>
                 </div>
             </div>
             
@@ -27,10 +27,10 @@
                                         id="gns_core.roles.create"
                                         <%= 'checked' if @role.has_permission?('gns_core.roles.create') %>
                                     >
-                                    <label class="custom-control-label" for="gns_core.roles.create">Create</label>
+                                    <label class="custom-control-label" for="gns_core.roles.create"><%= t('.create_upp') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>create</b> a system role</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.create') %></b> <%= t('.a_system_role') %></td>
                         </tr>
                         
                         <tr>
@@ -42,10 +42,10 @@
                                         id="gns_core.roles.set_permissions_own"
                                         <%= 'checked' if @role.has_permission?('gns_core.roles.set_permissions_own') %>
                                     >
-                                    <label class="custom-control-label" for="gns_core.roles.set_permissions_own">Configure permissions own</label>
+                                    <label class="custom-control-label" for="gns_core.roles.set_permissions_own"><%= t('.configure_permissions_own') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>configure permissions</b> their own system roles</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.configure_permissions') %></b> <%= t('.their_own_system_roles') %></td>
                         </tr>
                         
                         <tr>
@@ -57,10 +57,10 @@
                                         id="gns_core.roles.set_permissions_other"
                                         <%= 'checked' if @role.has_permission?('gns_core.roles.set_permissions_other') %>
                                     >
-                                    <label class="custom-control-label" for="gns_core.roles.set_permissions_other">Configure permissions other</label>
+                                    <label class="custom-control-label" for="gns_core.roles.set_permissions_other"><%= t('.configure_permissions_other') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>configure permissions</b> other people's system roles</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.configure_permissions') %></b> <%= t('.other_people_system_roles') %></td>
                         </tr>
                         
                         <tr>
@@ -72,10 +72,10 @@
                                         id="gns_core.roles.read_own"
                                         <%= 'checked' if @role.has_permission?('gns_core.roles.read_own') %>
                                     >
-                                    <label class="custom-control-label" for="gns_core.roles.read_own">Read own</label>
+                                    <label class="custom-control-label" for="gns_core.roles.read_own"><%= t('.read_own') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>view/read</b> their own system roles</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.view_read') %></b> <%= t('.their_own_system_roles') %></td>
                         </tr>
                         
                         <tr>
@@ -87,10 +87,10 @@
                                         id="gns_core.roles.read_other"
                                         <%= 'checked' if @role.has_permission?('gns_core.roles.read_other') %>
                                     >
-                                    <label class="custom-control-label" for="gns_core.roles.read_other">Read other</label>
+                                    <label class="custom-control-label" for="gns_core.roles.read_other"><%= t('.read_other') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>view/read</b> other people's system roles</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.view_read') %></b> <%= t('.other_people_system_roles') %></td>
                         </tr>
                         
                         <tr>
@@ -102,10 +102,10 @@
                                         id="gns_core.roles.update_own"
                                         <%= 'checked' if @role.has_permission?('gns_core.roles.update_own') %>
                                     >
-                                    <label class="custom-control-label" for="gns_core.roles.update_own">Update own</label>
+                                    <label class="custom-control-label" for="gns_core.roles.update_own"><%= t('.update_own') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>update info</b> their own system roles</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.update_info') %></b> <%= t('.their_own_system_roles') %></td>
                         </tr>
                         
                         <tr>
@@ -117,10 +117,10 @@
                                         id="gns_core.roles.update_other"
                                         <%= 'checked' if @role.has_permission?('gns_core.roles.update_other') %>
                                     >
-                                    <label class="custom-control-label" for="gns_core.roles.update_other">Update other</label>
+                                    <label class="custom-control-label" for="gns_core.roles.update_other"><%= t('.update_other') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>update info</b> other people's system roles</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.update_info') %></b> <%= t('.other_people_system_roles') %></td>
                         </tr>
                         
                         <tr>
@@ -132,10 +132,10 @@
                                         id="gns_core.roles.activate_own"
                                         <%= 'checked' if @role.has_permission?('gns_core.roles.activate_own') %>
                                     >
-                                    <label class="custom-control-label" for="gns_core.roles.activate_own">Activate own</label>
+                                    <label class="custom-control-label" for="gns_core.roles.activate_own"><%= t('.activate_own') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>activate</b> their own system roles</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.activate') %></b> <%= t('.their_own_system_roles') %></td>
                         </tr>
                         
                         <tr>
@@ -147,10 +147,10 @@
                                         id="gns_core.roles.activate_other"
                                         <%= 'checked' if @role.has_permission?('gns_core.roles.activate_other') %>
                                     >
-                                    <label class="custom-control-label" for="gns_core.roles.activate_other">Activate other</label>
+                                    <label class="custom-control-label" for="gns_core.roles.activate_other"><%= t('.activate_other') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>activate</b> other people's system roles</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.activate') %></b> <%= t('.other_people_system_roles') %></td>
                         </tr>
                         
                         <tr>
@@ -162,10 +162,10 @@
                                         id="gns_core.roles.deactivate_own"
                                         <%= 'checked' if @role.has_permission?('gns_core.roles.deactivate_own') %>
                                     >
-                                    <label class="custom-control-label" for="gns_core.roles.deactivate_own">De-activate own</label>
+                                    <label class="custom-control-label" for="gns_core.roles.deactivate_own"><%= t('.deactivate_own') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>de-activate</b> their own system roles</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.de_activate') %></b> <%= t('.their_own_system_roles') %></td>
                         </tr>
                         
                         <tr>
@@ -177,10 +177,10 @@
                                         id="gns_core.roles.deactivate_other"
                                         <%= 'checked' if @role.has_permission?('gns_core.roles.deactivate_other') %>
                                     >
-                                    <label class="custom-control-label" for="gns_core.roles.deactivate_other">De-activate other</label>
+                                    <label class="custom-control-label" for="gns_core.roles.deactivate_other"><%= t('.deactivate_other') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>de-activate</b> other people's system roles</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.de_activate') %></b> <%= t('.other_people_system_roles') %></td>
                         </tr>
                         
                         <tr>
@@ -192,10 +192,10 @@
                                         id="gns_core.roles.delete_own"
                                         <%= 'checked' if @role.has_permission?('gns_core.roles.delete_own') %>
                                     >
-                                    <label class="custom-control-label" for="gns_core.roles.delete_own">Delete own</label>
+                                    <label class="custom-control-label" for="gns_core.roles.delete_own"><%= t('.delete_own') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>delete</b> their own system roles</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.delete') %></b> <%= t('.their_own_system_roles') %></td>
                         </tr>
                         
                         <tr>
@@ -207,10 +207,10 @@
                                         id="gns_core.roles.delete_other"
                                         <%= 'checked' if @role.has_permission?('gns_core.roles.delete_other') %>
                                     >
-                                    <label class="custom-control-label" for="gns_core.roles.delete_other">Delete other</label>
+                                    <label class="custom-control-label" for="gns_core.roles.delete_other"><%= t('.delete_other') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>delete</b> other people's system roles</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.delete') %></b> <%= t('.other_people_system_roles') %></td>
                         </tr>
                     </tbody>
                 </table>
@@ -221,13 +221,13 @@
             <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
                 <h6 class="card-title mb-1">
                     <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
-                       href="#gnsNotification-notifications">Notifications
+                       href="#gnsNotification-notifications"><%= t('.notifications') %>
                     </a>
                 </h6>
                 <div>
-                    <button type="button" class="btn btn-link p-0 select_all_permissions_on">Select all</button>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_on"><%= t('.select_all') %></button>
                     <i class="icon-primitive-dot text-muted font-size-sm"></i>
-                    <button type="button" class="btn btn-link p-0 select_all_permissions_off">Deselect all</button>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_off"><%= t('.deselect_all') %></button>
                 </div>
             </div>
                 
@@ -244,7 +244,7 @@
                                         id="gns_notification.notifications.read_own"
                                         <%= 'checked' if @role.has_permission?('gns_notification.notifications.read_own') %>
                                     >
-                                    <label class="custom-control-label" for="gns_notification.notifications.read_own">Read own</label>
+                                    <label class="custom-control-label" for="gns_notification.notifications.read_own"><%= t('.read_own') %></label>
                                 </div>
                             </td>
                             <td></td>
@@ -259,7 +259,7 @@
                                         id="gns_notification.notifications.read_other"
                                         <%= 'checked' if @role.has_permission?('gns_notification.notifications.read_other') %>
                                     >
-                                    <label class="custom-control-label" for="gns_notification.notifications.read_other">Read other</label>
+                                    <label class="custom-control-label" for="gns_notification.notifications.read_other"><%= t('.read_other') %></label>
                                 </div>
                             </td>
                             <td></td>
@@ -273,13 +273,13 @@
             <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
                 <h6 class="card-title mb-1">
                     <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
-                       href="#gnsSystem-settings">Settings
+                       href="#gnsSystem-settings"><%= t('.settings') %>
                     </a>
                 </h6>
                 <div>
-                    <button type="button" class="btn btn-link p-0 select_all_permissions_on">Select all</button>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_on"><%= t('.select_all') %></button>
                     <i class="icon-primitive-dot text-muted font-size-sm"></i>
-                    <button type="button" class="btn btn-link p-0 select_all_permissions_off">Deselect all</button>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_off"><%= t('.deselect_all') %></button>
                 </div>
             </div>
 
@@ -301,13 +301,13 @@
             <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
                 <h6 class="card-title mb-1">
                     <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
-                       href="#gnsSystem-backup-restore">Backup & Restore
+                       href="#gnsSystem-backup-restore"><%= t('.backup_restore') %>
                     </a>
                 </h6>
                 <div>
-                    <button type="button" class="btn btn-link p-0 select_all_permissions_on">Select all</button>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_on"><%= t('.select_all') %></button>
                     <i class="icon-primitive-dot text-muted font-size-sm"></i>
-                    <button type="button" class="btn btn-link p-0 select_all_permissions_off">Deselect all</button>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_off"><%= t('.deselect_all') %></button>
                 </div>
             </div>
             

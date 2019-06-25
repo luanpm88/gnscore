@@ -3,18 +3,18 @@
 <% end %>
 
 <% content_for :breadcrumb do %>
-    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-    <span class="breadcrumb-item active">Contacts</span>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i><%= t("home") %></a>
+    <span class="breadcrumb-item active"><%= t(".contacts") %></span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Contact</span></h4>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold"><%= t(".contacts") %></span></h4>
 <% end %>
 
 <% content_for :page_toolbar do %>
     <% if can? :create, GnsContact::Contact %>
         <a class="btn btn-primary add-contact-button" href="<%= gns_contact.new_backend_contact_path %>">
-            <b><i class="icon-plus22"></i></b> Create Contact
+            <b><i class="icon-plus22"></i></b><%= t(".create_contact") %>
         </a>
     <% end %>
 <% end %>
@@ -166,7 +166,7 @@
     data-url="<%= gns_contact.list_backend_contacts_path %>"
 >
     <div class="card-header header-elements-inline">
-        <h5 class="card-title">Contact list</h5>
+        <h5 class="card-title"><%= t(".contact_list") %></h5>
         <div class="header-elements">
             <div class="list-icons">
                 <a class="list-icons-item" data-action="collapse"></a>
@@ -179,7 +179,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <select name="country_id" data-placeholder="Filter by country..."
+                        <select name="country_id" data-placeholder="<%= t(".placeholder_country") %>"
                           class="form-control select-ajax"
                           data-url="<%= gns_area.select2_backend_countries_path %>">
                         </select>
@@ -187,7 +187,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <select name="state_id" data-placeholder="Filter by state..."
+                        <select name="state_id" data-placeholder="<%= t(".placeholder_state") %>"
                           class="form-control select-ajax"
                           data-url="<%= gns_area.select2_backend_states_path %>">
                         </select>
@@ -195,7 +195,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <select name="district_id" data-placeholder="Filter by district..."
+                        <select name="district_id" data-placeholder="<%= t(".placeholder_district") %>"
                           class="form-control select-ajax"
                           data-url="<%= gns_area.select2_backend_districts_path %>">
                         </select>
@@ -205,7 +205,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <select name="active" data-placeholder="Filter by status..."
+                        <select name="active" data-placeholder="<%= t(".placeholder_status") %>"
                             class="form-control selectAllowClear" data-fouc>
                             <option value="true"><%= t('active') %></option>
                             <option value="false"><%= t('inactive') %></option>
@@ -214,7 +214,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <select name="category_ids[]" data-placeholder="Filter by group..."
+                        <select name="category_ids[]" data-placeholder="<%= t(".placeholder_group") %>"
                           class="form-control select-ajax"
                           data-url="<%= gns_contact.select2_backend_categories_path %>">
                         </select>
@@ -222,7 +222,7 @@
                 </div>
                 <div class="col-md-3">
                     <select class="form-control selectAllowClear"
-                        data-placeholder="Filter by business partner type..."
+                        data-placeholder="<%= t(".placeholder_business_partner") %>"
                         data-fouc
                         name="contact_type"
                     >
@@ -233,7 +233,7 @@
                     </select>
                 </div>
                 <div class="col-md-3 text-right">
-                    <span class="btn btn-primary mb-3 datalist-search-button">Go</span>
+                    <span class="btn btn-primary mb-3 datalist-search-button"><%= t("go") %></span>
                 </div>
             </div>
         </div>
@@ -242,39 +242,39 @@
             <div class="datalist-header flex space-between">
                 <div class="text-left text-nowrap flex">
                     <div class="keyword-search flex align-center mr-3">
-                        <input class="form-control keyword-input" name="keyword" type="search" placeholder="Type to filter...">
+                        <input class="form-control keyword-input" name="keyword" type="search" placeholder="<%= t("keyword_search") %>">
                     </div>
                     <div class="flex align-center">
-                        <span class="mr-1">Show columns:</span>
+                        <span class="mr-1"><%= t("show_columns") %></span>
                         <select name="show_columns[]" class="form-control multiselect show-columns-select" multiple="multiple">
-                            <option value="code" selected>Code</option>
-                            <option value="full_name" selected>Full name</option>
-                            <option value="foreign_name">Foreign name</option>
-                            <option value="contact_group" selected>Group</option>
-                            <option value="business_partner_type">Business Partner Type</option>
-                            <option value="belongs_to">Belongs To</option>
-                            <option value="tax_code" selected>Tax ID</option>
-                            <option value="email">Email</option>
-                            <option value="phone_number">Phone number</option>
-                            <option value="address" selected>Address</option>
-                            <option value="status" selected>Status</option>
-                            <option value="created_at" selected>Created at</option>
-                            <option value="updated_at">Updated at</option>
+                            <option value="code" selected><%= t(".code") %></option>
+                            <option value="full_name" selected><%= t(".full_name") %></option>
+                            <option value="foreign_name"><%= t(".foreign_name") %></option>
+                            <option value="contact_group" selected><%= t(".group") %></option>
+                            <option value="business_partner_type"><%= t(".business_partner_type") %></option>
+                            <option value="belongs_to"><%= t(".belongs_to") %></option>
+                            <option value="tax_code" selected><%= t(".tax_id") %></option>
+                            <option value="email"><%= t(".email") %></option>
+                            <option value="phone_number"><%= t(".phone_number") %></option>
+                            <option value="address" selected><%= t(".address") %></option>
+                            <option value="status" selected><%= t("status") %></option>
+                            <option value="created_at" selected><%= t("created_at") %></option>
+                            <option value="updated_at"><%= t("updated_at") %></option>
                         </select>
                     </div>
                 </div>
                 <div class="text-right text-nowrap flex">
                     <div class="sort-by-box flex align-center mr-3">
-                        <span class="mr-1">Sort by:</span>
-                        <select name="sort_by" data-placeholder="Sort by..." class="form-control selectPrimary sort-by-select">
-                            <option value="created_at">created_at</option>
-                            <option value="code">code</option>
-                            <option value="full_name">fullname</option>
+                        <span class="mr-1"><%= t("sort_by") %></span>
+                        <select name="sort_by" data-placeholder="<%= t(".placeholder_sort_by") %>" class="form-control selectPrimary sort-by-select">
+                            <option value="created_at"><%= t(".created_at") %></option>
+                            <option value="code"><%= t(".code") %></option>
+                            <option value="full_name"><%= t(".full_name") %></option>
                         </select>
                         <input class="sort-direction" type="hidden" name="sort_direction" value="desc" />
                     </div>
                     <div class="show-per-page flex align-center">
-                        <span class="mr-1">Per page:</span>
+                        <span class="mr-1"><%= t('per_page') %></span>
                         <select name="per_page" class="form-control selectPrimary per-page-select">
                             <option value="10">10</option>
                             <option value="25">25</option>

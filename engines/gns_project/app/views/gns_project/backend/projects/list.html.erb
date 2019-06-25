@@ -3,36 +3,36 @@
     <thead>
         <tr class="bg-info-700">
             <% if params["show_columns"].include?("code") %>
-                <th>Code</th>
+                <th class="text-nowrap"><%= t('.code') %></th>
             <% end %>
             <% if params["show_columns"].include?("name") %>
-                <th>Name</th>
+                <th class="text-nowrap"><%= t('.name') %></th>
             <% end %>
             <% if params["show_columns"].include?("customer") %>
-                <th>Customer</th>
+                <th class="text-nowrap"><%= t('.customer') %></th>
             <% end %>
             <% if params["show_columns"].include?("project_type") %>
-                <th>Type</th>
+                <th class="text-nowrap"><%= t('.type') %></th>
             <% end %>
             <% if params["show_columns"].include?("start_date") %>
-                <th>Start Date</th>
+                <th class="text-nowrap"><%= t('.start_date') %></th>
             <% end %>
             <% if params["show_columns"].include?("end_date") %>
-                <th>End Date</th>
+                <th class="text-nowrap"><%= t('.end_date') %></th>
             <% end %>
             <% if params["show_columns"].include?("complete") %>
-                <th>Complete</th>
+                <th class="text-nowrap"><%= t('.complete') %></th>
             <% end %>
             <% if params["show_columns"].include?("status") %>
-                <th>Status</th>
+                <th class="text-nowrap"><%= t('.status') %></th>
             <% end %>
             <% if params["show_columns"].include?("created_at") %>
-                <th class="text-nowrap">Created At</th>
+                <th class="text-nowrap"><%= t('.create_at') %></th>
             <% end %>
             <% if params["show_columns"].include?("updated_at") %>
-                <th class="text-nowrap">Updated At</th>
+                <th class="text-nowrap"><%= t('.update_at') %></th>
             <% end %>
-            <th class="text-center">Actions</th>
+            <th class="text-nowrap text-center"><%= t('.actions') %></th>
         </tr>
     </thead>
     <tbody>
@@ -102,35 +102,35 @@
                                 <% if can? :read, project %>
                                     <a href="<%= gns_project.backend_project_path(project) %>" class="dropdown-item modal-control"
                                         modal-size="lg">
-                                        <i class="icon-file-eye"></i> Show Info
+                                        <i class="icon-file-eye"></i><%= t('.show_info') %>
                                     </a>
                                 <% end %>
                                 
                                 <% if can? :update, project %>
                                     <a class="dropdown-item edit-project-button"
                                         href="<%= gns_project.edit_backend_project_path(project) %>">
-                                        <i class="icon-pencil7"></i> Update Info
+                                        <i class="icon-pencil7"></i> <%= t('.update_info') %>
                                     </a>
                                 <% end %>
                                 
                                 <% if can? :send_request, project %>
                                     <a class="dropdown-item request-project-button"
                                         href="<%= gns_project.send_request_backend_projects_path(id: project) %>">
-                                        <i class="icon-shift"></i> Request (Submit)
+                                        <i class="icon-shift"></i> <%= t('.request_submit') %>
                                     </a>
                                 <% end %>
                                 
                                 <% if can? :start_project, project %>
                                     <a class="dropdown-item start-progress-project-button"
                                         href="<%= gns_project.start_progress_backend_projects_path(id: project) %>">
-                                        <i class="icon-power2"></i> Start project
+                                        <i class="icon-power2"></i> <%= t('.start_project') %>
                                     </a>
                                 <% end %>
                                 
                                 <% if can? :finish, project %>
                                     <a class="dropdown-item finish-project-button"
                                         href="<%= gns_project.finish_backend_projects_path(id: project) %>">
-                                        <i class="icon-finish"></i> Finish
+                                        <i class="icon-finish"></i> <%= t('.finish') %>
                                     </a>
                                 <% end %>
                                 
@@ -138,17 +138,17 @@
                                 
                                 <a class="dropdown-item"
                                     href="<%= gns_project.tasks_backend_projects_path(project) %>">
-                                    <i class="icon-clipboard3"></i> Task planning
+                                    <i class="icon-clipboard3"></i> <%= t('.task_planning') %>
                                 </a>
                                 
                                 <a class="dropdown-item"
                                     href="<%= gns_project.authorization_backend_projects_path(project) %>">
-                                    <i class="icon-user-check"></i> Manpower
+                                    <i class="icon-user-check"></i> <%= t('.manpower') %>
                                 </a>
                                 
                                 <a class="dropdown-item"
                                     href="<%= gns_project.logs_backend_projects_path(project) %>">
-                                    <i class="icon-history"></i> View logs
+                                    <i class="icon-history"></i> <%= t('.view_logs') %>
                                 </a>
                                 
                                 <% if can? :delete, project %>
@@ -157,9 +157,9 @@
                                     <a class="dropdown-item ajax datalist-g-link"
                                         href="<%= gns_project.backend_project_path(project) %>"
                                         data-method="DELETE"
-                                        data-confirm="You are about to delete a project"
+                                        data-confirm="<%= t('.delete_confirm') %>"
                                     >
-                                        <i class="icon-bin"></i> Delete
+                                        <i class="icon-bin"></i> <%= t('.delete') %>
                                     </a>
                                 <% end %>
                             </div>

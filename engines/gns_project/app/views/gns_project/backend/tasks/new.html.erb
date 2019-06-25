@@ -1,5 +1,5 @@
 <% content_for :title do %>
-    New Task
+    <%= t('.new_task') %>
 <% end %>
 
 <% content_for :breadcrumb do %>
@@ -11,7 +11,7 @@
 <% content_for :page_title do %>
     <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Task</span> - Create</h4>
 <% end %>
-
+    
 <% content_for :page_script do %>
     <script>
         $(document).ready(function() {
@@ -57,7 +57,7 @@
         
         <div class="card">
             <div class="card-header header-elements-inline bg-white">
-                <h5 class="card-title">Details</h5>
+                <h5 class="card-title"><%= t('.details') %></h5>
                 <div class="header-elements">
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="collapse"></a>

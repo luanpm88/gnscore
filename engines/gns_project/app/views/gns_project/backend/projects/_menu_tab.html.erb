@@ -79,18 +79,18 @@
         <% if can? :read, @project %>
             <a href="<%= gns_project.backend_project_path(@project) %>"
                 class="btn btn-success btn-labeled btn-labeled-left btn-sm modal-control"
-                 modal-size="lg"><b><i class="icon-zoomin3"></i></b> Show Info
+                 modal-size="lg"><b><i class="icon-zoomin3"></i></b> <%= t('.show_info') %>
             </a>
         <% end %>
         
         <% if (can? :update, @project) or (can? :mark_as_new, @project) or (can? :send_request, @project) or (can? :start_project, @project) or (can? :finish, @project) %>
             <div class="btn-group ml-1">
-                <button type="button" class="btn btn-sm bg-transparent text-success border-success dropdown-toggle" data-toggle="dropdown">Actions</button>
+                <button type="button" class="btn btn-sm bg-transparent text-success border-success dropdown-toggle" data-toggle="dropdown"><%= t('.actions') %></button>
                 <div class="dropdown-menu dropdown-menu-right">
                     <% if can? :update, @project %>
                         <a href="<%= gns_project.edit_backend_project_path(@project) %>"
                            class="dropdown-item edit-project-button"
-                        > Update Info</a>
+                        > <%= t('.update_info') %></a>
                     <% end %>
                     
                     <% if (can? :mark_as_new, @project) or (can? :send_request, @project) or (can? :start_project, @project) or (can? :finish, @project) %>
@@ -99,19 +99,19 @@
                         <% if can? :send_request, @project %>
                             <a href="<%= gns_project.send_request_backend_projects_path(id: @project) %>"
                                class="dropdown-item send-request-project-button"
-                            > Send request (submit)</a>
+                            > <%= t('.send_request') %></a>
                         <% end %>
                         
                         <% if can? :start_project, @project %>
                             <a href="<%= gns_project.start_progress_backend_projects_path(id: @project) %>"
                                class="dropdown-item start-progress-project-button"
-                            > Start progress</a>
+                            > <%= t('.start_progress') %>/a>
                         <% end %>
                         
                         <% if can? :finish, @project %>
                             <a href="<%= gns_project.finish_backend_projects_path(id: @project) %>"
                                 class="dropdown-item finish-project-button"
-                            > Finish to project</a>
+                            > <%= t('.finish_to_project') %></a>
                         <% end %>
                     <% end %>
                 </div>
@@ -131,7 +131,7 @@
                 data-menu="gns_project/backend/projects/tasks"
             >
                 <i class="icon-clipboard3 mr-1"></i>
-                Task planning
+                <%= t('.task_planning') %>
             </a>
         </li>
         
@@ -142,7 +142,7 @@
                     href="<%= gns_project.authorization_backend_projects_path(@project.id) %>"
                     class="nav-link" modal-size="full">
                         <i class="icon-user-check mr-1"></i>
-                        Manpower
+                        <%= t('.manpower') %>
                 </a>
             </li>
         <% end %>
@@ -153,7 +153,7 @@
                 href="<%= gns_project.logs_backend_projects_path(@project.id) %>"
                 class="nav-link" modal-size="full">
                     <i class="icon-history mr-1"></i>
-                    View logs
+                    <%= t('.view_logs') %>
             </a>
         </li>
     </ul>

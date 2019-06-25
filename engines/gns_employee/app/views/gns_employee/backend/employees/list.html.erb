@@ -3,48 +3,48 @@
     <thead>
         <tr class="bg-info-700">
             <% if params["show_columns"].include?("code") %>
-                <th class="text-nowrap">Code</th>
+                <th class="text-nowrap"><%= t(".code") %></th>
             <% end %>
             <% if params["show_columns"].include?("name") %>
-                <th class="text-nowrap">Name</th>
+                <th class="text-nowrap"><%= t(".name") %></th>
             <% end %>
             <% if params["show_columns"].include?("department") %>
-                <th class="text-nowrap">Department</th>
+                <th class="text-nowrap"><%= t(".department") %></th>
             <% end %>
             <% if params["show_columns"].include?("position") %>
-                <th class="text-nowrap">Position</th>
+                <th class="text-nowrap"><%= t(".position") %></th>
             <% end %>
             <% if params["show_columns"].include?("labor_contract_type") %>
-                <th class="text-nowrap">Labor Contract Type</th>
+                <th class="text-nowrap"><%= t(".labor_contract_type") %></th>
             <% end %>
             <% if params["show_columns"].include?("starting_date") %>
-                <th class="text-nowrap">Starting Date</th>
+                <th class="text-nowrap"><%= t(".starting_date") %></th>
             <% end %>
             <% if params["show_columns"].include?("phone") %>
-                <th class="text-nowrap">Telephone</th>
+                <th class="text-nowrap"><%= t(".telephone") %></th>
             <% end %>
             <% if params["show_columns"].include?("mobile") %>
-                <th class="text-nowrap">Mobile Phone</th>
+                <th class="text-nowrap"><%= t(".mobile_phone") %></th>
             <% end %>
             <% if params["show_columns"].include?("email") %>
-                <th class="text-nowrap">Email</th>
+                <th class="text-nowrap"><%= t(".email") %></th>
             <% end %>
             <% if params["show_columns"].include?("address") %>
-                <th class="text-nowrap">Address</th>
+                <th class="text-nowrap"><%= t(".address") %></th>
             <% end %>
             <% if params["show_columns"].include?("status") %>
-                <th class="text-nowrap">Status</th>
+                <th class="text-nowrap"><%= t(".status") %></th>
             <% end %>
             <% if params["show_columns"].include?("creator") %>
-                <th class="text-nowrap">Added By</th>
+                <th class="text-nowrap"><%= t(".added_by") %></th>
             <% end %>
             <% if params["show_columns"].include?("created_at") %>
-                <th class="text-nowrap">Created Date</th>
+                <th class="text-nowrap"><%= t(".created_date") %></th>
             <% end %>
             <% if params["show_columns"].include?("updated_at") %>
-                <th class="text-nowrap">Updated Date</th>
+                <th class="text-nowrap"><%= t.(".updated_date") %></th>
             <% end %>
-            <th class="text-nowrap text-right">Actions</th>
+            <th class="text-nowrap text-right"><%= t(".actions") %></th>
         </tr>
     </thead>
     <tbody>
@@ -114,14 +114,14 @@
                                     <% if can? :read, employee %>
                                         <a class="dropdown-item"
                                             href="<%= gns_employee.backend_employee_path(employee) %>">
-                                            <i class="icon-file-eye"></i> View details
+                                            <i class="icon-file-eye"></i><%= t(".view_details") %>
                                         </a>
                                     <% end %>
                                     
                                     <% if can? :update, employee %>
                                         <a class="dropdown-item edit-employee-button"
                                             href="<%= gns_employee.edit_backend_employee_path(employee) %>">
-                                            <i class="icon-pencil7"></i> Update Info
+                                            <i class="icon-pencil7"></i><%= t(".update_info") %>
                                         </a>
                                     <% end %>
                                     
@@ -131,7 +131,7 @@
                                             data-method="PUT"
                                             data-confirm="You want to activate an employee"
                                         >
-                                            <i class="icon-checkmark4"></i> Activate
+                                            <i class="icon-checkmark4"></i><%= t(".activate") %>
                                         </a>
                                     <% end %>
                                     
@@ -139,9 +139,9 @@
                                         <a class="dropdown-item ajax datalist-g-link"
                                             href="<%= gns_employee.deactivate_backend_employees_path(id: employee) %>"
                                             data-method="PUT"
-                                            data-confirm="Deactivate this employee will also block access by their account"
+                                            data-confirm="<%= t(".de_confirm") %>"
                                         >
-                                            <i class="icon-blocked"></i> De-activate
+                                            <i class="icon-blocked"></i><%= t(".de_activate") %>
                                         </a>
                                     <% end %>
                                     
@@ -150,9 +150,9 @@
                                         <a class="dropdown-item ajax datalist-g-link"
                                             href="<%= gns_employee.backend_employee_path(employee) %>"
                                             data-method="DELETE"
-                                            data-confirm="You are about to delete a employee"
+                                            data-confirm="<%= t(".de_delete") %>"
                                         >
-                                            <i class="icon-bin"></i> Delete
+                                            <i class="icon-bin"></i><%= t(".delete") %>
                                         </a>
                                     <% end %>
                                 </div>

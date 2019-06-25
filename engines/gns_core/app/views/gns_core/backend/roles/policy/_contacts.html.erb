@@ -5,13 +5,13 @@
             <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
                 <h6 class="card-title mb-1">
                     <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
-                       href="#gnsContact-contacts">Contacts
+                       href="#gnsContact-contacts"><%= t('.contacts') %>
                     </a>
                 </h6>
                 <div>
-                    <button type="button" class="btn btn-link p-0 select_all_permissions_on">Select all</button>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_on"><%= t('.select_all') %></button>
                     <i class="icon-primitive-dot text-muted font-size-sm"></i>
-                    <button type="button" class="btn btn-link p-0 select_all_permissions_off">Deselect all</button>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_off"><%= t('.deselect_all') %></button>
                 </div>
             </div>
             
@@ -27,10 +27,10 @@
                                         id="gns_contact.contacts.create"
                                         <%= 'checked' if @role.has_permission?('gns_contact.contacts.create') %>
                                     >
-                                    <label class="custom-control-label" for="gns_contact.contacts.create">Create</label>
+                                    <label class="custom-control-label" for="gns_contact.contacts.create"><%= t('.create_upp') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>create</b> a contact</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.create') %></b> <%= t('.a_contact') %></td>
                         </tr>
                         
                         <tr>
@@ -42,10 +42,10 @@
                                         id="gns_contact.contacts.read_own"
                                         <%= 'checked' if @role.has_permission?('gns_contact.contacts.read_own') %>
                                     >
-                                    <label class="custom-control-label" for="gns_contact.contacts.read_own">Read own</label>
+                                    <label class="custom-control-label" for="gns_contact.contacts.read_own"><%= t('.read_own') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>view</b> their own contacts</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.view') %></b> <%= t('.their_own_contacts') %></td>
                         </tr>
                         
                         <tr>
@@ -57,10 +57,10 @@
                                         id="gns_contact.contacts.read_other"
                                         <%= 'checked' if @role.has_permission?('gns_contact.contacts.read_other') %>
                                     >
-                                    <label class="custom-control-label" for="gns_contact.contacts.read_other">Read other</label>
+                                    <label class="custom-control-label" for="gns_contact.contacts.read_other"><%= t('.read_other') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>view</b> other people's contacts</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.view') %></b> <%= t('.other_people_contacts') %></td>
                         </tr>
                         
                         <tr>
@@ -72,10 +72,10 @@
                                         id="gns_contact.contacts.update_own"
                                         <%= 'checked' if @role.has_permission?('gns_contact.contacts.update_own') %>
                                     >
-                                    <label class="custom-control-label" for="gns_contact.contacts.update_own">Update own</label>
+                                    <label class="custom-control-label" for="gns_contact.contacts.update_own"><%= t('.update_own') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>update</b> their own contacts</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.update') %></b> <%= t('.their_own_contacts') %></td>
                         </tr>
                         
                         <tr>
@@ -87,10 +87,10 @@
                                         id="gns_contact.contacts.update_other"
                                         <%= 'checked' if @role.has_permission?('gns_contact.contacts.update_other') %>
                                     >
-                                    <label class="custom-control-label" for="gns_contact.contacts.update_other">Update other</label>
+                                    <label class="custom-control-label" for="gns_contact.contacts.update_other"><%= t('.update_other') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>update</b> other people's contacts</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.update') %></b> <%= t('.other_people_contacts') %></td>
                         </tr>
                         
                         <tr>
@@ -102,10 +102,10 @@
                                         id="gns_contact.contacts.delete_own"
                                         <%= 'checked' if @role.has_permission?('gns_contact.contacts.delete_own') %>
                                     >
-                                    <label class="custom-control-label" for="gns_contact.contacts.delete_own">Delete own</label>
+                                    <label class="custom-control-label" for="gns_contact.contacts.delete_own"><%= t('.delete_own') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>delete</b> their own contacts</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.delete') %></b> <%= t('.their_own_contacts') %></td>
                         </tr>
                         
                         <tr>
@@ -117,10 +117,10 @@
                                         id="gns_contact.contacts.delete_other"
                                         <%= 'checked' if @role.has_permission?('gns_contact.contacts.delete_other') %>
                                     >
-                                    <label class="custom-control-label" for="gns_contact.contacts.delete_other">Delete other</label>
+                                    <label class="custom-control-label" for="gns_contact.contacts.delete_other"><%= t('.delete_other') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>delete</b> other people's contacts</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.delete') %></b> <%= t('.other_people_contacts') %></td>
                         </tr>
                         
                         <tr>
@@ -132,10 +132,10 @@
                                         id="gns_contact.contacts.activate_own"
                                         <%= 'checked' if @role.has_permission?('gns_contact.contacts.activate_own') %>
                                     >
-                                    <label class="custom-control-label" for="gns_contact.contacts.activate_own">Activate own</label>
+                                    <label class="custom-control-label" for="gns_contact.contacts.activate_own"><%= t('.activate_own') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>activate</b> their own contacts</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.activate') %></b> <%= t('.their_own_contacts') %></td>
                         </tr>
                         
                         <tr>
@@ -147,10 +147,10 @@
                                         id="gns_contact.contacts.activate_other"
                                         <%= 'checked' if @role.has_permission?('gns_contact.contacts.activate_other') %>
                                     >
-                                    <label class="custom-control-label" for="gns_contact.contacts.activate_other">Activate other</label>
+                                    <label class="custom-control-label" for="gns_contact.contacts.activate_other"><%= t('.activate_other') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>activate</b> other people's contacts</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.activate') %></b> <%= t('.other_people_contacts') %></td>
                         </tr>
                         
                         <tr>
@@ -162,10 +162,10 @@
                                         id="gns_contact.contacts.deactivate_own"
                                         <%= 'checked' if @role.has_permission?('gns_contact.contacts.deactivate_own') %>
                                     >
-                                    <label class="custom-control-label" for="gns_contact.contacts.deactivate_own">De-activate own</label>
+                                    <label class="custom-control-label" for="gns_contact.contacts.deactivate_own"><%= t('.de_activate_own') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>de-activate</b> their own contacts</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.de_activate') %></b> <%= t('.their_own_contacts') %></td>
                         </tr>
                         
                         <tr>
@@ -177,10 +177,10 @@
                                         id="gns_contact.contacts.deactivate_other"
                                         <%= 'checked' if @role.has_permission?('gns_contact.contacts.deactivate_other') %>
                                     >
-                                    <label class="custom-control-label" for="gns_contact.contacts.deactivate_other">De-activate other</label>
+                                    <label class="custom-control-label" for="gns_contact.contacts.deactivate_other"><%= t('.de_activate_other') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>de-activate</b> other people's contacts</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.de_activate') %></b> <%= t('.other_people_contacts') %></td>
                         </tr>
                     </tbody>
                 </table>
@@ -191,13 +191,13 @@
             <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
                 <h6 class="card-title mb-1">
                     <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
-                       href="#gnsContact-categories">Groups
+                       href="#gnsContact-categories"><%= t('.groups') %>
                     </a>
                 </h6>
                 <div>
-                    <button type="button" class="btn btn-link p-0 select_all_permissions_on">Select all</button>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_on"><%= t('.select_all') %></button>
                     <i class="icon-primitive-dot text-muted font-size-sm"></i>
-                    <button type="button" class="btn btn-link p-0 select_all_permissions_off">Deselect all</button>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_off"><%= t('.deselect_all') %></button>
                 </div>
             </div>
 
@@ -213,10 +213,10 @@
                                         id="gns_contact.categories.create"
                                         <%= 'checked' if @role.has_permission?('gns_contact.categories.create') %>
                                     >
-                                    <label class="custom-control-label" for="gns_contact.categories.create">Create</label>
+                                    <label class="custom-control-label" for="gns_contact.categories.create"><%= t('.create_upp') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>create</b> a contact group</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.create') %></b> <%= t('.a_contact_group') %></td>
                         </tr>
                         
                         <tr>
@@ -228,10 +228,10 @@
                                         id="gns_contact.categories.read_own"
                                         <%= 'checked' if @role.has_permission?('gns_contact.categories.read_own') %>
                                     >
-                                    <label class="custom-control-label" for="gns_contact.categories.read_own">Read own</label>
+                                    <label class="custom-control-label" for="gns_contact.categories.read_own"><%= t('.read_own') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>view</b> their own contact groups</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.view') %></b> <%= t('.their_own_contacts_groups') %></td>
                         </tr>
                         
                         <tr>
@@ -243,10 +243,10 @@
                                         id="gns_contact.categories.read_other"
                                         <%= 'checked' if @role.has_permission?('gns_contact.categories.read_other') %>
                                     >
-                                    <label class="custom-control-label" for="gns_contact.categories.read_other">Read other</label>
+                                    <label class="custom-control-label" for="gns_contact.categories.read_other"><%= t('.read_other') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>view</b> other people's contact groups</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.view') %></b> <%= t('.other_people_contacts_groups') %></td>
                         </tr>
                         
                         <tr>
@@ -258,10 +258,10 @@
                                         id="gns_contact.categories.update_own"
                                         <%= 'checked' if @role.has_permission?('gns_contact.categories.update_own') %>
                                     >
-                                    <label class="custom-control-label" for="gns_contact.categories.update_own">Update own</label>
+                                    <label class="custom-control-label" for="gns_contact.categories.update_own"><%= t('.update_own') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>update</b> their own contact groups</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.update') %></b> <%= t('.their_own_contacts_groups') %></td>
                         </tr>
                         
                         <tr>
@@ -272,11 +272,11 @@
                                         class="custom-control-input"
                                         id="gns_contact.categories.update_other"
                                         <%= 'checked' if @role.has_permission?('gns_contact.categories.update_other') %>
-                                    >
-                                    <label class="custom-control-label" for="gns_contact.categories.update_other">Update other</label>
+                                    >  
+                                  <label class="custom-control-label" for="gns_contact.categories.update_other"><%= t('.update_other') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>update</b> other people's contact groups</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.update') %></b> <%= t('.other_people_contacts_groups') %></td>
                         </tr>
                         
                         <tr>
@@ -288,10 +288,10 @@
                                         id="gns_contact.categories.delete_own"
                                         <%= 'checked' if @role.has_permission?('gns_contact.categories.delete_own') %>
                                     >
-                                    <label class="custom-control-label" for="gns_contact.categories.delete_own">Delete own</label>
+                                    <label class="custom-control-label" for="gns_contact.categories.delete_own"><%= t('.delete_own') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>delete</b> their own contact groups</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.delete') %></b> <%= t('.their_own_contacts_groups') %></td>
                         </tr>
                         
                         <tr>
@@ -303,10 +303,10 @@
                                         id="gns_contact.categories.delete_other"
                                         <%= 'checked' if @role.has_permission?('gns_contact.categories.delete_other') %>
                                     >
-                                    <label class="custom-control-label" for="gns_contact.categories.delete_other">Delete other</label>
+                                    <label class="custom-control-label" for="gns_contact.categories.delete_other"><%= t('.delete_other') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>delete</b> other people's contact groups</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.delete') %></b> <%= t('.other_people_contacts_groups') %></td>
                         </tr>
                         
                         <tr>
@@ -318,10 +318,10 @@
                                         id="gns_contact.categories.activate_own"
                                         <%= 'checked' if @role.has_permission?('gns_contact.categories.activate_own') %>
                                     >
-                                    <label class="custom-control-label" for="gns_contact.categories.activate_own">Activate own</label>
+                                    <label class="custom-control-label" for="gns_contact.categories.activate_own"><%= t('.activate_own') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>activate</b> their own contact groups</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.activate') %></b> <%= t('.their_own_contacts_groups') %></td>
                         </tr>
                         
                         <tr>
@@ -333,10 +333,10 @@
                                         id="gns_contact.categories.activate_other"
                                         <%= 'checked' if @role.has_permission?('gns_contact.categories.activate_other') %>
                                     >
-                                    <label class="custom-control-label" for="gns_contact.categories.activate_other">Activate other</label>
+                                    <label class="custom-control-label" for="gns_contact.categories.activate_other"><%= t('.activate_other') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>activate</b> other people's contact groups</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.activate') %></b> <%= t('.other_people_contacts_groups') %></td>
                         </tr>
                         
                         <tr>
@@ -348,10 +348,10 @@
                                         id="gns_contact.categories.deactivate_own"
                                         <%= 'checked' if @role.has_permission?('gns_contact.categories.deactivate_own') %>
                                     >
-                                    <label class="custom-control-label" for="gns_contact.categories.deactivate_own">De-activate own</label>
+                                    <label class="custom-control-label" for="gns_contact.categories.deactivate_own"><%= t('.de_activate_own') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>de-activate</b> their own contact groups</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.de_activate') %></b> <%= t('.their_own_contacts_groups') %></td>
                         </tr>
                         
                         <tr>
@@ -363,10 +363,10 @@
                                         id="gns_contact.categories.deactivate_other"
                                         <%= 'checked' if @role.has_permission?('gns_contact.categories.deactivate_other') %>
                                     >
-                                    <label class="custom-control-label" for="gns_contact.categories.deactivate_other">De-activate other</label>
+                                    <label class="custom-control-label" for="gns_contact.categories.deactivate_other"><%= t('.de_activate_other') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>de-activate</b> other people's contact groups</td>
+                            <td><%= t('.allow_users_to') %> <b><%= t('.de_activate') %></b> <%= t('.other_people_contacts_groups') %></td>
                         </tr>
                     </tbody>
                 </table>

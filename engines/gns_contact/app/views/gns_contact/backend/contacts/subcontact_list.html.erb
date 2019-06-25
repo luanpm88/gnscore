@@ -1,20 +1,20 @@
 <% if @contact.children.empty? %>
     <div class="card-body">
         <p class="text-center text-warning pt-2">
-            There are no children
+            <%= t('.there_are_no_children') %>
         </p>
     </div>
 <% else %>
     <table class="table">
         <thead>
             <tr class="alpha-primary">
-                <th class="text-nowrap">Person Name</th>
-                <th class="text-nowrap">Mobile Phone</th>
-                <th class="text-nowrap">Email</th>
-                <th class="text-nowrap">Address</th>
-                <th class="text-nowrap">Status</th>
-                <th class="text-nowrap">Created</th>
-                <th class="text-center text-nowrap" style="width: 100px;">Actions</th>
+                <th class="text-nowrap"><%= t('.person_name') %></th>
+                <th class="text-nowrap"><%= t('.mobile_phone') %></th>
+                <th class="text-nowrap"><%= t('.email') %></th>
+                <th class="text-nowrap"><%= t('.address') %></th>
+                <th class="text-nowrap"><%= t('.status') %></th>
+                <th class="text-nowrap"><%= t('.created') %></th>
+                <th class="text-center text-nowrap" style="width: 100px;"><%= t('.actions') %></th>
             </tr>
         </thead>
         <tbody>
@@ -39,7 +39,7 @@
                                     <% if can? :update, child %>
                                         <a class="dropdown-item edit-subcontact-button"
                                             href="<%= gns_contact.subcontact_edit_backend_contacts_path(child) %>">
-                                            <i class="icon-pencil7"></i> Update infomation
+                                            <i class="icon-pencil7"></i><%= t('.update_information') %>
                                         </a>
                                     <% end %>
                                     
@@ -50,7 +50,7 @@
                                             data-method="PUT"
                                             data-confirm="You want to remove a contact from the contact persons"
                                         >
-                                            <i class="icon-subtract"></i> Remove from list
+                                            <i class="icon-subtract"></i><%= t('.remove_from_list') %> 
                                         </a>
                                     <% end %>
                                 </div>

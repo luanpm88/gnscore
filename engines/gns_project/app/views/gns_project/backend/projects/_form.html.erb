@@ -3,11 +3,11 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="d-block">Project Type <span class="text-danger">*</span></label>
+                    <label class="d-block"><%= t('.project_type') %> <span class="text-danger">*</span></label>
                     <select name="project[category_id]"
                         class="form-control select-ajax"
                         data-container-css-class="font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:category_id).present? %>"
-                        data-placeholder="Select category..."
+                        data-placeholder="<%= t('.select_category') %>"
                         data-url="<%= gns_project.select2_backend_categories_path %>">
                         <option value="<%= project.category_id %>"><%= project.category_name %></option>
                     </select>
@@ -17,8 +17,8 @@
                 </div>
                 
                 <div class="form-group">
-                    <label class="d-block">Project Code <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:code).present? %>" placeholder="Enter code"
+                    <label class="d-block"><%= t('.project_code') %> <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:code).present? %>" placeholder="<%= t('.enter_code') %>"
                         name="project[code]"
                         value="<%= project.code %>"
                     >
@@ -28,8 +28,8 @@
                 </div>
                 
                 <div class="form-group">
-                    <label class="d-block">Project Name <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:name).present? %>" placeholder="Enter name"
+                    <label class="d-block"><%= t('.project_name') %> <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:name).present? %>" placeholder="<%= t('.enter_name') %>"
                         name="project[name]"
                         value="<%= project.name %>"
                     >
@@ -40,10 +40,10 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="d-block">Customer <span class="text-danger">*</span></label>
+                    <label class="d-block"><%= t('.customer') %> <span class="text-danger">*</span></label>
                     <select name="project[customer_id]"
                         data-container-css-class="font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:customer_id).present? %>"
-                        data-placeholder="Select customer"
+                        data-placeholder="<%= t('.select_customer') %>"
                         class="form-control select-ajax"
                         data-url="<%= gns_contact.select2_backend_contacts_path %>">
                         <option value="<%= project.customer_id %>"><%= project.customer_name %></option>
@@ -54,7 +54,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label class="d-block">Date of implementation <span class="text-danger">*</span></label>
+                    <label class="d-block"><%= t('.date_of_implementation') %> <span class="text-danger">*</span></label>
                     <div class="input-group">
                         <span class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-calendar22"></i></span>
@@ -71,10 +71,10 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="d-block">Project Manager <span class="text-danger">*</span></label>
+                            <label class="d-block"><%= t('.project_manager') %> <span class="text-danger">*</span></label>
                             <select name="project[manager_id]"
                                 data-container-css-class="font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:manager_id).present? %>"
-                                data-placeholder="Select manager"
+                                data-placeholder="<%= t('.select_manager') %>"
                                 class="form-control select-ajax"
                                 data-url="<%= gns_employee.select2_backend_employees_path %>">
                                 <option value="<%= project.manager_id %>"><%= project.manager_name %></option>
@@ -87,10 +87,10 @@
                         
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="d-block">Priority <span class="text-danger">*</span></label>
+                            <label class="d-block"><%= t('.priority') %> <span class="text-danger">*</span></label>
                             <select class="form-control selectAllowClear"
                                 data-container-css-class="font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:priority).present? %>"
-                                data-placeholder="Select priority level"
+                                data-placeholder="<%= t('.select_priority_level') %>"
                                 name="project[priority]"
                             >
                                 <option></option>
@@ -109,10 +109,10 @@
         </div>
         <% if !project.id.nil? %>
             <div class="form-group">
-                <label class="d-block">Remark <span class="text-danger">*</span></label>
+                <label class="d-block"><%= t('.remark') %> <span class="text-danger">*</span></label>
                 <textarea rows="2" cols="5"
                     class="form-control font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:remark).present? %>"
-                    placeholder="Enter your remark here"
+                    placeholder="<%= t('.enter_remark') %>"
                     name="remark"
                 ></textarea>
                 <% if project.errors.full_messages_for(:remark).present? %>
@@ -124,9 +124,9 @@
     
     <hr class="mt-0">
     <div class="text-left">
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary"><%= t('.save') %></button>
         <a class="btn btn-light ml-1" href="<%= gns_project.backend_projects_path %>">
-            Cancel
+            <%= t('.cancel') %>
         </a>
     </div>
 <% end %>

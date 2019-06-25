@@ -15,9 +15,9 @@
         <% end %>
         
         <div class="form-group">
-            <label class="d-block font-weight-semibold">Name <span class="text-danger">*</span></label>
+            <label class="d-block font-weight-semibold"><%= t(".name") %> <span class="text-danger">*</span></label>
             <input type="text" autocomplete="name"
-                class="form-control font-weight-semibold <%= 'border-danger' if employee.errors.full_messages_for(:name).present? %>" placeholder="Enter name"
+                class="form-control font-weight-semibold <%= 'border-danger' if employee.errors.full_messages_for(:name).present? %>" placeholder="<%= t(".placeholder_name") %>"
                 name="employee[name]"
                 value="<%= employee.name %>"
             >
@@ -29,7 +29,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="d-block">Date of birth</label>
+                    <label class="d-block"><%= t(".date_of_birth") %></label>
                     <div class="input-group">
                         <span class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-calendar22"></i></span>
@@ -43,11 +43,11 @@
             
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="d-block">Gender</label>
+                    <label class="d-block"><%= t(".gender") %></label>
                     <div class="input-group">
                         <select class="form-control selectAllowClear"
                             data-container-css-class="font-weight-semibold"
-                            data-placeholder="Choose gender"
+                            data-placeholder="<%= t(".placeholder_gender") %>"
                             name="employee[gender]"
                         >
                             <% options = GnsEmployee::Employee::get_gender_options() %>
@@ -63,15 +63,15 @@
     
     <fieldset>
         <a class="collapsed text-default" data-toggle="collapse" href="#ContactInformation">
-            <legend><span class="font-weight-semibold text-uppercase font-size-sm text-info-700">Contact Information</span></legend>
+            <legend><span class="font-weight-semibold text-uppercase font-size-sm text-info-700"><%= t(".contact_information") %></span></legend>
         </a>
         <div id="ContactInformation" class="collapse">
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label class="d-block">Telephone</label>
+                        <label class="d-block"><%= t(".telephone") %></label>
                         <input type="text" class="form-control font-weight-semibold"
-                            placeholder="Enter telephone number"
+                            placeholder="<%= t(".placeholder_telephone") %>"
                             name="employee[phone]"
                             value="<%= employee.phone %>"
                         >
@@ -79,9 +79,9 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label class="d-block">Mobile</label>
+                        <label class="d-block"><%= t(".mobile") %></label>
                         <input type="text" class="form-control font-weight-semibold"
-                            placeholder="Enter mobile number"
+                            placeholder="<%= t(".placeholder_mobile") %>"
                             name="employee[mobile]"
                             value="<%= employee.mobile %>"
                         >
@@ -89,9 +89,9 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label class="d-block">Email</label>
+                        <label class="d-block"><%= t(".email") %></label>
                         <input type="text" class="form-control font-weight-semibold"
-                            placeholder="Eg: name@sao-ee.vn"
+                            placeholder="<%= t(".placeholder_email") %>"
                             name="employee[email]"
                             value="<%= employee.email %>"
                         >
@@ -102,10 +102,10 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="d-block">Country</label>
+                        <label class="d-block"><%= t(".country") %></label>
                         <select class="form-control font-weight-semibold select-ajax"
                             data-container-css-class="font-weight-semibold"
-                            data-placeholder="Choose country"
+                            data-placeholder="<%= t(".placeholder_country") %>"
                             data-url="<%= gns_area.select2_backend_countries_path %>"
                             name="employee[country_id]"
                         >
@@ -116,10 +116,10 @@
                 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="d-block">State/Province</label>
+                        <label class="d-block"><%= t(".state_province") %></label>
                         <select class="form-control font-weight-semibold select-ajax"
                             data-container-css-class="font-weight-semibold"
-                            data-placeholder="Choose state/province"
+                            data-placeholder="<%= t(".placeholder_state_country") %>"
                             data-url="<%= gns_area.select2_backend_states_path %>"
                             name="employee[state_id]"
                         >
@@ -131,10 +131,10 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="d-block">District/Town/City</label>
+                        <label class="d-block"><%= t(".district_town_city") %></label>
                         <select class="form-control font-weight-semibold select-ajax"
                             data-container-css-class="font-weight-semibold"
-                            data-placeholder="Choose district/town/city"
+                            data-placeholder="<%= t(".placeholder_district_town_city") %>"
                             data-url="<%= gns_area.select2_backend_districts_path %>"
                             name="employee[district_id]"
                         >
@@ -145,8 +145,8 @@
                 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="d-block">Address</label>
-                        <input type="text" class="form-control font-weight-semibold" placeholder="Enter address"
+                        <label class="d-block"><%= t(".address") %></label>
+                        <input type="text" class="form-control font-weight-semibold" placeholder="<%= t(".placeholder_address") %>"
                             name="employee[address]"
                             value="<%= employee.address %>"
                         >
@@ -158,15 +158,15 @@
     
     <fieldset>
         <a class="collapsed text-default" data-toggle="collapse" href="#EmploymentInformation">
-            <legend><span class="font-weight-semibold text-uppercase font-size-sm text-info-700">Employment Information</span></legend>
+            <legend><span class="font-weight-semibold text-uppercase font-size-sm text-info-700"><%= t(".employment_information") %></span></legend>
         </a>
         <div id="EmploymentInformation" class="collapse">            
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="d-block font-weight-semibold">Department</label>
+                        <label class="d-block font-weight-semibold"><%= t(".department") %></label>
                         <input type="text" autocomplete="department"
-                            class="form-control font-weight-semibold" placeholder="Enter department"
+                            class="form-control font-weight-semibold" placeholder="<%= t(".placeholder_department") %>"
                             name="employee[department]"
                             value="<%= employee.department %>"
                         >
@@ -175,9 +175,9 @@
                 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="d-block font-weight-semibold">Position</label>
+                        <label class="d-block font-weight-semibold"><%= t(".position") %></label>
                         <input type="text" autocomplete="position"
-                            class="form-control font-weight-semibold" placeholder="Enter position"
+                            class="form-control font-weight-semibold" placeholder="<%= t(".placeholder_position") %>"
                             name="employee[position]"
                             value="<%= employee.position %>"
                         >
@@ -188,7 +188,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="d-block">Starting Date</label>
+                        <label class="d-block"><%= t(".starting_date") %></label>
                         <div class="input-group">
                             <span class="input-group-prepend">
                                 <span class="input-group-text"><i class="icon-calendar22"></i></span>
@@ -201,7 +201,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="d-block">Leaving Date</label>
+                        <label class="d-block"><%= t(".leaving_date") %></label>
                         <div class="input-group">
                             <span class="input-group-prepend">
                                 <span class="input-group-text"><i class="icon-calendar22"></i></span>
@@ -217,7 +217,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="d-block">Labor Contract Type</label>
+                        <label class="d-block"><%= t(".labor_contract_type") %></label>
                         <select class="form-control selectAllowClear"
                             data-container-css-class="font-weight-semibold"
                             data-placeholder="Select labor contract type"
@@ -240,9 +240,9 @@
     </fieldset>
     
     <div class="text-left">
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary"><%= t("save") %></button>
         <a class="btn btn-light ml-1" href="<%= gns_employee.backend_employees_path %>">
-            Cancel
+            <%= t("cancel") %>
         </a>
     </div>
 <% end %>

@@ -4,10 +4,10 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="d-block">Code <span class="text-danger">*</span></label>
+                    <label class="d-block"><%= t('.code') %> <span class="text-danger">*</span></label>
                     <input type="text"
                         class="form-control font-weight-semibold <%= 'border-danger' if contact.errors.full_messages_for(:code).present? %>"
-                        placeholder="Enter code"
+                        placeholder="<%= t('.placeholder_code') %>"
                         name="contact[code]"
                         value="<%= contact.code %>"
                     >
@@ -18,10 +18,10 @@
             </div>
             <div class="col-md-6">                    
                 <div class="form-group">
-                    <label class="d-block">Contact Group <span class="text-danger">*</span></label>
+                    <label class="d-block"><%= t('.contact_group') %> <span class="text-danger">*</span></label>
                     <select class="form-control select-ajax"
                         data-container-css-class="font-weight-semibold <%= 'border-danger' if contact.errors.full_messages_for(:categories).present? %>"
-                        data-placeholder="Choose group"
+                        data-placeholder="<%= t('.placeholder_choose_group') %>"
                         data-url="<%= gns_contact.select2_backend_categories_path %>"
                         name="contact[category_ids][]"
                     >
@@ -42,10 +42,10 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="d-block">Full Name <span class="text-danger">*</span></label>
+                    <label class="d-block"><%= t('.full_name') %> <span class="text-danger">*</span></label>
                     <input type="text"
                         class="form-control font-weight-semibold <%= 'border-danger' if contact.errors.full_messages_for(:full_name).present? %>"
-                        placeholder="Enter full name"
+                        placeholder="<%= t('.placeholder_enter_full_name') %>"
                         name="contact[full_name]"
                         value="<%= contact.full_name %>"
                     >
@@ -56,10 +56,10 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="d-block">Foreign Name</label>
+                    <label class="d-block"><%= t('.foreign_name') %></label>
                     <input type="text"
                         class="form-control font-weight-semibold"
-                        placeholder="Enter foreign name"
+                        placeholder="<%= t('.placeholder_enter_foreign_name') %>"
                         name="contact[foreign_name]"
                         value="<%= contact.foreign_name %>"
                     >
@@ -71,10 +71,10 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="d-block">Business Partner Type <span class="text-danger">*</span></label>
+                        <label class="d-block"><%= t('.business_partner_type') %> <span class="text-danger">*</span></label>
                         <select class="form-control selectAllowClear"
                             data-container-css-class="font-weight-semibold"
-                            data-placeholder="Select business partner type"
+                            data-placeholder="<%= t('.placeholder_select_business_partner_type') %>"
                             data-fouc
                             name="contact[contact_type]"
                         >
@@ -92,49 +92,49 @@
     
     <fieldset>
         <a class="collapsed text-default" data-toggle="collapse" href="#collapsible-control-group">
-            <legend><span class="font-weight-semibold text-uppercase font-size-sm text-info-700">Other Information</span> (more here)</legend>
+            <legend><span class="font-weight-semibold text-uppercase font-size-sm text-info-700"><%= t('.other_information') %></span> (<%= t('.more_here') %>)</legend>
         </a>
         <div id="collapsible-control-group" class="collapse">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="d-block">Telephone</label>
-                        <input type="text" class="form-control font-weight-semibold" placeholder="Enter telephone number"
+                        <label class="d-block"><%= t('.telephone') %></label>
+                        <input type="text" class="form-control font-weight-semibold" placeholder="<%= t('.placeholder_enter_telephone_number') %>"
                             name="contact[phone]"
                             value="<%= contact.phone %>"
                         >
                     </div>
                     <div class="form-group">
-                        <label class="d-block">Mobile</label>
-                        <input type="text" class="form-control font-weight-semibold" placeholder="Enter mobile number"
+                        <label class="d-block"><%= t('.mobile') %></label>
+                        <input type="text" class="form-control font-weight-semibold" placeholder="<%= t('.placeholder_enter_mobile_number') %>"
                             name="contact[mobile]"
                             value="<%= contact.mobile %>"
                         >
                     </div>
                     <div class="form-group">
-                        <label class="d-block">Fax</label>
-                        <input type="text" class="form-control font-weight-semibold" placeholder="Enter fax number"
+                        <label class="d-block"><%= t('.fax') %></label>
+                        <input type="text" class="form-control font-weight-semibold" placeholder="<%= t('.placeholder_enter_fax_number') %>"
                             name="contact[fax]"
                             value="<%= contact.fax %>"
                         >
                     </div>
                     <div class="form-group">
-                        <label class="d-block">Tax Code</label>
-                        <input type="text" class="form-control font-weight-semibold" placeholder="Enter tax code"
+                        <label class="d-block"><%= t('.tax_code') %></label>
+                        <input type="text" class="form-control font-weight-semibold" placeholder="<%= t('.placeholder_enter_tax_code') %>"
                             name="contact[tax_code]"
                             value="<%= contact.tax_code %>"
                         >
                     </div>
                     <div class="form-group">
-                        <label class="d-block">Email</label>
-                        <input type="text" class="form-control font-weight-semibold" placeholder="Eg: name@sao-ee.vn"
+                        <label class="d-block"><%= t('.email') %></label>
+                        <input type="text" class="form-control font-weight-semibold" placeholder="<%= t('.placeholder_email') %>"
                             name="contact[email]"
                             value="<%= contact.email %>"
                         >
                     </div>
                     <div class="form-group">
-                        <label class="d-block">Website</label>
-                        <input type="text" class="form-control font-weight-semibold" placeholder="http://sao-ee.vn"
+                        <label class="d-block"><%= t('.website') %></label>
+                        <input type="text" class="form-control font-weight-semibold" placeholder="<%= t('.placeholder_website') %>"
                             name="contact[website]"
                             value="<%= contact.website %>"
                         >
@@ -143,10 +143,10 @@
                 
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="d-block">Country</label>
+                        <label class="d-block"><%= t('.country') %></label>
                         <select class="form-control font-weight-semibold select-ajax"
                             data-container-css-class="font-weight-semibold"
-                            data-placeholder="Choose country"
+                            data-placeholder="<%= t('.placeholder_choose_country') %>"
                             data-url="<%= gns_area.select2_backend_countries_path %>"
                             name="contact[country_id]"
                         >
@@ -155,10 +155,10 @@
                     </div>
                     
                     <div class="form-group">
-                        <label class="d-block">State/Province</label>
+                        <label class="d-block"><%= t('.state_province') %></label>
                         <select class="form-control font-weight-semibold select-ajax"
                             data-container-css-class="font-weight-semibold"
-                            data-placeholder="Choose state/province"
+                            data-placeholder="<%= t('.placeholder_choose_state_province') %>"
                             data-url="<%= gns_area.select2_backend_states_path %>"
                             name="contact[state_id]"
                         >
@@ -167,10 +167,10 @@
                     </div>
                     
                     <div class="form-group">
-                        <label class="d-block">District/Town/City</label>
+                        <label class="d-block"><%= t('.district_town_city') %></label>
                         <select class="form-control font-weight-semibold select-ajax"
                             data-container-css-class="font-weight-semibold"
-                            data-placeholder="Choose district/town/city"
+                            data-placeholder="<%= t('.placeholder_choose_district_town_city') %>"
                             data-url="<%= gns_area.select2_backend_districts_path %>"
                             name="contact[district_id]"
                         >
@@ -179,26 +179,26 @@
                     </div>
                     
                     <div class="form-group">
-                        <label class="d-block">Address</label>
-                        <input type="text" class="form-control font-weight-semibold" placeholder="Enter address"
+                        <label class="d-block"><%= t('.address') %></label>
+                        <input type="text" class="form-control font-weight-semibold" placeholder="<%= t('.placeholder_enter_address') %>"
                             name="contact[address]"
                             value="<%= contact.address %>"
                         >
                     </div>
                     
                     <div class="form-group">
-                        <label class="d-block">Invoice Address</label>
-                        <input type="text" class="form-control font-weight-semibold" placeholder="Enter address for invoice"
+                        <label class="d-block"><%= t('.invoice_address') %></label>
+                        <input type="text" class="form-control font-weight-semibold" placeholder="<%= t('.placeholder_enter_address_for_invoice') %>"
                             name="contact[invoice_address]"
                             value="<%= contact.invoice_address %>"
                         >
                     </div>
                     
                     <div class="form-group">
-                        <label class="d-block">BelongsTo/Parent</label>
+                        <label class="d-block"><%= t('.belongsto_parent') %></label>
                         <select class="form-control select-ajax"
                             data-container-css-class="font-weight-semibold"
-                            data-placeholder="Choose group"
+                            data-placeholder="<%= t('.placeholder_belongsto_parent') %>"
                             data-url="<%= gns_contact.select2_backend_contacts_path(current_contact_id: contact.id) %>"
                             name="contact[parent_ids][]"
                         >
@@ -217,10 +217,10 @@
     
     <fieldset>
         <div class="form-group">
-            <label class="d-block">Remark</label>
+            <label class="d-block"><%= t('.remark') %></label>
             <textarea rows="2" cols="5"
                 class="form-control"
-                placeholder="Enter your remark here"
+                placeholder="<%= t('.placeholder_enter_your_remark_here') %>"
                 name="contact[description]"
             ><%= contact.description %></textarea>
         </div>
@@ -228,7 +228,7 @@
         <div class="form-group">
             <div class="form-check form-check-inline form-check-right form-check-switchery">
                 <label class="form-check-label">
-                    Set active:
+                    <%= t('.set_active') %>
                     <input type="hidden" name="contact[active]" value="false" />
                     <input type="checkbox" class="form-check-input-switchery"
                         name="contact[active]"
@@ -241,9 +241,9 @@
     </fieldset>
     <hr class="mt-0">
     <div class="text-left">
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary"><%= t('save') %></button>
         <a class="btn btn-light ml-1" href="<%= gns_contact.backend_contacts_path %>">
-            Cancel
+            <%= t('cancel') %>
         </a>
     </div>
 <% end %>

@@ -1,14 +1,14 @@
 <div class="card">
     <div class="card-header bg-white header-elements-sm-inline">
-        <h6 class="card-title">Contact Details</h6>
+        <h6 class="card-title"><%= t('.contact_details') %></h6>
         <div class="header-elements">
             <div class="btn-group mr-3">
-                <button type="button" class="btn bg-blue-600 dropdown-toggle" data-toggle="dropdown">Actions</button>
+                <button type="button" class="btn bg-blue-600 dropdown-toggle" data-toggle="dropdown"><%= t('.actions') %></button>
                 <div class="dropdown-menu dropdown-menu-right">
                     <% if can? :update, @contact %>
                         <a class="dropdown-item add-current-contact-button"
                             href="<%= gns_contact.edit_backend_contact_path(@contact) %>">
-                            <i class="icon-pencil5"></i> Update Info
+                            <i class="icon-pencil5"></i><%= t('.update_info') %> 
                         </a>
                     <% end %>
                 </div>
@@ -26,7 +26,7 @@
                 <div class="col-md-6">
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Code:</div>
+                            <div class="font-weight-semibold"><%= t('.code') %></div>
                         </div>
     
                         <div class="ml-3 align-self-center text-blue-800">
@@ -36,7 +36,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Full Name:</div>
+                            <div class="font-weight-semibold"><%= t('.full_name') %></div>
                         </div>
     
                         <div class="ml-3 align-self-center text-blue-800">
@@ -46,7 +46,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Foreign Name:</div>
+                            <div class="font-weight-semibold"><%= t('.foreign_name') %></div>
                         </div>
     
                         <div class="ml-3 align-self-center text-blue-800">
@@ -56,7 +56,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Contact Group:</div>
+                            <div class="font-weight-semibold"><%= t('.contact_group') %></div>
                         </div>
     
                         <div class="ml-3 align-self-center text-blue-800">
@@ -70,7 +70,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Business Partner Type:</div>
+                            <div class="font-weight-semibold"><%= t('.business_partner_type') %></div>
                         </div>
     
                         <div class="ml-3 align-self-center text-blue-800">
@@ -80,7 +80,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Company:</div>
+                            <div class="font-weight-semibold"><%= t('.company') %></div>
                         </div>
     
                         <div class="ml-3 align-self-center text-blue-800">
@@ -90,7 +90,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Address:</div>
+                            <div class="font-weight-semibold"><%= t('.address') %></div>
                         </div>
     
                         <div class="ml-3 align-self-center text-blue-800">
@@ -100,7 +100,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Email:</div>
+                            <div class="font-weight-semibold"><%= t('.email') %></div>
                         </div>
     
                         <div class="ml-3 align-self-center text-blue-800">
@@ -114,7 +114,7 @@
                         <div class="col-md-6">
                             <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                                 <div class="media-body">
-                                    <div class="font-weight-semibold">Telephone:</div>
+                                    <div class="font-weight-semibold"><%= t('.telephone') %></div>
                                 </div>
             
                                 <div class="ml-3 align-self-center text-blue-800">
@@ -126,7 +126,7 @@
                         <div class="col-md-6">
                             <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                                 <div class="media-body">
-                                    <div class="font-weight-semibold">Mobile:</div>
+                                    <div class="font-weight-semibold"><%= t('.mobile') %></div>
                                 </div>
             
                                 <div class="ml-3 align-self-center text-blue-800">
@@ -140,7 +140,7 @@
                         <div class="col-md-6">
                             <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                                 <div class="media-body">
-                                    <div class="font-weight-semibold">Fax:</div>
+                                    <div class="font-weight-semibold"><%= t('.fax') %></div>
                                 </div>
         
                                 <div class="ml-3 align-self-center text-blue-800">
@@ -151,7 +151,7 @@
                         <div class="col-md-6">
                             <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                                 <div class="media-body">
-                                    <div class="font-weight-semibold">Tax ID:</div>
+                                    <div class="font-weight-semibold"><%= t('.tax_id') %></div>
                                 </div>
         
                                 <div class="ml-3 align-self-center text-blue-800">
@@ -163,7 +163,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Invoice Address:</div>
+                            <div class="font-weight-semibold"><%= t('.invoice_address') %></div>
                         </div>
     
                         <div class="ml-3 align-self-center text-blue-800">
@@ -173,7 +173,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Status:</div>
+                            <div class="font-weight-semibold"><%= t('.status') %></div>
                         </div>
     
                         <div class="ml-3 align-self-center text-blue-800">
@@ -183,7 +183,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Added By:</div>
+                            <div class="font-weight-semibold"><%= t('.added_by') %></div>
                         </div>
     
                         <div class="ml-3 align-self-center">
@@ -195,7 +195,7 @@
                         <div class="col-md-6">
                             <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                                 <div class="media-body">
-                                    <div class="font-weight-semibold">Created:</div>
+                                    <div class="font-weight-semibold"><%= t('.created') %></div>
                                 </div>
             
                                 <div class="ml-3 align-self-center text-muted">
@@ -207,7 +207,7 @@
                         <div class="col-md-6">
                             <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                                 <div class="media-body">
-                                    <div class="font-weight-semibold">Last Updated:</div>
+                                    <div class="font-weight-semibold"><%= t('.last_updated') %></div>
                                 </div>
             
                                 <div class="ml-3 align-self-center text-muted">
@@ -219,7 +219,7 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
-                            <div class="font-weight-semibold">Remark:</div>
+                            <div class="font-weight-semibold"><%= t('.remark') %></div>
                         </div>
     
                         <div class="ml-3 align-self-center text-blue-800">

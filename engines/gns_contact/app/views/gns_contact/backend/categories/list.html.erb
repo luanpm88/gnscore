@@ -1,10 +1,10 @@
 <table class="table table-hover">
     <thead>
         <tr class="bg-info-700">
-            <th>Name</th>
-            <th>Status</th>
-            <th>Created At</th>
-            <th class="text-right">Actions</th>
+            <th><%= t('.name') %></th>
+            <th><%= t('.status') %></th>
+            <th><%= t('.created_at') %></th>
+            <th class="text-right"><%= t('.actions') %></th>
         </tr>
     </thead>
     <tbody>
@@ -29,7 +29,7 @@
                                     <% if can? :update, category %>
                                         <a class="dropdown-item edit-contact-category-button"
                                             href="<%= gns_contact.edit_backend_category_path(category) %>">
-                                            <i class="icon-pencil7"></i> Update
+                                            <i class="icon-pencil7"></i><%= t('.update') %> 
                                         </a>
                                     <% end %>
                                     
@@ -39,7 +39,7 @@
                                             data-method="PUT"
                                             data-confirm="You want to activate a category"
                                         >
-                                            <i class="icon-checkmark4"></i> Activate
+                                            <i class="icon-checkmark4"></i><%= t('.activate') %>  
                                         </a>
                                     <% end %>
                                     
@@ -49,7 +49,7 @@
                                             data-method="PUT"
                                             data-confirm="You are about to de-activate a category"
                                         >
-                                            <i class="icon-blocked"></i> De-activate
+                                            <i class="icon-blocked"></i><%= t('.de_activate') %>   
                                         </a>
                                     <% end %>
                                     
@@ -60,7 +60,7 @@
                                             data-method="DELETE"
                                             data-confirm="You are about to delete a category"
                                         >
-                                            <i class="icon-bin"></i> Delete
+                                            <i class="icon-bin"></i><%= t('.delete') %>    
                                         </a>
                                     <% end %>
                                 </div>

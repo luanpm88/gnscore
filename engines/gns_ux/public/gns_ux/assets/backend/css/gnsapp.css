@@ -114,10 +114,10 @@
     opacity: .5;
 }
 .navbar-brand img {
-    height: 1.4rem;
+    height: 2.0rem;
 }
 .navbar-brand {
-    padding: 0.8rem 0;
+    padding: 0.5rem 0;
     margin-right: 0;
 }
 .bg-new {

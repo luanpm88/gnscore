@@ -3,9 +3,9 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="d-block">Name <span class="text-danger">*</span></label>
+                    <label class="d-block"><%= t('.name') %> <span class="text-danger">*</span></label>
                     <input type="text" class="form-control font-weight-semibold <%= 'border-danger' if category.errors.full_messages_for(:name).present? %>"
-                        placeholder="Enter group name"
+                        placeholder="<%= t('.placeholder_enter_group_name') %>"
                         name="category[name]"
                         value="<%= category.name %>"
                     >
@@ -17,10 +17,10 @@
             
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="d-block">Parent Group</label>
+                    <label class="d-block"><%= t('.parent_group') %></label>
                     <select class="form-control select-ajax"
                         data-container-css-class="font-weight-semibold"
-                        data-placeholder="Choose group (parent)"
+                        data-placeholder="<%= t('.placeholder_choose_group_parent') %>"
                         data-url="<%= gns_contact.select2_backend_categories_path(current_category_id: category.id) %>"
                         name="category[parent_id]"
                     >

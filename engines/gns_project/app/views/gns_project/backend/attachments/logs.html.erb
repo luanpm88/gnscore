@@ -1,15 +1,15 @@
 <% content_for :title do %>
-    Attachment Logs
+    <%= t('attachment_logs') %>
 <% end %>
 
 <% content_for :breadcrumb do %>
     <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-    <a href="<%= gns_project.backend_tasks_path %>" class="breadcrumb-item">Attachments</a>
-    <span class="breadcrumb-item active">Show</span>
+    <a href="<%= gns_project.backend_tasks_path %>" class="breadcrumb-item"><%= t('.attachments') %></a>
+    <span class="breadcrumb-item active"><%= t('.show') %></span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Attachment</span></h4>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold"><%= t('.attachments') %></span></h4>
 <% end %>
 
 <% content_for :page_script do %>
@@ -28,7 +28,7 @@
 
 <div class="card">
     <div class="card-header bg-white header-elements-inline">
-        <h6 class="card-title">Details</h6>
+        <h6 class="card-title"><%= t('.details') %></h6>
         <div class="header-elements">            
             <div class="list-icons">
                 <a class="list-icons-item" data-action="collapse"></a>
@@ -39,7 +39,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="d-blocks">Task Description</label>
+                    <label class="d-blocks"><%= t('.task_description') %></label>
                     <div class="form-control font-weight-semibold">
                         <%= @attachment.task.name_with_stage %>
                     </div>
@@ -47,11 +47,11 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="d-blocks">Document Name</label>
+                    <label class="d-blocks"><%= t('.document_name') %></label>
                     <div class="form-control font-weight-semibold">
                         <%= @attachment.name %>
                     </div>
-                </div>
+                </div>s
             </div>
         </div>
         

@@ -1,5 +1,5 @@
 <% content_for :title do %>
-    Un-unfinish Task - <%= @task.name %>
+    <%= t('.unfinish_task') %> - <%= @task.name %>
 <% end %>
 
 <% content_for :page_script do %>
@@ -39,12 +39,12 @@
 <div class="card">
     <div class="card-body">
         <%= form_for '', url: gns_project.unfinish_backend_tasks_path(id: @task.id), html: {multipart: false, class: 'unfinish_task'} do |f| %>
-            <h5>Do you want to un-finish this task?</h5>
+            <h5><%= t('.unfinish_task_confirm') %></h5>
             
             <div class="form-group">
                 <textarea rows="2" cols="5"
                     class="form-control <%= 'border-danger' if @task.errors.full_messages_for(:remark).present? %>"
-                    placeholder="Enter your remark here"
+                    placeholder="<%= t('.enter_your_remark_here') %>"
                     name="remark"
                 ></textarea>
                 <% if @task.errors.full_messages_for(:remark).present? %>
@@ -53,7 +53,7 @@
             </div>
             
             <div class="text-left">
-                <button type="submit" class="btn btn-primary">Un-finish Confirm</button>
+                <button type="submit" class="btn btn-primary"><%= t('.unfinish_confirm') %></button>
             </div>
         <% end %>
     </div>

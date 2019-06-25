@@ -5,13 +5,13 @@
             <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
                 <h6 class="card-title mb-1">
                     <a data-toggle="collapse" class="text-default text-uppercase text-blue-800"
-                       href="#gnsProject-attachments">Attachments
+                       href="#gnsProject-attachments"><%= t('.attachments')%>
                     </a>
                 </h6>
                 <div>
-                    <button type="button" class="btn btn-link p-0 select_all_permissions_on">Select all</button>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_on"><%= t('.select_all') %></button>
                     <i class="icon-primitive-dot text-muted font-size-sm"></i>
-                    <button type="button" class="btn btn-link p-0 select_all_permissions_off">Deselect all</button>
+                    <button type="button" class="btn btn-link p-0 select_all_permissions_off"><%= t('.deselect_all')%></button>
                 </div>
             </div>
             
@@ -27,10 +27,10 @@
                                         id="gns_project.attachments.create"
                                         <%= 'checked' if @role.has_permission?('gns_project.attachments.create') %>
                                     >
-                                    <label class="custom-control-label" for="gns_project.attachments.create">Create/Upload</label>
+                                    <label class="custom-control-label" for="gns_project.attachments.create"><%= t('.create_upload')%></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>create</b> and <b>upload</b> new attachment</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.create')%></b> <%= t('.and')%> <b><%= t('.upload')%></b> <%= t('.new_attachment')%></td>
                         </tr>
                         
                         <tr>
@@ -42,10 +42,10 @@
                                         id="gns_project.attachments.update_own"
                                         <%= 'checked' if @role.has_permission?('gns_project.attachments.update_own') %>
                                     >
-                                    <label class="custom-control-label" for="gns_project.attachments.update_own">Update/Re-upload own</label>
+                                    <label class="custom-control-label" for="gns_project.attachments.update_own"><%= t('.update_reupload_own')%></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>update info</b> or <b>re-upload file</b> their own attachments</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.update_info')%></b> <%= t('.or')%> <b><%= t('.reupload_file')%></b> <%= t('.their_own_attachments')%></td>
                         </tr>
                         
                         <tr>
@@ -57,10 +57,10 @@
                                         id="gns_project.attachments.update_other"
                                         <%= 'checked' if @role.has_permission?('gns_project.attachments.update_other') %>
                                     >
-                                    <label class="custom-control-label" for="gns_project.attachments.update_other">Update/Re-upload other</label>
+                                    <label class="custom-control-label" for="gns_project.attachments.update_other"><%= t('.update_reupload_other')%></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>update info</b> or <b>re-upload file</b> other people's attachments</td>
+                            <td><%= t('.allow_users_to')%> <b> <%= t('.update_info')%></b> <%= t('.or')%> <b><%= t('.reupload_file')%> </b> <%= t('.other_peoples_attachments')%></td>
                         </tr>
                         
                         <tr>
@@ -72,10 +72,10 @@
                                         id="gns_project.attachments.download_own"
                                         <%= 'checked' if @role.has_permission?('gns_project.attachments.download_own') %>
                                     >
-                                    <label class="custom-control-label" for="gns_project.attachments.download_own">Download own</label>
+                                    <label class="custom-control-label" for="gns_project.attachments.download_own"><%= t('.download_own')%></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>download</b> their own attachments</td>
+                            <td><%= t('.allow_users_to') %><b><%= t('.download') %></b> <%= t('.their_own_attachments') %></td>
                         </tr>
                         
                         <tr>
@@ -87,10 +87,10 @@
                                         id="gns_project.attachments.download_other"
                                         <%= 'checked' if @role.has_permission?('gns_project.attachments.download_other') %>
                                     >
-                                    <label class="custom-control-label" for="gns_project.attachments.download_other">Download other</label>
+                                    <label class="custom-control-label" for="gns_project.attachments.download_other"><%= t('.download_other') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>download</b> other people's attachments</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.download') %></b> <%= t('.other_peoples_attachments')%></td>
                         </tr>
                         
                         <tr>
@@ -102,10 +102,10 @@
                                         id="gns_project.attachments.view_logs_own"
                                         <%= 'checked' if @role.has_permission?('gns_project.attachments.view_logs_own') %>
                                     >
-                                    <label class="custom-control-label" for="gns_project.attachments.view_logs_own">View logs own</label>
+                                    <label class="custom-control-label" for="gns_project.attachments.view_logs_own"><%= t('.view_logs_own') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>view logs</b> their own attachments</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.view_logs')%></b> <%= t('.their_own_attachments') %></td>
                         </tr>
                         
                         <tr>
@@ -117,10 +117,10 @@
                                         id="gns_project.attachments.view_logs_other"
                                         <%= 'checked' if @role.has_permission?('gns_project.attachments.view_logs_other') %>
                                     >
-                                    <label class="custom-control-label" for="gns_project.attachments.view_logs_other">View logs other</label>
+                                    <label class="custom-control-label" for="gns_project.attachments.view_logs_other"><%= t('.view_logs_other') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>view logs</b> other people's attachments</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.view_logs')%></b><%= t('.other_peoples_attachments')%></td>
                         </tr>
                         
                         <tr>
@@ -132,10 +132,10 @@
                                         id="gns_project.attachments.delete_own"
                                         <%= 'checked' if @role.has_permission?('gns_project.attachments.delete_own') %>
                                     >
-                                    <label class="custom-control-label" for="gns_project.attachments.delete_own">Delete own</label>
+                                    <label class="custom-control-label" for="gns_project.attachments.delete_own"><%= t('.delete_own') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>delete</b> their own attachments created</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.delete')%></b> <%= t('.their_own_attachments_created') %></td>
                         </tr>
                         
                         <tr>
@@ -147,10 +147,10 @@
                                         id="gns_project.attachments.delete_other"
                                         <%= 'checked' if @role.has_permission?('gns_project.attachments.delete_other') %>
                                     >
-                                    <label class="custom-control-label" for="gns_project.attachments.delete_other">Delete other</label>
+                                    <label class="custom-control-label" for="gns_project.attachments.delete_other"><%= t('.delete_other') %></label>
                                 </div>
                             </td>
-                            <td>Allow users to <b>delete</b> other people's attachments</td>
+                            <td><%= t('.allow_users_to')%> <b><%= t('.delete')%></b> <%= t('.other_peoples_attachments')%></td>
                         </tr>
                     </tbody>
                 </table>

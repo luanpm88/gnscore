@@ -1,11 +1,11 @@
 <table class="table table-hover">
     <thead>
         <tr class="alpha-primary">
-            <th class="text-nowrap">No.</th>
-            <th class="text-nowrap">Employee Name</th>
-            <th class="text-nowrap">Role Name</th>
-            <th class="text-nowrap text-center">Permissions</th>
-            <th class="text-nowrap text-right">Actions</th>
+            <th class="text-nowrap"><%= t('.no')%></th>
+            <th class="text-nowrap"><%= t('.employee_name')%></th>
+            <th class="text-nowrap"><%= t('.role_name')%></th>
+            <th class="text-nowrap text-center"><%= t('.permissions')%></th>
+            <th class="text-nowrap text-right"><%= t('.actions')%></th>
         </tr>
     </thead>
     <tbody>
@@ -36,7 +36,7 @@
                                 <a href="<%= gns_project.authorization_permissions_backend_projects_path(project_employee_id: project_employee) %>"
                                    class="dropdown-item modal-control"
                                    modal-size="lg">
-                                    <i class="icon-info3"></i> View Permissions
+                                    <i class="icon-info3"></i> <%= t('.view_permissions')%>
                                 </a>
                                 
                                 <a href="<%= gns_project.update_authorization_backend_projects_path(
@@ -44,7 +44,7 @@
                                         ) %>"
                                     class="dropdown-item edit-authorization-button"
                                 >
-                                    <i class="icon-pencil7"></i> Update authorized
+                                    <i class="icon-pencil7"></i> <%= t('.update_authorized')%>
                                 </a>
                                 
                                 <div class="dropdown-divider"></div>
@@ -54,7 +54,7 @@
                                         ) %>"
                                     class="dropdown-item ajax remove-authorization-button"
                                 >
-                                    <i class="icon-bin"></i> Remove authorized
+                                    <i class="icon-bin"></i> <%= t('.remove_authorized')%>
                                 </a>
                             </div>
                         </div>

@@ -1,5 +1,34 @@
 vi:
+  home: "Trang chủ"
+  keyword_search: "Tìm theo từ khóa"
+  show_columns: "Ấn/hiện cột"
+  sort_by: "Sắp xếp"
+  per_page: "Hiển thị"
+  go: "Lọc"
+  
+  status: "Trạng thái"
+  created_at: "Ngày tạo"
+  updated_at: "Ngày sửa"
+  actions: "Thao tác"
+  
+  save: "Lưu"
+  cancel: "Hủy"
   close: "Đóng"
+  active: "Đang kích hoạt"
+  inactive: "Không kích hoạt"
+  male: "Nam"
+  female: "Nữ"
+  high: "Cao"
+  normal: "Bình thường"
+  low: "Thấp"
+  
+  new: "Mới"
+  pending: "Chờ duyệt"
+  in_progress: "Đang thực hiện"
+  done: "Đã hoàn thành"
+  finished: "Đã kết thúc"
+  canceled: "Đã bị hủy"
+  
   layouts:
     gns_ux:
       backend:

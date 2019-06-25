@@ -1,5 +1,5 @@
 <% content_for :title do %>
-    Permissions for <%= @project_employee.employee_name %>
+    <%= t('.permissions_for') %> <%= @project_employee.employee_name %>
 <% end %>
 
 <% content_for :page_title do %>
@@ -8,7 +8,7 @@
 
 <div class="card">
     <div class="card-header bg-transparent header-elements-inline">
-        <h5 class="card-title">See all policies</h5>
+        <h5 class="card-title"><%= t('.see_all_policies') %></h5>
         
         <div class="header-elements">            
             <div class="list-icons">

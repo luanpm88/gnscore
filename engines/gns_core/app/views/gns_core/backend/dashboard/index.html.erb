@@ -1,9 +1,9 @@
 <% content_for :title do %>
-    Dashboard
+    <%= t('.dashboard') %>
 <% end %>
 
 <% content_for :breadcrumb do %>
-    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home4 mr-2"></i> Home - Dashboard</a>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home4 mr-2"></i> <%= t('.home') %> - <%= t('.dashboard') %></a>
 <% end %>
 
 <!-- Dashboard content -->

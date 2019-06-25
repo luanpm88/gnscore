@@ -2,9 +2,9 @@
     <fieldset>
         <input type="hidden" name="user[employee_id]" value="<%= @user.employee_id %>">
         <div class="form-group">
-            <label class="d-block font-weight-semibold">Email <span class="text-danger">*</span></label>
+            <label class="d-block font-weight-semibold"><%= t(".email") %> <span class="text-danger">*</span></label>
             <input type="text" autocomplete="email"
-                class="form-control <%= 'border-danger' if user.errors.full_messages_for(:email).present? %>" placeholder="Enter email"
+                class="form-control <%= 'border-danger' if user.errors.full_messages_for(:email).present? %>" placeholder="<%= t(".placeholder_email") %>"
                 name="user[email]"
                 value="<%= user.email %>"
             >
@@ -16,11 +16,11 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="d-block font-weight-semibold">New Password
+                    <label class="d-block font-weight-semibold"><%= t(".new_password") %>
                         <% if user.id.nil? %><span class="text-danger">*</span><% end %>
                     </label>
                     <input type="password" autocomplete="new-password"
-                        class="form-control <%= 'border-danger' if user.errors.full_messages_for(:password).present? %>" placeholder="Enter new password"
+                        class="form-control <%= 'border-danger' if user.errors.full_messages_for(:password).present? %>" placeholder="<%= t(".placeholder_new_password") %>"
                         name="user[password]"
                     >
                     <% if user.errors.full_messages_for(:password).present? %>
@@ -30,11 +30,11 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="d-block font-weight-semibold">Repeat password
+                    <label class="d-block font-weight-semibold"><%= t(".repeat_password") %>
                         <% if user.id.nil? %><span class="text-danger">*</span><% end %>
                     </label>
                     <input type="password" autocomplete="re-password"
-                        class="form-control <%= 'border-danger' if user.errors.full_messages_for(:password_confirmation).present? %>" placeholder="Repeat new password"
+                        class="form-control <%= 'border-danger' if user.errors.full_messages_for(:password_confirmation).present? %>" placeholder="<%= t(".placeholder_repeat_new_password") %>"
                         name="user[password_confirmation]"
                         value="<%= user.password_confirmation %>"
                     >
@@ -48,7 +48,7 @@
         
             
         <div class="form-group">
-            <label class="d-block">Roles</label>
+            <label class="d-block"><%= t(".roles") %></label>
             <select class="form-control select-ajax" multiple
                 data-container-css-class="font-weight-semibold"
                 data-placeholder="Choose roles"
@@ -67,8 +67,8 @@
     
     <hr class="mt-0">
     <div class="text-left">
-        <button type="submit" class="btn btn-primary">Save</button>
-        <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary"><%= t("save") %></button>
+        <button type="button" class="btn btn-light" data-dismiss="modal"><%= t("cancel") %></button>
         
     </div>
 <% end %>

@@ -1,16 +1,16 @@
 <% content_for :title do %>
-    Manpower
+    <%= t('.manpower') %>
 <% end %>
 
 <% content_for :breadcrumb do %>
     <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-    <a href="<%= gns_project.backend_projects_path %>" class="breadcrumb-item">Projects</a>
+    <a href="<%= gns_project.backend_projects_path %>" class="breadcrumb-item"><%= t('.projects') %></a>
     <a href="<%= gns_project.backend_project_path(@project) %>" class="breadcrumb-item"><%= @project.name %></a>
-    <span class="breadcrumb-item active">Authorization</span>
+    <span class="breadcrumb-item active"><%= t('.authorization') %></span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold">Project</span>: <%= @project.name %></h4>
+    <h4><i class="icon-address-book mr-2"></i> <span class="font-weight-semibold"><%= t('.project') %></span>: <%= @project.name %></h4>
 <% end %>
 
 <% content_for :page_script do %>
@@ -54,11 +54,11 @@
     <%= render "menu_tab", title: 'Authorization' %>
     
     <div class="card-header header-elements-inline">
-        <h5 class="mb-0">Authorized List</h5>
+        <h5 class="mb-0"><%= t('.authorized_list') %></h5>
         <div class="text-right">
             <a href="<%= gns_project.add_authorization_backend_projects_path(project_id: @project) %>"
                 class="btn btn-sm bg-blue add-authorization-button">
-                <i class="icon-plus22 mr-1"></i> Add authorization
+                <i class="icon-plus22 mr-1"></i> <%= t('.add_authorization') %>
             </a>
         </div>
     </div>

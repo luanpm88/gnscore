@@ -1,7 +1,12 @@
 en:
+  contact_person: 'Contact Person'
+  project_list: 'Project List'
+  company: 'Company'
+  person: 'Person'
   gns_contact:
     notification:
       contact:
+        contact_list: "Contact List"
         created: "created new contact: %{full_name}"
         updated: "updated contact: %{full_name}"
         deleted: "deleted contact: %{full_name}"
@@ -13,7 +18,245 @@ en:
         deleted: "deleted contact group: %{name}"
         activate: "activate contact group: %{name}"
         deactivate: "de-activate contact group: %{name}"
-        
+    backend:
+      contacts:
+        index:
+          contacts: 'Contacts'
+          create_contact: 'Create Contact'
+          contact_list: 'Contact List'
+          placeholder_country: 'Filter by country...'
+          placeholder_state:  'Filter by state...'
+          placeholder_district: 'Filter by district...'
+          placeholder_status: 'Filter by status...'
+          placeholder_group: 'Filter by group...'
+          placeholder_business_partner: 'Filter by business partner type...'
+          go: 'Go'
+          keyword_search: 'Type to Filter...'
+          code: 'Code'
+          full_name: 'Full Name'
+          foreign_name: 'Foreign Name'
+          group: 'Group'
+          business_partner_type: 'Business Partner Type'
+          belongs_to: 'Belongs To'
+          tax_id: 'Tax ID'
+          email: 'Email'
+          phone_number: 'Phone Number'
+          address: 'Address'
+          status: 'Status'
+          created_at: 'Created At'
+          updated_at: 'Updated At'
+          placeholder_sort_by: 'Sort by'
+          created_at: 'Created at'
+        list:
+          code: "Code"
+          full_name: 'Full Name'
+          foreign_name: 'Foreign Name'
+          group: "Group"
+          bus_p_type: "Bus.P.Type"
+          belongs_to: "Belongs To"
+          tax_id: "Tax ID"
+          email: "Email"
+          phone_number: "Phone Number"
+          address: "Address"
+          status: "Status"
+          created_at: "Created At"
+          updated_at: "Updated At"
+          actions: "Actions"
+          view_details: 'View Details'
+          update_info: 'Update Info'
+          activate: 'Activate'
+          de-activate: 'De-activate'
+          delete: 'Delete'
+        new:
+          new_contact: 'New Contact'
+          contacts: 'Contacts'
+          create: 'Create'
+          contact: 'Contact'
+          oh_snap: 'Oh snap!'
+          check_a_few: 'Check a few things up (below) and try submitting again.'
+          details: 'Details'  
+        projects:
+          show_contact: 'Show Contact'
+          contacts: 'Contacts'
+          contact: 'Contact'
+          show: 'Show'
+          add_new: 'Add new'
+        show:
+          show_contact: 'Show Contact'
+          contacts: 'Contacts'
+          contact: 'Contact'
+          show: 'Show'
+          add_new_contact: 'Add new contact'
+          add_contact_already_exists: 'Add contact already exists'
+        subcontact_edit:
+          edit_contact_person: 'Edit Contact Person'
+          contacts: 'Contacts'
+          contact: 'Contact'
+          edit: 'Edit'
+          oh_snap: 'Oh snap!'
+          check_a_few: 'Check a few things up (below) and try submitting again.'
+          update: 'Update'
+        subcontact_list:
+          there_are_no_children: 'There are no children'
+          person_name: 'Person Name'
+          mobile_phone: 'Mobile Phone'
+          email: 'Email'
+          address: 'Address'
+          status: 'Status'
+          created: 'Created'
+          actions: 'Actions'
+          update_information: 'Update information'
+          remove_from_list: 'Remove from list'
+        subcontact_new:
+          add_new_contact_person: 'Add New Contact Person'
+          contacts: 'Contacts'
+          contact: 'Contact'
+          create: 'Create'
+          oh_snap: 'Oh snap!'
+          check_a_few: 'Check a few things up (below) and try submitting again.'
+          details: 'Details'
+          add: 'Add'
+        edit:
+          editing_contact: 'Editing Contact'
+          contacts: 'Contacts'
+          contact: 'Contact'
+          edit: 'Edit'
+          oh_snap: 'Oh snap!'
+          check_a_few: 'Check a few things up (below) and try submitting again.'
+          details: 'Details'
+        add_subcontact:
+          add_contact_person: 'Add Contact Person'
+          oh_snap: 'Oh snap!'
+          check_a_few: 'Check a few things up (below) and try submitting again.'
+          add: 'Add'
+        subcontact_form:
+          full_name: 'Full Name'
+          placeholder_enter_full_name: 'Enter full name'
+          date_of_birth: 'Date Of Birth'
+          mobile: 'Mobile'
+          placeholder_enter_mobile_number: 'Enter mobile number'
+          email: 'Email'
+          placeholder_eg: 'Eg: name@sao-ee.vn'
+          department: 'Department'
+          placeholder_enter_department: 'Enter department'
+          position: 'Position'
+          placeholder_enter_position: 'Enter position'
+          country: 'Country'
+          placeholder_choose_country: 'Choose country'
+          state_province: 'State/Province'
+          placeholder_choose_state_province: 'Choose state/province'
+          district_town_city: 'District/Town/City'
+          placeholder_choose_district_town_city: 'Choose district/town/city'
+          address: 'Address'
+          placeholder_enter_address: 'Enter address'
+        general_infomation:
+          contact_details: 'Contact Details'
+          actions: 'Actions'
+          update_info: 'Update Info'
+          code: 'Code:'
+          full_name: 'Full Name:'
+          foreign_name: 'Foreign Name:'
+          contact_group: 'Contact Group:'
+          business_partner_type: 'Business Partner Type:'
+          company: 'Company:'
+          address: 'Address:'
+          email: 'Email:'
+          telephone: 'Telephone:'
+          mobile: 'Mobile:'
+          fax: 'Fax:'
+          tax_id: 'Tax ID:'
+          invoice_address: 'Invoice Address:'
+          status: 'Status:'
+          added_by: 'Added By:'
+          created: 'Created:'
+          last_updated: 'Last Updated:'
+          remark: 'Remark:'
+        contact_menu:
+          contact_person: 'Contact Person'
+          project_list: 'Project List'
+        form:
+          code: 'Code'
+          contact_group: 'Contact Group'
+          placeholder_choose_group: 'Choose group'
+          full_name: 'Full Name'
+          placeholder_enter_full_name: 'Enter full name'
+          foreign_name: 'Foreign Name'
+          placeholder_enter_foreign_name: 'Enter foreign name'
+          business_partner_type: 'Business Partner Type'
+          placeholder_select_business_partner_type: 'Select business partner type'
+          other_information: 'Other Information'
+          more_here: '(more here)'
+          telephone: 'Telephone'
+          placeholder_enter_telephone_number: 'Enter telephone number'
+          mobile: 'Mobile'
+          placeholder_enter_mobile_number: 'Enter mobile number'
+          fax: 'Fax'
+          placeholder_enter_fax_number: 'Enter fax number'
+          tax_code: 'Tax Code'
+          placeholder_enter_tax_code: 'Enter tax code'
+          email: 'Email'
+          placeholder_email: 'Eg: name@sao-ee.vn'
+          website: 'Website'
+          placeholder_website: 'http://sao-ee.vn'
+          country: 'Country'
+          placeholder_choose_country: 'Choose country'
+          state_province: 'State/Province'
+          placeholder_choose_state_province: 'Choose state/province'
+          district_town_city: 'District/Town/City'
+          placeholder_choose_district_town_city: 'Choose district/town/city'
+          address: 'Address'
+          placeholder_enter_address: 'Enter Address'
+          invoice_address: 'Invoice Address'
+          placeholder_enter_address_for_invoice: 'Enter address for invoice'
+          belongsto_parent: 'BelongsTo Parent'
+          placeholder_choose_group: 'Choose group'
+          remark: 'Remark'
+          placeholder_enter_your_remark_here: 'Enter your remark here'
+          set_active: 'Set active'
+      
+      categories:
+        form:
+          name: 'Name'
+          placeholder_enter_group_name: 'Enter group name'
+          parent_group: 'Parent Group'
+          placeholder_choose_group_parent: 'Choose parent group'
+        edit:
+          editing_category: 'Editing Category'
+          categories: 'Categories'
+          edit: 'Edit:'
+          categorie: 'Categorie'
+          oh_snap: 'Oh snap!'
+          check_a_few: 'Check a few things up (below) and try submitting again.'
+          details: 'Details'
+        index:  
+          contact_category: 'Contact Category'
+          categories: 'Categories'
+          category: 'Category'
+          create_category: 'Create Category'
+          category_list: 'Category list'
+          placeholder_filter_by_status: 'Filter by status...'
+          placeholder_filter_by_parent_group: 'Filter by parent group...'
+          placeholder_type_to_filter: 'Type to filter'
+          created_at: 'created_at'
+          name: 'name'
+        list:
+          name: 'Name'
+          status: 'Status'
+          created_at: 'Created At'
+          actions: 'Actions'
+          update: 'Update'
+          activate: 'Activate'
+          de_activate: 'De-activate'
+          delete: 'Delete'
+        new:
+          new_category: 'New Category'
+          categories: 'Categories'
+          category: 'Category'
+          create: 'Create'
+          oh_snap: 'Oh snap!'
+          check_a_few: 'Check a few things up (below) and try submitting again.'
+          details: 'Details'
+          
   activerecord:
     errors:
       models:

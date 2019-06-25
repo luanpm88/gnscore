@@ -1,16 +1,738 @@
 vi:
-  save: "Lưu"
-  cancel: "Hủy"
-  active: "Đang kích hoạt"
-  inactive: "Không kích hoạt"
-  male: "Nam"
-  female: "Nữ"
   gns_project:
+    backend:
+      categories:
+        form:
+          name: "Tên"
+          enter_name: "Nhập tên"
+          description: "Mô tả"
+          enter_description: "Nhập mô tả"
+        edit:
+          edit_project_category: "Chỉnh sửa danh mục dự án"
+          categories: "Loại dự án"
+          contact: "Liên hệ"
+          create_category: "Tạo danh mục"
+          details: "Chi tiết"
+          edit: "Chỉnh sửa"
+        index:
+          project_types: "Loại dự án"
+          type: "Loại"
+          create_type: "Tạo loại"
+          project_type_list: "Danh sách loại dự án"
+          go: "Thực hiện"
+          type_to_filter: "Nhập để lọc"
+          sort_by: "Sắp xếp theo"
+          name: "Tên dự án"
+          created_at: "Thời gian tạo"
+          per_page: "Số dự án/1 trang"
+        list:
+          type_name: "Loại dự án"
+          description: "Mô tả"
+          status: "Trạng thái"
+          creator: "Người tạo"
+          created_at: "Thời gian tạo"
+          actions: "Thao tác"
+          view_details: "Xem chi tiết"
+          update_info: "Cập nhật thông tin"
+          activate: "Hoạt động"
+          de_activate: "Không hoạt động"
+          delete: "Xóa"
+          activate_confirm: "Bạn sắp kích hoạt một danh mục"
+          deactivate_confirm: "Bạn sắp hủy kích hoạt một danh mục"
+          delete_confirm: "Bạn xóa danh mục"
+        new:
+          new_project_category: "Hạng mục dự án mới"
+          home: "Trang chủ"
+          categories: "Thể loại"
+          category: "Loại"
+          create: "Tạo"
+          details: "Chi tiêt"
+        show:
+          show_contact: "Hiển thị liên hệ"
+          home: "Trang chủ"
+          project_category: "Loại dự án"
+          create_category: "Tạo mới"
+          category_details: "Chi tiết"
+          actions: "Thao tác"
+          update: "Cập nhật"
+          category_name: "Tên"
+          discription: "Mô tả"
+          status: "Trạng thái"
+          added_by: "Người tạo"
+          created: "Đã tạo"
+          updated: "Cập nhật"
+          add_stage: "Thêm giai đoạn"
+        stages:
+          there_are_no_stage: "Không có giai đoạn nào"
+          noo: "STT"
+          stage_name: "Tên giai đoạn"
+          description: "Mô tả"
+          actions: "Thao tác"
+      roles:
+        form:
+          name: "Tên"
+          enter_role_name: "Nhập tên vai trò"
+          save: "Lưu"
+          cancel: "Hủy"
+        edit:
+          edit_project_role: "Chỉnh sửa vai trò dự án"
+          home: "Trang chủ"
+          project_roles: "Vai trò dự án"
+          edit: "Chỉnh sửa"
+          create_project_role: "Tạo vai trò dự án"
+        index:
+          project_role: "Vai trò dự án"
+          project_roles: "Vai trò dự án"
+          create_project_role: "Tạo vai trò"
+          project_role_list: "Danh sách vai trò dự án"
+          filter_by_status: "Lọc theo trạng thái"
+          type_to_filter: "Nhập để lọc"
+          sort_by: "Sặp xếp theo"
+          created_at: "ngày tạo"
+          name: "tên"
+          per_page: "Số dự án/1 trang"
+          go: "Thực hiện"
+        list:
+          role_name: "Tên vai trò"
+          permissions: "Phân quyền"
+          status: "Trạng thái"
+          creator: "Người tạo"
+          created_at: "Ngày tạo"
+          actions: "Thao tác"
+          update_info: "Cập nhật thông tin"
+          setting_permissions: "Cài đặt phân quyền"
+          activate: "Kích hoạt"
+          de_activate: "Hủy kích hoạt"
+          delete: "Xóa"
+          activate_confirm: "Vai trò này sẽ hoạt động cho người dùng được gán cho nó"
+          deactivate_confirm: "Vai trò này sẽ không còn hoạt động đối với người dùng được gán cho nó"
+          delete_confirm: "Bạn sắp xóa một vai trò"
+        new:
+          new_project_role: "Vai trò dự án mới"
+          home: "Trang chủ"
+          project_roles: "Vai trò dự án"
+          project_role: "Vai trò dự án"
+          create: "Tạo mới"
+          details: "Chi tiết"
+        permissions:
+          project_permissions: "Phân quyền dự án"
+          project_role: "Vai trò dự án"
+          setting_permissions: "Cài đặt phân quyền"
+          task: "Công việc"
+          attachment: "Tệp đính kèm"
+          project_log: "Nhật ký dự án"
+        policy:
+          attachments:
+            attachments: "Tệp đính kèm"
+            select_all: "Chọn tất cả"
+            deselect_all: "Bỏ chọn tất cả"
+            create_upload: "Tạo/Tải lên"
+            allow_users_to: "Cho phép người dùng"
+            create: "tạo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              "
+            and: "và"
+            upload: "tải lên"
+            new_attachment: "tệp đính kèm mới"
+            update_reupload_own: "Cập nhật/tải lại của mình"
+            update_info: "cập nhật thông tin"
+            reupload_file: "tải lại tập tin"
+            their_own_attachments: "tiệp đính kèm của mình"
+            update_reupload_other: "Cập nhật/Tải lại của người khác"
+            or: "hoặc"
+            other_peoples_attachments: "tệp đính kèm của người khác"
+            download_own: "Tải của mình"
+            download: " tải xuống"
+            download_other: "Tải xuống người khác"
+            view_logs_own: "Xem nhật ký của mình"
+            view_logs_other: "Xem nhật ký người khác"
+            view_logs: "xem nhật ký "
+            delete_own: "Xóa của minh"
+            delete: "xóa"
+            their_own_attachments_created: "tiệp đính kèm của mình đã tạo"
+            delete_other: "Xóa người khác"
+          logs:
+            allow_users_to: "Cho phép người dùng"
+            download: "tải xuống"
+            logs_project_attached: "Nhật ký (Dự án/Đính kèm)"
+            select_all: "Chọn tất cả"
+            deselect_all: "Bỏ chọn tất cả"
+            vview_logs: "Xem nhật ký"
+            allow_users_to: "Cho phép người dùng"
+            view_logs: "xem nhật ký"
+            download: "tải xuống"
+            of_projects_tasks_attachments: "của dự án/ công việc/ tiệp đính kèm"
+            download_logs: "Nhật ký tải xuống "
+            the_attachment_of_the_log: "tiệp đính kèm của nhật ký"
+          tasks:
+            tasks: "Công việc"
+            select_all: "Chọn tất cả"
+            deselect_all: "Bỏ chọn tất cả"
+            create_insert: "Tạo mới/ Chèn"
+            allow_users_to: "Cho phép người dùng"
+            create: "tạo mới"
+            or: "or"
+            insert_below: "chèn (dưới)"
+            a_task: "công việc"
+            read_own: "Đọc của mình"
+            view: "xem"
+            their_own_tasks: "công việc của mình"
+            read_other: "Đọc của người khác"
+            other_peoples_tasks: "công việc của người khác"
+            update_own: "Cập nhật của mình"
+            update: "cập nhật"
+            update_other: "Cập nhật của người khác"
+            delete_own: "Xóa của mình"
+            delete: "xóa"
+            their_own_tasks_created: "công việc của mình đã tạo"
+            delete_other: "Xóa người khác"
+            the_task_of_others_created: "công việc của người khác đã tạo"
+            update_progress_own: "Cập nhật phát triển của mình"
+            update_progress: "cập nhật phát triển"
+            update_progress_other: "Cập nhật phát triển của người khác"
+            finish_own: "Hoàn thành của mình"
+            finish: "hoàn thành"
+            finish_other: "Hoàn thành của người khác"
+            unfinish_own: "Chưa hoàn thành của mình"
+            unfinish: "chưa hoàn thành"
+            unfinish_other: "Chưa hoàn thành của người khác"
+            close_own: "Đóng của mình"
+            closes: "đóng lại"
+            close_other: "Đóng của người khác"
+            reopen_own: "Mở lại của mình"
+            reopen: "mở lại"
+            reopen_other: "Mở lại của người khác"
+      stages:
+        form:
+          name: "Tên"
+          enter_name: "Nhập tên"
+          description: "Mô tả"
+          enter_description: "Nhập mô tả"
+        edit:
+          edit_stage: "Chỉnh sửa giai đoạn"
+          home: "Trang chủ"
+          stages: "Giai đoạn"
+          create: "Tạo mới"
+        new:
+          new_stage: "Giai đoạn mới"
+          home: "Trang chủ"
+          stages: "Giai đoạn"
+          create: "Tạo mới"
+          details: "Chi tiết"
+          
+      comments:
+        form:          
+          description: "Mô tả:"
+          enter_message: "Nhập tin nhắn"
+          add_file: "Thêm tập tin"
+          choose_file: "Chọn tập tin"
+          accepted: "Các định dạng được chấp nhận: pdf, doc. Kích thước tệp tối đa 2Mb"
+          send: "Gửi"
+          
+        edit:
+          edit_project_note: "Chỉnh sửa ghi chú dự án"
+          comments: "Bình luận"
+          edit: "Chỉnh sửa"
+          create_comment: "Tạo bình luận"
+        index:
+          comments: "Bình luận"
+        new:
+          comments: "Bình luận"
+          add: "Thêm"
+          create: "Tạo"
+          
+      attachments:
+        form:
+          document_name: "Tên tài liệu:"
+          enter_name: "Nhập tên..."
+          attach_files: "Tệp đính kèm"
+          choose_file: "Chọn tệp"
+          remark: "Ghi chú:"
+          enter_remark_here: "Nhập nhận xét ở đây..."
+          upload: "Tải lên"
+          
+        edit:
+          edit_attachment: "Chỉnh sửa tập tin đính kèm"
+          project_attachments: "Đính kèm của dự án"
+          attachment: "Tệp đính kèm"
+          
+        index:
+          attachments: "Tệp đính kèm"
+          
+        logs:
+          attachment_logs: "Nhật ký đính kèm"
+          attachments: "Tệp đính kèm"
+          show: "Hiện"
+          details: "Chi tiết"
+          task_description: "Mô tả công việc"
+          document_name: "Tên tài liệu"
+          
+        logs_list:
+          no: "Stt."
+          document: "Tài liệu"
+          update_date: "Ngày cập nhật"
+          change_description: "Mô tả thay đỏi"
+          remark: "Ghi chú"
+          change_by: "Thay đổi bởi"
+          
+        new:
+          new_attachment: "Tệp đính kèm mới"
+          attachment: "Tệp đính kèm"
+          create: "Tạo"
+    
+      projects:
+        index:
+          project_manager: "Quản lý dự án"
+          project: "Dự án"
+          project_list: "Danh sách dự án"
+          create_project: "Tạo mới dự án"
+          code: "Mã dự án"
+          name: "Tên dự án"
+          customer: "Khách hàng"
+          type: "Loại"
+          start_date: "Ngày bắt đầu"
+          end_date: "Ngày kết thúc"
+          complete: "% Hoàn thành"
+          status: "Trạng thái"
+          create_at: "Ngày tạo"
+          update_at: "Ngày cập nhật"
+          create_at: "Ngày tạo"
+          new: "Mới"
+          pending: "Đang chờ xử lý"
+          inprogress: "Trong tiến trình"
+          finished: "Đã kết thúc"
+          type_to_search: "Tìm theo loại..."
+          filter_by_customer: "Lọc theo khách hàng..."
+          filter_by_type: "Lọc theo loại..."
+          filter_by_status: "Lọc theo trạng thái..."
+          
+        list:
+          code: "Mã dự án"
+          name: "Tên dự án"
+          customer: "Khách hàng"
+          type: "Loại"
+          start_date: "Ngày bắt đầu"
+          end_date: "Ngày kết thúc"
+          complete: "Tiến độ thực hiện"
+          status: "Trạng thái"
+          create_at: "Ngày tạo"
+          update_at: "Ngày cập nhật"
+          actions: "Thao tác"
+          show_info: "Hiển thị thông tin"
+          update_info: "Cập nhật thông tin"
+          task_planning: "Lập kế hoạch công việc"
+          manpower: "Phân quyền nhân sự"
+          view_logs: "Lịch sử bản ghi"
+          delete: "Xóa thông tin dự án"
+          delete_confirm: "Bạn sắp xóa một dự án"
+          finish: "Hoàn thành"
+          start_project: 'Bắt đầu dự án'
+          request_submit: "Yêu cầu phê duyệt"
+        new:
+          new_project: "Dự án mới"
+          details: "Chi tiết"
+          
+        form:
+          project_type: "Loại dự án"
+          select_category: "Chọn loại dự án..."
+          project_code: "Mã dự án"
+          enter_code: "Nhập mã dự án"
+          project_name: "Tên dự án"
+          enter_name: "Nhập tên dự án"
+          customer: "Khách hàng"
+          select_customer: "Chọn khách hàng"
+          date_of_implementation: "Ngày thực hiện"
+          project_manager: "Quản lý dự án"
+          select_manager: "Chọn người quản lý"
+          priority: "Độ ưu tiên"
+          select_priority_level: "Chọn độ ưu tiên"
+          remark: "Cam kết / Ghi chú"
+          enter_remark: "Nhập nội dung cam kết/lý do của bạn..."
+          save: "Lưu"
+          cancel: "Hủy"
+        
+        show:
+          project_information: "Thông tin dự án"
+          details: "Chi tiết"
+          task_planning: "Lập kế hoạch công việc"
+          manpower: "Phân bổ nhân sự"  
+          view_logs: "Xem các bản ghi"
+          project_type: "Loại dự án:"
+          project_code: "Mã dự án:"
+          project_name: "Tên dự án:"
+          start_date: "Ngày bắt đầu:"
+          end_date: "Ngày kết thúc:"
+          status: "Trạng thái:"
+          priority: "Độ ưu tiên:"
+          customer_code: "Mã khách hàng:"
+          customer_name: "Tên khách hàng:"
+          project_manager: "QL (Người quản lý):"
+          created: "Đã tạo:"
+          last_updated: "Cập nhật lần cuối:"
+          added_by: "Thêm bởi:"
+          complete: "Hoàn thành:"
+          opening_activities: "Mở hoạt động:"
+          
+        comments:
+          no_note: "Không có ghi chú để thảo luận"
+          reply: "Trả lời"
+          edit: "Chỉnh sửa"
+          delete: "Xóa"
+          
+        edit:
+          edit_project: "Cập nhật dự án"
+          details: "Chi tiết"
+          
+        finish:
+          update_status_finish: "Cập nhật trạng thái thành ĐÃ HOÀN THÀNH"
+          update_status_finish_confirm: "Bạn có muốn thay đổi trạng thái của dự án này thành Đã hoàn thành?"
+          confirm: "Xác nhận"
+          
+        tasks:
+          task_list: "Danh sách công việc"
+          task_planning: "Lập kế hoạch công việc"
+          planning: "Lập kế hoạch"
+          projects: "Dự án"
+          add_new_task: "Thêm công việc mới"
+          download_all: "Tải xuống tất cả"
+        tasks_list:
+          no: "Stt"
+          task_description: "Mô tả công việc"
+          start_date: "Ngày bắt đầu"
+          end_date: "Ngày kết thúc"
+          complete: "Hoàn thành"
+          hours: "Số giờ"
+          responsible: "Chịu trách nhiệm"
+          status: "Trạng thái"
+          finished: "Đã kết thúc"
+          attached: "Đính kèm"
+          actions: "Thao tác"
+          no_file: "Không có tập tin"
+          insert_below: "Thêm bên dưới"
+          update_info: "Cập nhật thông tin"
+          finish_task: "Hoàn thành công việc"
+          un_finish_task: "Hủy hoàn thành công việc"
+          close_task: "Đóng công việc"
+          re_open_task: "Mở lại công việc"
+          go_to_task: "Xem công việc"
+          attachments: "Đính kèm"
+          delete: "Xóa"
+          no_task_description: "Không có mô tả công việc"
+          
+        start_progress:
+          update_status: "Cập nhật trạng thái lên"
+          confirm: "Xác nhận"  
+        
+        send_request:
+          update_pending: "Cập nhật trạng thái cho chờ xử lý"
+          update_pending_confirm: "Bạn có muốn gửi yêu cầu phê duyệt cho dự án này?"
+          enter_remark_here: "Nhập nhận xét của bạn ở đây"
+          submit: "Gửi"
+        
+        remove_authorization:
+          remove_authorization: "Xóa ủy quyền"
+          authorization_confirm: "Bạn có muốn xóa người dùng này khỏi ủy quyền?"
+          removes_confirm: "Xác nhận xoá"
+          enter_your_remark_here: "Nhập cam kết của bạn ở đây..."
+        
+        menu_tab:
+          show_info: "Hiển thị thông tin"
+          actions: "Thao tác"
+          update_info: "Cập nhật thông tin"
+          send_request: "Gửi yêu cầu"
+          start_progress: "Bắt đầu tiến độ"
+          finish_to_project: "Kết thúc tiến độ"
+          task_planning: "Lập kế hoạch công việc"
+          manpower: "Phân bổ nhân sự"
+          view_logs: "Xem bản ghi"
+        
+        authorization:
+          manpower: "Người chỉ huy"
+          authorization: "Phân bổ nhân sự"
+          projects: "Dự án"
+          project: "Dự án"
+          authorized_list: "Danh sách phân bổ nhân sự"
+          add_authorization: "Thêm nhân sự ủy quyền"  
+          
+        authorization_list:
+          no: "Stt"
+          employee_name: "Tên nhân viên"
+          role_name: "Tên quyền"
+          permissions: "Quyền"
+          actions: "Thao tác"
+          view_permissions: "Xem quyền"
+          update_authorized: "Cập nhật nhân sự ủy quyền"
+          remove_authorized: "Xóa nhân sự ủy quyền" 
+        
+        add_authorization:
+          add_authorization: "Thêm nhân sự ủy quyền"
+          add: "Thêm"
+          
+        attachments:
+          task_attachment: "Đính kèm công việc"
+          attachment: "Đính kèm"
+          download_all: "Tải xuống tất cả"
+          
+        attachments_list:
+          no_task_description: "Không có mô tả nhiệm vụ"
+          stage: "Giai đoạn"
+          task_description: "Mô tả công việc"
+          status: "Trạng thái"
+          finished: "Đã kết thúc"
+          attached: "Đính kèm"
+          actions: "Thao tác"
+          no_file_yet: "Chưa có tập tin"
+          view_attachs: "Xem đính kèm"
+          finish_task: "Hoàn thành công việc"
+          unfinish_task: "Chưa hoàn thành công việc"
+          close_task: "Đóng công việc"
+          reopen_task: "Re-open task"
+          
+        
+        form_authorization:
+          employee_name: "Tên nhân viên"
+          select_employee: "Chọn nhân viên..."
+          project_roles: "Quyền trong dự án"
+          select_project_roles: "Chọn quyền trong dự án..."
+          
+        update_authorization:
+          edit_authorization: "Chỉnh sửa ủy quyền"
+          update: "Cập nhật"
+          
+        project_employee_roles:
+          policies:
+            tasks: "Công việc"
+            attachment: "Đính kèm"
+            logs: "Nhật ký (Dự án/Tệp đính kèm)"
+            gns_project:
+              tasks:
+                creates: "Tạo"
+                read_owns: "Đọc riêng"
+                read_others: "Đọc khác"
+                update_owns: "Cập nhật riêng"
+                update_others: "cập nhật khác"
+                delete_owns: "Xóa riêng"
+                delete_others: "Xóa khác"
+                update_progress_owns: "Cập nhật tiến độ riêng"
+                update_progress_others: "Cập nhật tiến độ khác"
+                finish_owns: "Kết thúc riêng"
+                finish_others: "Kết thúc khác"
+                unfinish_owns: "Chưa hoàn thành riêng"
+                unfinish_others: "Chưa hoàn thành khác"
+                close_owns: "Đóng riêng"
+                close_others: "Đóng khác"
+                reopen_owns: "Mở lại riêng"
+                reopen_others: "Mở lại khác"
+                create:
+                  decription: "Cho phép nhân viên <b>tạo</b> hoặc <b>thêm (bên dưới)</b> một công việc"
+                read_own:
+                  decription: "Cho phép nhân viên <b>xem</b> nhiệm vụ riêng của họ"
+                read_other:
+                  decription: "Cho phép nhân viên <b>xem</b> nhiệm vụ của người khác"
+                update_own:
+                  decription: "Cho phép nhân viên <b>cập nhật</b> nhiệm vụ riêng của họ"
+                update_other:
+                  decription: "Cho phép nhân viên <b>cập nhật</b> nhiệm vụ của người khác"
+                delete_own:
+                  decription: "Cho phép nhân viên <b>xóa</b> nhiệm vụ riêng của họ tự tạo ra"
+                delete_other:
+                  decription: "Cho phép nhân viên <b>xóa</b> nhiệm vụ của người khác được tạo ra"
+                update_progress_own:
+                  decription: "Cho phép nhân viên <b>cập nhật quá trình</b> nhiệm vụ riêng của họ"
+                update_progress_other:
+                  decription: "Cho phép nhân viên <b>cập nhật quá trình</b> nhiệm vụ của người khác"
+                finish_own:
+                  decription: "Cho phép nhân viên <b>hoàn thành</b> nhiệm vụ riêng của họ"
+                finish_other:
+                  decription: "Cho phép nhân viên <b>hoàn thành</b> nhiệm vụ của người khác"
+                unfinish_own:
+                  decription: "Cho phép nhân viên <b>hủy hoàn thành</b> nhiệm vụ riêng của họ"
+                unfinish_other:
+                  decription: "Cho phép nhân viên <b>hủy hoàn thành</b> nhiệm vụ của người khác"
+                close_own:
+                  decription: "Cho phép nhân viên <b>đóng</b> nhiệm vụ riêng của họ"
+                close_other:
+                  decription: "Cho phép nhân viên <b>đóng</b> nhiệm vụ của người khác"
+                reopen_own:
+                  decription: "Cho phép nhân viên <b>mở lại</b> nhiệm vụ riêng của họ"
+                reopen_other:
+                  decription: "Cho phép nhân viên <b>mở lại</b> nhiệm vụ của người khác"
+              
+              attachments:
+                creates: "Tạo"
+                read_owns: "Đọc riêng"
+                read_others: "Đọc khác"
+                update_owns: "Cập nhật riêng"
+                update_others: "cập nhật khác"
+                delete_owns: "Xóa riêng"
+                delete_others: "Xóa khác"
+                download_owns: "Tải riêng"
+                download_others: "Tải khác"
+                create:
+                  decription: "Cho phép nhân viên <b>tạo</b> và <b>tải lên</b> đính kèm mới"
+                read_own:
+                  decription: "Cho phép nhân viên <b>đọc/xem</b> tệp đính kèm của họ"
+                read_other:
+                  decription: "Cho phép nhân viên <b>đọc/xem</b> tệp đính kèm của người khác"
+                update_own:
+                  decription: "Cho phép nhân viên <b>cập nhật thông tin</b> hoặc <b>tải lên lại tệp</b> đính kèm của họ"
+                update_other:
+                  decription: "Cho phép nhân viên <b>cập nhật thông tin</b> hoặc <b>tải lên file</b> đính kèm của người khác"
+                delete_own:
+                  decription: "Cho phép nhân viên <b>xóa</b> các tệp đính kèm của riêng họ tạo ra"
+                delete_other:
+                  decription: "Cho phép nhân viên <b>xóa</b> đính kèm của người khác"
+                download_own:
+                  decription: "Cho phép nhân viên <b>tải xuống</b> đính kèm của họ"
+                download_other:
+                  decription: "Cho phép nhân viên <b>tải xuống</b> đính kèm của người khác"
+                  
+              logs:
+                reads: "Đọc"
+                downloads: "Tải xuống"
+                read:
+                  decription: "Cho phép nhân viên <b>xem các bản ghi</b> of của dự án/công việc/tệp đính kèm"
+                download:
+                  decription: "Cho phép nhân viên <b>tải xuống</b> tệp đính kèm của nhật ký"
+                  
+        authorization_permissions:
+          permissions_for: "Quyền cho"
+          see_all_policies: "Xem tất cả quyền hành"
+          
+        logs:
+          project_logs: "Nhật ký dự án"
+          home: "Home"
+          projects: "Dự án"
+          project: "Dự án"
+          logs: "Nhật ký"
+          select_from_date: "Chọn ngày bắt đầu"
+          select_to_date: "Chọn ngày kết thúc"
+          select_log_type: "Chọn loại nhật ký"
+          select_stage_name: "Chọn tên giai đoạn"
+          select_task_name: "Chọn tên công việc"
+          select_attachment_name: "Chọn tên tệp đính kèm"          
+          task: "Công việc"
+          attachment: "Đính kèm"
+          go: "Thực hiện"
+          sort_by: "Sắp xếp theo:"
+          date_time: "Ngày/Giờ:"
+          per_page: "Số dòng/trang:"
+          10: "10"
+          25: "25"
+          50: "50"
+          100: "100"
+          
+        logs_list:
+          date_time: "Ngày/Giờ"
+          content_of_changes: "Nội dung thay đổi"
+          remark: "Cam kết(chú thích)"
+          by: "Bởi"
+          attached_file: "Tệp đính kèm"
+        
+        comment_card:
+          discussion_note: "Thảo luận/Chú thích"
+          add_new_note: "Thêm chú thích mới"
+      
+      tasks:
+        new:
+          new_task: "Công việc mới"
+          details: "Chi tiết"
+        form:
+          stage: "Giai đoạn"
+          choose_a_stage: "Chọn giai đoạn"
+          task_description: "Mô tả công việc"
+          enter_the_task_description: "Điền mô tả công việc"
+          responsible_person: "Người phụ trách"
+          choose_an_employee: "Chọn một nhân viên"
+          workday: "Ngày làm việc"
+          hours: "Giờ"
+          enter_hours_worked: "Nhập giờ làm việc"
+          remark: "Cam kết(chú thích)"
+          enter_your_remark_here: "Nhập cam kết(chú thích) ở đây"
+          save: "Lưu"
+          cancel: "Hủy"
+        attachment_actions:
+          upload_new_attach_file: "Tải lên tệp đính kèm mới"
+          download_all: "Tải xuống tất cả"  
+          
+        attachments:
+          attachments: "Đính kèm"
+          tasks: "Công việc"
+          task: "Công việc"
+          attached_details: "Chi tiết đính kèm"
+          stage_name_task_description: "Tên giai đoạn/Mô tả công việc"
+          
+        attachments_list:
+          num: "Stt"
+          attached_file: "Tệp đính kèm"
+          size: "Kích cỡ"
+          upload_at: "Tải lên tại"
+          actions: "Thao tác"
+          upload_reupload: "Tải lên/Tải lại"
+          download: "Tải xuống"
+          logs_attached: "Nhật ký đính kèm"
+          remove: "Xóa"
+          no_attachment_upload: "Không có đính kèm được tải lên"
+          
+        close:
+          close_task: "Đóng công việc"
+          confirm_close: "Bạn có muốn đóng công việc?"
+          enter_your_remark_here: "Nhập cam kết/giải thích của bạn tại đây"
+          close_confirm: "Close confirm"
+           
+        edit:
+          edit_task: "Cập nhật công việc"
+          edit: "Cập nhật"
+          task: "Công việc"
+          create_task: "Tạo công việc mới"
+          details: "Chi tiết"
+          
+        finish:
+          finish_task: "Kết thúc công việc"
+          finish_confirm: "Bạn có muốn kết thúc công việc?"
+          enter_your_remark_here: "Nhập cam kết/giải thích của bạn tại đây"
+          finish_confirm: "Đóng xác nhận"
+          
+          
+        show:
+          task: "Công việc:"
+          projects: "Dự án"
+          task_details: "Chi tiết công việc"
+          finish: "Hoàn thành"
+          unfinish: "Chưa hoàn thành"
+          close: "Đóng"
+          reopen: "Mỏ lại"
+          update_info: "Cập nhật thông tin"
+          project_name: "Tên dự án:"
+          stage_name: "Tên giai đoạn:"
+          task_description: "Chi tiết công việc:"
+          start_date: "Ngày bắt đầu:"
+          end_date: "Ngày kết thúc:"
+          hours: "Giờ:"
+          responsible_person: "Người phụ trách:"
+          project_complete: "Quá trình (hoàn thành):"
+          status: "Trạng thái:"
+          created: "Đã tạo vào:"
+          added_by: "Thêm bởi"
+          last_updated: "Cập nhật lần cuối:"
+          attached_details: "Chi tiết đính kèm"
+          
+        unfinish:
+          unfinish_task: "Chưa hoàn thành công việc"
+          unfinish_task_confirm: "Bạn có muốn hủy hoàn thành nhiệm vụ này không?"
+          enter_your_remark_here: "Nhập cam kết(nhận xét) của bạn ở đây..."
+          unfinish_confirm: "Xác nhận chưa hoàn thành"
+          
+        update_progress:
+          progress_update: "Cập nhật quá trình"
+          progress: "Trượt để chỉ định tỷ lệ phần trăm cho tiến trình"
+          remark: "Ghi chú"
+          enter_your_remark_here: "Nhập cam kết(nhận xét) của bạn ở đây..."
+          update: "Cập nhật"
+          
     notification:
       project:
         created: "Tạo mới thông tin dự án: %{name}"
         updated: "Cập nhật thông tin dự án: %{name}"
-    
+      
     # Project Logs
     log:
       project:
