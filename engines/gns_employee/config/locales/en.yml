@@ -1,8 +1,4 @@
 en:
-
-  show_columns: "Show Columns"
-  sort_by: "Sort By"
-  per_page: "Per Page"
   gns_employee:
     notification:
       employee:

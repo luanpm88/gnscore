@@ -3,28 +3,28 @@
     <thead>
         <tr class="bg-info-700">
             <% if params["show_columns"].include?("code") %>
-                <th><%= t('.code') %></th>
+                <th class="text-nowrap"><%= t('.code') %></th>
             <% end %>
             <% if params["show_columns"].include?("name") %>
-                <th><%= t('.name') %></th>
+                <th class="text-nowrap"><%= t('.name') %></th>
             <% end %>
             <% if params["show_columns"].include?("customer") %>
-                <th><%= t('.customer') %></th>
+                <th class="text-nowrap"><%= t('.customer') %></th>
             <% end %>
             <% if params["show_columns"].include?("project_type") %>
-                <th><%= t('.type') %></th>
+                <th class="text-nowrap"><%= t('.type') %></th>
             <% end %>
             <% if params["show_columns"].include?("start_date") %>
-                <th><%= t('.start_date') %></th>
+                <th class="text-nowrap"><%= t('.start_date') %></th>
             <% end %>
             <% if params["show_columns"].include?("end_date") %>
-                <th><%= t('.end_date') %></th>
+                <th class="text-nowrap"><%= t('.end_date') %></th>
             <% end %>
             <% if params["show_columns"].include?("complete") %>
-                <th><%= t('.complete') %></th>
+                <th class="text-nowrap"><%= t('.complete') %></th>
             <% end %>
             <% if params["show_columns"].include?("status") %>
-                <th><%= t('.status') %></th>
+                <th class="text-nowrap"><%= t('.status') %></th>
             <% end %>
             <% if params["show_columns"].include?("created_at") %>
                 <th class="text-nowrap"><%= t('.create_at') %></th>
@@ -32,7 +32,7 @@
             <% if params["show_columns"].include?("updated_at") %>
                 <th class="text-nowrap"><%= t('.update_at') %></th>
             <% end %>
-            <th class="text-center"><%= t('.actions') %></th>
+            <th class="text-nowrap text-center"><%= t('.actions') %></th>
         </tr>
     </thead>
     <tbody>
@@ -157,7 +157,7 @@
                                     <a class="dropdown-item ajax datalist-g-link"
                                         href="<%= gns_project.backend_project_path(project) %>"
                                         data-method="DELETE"
-                                        data-confirm="<%= t('.active_confirm') %>"
+                                        data-confirm="<%= t('.delete_confirm') %>"
                                     >
                                         <i class="icon-bin"></i> <%= t('.delete') %>
                                     </a>

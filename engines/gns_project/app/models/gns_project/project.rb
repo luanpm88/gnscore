@@ -51,15 +51,16 @@ module GnsProject
     STATUS_NEW = 'new'
     STATUS_PENDING = 'pending'
     STATUS_IN_PROGRESS = 'in_progress'
+    STATUS_DONE = 'done'
     STATUS_FINISHED = 'finished'
     STATUS_CANCELED = 'canceled'
     
     # get business type options
     def self.get_priority_options()
       [
-        {text: 'High', value: self::PRIORITY_HIGHT},
-        {text: 'Normal', value: self::PRIORITY_NORMAL},
-        {text: 'Low', value: self::PRIORITY_LOW}
+        {text: I18n.t('high'), value: self::PRIORITY_HIGHT},
+        {text: I18n.t('normal'), value: self::PRIORITY_NORMAL},
+        {text: I18n.t('low'), value: self::PRIORITY_LOW}
       ]
     end
     
@@ -180,7 +181,7 @@ module GnsProject
     end
 		
 		def is_finished?
-      return status == GnsProject::Project::STATUS_FINISHED
+      return status == GnsProject::Project::STATUS_DONE
     end
 		
 		def is_canceled?

@@ -109,7 +109,7 @@
         </div>
         <% if !project.id.nil? %>
             <div class="form-group">
-                <label class="d-block"><%= t('.remark') %><span class="text-danger">*</span></label>
+                <label class="d-block"><%= t('.remark') %> <span class="text-danger">*</span></label>
                 <textarea rows="2" cols="5"
                     class="form-control font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:remark).present? %>"
                     placeholder="<%= t('.enter_remark') %>"
