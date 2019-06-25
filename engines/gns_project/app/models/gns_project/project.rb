@@ -160,7 +160,7 @@ module GnsProject
 		end
 		
 		def set_finished_for_status
-			update_attributes(status: GnsProject::Project::STATUS_FINISHED)
+			update_attributes(status: GnsProject::Project::STATUS_DONE)
 		end
 		
 		def set_canceled_for_status
