@@ -94,6 +94,7 @@ GnsProject::Engine.routes.draw do
             resources :templates do
                 collection do
                     post 'list'
+                    get 'select2'
                     get ':id/template_details', to: 'templates#template_details', as: 'template_details'
                 end
             end

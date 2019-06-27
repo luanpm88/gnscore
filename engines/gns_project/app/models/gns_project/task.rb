@@ -3,11 +3,11 @@ module GnsProject
     belongs_to :creator, class_name: 'GnsCore::User'
     belongs_to :stage, class_name: 'GnsProject::Stage'
     belongs_to :project, class_name: 'GnsProject::Project'
-    belongs_to :employee, class_name: 'GnsEmployee::Employee'
+    belongs_to :employee, class_name: 'GnsEmployee::Employee', optional: true
     has_many :attachments, dependent: :restrict_with_error
     
     validates :name, :start_date, :end_date,
-              :stage_id, :project_id, :employee_id,
+              :stage_id, :project_id,
               :presence => true
     
     # get creator
@@ -162,7 +162,7 @@ module GnsProject
     end
     
     # check start date vs end date
-    validate :check_start_date_vs_end_date
+    #validate :check_start_date_vs_end_date
     def check_start_date_vs_end_date
       if start_date.present?
         if start_date < project.start_date
@@ -200,6 +200,10 @@ module GnsProject
       end
       
       return query
+    end
+    
+    def self.assigned_all?
+      return self.all_tasks.where(employee_id: nil).empty?
     end
     
     def self.finished_of_all_rate

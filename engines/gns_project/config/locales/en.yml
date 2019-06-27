@@ -347,6 +347,8 @@ en:
           enter_remark: "Enter your remark here"
           save: "Save"
           cancel: "Cancel"
+          project_template: "Project template"
+          select_template: "Select template..."
           
         show:
           project_information: "Project Information"

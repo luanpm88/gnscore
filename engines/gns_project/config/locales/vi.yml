@@ -348,6 +348,8 @@ vi:
           enter_remark: "Nhập nội dung cam kết/lý do của bạn..."
           save: "Lưu"
           cancel: "Hủy"
+          project_template: "Dự án mẫu"
+          select_template: "Chọn dự án mẫu..."
         
         show:
           project_information: "Thông tin dự án"
