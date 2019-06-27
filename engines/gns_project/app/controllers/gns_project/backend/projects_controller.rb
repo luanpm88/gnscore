@@ -48,6 +48,11 @@ module GnsProject
         else
           @project.errors.add('date', "not be blank")
         end
+        
+        if params[:template_id].present?
+          @template = GnsProject::Template.find(params[:template_id])
+          @project.category = @template.category
+        end
   
         if @project.save
           # add log
@@ -55,6 +60,8 @@ module GnsProject
           
           # add notification
           current_user.add_notification("gns_project.notification.project.created", @project)
+          
+          @project.apply_template_details_to_tasks
           
           flash[:success] = 'Project was successfully created.'
           render json: {
@@ -424,7 +431,7 @@ module GnsProject
         # Only allow a trusted parameter "white list" through.
         def project_params
           params.fetch(:project, {}).permit(:code, :name, :category_id, :customer_id,
-                                            :start_date, :end_date, :priority, :manager_id)
+                                            :start_date, :end_date, :priority, :manager_id, :template_id)
         end
         def comment_params
           params.fetch(:comment, {}).permit(:message, :file, :project_id, :parent_id)

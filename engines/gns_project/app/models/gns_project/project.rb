@@ -7,6 +7,7 @@ module GnsProject
     has_many :tasks, class_name: 'GnsProject::Task', dependent: :restrict_with_error
     has_many :logs, class_name: 'GnsProject::Log'
     has_many :comments, class_name: "GnsProject::Comment"
+    belongs_to :template, class_name: 'GnsProject::Template', optional: true
     
     validates :code, uniqueness: true, presence: true
     validates :name, :priority, :start_date, :end_date,
@@ -26,6 +27,11 @@ module GnsProject
     # get category name
     def category_name
       category.present? ? category.name : ''
+    end
+    
+    # get template name
+    def template_name
+      template.present? ? template.name : ''
     end
     
     # get manager name
@@ -267,6 +273,24 @@ module GnsProject
     def check_start_date_vs_end_date
       if end_date.present? and start_date.present? and end_date < start_date
         errors.add(:end_date, :cannot_take_place_before)
+      end
+    end
+    
+    # apply template to project
+    def apply_template_details_to_tasks
+      if self.template.present?
+        self.template.template_details.each do |td|
+          task = self.tasks.new(
+            name: td.task_description,
+            stage_id: td.stage_id,
+            status: GnsProject::Task::STATUS_OPEN,
+            start_date: Time.now.beginning_of_day,
+            end_date: Time.now.end_of_day,
+            custom_order: td.custom_order,
+            creator_id: self.creator_id
+          )
+          task.save
+        end
       end
     end
   end

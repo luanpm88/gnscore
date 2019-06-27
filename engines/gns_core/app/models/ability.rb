@@ -310,7 +310,12 @@ class Ability
     end
     
     can :send_request, GnsProject::Project do |project|
-      (project.is_new? and project.tasks.count > 0) and
+      (
+        project.is_new? and
+        (
+          project.tasks.count > 0 and project.tasks.assigned_all?
+        )
+      ) and
       (
         (user.has_permission?('gns_project.projects.setpending_own') and project.creator == user) or
         (user.has_permission?('gns_project.projects.setpending_other') and project.creator != user)
@@ -357,8 +362,18 @@ class Ability
     can :update, GnsProject::Task do |task|
       (!task.project.is_finished?) and
       (
-        (user.has_project_permission?(task.project, 'gns_project.tasks.update_own') and task.employee == user.employee) or
-        (user.has_project_permission?(task.project, 'gns_project.tasks.update_other') and task.employee != user.employee)
+        (
+          user.has_project_permission?(task.project, 'gns_project.tasks.update_own') and
+          (
+            task.employee == user.employee or task.creator == user
+          )
+        ) or
+        (
+          user.has_project_permission?(task.project, 'gns_project.tasks.update_other') and
+          (
+            task.employee != user.employee or task.creator != user
+          )
+        )
       )
     end
     
