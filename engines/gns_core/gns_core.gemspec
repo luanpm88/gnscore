@@ -37,4 +37,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'carrierwave'
   spec.add_dependency 'mini_magick'
   spec.add_dependency 'rubyXL'
+  spec.add_dependency 'figaro'
+  spec.add_dependency 'delayed_job_active_record'
 end

@@ -1,5 +1,5 @@
 <% content_for :title do %>
-    Re-open Task - <%= @task.name %>
+    <%= t('.reopen_task') %> - <%= @task.name %>
 <% end %>
 
 <% content_for :page_script do %>
@@ -39,12 +39,12 @@
 <div class="card">
     <div class="card-body">
         <%= form_for '', url: gns_project.reopen_backend_tasks_path(id: @task.id), html: {multipart: false, class: 'reopen_task'} do |f| %>
-            <h5>Do you want to reopen this task?</h5>
+            <h5><%= t('.reopen_confirmation') %></h5>
             
             <div class="form-group">
                 <textarea rows="2" cols="5"
                     class="form-control <%= 'border-danger' if @task.errors.full_messages_for(:remark).present? %>"
-                    placeholder="Enter your remark here"
+                    placeholder="<%= t('.placeholder_remark') %>"
                     name="remark"
                 ></textarea>
                 <% if @task.errors.full_messages_for(:remark).present? %>
@@ -53,7 +53,7 @@
             </div>
             
             <div class="text-left">
-                <button type="submit" class="btn btn-primary">Re-open Confirm</button>
+                <button type="submit" class="btn btn-primary"><%= t('.submit') %></button>
             </div>
         <% end %>
     </div>

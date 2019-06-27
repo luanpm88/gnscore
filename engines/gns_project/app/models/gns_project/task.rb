@@ -10,6 +10,10 @@ module GnsProject
               :stage_id, :project_id, :employee_id,
               :presence => true
     
+    # get creator
+    def creator_name
+      creator.present? ? creator.name : ''
+    end
     # get stage name
     def stage_name
       stage.present? ? stage.name : ''
@@ -28,6 +32,15 @@ module GnsProject
     # get employee name
     def employee_name
       employee.present? ? employee.name : ''
+    end
+    
+    # get employee email
+    def employee_email
+      if employee.present?
+        employee.email.present? ? employee.email : ''
+      else
+        ''
+      end
     end
     
     # count attachments

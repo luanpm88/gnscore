@@ -372,8 +372,9 @@ module GnsProject
             
             # add log
             @project.log("gns_project.log.project.start_progress", current_user, remark)
-            #send_log_email(t('gns_project.log.project.start_progress.title').html_sàfe, 'gns_project.log.project.start_progress.email')
-            # ProjectMailJob.perform_later('log_email', t('gns_project.log.project.start_progress.title').html_sàfe, 'gns_project.log.project.start_progress.email')
+            
+            # send mail
+            GnsProject::ProjectEmailJob.perform_later(GnsProject::ProjectMailer::TYPE_PROJECT_STARTED, {project: @project})
             
             # add notification
             current_user.add_notification("gns_project.notification.project.start_progress", @project)

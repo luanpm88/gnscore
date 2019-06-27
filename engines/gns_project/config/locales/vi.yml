@@ -671,27 +671,6 @@ vi:
           logs_attached: "Nhật ký đính kèm"
           remove: "Xóa"
           no_attachment_upload: "Không có đính kèm được tải lên"
-          
-        close:
-          close_task: "Đóng công việc"
-          confirm_close: "Bạn có muốn đóng công việc?"
-          enter_your_remark_here: "Nhập cam kết/giải thích của bạn tại đây"
-          close_confirm: "Close confirm"
-           
-        edit:
-          edit_task: "Cập nhật công việc"
-          edit: "Cập nhật"
-          task: "Công việc"
-          create_task: "Tạo công việc mới"
-          details: "Chi tiết"
-          
-        finish:
-          finish_task: "Kết thúc công việc"
-          finish_confirm: "Bạn có muốn kết thúc công việc?"
-          enter_your_remark_here: "Nhập cam kết/giải thích của bạn tại đây"
-          finish_confirm: "Đóng xác nhận"
-          
-          
         show:
           task: "Công việc:"
           projects: "Dự án"
@@ -699,7 +678,7 @@ vi:
           finish: "Hoàn thành"
           unfinish: "Chưa hoàn thành"
           close: "Đóng"
-          reopen: "Mỏ lại"
+          reopen: "Mở lại"
           update_info: "Cập nhật thông tin"
           project_name: "Tên dự án:"
           stage_name: "Tên giai đoạn:"
@@ -714,19 +693,38 @@ vi:
           added_by: "Thêm bởi"
           last_updated: "Cập nhật lần cuối:"
           attached_details: "Chi tiết đính kèm"
-          
-        unfinish:
-          unfinish_task: "Chưa hoàn thành công việc"
-          unfinish_task_confirm: "Bạn có muốn hủy hoàn thành nhiệm vụ này không?"
-          enter_your_remark_here: "Nhập cam kết(nhận xét) của bạn ở đây..."
-          unfinish_confirm: "Xác nhận chưa hoàn thành"
-          
+        edit:
+          edit_task: "Cập nhật công việc"
+          edit: "Cập nhật"
+          task: "Công việc"
+          create_task: "Tạo công việc mới"
+          details: "Chi tiết"
         update_progress:
-          progress_update: "Cập nhật quá trình"
-          progress: "Trượt để chỉ định tỷ lệ phần trăm cho tiến trình"
-          remark: "Ghi chú"
-          enter_your_remark_here: "Nhập cam kết(nhận xét) của bạn ở đây..."
+          progress_update: "Cập nhật tiến độ thực hiện"
+          help_progress: "Trượt để đánh dấu tỷ lệ phần trăm cho tiến độ thực hiện"
+          remark: "Ghi chú/cam kết"
+          placeholder_remark: "Nhập ghi chú/cam kết của bạn ở đây..."
           update: "Cập nhật"
+        finish:
+          finish_task: "Xác nhận hoàn thành công việc"
+          finish_confirmation: "Bạn có chắc công việc đã hoàn thành?"
+          placeholder_remark: "Nhập ghi chú/cam kết của bạn tại đây"
+          submit: "Xác nhận"
+        unfinish:
+          unfinish_task: "Hoàn tác công việc đã hoàn thành"
+          unfinish_confirmation: "Công việc hiện đã hoàn thành. Bạn có chắc muốn hoàn tác không?"
+          placeholder_remark: "Nhập ghi chú/cam kết của bạn ở đây..."
+          submit: "Xác nhận"
+        close:
+          close_task: "Đóng công việc"
+          close_confirmation: "Bạn có chắc đang muốn đóng công việc này?"
+          placeholder_remark: "Nhập ghi chú/cam kết của bạn tại đây"
+          submit: "Xác nhận"
+        reopen:
+          reopen_task: "Mở lại công việc"
+          reopen_confirmation: "Bạn có chắc đang muốn mở lại công việc này?"
+          placeholder_remark: "Nhập ghi chú/cam kết của bạn tại đây"
+          submit: "Xác nhận"
           
     notification:
       project:

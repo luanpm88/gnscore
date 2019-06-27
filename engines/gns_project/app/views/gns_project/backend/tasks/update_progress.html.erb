@@ -45,14 +45,14 @@
                 <input type="text" class="form-control" id="ion-percentage"
                     name="progress"
                     value="<%= @task.progress %>">
-                <label class="d-block"><%= t('.progress') %></label>
+                <label class="d-block"><%= t('.help_progress') %></label>
             </div>
             
             <div class="form-group">
                 <label class="d-block"><%= t('.remark') %>  <span class="text-danger">*</span></label>
                 <textarea rows="2" cols="5"
                     class="form-control font-weight-semibold <%= 'border-danger' if @task.errors.full_messages_for(:remark).present? %>"
-                    placeholder="<%= t('.enter_your_remark_here') %>"
+                    placeholder="<%= t('.placeholder_remark') %>"
                     name="remark"
                 ></textarea>
                 <% if @task.errors.full_messages_for(:remark).present? %>
