@@ -670,25 +670,6 @@ en:
           logs_attached: "Logs attached"
           remove: "Remove"
           not_attachment_upload: "No attached upload"
-        
-        close:
-          close_task: "Close task"
-          confirm_close: "Do you want to close this task?"
-          enter_your_remark_here: "Enter your remark here"
-          close_confirm: "Confirm close"
-           
-        edit:
-          edit_task: "Edit task"
-          edit: "Edit"
-          task: "Task"
-          create_task: "Create task"
-          details: "Details"
-          
-        finish:
-          finish_task: "Finish task"
-          finish_confirm: "Do you want to finish this task?"
-          enter_your_remark_here: "Enter your remark here"
-          finish_confirm: "Finish confirm"
         show:
           task: "Task:"
           projects: "Projects"
@@ -696,7 +677,7 @@ en:
           finish: "Finish"
           unfinish: "Un-finish"
           close: "Close"
-          reopen: "Re_open"
+          reopen: "Re-open"
           update_info: "Update Info"
           project_name: "Projects Name:"
           stage_name: "Stage Name:"
@@ -711,18 +692,38 @@ en:
           added_by: "Added by"
           last_updated: "Last Updated:"
           attached_details: "Attached details"
-                   
-        unfinish:
-          unfinish_task: "Un-finish Task"
-          unfinish_task_confirm: "Do you want to un-finish this task?"
-          enter_your_remark_here: "Enter your remark here..."
-          unfinish_confirm: "Un-finish Confirm"
+        edit:
+          edit_task: "Edit task"
+          edit: "Edit"
+          task: "Task"
+          create_task: "Create task"
+          details: "Details"
         update_progress:
           progress_update: "Progress Update"
-          progress: "Slide to assign a percentage for progress"
+          help_progress: "Slide to assign a percentage for progress"
           remark: "Remark"
-          enter_your_remark_here: "Enter your remark here..."
+          placeholder_remark: "Enter your remark here..."
           update: "Update"
+        finish:
+          finish_task: "Finish task"
+          finish_confirmation: "Do you want to finish this task?"
+          placeholder_remark: "Enter your remark here"
+          submit: "Finish confirm"
+        unfinish:
+          unfinish_task: "Un-finish Task"
+          unfinish_confirmation: "Do you want to un-finish this task?"
+          placeholder_remark: "Enter your remark here..."
+          submit: "Un-finish Confirm"
+        close:
+          close_task: "Close task"
+          close_confirmation: "Do you want to close this task?"
+          placeholder_remark: "Enter your remark here"
+          submit: "Confirm close"
+        reopen:
+          reopen_task: "Re-open task"
+          reopen_confirmation: "Do you want to reopen this task?"
+          placeholder_remark: "Enter your remark here"
+          submit: "Re-open Confirm"
           
     notification:
       project:

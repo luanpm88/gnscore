@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title><%= @task.name %></title>
+    <style>
+        table {
+          border-collapse: collapse;
+        }
+        th {
+          background: #0071bc;
+          color: #ffffff;
+        }
+        
+        th, td {
+          border: 1px solid #66a9d6;
+          padding: 8px;
+        }
+        
+        tr:nth-child(odd) {
+          background: #efefef;
+        }
+        
+        tr:hover {
+          background: #d1d1d1;
+        }
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    Hi <%= @task.employee_name %>,
+    <p>
+      There is a task for the <%= @task.project_name %> (<%= @task.project_code %>) project that has been finished:
+    </p>
+    
+    <p>
+      Stage name: <%= @task.stage_name %><br>
+      Task description: <%= @task.name %><br>
+      Remark: <%= @remark %><br>
+      Finished: <%= @task.finished? ? 'Yes' : 'No' %><br>
+      Status: <%= t("#{@task.status}") %>
+    </p>
+    <p>
+      => See task details <a href="<%= @task_link %>">HERE</a>
+    </p>
+    <p>
+      ========================================================================<br>
+      <i>(*) This is an email sent automatically. Please do not reply to this email.</i>
+    </p>
+</body>
+</html>

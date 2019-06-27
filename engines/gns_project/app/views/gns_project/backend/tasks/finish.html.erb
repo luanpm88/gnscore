@@ -39,12 +39,12 @@
 <div class="card">
     <div class="card-body">
         <%= form_for '', url: gns_project.finish_backend_tasks_path(id: @task.id), html: {multipart: false, class: 'finish_task'} do |f| %>
-            <h5><%= t('.finish_confirm').html.safe %></h5>
+            <h5><%= t('.finish_confirmation') %></h5>
             
             <div class="form-group">
                 <textarea rows="2" cols="5"
                     class="form-control <%= 'border-danger' if @task.errors.full_messages_for(:remark).present? %>"
-                    placeholder="<%= t('.enter_your_remark_here') %>"
+                    placeholder="<%= t('.placeholder_remark') %>"
                     name="remark"
                 ></textarea>
                 <% if @task.errors.full_messages_for(:remark).present? %>
@@ -53,7 +53,7 @@
             </div>
             
             <div class="text-left">
-                <button type="submit" class="btn btn-primary"><%= t('.finish_confirm') %></button>
+                <button type="submit" class="btn btn-primary"><%= t('.submit') %></button>
             </div>
         <% end %>
     </div>

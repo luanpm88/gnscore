@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title><%= @project.code %></title>
+    <style>
+        table {
+          border-collapse: collapse;
+        }
+        th {
+          background: #0071bc;
+          color: #ffffff;
+        }
+        
+        th, td {
+          border: 1px solid #66a9d6;
+          padding: 8px;
+        }
+        
+        tr:nth-child(odd) {
+          background: #efefef;
+        }
+        
+        tr:hover {
+          background: #d1d1d1;
+        }
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    Hi <%= @name %>,
+    <p>You have been assigned for Project <%= @project.name %> (<%= @project.code %>) as following:</p>
+    
+    <table class="table">
+        <tr>
+            <th>STT</th>
+            <th>Mô tả công việc</th>
+            <th>Ngày bắt đầu</th>
+            <th>Ngày kết thúc</th>
+            <th>Người thực hiện</th>
+            <th>Người giao việc</th>
+        </tr>
+        <% @tasks.each_with_index do |task,index| %>
+            <tr>
+                <td class="text-center"><%= index + 1 %></td>
+                <td><%= task.name %></td>
+                <td class="text-center"><%= task.start_date.strftime('%d/%m/%Y') %></td>
+                <td class="text-center"><%= task.end_date.strftime('%d/%m/%Y') %></td>
+                <td><%= task.employee_name %></td>
+                <td><%= task.creator_name %></td>
+            </tr>
+        <% end %>
+    </table>
+    <p>
+      ========================================================================<br>
+      <i>(*) Đây là thư tự động. Vui lòng không trả lời thư này!</i>
+    </p>
+</body>
+</html>

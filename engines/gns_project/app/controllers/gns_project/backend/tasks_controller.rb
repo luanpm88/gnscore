@@ -12,6 +12,9 @@ module GnsProject
   
       # GET /tasks/1
       def show
+        logger.info '==============='
+        logger.info gns_project.backend_task_path(@task)
+        logger.info '==============='
       end
   
       # GET /tasks/new
@@ -147,7 +150,19 @@ module GnsProject
           
           if @task.errors.empty?
             @task.set_open
+            
+            # log
             @task.log("gns_project.log.task.reopen", current_user, remark)
+            
+            # send email
+            GnsProject::ProjectEmailJob.perform_later(
+              GnsProject::ProjectMailer::TYPE_TASK_REOPENED,
+              {
+                task: @task,
+                remark: remark,
+                task_link: ENV['web_root'] + gns_project.backend_task_path(@task)
+              }
+            )
             
             render json: {
               status: 'success',
@@ -170,7 +185,19 @@ module GnsProject
           
           if @task.errors.empty?
             @task.set_closed
+            
+            # log
             @task.log("gns_project.log.task.close", current_user, remark)
+            
+            # send email
+            GnsProject::ProjectEmailJob.perform_later(
+              GnsProject::ProjectMailer::TYPE_TASK_CLOSED,
+              {
+                task: @task,
+                remark: remark,
+                task_link: ENV['web_root'] + gns_project.backend_task_path(@task)
+              }
+            )
             
             render json: {
               status: 'success',
@@ -193,7 +220,19 @@ module GnsProject
           
           if @task.errors.empty?
             @task.finish
+            
+            # log
             @task.log("gns_project.log.task.finish", current_user, remark)
+            
+            # send email
+            GnsProject::ProjectEmailJob.perform_later(
+              GnsProject::ProjectMailer::TYPE_TASK_FINISHED,
+              {
+                task: @task,
+                remark: remark,
+                task_link: ENV['web_root'] + gns_project.backend_task_path(@task)
+              }
+            )
             
             render json: {
               status: 'success',
@@ -216,7 +255,19 @@ module GnsProject
           
           if @task.errors.empty?
             @task.unfinish
+            
+            # log
             @task.log("gns_project.log.task.unfinish", current_user, remark)
+            
+            # send email
+            GnsProject::ProjectEmailJob.perform_later(
+              GnsProject::ProjectMailer::TYPE_TASK_UNFINISHED,
+              {
+                task: @task,
+                remark: remark,
+                task_link: ENV['web_root'] + gns_project.backend_task_path(@task)
+              }
+            )
             
             render json: {
               status: 'success',
