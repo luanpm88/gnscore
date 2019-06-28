@@ -41,7 +41,7 @@ module GnsProject
       @task = options[:task]
       @remark = options[:remark]
       @task_link = options[:task_link]
-      send_email(@task.employee_email, "[Task Finished] #{@task.name} (Project code: #{@task.project_code})") if @task.employee_email.present?
+      send_email(@task.employee_email, "Task Finished - #{@task.name} (Project code: #{@task.project_code})") if @task.employee_email.present?
     end
     
     # task un-finished email notification
@@ -49,7 +49,7 @@ module GnsProject
       @task = options[:task]
       @remark = options[:remark]
       @task_link = options[:task_link]
-      send_email(@task.employee_email, "[Task Un-finished] #{@task.name} (Project code: #{@task.project_code})") if @task.employee_email.present?
+      send_email(@task.employee_email, "Task Un-finished - #{@task.name} (Project code: #{@task.project_code})") if @task.employee_email.present?
     end
     
     # task closed email notification
@@ -57,7 +57,7 @@ module GnsProject
       @task = options[:task]
       @remark = options[:remark]
       @task_link = options[:task_link]
-      send_email(@task.employee_email, "[Task Closed] #{@task.name} (Project code: #{@task.project_code})") if @task.employee_email.present?
+      send_email(@task.employee_email, "Task Closed - #{@task.name} (Project code: #{@task.project_code})") if @task.employee_email.present?
     end
     
     # task reopen email notification
@@ -65,7 +65,7 @@ module GnsProject
       @task = options[:task]
       @remark = options[:remark]
       @task_link = options[:task_link]
-      send_email(@task.employee_email, "[Task Re-opened] #{@task.name} (Project code: #{@task.project_code})") if @task.employee_email.present?
+      send_email(@task.employee_email, "Task Re-opened - #{@task.name} (Project code: #{@task.project_code})") if @task.employee_email.present?
     end
     
   end
