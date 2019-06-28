@@ -105,7 +105,7 @@
                         <% if can? :start_project, @project %>
                             <a href="<%= gns_project.start_progress_backend_projects_path(id: @project) %>"
                                class="dropdown-item start-progress-project-button"
-                            > <%= t('.start_progress') %>/a>
+                            > <%= t('.start_progress') %></a>
                         <% end %>
                         
                         <% if can? :finish, @project %>
