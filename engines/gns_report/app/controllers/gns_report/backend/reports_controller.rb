@@ -1,62 +1,51 @@
 module GnsReport
   module Backend
     class ReportsController < GnsCore::Backend::BackendController
-      before_action :set_report, only: [:show, :edit, :update, :destroy]
-  
-      # GET /reports
-      def index
-        @reports = Report.all
+      
+      def project_report
       end
-  
-      # GET /reports/1
-      def show
-      end
-  
-      # GET /reports/new
-      def new
-        @report = Report.new
-      end
-  
-      # GET /reports/1/edit
-      def edit
-      end
-  
-      # POST /reports
-      def create
-        @report = Report.new(report_params)
-  
-        if @report.save
-          redirect_to @report, notice: 'Report was successfully created.'
-        else
-          render :new
+      
+      def project_report_data
+        @customer = GnsContact::Contact.find(params[:customer_id]) if params[:customer_id].present?
+        @projects = GnsProject::Project.search(params)
+        
+        File.open("tmp/project_report_xlsx.yml", "w+") do |f|
+          f.write({
+            projects: @projects
+          }.to_yaml)
         end
+        
+        render layout: nil
       end
-  
-      # PATCH/PUT /reports/1
-      def update
-        if @report.update(report_params)
-          redirect_to @report, notice: 'Report was successfully updated.'
-        else
-          render :edit
+      
+      def project_report_xlsx
+        data = YAML.load_file("tmp/project_report_xlsx.yml")
+        @projects = data[:projects]
+        
+        workbook = RubyXL::Parser.parse('templates/project_export_template.xlsx')
+        worksheet = workbook[0]
+        
+        # Records
+        sum = 0
+        row_num = 4
+        @projects.each do |project|
+          diff_date = (project.end_date.to_date - project.start_date.to_date).to_i + 1
+          worksheet.insert_row(4)
+          worksheet[4][0].change_contents(project.code)
+          worksheet[4][1].change_contents(project.name)
+          worksheet[4][2].change_contents(diff_date)
+          row_num += 1
+          sum += diff_date
         end
+        worksheet[row_num][2].change_contents(sum)
+        worksheet.delete_row(3)
+        
+        send_data workbook.stream.string,
+          filename: "number-of-projects.xlsx",
+          disposition: 'attachment'
       end
-  
-      # DELETE /reports/1
-      def destroy
-        @report.destroy
-        redirect_to reports_url, notice: 'Report was successfully destroyed.'
-      end
-  
-      private
-        # Use callbacks to share common setup or constraints between actions.
-        def set_report
-          @report = Report.find(params[:id])
-        end
-  
-        # Only allow a trusted parameter "white list" through.
-        def report_params
-          params.fetch(:report, {})
-        end
+      
+      
     end
   end
 end

@@ -5,6 +5,10 @@ GnsReport::Engine.routes.draw do
                 collection do
                     get 'employees_schedule'
                     get 'gantt_chart'
+                    
+                    get 'project_report'
+                    post 'project_report_data'
+                    get 'project_report_xlsx'
                 end
             end
         end

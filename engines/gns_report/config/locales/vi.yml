@@ -1,0 +1,8 @@
+vi:
+  gns_report:
+    backend:
+      reports:
+        project_report:
+          project_report: "Báo cáo số lượng dự án"
+          filter_by_customer: "Tìm theo khách hàng"
+          filter_by_status: "Tìm theo trạng thái dự án"

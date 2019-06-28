@@ -1,0 +1,8 @@
+en:
+  gns_report:
+    backend:
+      reports:
+        project_report:
+          project_report: "Project Report"
+          filter_by_customer: "Filter by customer"
+          filter_by_status: "Filter by status"
