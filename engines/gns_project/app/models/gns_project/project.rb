@@ -293,5 +293,37 @@ module GnsProject
         end
       end
     end
+    
+    # get start date
+    def get_start_date
+      task = self.tasks.min_by(&:start_date)
+      if task.present?
+        return task.start_date
+      else
+        return nil
+      end
+    end
+    
+    # get end date
+    def get_end_date
+      task = self.tasks.max_by(&:end_date)
+      if task.present?
+        return task.end_date
+      else
+        return nil
+      end
+    end
+    
+    def number_of_days
+      if self.get_end_date.present? and self.get_start_date.present?
+        (self.get_end_date.to_date - self.get_start_date.to_date).to_i + 1
+      else
+        return 0
+      end
+    end
+    
+    def self.number_of_days
+      sum(&:number_of_days)
+    end
   end
 end

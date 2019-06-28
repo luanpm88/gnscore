@@ -1,0 +1,54 @@
+<% if params[:customer_id].present? %>
+    <% if @projects.empty? %>
+        <div class="card-body">
+            <div class="alert alert-warning border-0 alert-dismissible text-center">
+                <span class="font-weight-semibold">No results found for matching filter values.
+            </div>
+        </div>
+    <% else %>
+        <div class="card-header header-elements-inline">
+            <h1>
+                <%= @customer.full_name %>'s Project
+            </h1>
+            <a href="<%= gns_report.project_report_xlsx_backend_reports_path %>"
+                target="_blank"
+                class="btn btn-light mb-2 mr-2"
+            >Xuất excel</a>
+        </div>
+        
+        <table class="table table-hover">
+            <thead>
+                <tr class="bg-info-700">
+                    <th class="text-nowrap"><%= t('.project_code') %>
+                    <th class="text-nowrap"><%= t('.project_name') %></th>
+                    <th class="text-nowrap text-center"><%= t('.number_of_days') %></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @projects.each do |project| %>
+                    <tr>
+                        <td>
+                            <%= project.code %>
+                        </td>
+                        <td><%= project.name %></td>
+                        <td class="text-center"><%= project.number_of_days %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+            <tfoot>
+                <tr class="bg-info-700 font-weight-semibold">
+                    <td colspan="2">
+                        Total days
+                    </td>
+                    <td class="text-center"><%= @projects.number_of_days %></td>
+                </tr>
+            </tfoot>
+        </table>
+    <% end %>
+<% else %>
+    <div class="card-body">
+        <div class="alert alert-warning border-0 alert-dismissible text-center">
+            <span class="font-weight-semibold">Not found!</span> Please select a customer to filter the report.
+        </div>
+    </div>
+<% end %>
