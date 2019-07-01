@@ -23,6 +23,13 @@ module GnsArea
         query = query.where('LOWER(gns_area_districts.cache_search) LIKE ?', '%'+params[:q].to_ascii.downcase.strip+'%')
       end
       
+      # country
+      if params[:country_id].present?
+        country = GnsArea::Country.find(params[:country_id])
+        state_ids = country.states.map(&:id)
+        query = query.where(state_id: state_ids)
+      end
+      
       # state
       if params[:state_id].present?
         query = query.where(state_id: params[:state_id])

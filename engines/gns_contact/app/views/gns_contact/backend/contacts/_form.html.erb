@@ -195,10 +195,10 @@
                     </div>
                     
                     <div class="form-group">
-                        <label class="d-block"><%= t('.belongsto_parent') %></label>
+                        <label class="d-block"><%= t('.belongs_to_parent') %></label>
                         <select class="form-control select-ajax"
                             data-container-css-class="font-weight-semibold"
-                            data-placeholder="<%= t('.placeholder_belongsto_parent') %>"
+                            data-placeholder="<%= t('.placeholder_belongs_to_parent') %>"
                             data-url="<%= gns_contact.select2_backend_contacts_path(current_contact_id: contact.id) %>"
                             name="contact[parent_ids][]"
                         >
@@ -292,6 +292,7 @@
                                 q: params.term,
                                 page: params.page,
                                 type: 'public',
+                                state_id: $('select[name="contact[country_id]"]').select2('val'),
                                 state_id: $('select[name="contact[state_id]"]').select2('val')
                             }
                       
