@@ -13,7 +13,41 @@
 
 <% content_for :page_script do %>
     <script>
-        
+        $(function() {
+            $('input[name="from_date"]').daterangepicker({
+                singleDatePicker: true,
+                autoUpdateInput: false,
+                showDropdowns: true,
+                locale: {
+                    format: "DD/MM/YYYY"
+                }
+            }, function(start, end, label) {                            
+                $('input[name="from_date"]').on('hideCalendar.daterangepicker', function(e) {
+                  $('input[name="from_date"]').val('');
+                });
+                
+                $('input[name="from_date"]').on('showCalendar.daterangepicker', function(e) {
+                      $('input[name="from_date"]').val(start.format('DD/MM/YYYY'));
+                });
+            });
+            
+            $('input[name="to_date"]').daterangepicker({
+                singleDatePicker: true,
+                autoUpdateInput: false,
+                showDropdowns: true,
+                locale: {
+                    format: "DD/MM/YYYY"
+                }
+            }, function(start, end, label) {                            
+                $('input[name="to_date"]').on('hideCalendar.daterangepicker', function(e) {
+                  $('input[name="to_date"]').val('');
+                });
+                
+                $('input[name="to_date"]').on('showCalendar.daterangepicker', function(e) {
+                      $('input[name="to_date"]').val(start.format('DD/MM/YYYY'));
+                });
+            });
+        });
     </script>
 <% end %>
 
@@ -34,6 +68,28 @@
         <div class="card-body pb-0">
             <div class="row">
                 <div class="col-md-3">
+                    <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-calendar22"></i></span>
+                        </span>
+                        <input type="text" class="form-control font-weight-semibold"
+                            placeholder="<%= t('.filter_by_from_date') %>"
+                            value="<%= Time.now.beginning_of_month.strftime('%d/%m/%Y') %>"
+                            name="from_date">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-calendar22"></i></span>
+                        </span>
+                        <input type="text" class="form-control font-weight-semibold"
+                            placeholder="<%= t('.filter_by_to_date') %>"
+                            value="<%= Time.now.end_of_month.strftime('%d/%m/%Y') %>"
+                            name="to_date">
+                    </div>
+                </div>
+                <div class="col-md-3">
                     <div class="form-group">
                         <select name="customer_id" data-placeholder="<%= t('.filter_by_customer') %>"
                           class="form-control select-ajax"
@@ -41,10 +97,9 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <select class="form-control selectAllowClear"
                         data-placeholder="<%= t('.filter_by_status') %>"
-                        data-fouc   
                         name="status">
                         <option></option>
                         <option value="<%= GnsProject::Project::STATUS_NEW %>"><%= t('.new') %></option>
@@ -53,7 +108,7 @@
                         <option selected value="<%= GnsProject::Project::STATUS_FINISHED %>"><%= t('.finished') %></option>
                     </select>
                 </div>
-                <div class="col-md-3 text-right">
+                <div class="col-md-1 text-right">
                     <span class="btn btn-primary mb-3 datalist-search-button"><%= t('go') %></span>
                 </div>
             </div>

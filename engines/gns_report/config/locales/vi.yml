@@ -1,8 +1,38 @@
 vi:
+  export_to_excel: "Xuất Excel"
   gns_report:
     backend:
       reports:
         project_report:
           project_report: "Báo cáo số lượng dự án"
-          filter_by_customer: "Tìm theo khách hàng"
-          filter_by_status: "Tìm theo trạng thái dự án"
+          filter_by_customer: "Lọc theo khách hàng"
+          filter_by_status: "Lọc theo trạng thái dự án"
+          filter_by_from_date: "Lọc theo ngày bắt đầu"
+          filter_by_to_date: "Lọc theo ngày kết thúc"
+          new: "Mới/Đang lên kế hoạch"
+          pending: "Chờ phê duyệt"
+          inprogress: "Đang thực hiện"
+          finished: "Hoàn thành"
+        project_report_data:
+          title: "Báo cáo dự án của khách hàng: %{name}"
+          must_select_filter: "Vui lòng chọn khách hàng để lọc báo cáo"
+          no_results_found: "Không tìm thấy kết quả nào phù hợp"
+          project_code: "Mã dự án"
+          project_name: "Tên dự án"
+          number_of_days: "Số ngày thực hiện"
+          total_days: "Tổng số ngày thực hiện"
+        employee_report:
+          employee_report: "Báo cáo nhân viên tham gia dự án"
+          filter_by_employee: "Lọc theo nhân viên"
+          filter_by_from_date: "Lọc theo ngày bắt đầu"
+          filter_by_to_date: "Lọc theo ngày kết thúc"
+        employee_report_data:
+          title: "Báo cáo nhân viên tham gia dự án"
+          must_select_filter: "Vui lòng chọn nhân viên để lọc báo cáo"
+          no_results_found: "Không tìm thấy kết quả nào phù hợp"
+          cardinal: "STT"
+          project_name: "Tên dự án"
+          time_joined: "Thời gian tham gia (ngày)"
+          total: "Tổng cộng"
+          projects: "dự án"
+          days: "ngày"

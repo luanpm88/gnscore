@@ -1,4 +1,5 @@
 en:
+  export_to_excel: "Export to Excel"
   gns_report:
     backend:
       reports:
@@ -6,3 +7,32 @@ en:
           project_report: "Project Report"
           filter_by_customer: "Filter by customer"
           filter_by_status: "Filter by status"
+          filter_by_from_date: "Filter by from date"
+          filter_by_to_date: "Filter by to date"
+          new: "New"
+          pending: "Pending"
+          inprogress: "In progress"
+          finished: "Done"
+        project_report_data:
+          title: "Report of customer projects: %{name}"
+          must_select_filter: "Not found! Please select a customer to filter the report"
+          no_results_found: "No results found for matching filter values"
+          project_code: "Project code"
+          project_name: "Project name"
+          number_of_days: "Number of days"
+          total_days: "Total days"
+        employee_report:
+          employee_report: "Employee Report"
+          filter_by_employee: "Filter by employee"
+          filter_by_from_date: "Filter by from date"
+          filter_by_to_date: "Filter by to date"
+        employee_report_data:
+          title: "Situation of participation in the project"
+          must_select_filter: "Not found! Please select an employee to filter the report"
+          no_results_found: "No results found for matching filter values"
+          cardinal: "No."
+          project_name: "Project name"
+          time_joined: "Time joined"
+          total: "Total"
+          projects: "projects"
+          days: "days"
