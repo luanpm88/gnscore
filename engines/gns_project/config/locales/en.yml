@@ -20,7 +20,7 @@ en:
           type: "Type"
           create_type: "Create Type"
           project_type_list: "Project type list"
-          go: "Go"
+          filter_by_status: "Filter by status"
           type_to_filter: "Type to filter"
           sort_by: "Sort by"
           name: "name"

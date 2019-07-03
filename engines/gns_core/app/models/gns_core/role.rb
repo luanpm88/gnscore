@@ -1,5 +1,7 @@
 module GnsCore
   class Role < ApplicationRecord
+    validates :name, presence: true
+    
     #has_many :users_roles, class_name: 'GnsCore::UsersRole', dependent: :restrict_with_error
     belongs_to :creator, class_name: 'GnsCore::User'
     has_and_belongs_to_many :users, class_name: 'GnsCore::User'

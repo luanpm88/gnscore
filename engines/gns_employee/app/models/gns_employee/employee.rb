@@ -2,6 +2,7 @@ module GnsEmployee
   class Employee < ApplicationRecord
     validates :name, presence: true
     validate :must_have_code
+    validates_format_of :email, :allow_blank => true, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, :message => " is invalid"
     
     belongs_to :creator, class_name: 'GnsCore::User'
     has_one :user, class_name: 'GnsCore::User', dependent: :restrict_with_error
@@ -62,8 +63,8 @@ module GnsEmployee
     # get business type options
     def self.get_labor_contract_type_options()
       [
-        {text: 'Seasonal Contract', value: self::LABOR_CONTRACT_TYPE_SEASONAL},
-        {text: 'Formal  Contract', value: self::LABOR_CONTRACT_TYPE_FORMAL}
+        {text: I18n.t('seasonal'), value: self::LABOR_CONTRACT_TYPE_SEASONAL},
+        {text: I18n.t('formal'), value: self::LABOR_CONTRACT_TYPE_FORMAL}
       ]
     end
     

@@ -2,6 +2,7 @@ module GnsContact
   class Contact < ApplicationRecord
     #validates :code, uniqueness: true, presence: true#, allow_blank: true
     validates :full_name, :contact_type, presence: true
+    validates_format_of :email, :allow_blank => true, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, :message => " is invalid"
     
     belongs_to :creator, class_name: 'GnsCore::User'
     belongs_to :country, class_name: 'GnsArea::Country', optional: true

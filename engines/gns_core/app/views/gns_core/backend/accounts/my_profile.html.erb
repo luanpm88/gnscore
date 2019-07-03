@@ -65,7 +65,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <label><%= t('.labor_contract_type') %></label>
-                                    <input type="text" readonly="readonly" value="<%= t(".#{@profile.labor_contract_type}") if @profile.labor_contract_type.present? %>" class="form-control font-weight-semibold">
+                                    <input type="text" readonly="readonly" value="<%= t("#{@profile.labor_contract_type}") if @profile.labor_contract_type.present? %>" class="form-control font-weight-semibold">
                                 </div>
                                 <div class="col-md-6">
                                     <label><%= t('.starting_date') %></label>
