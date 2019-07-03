@@ -171,7 +171,7 @@
                                     gns_report/backend/reports/gantt_chart
                                 "
                             >
-                                Employee's tasks (gantt chart)
+                                <%= t(".gantt_chart") %>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -180,16 +180,16 @@
                                     gns_report/backend/reports/project_report
                                 "
                             >
-                                Customer Projects
+                                <%= t(".project_report") %>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link disabled"
+                            <a href="<%= gns_report.employee_report_backend_reports_path %>" class="nav-link"
                                 data-menu="
-                                    
+                                    gns_report/backend/reports/employee_report
                                 "
                             >
-                                Employee Report
+                                <%= t(".employee_report") %>
                             </a>
                         </li>
                     </ul>
