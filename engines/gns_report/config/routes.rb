@@ -9,6 +9,10 @@ GnsReport::Engine.routes.draw do
                     get 'project_report'
                     post 'project_report_data'
                     get 'project_report_xlsx'
+                    
+                    get 'employee_report'
+                    post 'employee_report_data'
+                    get 'employee_report_xlsx'
                 end
             end
         end

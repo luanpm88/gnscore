@@ -90,11 +90,14 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label class="d-block"><%= t(".email") %></label>
-                        <input type="text" class="form-control font-weight-semibold"
+                        <input type="text" class="form-control font-weight-semibold <%= 'border-danger' if employee.errors.full_messages_for(:email).present? %>"
                             placeholder="<%= t(".placeholder_email") %>"
                             name="employee[email]"
                             value="<%= employee.email %>"
                         >
+                        <% if employee.errors.full_messages_for(:email).present? %>
+                            <span class="form-text text-danger"><%= employee.errors.full_messages_for(:email).join('<br/>').html_safe %></span>
+                        <% end %>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,12 @@
 vi:
+  save: "Lưu"
+  cancel: "Hủy"
+  active: "Đang kích hoạt"
+  inactive: "Không kích hoạt"
+  male: "Nam"
+  female: "Nữ"
+  from: "Từ"
+  to: "Đến"
   layouts:
     gns_core:
       backend:

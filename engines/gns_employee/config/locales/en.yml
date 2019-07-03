@@ -1,4 +1,6 @@
 en:
+  seasonal: "Seasonal Contract"
+  formal: "Formal Contract"
   gns_employee:
     notification:
       employee:

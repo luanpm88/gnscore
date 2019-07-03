@@ -5,6 +5,8 @@ en:
   inactive: "Inactive"
   male: "Male"
   female: "Female"
+  from: "From"
+  to: "To"
   layouts:
     gns_core:
       backend:

@@ -3,8 +3,8 @@ vi:
     backend:
       categories:
         form:
-          name: "Tên"
-          enter_name: "Nhập tên"
+          name: "Tên loại"
+          enter_name: "Nhập tên của loại dự án"
           description: "Mô tả"
           enter_description: "Nhập mô tả"
         edit:
@@ -19,12 +19,9 @@ vi:
           type: "Loại"
           create_type: "Tạo loại"
           project_type_list: "Danh sách loại dự án"
-          go: "Thực hiện"
-          type_to_filter: "Nhập để lọc"
-          sort_by: "Sắp xếp theo"
-          name: "Tên dự án"
+          filter_by_status: "Lọc theo trạng thái"
+          name: "Tên loại"
           created_at: "Thời gian tạo"
-          per_page: "Số dự án/1 trang"
         list:
           type_name: "Loại dự án"
           description: "Mô tả"
@@ -34,9 +31,9 @@ vi:
           actions: "Thao tác"
           view_details: "Xem chi tiết"
           update_info: "Cập nhật thông tin"
-          activate: "Hoạt động"
-          de_activate: "Không hoạt động"
-          delete: "Xóa"
+          activate: "Kích hoạt"
+          de_activate: "Ngưng kích hoạt"
+          delete: "Xóa loại"
           activate_confirm: "Bạn sắp kích hoạt một danh mục"
           deactivate_confirm: "Bạn sắp hủy kích hoạt một danh mục"
           delete_confirm: "Bạn xóa danh mục"
@@ -128,7 +125,7 @@ vi:
             deselect_all: "Bỏ chọn tất cả"
             create_upload: "Tạo/Tải lên"
             allow_users_to: "Cho phép người dùng"
-            create: "tạo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              "
+            create: "tạo"
             and: "và"
             upload: "tải lên"
             new_attachment: "tệp đính kèm mới"

@@ -1,4 +1,6 @@
 vi:
+  seasonal: "Thời vụ/không chính thức"
+  formal: "Hợp đồng chính thức"
   gns_employee:
     notification:
       employee:

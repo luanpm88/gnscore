@@ -1,0 +1,58 @@
+<% if params[:employee_id].present? %>
+    <% if @projects.empty? %>
+        <div class="card-body">
+            <div class="alert alert-warning border-0 alert-dismissible text-center">
+                <%= t('.no_results_found') %>
+            </div>
+        </div>
+    <% else %>
+        <div class="card-header header-elements-inline">
+            <h1>
+                <%= t('.title') %>: <%= @employee.name %>
+            </h1>
+            <a href="<%= gns_report.employee_report_xlsx_backend_reports_path %>"
+                target="_blank"
+                class="btn btn-light mb-2 mr-2"
+            ><%= t('export_to_excel') %></a>
+        </div>
+        
+        <div class="card-body pb-0">
+            <h5 class="font-weight-semibold"><%= t('from') %> <%= @from_date.strftime('%d/%m/%Y') %> <%= t('to') %> <%= @to_date.strftime('%d/%m/%Y') %></h5>
+        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr class="bg-info-700">
+                    <th class="text-nowrap"><%= t('.cardinal') %></th>
+                    <th class="text-nowrap"><%= t('.project_name') %></th>
+                    <th class="text-nowrap text-center"><%= t('.time_joined') %></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @projects.each_with_index do |project,index| %>
+                    <tr>
+                        <td>
+                            <%= index + 1 %>
+                        </td>
+                        <td><%= project.name %></td>
+                        <td class="text-center"><%= project.number_of_days(employee_id: @employee.id) %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+            <tfoot>
+                <tr class="bg-info-700 font-weight-semibold">
+                    <td>
+                        <%= t('.total') %>
+                    </td>
+                    <td><%= @projects.count %> (<%= t('.projects') %>)</td>
+                    <td class="text-center"><%= @projects.number_of_days(employee_id: @employee.id) %> (<%= t('.days') %>)</td>
+                </tr>
+            </tfoot>
+        </table>
+    <% end %>
+<% else %>
+    <div class="card-body">
+        <div class="alert alert-warning border-0 alert-dismissible text-center">
+            <%= t('.must_select_filter') %>
+        </div>
+    </div>
+<% end %>

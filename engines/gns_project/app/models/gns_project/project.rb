@@ -295,8 +295,15 @@ module GnsProject
     end
     
     # get start date
-    def get_start_date
-      task = self.tasks.min_by(&:start_date)
+    def get_start_date(options={})
+      tasks = self.tasks
+      
+      if options[:employee_id].present?
+        tasks = tasks.where(employee_id: options[:employee_id])
+      end
+      
+      task = tasks.min_by(&:start_date)
+      
       if task.present?
         return task.start_date
       else
@@ -305,8 +312,15 @@ module GnsProject
     end
     
     # get end date
-    def get_end_date
-      task = self.tasks.max_by(&:end_date)
+    def get_end_date(options={})
+      tasks = self.tasks
+      
+      if options[:employee_id].present?
+        tasks = tasks.where(employee_id: options[:employee_id])
+      end
+      
+      task = tasks.max_by(&:end_date)
+      
       if task.present?
         return task.end_date
       else
@@ -314,16 +328,19 @@ module GnsProject
       end
     end
     
-    def number_of_days
-      if self.get_end_date.present? and self.get_start_date.present?
-        (self.get_end_date.to_date - self.get_start_date.to_date).to_i + 1
+    def number_of_days(options={})
+      start_date = self.get_start_date(options)
+      end_date = self.get_end_date(options)
+      
+      if end_date.present? and start_date.present?
+        (end_date.to_date - start_date.to_date).to_i + 1
       else
         return 0
       end
     end
     
-    def self.number_of_days
-      sum(&:number_of_days)
+    def self.number_of_days(options={})
+      sum { |p| p.number_of_days(options) }
     end
   end
 end
