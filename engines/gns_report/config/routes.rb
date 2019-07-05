@@ -4,7 +4,9 @@ GnsReport::Engine.routes.draw do
             resources :reports do
                 collection do
                     get 'employees_schedule'
+                    
                     get 'gantt_chart'
+                    post 'gantt_chart_data'
                     
                     get 'project_report'
                     post 'project_report_data'

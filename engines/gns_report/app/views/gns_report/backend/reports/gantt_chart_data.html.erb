@@ -1,0 +1,35 @@
+<% if params[:chart_type].present? %>
+    <div class="gantt">
+        <div class="gantt__chart_type_<%= params[:chart_type] %>">
+            <div class="gantt__row gantt__row--header" <%= "style=\"grid-template-columns: 150px repeat(#{@data.first[1..-1].count}, 1fr);\"".html_safe if params[:chart_type] == 'month' %>>
+                <div class="gantt__row-first"></div>
+                <% @data.first[1..-1].each do |header| %>
+                    <span><%= header[:label] %></span>
+                <% end %>
+            </div>
+            <div class="gantt__row gantt__row--lines" <%= "style=\"grid-template-columns: 150px repeat(#{@data.first[1..-1].count}, 1fr);\"".html_safe if params[:chart_type] == 'month' %>>
+                <% @data.first[1..-1].each do |header| %>
+                    <span></span>
+                <% end %>
+            </div>
+            <% @data[1..-1].each do |row| %>
+                <div class="gantt__row <%= 'gantt__row--empty' if row[1..-1].empty? %>">
+                    <div class="gantt__row-first">
+                        <%= row[0] %>
+                    </div>
+                    <ul class="gantt__row-bars" <%= "style=\"grid-template-columns: repeat(#{@data.first[1..-1].count}, 1fr);\"".html_safe if params[:chart_type] == 'month' %>>
+                        <% row[1..-1].each do |item| %>
+                            <li style="grid-column: <%= item[:size] %>; background-color: <%= item[:color] %>;" title="<%= item[:name] %>"><%= item[:label] %></li>
+                        <% end %>
+                    </ul>
+                </div>
+            <% end %>
+        </div>
+    </div>
+<% else %>
+    <div class="card-body">
+        <div class="alert alert-warning border-0 alert-dismissible text-center">
+            <%= t('.must_select_filter') %>
+        </div>
+    </div>
+<% end %>

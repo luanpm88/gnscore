@@ -1,24 +1,48 @@
 <% content_for :title do %>
-    Gantt chart work
+    <%= t('.gantt_chart') %>
 <% end %>
 
 <% content_for :breadcrumb do %>
-    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-    <span class="breadcrumb-item">Report</span>
-    <span class="breadcrumb-item active">Gantt chart work</span>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> <%= t('home') %></a>
+    <span class="breadcrumb-item active"><%= t('.gantt_chart') %></span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class=""></i> <span class="font-weight-semibold">Gantt chart work</span></h4>
+    <h4><i class=""></i> <span class="font-weight-semibold"><%= t('.gantt_chart') %></span></h4>
 <% end %>
 
 <% content_for :page_stylesheets do %>
 <%= stylesheet_link_tag "/gns_ux/assets/backend/css/gantt-chart.css" %>
 <% end %>
 
-<div class="card">
+<% content_for :page_script do %>
+    <script>
+        $(function() {
+            var anchor = 0;
+            $('input[name="anchor"]').val(anchor);
+            
+            $('.datalist-prev-button').click(function(){
+                anchor --;
+    
+                $('input[name="anchor"]').val(anchor);
+                $('.datalist-search-button').click();
+            });
+            
+            $('.datalist-next-button').click(function(){
+                anchor ++;
+    
+                $('input[name="anchor"]').val(anchor);
+                $('.datalist-search-button').click();
+            });
+        })
+    </script>
+<% end %>
+
+<div class="card datalist"
+     data-url="<%= gns_report.gantt_chart_data_backend_reports_path %>"
+>
     <div class="card-header header-elements-inline bg-white">
-        <h5 class="card-title">Employee's tasks</h5>
+        <h5 class="card-title"><%= t('.employees_tasks') %></h5>
         <div class="header-elements">
             <div class="list-icons">
                 <a class="list-icons-item" data-action="collapse"></a>
@@ -29,95 +53,38 @@
     <form class="datalist-filters">
         <div class="card-body pb-0">    
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
+                    <select class="form-control selectAllowClear"
+                        data-placeholder="<%= t('.select_chart_type') %>"
+                        name="chart_type">
+                        <option></option>
+                        <option selected value="<%= 'week' %>"><%= t('.week') %></option>
+                        <option value="<%= 'month' %>"><%= t('.month') %></option>
+                        <option value="<%= 'year' %>"><%= t('.year') %></option>
+                    </select>
+                </div>
+                <div class="col-md-6">
                     <div class="form-group">
-                        <select name="customer_id" data-placeholder="All employees..."
+                        <select name="employee_ids[]" data-placeholder="<%= t('.select_employees') %>"
                           class="form-control select-ajax"
+                          multiple
                           data-url="<%= gns_employee.select2_backend_employees_path %>">
                         </select>
                     </div>
                 </div>
+                <div class="col-md-1 text-right">
+                    <span class="btn btn-primary mb-3 datalist-search-button"><%= t('go') %></span>
+                </div>
                 <div class="col-md-3 text-right">
-                    <span class="btn btn-primary mb-3 datalist-search-button">Go</span>
+                    <input type="hidden" name="anchor" value="">
+                    <span class="btn btn-light mb-3 datalist-prev-button"><i class="icon-previous2"></i> <%= t('.prev') %></span>
+                    <span class="btn btn-light mb-3 datalist-next-button"><%= t('.next') %> <i class="icon-next2"></i></span>
                 </div>
             </div>
         </div>
-    
-        <div class="gantt">
-            <div class="gantt__row gantt__row--months">
-                <div class="gantt__row-first"></div>
-                <span>May 1, 2019</span><span>May 2, 2019</span><span>May 3, 2019</span>
-                <span>May 4, 2019</span><span>May 5, 2019</span><span>May 6, 2019</span>
-                <span>May 7, 2019</span><span>May 8, 2019</span><span>May 9, 2019</span>
-                <span>May 10, 2019</span><span>May 11, 2019</span><span>May 12, 2019</span>
-            </div>
-            <div class="gantt__row gantt__row--lines" data-month="5">
-                <span></span><span></span><span></span>
-                <span></span><span></span><span></span>
-                <span></span><span class="marker"></span><span></span>
-                <span></span><span></span><span></span>
-            </div>
-            <div class="gantt__row">
-                <div class="gantt__row-first">
-                    Barnard Posselt
-                </div>
-                <ul class="gantt__row-bars">
-                    <li style="grid-column: 1/11; background-color: #2ecaac;">Even longer project</li>
-                </ul>
-            </div>
-            <div class="gantt__row gantt__row--empty">
-                <div class="gantt__row-first">
-                    Ryley Huggons
-                </div>
-                <ul class="gantt__row-bars"></ul>
-            </div>
-            <div class="gantt__row">
-                <div class="gantt__row-first">
-                    Lanie Erwin
-                </div>
-                <ul class="gantt__row-bars">
-                    <li style="grid-column: 2/5; background-color: #2ecaac;">Start Februar</li>
-                    <li style="grid-column: 1/6; background-color: #ff6252;" class="stripes"></li>
-                    <li style="grid-column: 7/11; background-color: #54c6f9;">Same line</li>
-                </ul>
-            </div>
-            <div class="gantt__row gantt__row--empty">
-                <div class="gantt__row-first">
-                    Krishnah Pauleit
-                </div>
-                <ul class="gantt__row-bars"></ul>
-            </div>
-            <div class="gantt__row gantt__row--empty">
-                <div class="gantt__row-first">
-                    Hobard Lampitt
-                </div>
-                <ul class="gantt__row-bars"></ul>
-            </div>
-            <div class="gantt__row">
-                <div class="gantt__row-first">
-                    Virgilio Jeanes
-                </div>
-                <ul class="gantt__row-bars">
-                    <li style="grid-column: 2/5; background-color: #2ecaac;"></li>
-                </ul>
-            </div>
-            <div class="gantt__row">
-                <div class="gantt__row-first">
-                    Ky Verick
-                </div>
-                <ul class="gantt__row-bars">
-                    <li style="grid-column: 3/8; background-color: #54c6f9;">Long project</li>
-                </ul>
-            </div>
-    
-            <div class="gantt__row">
-                <div class="gantt__row-first">
-                    Ketti Waterworth
-                </div>
-                <ul class="gantt__row-bars">
-                    <li style="grid-column: 4/9; background-color: #ff6252;" class="stripes">A title</li>
-                </ul>
-            </div>
+        
+        <div class="datalist-content">
+            
         </div>
     </form>
 </div>
