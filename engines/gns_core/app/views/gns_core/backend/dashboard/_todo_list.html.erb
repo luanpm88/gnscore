@@ -7,7 +7,10 @@
             <span class="badge bg-success badge-pill"><%= @todo_list.count %> <%= t('.task_s') %></span>
             
             <div class="list-icons ml-3">
+                <% if false %>
+                <!--todo: master-->
                 <a href="#" class="list-icons-item"><i class="icon-sync"></i></a>
+                <% end %>
                 <a class="list-icons-item" data-action="collapse"></a>
             </div>
         </div>

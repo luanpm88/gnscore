@@ -17,6 +17,7 @@ class Ability
     
     can :lock, GnsCore::User do |account|
       #!account.active? and
+      false and #todo: master
       (
         (user.has_permission?('gns_core.users.deactivate_own') and account.creator == user) or
         (user.has_permission?('gns_core.users.deactivate_other') and account.creator != user)
@@ -25,6 +26,7 @@ class Ability
     
     can :unlock, GnsCore::User do |account|
       #account.active? and
+      false and #todo: master
       (
         (user.has_permission?('gns_core.users.activate_own') and account.creator == user) or
         (user.has_permission?('gns_core.users.activate_other') and account.creator != user)

@@ -17,15 +17,17 @@
                     <span class="form-text text-danger"><%= comment.errors.full_messages_for(:message).join('<br/>').html_safe %></span>
                 <% end %>
             </div>
-            
-            <div class="form-group">
-                <label class="d-block font-weight-semibold"><%= t('.add_file') %></label>
-                <div class="custom-file">
-                    <input type="file" name="comment[file][]" class="custom-file-input" multiple>
-                    <label class="custom-file-label"><%= t('.choose_file') %></label>
+            <% if false %>
+                <!--todo: master-->
+                <div class="form-group">
+                    <label class="d-block font-weight-semibold"><%= t('.add_file') %></label>
+                    <div class="custom-file">
+                        <input type="file" name="comment[file][]" class="custom-file-input" multiple>
+                        <label class="custom-file-label"><%= t('.choose_file') %></label>
+                    </div>
+                    <span class="form-text text-muted"><%= t('.accepted') %></span>
                 </div>
-                <span class="form-text text-muted"><%= t('.accepted') %></span>
-            </div>
+            <% end %>
         </fieldset>
     </div>
 </div>
