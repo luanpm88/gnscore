@@ -91,19 +91,36 @@
                     </td>
                     <td>
                         <% if task.attachments.count > 0 %>
-                            <a href="<%= gns_project.attachments_backend_tasks_path(task) %>"
-                                class="badge badge-light badge-striped badge-striped-left border-left-teal text-primary-600 attachment-list-button"
-                                title="Click here to view and upload input/output data files"
-                            >
-                                <%= task.attachments.count %> <%= task.attachments.count <= 1 ? 'file' : 'files' %>
-                            </a>
+                            <% if can? :attachments, task %>
+                                <a href="<%= gns_project.attachments_backend_tasks_path(task) %>"
+                                    class="badge badge-light badge-striped badge-striped-left border-left-teal text-primary-600 attachment-list-button"
+                                    title="Click here to view and upload input/output data files"
+                                >
+                                    <%= task.attachments.count %> <%= task.attachments.count <= 1 ? 'file' : 'files' %>
+                                </a>
+                            <% else %>
+                                <span class="badge badge-light badge-striped badge-striped-left border-left-teal text-primary-600"
+                                    title="Click here to view and upload input/output data files"
+                                >
+                                    <%= task.attachments.count %> <%= task.attachments.count <= 1 ? 'file' : 'files' %>
+                                </span>
+                            <% end %>
                         <% else %>
-                            <a href="<%= gns_project.attachments_backend_tasks_path(task) %>"
-                                class="badge badge-light badge-striped badge-striped-left border-left-danger text-warning-600 attachment-list-button"
-                                title="Click here to view and upload input/output data files"
-                            >
-                                <%= t('.no_file') %>
-                            </a>
+                            
+                            <% if can? :attachments, task %>
+                                <a href="<%= gns_project.attachments_backend_tasks_path(task) %>"
+                                    class="badge badge-light badge-striped badge-striped-left border-left-danger text-warning-600 attachment-list-button"
+                                    title="Click here to view and upload input/output data files"
+                                >
+                                    <%= t('.no_file') %>
+                                </a>
+                            <% else %>
+                                <span class="badge badge-light badge-striped badge-striped-left border-left-danger text-warning-600"
+                                    title="Click here to view and upload input/output data files"
+                                >
+                                    <%= t('.no_file') %>
+                                </span>
+                            <% end %>
                         <% end %>
                     </td>
                     <td class="text-center">
@@ -155,17 +172,21 @@
                                         </a>
                                     <% end %>
                                     
-                                    <a href="<%= gns_project.backend_task_path(task) %>"
-                                        class="dropdown-item">
-                                        <i class="icon-new-tab2"></i> <%= t('.go_to_task') %>
-                                    </a>
+                                    <% if can? :read, task %>
+                                        <a href="<%= gns_project.backend_task_path(task) %>"
+                                            class="dropdown-item">
+                                            <i class="icon-new-tab2"></i> <%= t('.go_to_task') %>
+                                        </a>
+                                    <% end %>
                                     
                                     <div class="dropdown-divider"></div>
                                     
-                                    <a href="<%= gns_project.attachments_backend_tasks_path(task) %>"
-                                        class="dropdown-item attachment-list-button">
-                                        <i class="icon-attachment"></i> <%= t('.attachments') %>
-                                    </a>
+                                    <% if can? :attachments, task %>
+                                        <a href="<%= gns_project.attachments_backend_tasks_path(task) %>"
+                                            class="dropdown-item attachment-list-button">
+                                            <i class="icon-attachment"></i> <%= t('.attachments') %>
+                                        </a>
+                                    <% end %>
                                     
                                     <% if can? :delete, task %>
                                         <div class="dropdown-divider"></div>

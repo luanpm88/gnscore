@@ -1,41 +1,7 @@
 <%= form_for([gns_project, :backend, project], html: {multipart: true}) do |f| %>
     <fieldset>
         <div class="row">
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="d-block"><%= t('.project_template') %> </label>
-                            <select name="project[template_id]"
-                                class="form-control select-ajax"
-                                data-container-css-class="font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:template_id).present? %>"
-                                data-placeholder="<%= t('.select_template') %>"
-                                data-url="<%= gns_project.select2_backend_templates_path %>">
-                                <option value="<%= project.category_id %>"><%= project.template_name %></option>
-                            </select>
-                            <% if project.errors.full_messages_for(:template_id).present? %>
-                                <span class="form-text text-danger"><%= project.errors.full_messages_for(:template_id).join('<br/>').html_safe %></span>
-                            <% end %>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="d-block"><%= t('.project_type') %> <span class="text-danger">*</span></label>
-                            <select name="project[category_id]"
-                                class="form-control select-ajax"
-                                data-container-css-class="font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:category_id).present? %>"
-                                data-placeholder="<%= t('.select_category') %>"
-                                data-url="<%= gns_project.select2_backend_categories_path %>">
-                                <option value="<%= project.category_id %>"><%= project.category_name %></option>
-                            </select>
-                            <% if project.errors.full_messages_for(:category_id).present? %>
-                                <span class="form-text text-danger"><%= project.errors.full_messages_for(:category_id).join('<br/>').html_safe %></span>
-                            <% end %>
-                        </div>
-                    </div>
-                </div>
-                
+            <div class="col-md-6">                
                 <div class="form-group">
                     <label class="d-block"><%= t('.project_code') %> <span class="text-danger">*</span></label>
                     <input type="text" class="form-control font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:code).present? %>" placeholder="<%= t('.enter_code') %>"
@@ -57,8 +23,7 @@
                         <span class="form-text text-danger"><%= project.errors.full_messages_for(:name).join('<br/>').html_safe %></span>
                     <% end %>
                 </div>
-            </div>
-            <div class="col-md-6">
+                
                 <div class="form-group">
                     <label class="d-block"><%= t('.customer') %> <span class="text-danger">*</span></label>
                     <select name="project[customer_id]"
@@ -72,19 +37,33 @@
                         <span class="form-text text-danger"><%= project.errors.full_messages_for(:customer_id).join('<br/>').html_safe %></span>
                     <% end %>
                 </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="d-block"><%= t('.project_template') %> </label>
+                    <select name="project[template_id]"
+                        class="form-control select-ajax"
+                        data-container-css-class="font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:template_id).present? %>"
+                        data-placeholder="<%= t('.select_template') %>"
+                        data-url="<%= gns_project.select2_backend_templates_path %>">
+                        <option value="<%= project.category_id %>"><%= project.template_name %></option>
+                    </select>
+                    <% if project.errors.full_messages_for(:template_id).present? %>
+                        <span class="form-text text-danger"><%= project.errors.full_messages_for(:template_id).join('<br/>').html_safe %></span>
+                    <% end %>
+                </div>
                 
                 <div class="form-group">
-                    <label class="d-block"><%= t('.date_of_implementation') %> <span class="text-danger">*</span></label>
-                    <div class="input-group">
-                        <span class="input-group-prepend">
-                            <span class="input-group-text"><i class="icon-calendar22"></i></span>
-                        </span>
-                        <input type="text" class="form-control font-weight-semibold daterange-dual"
-                            value="<%= @date_of_implementation %>"
-                            name="project[date_of_implementation]"> 
-                    </div>
-                    <% if project.errors.full_messages_for(:date).present? %>
-                        <span class="form-text text-danger"><%= project.errors.full_messages_for(:date).join('<br/>').html_safe %></span>
+                    <label class="d-block"><%= t('.project_type') %> <span class="text-danger">*</span></label>
+                    <select name="project[category_id]"
+                        class="form-control select-ajax"
+                        data-container-css-class="font-weight-semibold <%= 'border-danger' if project.errors.full_messages_for(:category_id).present? %>"
+                        data-placeholder="<%= t('.select_category') %>"
+                        data-url="<%= gns_project.select2_backend_categories_path %>">
+                        <option value="<%= project.category_id %>"><%= project.category_name %></option>
+                    </select>
+                    <% if project.errors.full_messages_for(:category_id).present? %>
+                        <span class="form-text text-danger"><%= project.errors.full_messages_for(:category_id).join('<br/>').html_safe %></span>
                     <% end %>
                 </div>
                 

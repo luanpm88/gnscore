@@ -753,6 +753,7 @@ en:
         updated: "Update project info: %{name}"
         deleted: "Destroy/delete project: %{name}"
         mark_as_new: "Mark the project status as new"
+        request: "Submitted request for project approval"
         start_progress: "Mark the project status as: in progress"
         finish: "Mark the project status as finished"
       task:

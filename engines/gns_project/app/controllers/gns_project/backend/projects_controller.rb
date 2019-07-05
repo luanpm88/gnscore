@@ -27,10 +27,10 @@ module GnsProject
         
         @project = Project.new
         
-        date = []
-        date << Time.now.beginning_of_day.strftime('%d/%m/%Y')
-        date << Time.now.end_of_day.strftime('%d/%m/%Y')
-        @date_of_implementation = date.join(" - ")
+        #date = []
+        #date << Time.now.beginning_of_day.strftime('%d/%m/%Y')
+        #date << Time.now.end_of_day.strftime('%d/%m/%Y')
+        #@date_of_implementation = date.join(" - ")
       end
   
       # POST /projects
@@ -42,12 +42,12 @@ module GnsProject
         @project.creator = current_user
         @project.status = Project::STATUS_NEW
         
-        if params[:project][:date_of_implementation].present?
-          @project.start_date = params[:project][:date_of_implementation].to_s.split('-')[0].to_date
-          @project.end_date = params[:project][:date_of_implementation].to_s.split('-')[1].to_date
-        else
-          @project.errors.add('date', "not be blank")
-        end
+        #if params[:project][:date_of_implementation].present?
+        #  @project.start_date = params[:project][:date_of_implementation].to_s.split('-')[0].to_date
+        #  @project.end_date = params[:project][:date_of_implementation].to_s.split('-')[1].to_date
+        #else
+        #  @project.errors.add('date', "not be blank")
+        #end
         
         if params[:template_id].present?
           @template = GnsProject::Template.find(params[:template_id])
@@ -76,10 +76,10 @@ module GnsProject
       def edit
         authorize! :update, @project
         
-        date = []
-        date << @project.start_date.strftime('%d/%m/%Y')
-        date << @project.end_date.strftime('%d/%m/%Y')
-        @date_of_implementation = date.join(" - ")
+        #date = []
+        #date << @project.start_date.strftime('%d/%m/%Y')
+        #date << @project.end_date.strftime('%d/%m/%Y')
+        #@date_of_implementation = date.join(" - ")
       end
   
       # PATCH/PUT /projects/1
@@ -95,12 +95,12 @@ module GnsProject
           @project.errors.add('remark', "not be blank")
         end
         
-        if params[:project][:date_of_implementation].present?
-          @project.start_date = params[:project][:date_of_implementation].to_s.split('-')[0].to_date
-          @project.end_date = params[:project][:date_of_implementation].to_s.split('-')[1].to_date
-        else
-          @project.errors.add('date', "not be blank")
-        end
+        #if params[:project][:date_of_implementation].present?
+        #  @project.start_date = params[:project][:date_of_implementation].to_s.split('-')[0].to_date
+        #  @project.end_date = params[:project][:date_of_implementation].to_s.split('-')[1].to_date
+        #else
+        #  @project.errors.add('date', "not be blank")
+        #end
         
         # check error empty?
         if @project.errors.empty?
@@ -189,6 +189,7 @@ module GnsProject
       
       # Authorization
       def authorization
+        authorize! :manpower_authorize, @project
       end
       
       def authorization_list

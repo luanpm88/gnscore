@@ -735,6 +735,11 @@ vi:
       project:
         created: "Tạo mới thông tin dự án: %{name}"
         updated: "Cập nhật thông tin dự án: %{name}"
+        deleted: "Xóa thông tin dự án: %{name}"
+        mark_as_new: "Đánh dấu dự án thành 'mới'"
+        request: "Đề xuất phê duyệt dự án"
+        start_progress: "Phê duyệt thực hiện dự án"
+        finish: "Đánh dấu dự án đã hoàn thành"
       task:
         created: "Tạo mới thông tin công việc: %{name}"
         updated: "Cập nhật thông tin công việc: %{name}"

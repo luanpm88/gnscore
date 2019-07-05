@@ -2,7 +2,8 @@ module GnsProject
   class Role < ApplicationRecord
     
     belongs_to :creator, class_name: 'GnsCore::User'
-    has_many :roles_permissions, class_name: 'GnsProject::RolesPermission'
+    has_many :roles_permissions, class_name: 'GnsProject::RolesPermission', dependent: :restrict_with_error
+    has_many :project_employees, class_name: 'GnsProject::ProjectEmployeeRole', dependent: :restrict_with_error
     
     # get creator name
     def creator_name

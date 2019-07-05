@@ -12,13 +12,13 @@ module GnsProject
   
       # GET /tasks/1
       def show
-        logger.info '==============='
-        logger.info gns_project.backend_task_path(@task)
-        logger.info '==============='
+        authorize! :read, @task
       end
   
       # GET /tasks/new
       def new
+        authorize! :create, GnsProject::Task
+        
         @task = Task.new
         @task.project = Project.find(params[:project_id])
         
@@ -30,6 +30,8 @@ module GnsProject
   
       # POST /tasks
       def create
+        authorize! :create, GnsProject::Task
+        
         @task = Task.new(task_params)
         
         @task.creator = current_user
@@ -63,6 +65,8 @@ module GnsProject
   
       # GET /tasks/1/edit
       def edit
+        authorize! :update, @task
+        
         working_date = []
         working_date << @task.start_date.strftime('%d/%m/%Y')
         working_date << @task.end_date.strftime('%d/%m/%Y')
@@ -71,6 +75,8 @@ module GnsProject
   
       # PATCH/PUT /tasks/1
       def update
+        authorize! :update, @task
+        
         # check other model errors
         @task.assign_attributes(task_params)
         @task.valid?
@@ -104,7 +110,9 @@ module GnsProject
       end
   
       # DELETE /tasks/1
-      def destroy        
+      def destroy
+        authorize! :delete, @task
+        
         if @task.destroy
           render json: {
             status: 'success',
@@ -125,6 +133,7 @@ module GnsProject
       
       # danh sach attachment cua task
       def attachments
+        authorize! :attachments, @task
       end
       
       def attachment_actions
