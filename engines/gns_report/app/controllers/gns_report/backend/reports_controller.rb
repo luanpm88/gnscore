@@ -124,6 +124,15 @@ module GnsReport
           filename: "tinh-hinh-tham-gia-du-an-cua-nhan-vien.xlsx",
           disposition: 'attachment'
       end
+      
+      def gantt_chart
+      end
+      
+      def gantt_chart_data
+        @data = GnsEmployee::Employee.gantt_chart(params)
+        
+        render layout: nil
+      end
     end
   end
 end

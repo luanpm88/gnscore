@@ -36,3 +36,15 @@ en:
           total: "Total"
           projects: "projects"
           days: "days"
+        gantt_chart:
+          gantt_chart: "Gantt chart"
+          employees_tasks: "Employee's tasks"
+          select_chart_type: "Select chart type"
+          week: "Week"
+          month: "Month"
+          year: "Year"
+          select_employees: "All employees"
+          prev: "Prev"
+          next: "Next"
+        gantt_chart_data:
+          must_select_filter: "Please select chart type"

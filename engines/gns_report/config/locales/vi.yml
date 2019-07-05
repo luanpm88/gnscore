@@ -36,3 +36,15 @@ vi:
           total: "Tổng cộng"
           projects: "dự án"
           days: "ngày"
+        gantt_chart:
+          gantt_chart: "Biểu đồ Gantt (công việc)"
+          employees_tasks: "Nhiệm vụ của nhân viên"
+          select_chart_type: "Chọn kiểu hiển thị biểu đồ"
+          week: "Tuần"
+          month: "Tháng"
+          year: "Năm"
+          select_employees: "Tất cả nhân viên"
+          prev: "Trước"
+          next: "Sau"
+        gantt_chart_data:
+          must_select_filter: "Vui lòng chọn kiểu hiển thị cho biểu đồ"

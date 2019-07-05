@@ -12,7 +12,7 @@ module GnsEmployee
     has_many :project_employees, class_name: 'GnsProject::ProjectEmployee', dependent: :restrict_with_error
     has_many :project_employee_roles, class_name: 'GnsProject::ProjectEmployeeRole', through: :project_employees, dependent: :restrict_with_error
     has_many :projects, class_name: 'GnsProject::Project', foreign_key: :manager_id, dependent: :restrict_with_error
-    has_many :task, class_name: 'GnsProject::Task', foreign_key: :employee_id, dependent: :restrict_with_error
+    has_many :tasks, class_name: 'GnsProject::Task', foreign_key: :employee_id, dependent: :restrict_with_error
     
     # class const
     GENDER_MALE = 'male'
@@ -208,6 +208,117 @@ module GnsEmployee
     
     def project_permission_count(project)
       self.project_permissions(project).count
+    end
+    
+    def self.gantt_chart(params={})
+      employees = GnsEmployee::Employee.get_active
+      
+      if params[:employee_ids].present?
+        employees = employees.where(id: params[:employee_ids])
+      end
+      
+      data = []
+      first_row = []
+      first_row << ''
+      
+      start_at = nil
+      end_at = nil
+      
+      increment = nil
+      anchor_date = Time.now
+      anchor =  0
+      anchor = params[:anchor].to_i if params[:anchor].present?
+      
+      if params[:chart_type].present?
+        if params[:chart_type] == 'week'
+          anchor_date = anchor_date + anchor.week
+          
+          start_at = anchor_date.beginning_of_week
+          end_at = anchor_date.end_of_week
+          increment = 1.day
+        
+          d = start_at.beginning_of_day
+          while d <= end_at.end_of_day do
+            first_row << {label: d.strftime('%d/%m/%Y'), date: d}
+            d += increment
+          end
+        end
+        
+        if params[:chart_type] == 'month'
+          anchor_date = anchor_date + anchor.month
+          
+          start_at = anchor_date.beginning_of_month
+          end_at = anchor_date.end_of_month
+          increment = 1.day
+        
+          d = start_at.beginning_of_day
+          while d <= end_at.end_of_day do
+            first_row << {label: d.strftime('%d.%m %Y'), date: d}
+            d += increment
+          end
+        end
+        
+        if params[:chart_type] == 'year'
+          anchor_date = anchor_date + anchor.year
+          
+          start_at = anchor_date.beginning_of_year
+          end_at = anchor_date.end_of_year
+          increment = 1.month
+        
+          d = start_at.beginning_of_day
+          while d <= end_at.end_of_day do
+            first_row << {label: d.strftime('%m/%Y'), date: d}
+            d += increment
+          end
+        end
+      end
+      
+      # first header
+      data << first_row
+      
+      colors = ['#2ecaac', '#00796B', '#ff6252', '#2E7D32' , '#F4511E', '#00838F', '#AD1457', '#283593' , '#558B2F', '#607D8B', '#FFA726', '#54c6f9']
+      
+      employees.each do |employee|
+        row = []
+        row << employee.name
+        
+        tasks = employee.tasks.where('(start_date <= ? AND end_date >= ?) OR (end_date >= ? AND start_date <= ?)', end_at, start_at, start_at, end_at)
+        
+        tasks.each do |task|
+          start_num = 1
+          end_num = 1
+          
+          first_row[1..-1].each do |r|
+            if params[:chart_type] == 'year'
+              if task.start_date >= r[:date].end_of_month
+                start_num += 1
+                end_num += 1
+              elsif r[:date].beginning_of_month <= task.end_date
+                end_num += 1
+              end
+            else
+              # @todo: Lỗi thanh <li> bị lùi về 1 ngày trước
+              if task.start_date >= r[:date].end_of_day
+                start_num += 1
+                end_num += 1
+              elsif r[:date].beginning_of_day <= task.end_date
+                end_num += 1
+              end
+            end
+          end
+          
+          row << {
+            size: "#{start_num}/#{end_num}",
+            color: colors[task.project_id%colors.count],
+            label: task.name,
+            name: task.project_name + ': ' + task.name  + ' (' + task.start_date.strftime('%d/%m/%Y') + ' - ' + task.end_date.strftime('%d/%m/%Y') + ')'
+          }
+        end
+            
+        data << row
+      end
+      
+      return data
     end
   end
 end

@@ -58,6 +58,9 @@ vi:
           report: "Báo cáo/Thống kê"
           system: "Hệ thống"
           configure_user_roles: "Vai trò người dùng"
+          project_report: "Dự án theo khách hàng"
+          employee_report: "Nhân viên tham gia dự án"
+          gantt_chart: "Theo dõi công việc của nhân viên (biểu đồ Gantt)"
         footer:
           support: "Hỗ trợ"
           user_guide: "Hướng dẫn"

@@ -58,6 +58,9 @@ en:
           report: "Report"
           system: "System"
           configure_user_roles: "Configure User Roles"
+          project_report: "Customer's project"
+          employee_report: "Employee's project"
+          gantt_chart: "Employee's tasks (Gantt chart)"
         footer:
           support: "Support"
           user_guide: "User Guide"
