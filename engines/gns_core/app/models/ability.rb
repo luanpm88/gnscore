@@ -425,6 +425,11 @@ class Ability
       )
     end
     
+    can :attachments, GnsProject::Task do |task|
+      #task.employee == user.employee
+      true
+    end
+    
     can :download_attachments, GnsProject::Task do |task|
       task.count_attachments > 0
     end

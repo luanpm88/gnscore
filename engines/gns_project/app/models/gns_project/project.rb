@@ -10,9 +10,7 @@ module GnsProject
     belongs_to :template, class_name: 'GnsProject::Template', optional: true
     
     validates :code, uniqueness: true, presence: true
-    validates :name, :priority, :start_date, :end_date,
-              :category_id, :customer_id, :manager_id,
-              presence: true
+    validates :name, :priority, :category_id, :customer_id, :manager_id, presence: true
     
     # get customer code
     def customer_code
@@ -199,10 +197,11 @@ module GnsProject
       result = 0
       
       if !self.tasks.empty?
-        all_tasks = self.tasks.count
-        closed_tasks = self.tasks.where(status: GnsProject::Task::STATUS_CLOSED).count
-      
-        result = (closed_tasks.to_f/all_tasks.to_f)*100
+        #all_tasks = self.tasks.count
+        #closed_tasks = self.tasks.where(status: GnsProject::Task::STATUS_CLOSED).count
+        #
+        #result = (closed_tasks.to_f/all_tasks.to_f)*100
+        result = self.tasks.sum(:progress)/self.tasks.count
       end
       
       return result

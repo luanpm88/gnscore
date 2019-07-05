@@ -141,10 +141,12 @@
                                     <i class="icon-clipboard3"></i> <%= t('.task_planning') %>
                                 </a>
                                 
-                                <a class="dropdown-item"
-                                    href="<%= gns_project.authorization_backend_projects_path(project) %>">
-                                    <i class="icon-user-check"></i> <%= t('.manpower') %>
-                                </a>
+                                <% if can? :manpower_authorize, project %>
+                                    <a class="dropdown-item"
+                                        href="<%= gns_project.authorization_backend_projects_path(project) %>">
+                                        <i class="icon-user-check"></i> <%= t('.manpower') %>
+                                    </a>
+                                <% end %>
                                 
                                 <a class="dropdown-item"
                                     href="<%= gns_project.logs_backend_projects_path(project) %>">

@@ -92,10 +92,24 @@ module GnsProject
       end
   
       # DELETE /roles/1
-      #def destroy
-      #  @role.destroy
-      #  redirect_to roles_url, notice: 'Role was successfully destroyed.'
-      #end
+      def destroy
+        authorize! :delete, @role
+        
+        # Add notification
+        current_user.add_notification("gns_employee.notification.role.deleted", @role)
+        
+        if @role.destroy
+          render json: {
+            status: 'success',
+            message: 'The role was successfully destroyed.',
+          }
+        else
+          render json: {
+            status: 'warning',
+            message: @role.errors.full_messages.to_sentence
+          }
+        end
+      end
       
       # SELECT2 /roles
       def select2
