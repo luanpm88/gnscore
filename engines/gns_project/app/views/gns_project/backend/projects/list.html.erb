@@ -57,12 +57,12 @@
                 <% end %>
                 <% if params["show_columns"].include?("start_date") %>
                     <td>
-                        <%= project.start_date.strftime("%d/%m/%Y") %>
+                        <%= project.get_start_date.strftime("%d/%m/%Y") if project.get_start_date.present? %>
                     </td>
                 <% end %>
                 <% if params["show_columns"].include?("end_date") %>
                     <td>
-                        <%= project.end_date.strftime("%d/%m/%Y") %>
+                        <%= project.get_end_date.strftime("%d/%m/%Y") if project.get_end_date.present? %>
                     </td>
                 <% end %>
                 <% if params["show_columns"].include?("complete") %>

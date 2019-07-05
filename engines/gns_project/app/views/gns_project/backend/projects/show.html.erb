@@ -162,7 +162,7 @@
                         </div>
 
                         <div class="ml-3 align-self-center">
-                            <%= @project.start_date.strftime('%A, %d/%m/%Y') %>
+                            <%= @project.get_start_date.strftime('%A, %d/%m/%Y') if @project.get_start_date.present? %>
                         </div>
                     </li>
                     
@@ -172,7 +172,7 @@
                         </div>
 
                         <div class="ml-3 align-self-center">
-                            <%= @project.end_date.strftime('%A, %d/%m/%Y') %>
+                            <%= @project.get_end_date.strftime('%A, %d/%m/%Y') if @project.get_end_date.present? %>
                         </div>
                     </li>
                     
