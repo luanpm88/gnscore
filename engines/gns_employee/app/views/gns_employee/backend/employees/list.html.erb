@@ -24,13 +24,16 @@
                 <th class="text-nowrap"><%= t(".telephone") %></th>
             <% end %>
             <% if params["show_columns"].include?("mobile") %>
-                <th class="text-nowrap"><%= t(".mobile_phone") %></th>
+                <th class="text-nowrap"><%= t(".mobile") %></th>
             <% end %>
             <% if params["show_columns"].include?("email") %>
                 <th class="text-nowrap"><%= t(".email") %></th>
             <% end %>
             <% if params["show_columns"].include?("address") %>
                 <th class="text-nowrap"><%= t(".address") %></th>
+            <% end %>
+            <% if params["show_columns"].include?("account") %>
+                <th class="text-nowrap"><%= t(".account") %></th>
             <% end %>
             <% if params["show_columns"].include?("status") %>
                 <th class="text-nowrap"><%= t(".status") %></th>
@@ -39,10 +42,10 @@
                 <th class="text-nowrap"><%= t(".added_by") %></th>
             <% end %>
             <% if params["show_columns"].include?("created_at") %>
-                <th class="text-nowrap"><%= t(".created_date") %></th>
+                <th class="text-nowrap"><%= t(".created_at") %></th>
             <% end %>
             <% if params["show_columns"].include?("updated_at") %>
-                <th class="text-nowrap"><%= t(".updated_date") %></th>
+                <th class="text-nowrap"><%= t(".updated_at") %></th>
             <% end %>
             <th class="text-nowrap text-right"><%= t(".actions") %></th>
         </tr>
@@ -63,7 +66,7 @@
                     <td><%= employee.position %></td>
                 <% end %>
                 <% if params["show_columns"].include?("labor_contract_type") %>
-                    <td><%= t(".#{employee.labor_contract_type}") if employee.labor_contract_type.present? %></td>
+                    <td><%= t("#{employee.labor_contract_type}") if employee.labor_contract_type.present? %></td>
                 <% end %>
                 <% if params["show_columns"].include?("starting_date") %>
                     <td><%= employee.starting_date.strftime("%d/%m/%Y") if employee.starting_date.present? %></td>
@@ -79,6 +82,23 @@
                 <% end %>
                 <% if params["show_columns"].include?("address") %>
                     <td><%= display_address(employee) %></td>
+                <% end %>
+                <% if params["show_columns"].include?("account") %>
+                    <td class="text-center">
+                        <a href="<%= gns_employee.backend_employee_path(employee) %>">
+                            <% if employee.user.present? %>
+                                <i class="icon-checkmark-circle text-success"
+                                    data-popup="tooltip"
+                                    data-original-title="<%= t(".allowed_to_access") %>"
+                                ></i>
+                            <% else %>
+                                <i class="icon-cancel-circle2 text-danger"
+                                    data-popup="tooltip"
+                                    data-original-title="<%= t(".not_allowed_to_access") %>"
+                                ></i>
+                            <% end %>
+                        </a>
+                    </td>
                 <% end %>
                 <% if params["show_columns"].include?("status") %>
                     <td>
@@ -129,7 +149,7 @@
                                         <a class="dropdown-item ajax datalist-g-link"
                                             href="<%= gns_employee.activate_backend_employees_path(id: employee) %>"
                                             data-method="PUT"
-                                            data-confirm="You want to activate an employee"
+                                            data-confirm="<%= t(".activate_confirm") %>"
                                         >
                                             <i class="icon-checkmark4"></i><%= t(".activate") %>
                                         </a>
@@ -139,9 +159,9 @@
                                         <a class="dropdown-item ajax datalist-g-link"
                                             href="<%= gns_employee.deactivate_backend_employees_path(id: employee) %>"
                                             data-method="PUT"
-                                            data-confirm="<%= t(".de_confirm") %>"
+                                            data-confirm="<%= t(".deactivate_confirm") %>"
                                         >
-                                            <i class="icon-blocked"></i><%= t(".de_activate") %>
+                                            <i class="icon-blocked"></i><%= t(".deactivate") %>
                                         </a>
                                     <% end %>
                                     
@@ -150,7 +170,7 @@
                                         <a class="dropdown-item ajax datalist-g-link"
                                             href="<%= gns_employee.backend_employee_path(employee) %>"
                                             data-method="DELETE"
-                                            data-confirm="<%= t(".de_delete") %>"
+                                            data-confirm="<%= t(".delete_confirm") %>"
                                         >
                                             <i class="icon-bin"></i><%= t(".delete") %>
                                         </a>

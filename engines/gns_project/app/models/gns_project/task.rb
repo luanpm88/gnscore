@@ -231,13 +231,17 @@ module GnsProject
     end
     
     # get todo list
-    def self.get_todo_list(user)
+    def self.get_todo_list(user={})
       # can cap nhat lai theo employee/user he thong
-      GnsProject::Task.where(employee_id: user.id).where(status: GnsProject::Task::STATUS_OPEN)
+      if user.present?
+        GnsProject::Task.where(employee_id: user.id).where(status: GnsProject::Task::STATUS_OPEN)
+      else
+        return GnsProject::Task.where(id: -1)
+      end
     end
     
     # get wait for approval
-    def self.get_wait_for_approval(user)
+    def self.get_wait_for_approval(user={})
       # can cap nhat lai theo employee/user he thong
       GnsProject::Task.where(status: GnsProject::Task::STATUS_OPEN).where(finished: true)
     end

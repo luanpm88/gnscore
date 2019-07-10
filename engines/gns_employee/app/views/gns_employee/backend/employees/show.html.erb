@@ -134,7 +134,7 @@
                         </div>
 
                         <div class="ml-3 align-self-center">
-                            <%= t(".#{@employee.labor_contract_type}") if @employee.labor_contract_type.present? %>
+                            <%= t("#{@employee.labor_contract_type}") if @employee.labor_contract_type.present? %>
                         </div>
                     </li>
                     
@@ -197,6 +197,16 @@
                     
                     <li class="media mt-0 py-2 px-2 border-bottom-dotted">
                         <div class="media-body">
+                            <div class="font-weight-semibold"><%= t(".address") %></div>
+                        </div>
+
+                        <div class="ml-3 align-self-center">
+                            <%= display_address(@employee) %>
+                        </div>
+                    </li>
+                    
+                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
+                        <div class="media-body">
                             <div class="font-weight-semibold"><%= t(".added_by") %></div>
                         </div>
 
@@ -222,16 +232,6 @@
 
                         <div class="ml-3 align-self-center text-muted">
                             <%= @employee.updated_at.strftime('%d/%m/%Y - %T') %>
-                        </div>
-                    </li>
-                    
-                    <li class="media mt-0 py-2 px-2 border-bottom-dotted">
-                        <div class="media-body">
-                            <div class="font-weight-semibold"><%= t(".address") %></div>
-                        </div>
-
-                        <div class="ml-3 align-self-center">
-                            <%= display_address(@employee) %>
                         </div>
                     </li>
                 </div>

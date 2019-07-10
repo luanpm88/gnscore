@@ -24,7 +24,7 @@ function gLink(objs, ajaxCallback) {
                         '<div class="modal-dialog modal-sm">' +
                             '<div class="modal-content">' +
                                 '<div class="modal-header">' +
-                                    '<h5 class="modal-title">Are you sure?</h5>' +
+                                    '<h5 class="modal-title">'+ LANG_ARE_YOU_SURE +'</h5>' +
                                     '<button type="button" class="close" data-dismiss="modal">&times;</button>' +
                                 '</div>' +
             
@@ -33,8 +33,8 @@ function gLink(objs, ajaxCallback) {
                                 '</div>' +
             
                                 '<div class="modal-footer">' +
-                                    '<button type="button" class="btn btn-link" data-dismiss="modal">Close</button>' +
-                                    '<button type="button" class="btn bg-primary data-confirm-ok">OK</button>' +
+                                    '<button type="button" class="btn btn-link" data-dismiss="modal">' + LANG_CLOSE + '</button>' +
+                                    '<button type="button" class="btn bg-primary data-confirm-ok">' + LANG_OK + '</button>' +
                                 '</div>' +
                             '</div>' +
                         '</div>' +

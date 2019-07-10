@@ -1,12 +1,14 @@
 <div class="card-body">
     <% if @employee.user.nil? %>
-        <div class="alert alert-warning border-0 alert-dismissible text-center mb-0">
-            <%= t(".alert_account_empty") %>
+        <div class="text-center">
+            <div class="alert alert-warning">
+                <h6 class="mb-0"><%= t(".alert_account_empty") %></h6>
+            </div>
             <% if can? :create, GnsCore::User %>
                 <a href="<%= gns_core.new_backend_user_path(employee_id: @employee.id) %>"
-                    class="alert-link text-primary create-user-button">
-                    <%= t(".click_here") %>
-                </a> <%= t(".alert_empty") %>
+                    class="btn btn-primary create-user-button">
+                    <%= t(".create_account") %>
+                </a>
             <% end %>
         </div>
     <% else %>            
@@ -21,7 +23,7 @@
                         <footer class="blockquote-footer"><%= t(".email_login") %> <span class="font-weight-semibold"><%= @employee.user.email %></span></footer>
                         <footer class="blockquote-footer"><%= t(".system_roles") %>
                             <% if @employee.user.roles.empty? %>
-                                <span class="font-weight-semibold">No Access</span>
+                                <span class="font-weight-semibold"><%= t(".no_access") %></span>
                             <% else %>
                                 <%= @employee.user.roles.map {|r| "<span class=\"font-weight-semibold\">#{r.name}</span>"}.join(', ').html_safe %>
                             <% end %>

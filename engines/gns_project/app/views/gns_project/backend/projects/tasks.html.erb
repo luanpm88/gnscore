@@ -131,13 +131,27 @@
                         class="btn btn-sm bg-blue add-task-button">
                         <i class="icon-plus22 mr-1"></i> <%= t('.add_new_task') %>
                     </a>
+                <% else %>
+                    <button type="button"
+                        class="btn btn-sm bg-blue warning-button"
+                        data-warning="<%= t('.create_task_warning') %>">
+                        <i class="icon-plus22 mr-1"></i> <%= t('.add_new_task') %>
+                    </button>
                 <% end %>
-                <% if can? :download_attachments, @project %>
+                <% if @project.count_attachments > 0 %>
+                    <% if can? :download_attachments, @project %>
                         <a class="btn btn-sm btn-light ml-2"
                            href="<%= gns_project.download_attachments_backend_projects_path(@project.id) %>"
                            target="_blank">
                             <i class="icon-download4 mr-1"></i> <%= t('.download_all') %>
                         </a>
+                    <% else %>
+                        <button type="button"
+                            class="btn btn-sm bg-light ml-2 warning-button"
+                            data-warning="<%= t('.download_all_warning') %>">
+                            <i class="icon-plus22 mr-1"></i> <%= t('.download_all') %>
+                        </button>
+                    <% end %>
                 <% end %>
             </div>
         <% end %>

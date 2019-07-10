@@ -254,3 +254,10 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+.sort-by-box .select2.select2-container {
+    min-width: 8.25rem;
+}
+.btn.warning-button, a.warning-button {
+    opacity: .4;
+    cursor: not-allowed !important;
+}

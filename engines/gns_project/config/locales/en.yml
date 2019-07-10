@@ -392,8 +392,10 @@ en:
           task_planning: "Task Planning"
           planning: "Planning"
           projects: "Projects"
-          add_new_task: "Add New Task"
-          download_all: "Download All"
+          add_new_task: "Add new task"
+          download_all: "Download all"
+          create_task_warning: "You are not authorized to create new task"
+          download_all_warning: "You are not authorized to download all attachments"
         tasks_list:
           no: "No."
           task_description: "Task Description"
@@ -417,6 +419,7 @@ en:
           attachments: "Attachments"
           delete: "Delete"
           no_task_description: "There are no task description"
+          update_info_warning: "You are not authorized to update this task information"
           
         start_progress:
           update_status: "Update Status to IN-PROGRESS"

@@ -29,6 +29,13 @@ en:
   finished: "Finished"
   canceled: "Canceled"
   
+  lang:
+    close: "Close"
+    ok: "OK"
+    understand: "I understand!"
+    are_you_sure: "Are you sure?"
+    not_authorized: "You are not authorized to perform this action!"
+  
   layouts:
     gns_ux:
       backend:

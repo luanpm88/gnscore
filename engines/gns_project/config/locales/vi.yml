@@ -392,6 +392,8 @@ vi:
           projects: "Dự án"
           add_new_task: "Thêm công việc mới"
           download_all: "Tải xuống tất cả"
+          create_task_warning: "Bạn không được phép tạo thêm nhiệm vụ mới"
+          download_all_warning: "Bạn không được phép tải xuống tất cả hồ sơ"
         tasks_list:
           no: "Stt"
           task_description: "Mô tả công việc"
@@ -415,6 +417,7 @@ vi:
           attachments: "Đính kèm"
           delete: "Xóa"
           no_task_description: "Không có mô tả công việc"
+          update_info_warning: "Bạn không được phép cập nhật thông tin của nhiệm vụ này"
           
         start_progress:
           update_status: "Cập nhật trạng thái lên"
