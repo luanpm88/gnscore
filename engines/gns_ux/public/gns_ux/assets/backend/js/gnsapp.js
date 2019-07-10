@@ -360,4 +360,25 @@ function applyJs(container) {
 $(document).ready(function() {    
     // Apply js first load
     applyJs($('body'));
+    
+    // Warning button
+    $(document).on('click', '.warning-button', function(e) {
+        e.preventDefault();
+        
+        var message = $(this).attr('data-warning');
+        var html = '<div id="warningButtonModal" class="modal fade" tabindex="-1">' +
+            '<div class="modal-dialog modal-sm">' +
+                '<div class="modal-content">' +    
+                    '<div class="modal-body text-center">' +
+                        '<p>' + message + '</p>' +
+                        '<button type="button" class="btn btn-primary" data-dismiss="modal">' + LANG_UNDERSTAND + '</button>' +
+                    '</div>' +
+                '</div>' +
+            '</div>' +
+        '</div>';
+        $('body').append(html);
+        warningButtonModal = $('#warningButtonModal');
+        
+        warningButtonModal.modal('show');
+    });
 });

@@ -16,11 +16,10 @@ module GnsProject
       end
   
       # GET /tasks/new
-      def new
-        authorize! :create, GnsProject::Task
-        
+      def new        
         @task = Task.new
         @task.project = Project.find(params[:project_id])
+        authorize! :create_task, @task.project
         
         working_date = []
         working_date << Time.now.beginning_of_day.strftime('%d/%m/%Y')
@@ -30,9 +29,9 @@ module GnsProject
   
       # POST /tasks
       def create
-        authorize! :create, GnsProject::Task
-        
         @task = Task.new(task_params)
+        
+        authorize! :create_task, @task.project
         
         @task.creator = current_user
         @task.status = Task::STATUS_OPEN
@@ -82,9 +81,9 @@ module GnsProject
         @task.valid?
         
         # check if remark empty errors
-        if !params[:remark].present?
-          @task.errors.add('remark', "not be blank")
-        end
+        #if !params[:remark].present?
+        #  @task.errors.add('remark', "not be blank")
+        #end
         
         if params[:task][:workday].present?
           @task.start_date = params[:task][:workday].to_s.split('-')[0].to_date

@@ -12,6 +12,7 @@ module GnsCore
     
     belongs_to :creator, class_name: "GnsCore::User", optional: true
     has_and_belongs_to_many :roles, class_name: 'GnsCore::Role'
+    has_many :roles_users, class_name: 'GnsCore::RolesUser', dependent: :destroy
     belongs_to :employee, class_name: "GnsEmployee::Employee", optional: true
     validates :employee_id, uniqueness: true
     

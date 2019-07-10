@@ -94,8 +94,8 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <select name="active" data-placeholder="<%= t(".placeholder_employee") %>"
-                            class="form-control selectAllowClear" data-fouc>
+                        <select name="active" data-placeholder="<%= t('.filter_by_status') %>"
+                            class="form-control selectAllowClear">
                             <option value="true"><%= t('active') %></option>
                             <option value="false"><%= t('inactive') %></option>
                         </select>
@@ -103,7 +103,7 @@
                 </div>
                 
                 <div class="col-md-1 text-right">
-                    <span class="btn btn-primary mb-3 datalist-search-button"><%= t(".go") %></span>
+                    <span class="btn btn-primary mb-3 datalist-search-button"><%= t("go") %></span>
                 </div>
             </div>
         </div>
@@ -112,7 +112,7 @@
             <div class="datalist-header flex space-between">
                 <div class="text-left text-nowrap flex">
                     <div class="keyword-search flex align-center mr-3">
-                        <input class="form-control keyword-input" name="keyword" type="search" placeholder="<%= t(".placeholder_keyword_search") %>">
+                        <input class="form-control keyword-input" name="keyword" type="search" placeholder="<%= t("keyword_search") %>">
                     </div>
                     <div class="flex align-center">
                         <span class="mr-1"><%= t("show_columns") %>:</span>
@@ -127,9 +127,10 @@
                             <option value="mobile"><%= t(".mobile") %></option>
                             <option value="email"><%= t(".email") %></option>
                             <option value="address" selected><%= t(".address") %></option>
+                            <option value="account" selected><%= t(".account") %></option>
                             <option value="status" selected><%= t(".status") %></option>
                             <option value="creator"><%= t(".added_by") %></option>
-                            <option value="created_at" selected><%= t(".created_at") %></option>
+                            <option value="created_at"><%= t(".created_at") %></option>
                             <option value="updated_at"><%= t(".updated_at") %></option>
                         </select>
                     </div>
@@ -137,9 +138,9 @@
                 <div class="text-right text-nowrap flex">
                     <div class="sort-by-box flex align-center mr-3">
                         <span class="mr-1"><%= t("sort_by") %>:</span>
-                        <select name="sort_by" data-placeholder="Sort by..." class="form-control selectPrimary sort-by-select">
-                            <option value="created_at"><%= t(".created_date") %></option>
-                            <option value="code"><%= t(".code_id") %></option>
+                        <select name="sort_by" data-placeholder="<%= t('sort_by') %>" class="form-control selectPrimary sort-by-select">
+                            <option value="created_at"><%= t("created_at") %></option>
+                            <option value="code"><%= t(".code") %></option>
                             <option value="name"><%= t(".name") %></option>
                             <option value="starting_date"><%= t(".starting_date") %></option>
                         </select>
