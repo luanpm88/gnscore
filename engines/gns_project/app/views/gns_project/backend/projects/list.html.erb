@@ -26,6 +26,9 @@
             <% if params["show_columns"].include?("status") %>
                 <th class="text-nowrap"><%= t('.status') %></th>
             <% end %>
+            <% if params["show_columns"].include?("active") %>
+                <th class="text-nowrap text-center"><%= t('.active') %></th>
+            <% end %>
             <% if params["show_columns"].include?("created_at") %>
                 <th class="text-nowrap"><%= t('.create_at') %></th>
             <% end %>
@@ -78,6 +81,12 @@
                 <% if params["show_columns"].include?("status") %>
                     <td>
                         <span class="badge badge-<%= project.status %>"><%= t project.status %></span>
+                    </td>
+                <% end %>
+                <% if params["show_columns"].include?("active") %>
+                    <td class="text-center">
+                        <%= '<i class="icon-checkmark3 text-success"></i>'.html_safe if project.active? %>
+                        <%= '<i class="icon-cross2 text-danger-400"></i>'.html_safe if !project.active? %>
                     </td>
                 <% end %>
                 <% if params["show_columns"].include?("created_at") %>
@@ -152,6 +161,26 @@
                                     href="<%= gns_project.logs_backend_projects_path(project) %>">
                                     <i class="icon-history"></i> <%= t('.view_logs') %>
                                 </a>
+                                
+                                <% if can? :activate, project %>
+                                    <a class="dropdown-item ajax datalist-g-link"
+                                        href="<%= gns_project.activate_backend_projects_path(id: project) %>"
+                                        data-method="PUT"
+                                        data-confirm="<%= t('.activate_confirm')%>"
+                                    >
+                                        <i class="icon-checkmark4"></i> <%= t('.activate')%>
+                                    </a>
+                                <% end %>
+                                
+                                <% if can? :deactivate, project %>
+                                    <a class="dropdown-item ajax datalist-g-link"
+                                        href="<%= gns_project.deactivate_backend_projects_path(id: project) %>"
+                                        data-method="PUT"
+                                        data-confirm="<%= t('.deactivate_confirm')%>"
+                                    >
+                                        <i class="icon-blocked"></i> <%= t('.de_activate')%>
+                                    </a>
+                                <% end %>
                                 
                                 <% if can? :delete, project %>
                                     <div class="dropdown-divider"></div>

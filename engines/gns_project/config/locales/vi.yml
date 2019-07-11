@@ -289,6 +289,8 @@ vi:
           end_date: "Ngày kết thúc"
           complete: "% Hoàn thành"
           status: "Trạng thái"
+          active: "Có hiệu lực"
+          inactive: "Không hiệu lực"
           create_at: "Ngày tạo"
           update_at: "Ngày cập nhật"
           create_at: "Ngày tạo"
@@ -323,6 +325,12 @@ vi:
           finish: "Hoàn thành"
           start_project: 'Bắt đầu dự án'
           request_submit: "Yêu cầu phê duyệt"
+          activate: "Kích hoạt hiệu lực"
+          activate_confirm: "Bạn đang sắp hủy một dự án"
+          de_activate: "Hủy bỏ dự án"
+          deactivate_confirm: "Dự án hiện đang bị hủy. Bạn đang muốn khôi phục lại"
+          active: "Có hiệu lực"
+          inactive: "Không hiệu lực"
         new:
           new_project: "Dự án mới"
           details: "Chi tiết"
