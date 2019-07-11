@@ -96,7 +96,7 @@ module GnsProject
         authorize! :delete, @role
         
         # Add notification
-        current_user.add_notification("gns_employee.notification.role.deleted", @role)
+        current_user.add_notification("gns_project.notification.role.deleted", @role)
         
         if @role.destroy
           render json: {
