@@ -1,4 +1,4 @@
-<% @todo_list = GnsProject::Task.get_todo_list(current_user).order('updated_at desc') %>
+<% @todo_list = GnsProject::Task.get_todo_list(current_user.employee).order('updated_at desc') %>
 
 <div class="card">
     <div class="card-header header-elements-sm-inline">
