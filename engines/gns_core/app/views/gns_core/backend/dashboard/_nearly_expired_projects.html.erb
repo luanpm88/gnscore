@@ -26,7 +26,7 @@
         </thead>
         <tbody>
             <% @projects.each do |project| %>
-                <% time_remaining = (project.end_date.to_datetime - Time.now.to_datetime).to_i %>
+                <% time_remaining = (project.get_end_date.to_datetime - Time.now.to_datetime).to_i %>
                 <tr>
                     <td>
                         <a href="<%= gns_project.tasks_backend_projects_path(project) %>"
