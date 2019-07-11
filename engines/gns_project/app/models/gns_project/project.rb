@@ -78,6 +78,11 @@ module GnsProject
 
 			self.update_column(:cache_search, str.join(" ") + " " + str.join(" ").to_ascii)
 		end
+		
+		# get active
+    def self.get_active
+			self.where(active: true)
+		end
     
     # filters
     def self.filter(query, params)
@@ -96,6 +101,11 @@ module GnsProject
       # filter by status
       if params[:status].present?
         query = query.where(status: params[:status])
+      end
+      
+      # filter by active
+      if params[:active].present?
+        query = query.where(active: params[:active])
       end
       
       # single keyword
@@ -126,6 +136,7 @@ module GnsProject
       return query
     end
     
+    # get select2 records
     def self.select2(params)
       per_page = 10
       page = 1      
@@ -150,6 +161,16 @@ module GnsProject
       
       return data
     end
+    
+    # activate
+    def activate
+			update_attributes(active: true)
+		end
+    
+    # deactivate
+    def deactivate
+			update_attributes(active: false)
+		end
     
     # set status
     def set_new_for_status

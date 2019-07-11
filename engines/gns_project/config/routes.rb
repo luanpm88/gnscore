@@ -4,6 +4,9 @@ GnsProject::Engine.routes.draw do
             resources :projects do
                 collection do
                     post 'list'
+                    get 'select2'
+                    put 'activate'
+                    put 'deactivate'
                     get ':id/authorization', to: 'projects#authorization', as: 'authorization'
                     get ':id/authorization_list', to: 'projects#authorization_list', as: 'authorization_list'
                     get ':id/tasks', to: 'projects#tasks', as: 'tasks'

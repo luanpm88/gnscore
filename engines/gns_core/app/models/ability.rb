@@ -301,6 +301,22 @@ class Ability
       )
     end
     
+    can :activate, GnsProject::Project do |project|
+      !project.active? and
+      (
+        (user.has_permission?('gns_project.projects.activate_own') and project.creator == user) or
+        (user.has_permission?('gns_project.projects.activate_other') and project.creator != user)
+      )
+    end
+    
+    can :deactivate, GnsProject::Project do |project|
+      project.active? and
+      (
+        (user.has_permission?('gns_project.projects.deactivate_own') and project.creator == user) or
+        (user.has_permission?('gns_project.projects.deactivate_other') and project.creator != user)
+      )
+    end
+    
     can :mark_as_new, GnsProject::Project do |project|
       !project.is_new? and
       (

@@ -139,6 +139,15 @@
     <form class="datalist-filters">
         <div class="card-body pb-0">    
             <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select name="active" data-placeholder="<%= t('.filter_by_status') %>"
+                            class="form-control selectAllowClear">
+                            <option value="true"><%= t('.active') %></option>
+                            <option value="false"><%= t('.inactive') %></option>
+                        </select>
+                    </div>
+                </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <select name="customer_id" data-placeholder="<%= t('.filter_by_customer') %>"
@@ -167,7 +176,7 @@
                         <option value="<%= GnsProject::Project::STATUS_FINISHED %>"><%= t('.finished') %></option>
                     </select>
                 </div>
-                <div class="col-md-3 text-right">
+                <div class="col-md-1 text-right">
                     <span class="btn btn-primary mb-3 datalist-search-button"><%= t('go') %></span>
                 </div>
             </div>
@@ -190,6 +199,7 @@
                             <option value="end_date" selected><%= t('.end_date') %></option>
                             <option value="complete" selected><%= t('.complete') %></option>
                             <option value="status" selected><%= t('.status') %></option>
+                            <option value="active" selected><%= t('.active') %></option>
                             <option value="created_at"><%= t('.create_at') %></option>
                             <option value="updated_at"><%= t('.update_at') %></option>
                         </select>

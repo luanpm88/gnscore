@@ -293,6 +293,8 @@ en:
           end_date: "End Date"
           complete: "Progress complete"
           status: "Status"
+          active: "Active"
+          inactive: "Inactive"
           create_at: "Create at"
           update_at: "Update at"
           create_at: "Create at"
@@ -326,6 +328,12 @@ en:
           finish: "Finish"
           start_project: 'Start Project'
           request_submit: "Request (Submit)"
+          activate: "Activate"
+          activate_confirm: "You are about to activate a project"
+          de_activate: "De-activate"
+          deactivate_confirm: "You are about to deactivate a project"
+          active: "Active"
+          inactive: "Inactive"
         new:
           new_project: "New Project"
           details: "Details"

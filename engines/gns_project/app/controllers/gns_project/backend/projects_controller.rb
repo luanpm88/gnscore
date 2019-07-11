@@ -4,7 +4,8 @@ module GnsProject
       before_action :set_project, only: [:download_attachments, :show, :edit, :update, :destroy,
                                          :tasks, :tasks_list, :attachments, :attachments_list,
                                          :logs, :logs_list, :authorization, :authorization_list,
-                                         :comments, :send_request, :start_progress, :finish]
+                                         :comments, :send_request, :start_progress, :finish,
+                                         :activate, :deactivate]
   
       # GET /projects
       def index
@@ -158,7 +159,41 @@ module GnsProject
             }
           end
         end
+      end
+      
+      # SELECT2 /projects
+      def select2
+        render json: GnsProject::Project.select2(params)
+      end
+      
+      # ACTIVATE /roles/1
+      def activate
+        authorize! :activate, @project
         
+        @project.activate
+        
+        # Add notification
+        current_user.add_notification("gns_project.notification.project.activated", @project)
+        
+        render json: {
+          status: 'success',
+          message: 'Project was successfully activated.',
+        }
+      end
+      
+      # DEACTIVATE /roles/1
+      def deactivate
+        authorize! :deactivate, @project
+        
+        @project.deactivate
+        
+        # Add notification
+        current_user.add_notification("gns_project.notification.project.deactivated", @project)
+        
+        render json: {
+          status: 'success',
+          message: 'Project was successfully deactivated.',
+        }
       end
       
       # task list ajax table / project planning
