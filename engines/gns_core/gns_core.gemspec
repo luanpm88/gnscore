@@ -39,4 +39,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rubyXL'
   spec.add_dependency 'figaro'
   spec.add_dependency 'delayed_job_active_record'
+  spec.add_dependency 'sidekiq'
 end
