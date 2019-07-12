@@ -9,6 +9,7 @@ require "rubyXL"
 require 'rubyXL/convenience_methods'
 require 'figaro'
 require 'delayed_job_active_record'
+require 'sidekiq'
 
 
 module GnsCore
