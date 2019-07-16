@@ -38,11 +38,11 @@
                         </a>
                     </td>
                     <td>
-                        <span class="font-size-sm"><%= project.start_date.strftime("%d/%m/%Y") %></span>
+                        <span class="font-size-sm"><%= project.get_start_date.strftime("%d/%m/%Y") %></span>
                     </td>
                     <td>
                         <span class="font-size-sm <%= time_remaining <= 15 ? 'text-danger font-weight-semibold' : '' %>">
-                            <%= project.end_date.strftime("%d/%m/%Y") %>
+                            <%= project.get_end_date.strftime("%d/%m/%Y") %>
                         </span>
                     </td>
                 </tr>
