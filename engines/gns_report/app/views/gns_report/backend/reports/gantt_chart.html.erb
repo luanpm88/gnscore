@@ -34,6 +34,12 @@
                 $('input[name="anchor"]').val(anchor);
                 $('.datalist-search-button').click();
             });
+            
+            //$('.reset-anchor').click(function(){
+            //    anchor = 0;
+            //
+            //    $('input[name="anchor"]').val(anchor);
+            //});
         })
     </script>
 <% end %>
@@ -73,7 +79,7 @@
                     </div>
                 </div>
                 <div class="col-md-1 text-right">
-                    <span class="btn btn-primary mb-3 datalist-search-button"><%= t('go') %></span>
+                    <span class="btn btn-primary mb-3 datalist-search-button reset-anchor"><%= t('go') %></span>
                 </div>
                 <div class="col-md-3 text-right">
                     <input type="hidden" name="anchor" value="">

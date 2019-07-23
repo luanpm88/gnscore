@@ -218,8 +218,8 @@ module GnsEmployee
       end
       
       data = []
-      first_row = []
-      first_row << ''
+      days_row = []
+      days_row << ''
       
       start_at = nil
       end_at = nil
@@ -239,7 +239,7 @@ module GnsEmployee
         
           d = start_at.beginning_of_day
           while d <= end_at.end_of_day do
-            first_row << {label: d.strftime('%d/%m/%Y'), date: d}
+            days_row << {label: d.strftime('%d'), date: d}
             d += increment
           end
         end
@@ -253,7 +253,7 @@ module GnsEmployee
         
           d = start_at.beginning_of_day
           while d <= end_at.end_of_day do
-            first_row << {label: d.strftime('%d.%m %Y'), date: d}
+            days_row << {label: d.strftime('%d'), date: d}
             d += increment
           end
         end
@@ -267,15 +267,60 @@ module GnsEmployee
         
           d = start_at.beginning_of_day
           while d <= end_at.end_of_day do
-            first_row << {label: d.strftime('%m/%Y'), date: d}
+            days_row << {label: d.strftime('%m/%Y'), date: d}
             d += increment
           end
         end
       end
+      # day header
+      data << days_row
       
-      # first header
-      data << first_row
+      #########
+      # get months group
+      months_row = []
+      months_row << ''
+      current_row = nil
+      data.first[1..-1].each do |day|
+        if current_row.nil?
+          current_row = {month: day[:date].month, label: day[:date].strftime('%m/%Y'), grid_column_start: 2, grid_column_end: 3}
+        else
+          if day[:date].month == current_row[:month]
+            current_row[:grid_column_end] = current_row[:grid_column_end] + 1
+          else
+            months_row << current_row
+            current_row = {month: day[:date].month, label: day[:date].strftime('%m/%Y'), grid_column_start: current_row[:grid_column_end], grid_column_end: current_row[:grid_column_end] + 1}
+          end
+        end
+      end
+      months_row << current_row if current_row != months_row.last
       
+      # month header
+      data << months_row
+      
+      #########
+      # get months group
+      #years_row = []
+      #years_row << ''
+      #y_current_row = nil
+      #data.first[1..-1].each do |day|
+      #  if y_current_row.nil?
+      #    y_current_row = {year: day[:date].year, label: day[:date].year, grid_column_start: 2, grid_column_end: 3}
+      #  else
+      #    if day[:date].year == y_current_row[:year]
+      #      y_current_row[:grid_column_end] = y_current_row[:grid_column_end] + 1
+      #    else
+      #      years_row << y_current_row
+      #      y_current_row = {year: day[:date].year, label: day[:date].year, grid_column_start: y_current_row[:grid_column_end] + 1, grid_column_end: y_current_row[:grid_column_end] + 1}
+      #    end
+      #  end
+      #end
+      #years_row << y_current_row if y_current_row != years_row.last
+      
+      # year header
+      #data << years_row
+      
+      #########
+      # get gantt tasks
       colors = ['#2ecaac', '#00796B', '#ff6252', '#2E7D32' , '#F4511E', '#00838F', '#AD1457', '#283593' , '#558B2F', '#607D8B', '#FFA726', '#54c6f9']
       
       employees.each do |employee|
@@ -288,7 +333,7 @@ module GnsEmployee
           start_num = 1
           end_num = 1
           
-          first_row[1..-1].each do |r|
+          data.first[1..-1].each do |r|
             if params[:chart_type] == 'year'
               if task.start_date >= r[:date].end_of_month
                 start_num += 1
@@ -311,7 +356,8 @@ module GnsEmployee
             size: "#{start_num}/#{end_num}",
             color: colors[task.project_id%colors.count],
             label: task.name,
-            name: task.project_name + ': ' + task.name  + ' (' + task.start_date.strftime('%d/%m/%Y') + ' - ' + task.end_date.strftime('%d/%m/%Y') + ')'
+            name: task.project_name + ': ' + task.name  + ' (' + task.start_date.strftime('%d/%m/%Y') + ' - ' + task.end_date.strftime('%d/%m/%Y') + ')',
+            task: task
           }
         end
             
