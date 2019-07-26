@@ -31,6 +31,18 @@
                                 </div>
                             </td>
                             <td><%= t('.allow_users_to') %> <b><%= t('.create') %></b> <%= t('.a_new_employee') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_employee.employees.create.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_employee.employees.create.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_employee.employees.create.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
                         </tr>
                         
                         <tr>
@@ -46,6 +58,7 @@
                                 </div>
                             </td>
                             <td><%= t('.allow_users_to') %> <b><%= t('.view_read') %></b> <%= t('.their_own_employees') %></td>
+                            <td></td>
                         </tr>
                         
                         <tr>
@@ -61,6 +74,7 @@
                                 </div>
                             </td>
                             <td><%= t('.allow_users_to') %> <b><%= t('.view_read') %></b> <%= t('.other_people_employees') %></td>
+                            <td></td>
                         </tr>
                         
                         <tr>
@@ -76,6 +90,18 @@
                                 </div>
                             </td>
                             <td><%= t('.allow_users_to') %> <b><%= t('.update_info') %></b> <%= t('.their_own_employees') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_employee.employees.update_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_employee.employees.update_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_employee.employees.update_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
                         </tr>
                         
                         <tr>
@@ -91,6 +117,18 @@
                                 </div>
                             </td>
                             <td><%= t('.allow_users_to') %> <b><%= t('.update_info') %></b> <%= t('.other_people_employees') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_employee.employees.update_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_employee.employees.update_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_employee.employees.update_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
                         </tr>
                         
                         <tr>
@@ -106,6 +144,18 @@
                                 </div>
                             </td>
                             <td><%= t('.allow_users_to') %> <b><%= t('.activate') %></b> <%= t('.their_own_employees') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_employee.employees.activate_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_employee.employees.activate_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_employee.employees.activate_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
                         </tr>
                         
                         <tr>
@@ -121,6 +171,18 @@
                                 </div>
                             </td>
                             <td><%= t('.allow_users_to') %> <b><%= t('.activate') %></b> <%= t('.other_people_employees') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_employee.employees.activate_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_employee.employees.activate_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_employee.employees.activate_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
                         </tr>
                         
                         <tr>
@@ -136,6 +198,18 @@
                                 </div>
                             </td>
                             <td><%= t('.allow_users_to') %> <b><%= t('.de_activate') %></b> <%= t('.their_own_employees') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_employee.employees.deactivate_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_employee.employees.deactivate_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_employee.employees.deactivate_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
                         </tr>
                         
                         <tr>
@@ -151,6 +225,18 @@
                                 </div>
                             </td>
                             <td><%= t('.allow_users_to') %> <b><%= t('.de_activate') %></b> <%= t('.other_people_employees') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_employee.employees.deactivate_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_employee.employees.deactivate_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_employee.employees.deactivate_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
                         </tr>
                         
                         <tr>
@@ -166,6 +252,18 @@
                                 </div>
                             </td>
                             <td><%= t('.allow_users_to') %> <b><%= t('.delete') %></b> <%= t('.their_own_employees') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_employee.employees.delete_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_employee.employees.delete_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_employee.employees.delete_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
                         </tr>
                         
                         <tr>
@@ -181,6 +279,18 @@
                                 </div>
                             </td>
                             <td><%= t('.allow_users_to') %> <b><%= t('.delete') %></b> <%= t('.other_people_employees') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_employee.employees.delete_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_employee.employees.delete_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_employee.employees.delete_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -217,6 +327,18 @@
                                 </div>
                             </td>
                             <td><%= t('.allow_users_to') %> <b><%= t('.create') %></b> <%= t('.an_account_for_employees') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_core.users.create.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_core.users.create.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_core.users.create.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
                         </tr>
                         
                         <tr>
@@ -232,6 +354,7 @@
                                 </div>
                             </td>
                             <td><%= t('.allow_users_to') %> <b><%= t('.view_read') %></b> <%= t('.their_own_accounts') %></td>
+                            <td></td>
                         </tr>
                         
                         <tr>
@@ -247,6 +370,7 @@
                                 </div>
                             </td>
                             <td><%= t('.allow_users_to') %> <b><%= t('.view_read') %></b> <%= t('.other_people_accounts') %></td>
+                            <td></td>
                         </tr>
                         
                         <tr>
@@ -262,6 +386,18 @@
                                 </div>
                             </td>
                             <td><%= t('.allow_users_to') %> <b><%= t('.update_info_change_password') %></b> <%= t('.their_own_accounts') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_core.users.update_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_core.users.update_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_core.users.update_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
                         </tr>
                         
                         <tr>
@@ -277,6 +413,18 @@
                                 </div>
                             </td>
                             <td><%= t('.allow_users_to') %> <b><%= t('.update_info_change_password') %></b> <%= t('.other_people_accounts') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_core.users.update_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_core.users.update_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_core.users.update_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
                         </tr>
                         
                         <tr>
@@ -292,6 +440,18 @@
                                 </div>
                             </td>
                             <td><%= t('.allow_users_to') %> <b><%= t('.lock_ban_block') %></b> <%= t('.their_own_accounts') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_core.users.deactivate_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_core.users.deactivate_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_core.users.deactivate_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
                         </tr>
                         
                         <tr>
@@ -307,6 +467,18 @@
                                 </div>
                             </td>
                             <td><%= t('.allow_users_to') %> <b><%= t('.lock_ban_block') %></b> <%= t('.other_people_accounts') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_core.users.deactivate_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_core.users.deactivate_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_core.users.deactivate_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
                         </tr>
                         
                         <tr>
@@ -322,6 +494,18 @@
                                 </div>
                             </td>
                             <td><%= t('.allow_users_to') %> <b><%= t('.unlock') %></b> <%= t('.their_own_accounts') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_core.users.activate_own.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_core.users.activate_own.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_core.users.activate_own.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
                         </tr>
                         
                         <tr>
@@ -337,6 +521,18 @@
                                 </div>
                             </td>
                             <td><%= t('.allow_users_to') %> <b><%= t('.unlock') %></b> <%= t('.other_people_accounts') %></td>
+                            <td class="text-right">
+                                <div class="form-check form-check-inline form-check-right form-check-switchery">
+                                    <label class="form-check-label">
+                                        <%= t('.notification') %>:
+                                        <input type="hidden" name="permissions[gns_core.users.activate_other.notification]" value="false" />
+                                        <input type="checkbox" class="form-check-input-switchery"
+                                            name="permissions[gns_core.users.activate_other.notification]" value="true"
+                                            <%= 'checked' if @role.has_permission?('gns_core.users.activate_other.notification') %>
+                                        >
+                                    </label>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
