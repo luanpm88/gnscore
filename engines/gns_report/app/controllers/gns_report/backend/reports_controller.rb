@@ -20,9 +20,22 @@ module GnsReport
         #  @projects = @projects.where('gns_project_tasks.end_date <= ?', @to_date)
         #end
         
+        @pie_data = []
+        legend_data = []
+        series_data = []
+        
+        @projects.each do |project|
+          legend_data << project.name
+          series_data << {value: project.hours, name: project.name}
+        end
+        @pie_data << legend_data
+        @pie_data << series_data
+        @pie_data = @pie_data
+        
         File.open("tmp/project_report_xlsx.yml", "w+") do |f|
           f.write({
-            projects: @projects
+            projects: @projects,
+            projects_hours: @projects.hours
           }.to_yaml)
         end
         
@@ -32,6 +45,7 @@ module GnsReport
       def project_report_xlsx
         data = YAML.load_file("tmp/project_report_xlsx.yml")
         @projects = data[:projects]
+        @projects_hours = data[:projects_hours]
         
         workbook = RubyXL::Parser.parse('templates/project_export_template.xlsx')
         worksheet = workbook[0]
@@ -39,16 +53,14 @@ module GnsReport
         # Records
         sum = 0
         row_num = 4
-        @projects.each do |project|
-          diff_date = (project.end_date.to_date - project.start_date.to_date).to_i + 1
+        @projects.reverse.each do |project|
           worksheet.insert_row(4)
           worksheet[4][0].change_contents(project.code)
           worksheet[4][1].change_contents(project.name)
-          worksheet[4][2].change_contents(diff_date)
+          worksheet[4][2].change_contents(project.hours)
           row_num += 1
-          sum += diff_date
         end
-        worksheet[row_num][2].change_contents(sum)
+        worksheet[row_num][2].change_contents(@projects_hours)
         worksheet.delete_row(3)
         
         send_data workbook.stream.string,
@@ -76,6 +88,21 @@ module GnsReport
             @projects = @projects.where('gns_project_tasks.end_date <= ?', @to_date)
           end
           
+          @projects_legend_data = @projects.map {|p| p.name}.to_s
+          @projects_series_data = @projects.map {|p| {value: p.hours, name: p.name}}.to_s
+          
+          @pie_data = []
+          legend_data = []
+          series_data = []
+          
+          @projects.each do |project|
+            legend_data << project.name
+            series_data << {value: project.hours(employee_id: @employee.id), name: project.name}
+          end
+          @pie_data << legend_data
+          @pie_data << series_data
+          @pie_data = @pie_data
+          
           File.open("tmp/employee_report_xlsx.yml", "w+") do |f|
             f.write({
               from_date: @from_date,
@@ -83,7 +110,7 @@ module GnsReport
               projects: @projects,
               employee: @employee,
               projects_count: @projects.count,
-              projects_number_of_days: @projects.number_of_days(employee_id: @employee.id)
+              projects_hours: @projects.hours(employee_id: @employee.id)
             }.to_yaml)
           end
         end
@@ -98,7 +125,7 @@ module GnsReport
         @projects = data[:projects]
         @employee = data[:employee]
         @projects_count = data[:projects_count]
-        @projects_number_of_days = data[:projects_number_of_days]
+        @projects_hours = data[:projects_hours]
         
         workbook = RubyXL::Parser.parse('templates/employee_export_template.xlsx')
         worksheet = workbook[0]
@@ -113,11 +140,11 @@ module GnsReport
           worksheet.insert_row(6)
           worksheet[6][0].change_contents(@projects_count - index)
           worksheet[6][1].change_contents(project.name)
-          worksheet[6][2].change_contents(project.number_of_days(employee_id: @employee.id))
+          worksheet[6][2].change_contents(project.hours(employee_id: @employee.id))
           row_num += 1
         end
         worksheet[row_num][1].change_contents(@projects_count)
-        worksheet[row_num][2].change_contents(@projects_number_of_days)
+        worksheet[row_num][2].change_contents(@projects_hours)
         worksheet.delete_row(5)
         
         send_data workbook.stream.string,
