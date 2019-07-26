@@ -40,11 +40,11 @@
             </li>
             
             <li class="nav-item dropdown">
-                <% notifications = GnsNotification::Notification.all %>
-                <a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
+                
+                <a href="#" class="navbar-nav-link dropdown-toggle caret-0 notifications-button" data-toggle="dropdown">
                     <i class="icon-bell2"></i>
                     <span class="d-md-none ml-2"><%= t(".notifications") %></span>
-                    <span class="badge badge-pill bg-warning-400 ml-auto ml-md-0"><%= notifications.count %></span>
+                    <div class="notifications-count"></div>
                 </a>
                 
                 <div class="dropdown-menu dropdown-menu-right dropdown-content wmin-md-350">
@@ -53,39 +53,10 @@
                         <a href="#" class="text-primary"><%= t(".mark_all_as_read") %></a>
                     </div>
 
-                    <div class="dropdown-content-body dropdown-scrollable">
-                        <ul class="media-list">
-                            
-                            <% notifications.order('created_at desc').each do |notification| %>
-                                <li class="media">
-                                    <div class="mr-3 position-relative">
-										<img src="<%= notification.user.avatar.present? ? notification.user.avatar.system : url_for("/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg") %>"
-                                            width="40" height="40" class="rounded-circle" alt=""
-                                        >
-									</div>
-
-									<div class="media-body">
-                                        <a href="#">
-                                            <div class="media-title">
-                                                <span class="text-info"><%= notification.user_name %></span>
-                                                <span class="text-muted float-right font-size-sm">
-                                                    <%= time_ago_in_words(notification.created_at)  %>
-                                                </span>
-                                            </div>
-    
-                                            <span class="text-grey-600">
-                                                <%= t(notification.phrase, notification.get_data.attributes.symbolize_keys) %>
-                                            </span>
-                                        </a>
-									</div>
-                                </li>
-                            <% end %>
-                            
-                        </ul>
-                    </div>
+                    <div class="notifications-box"></div>
 
                     <div class="dropdown-content-footer justify-content-center p-0">
-                        <a href="#" class="bg-light text-grey w-100 py-2" data-popup="tooltip" title="<%= t(".see_all") %>"><i class="icon-menu7 d-block top-0"></i></a>
+                        <a href="<%= gns_notification.your_notifications_backend_notifications_users_path %>" class="bg-light text-grey w-100 py-2" data-popup="tooltip" title="<%= t(".see_all") %>"><i class="icon-menu7 d-block top-0"></i></a>
                     </div>
                 </div>
             </li>
@@ -115,3 +86,27 @@
     </div>
 </div>
 <!-- /main navbar -->
+
+<% content_for :page_script do %>
+    <script>
+        var notifications_box = new ajaxBox(
+            $('.notifications-box'),
+            '<%= gns_notification.notifications_box_backend_notifications_users_path %>'
+        );
+        
+        var notification_unread_count = new ajaxBox(
+            $('.notifications-count'),
+            '<%= gns_notification.notification_unread_count_backend_notifications_users_path %>'
+        );
+        
+        $(function() {
+            $('.notifications-button').click(function(e) {
+                e.preventDefault();
+                
+                notifications_box.load();
+                notification_unread_count.load();
+            });
+            notification_unread_count.load();
+        });
+    </script>
+<% end %>

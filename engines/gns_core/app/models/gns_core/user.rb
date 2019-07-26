@@ -16,6 +16,8 @@ module GnsCore
     belongs_to :employee, class_name: "GnsEmployee::Employee", optional: true
     validates :employee_id, uniqueness: true
     
+    has_many :notifications_users, class_name: 'GnsNotification::NotificationsUser', dependent: :destroy
+    
     mount_uploader :avatar, GnsCore::AvatarUploader
     
     def creator_name
@@ -129,6 +131,10 @@ module GnsCore
     # add notification
     def add_notification(phrase, object, remark=nil)
       GnsNotification::Notification.add_new(phrase, object, self, remark)
+    end
+    
+    def notification_unread_count
+      self.notifications_users.where(read: false).count
     end
     
     def supreme_administrator?
