@@ -363,5 +363,19 @@ module GnsProject
     def self.number_of_days(options={})
       sum { |p| p.number_of_days(options) }
     end
+    
+    def hours(options={})
+      tasks = self.tasks
+      
+      if options[:employee_id].present?
+        tasks = tasks.where(employee_id: options[:employee_id])
+      end
+      
+      return tasks.sum(:hours)
+    end
+    
+    def self.hours(options={})
+      sum { |p| p.hours(options) }
+    end
   end
 end
