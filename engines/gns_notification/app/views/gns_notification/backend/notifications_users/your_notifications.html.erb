@@ -1,0 +1,44 @@
+<% content_for :title do %>
+    <%= t('.my_notifications') %>
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> <%= t('.home') %></a>
+    <span class="breadcrumb-item active"><%= t('.notifications') %></span>
+<% end %>
+
+<div class="card">
+    <div class="card-header header-elements-inline">
+        <h5 class="card-title">List of all notifications</h5>
+        <div class="header-elements">
+            <div class="list-icons">
+                <a href="#" class="text-primary mr-3">Mark All as Read</a>
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+
+    <ul class="media-list media-list-linked">
+        <% @notifications_users.each do |notifications_user| %>
+            <li>
+                <a href="#" class="media">
+                    <div class="mr-3">
+                        <img src="<%= notifications_user.notification.user.avatar.present? ? notifications_user.notification.user.avatar.system : url_for("/gns_ux/assets/backend/global/images/placeholders/placeholder.jpg") %>"
+                            width="40" height="40" class="rounded-circle" alt=""
+                        >
+                    </div>
+                    <div class="media-body">
+                        <div>
+                            <span class="media-title font-weight-semibold"><%= notifications_user.notification.user_name %></span> - 
+                            <span><%= t(notifications_user.notification.phrase, notifications_user.notification.get_data.attributes.symbolize_keys) %></span>
+                        </div>
+                        <span class="text-muted"><%= time_ago_in_words(notifications_user.notification.created_at) %></span>
+                    </div>
+                    <div class="align-self-center ml-3">
+                        <span class="badge badge-mark border-dark" data-popup="tooltip" data-original-title="Mark as Read"></span>
+                    </div>
+                </a>
+            </li>
+        <% end %>
+    </ul>
+</div>
