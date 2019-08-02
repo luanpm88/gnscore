@@ -22,9 +22,9 @@ module GnsNotification
       return notification
     end
     
-    def push_to_users(type)      
+    def push_to_users(ability, object)      
 			GnsCore::User.all.each do |user|
-				if user.has_permission?(type)
+				if user.can?(ability, object) 
 					self.notifications_users.create(
 						user_id: user.id,
 					)

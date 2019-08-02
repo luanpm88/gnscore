@@ -20,6 +20,11 @@ module GnsCore
     
     mount_uploader :avatar, GnsCore::AvatarUploader
     
+    def ability
+      @ability ||= Ability.new(self)
+    end
+    delegate :can?, :cannot?, :to => :ability
+    
     def creator_name
       creator.present? ? creator.name : ''
     end
