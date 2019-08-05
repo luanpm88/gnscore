@@ -105,6 +105,28 @@ class Ability
         (user.has_permission?('gns_employee.employees.deactivate_other') and employee.creator != user)
       )
     end
+    
+    can :create_notification, GnsEmployee::Employee if user.has_permission?('gns_employee.employees.create.notification')
+    
+    can :update_notification, GnsEmployee::Employee do |employee|
+      (user.has_permission?('gns_employee.employees.update_own.notification') and employee.creator == user) or
+      (user.has_permission?('gns_employee.employees.update_other.notification') and employee.creator != user)
+    end
+    
+    can :delete_notification, GnsEmployee::Employee do |employee|
+      (user.has_permission?('gns_employee.employees.delete_own.notification') and employee.creator == user) or
+      (user.has_permission?('gns_employee.employees.delete_other.notification') and employee.creator != user)
+    end
+    
+    can :activate_notification, GnsEmployee::Employee do |employee|
+      (user.has_permission?('gns_employee.employees.activate_own.notification') and employee.creator == user) or
+      (user.has_permission?('gns_employee.employees.activate_other.notification') and employee.creator != user)
+    end
+    
+    can :deactivate_notification, GnsEmployee::Employee do |employee|
+      (user.has_permission?('gns_employee.employees.deactivate_own.notification') and employee.creator == user) or
+      (user.has_permission?('gns_employee.employees.deactivate_other.notification') and employee.creator != user)
+    end
     # --------------------------
     
     # gns_contact /contacts
@@ -139,6 +161,28 @@ class Ability
         (user.has_permission?('gns_contact.contacts.deactivate_own') and contact.creator == user) or
         (user.has_permission?('gns_contact.contacts.deactivate_other') and contact.creator != user)
       )
+    end
+    
+    can :create_notification, GnsContact::Contact if user.has_permission?('gns_contact.contacts.create.notification')
+    
+    can :update_notification, GnsContact::Contact do |contact|
+      (user.has_permission?('gns_contact.contacts.update_own.notification') and contact.creator == user) or
+      (user.has_permission?('gns_contact.contacts.update_other.notification') and contact.creator != user)
+    end
+    
+    can :delete_notification, GnsContact::Contact do |contact|
+      (user.has_permission?('gns_contact.contacts.delete_own.notification') and contact.creator == user) or
+      (user.has_permission?('gns_contact.contacts.delete_other.notification') and contact.creator != user)
+    end
+    
+    can :activate_notification, GnsContact::Contact do |contact|
+      (user.has_permission?('gns_contact.contacts.activate_own.notification') and contact.creator == user) or
+      (user.has_permission?('gns_contact.contacts.activate_other.notification') and contact.creator != user)
+    end
+    
+    can :deactivate_notification, GnsContact::Contact do |contact|
+      (user.has_permission?('gns_contact.contacts.deactivate_own.notification') and contact.creator == user) or
+      (user.has_permission?('gns_contact.contacts.deactivate_other.notification') and contact.creator != user)
     end
     # --------------------------
     
@@ -175,6 +219,28 @@ class Ability
         (user.has_permission?('gns_contact.categories.deactivate_other') and category.creator != user)
       )
     end
+    
+    can :create_notification, GnsContact::Category if user.has_permission?('gns_contact.categories.create.notification')
+    
+    can :update_notification, GnsContact::Category do |category|
+      (user.has_permission?('gns_contact.categories.update_own.notification') and category.creator == user) or
+      (user.has_permission?('gns_contact.categories.update_other.notification') and category.creator != user)
+    end
+    
+    can :delete_notification, GnsContact::Category do |category|
+      (user.has_permission?('gns_contact.categories.delete_own.notification') and category.creator == user) or
+      (user.has_permission?('gns_contact.categories.delete_other.notification') and category.creator != user)
+    end
+    
+    can :activate_notification, GnsContact::Category do |category|
+      (user.has_permission?('gns_contact.categories.activate_own.notification') and category.creator == user) or
+      (user.has_permission?('gns_contact.categories.activate_other.notification') and category.creator != user)
+    end
+    
+    can :deactivate_notification, GnsContact::Category do |category|
+      (user.has_permission?('gns_contact.categories.deactivate_own.notification') and category.creator == user) or
+      (user.has_permission?('gns_contact.categories.deactivate_other.notification') and category.creator != user)
+    end
     # --------------------------
     
     # gns_project /categories
@@ -210,6 +276,28 @@ class Ability
         (user.has_permission?('gns_project.categories.deactivate_other') and category.creator != user)
       )
     end
+    
+    can :create_notification, GnsProject::Category if user.has_permission?('gns_project.categories.create.notification')
+    
+    can :update_notification, GnsProject::Category do |category|
+      (user.has_permission?('gns_project.categories.update_own.notification') and category.creator == user) or
+      (user.has_permission?('gns_project.categories.update_other.notification') and category.creator != user)
+    end
+    
+    can :delete_notification, GnsProject::Category do |category|
+      (user.has_permission?('gns_project.categories.delete_own.notification') and category.creator == user) or
+      (user.has_permission?('gns_project.categories.delete_other.notification') and category.creator != user)
+    end
+    
+    can :activate_notification, GnsProject::Category do |category|
+      (user.has_permission?('gns_project.categories.activate_own.notification') and category.creator == user) or
+      (user.has_permission?('gns_project.categories.activate_other.notification') and category.creator != user)
+    end
+    
+    can :deactivate_notification, GnsProject::Category do |category|
+      (user.has_permission?('gns_project.categories.deactivate_own.notification') and category.creator == user) or
+      (user.has_permission?('gns_project.categories.deactivate_other.notification') and category.creator != user)
+    end
     # --------------------------
     
     # gns_project /stages
@@ -238,6 +326,28 @@ class Ability
     can :deactivate, GnsProject::Stage do |stage|
       user.has_permission?('gns_project.stages.deactivate_own') or
       user.has_permission?('gns_project.stages.deactivate_other')
+    end
+    
+    can :create_notification, GnsProject::Stage if user.has_permission?('gns_project.stages.create.notification')
+    
+    can :update_notification, GnsProject::Stage do |stage|
+      (user.has_permission?('gns_project.stages.update_own.notification') and stage.creator == user) or
+      (user.has_permission?('gns_project.stages.update_other.notification') and stage.creator != user)
+    end
+    
+    can :delete_notification, GnsProject::Stage do |stage|
+      (user.has_permission?('gns_project.stages.delete_own.notification') and stage.creator == user) or
+      (user.has_permission?('gns_project.stages.delete_other.notification') and stage.creator != user)
+    end
+    
+    can :activate_notification, GnsProject::Stage do |stage|
+      (user.has_permission?('gns_project.stages.activate_own.notification') and stage.creator == user) or
+      (user.has_permission?('gns_project.stages.activate_other.notification') and stage.creator != user)
+    end
+    
+    can :deactivate_notification, GnsProject::Stage do |stage|
+      (user.has_permission?('gns_project.stages.deactivate_own.notification') and stage.creator == user) or
+      (user.has_permission?('gns_project.stages.deactivate_other.notification') and stage.creator != user)
     end
     # --------------------------
     # gns_project /roles
@@ -277,6 +387,33 @@ class Ability
         (user.has_permission?('gns_project.roles.deactivate_own') and role.creator == user) or
         (user.has_permission?('gns_project.roles.deactivate_other') and role.creator != user)
       )
+    end
+    
+    can :create_notification, GnsProject::Role if user.has_permission?('gns_project.roles.create.notification')
+    
+    can :update_notification, GnsProject::Role do |role|
+      (user.has_permission?('gns_project.roles.update_own.notification') and role.creator == user) or
+      (user.has_permission?('gns_project.roles.update_other.notification') and role.creator != user)
+    end
+    
+    can :set_permissions_notification, GnsProject::Role do |role|
+      (user.has_permission?('gns_project.roles.set_permissions_own.notification') and role.creator == user) or
+      (user.has_permission?('gns_project.roles.set_permissions_other.notification') and role.creator != user)
+    end
+    
+    can :delete_notification, GnsProject::Role do |role|
+      (user.has_permission?('gns_project.roles.delete_own.notification') and role.creator == user) or
+      (user.has_permission?('gns_project.roles.delete_other.notification') and role.creator != user)
+    end
+    
+    can :activate_notification, GnsProject::Role do |role|
+      (user.has_permission?('gns_project.roles.activate_own.notification') and role.creator == user) or
+      (user.has_permission?('gns_project.roles.activate_other.notification') and role.creator != user)
+    end
+    
+    can :deactivate_notification, GnsProject::Role do |role|
+      (user.has_permission?('gns_project.roles.deactivate_own.notification') and role.creator == user) or
+      (user.has_permission?('gns_project.roles.deactivate_other.notification') and role.creator != user)
     end
     # --------------------------
     
@@ -361,6 +498,54 @@ class Ability
     
     can :download_attachments, GnsProject::Project do |project|
       project.count_attachments > 0
+    end
+    
+    # project notifications
+    can :create_notification, GnsProject::Project if user.has_permission?('gns_project.projects.create.notification')
+    
+    can :update_notification, GnsProject::Project do |project|
+      (user.has_permission?('gns_project.projects.update_own.notification') and project.creator == user) or
+      (user.has_permission?('gns_project.projects.update_other.notification') and project.creator != user)
+    end
+    
+    can :delete_notification, GnsProject::Project do |project|
+      (user.has_permission?('gns_project.projects.delete_own.notification') and project.creator == user) or
+      (user.has_permission?('gns_project.projects.delete_other.notification') and project.creator != user)
+    end
+    
+    can :activate_notification, GnsProject::Project do |employee|
+      (user.has_permission?('gns_project.projects.activate_own.notification') and project.creator == user) or
+      (user.has_permission?('gns_project.projects.activate_other.notification') and project.creator != user)
+    end
+    
+    can :deactivate_notification, GnsProject::Project do |project|
+      (user.has_permission?('gns_project.projects.deactivate_own.notification') and project.creator == user) or
+      (user.has_permission?('gns_project.projects.deactivate_other.notification') and project.creator != user)
+    end
+    
+    can :mark_as_new_notification, GnsProject::Project do |employee|
+      (user.has_permission?('gns_project.projects.setnew_own.notification') and project.creator == user) or
+      (user.has_permission?('gns_project.projects.setnew_other.notification') and project.creator != user)
+    end
+    
+    can :send_request_notification, GnsProject::Project do |project|
+      (user.has_permission?('gns_project.projects.setpending_own.notification') and project.creator == user) or
+      (user.has_permission?('gns_project.projects.setpending_other.notification') and project.creator != user)
+    end
+    
+    can :start_project_notification, GnsProject::Project do |project|
+      (user.has_permission?('gns_project.projects.setinprogress_own.notification') and project.creator == user) or
+      (user.has_permission?('gns_project.projects.setinprogress_other.notification') and project.creator != user)
+    end
+    
+    can :finish_notification, GnsProject::Project do |employee|
+      (user.has_permission?('gns_project.projects.setfinished_own.notification') and project.creator == user) or
+      (user.has_permission?('gns_project.projects.setfinished_other.notification') and project.creator != user)
+    end
+    
+    can :download_attachments_notification, GnsProject::Project do |project|
+      (user.has_permission?('gns_project.projects.download_attachments_own.notification') and project.creator == user) or
+      (user.has_permission?('gns_project.projects.download_attachments_other.notification') and project.creator != user)
     end
     # --------------------------
     
@@ -449,6 +634,57 @@ class Ability
     can :download_attachments, GnsProject::Task do |task|
       task.count_attachments > 0
     end
+    
+    # task notifications
+    can :create_task_notification, GnsProject::Project do |project|
+      user.has_project_permission?(project, 'gns_project.tasks.create.notification')
+    end
+    
+    can :update_notification, GnsProject::Task do |task|
+      (
+        user.has_project_permission?(task.project, 'gns_project.tasks.update_own') and
+        (
+          task.employee == user.employee or task.creator == user
+        )
+      ) or
+      (
+        user.has_project_permission?(task.project, 'gns_project.tasks.update_other') and
+        (
+          task.employee != user.employee or task.creator != user
+        )
+      )
+    end
+    
+    can :delete_notification, GnsProject::Task do |task|
+      (user.has_project_permission?(task.project, 'gns_project.tasks.delete_own') and task.employee == user.employee) or
+      (user.has_project_permission?(task.project, 'gns_project.tasks.delete_other') and task.employee != user.employee)
+    end
+    
+    can :finish_notification, GnsProject::Task do |task|
+      (user.has_project_permission?(task.project, 'gns_project.tasks.finish_own') and task.employee == user.employee) or
+      (user.has_project_permission?(task.project, 'gns_project.tasks.finish_other') and task.employee != user.employee)
+    end
+    
+    can :unfinish_notification, GnsProject::Task do |task|
+      (user.has_project_permission?(task.project, 'gns_project.tasks.unfinish_own') and task.employee == user.employee) or
+      (user.has_project_permission?(task.project, 'gns_project.tasks.unfinish_other') and task.employee != user.employee)
+    end
+    
+    can :close_notification, GnsProject::Task do |task|
+      (user.has_project_permission?(task.project, 'gns_project.tasks.close_own') and task.employee == user.employee) or
+      (user.has_project_permission?(task.project, 'gns_project.tasks.close_other') and task.employee != user.employee)
+    end
+    
+    can :reopen_notification, GnsProject::Task do |task|
+      (user.has_project_permission?(task.project, 'gns_project.tasks.reopen_own') and task.employee == user.employee) or
+      (user.has_project_permission?(task.project, 'gns_project.tasks.reopen_other') and task.employee != user.employee)
+    end
+    
+    can :update_progress_notification, GnsProject::Task do |task|
+      (user.has_project_permission?(task.project, 'gns_project.tasks.update_progress_own') and task.employee == user.employee) or
+      (user.has_project_permission?(task.project, 'gns_project.tasks.update_progress_other') and task.employee != user.employee)
+    end
+    
     # --------------------------
     
     # gns_project / attachments
@@ -512,6 +748,19 @@ class Ability
     #    (user.has_permission?('gns_project.template.deactivate_other') and template.creator != user)
     #  )
     #end
+    
+    # template notifications
+    can :create_notification, GnsProject::Template if user.has_permission?('gns_project.templates.create.notification')
+    
+    can :update_notification, GnsProject::Template do |template|
+      (user.has_permission?('gns_project.templates.update_own.notification') and template.creator == user) or
+      (user.has_permission?('gns_project.templates.update_other.notification') and template.creator != user)
+    end
+    
+    can :delete_notification, GnsProject::Template do |template|
+      (user.has_permission?('gns_project.templates.delete_own.notification') and template.creator == user) or
+      (user.has_permission?('gns_project.templates.delete_other.notification') and template.creator != user)
+    end
     # --------------------------
   end
 end
