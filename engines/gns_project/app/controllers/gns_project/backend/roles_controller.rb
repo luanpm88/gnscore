@@ -34,7 +34,8 @@ module GnsProject
           end
           
           # Add notification
-          current_user.add_notification("gns_project.notification.role.update_permissions", @role)
+          @notification = current_user.add_notification("gns_project.notification.role.update_permissions", @role)
+          @notification.push_to_users(:set_permissions_notification, @role)
           
           flash[:success] = 'Project role has been updated policies successfully.'
           redirect_to gns_project.backend_roles_path
@@ -58,7 +59,8 @@ module GnsProject
   
         if @role.save
           # Add notification
-          current_user.add_notification("gns_project.notification.role.created", @role)
+          @notification = current_user.add_notification("gns_project.notification.role.created", @role)
+          @notification.push_to_users(:create_notification, @role)
           
           flash[:success] = 'Project role was successfully created.'
           render json: {
@@ -80,7 +82,8 @@ module GnsProject
         
         if @role.update(role_params)
           # Add notification
-          current_user.add_notification("gns_project.notification.role.updated", @role)
+          @notification = current_user.add_notification("gns_project.notification.role.updated", @role)
+          @notification.push_to_users(:update_notification, @role)
           
           render json: {
             status: 'success',
@@ -96,7 +99,8 @@ module GnsProject
         authorize! :delete, @role
         
         # Add notification
-        current_user.add_notification("gns_project.notification.role.deleted", @role)
+        @notification = current_user.add_notification("gns_project.notification.role.deleted", @role)
+        @notification.push_to_users(:delete_notification, @role)
         
         if @role.destroy
           render json: {
@@ -123,7 +127,8 @@ module GnsProject
         @role.activate
         
         # Add notification
-        current_user.add_notification("gns_project.notification.role.activate", @role)
+        @notification = current_user.add_notification("gns_project.notification.role.activate", @role)
+        @notification.push_to_users(:activate_notification, @role)
         
         render json: {
           status: 'success',
@@ -138,7 +143,8 @@ module GnsProject
         @role.deactivate
         
         # Add notification
-        current_user.add_notification("gns_project.notification.role.deactivate", @role)
+        @notification = current_user.add_notification("gns_project.notification.role.deactivate", @role)
+        @notification.push_to_users(:deactivate_notification, @role)
         
         render json: {
           status: 'success',

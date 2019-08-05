@@ -37,6 +37,10 @@ module GnsProject
           # add below stage
           @stage.update_custom_order(current_stage)
           
+          # Add notification
+          @notification = current_user.add_notification("gns_project.notification.stage.created", @stage)
+          @notification.push_to_users(:create_notification, @stage)
+          
           flash[:success] = 'Stage was successfully created.'
           
           render json: {
@@ -58,7 +62,9 @@ module GnsProject
         authorize! :update, @stage
         
         if @stage.update(stage_params)
-          flash[:success] = 'Stage was successfully updated.'
+          # Add notification
+          @notification = current_user.add_notification("gns_project.notification.stage.updated", @stage)
+          @notification.push_to_users(:update_notification, @stage)
           
           render json: {
             status: 'success',
@@ -72,6 +78,10 @@ module GnsProject
       # DELETE /stages/1
       def destroy
         authorize! :delete, @stage
+        
+        # Add notification
+        @notification = current_user.add_notification("gns_project.notification.stage.deleted", @stage)
+        @notification.push_to_users(:delete_notification, @stage)
         
         @stage.destroy
         

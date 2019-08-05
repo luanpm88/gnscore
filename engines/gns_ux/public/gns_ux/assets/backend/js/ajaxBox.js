@@ -1,11 +1,11 @@
-function ajaxBox(obj, url, callback) {
+function ajaxBox(obj, url, callback, hide_loader) {
     this.box = obj;
     this.url = url;
     var main = this;
     
     this.clear = function() {
         // Add loading icon spinner
-        if (main.box.find('.datalist-loading-overlay').length === 0) {
+        if (hide_loader !== 'hide' && main.box.find('.datalist-loading-overlay').length === 0) {
             main.box.prepend('<div class="datalist-loading-overlay"><i class="icon-spinner4 spinner mr-2"></i></div>');
         }
     };

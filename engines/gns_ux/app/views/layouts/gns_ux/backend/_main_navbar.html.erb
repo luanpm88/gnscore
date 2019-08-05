@@ -96,7 +96,9 @@
         
         var notification_unread_count = new ajaxBox(
             $('.notifications-count'),
-            '<%= gns_notification.notification_unread_count_backend_notifications_users_path %>'
+            '<%= gns_notification.notification_unread_count_backend_notifications_users_path %>',
+            function() {},
+            'hide'
         );
         
         $(function() {

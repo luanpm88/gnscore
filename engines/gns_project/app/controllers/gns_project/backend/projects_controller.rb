@@ -60,7 +60,8 @@ module GnsProject
           @project.log("gns_project.log.project.created", current_user)
           
           # add notification
-          current_user.add_notification("gns_project.notification.project.created", @project)
+          @notification = current_user.add_notification("gns_project.notification.project.created", @project)
+          @notification.push_to_users(:create_notification, @project)
           
           @project.apply_template_details_to_tasks
           
@@ -111,7 +112,8 @@ module GnsProject
           @project.log("gns_project.log.project.updated", current_user, params[:remark])
           
           # add notification
-          current_user.add_notification("gns_project.notification.project.updated", @project)
+          @notification = current_user.add_notification("gns_project.notification.project.updated", @project)
+          @notification.push_to_users(:update_notification, @project)
           
           render json: {
             status: 'success',
@@ -130,7 +132,8 @@ module GnsProject
         @project.log("gns_project.log.project.deleted", current_user)
         
         # add notification
-        current_user.add_notification("gns_project.notification.project.deleted", @project)
+        @notification = current_user.add_notification("gns_project.notification.project.deleted", @project)
+        @notification.push_to_users(:delete_notification, @project)
         
         if @project.destroy
           respond_to do |format|
@@ -173,7 +176,8 @@ module GnsProject
         @project.activate
         
         # Add notification
-        current_user.add_notification("gns_project.notification.project.activated", @project)
+        @notification = current_user.add_notification("gns_project.notification.project.activated", @project)
+        @notification.push_to_users(:activate_notification, @project)
         
         render json: {
           status: 'success',
@@ -188,7 +192,8 @@ module GnsProject
         @project.deactivate
         
         # Add notification
-        current_user.add_notification("gns_project.notification.project.deactivated", @project)
+        @notification = current_user.add_notification("gns_project.notification.project.deactivated", @project)
+        @notification.push_to_users(:deactivate_notification, @project)
         
         render json: {
           status: 'success',
@@ -265,7 +270,8 @@ module GnsProject
             @project_employee.log("gns_project.log.project_employee.added", current_user)
             
             # add notification
-            current_user.add_notification("gns_project.notification.project_employee.added", @project_employee)
+            @notification = current_user.add_notification("gns_project.notification.project_employee.added", @project_employee)
+            #@notification.push_to_users(:add_notification, @project_employee)
             
             render json: {
               status: 'success',
@@ -300,7 +306,8 @@ module GnsProject
             @project_employee.log("gns_project.log.project_employee.updated", current_user)
             
             # add notification
-            current_user.add_notification("gns_project.notification.project_employee.updated", @project_employee)
+            @notification = current_user.add_notification("gns_project.notification.project_employee.updated", @project_employee)
+            #@notification.push_to_users(:update_notification, @project)
             
             render json: {
               status: 'success',
@@ -326,7 +333,8 @@ module GnsProject
             @project_employee.log("gns_project.log.project_employee.removed", current_user, remark)
             
             # add notification
-            current_user.add_notification("gns_project.notification.project_employee.removed", @project_employee)
+            @notification = current_user.add_notification("gns_project.notification.project_employee.removed", @project_employee)
+            #@notification.push_to_users(:remove_notification, @project)
             
             @project.remove_project_employee(@project_employee)
             
@@ -340,6 +348,10 @@ module GnsProject
       
       def download_attachments
         authorize! :download_attachments, @project
+        
+        # add notification
+        @notification = current_user.add_notification("gns_project.notification.project.download_attachments", @project)
+        @notification.push_to_users(:download_attachments_notification, @project)
         
         filename = "#{@project.code}.zip"
         t = Tempfile.new(filename)
@@ -389,7 +401,8 @@ module GnsProject
             @project.log("gns_project.log.project.request", current_user, remark)
             
             # add notification
-            current_user.add_notification("gns_project.notification.project.request", @project)
+            @notification = current_user.add_notification("gns_project.notification.project.request", @project)
+            @notification.push_to_users(:request_notification, @project)
             
             render json: {
               status: 'success',
@@ -420,7 +433,8 @@ module GnsProject
             GnsProject::ProjectEmailJob.perform_later(GnsProject::ProjectMailer::TYPE_PROJECT_STARTED, {project: @project})
             
             # add notification
-            current_user.add_notification("gns_project.notification.project.start_progress", @project)
+            @notification = current_user.add_notification("gns_project.notification.project.start_progress", @project)
+            @notification.push_to_users(:start_progress_notification, @project)
             
             render json: {
               status: 'success',
@@ -448,7 +462,8 @@ module GnsProject
             @project.log("gns_project.log.project.finish", current_user, remark)
             
             # add notification
-            current_user.add_notification("gns_project.notification.project.finish", @project)
+            @notification = urrent_user.add_notification("gns_project.notification.project.finish", @project)
+            @notification.push_to_users(:finish_notification, @project)
             
             render json: {
               status: 'success',

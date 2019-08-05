@@ -36,7 +36,8 @@ module GnsProject
   
         if @template.save
           # Add notification
-          current_user.add_notification("gns_project.notification.template.created", @template)
+          @notification = current_user.add_notification("gns_project.notification.template.created", @template)
+          @notification.push_to_users(:create_notification, @template)
           
           flash[:success] = 'Template was successfully created.'
           render json: {
@@ -51,7 +52,8 @@ module GnsProject
       def update
         if @template.update(template_params)
           # Add notification
-          current_user.add_notification("gns_project.notification.template.updated", @template)
+          @notification = current_user.add_notification("gns_project.notification.template.updated", @template)
+          @notification.push_to_users(:update_notification, @template)
           
           render json: {
             status: 'success',
@@ -65,7 +67,8 @@ module GnsProject
       # DELETE /templates/1
       def destroy
         # Add notification
-        current_user.add_notification("gns_project.notification.template.destroyed", @template)
+        @notification = current_user.add_notification("gns_project.notification.template.destroyed", @template)
+        @notification.push_to_users(:delete_notification, @template)
         
         if @template.destroy
           respond_to do |format|
