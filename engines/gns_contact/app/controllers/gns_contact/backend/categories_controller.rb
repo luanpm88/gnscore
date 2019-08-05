@@ -32,7 +32,8 @@ module GnsContact
   
         if @category.save
           # add notification
-          current_user.add_notification("gns_contact.notification.category.created", @category)
+          @notification = current_user.add_notification("gns_contact.notification.category.created", @category)
+          @notification.push_to_users(:create_notification, @category)
           
           render json: {
             status: 'success',
@@ -54,7 +55,8 @@ module GnsContact
         
         if @category.update(category_params)
           # add notification
-          current_user.add_notification("gns_contact.notification.category.updated", @category)
+          @notification = current_user.add_notification("gns_contact.notification.category.updated", @category)
+          @notification.push_to_users(:update_notification, @category)
           
           render json: {
             status: 'success',
@@ -70,7 +72,8 @@ module GnsContact
         authorize! :delete, @category
         
         # add notification
-        current_user.add_notification("gns_contact.notification.category.deleted", @category)
+        @notification = current_user.add_notification("gns_contact.notification.category.deleted", @category)
+        @notification.push_to_users(:delete_notification, @category)
         
         if @category.destroy
           respond_to do |format|
@@ -113,7 +116,8 @@ module GnsContact
         @category.activate
         
         # Add notification
-        current_user.add_notification("gns_contact.notification.category.activate", @category)
+        @notification = current_user.add_notification("gns_contact.notification.category.activate", @category)
+        @notification.push_to_users(:activate_notification, @category)
         
         render json: {
           status: 'success',
@@ -128,7 +132,8 @@ module GnsContact
         @category.deactivate
         
         # Add notification
-        current_user.add_notification("gns_contact.notification.category.deactivate", @category)
+        @notification = current_user.add_notification("gns_contact.notification.category.deactivate", @category)
+        @notification.push_to_users(:deactivate_notification, @category)
         
         render json: {
           status: 'success',

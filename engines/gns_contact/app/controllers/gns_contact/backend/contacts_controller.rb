@@ -63,7 +63,7 @@ module GnsContact
         if @contact.save
           # Add notification
           @notification = current_user.add_notification("gns_contact.notification.contact.created", @contact)
-          @notification.push_to_users(type='gns_contact.contacts.create.notification')
+          @notification.push_to_users(:create_notification, @contact)
           
           flash[:success] = 'Contact was successfully created.'
           render json: {
@@ -87,7 +87,7 @@ module GnsContact
           # add notification
           #current_user.add_notification("gns_contact.notification.contact.created", @contact)
           @notification = current_user.add_notification("gns_contact.notification.contact.created", @contact)
-          @notification.push_to_users(type='gns_contact.contacts.create.notification')
+          @notification.push_to_users(:create_notification, @contact)
           
           render json: {
             status: 'success',
@@ -104,9 +104,8 @@ module GnsContact
         
         if @contact.update(contact_params)
           # Add notification
-          #current_user.add_notification("gns_contact.notification.contact.updated", @contact)
           @notification = current_user.add_notification("gns_contact.notification.contact.updated", @contact)
-          @notification.push_to_users(type='gns_contact.contacts.update_own.notification')
+          @notification.push_to_users(:update_notification, @contact)
           
           render json: {
             status: 'success',
@@ -124,7 +123,7 @@ module GnsContact
         if @contact.update(contact_params)
           # Add notification
           @notification = current_user.add_notification("gns_contact.notification.contact.updated", @contact)
-          @notification.push_to_users(type='gns_contact.contacts.update_own.notification')
+          @notification.push_to_users(:update_notification, @contact)
           
           render json: {
             status: 'success',
@@ -141,7 +140,7 @@ module GnsContact
         
         # Add notification
         @notification = current_user.add_notification("gns_contact.notification.contact.deleted", @contact)
-        @notification.push_to_users(type='gns_contact.contacts.delete_own.notification')
+        @notification.push_to_users(:delete_notification, @contact)
         
         if @contact.destroy
           respond_to do |format|
@@ -184,7 +183,7 @@ module GnsContact
         
         # Add notification
         @notification = current_user.add_notification("gns_contact.notification.contact.activate", @contact)
-        @notification.push_to_users(type='gns_contact.contacts.activate_own.notification')
+        @notification.push_to_users(:activate_notification, @contact)
         
         render json: {
           status: 'success',
@@ -200,7 +199,7 @@ module GnsContact
         
         # Add notification
         @notification = current_user.add_notification("gns_contact.notification.contact.deactivate", @contact)
-        @notification.push_to_users(type='gns_contact.contacts.deactivate_own.notification')
+        @notification.push_to_users(:deactivate_notification, @contact)
         
         render json: {
           status: 'success',

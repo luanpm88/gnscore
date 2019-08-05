@@ -44,7 +44,8 @@ module GnsEmployee
   
         if @employee.save
           # Add notification
-          current_user.add_notification("gns_employee.notification.employee.created", @employee)
+          @notification = current_user.add_notification("gns_employee.notification.employee.created", @employee)
+          @notification.push_to_users(:create_notification, @employee)
           
           render json: {
             status: 'success',
@@ -61,7 +62,8 @@ module GnsEmployee
         
         if @employee.update(employee_params)
           # Add notification
-          current_user.add_notification("gns_employee.notification.employee.updated", @employee)
+          @notification = current_user.add_notification("gns_employee.notification.employee.updated", @employee)
+          @notification.push_to_users(:update_notification, @employee)
           
           render json: {
             status: 'success',
@@ -77,7 +79,8 @@ module GnsEmployee
         authorize! :delete, @employee
         
         # Add notification
-        current_user.add_notification("gns_employee.notification.employee.deleted", @employee)
+        @notification = current_user.add_notification("gns_employee.notification.employee.deleted", @employee)
+        @notification.push_to_users(:delete_notification, @employee)
         
         if @employee.destroy
           render json: {
@@ -104,7 +107,8 @@ module GnsEmployee
         @employee.activate
         
         # Add notification
-        current_user.add_notification("gns_employee.notification.employee.activate", @employee)
+        @notification = current_user.add_notification("gns_employee.notification.employee.activate", @employee)
+        @notification.push_to_users(:activate_notification, @employee)
         
         render json: {
           status: 'success',
@@ -119,7 +123,8 @@ module GnsEmployee
         @employee.deactivate
         
         # Add notification
-        current_user.add_notification("gns_employee.notification.employee.deactivate", @employee)
+        @notification = current_user.add_notification("gns_employee.notification.employee.deactivate", @employee)
+        @notification.push_to_users(:deactivate_notification, @employee)
         
         render json: {
           status: 'success',
