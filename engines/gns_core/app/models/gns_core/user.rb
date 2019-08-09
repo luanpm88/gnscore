@@ -17,6 +17,7 @@ module GnsCore
     validates :employee_id, uniqueness: true
     
     has_many :notifications_users, class_name: 'GnsNotification::NotificationsUser', dependent: :destroy
+    has_many :personal_notes, class_name: 'GnsNote::PersonalNote', dependent: :destroy
     
     mount_uploader :avatar, GnsCore::AvatarUploader
     

@@ -1,0 +1,43 @@
+vi:
+  gns_note:
+    backend:
+      personal_notes:
+        list:
+          note: "Ghi chú"
+          due_date: "Ngày hết hạn"
+          status: "Trạng thái"
+          created_at: "Ngày tạo"
+          actions: "Hành động"
+          is_done: "Đã hoàn thành"
+          not_done: "Chưa hoàn thành"
+          update: "Cập nhật"
+          mark_as_done: "Đánh dấu là Đã hoàn thành"
+          mark_as_not_done_yet: "Đánh dấu là Chưa hoàn thành"
+          delete: "Xóa ghi chú"
+          delete_confirm: "Bạn sắp xóa một ghi chú và sẽ không thể hoàn tác hành động này."
+        new:
+          personal_notes: "Ghi chú"
+          personal_note: "Ghi chú cá nhân"
+          create: "Thêm ghi chú mới"
+          new_personal_note: "Thêm ghi chú"
+          note_detail: "Chi tiết"
+        edit:
+          personal_notes: "Ghi chú"
+          personal_note: "Ghi chú cá nhân"
+          edit: "Chỉnh sửa"
+          edit_personal_note: "Chỉnh sửa ghi chú"
+          note_detail: "Chi tiết"
+        form:
+          description: "Mô tả ghi chú"
+          enter_description: "Nhập mô tả ghi chú"
+          due_date: "Ngày hết hạn"
+  activerecord:
+    attributes:
+      gns_note/personal_note:
+        description: 'Mô tả'
+    errors:
+      models:
+        gns_note/personal_note:
+          attributes:
+            description:
+              blank: "không được để trống"

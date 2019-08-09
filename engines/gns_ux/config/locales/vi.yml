@@ -46,6 +46,7 @@ vi:
           mark_all_as_read: "Đánh dấu đã đọc tất cả"
           see_all: "Xem tất cả"
           my_account: "Tài khoản của tôi"
+          personal_note: "Ghi chú cá nhân"
           logout: "Đăng xuất"
         sidebar:
           navigation: "Navigation"

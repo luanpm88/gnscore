@@ -7,6 +7,7 @@ vi:
   female: "Nữ"
   from: "Từ"
   to: "Đến"
+  message_invaild: "<span class=\"font-weight-semibold\">Lỗi!</span> Vui lòng kiểm tra và cung cấp đầy đủ các trường bắt buộc."
   layouts:
     gns_core:
       backend:
@@ -94,6 +95,15 @@ vi:
           enter_address: Nhập địa chỉ"
           update_info: "Cập nhật thông tin"
           alert: "Hồ sơ của bạn chưa được tạo."
+        my_notes:
+          personal_notes: "Ghi chú cá nhân"
+          personal_note: "Ghi chú cá nhân"
+          add_note: "Tạo mới ghi chú"
+          note_list: "Danh sách ghi chú"
+          placeholder_filter_by_status: "Lọc theo trạng thái"
+          not_done: "Chưa hoàn thành"
+          is_done: "Đã hoàn thành"
+          created_at: "Ngày tạo"
       dashboard:
         index:
           dashboard: "Bảng điều khiển"
