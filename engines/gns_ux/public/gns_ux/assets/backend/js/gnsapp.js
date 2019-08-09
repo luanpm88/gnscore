@@ -70,6 +70,10 @@ function applyJs(container) {
     
     container.find('.file-input').uniform();
     
+    container.find('.form-check-input-styled-primary').uniform({
+        wrapperClass: 'border-primary-600 text-primary-800'
+    });
+    
     // Image lightbox
     container.find('[data-popup="lightbox"]').fancybox({
         padding: 3
