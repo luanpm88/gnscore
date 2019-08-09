@@ -6,6 +6,7 @@ GnsNote::Engine.routes.draw do
                     post 'list'
                     put 'mark_as_done'
                     put 'mark_as_not_done_yet'
+                    get 'dashboard_note_list'
                 end
             end
         end

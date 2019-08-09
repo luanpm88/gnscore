@@ -1,5 +1,3 @@
-<% @personal_notes = current_user.personal_notes.search(params).order('due_date asc').limit(10) %>
-
 <div class="card">
     <div class="card-header header-elements-inline">
         <h6 class="card-title">Personal note</h6>
@@ -16,26 +14,8 @@
         </div>
     </div>
 
-    <table class="table">
-        <tbody>
-            <% @personal_notes.each do |note| %>
-                <tr>
-                    <td>
-                        <div class="d-flex  text-justify">
-                            <div>
-                                <span class="text-default"><%= note.description %></span>
-                                <% if note.due_date.present? %>
-                                    <div class="text-muted font-size-sm">
-                                        <i class="icon-alarm-check font-size-sm mr-1"></i>Due date: <%= note.due_date.strftime("%d/%m/%Y %H:%M") %>
-                                    </div>
-                                <% end %>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            <% end %>
-        </tbody>
-    </table>
+    <div class="personal-note-list"></div>
+    
     <div class="dropdown-content-footer justify-content-center p-0">
         <a href="<%= gns_core.my_notes_backend_accounts_path %>"
             class="bg-light text-grey w-100 py-2"
@@ -53,6 +33,11 @@
         var personal_note_modal = new gModal({size: 'md'});
         var newNoteCallback;
         
+        var note_list_box = new ajaxBox(
+            $('.personal-note-list'),
+            '<%= gns_note.dashboard_note_list_backend_personal_notes_path %>'
+        );
+        
         $(function() {            
             $('.add-note-button').click(function(e) {
                 e.preventDefault();
@@ -65,7 +50,7 @@
                         showNotification(response.status, response.message);
                         personal_note_modal.hide();
                         
-                        //datalists[$('.datalist-personal-notes').attr('data-id')].refresh();
+                        note_list_box.load();
                     } else if (typeof(response.redirect) !== 'undefined') {
                         window.location = response.redirect;
                     } else {
@@ -74,6 +59,34 @@
                     }
                 };
             });
+            
+            $(document).on('click', '.edit-note-button', function(e) {
+                e.preventDefault();
+                
+                var but = $(this);
+                
+                // load modal edit category
+                personal_note_modal.load(but.attr('href'));
+                
+                // after update category event
+                updateNoteCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        personal_note_modal.hide();
+                        
+                        note_list_box.load();
+                    } else if (typeof(response.redirect) !== 'undefined') {
+                        window.location = response.redirect;
+                    } else {
+                        // validation error
+                        personal_note_modal.renderHtml(response);
+                    }           
+                }
+                    
+            });
+            
+            // ajax box note list
+            note_list_box.load();
         });
     </script>
 <% end %>

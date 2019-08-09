@@ -12,7 +12,9 @@ module GnsNote
       end
   
       # GET /personal_notes/1
-      def show
+      def dashboard_note_list
+        @personal_notes = current_user.personal_notes.search(params.merge(is_done: 'false')).order('due_date asc').limit(5)
+        render layout: nil
       end
   
       # GET /personal_notes/new
