@@ -1,0 +1,30 @@
+<table class="table">
+    <tbody>
+        <% @personal_notes.each do |note| %>
+            <tr class="<%= 'line-through' if note.is_done? %>">
+                <td>
+                    <div class="d-flex  text-justify">
+                        <div>
+                            <span class="text-default">
+                                <%= note.description %>
+                                <% if can? :update, note %>
+                                    <a class="edit-note-button"
+                                       href="<%= gns_note.edit_backend_personal_note_path(note) %>">
+                                        <i class="icon-pencil font-size-sm"></i>
+                                    </a>
+                                <% end %>
+                            </span>
+                            <% if note.due_date.present? %>
+                                <div class="font-size-sm">
+                                    <span class="text-muted">
+                                        <i class="icon-alarm-check font-size-sm mr-1"></i>Due date: <%= note.due_date.strftime("%d/%m/%Y %H:%M") %>
+                                    </span>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
