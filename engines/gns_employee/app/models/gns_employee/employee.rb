@@ -31,7 +31,7 @@ module GnsEmployee
       errors.add(:code, "can't be blank") if (id.present? and !code.present?)
     end
     
-    # get coutry name
+    # get creator name
     def creator_name
       creator.present? ? creator.name : ''
     end
