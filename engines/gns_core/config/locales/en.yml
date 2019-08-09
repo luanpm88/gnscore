@@ -7,6 +7,7 @@ en:
   female: "Female"
   from: "From"
   to: "To"
+  message_invaild: "<span class=\"font-weight-semibold\">Oh snap!</span> Check a few things up (below) and try submitting again."
   layouts:
     gns_core:
       backend:
@@ -19,6 +20,7 @@ en:
           navigation: "Navigation"
           my_profile: "My Profile"
           accounts_settings: "Accounts Settings"
+          personal_notes: "Personal Notes"
         index:
           home: "Home"
           my_account: "My Account"
@@ -94,6 +96,15 @@ en:
           enter_address: "Enter address"
           update_info: "Update info"
           alert: "Your profile is not initialized."
+        my_notes:
+          personal_notes: "Personal notes"
+          personal_note: "Personal note"
+          add_note: "Add new note"
+          note_list: "Note list"
+          placeholder_filter_by_status: "Filter by status"
+          not_done: "Not done yet"
+          is_done: "Done"
+          created_at: "Created at"
       dashboard:
         index:
           dashboard: "Dashboard"

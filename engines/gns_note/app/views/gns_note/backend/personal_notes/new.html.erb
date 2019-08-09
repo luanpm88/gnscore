@@ -1,0 +1,69 @@
+<% content_for :title do %>
+    <%= t('.new_personal_note') %>
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i><%= t('home') %> </a>
+    <a href="<%= gns_core.my_notes_backend_accounts_path %>" class="breadcrumb-item"><%= t('.personal_notes') %></a>
+    <span class="breadcrumb-item active"><%= t('.create') %></span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-notebook mr-2"></i> <span class="font-weight-semibold"></a><%= t('.personal_note') %></span> - <%= t('.create') %></h4>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        $(document).ready(function() {
+            $('.new_personal_note').submit(function(e) {
+                e.preventDefault();
+                
+                var form = $(this);
+                
+                // clear modal
+                personal_note_modal.clear();
+                
+                $.ajax({
+                    url: form.attr('action'),
+                    method: form.attr('method'),
+                    data: form.serialize() + '&layout=modal',
+                }).done(function(response) {
+                    // callback
+                    if (typeof(newNoteCallback) !== 'undefined') {
+                        newNoteCallback(response);
+                    }
+                });
+                
+                return false;
+            });
+        });
+    </script>
+<% end %>
+
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        
+        <% if @personal_note.errors.any? %>
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                <%= raw t('message_invaild') %>
+            </div>
+        <% end %>
+        
+        <div class="card">
+            <div class="card-header header-elements-inline bg-white">
+                <h5 class="card-title"><%= t('.note_detail')%></h5>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <%= render 'form', personal_note: @personal_note %>
+            </div>
+        </div>
+        
+    </div>
+</div>

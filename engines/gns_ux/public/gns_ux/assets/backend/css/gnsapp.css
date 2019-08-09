@@ -261,3 +261,7 @@
     opacity: .4;
     cursor: not-allowed !important;
 }
+.line-through {
+    text-decoration: line-through;
+    color: #999;
+}

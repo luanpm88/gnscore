@@ -37,6 +37,8 @@ GnsCore::Engine.routes.draw do
                     get 'my_account'
                     post 'update_account'
                     post 'update_password'
+                    
+                    get 'my_notes'
                 end
             end
         end

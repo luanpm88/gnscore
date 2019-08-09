@@ -1,0 +1,79 @@
+<% @personal_notes = current_user.personal_notes.search(params).order('due_date asc').limit(10) %>
+
+<div class="card">
+    <div class="card-header header-elements-inline">
+        <h6 class="card-title">Personal note</h6>
+        <div class="header-elements">
+            <a href="<%= gns_note.new_backend_personal_note_path %>"
+                class="font-weight-bold text-success-600 ml-2 add-note-button">
+                <i class="icon-plus2"></i> Add new note
+            </a>
+            <div class="list-icons ml-3">
+                <div class="list-icons-item">
+                    <a class="list-icons-item" data-action="collapse"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <tbody>
+            <% @personal_notes.each do |note| %>
+                <tr>
+                    <td>
+                        <div class="d-flex  text-justify">
+                            <div>
+                                <span class="text-default"><%= note.description %></span>
+                                <% if note.due_date.present? %>
+                                    <div class="text-muted font-size-sm">
+                                        <i class="icon-alarm-check font-size-sm mr-1"></i>Due date: <%= note.due_date.strftime("%d/%m/%Y %H:%M") %>
+                                    </div>
+                                <% end %>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <div class="dropdown-content-footer justify-content-center p-0">
+        <a href="<%= gns_core.my_notes_backend_accounts_path %>"
+            class="bg-light text-grey w-100 py-2"
+            data-popup="tooltip"
+            title=""
+            data-original-title="See all notes">
+            <i class="icon-menu7 d-block top-0"></i>
+        </a>
+    </div>
+</div>
+
+<% content_for :page_script do %>
+    <script>
+        // global modal
+        var personal_note_modal = new gModal({size: 'md'});
+        var newNoteCallback;
+        
+        $(function() {            
+            $('.add-note-button').click(function(e) {
+                e.preventDefault();
+                var button = $(this);
+                
+                personal_note_modal.load(button.attr('href'));
+                
+                newNoteCallback = function(response) {
+                    if (typeof(response.status) !== 'undefined') {
+                        showNotification(response.status, response.message);
+                        personal_note_modal.hide();
+                        
+                        //datalists[$('.datalist-personal-notes').attr('data-id')].refresh();
+                    } else if (typeof(response.redirect) !== 'undefined') {
+                        window.location = response.redirect;
+                    } else {
+                        // validation error
+                        personal_note_modal.renderHtml(response);
+                    }
+                };
+            });
+        });
+    </script>
+<% end %>

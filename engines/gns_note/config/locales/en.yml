@@ -1,0 +1,43 @@
+en:
+  gns_note:
+    backend:
+      personal_notes:
+        list:
+          note: "Note"
+          due_date: "Due date"
+          status: "Status"
+          created_at: "Created at"
+          actions: "Actions"
+          is_done: "Done"
+          not_done: "Not done yet"
+          update: "Update info"
+          mark_as_done: "Mark as done"
+          mark_as_not_done_yet: "Mark as note done yet"
+          delete: "Delete"
+          delete_confirm: "You are about to delete a personal note"
+        new:
+          personal_notes: "Personal notes"
+          personal_note: "Personal note"
+          create: "Create"
+          new_personal_note: "New personal note"
+          note_detail: "Note detail"
+        edit:
+          personal_notes: "Personal notes"
+          personal_note: "Personal note"
+          edit: "Edit"
+          edit_personal_note: "Edit personal note"
+          note_detail: "Note detail"
+        form:
+          description: "Description"
+          enter_description: "Enter description"
+          due_date: "Due date"
+  activerecord:
+    attributes:
+      gns_note/personal_note:
+        description: "Description"
+    errors:
+      models:
+        gns_note/personal_note:
+          attributes:
+            description:
+              blank: "must not be blank"

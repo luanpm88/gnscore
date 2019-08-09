@@ -1,0 +1,88 @@
+<table class="table table-hover">
+    <thead>
+        <tr class="bg-info-700">
+            <th><%= t('.note') %></th>
+            <th><%= t('.due_date') %></th>
+            <th><%= t('.status') %></th>
+            <th><%= t('.created_at') %></th>
+            <th class="text-right"><%= t('.actions') %></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @personal_notes.each do |note| %>
+            <tr class="<%= 'line-through' if note.is_done? %>">
+                <td><%= note.description %></td>
+                <td>
+                    <%= note.due_date.strftime("%d/%m/%Y %H:%M") if note.due_date.present? %>
+                </td>
+                <td>
+                    <% if note.is_done? %>
+                        <span class="badge badge-success"><%= t('.is_done') %></span>
+                    <% else %>
+                        <span class="badge badge-info"><%= t('.not_done') %></span>
+                    <% end %>
+                </td>
+                <td>
+                    <%= note.created_at.strftime("%d/%m/%Y %H:%M") %>
+                </td>
+                <td class="text-right">
+                    <div class="list-icons">
+                        <div class="dropdown">
+                            <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                <i class="icon-menu9"></i>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <% if can? :update, note %>
+                                    <a class="dropdown-item edit-note-button"
+                                        href="<%= gns_note.edit_backend_personal_note_path(note) %>">
+                                        <i class="icon-pencil7"></i><%= t('.update') %>
+                                    </a>
+                                <% end %>
+                                
+                                <% if can? :mark_as_done, note %>
+                                    <a class="dropdown-item ajax datalist-g-link"
+                                        href="<%= gns_note.mark_as_done_backend_personal_notes_path(id: note) %>"
+                                        data-method="PUT"
+                                    >
+                                        <i class="icon-checkmark4"></i><%= t('.mark_as_done') %>
+                                    </a>
+                                <% end %>
+                                
+                                <% if can? :mark_as_not_done_yet, note %>
+                                    <a class="dropdown-item ajax datalist-g-link"
+                                        href="<%= gns_note.mark_as_not_done_yet_backend_personal_notes_path(id: note) %>"
+                                        data-method="PUT"
+                                    >
+                                        <i class="icon-blocked"></i><%= t('.mark_as_not_done_yet') %>
+                                    </a>
+                                <% end %>
+                                
+                                <% if can? :delete, note %>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item ajax datalist-g-link"
+                                        href="<%= gns_note.backend_personal_note_path(note) %>"
+                                        data-method="DELETE"
+                                        data-confirm="<%= t('.delete_confirm') %>"
+                                    >
+                                        <i class="icon-bin"></i><%= t('.delete') %>
+                                    </a>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<div class="pagination-area">
+    <div class="page_entries_info">
+        <%= page_entries_info @personal_notes %>
+    </div>
+
+    <div class="pagination_style paging_simple_numbers">
+        <%= will_paginate @personal_notes, previous_label: 'Prev'.html_safe, next_label: 'Next'.html_safe, renderer: BootstrapPagination::Rails, class: 'align-self-center' %>
+    </div>
+</div>

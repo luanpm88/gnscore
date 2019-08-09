@@ -762,5 +762,23 @@ class Ability
       (user.has_permission?('gns_project.templates.delete_other.notification') and template.creator != user)
     end
     # --------------------------
+    
+    # gns_note /personal notes
+    can :update, GnsNote::PersonalNote do |personal_note|
+      personal_note.user == user
+    end
+    
+    can :delete, GnsNote::PersonalNote do |personal_note|
+      personal_note.user == user
+    end
+    
+    can :mark_as_done, GnsNote::PersonalNote do |personal_note|
+      !personal_note.is_done? and personal_note.user == user
+    end
+    
+    can :mark_as_not_done_yet, GnsNote::PersonalNote do |personal_note|
+      personal_note.is_done? and personal_note.user == user
+    end
+    # --------------------------
   end
 end

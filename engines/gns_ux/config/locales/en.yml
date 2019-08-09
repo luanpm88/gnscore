@@ -46,6 +46,7 @@ en:
           mark_all_as_read: "Mark All as Read"
           see_all: "See All"
           my_account: "My account"
+          personal_note: "Personal note"
           logout: "Logout"
         sidebar:
           navigation: "Navigation"
