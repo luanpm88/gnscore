@@ -20,7 +20,7 @@ en:
           navigation: "Navigation"
           my_profile: "My Profile"
           accounts_settings: "Accounts Settings"
-          personal_notes: "Personal Notes"
+          personal_note: "Personal Note"
         index:
           home: "Home"
           my_account: "My Account"

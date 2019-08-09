@@ -20,6 +20,7 @@ vi:
           navigation: "Điều hướng"
           my_profile: "Thông tin của tôi"
           accounts_settings: "Cài đặt tài khoản"
+          personal_note: "Ghi chú cá nhân"
         index:
           home: "Trang chủ"
           my_account: "Tài khoản của tôi"
