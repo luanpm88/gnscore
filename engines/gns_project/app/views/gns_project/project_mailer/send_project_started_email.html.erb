@@ -36,27 +36,31 @@
     
     <table class="table">
         <tr>
-            <th>STT</th>
-            <th>Mô tả công việc</th>
-            <th>Ngày bắt đầu</th>
-            <th>Ngày kết thúc</th>
-            <th>Người thực hiện</th>
-            <th>Người giao việc</th>
+            <th>No.</th>
+            <th>Task description</th>
+            <th>Start date</th>
+            <th>Due date</th>
+            <th>Assignee/Responsible</th>
+            <th>Assigned by</th>
         </tr>
+        <% stt = 0 %>
         <% @tasks.each_with_index do |task,index| %>
-            <tr>
-                <td class="text-center"><%= index + 1 %></td>
-                <td><%= task.name %></td>
-                <td class="text-center"><%= task.start_date.strftime('%d/%m/%Y') %></td>
-                <td class="text-center"><%= task.end_date.strftime('%d/%m/%Y') %></td>
-                <td><%= task.employee_name %></td>
-                <td><%= task.creator_name %></td>
-            </tr>
+            <% if @employee.user.can?(:read, task) %>
+                <% stt += 1 %>
+                <tr>
+                    <td class="text-center"><%= stt %></td>
+                    <td><%= task.name %></td>
+                    <td class="text-center"><%= task.start_date.strftime('%d/%m/%Y') %></td>
+                    <td class="text-center"><%= task.end_date.strftime('%d/%m/%Y') %></td>
+                    <td><%= task.employee_name %></td>
+                    <td><%= task.creator_name %></td>
+                </tr>
+            <% end %>
         <% end %>
     </table>
     <p>
       ========================================================================<br>
-      <i>(*) Đây là thư tự động. Vui lòng không trả lời thư này!</i>
+      <i>(*) This is an email sent automatically. Please do not reply to this email.</i>
     </p>
 </body>
 </html>

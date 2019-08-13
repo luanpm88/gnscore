@@ -22,18 +22,19 @@ module GnsProject
       #@todo static emails
       employee_ids = @tasks.map(&:employee_id).uniq
       
-      @recipients = GnsEmployee::Employee.where(id: employee_ids)
+      @employees = GnsEmployee::Employee.where(id: employee_ids)
       
-      @recipients.each do |recipient|
-        send_project_started_email(recipient, @project).deliver_now
+      @employees.each do |employee|
+        send_project_started_email(employee, @project).deliver_now if employee.project_permissions(@project).present?
       end
     end
     
-    def send_project_started_email(recipient, project)
+    def send_project_started_email(employee, project)
       @project = project
       @tasks = @project.tasks
-      @name = recipient.name
-      send_email("#{recipient.user.email}", "#{project.code}: You have been assigned to the project")
+      @employee = employee
+      @name = @employee.name
+      send_email("#{@employee.user.email}", "#{project.code}: You have been assigned to the project")
     end
     
     # task finished email notification
@@ -41,7 +42,16 @@ module GnsProject
       @task = options[:task]
       @remark = options[:remark]
       @task_link = options[:task_link]
-      send_email(@task.employee_email, "Task Finished - #{@task.name} (Project code: #{@task.project_code})") if @task.employee_email.present?
+      
+      group1 = @task.project.get_employee_by_permissions(['gns_project.tasks.close_own', 'gns_project.tasks.unfinish_own']).where(employee_id: @task.employee_id)
+      group2 = @task.project.get_employee_by_permissions(['gns_project.tasks.close_other', 'gns_project.tasks.unfinish_other'])
+      employee_ids = (group1.map(&:employee_id) + group2.map(&:employee_id)).uniq
+      
+      @recipients = GnsEmployee::Employee.where(id: employee_ids).map{ |e| e.user.email } # email của nhân sự có quyền close và unfinish
+      @recipients << @task.employee.user.email # email của người được giao nhiệm vụ
+      @recipients = @recipients.uniq
+      
+      send_email(@recipients.join("; "), "Task Finished - #{@task.name} (Project code: #{@task.project_code})")
     end
     
     # task un-finished email notification

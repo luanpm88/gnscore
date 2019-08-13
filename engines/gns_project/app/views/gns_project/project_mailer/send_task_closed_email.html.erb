@@ -39,6 +39,9 @@
     <p>
       Stage name: <%= @task.stage_name %><br>
       Task description: <%= @task.name %><br>
+      Assignee: <%= @task.employee_name %><br>
+      Start date: <%= @task.start_date.strftime('%d/%m/%Y') if @task.start_date.present? %><br>
+      Due date: <%= @task.end_date.strftime('%d/%m/%Y') if @task.end_date.present? %><br>s
       Remark: <%= @remark %><br>
       Finished: <%= @task.finished? ? 'Yes' : 'No' %><br>
       Status: <%= t("#{@task.status}") %>
