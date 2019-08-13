@@ -22,18 +22,6 @@
                             </div>
                         </td>
                         <td> <%= t('.gns_project.tasks.create.decription').html_safe %> </td>
-                        <td class="text-right">
-                            <div class="form-check form-check-inline form-check-right form-check-switchery">
-                                <label class="form-check-label">
-                                    <%= t('.notification') %>:
-                                    <input type="hidden" name="permissions[gns_project.tasks.create.notification]" value="false" />
-                                    <input type="checkbox" class="form-check-input-switchery"
-                                        name="permissions[gns_project.tasks.create.notification]" value="true"
-                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.create.notification') %>
-                                    >
-                                </label>
-                            </div>
-                        </td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -48,7 +36,6 @@
                             </div>
                         </td>
                         <td><%= t('.gns_project.tasks.read_own.decription').html_safe %></td>
-                        <td></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -63,7 +50,6 @@
                             </div>
                         </td>
                         <td><%= t('.gns_project.tasks.read_other.decription').html_safe %></td>
-                        <td></td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -78,18 +64,6 @@
                             </div>
                         </td>
                         <td><%= t('.gns_project.tasks.update_own.decription').html_safe %></td>
-                        <td class="text-right">
-                            <div class="form-check form-check-inline form-check-right form-check-switchery">
-                                <label class="form-check-label">
-                                    <%= t('.notification') %>:
-                                    <input type="hidden" name="permissions[gns_project.tasks.update_own.notification]" value="false" />
-                                    <input type="checkbox" class="form-check-input-switchery"
-                                        name="permissions[gns_project.tasks.update_own.notification]" value="true"
-                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.update_own.notification') %>
-                                    >
-                                </label>
-                            </div>
-                        </td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -104,18 +78,6 @@
                             </div>
                         </td>
                         <td><%= t('.gns_project.tasks.update_other.decription').html_safe %></td>
-                        <td class="text-right">
-                            <div class="form-check form-check-inline form-check-right form-check-switchery">
-                                <label class="form-check-label">
-                                    <%= t('.notification') %>:
-                                    <input type="hidden" name="permissions[gns_project.tasks.update_other.notification]" value="false" />
-                                    <input type="checkbox" class="form-check-input-switchery"
-                                        name="permissions[gns_project.tasks.update_other.notification]" value="true"
-                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.update_other.notification') %>
-                                    >
-                                </label>
-                            </div>
-                        </td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -130,18 +92,6 @@
                             </div>
                         </td>
                         <td><%= t('.gns_project.tasks.delete_own.decription').html_safe %></td>
-                        <td class="text-right">
-                            <div class="form-check form-check-inline form-check-right form-check-switchery">
-                                <label class="form-check-label">
-                                    <%= t('.notification') %>:
-                                    <input type="hidden" name="permissions[gns_project.tasks.delete_own.notification]" value="false" />
-                                    <input type="checkbox" class="form-check-input-switchery"
-                                        name="permissions[gns_project.tasks.delete_own.notification]" value="true"
-                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.delete_own.notification') %>
-                                    >
-                                </label>
-                            </div>
-                        </td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -156,18 +106,6 @@
                             </div>
                         </td>
                         <td><%= t('.gns_project.tasks.delete_other.decription').html_safe %></td>
-                        <td class="text-right">
-                            <div class="form-check form-check-inline form-check-right form-check-switchery">
-                                <label class="form-check-label">
-                                    <%= t('.notification') %>:
-                                    <input type="hidden" name="permissions[gns_project.tasks.delete_other.notification]" value="false" />
-                                    <input type="checkbox" class="form-check-input-switchery"
-                                        name="permissions[gns_project.tasks.delete_other.notification]" value="true"
-                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.delete_other.notification') %>
-                                    >
-                                </label>
-                            </div>
-                        </td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -182,18 +120,6 @@
                             </div>
                         </td>
                         <td><%= t('.gns_project.tasks.update_progress_own.decription').html_safe %></td>
-                        <td class="text-right">
-                            <div class="form-check form-check-inline form-check-right form-check-switchery">
-                                <label class="form-check-label">
-                                    <%= t('.notification') %>:
-                                    <input type="hidden" name="permissions[gns_project.tasks.update_progress_own.notification]" value="false" />
-                                    <input type="checkbox" class="form-check-input-switchery"
-                                        name="permissions[gns_project.tasks.update_progress_own.notification]" value="true"
-                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.update_progress_own.notification') %>
-                                    >
-                                </label>
-                            </div>
-                        </td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -208,18 +134,6 @@
                             </div>
                         </td>
                         <td><%= t('.gns_project.tasks.update_progress_other.decription').html_safe %></td>
-                        <td class="text-right">
-                            <div class="form-check form-check-inline form-check-right form-check-switchery">
-                                <label class="form-check-label">
-                                    <%= t('.notification') %>:
-                                    <input type="hidden" name="permissions[gns_project.tasks.update_progress_other.notification]" value="false" />
-                                    <input type="checkbox" class="form-check-input-switchery"
-                                        name="permissions[gns_project.tasks.update_progress_other.notification]" value="true"
-                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.update_progress_other.notification') %>
-                                    >
-                                </label>
-                            </div>
-                        </td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -234,18 +148,6 @@
                             </div>
                         </td>
                         <td><%= t('.gns_project.tasks.finish_own.decription').html_safe %></td>
-                        <td class="text-right">
-                            <div class="form-check form-check-inline form-check-right form-check-switchery">
-                                <label class="form-check-label">
-                                    <%= t('.notification') %>:
-                                    <input type="hidden" name="permissions[gns_project.tasks.finish_own.notification]" value="false" />
-                                    <input type="checkbox" class="form-check-input-switchery"
-                                        name="permissions[gns_project.tasks.finish_own.notification]" value="true"
-                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.finish_own.notification') %>
-                                    >
-                                </label>
-                            </div>
-                        </td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -260,18 +162,6 @@
                             </div>
                         </td>
                         <td><%= t('.gns_project.tasks.finish_other.decription').html_safe %></td>
-                        <td class="text-right">
-                            <div class="form-check form-check-inline form-check-right form-check-switchery">
-                                <label class="form-check-label">
-                                    <%= t('.notification') %>:
-                                    <input type="hidden" name="permissions[gns_project.tasks.finish_other.notification]" value="false" />
-                                    <input type="checkbox" class="form-check-input-switchery"
-                                        name="permissions[gns_project.tasks.finish_other.notification]" value="true"
-                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.finish_other.notification') %>
-                                    >
-                                </label>
-                            </div>
-                        </td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -286,18 +176,6 @@
                             </div>
                         </td>
                         <td><%= t('.gns_project.tasks.unfinish_own.decription').html_safe %></td>
-                        <td class="text-right">
-                            <div class="form-check form-check-inline form-check-right form-check-switchery">
-                                <label class="form-check-label">
-                                    <%= t('.notification') %>:
-                                    <input type="hidden" name="permissions[gns_project.tasks.unfinish_own.notification]" value="false" />
-                                    <input type="checkbox" class="form-check-input-switchery"
-                                        name="permissions[gns_project.tasks.unfinish_own.notification]" value="true"
-                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.unfinish_own.notification') %>
-                                    >
-                                </label>
-                            </div>
-                        </td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -312,18 +190,6 @@
                             </div>
                         </td>
                         <td><%= t('.gns_project.tasks.unfinish_other.decription').html_safe %></td>
-                        <td class="text-right">
-                            <div class="form-check form-check-inline form-check-right form-check-switchery">
-                                <label class="form-check-label">
-                                    <%= t('.notification') %>:
-                                    <input type="hidden" name="permissions[gns_project.tasks.unfinish_other.notification]" value="false" />
-                                    <input type="checkbox" class="form-check-input-switchery"
-                                        name="permissions[gns_project.tasks.unfinish_other.notification]" value="true"
-                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.unfinish_other.notification') %>
-                                    >
-                                </label>
-                            </div>
-                        </td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -338,18 +204,6 @@
                             </div>
                         </td>
                         <td><%= t('.gns_project.tasks.close_own.decription').html_safe %></td>
-                        <td class="text-right">
-                            <div class="form-check form-check-inline form-check-right form-check-switchery">
-                                <label class="form-check-label">
-                                    <%= t('.notification') %>:
-                                    <input type="hidden" name="permissions[gns_project.tasks.close_own.notification]" value="false" />
-                                    <input type="checkbox" class="form-check-input-switchery"
-                                        name="permissions[gns_project.tasks.close_own.notification]" value="true"
-                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.close_own.notification') %>
-                                    >
-                                </label>
-                            </div>
-                        </td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -364,18 +218,6 @@
                             </div>
                         </td>
                         <td><%= t('.gns_project.tasks.close_other.decription').html_safe %></td>
-                        <td class="text-right">
-                            <div class="form-check form-check-inline form-check-right form-check-switchery">
-                                <label class="form-check-label">
-                                    <%= t('.notification') %>:
-                                    <input type="hidden" name="permissions[gns_project.tasks.close_other.notification]" value="false" />
-                                    <input type="checkbox" class="form-check-input-switchery"
-                                        name="permissions[gns_project.tasks.close_other.notification]" value="true"
-                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.close_other.notification') %>
-                                    >
-                                </label>
-                            </div>
-                        </td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -390,18 +232,6 @@
                             </div>
                         </td>
                         <td><%= t('.gns_project.tasks.reopen_own.decription').html_safe %></td>
-                        <td class="text-right">
-                            <div class="form-check form-check-inline form-check-right form-check-switchery">
-                                <label class="form-check-label">
-                                    <%= t('.notification') %>:
-                                    <input type="hidden" name="permissions[gns_project.tasks.reopen_own.notification]" value="false" />
-                                    <input type="checkbox" class="form-check-input-switchery"
-                                        name="permissions[gns_project.tasks.reopen_own.notification]" value="true"
-                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.reopen_own.notification') %>
-                                    >
-                                </label>
-                            </div>
-                        </td>
                     </tr>
                     <tr>
                         <td class="wmin-md-200">
@@ -416,18 +246,6 @@
                             </div>
                         </td>
                         <td><%= t('.gns_project.tasks.reopen_other.decription').html_safe %></td>
-                        <td class="text-right">
-                            <div class="form-check form-check-inline form-check-right form-check-switchery">
-                                <label class="form-check-label">
-                                    <%= t('.notification') %>:
-                                    <input type="hidden" name="permissions[gns_project.tasks.reopen_other.notification]" value="false" />
-                                    <input type="checkbox" class="form-check-input-switchery"
-                                        name="permissions[gns_project.tasks.reopen_other.notification]" value="true"
-                                        <%= 'checked' if @role.has_permission?('gns_project.tasks.reopen_other.notification') %>
-                                    >
-                                </label>
-                            </div>
-                        </td>
                     </tr>
                 </tbody>
             </table>

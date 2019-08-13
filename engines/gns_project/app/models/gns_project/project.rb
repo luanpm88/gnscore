@@ -289,6 +289,14 @@ module GnsProject
       GnsProject::ProjectEmployee.find(project_employee.id).destroy
     end
     
+    def get_employee_by_permissions(permissions=[])
+      self.project_employees
+          .joins("LEFT JOIN gns_project_project_employee_roles ON gns_project_project_employee_roles.project_employee_id = gns_project_project_employees.id")
+          .joins("LEFT JOIN gns_project_roles ON gns_project_project_employee_roles .role_id = gns_project_roles.id")
+          .joins("LEFT JOIN gns_project_roles_permissions ON gns_project_roles_permissions.role_id = gns_project_roles.id")
+          .where(gns_project_roles_permissions: {permission: permissions})
+    end
+    
     # check start date vs end date
     validate :check_start_date_vs_end_date
     def check_start_date_vs_end_date

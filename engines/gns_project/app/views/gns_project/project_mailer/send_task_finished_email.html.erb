@@ -31,7 +31,7 @@
 </head>
 
 <body>
-    Hi <%= @task.employee_name %>,
+    Hi,
     <p>
       There is a task for the <%= @task.project_name %> (<%= @task.project_code %>) project that has been finished:
     </p>
@@ -39,12 +39,15 @@
     <p>
       Stage name: <%= @task.stage_name %><br>
       Task description: <%= @task.name %><br>
+      Assignee/Responsible: <%= @task.employee_name %><br>
+      Start date: <%= @task.start_date.strftime('%d/%m/%Y') if @task.start_date.present? %><br>
+      Due date: <%= @task.end_date.strftime('%d/%m/%Y') if @task.end_date.present? %><br>
       Remark: <%= @remark %><br>
       Finished: <%= @task.finished? ? 'Yes' : 'No' %><br>
       Status: <%= t("#{@task.status}") %>
     </p>
     <p>
-      => See task details <a href="<%= @task_link %>">HERE</a>
+      => Click <a href="<%= @task_link %>">here</a> to see details of this task.
     </p>
     <p>
       ========================================================================<br>

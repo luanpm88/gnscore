@@ -202,6 +202,7 @@ module GnsEmployee
     
     def project_permissions(project)
       project_employee = self.project_employees.where(project_id: project.id).first
+      return [] if !project_employee.present?
       role_ids = project_employee.project_employee_roles.includes(:role).select("role_id")
       GnsProject::RolesPermission.where(role_id: role_ids).map(&:permission).uniq
     end
