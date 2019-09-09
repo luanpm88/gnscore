@@ -7,6 +7,32 @@ module GnsNote
       user.present? ? user.name : ''
     end
     
+    # class const
+    REMINDER_NONE = 'none'
+    REMINDER_00_MINUTES = '0_minutes'
+    REMINDER_05_MINUTES = '5_minutes'
+    REMINDER_15_MINUTES = '15_minutes'
+    REMINDER_30_MINUTES = '30_minutes'
+    REMINDER_01_HOUR = '1_hour'
+    REMINDER_12_HOURS = '12_hours'
+    REMINDER_01_DAY = '1_day'
+    REMINDER_01_WEEK = '1_week'
+    
+    # get reminder
+    def self.get_reminder_options()
+      [
+        {text: I18n.t('gns_note.none'),value: self::REMINDER_NONE},
+        {text: I18n.t('gns_note.0_minutes'),value: self::REMINDER_00_MINUTES},
+        {text: I18n.t('gns_note.5_minutes'),value: self::REMINDER_05_MINUTES},
+        {text: I18n.t('gns_note.15_minutes'),value: self::REMINDER_15_MINUTES},
+        {text: I18n.t('gns_note.30_minutes'),value: self::REMINDER_30_MINUTES},
+        {text: I18n.t('gns_note.1_hour'),value: self::REMINDER_01_HOUR},
+        {text: I18n.t('gns_note.12_hours'),value: self::REMINDER_12_HOURS},
+        {text: I18n.t('gns_note.1_day'),value: self::REMINDER_01_DAY},
+        {text: I18n.t('gns_note.1_week'),value: self::REMINDER_01_WEEK},
+      ]
+    end
+    
     # filters
     def self.filter(query, params)
       params = params.to_unsafe_hash
@@ -57,5 +83,34 @@ module GnsNote
     def mark_as_not_done_yet
 			update_attributes(is_done: false)
 		end
+    
+    # set remind
+    def remind_at
+      if due_date.present? and reminder.present?
+        case
+        when reminder == REMINDER_00_MINUTES
+          return due_date
+        when reminder == REMINDER_05_MINUTES
+          return due_date - 5.minutes
+        when reminder == REMINDER_15_MINUTES
+          return due_date - 15.minutes
+        when reminder == REMINDER_30_MINUTES
+          return due_date - 30.minutes
+        when reminder == REMINDER_01_HOUR
+          return due_date - 1.hour
+        when reminder == REMINDER_12_HOURS
+          return due_date - 12.hours
+        when reminder == REMINDER_01_DAY
+          return due_date - 1.day
+        when reminder == REMINDER_01_WEEK
+          return due_date - 1.week
+        else
+          return nil
+        end
+      else
+        return nil
+      end
+    end
+
   end
 end

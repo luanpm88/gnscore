@@ -1,5 +1,14 @@
 en:
   gns_note:
+    none: "None"
+    0_minutes: "0 minutes"
+    5_minutes: "5 minutes"
+    15_minutes: "15 minutes"
+    30_minutes: "30 minutes"
+    1_hour: "1 hour"
+    12_hours: "12 hours"
+    1_day: "1 day"
+    1_week: "1 week"
     backend:
       personal_notes:
         list:
@@ -31,6 +40,8 @@ en:
           description: "Description"
           enter_description: "Enter description"
           due_date: "Due date"
+          reminder: "Reminder"
+          placeholder_reminder: "Choose reminder"
   activerecord:
     attributes:
       gns_note/personal_note:

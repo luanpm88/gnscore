@@ -1,5 +1,14 @@
 vi:
   gns_note:
+    none: "Không nhắc"
+    0_minutes: "0 phút"
+    5_minutes: "5 phút"
+    15_minutes: "15 phút"
+    30_minutes: "30 phút"
+    1_hour: "1 giờ"
+    12_hours: "12 giờ"
+    1_day: "1 ngày"
+    1_week: "1 tuần"
     backend:
       personal_notes:
         list:
@@ -31,6 +40,8 @@ vi:
           description: "Mô tả ghi chú"
           enter_description: "Nhập mô tả ghi chú"
           due_date: "Ngày hết hạn"
+          reminder: "Nhắc nhở trước"
+          placeholder_reminder: "Chọn nhắc nhở"
   activerecord:
     attributes:
       gns_note/personal_note:
