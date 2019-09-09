@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Personal note: Remind you!</title>
+    <style>
+        table {
+          border-collapse: collapse;
+        }
+        th {
+          background: #0071bc;
+          color: #ffffff;
+        }
+        
+        th, td {
+          border: 1px solid #66a9d6;
+          padding: 8px;
+        }
+        
+        tr:nth-child(odd) {
+          background: #efefef;
+        }
+        
+        tr:hover {
+          background: #d1d1d1;
+        }
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    Hi <%= @user.name %>,
+    <p>
+      <b>Remind you!</b><br>
+      You have a personal note to be taken before <b><%= @note.due_date.strftime('%d/%m/%Y, %H:%M') %></b>
+    </p>
+    
+    <p>
+      Description: <b><%= @note.description %></b><br>
+      Due date: <%= @note.due_date.strftime('%d/%m/%Y, %H:%M') %>
+    </p>
+    <p>
+      ========================================================================<br>
+      <i>(*) This is an email sent automatically. Please do not reply to this email.</i>
+    </p>
+</body>
+</html>

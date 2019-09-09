@@ -33,6 +33,12 @@ module GnsNote
         @personal_note.user = current_user
   
         if @personal_note.save
+          
+          # send mail
+          if @personal_note.remind_at.present?
+            GnsNote::PersonalNoteEmailJob.set(wait_until: @personal_note.remind_at).perform_later({note_id: @personal_note.id})
+          end
+          
           render json: {
             status: 'success',
             message: 'Note was successfully created.',
@@ -46,7 +52,15 @@ module GnsNote
       def update
         authorize! :update, @personal_note
         
+        # get previous remind_at
+        prev_remind_at = @personal_note.remind_at
+        
         if @personal_note.update(personal_note_params)
+          # send mail
+          if @personal_note.remind_at.present? and (@personal_note.remind_at != prev_remind_at)
+            GnsNote::PersonalNoteEmailJob.set(wait_until: @personal_note.remind_at).perform_later({note_id: @personal_note.id, remind_time: @personal_note.remind_at.to_s})
+          end
+          
           render json: {
             status: 'success',
             message: 'Note was successfully updated.',
@@ -105,7 +119,7 @@ module GnsNote
   
         # Only allow a trusted parameter "white list" through.
         def personal_note_params
-          params.fetch(:personal_note, {}).permit(:description, :due_date)
+          params.fetch(:personal_note, {}).permit(:description, :due_date, :reminder)
         end
     end
   end

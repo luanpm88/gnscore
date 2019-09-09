@@ -265,3 +265,14 @@
     text-decoration: line-through;
     color: #999;
 }
+.daterangepicker .table-condensed thead tr:last-child th {
+    padding-top: 0;
+}
+.daterangepicker .table-condensed tr>td, .daterangepicker .table-condensed tr>th {
+    padding: 0;
+    min-width: inherit;
+}
+.daterangepicker th {
+    color: inherit;
+    font-weight: bold;
+}
