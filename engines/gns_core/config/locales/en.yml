@@ -146,6 +146,8 @@ en:
           total_tasks: "Total Tasks"
           tasks_are_closed: "Tasks are closed"
           tasks_are_open: "Tasks are open"
+          gantt_chart: "Gantt chart"
+          report_employees_tasks: "Employee's tasks"
         todo_list:
           todo_list: "TODO LIST"
           task_s: "task(s)"

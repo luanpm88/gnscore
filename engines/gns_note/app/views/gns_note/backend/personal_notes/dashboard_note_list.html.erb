@@ -16,9 +16,15 @@
                             </span>
                             <% if note.due_date.present? %>
                                 <div class="font-size-sm">
-                                    <span class="text-muted">
+                                    <span class="<%= note.due_date <= Time.now ? 'text-warning' : 'text-muted' %>">
                                         <i class="icon-alarm-check font-size-sm mr-1"></i>Due date: <%= note.due_date.strftime("%d/%m/%Y %H:%M") %>
                                     </span>
+                                    <% if note.due_date <= Time.now %>
+                                        <i class="icon-warning font-size-sm font-weight-semibold text-warning ml-1"
+                                            data-popup="tooltip"
+                                            data-original-title="Out of date">
+                                        </i>
+                                    <% end %>
                                 </div>
                             <% end %>
                         </div>
