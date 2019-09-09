@@ -9,11 +9,14 @@ en:
     12_hours: "12 hours"
     1_day: "1 day"
     1_week: "1 week"
+    
+    out_of_date: "Out of date"
     backend:
       personal_notes:
         list:
           note: "Note"
           due_date: "Due date"
+          remind_me: "Remind me"
           status: "Status"
           created_at: "Created at"
           actions: "Actions"

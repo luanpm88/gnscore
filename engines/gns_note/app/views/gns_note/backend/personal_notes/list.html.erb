@@ -10,16 +10,24 @@
     </thead>
     <tbody>
         <% @personal_notes.each do |note| %>
-            <tr class="<%= 'line-through' if note.is_done? %>">
+            <tr class="<%= 'line-through' if note.is_done? %> <%= 'text-danger' if note.due_date <= Time.now %>">
                 <td><%= note.description %></td>
                 <td>
-                    <%= note.due_date.strftime("%d/%m/%Y %H:%M") if note.due_date.present? %>
+                    <% if note.due_date.present? %>
+                        <%= note.due_date.strftime("%d/%m/%Y %H:%M") %>
+                        <div class="text-muted font-size-xs text-nowrap">
+                            <i class="icon-alarm-check font-size-sm"></i> <%= t('.remind_me') %>: <%= t("gns_note.#{note.reminder}") %>
+                        </div>
+                    <% end %>
                 </td>
                 <td>
                     <% if note.is_done? %>
                         <span class="badge badge-success"><%= t('.is_done') %></span>
                     <% else %>
                         <span class="badge badge-info"><%= t('.not_done') %></span>
+                    <% end %>
+                    <% if note.due_date <= Time.now %>
+                        <span class="badge badge-danger"><%= t('gns_note.out_of_date') %></span>
                     <% end %>
                 </td>
                 <td>

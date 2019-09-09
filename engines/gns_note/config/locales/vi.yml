@@ -9,11 +9,14 @@ vi:
     12_hours: "12 giờ"
     1_day: "1 ngày"
     1_week: "1 tuần"
+    
+    out_of_date: "Đã quá hạn"
     backend:
       personal_notes:
         list:
           note: "Ghi chú"
           due_date: "Ngày hết hạn"
+          remind_me: "Nhắc trước"
           status: "Trạng thái"
           created_at: "Ngày tạo"
           actions: "Hành động"
