@@ -146,6 +146,8 @@ vi:
           total_tasks: "Tổng số công việc"
           tasks_are_closed: "Công việc đã đóng"
           tasks_are_open: "Công việc đang mở"
+          gantt_chart: "Biểu đồ Gantt"
+          report_employees_tasks: "Công việc nhân viên"
         todo_list:
           todo_list: "DANH SÁCH VIỆC LÀM"
           task_s: "Công việc"

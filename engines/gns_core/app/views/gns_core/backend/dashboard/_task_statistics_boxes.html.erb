@@ -1,6 +1,6 @@
 <% @tasks = GnsProject::Task.all %>
 <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-3">
 
         <div class="card bg-teal-400">
             <div class="card-body">
@@ -19,7 +19,7 @@
 
     </div>
 
-    <div class="col-lg-4">
+    <div class="col-lg-3">
 
         <div class="card bg-success-400">
             <div class="card-body">
@@ -36,7 +36,7 @@
 
     </div>
 
-    <div class="col-lg-4">
+    <div class="col-lg-3">
 
         <div class="card bg-blue-400">
             <div class="card-body">
@@ -49,6 +49,24 @@
                      <%= t('.tasks_are_open') %>
                 </div>
             </div>
+        </div>
+
+    </div>
+
+    <div class="col-lg-3">
+
+        <div class="card bg-blue-400">
+            <a class="text-white" href="<%= gns_report.gantt_chart_backend_reports_path %>">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <h3 class="font-weight-semibold mb-0"><%= t('.gantt_chart') %></h3>
+                    </div>
+                    
+                    <div>
+                         <%= t('.report_employees_tasks') %>
+                    </div>
+                </div>
+            </a>
         </div>
 
     </div>
