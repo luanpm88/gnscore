@@ -57,7 +57,6 @@ module GnsProject
     STATUS_PENDING = 'pending'
     STATUS_IN_PROGRESS = 'in_progress'
     STATUS_DONE = 'done'
-    STATUS_FINISHED = 'finished'
     STATUS_CANCELED = 'canceled'
     
     # get business type options

@@ -156,6 +156,10 @@
     color: #fff;
     background-color: #4caf50;
 }
+.badge-done {
+    color: #fff;
+    background-color: #00bcd4;
+}
 .badge-finished {
     color: #fff;
     background-color: #00bcd4;

@@ -297,7 +297,7 @@ vi:
           new: "Mới"
           pending: "Đang chờ xử lý"
           inprogress: "Trong tiến trình"
-          finished: "Đã kết thúc"
+          done: "Đã hoàn thành"
           type_to_search: "Tìm theo loại..."
           filter_by_customer: "Lọc theo khách hàng..."
           filter_by_type: "Lọc theo loại..."
