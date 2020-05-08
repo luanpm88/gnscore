@@ -77,7 +77,11 @@ module GnsReport
         
         if params[:employee_id].present?
           @employee = GnsEmployee::Employee.find(params[:employee_id])
-          @projects = GnsProject::Project.where(status: GnsProject::Project::STATUS_IN_PROGRESS).includes(:tasks)
+          @projects = GnsProject::Project.where(status: [
+                        GnsProject::Project::STATUS_IN_PROGRESS,
+                        GnsProject::Project::STATUS_DONE,
+                      ])
+                      .includes(:tasks)
                       .where(gns_project_tasks: {employee_id: @employee.id})
           
           if @from_date.present?

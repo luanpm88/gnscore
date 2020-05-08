@@ -182,7 +182,12 @@
                         </div>
 
                         <div class="ml-3 align-self-center">
-                            <% if (can? :mark_as_new, @project) or (can? :send_request, @project) or (can? :start_project, @project) or (can? :finish, @project) %>
+                            <% if ((can? :mark_as_new, @project) or
+                                (can? :send_request, @project) or
+                                (can? :start_project, @project) or
+                                (can? :finish, @project)) and false
+                                # Hide drop-down
+                            %>
                                 <div class="dropdown">
                                     <a href="#" class="badge bg-<%= @project.status %> dropdown-toggle" data-toggle="dropdown"><%= t @project.status %></a>
                                     <div class="dropdown-menu dropdown-menu-right">
