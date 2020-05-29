@@ -48,3 +48,17 @@ en:
           next: "Next"
         gantt_chart_data:
           must_select_filter: "Please select chart type"
+        project_working_hours:
+          project_working_hours_report: "Report - Project Working Hours"
+          project_working_hours: "Project Working Hours"
+          filter_by_project: "Filter by project"
+          filter_by_from_date: "Filter by from date"
+          filter_by_to_date: "Filter by to date"
+        project_working_hours_data:
+          title: "Report of employees working hours in the project"
+          must_select_filter: "Not found! Please select a project to filter the report"
+          no_results_found: "No results found for matching filter values"
+          cardinal: "No."
+          employee_name: "Employee's name"
+          hours: "Hours"
+          total: "Total"

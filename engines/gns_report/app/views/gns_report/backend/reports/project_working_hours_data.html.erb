@@ -1,0 +1,188 @@
+<% if params[:project_id].present? %>
+    <% if @project_tasks[:hour_data_series].empty? %>
+        <div class="card-body">
+            <div class="alert alert-warning border-0 alert-dismissible text-center">
+                <%= t('.no_results_found') %>
+            </div>
+        </div>
+    <% else %>
+        <div class="card-header header-elements-inline">
+            <h1>
+                <%= t('.title') %> <%= @project_tasks[:project_name] %> (<%= @project_tasks[:project_code] %>)
+            </h1>
+            <a href="<%= gns_report.project_working_hours_xlsx_backend_reports_path %>"
+                target="_blank"
+                class="btn btn-light mb-2 mr-2"
+            ><%= t('export_to_excel') %></a>
+        </div>
+        
+        <div class="card-body pb-0">
+            <h5 class="font-weight-semibold"><%= t('from') %> <%= @from_date.strftime('%d/%m/%Y') %> <%= t('to') %> <%= @to_date.strftime('%d/%m/%Y') %></h5>
+        </div>
+        
+        <table class="table table-hover">
+            <thead>
+                <tr class="bg-info-700">
+                    <th class="text-nowrap"><%= t('.cardinal') %></th>
+                    <th class="text-nowrap"><%= t('.employee_name') %></th>
+                    <th class="text-nowrap text-center"><%= t('.hours') %></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @project_tasks[:hour_data_series].each_with_index do |detail,index| %>
+                    <tr>
+                        <td>
+                            <%= index + 1 %>
+                        </td>
+                        <td><%= detail[:name] %></td>
+                        <td class="text-center"><%= detail[:value] %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+            <tfoot>
+                <tr class="bg-info-700 font-weight-semibold">
+                    <td>
+                        <%= t('.total') %>
+                    </td>
+                    <td></td>
+                    <td class="text-center"><%= @project_tasks[:total_hours] %></td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="card-body">
+            <div class="chart-container">
+                <div class="chart has-fixed-height" id="pie_basic"></div>
+            </div>
+            <div class="pie-legend-data" style="display: none"><%= @project_tasks[:employee_names].to_json.html_safe %></div>
+            <div class="pie-series-data" style="display: none"><%= @project_tasks[:hour_data_series].to_json.html_safe %></div>
+            <script>
+                var EMPLOYEES_LEGEND_DATA = $('.pie-legend-data').html();
+                var EMPLOYEES_SERIES_DATA = $('.pie-series-data').html();
+                // Setup module
+                // ------------------------------
+                
+                var EchartsPiesDonuts = function() {
+                
+                    //
+                    // Setup module components
+                    //
+                
+                    // Pie and donut charts
+                    var _piesDonutsExamples = function() {
+                        
+                        // Define elements
+                        var pie_basic_element = document.getElementById('pie_basic');
+                
+                
+                        //
+                        // Charts configuration
+                        //
+                
+                        // Basic pie chart
+                        if (pie_basic_element) {
+                
+                            // Initialize chart
+                            var pie_basic = echarts.init(pie_basic_element);
+                            
+                            //
+                            // Chart config
+                            //
+                
+                            // Options
+                            pie_basic.setOption({
+                
+                                // Colors
+                                color: [
+                                    '#2ec7c9','#b6a2de','#5ab1ef','#ffb980','#d87a80',
+                                    '#8d98b3','#e5cf0d','#97b552','#95706d','#dc69aa',
+                                    '#07a2a4','#9a7fd1','#588dd5','#f5994e','#c05050',
+                                    '#59678c','#c9ab00','#7eb00a','#6f5553','#c14089'
+                                ],
+                
+                                // Global text styles
+                                textStyle: {
+                                    fontFamily: 'Roboto, Arial, Verdana, sans-serif',
+                                    fontSize: 13
+                                },
+                
+                                // Add title
+                                title: {
+                                    text: "The chart shows the employee's hours rate in the project <%= @project_tasks[:project_name] %>",
+                                    left: 'center',
+                                    bottom: 0,
+                                    textStyle: {
+                                        fontSize: 17,
+                                        fontWeight: 500
+                                    },
+                                    subtextStyle: {
+                                        fontSize: 12
+                                    }
+                                },
+                
+                                // Add tooltip
+                                tooltip: {
+                                    trigger: 'item',
+                                    backgroundColor: 'rgba(0,0,0,0.75)',
+                                    padding: [10, 15],
+                                    textStyle: {
+                                        fontSize: 13,
+                                        fontFamily: 'Roboto, sans-serif'
+                                    },
+                                    formatter: "{b} <br/>{a}: {c} ({d}%)"
+                                },
+                
+                                // Add legend
+                                legend: {
+                                    orient: 'vertical',
+                                    top: 'center',
+                                    left: 20,
+                                    data: JSON.parse(EMPLOYEES_LEGEND_DATA),
+                                    itemHeight: 10,
+                                    itemWidth: 10
+                                },
+                
+                                // Add series
+                                series: [{
+                                    name: 'Hours',
+                                    type: 'pie',
+                                    radius: '70%',
+                                    center: ['50%', '45%'],
+                                    top: 0,
+                                    itemStyle: {
+                                        normal: {
+                                            borderWidth: 1,
+                                            borderColor: '#fff'
+                                        },
+                                    },
+                                    data: JSON.parse(EMPLOYEES_SERIES_DATA)
+                                }]
+                            });
+                        }
+                    };
+                
+                
+                    //
+                    // Return objects assigned to module
+                    //
+                
+                    return {
+                        init: function() {
+                            _piesDonutsExamples();
+                        }
+                    }
+                }();
+                
+                
+                // Initialize module
+                // ------------------------------
+                EchartsPiesDonuts.init();
+            </script>
+        </div>
+    <% end %>
+<% else %>
+    <div class="card-body">
+        <div class="alert alert-warning border-0 alert-dismissible text-center">
+            <%= t('.must_select_filter') %>
+        </div>
+    </div>
+<% end %>

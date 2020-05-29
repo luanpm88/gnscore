@@ -155,7 +155,7 @@ module GnsProject
       
       # render items
       query.each do |d|
-        data[:results] << {id: d.id, text: d.name}
+        data[:results] << {id: d.id, text: d.name + ' (' + d.code + ')'}
       end
       
       return data
