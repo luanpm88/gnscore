@@ -1,0 +1,109 @@
+<% content_for :title do %>
+    <%= t('.project_working_hours_report') %>
+<% end %>
+
+<% content_for :breadcrumb do %>
+    <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i><%= t('home') %></a>
+    <span class="breadcrumb-item active"><%= t('.project_working_hours_report') %></span>
+<% end %>
+
+<% content_for :page_title do %>
+    <h4><i class="icon-pie-chart3"></i> <span class="font-weight-semibold"><%= t('.project_working_hours_report') %></span></h4>
+<% end %>
+
+<% content_for :page_script do %>
+    <script>
+        $(function() {
+            $('input[name="from_date"]').daterangepicker({
+                singleDatePicker: true,
+                autoUpdateInput: false,
+                showDropdowns: true,
+                locale: {
+                    format: "DD/MM/YYYY"
+                }
+            }, function(start, end, label) {                            
+                $('input[name="from_date"]').on('hideCalendar.daterangepicker', function(e) {
+                  $('input[name="from_date"]').val('');
+                });
+                
+                $('input[name="from_date"]').on('showCalendar.daterangepicker', function(e) {
+                      $('input[name="from_date"]').val(start.format('DD/MM/YYYY'));
+                });
+            });
+            
+            $('input[name="to_date"]').daterangepicker({
+                singleDatePicker: true,
+                autoUpdateInput: false,
+                showDropdowns: true,
+                locale: {
+                    format: "DD/MM/YYYY"
+                }
+            }, function(start, end, label) {                            
+                $('input[name="to_date"]').on('hideCalendar.daterangepicker', function(e) {
+                  $('input[name="to_date"]').val('');
+                });
+                
+                $('input[name="to_date"]').on('showCalendar.daterangepicker', function(e) {
+                      $('input[name="to_date"]').val(start.format('DD/MM/YYYY'));
+                });
+            });
+        });
+    </script>
+<% end %>
+
+<!-- Datatable -->
+<div class="card datalist"
+    data-url="<%= gns_report.project_working_hours_data_backend_reports_path %>"
+>
+    <div class="card-header header-elements-inline">
+        <h5 class="card-title"><%= t('.project_working_hours') %></h5>
+        <div class="header-elements">
+            <div class="list-icons">
+                <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+        </div>
+    </div>
+    
+    <form class="datalist-filters">
+        <div class="card-body pb-0">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-calendar22"></i></span>
+                        </span>
+                        <input type="text" class="form-control font-weight-semibold"
+                            placeholder="<%= t('.filter_by_from_date') %>"
+                            value="<%= Time.now.beginning_of_month.strftime('%d/%m/%Y') %>"
+                            name="from_date">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-calendar22"></i></span>
+                        </span>
+                        <input type="text" class="form-control font-weight-semibold"
+                            placeholder="<%= t('.filter_by_to_date') %>"
+                            value="<%= Time.now.end_of_month.strftime('%d/%m/%Y') %>"
+                            name="to_date">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select name="project_id" data-placeholder="<%= t('.filter_by_project') %>"
+                          class="form-control select-ajax"
+                          data-url="<%= gns_project.select2_backend_projects_path(status: [GnsProject::Project::STATUS_IN_PROGRESS, GnsProject::Project::STATUS_DONE]) %>">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 text-right">
+                    <span class="btn btn-primary mb-3 datalist-search-button"><%= t('go') %></span>
+                </div>
+            </div>
+        </div>
+        <div class="datalist-content">
+            
+        </div>
+    </form>
+</div>

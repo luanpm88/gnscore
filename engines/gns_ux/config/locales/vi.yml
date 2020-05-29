@@ -69,6 +69,9 @@ vi:
           project_report: "Dự án theo khách hàng"
           employee_report: "Nhân viên tham gia dự án"
           gantt_chart: "Theo dõi công việc của nhân viên (biểu đồ Gantt)"
+          employee_working_hours_by_month: "Giờ công nhân viên (theo tháng)"
+          employee_working_hours_by_year: "Giờ công nhân viên (theo năm)"
+          project_working_hours: "Giờ công nhân viên (theo dự án)"
         footer:
           support: "Hỗ trợ"
           user_guide: "Hướng dẫn"

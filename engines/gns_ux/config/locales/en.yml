@@ -69,6 +69,9 @@ en:
           project_report: "Customer's project"
           employee_report: "Employee's project"
           gantt_chart: "Employee's tasks (Gantt chart)"
+          employee_working_hours_by_month: "Employee working hours (month)"
+          employee_working_hours_by_year: "Employee working hours (year)"
+          project_working_hours: "Project working hours"
         footer:
           support: "Support"
           user_guide: "User Guide"

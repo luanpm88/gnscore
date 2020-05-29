@@ -15,6 +15,18 @@ GnsReport::Engine.routes.draw do
                     get 'employee_report'
                     post 'employee_report_data'
                     get 'employee_report_xlsx'
+                    
+                    get 'employee_working_hours_by_month'
+                    post 'employee_working_hours_by_month_data'
+                    get 'employee_working_hours_by_month_xlsx'
+                    
+                    get 'employee_working_hours_by_year'
+                    post 'employee_working_hours_by_year_data'
+                    get 'employee_working_hours_by_year_xlsx'
+                    
+                    get 'project_working_hours'
+                    post 'project_working_hours_data'
+                    get 'project_working_hours_xlsx'
                 end
             end
         end

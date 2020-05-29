@@ -48,3 +48,17 @@ vi:
           next: "Sau"
         gantt_chart_data:
           must_select_filter: "Vui lòng chọn kiểu hiển thị cho biểu đồ"
+        project_working_hours:
+          project_working_hours_report: "Báo cáo - Giờ làm việc của nhân viên trong dự án"
+          project_working_hours: "Giờ tham gia dự án của nhân viên"
+          filter_by_project: "Lọc theo dự án"
+          filter_by_from_date: "Lọc theo ngày bắt đầu"
+          filter_by_to_date: "Lọc theo ngày kết thúc"
+        project_working_hours_data:
+          title: "Giờ làm việc của nhân viên trong dự án"
+          must_select_filter: "Vui lòng chọn thông tin để lọc báo cáo"
+          no_results_found: "Không tìm thấy kết quả nào phù hợp"
+          cardinal: "STT"
+          employee_name: "Tên nhân viên"
+          hours: "Giờ"
+          total: "Tổng cộng"
