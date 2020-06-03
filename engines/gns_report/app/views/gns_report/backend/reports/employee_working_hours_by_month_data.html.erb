@@ -1,0 +1,121 @@
+<% if params[:employee_id].present? %>
+    <% if @datas.empty? %>
+        <div class="card-body">
+            <div class="alert alert-warning border-0 alert-dismissible text-center">
+                <%= t('.no_results_found') %>
+            </div>
+        </div>
+    <% else %>
+        <div class="card-header header-elements-inline">
+            <h1>
+                <%= t('.title') %>: <%= @employee.name %>
+            </h1>
+            <a href="<%= gns_report.employee_working_hours_by_month_xlsx_backend_reports_path %>"
+                target="_blank"
+                class="btn btn-light mb-2 mr-2"
+            ><%= t('export_to_excel') %></a>
+        </div>
+        
+        <div class="card-body pb-0">
+            <h5 class="font-weight-semibold"><%= t('from') %> <%= @datas[:filter_from_month] %> <%= t('to') %> <%= @datas[:filter_to_month] %></h5>
+        </div>
+        
+        <table class="table table-hover">
+            <thead>
+                <tr class="bg-info-700">
+                    <th class="text-nowrap"><%= t('.months') %></th>
+                    <th class="text-nowrap text-center"><%= t('.hours') %></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @datas[:data_by_month].each_with_index do |month,index| %>
+                    <tr>
+                        <td><%= month[:text] %></td>
+                        <td class="text-center"><%= month[:value] %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+            <tfoot>
+                <tr class="bg-info-700 font-weight-semibold">
+                    <td>
+                        <%= t('.total') %>
+                    </td>
+                    <td class="text-center"><%= @datas[:total_hours] %></td>
+                </tr>
+            </tfoot>
+        </table>
+        
+        <!-- Bar chart -->
+        <div class="card-body">
+            <h5 class="font-weight-semibold py-3"><%= t('.bar_chart_name') %></h5>
+            <div class="chart-container">
+                <div class="chart" id="c3-bar-chart"></div>
+            </div>
+            <div class="bar-chart-data" style="display: none"><%= @datas[:data_by_month].to_json.html_safe %></div>
+        </div>
+        
+        <script>
+            var BAR_CHART_DATA = JSON.parse($('.bar-chart-data').html());
+            var TEXTS = BAR_CHART_DATA.map(m => m['text']);
+            var VALUES = BAR_CHART_DATA.map(m => m['value']);
+            function C3_Charts() {
+                // Define charts elements
+                var bar_chart_element = document.getElementById('c3-bar-chart');
+        
+                // Bar chart
+                if(bar_chart_element) {
+        
+                    // Generate chart
+                    c3.generate({
+                        bindto: bar_chart_element,
+                        size: { height: 500 },
+                        padding: {
+                            top: 0,
+                            right: 50,
+                            bottom: -50,
+                            left: 50,
+                        },
+                        data: {
+                            x: 'x',
+                            columns: [
+                                ['x'].concat(TEXTS),
+                                ['Working hours'].concat(VALUES),
+                            ],
+                            type: 'bar',
+                            labels: true
+                        },
+                        bar: {
+                            width: {
+                                ratio: 0.4
+                            }
+                        },
+                        axis: {
+                            x: {
+                                type: 'category',
+                                label: 'Months',
+                                tick: {
+                                    rotate: 75,
+                                    multiline: false
+                                },
+                                 height: 130,
+                            },
+                            y: {
+                                label: 'Hours',
+                            },
+                        }
+                    });
+                }
+            }
+            
+            // Initialize module
+            // ------------------------------
+            C3_Charts();
+        </script>
+    <% end %>
+<% else %>
+    <div class="card-body">
+        <div class="alert alert-warning border-0 alert-dismissible text-center">
+            <%= t('.must_select_filter') %>
+        </div>
+    </div>
+<% end %>
