@@ -1,46 +1,47 @@
 <% content_for :title do %>
-    <%= t('.project_working_hours_report') %>
+    <%= t('.employee_working_hours_by_month') %>
 <% end %>
 
 <% content_for :breadcrumb do %>
     <a href="<%= gns_core.root_path %>" class="breadcrumb-item"><i class="icon-home2 mr-2"></i><%= t('home') %></a>
-    <span class="breadcrumb-item active"><%= t('.project_working_hours_report') %></span>
+    <span class="breadcrumb-item active"><%= t('.employee_working_hours_by_month') %></span>
 <% end %>
 
 <% content_for :page_title do %>
-    <h4><i class="icon-pie-chart3"></i> <span class="font-weight-semibold"><%= t('.project_working_hours_report') %></span></h4>
+    <h4><i class="icon-address-book"></i> <span class="font-weight-semibold"><%= t('.employee_working_hours_by_month') %></span></h4>
 <% end %>
 
 <% content_for :page_script do %>
-    <%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/visualization/echarts/echarts.min.js' %>
+    <%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/visualization/d3/d3.min.js' %>
+    <%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/visualization/c3/c3.min.js' %>
     <script>
-        $(function() {
-            $('input[name="from_date"]').datetimepicker({
-                viewMode: 'days',
-                format: 'DD/MM/YYYY',
+        $(function () {
+            $('input[name="from_month"]').datetimepicker({
+                viewMode: 'months',
+                format: 'MM/YYYY',
                 locale: '<%= I18n.locale %>',
             });
-            $('input[name="to_date"]').datetimepicker({
-                viewMode: 'days',
-                format: 'DD/MM/YYYY',
+            $('input[name="to_month"]').datetimepicker({
+                viewMode: 'months',
+                format: 'MM/YYYY',
                 locale: '<%= I18n.locale %>',
             });
-            $('input[name="from_date"]').on("dp.change", function (e) {
-                $('input[name="to_date"]').data("DateTimePicker").minDate(e.date);
+            $('input[name="from_month"]').on("dp.change", function (e) {
+                $('input[name="to_month"]').data("DateTimePicker").minDate(e.date);
             });
-            $('input[name="to_date"]').on("dp.change", function (e) {
-                $('input[name="from_date"]').data("DateTimePicker").maxDate(e.date);
-            });
+            $('input[name="to_month"]').on("dp.change", function (e) {
+                $('input[name="from_month"]').data("DateTimePicker").maxDate(e.date);
+            }); 
         });
     </script>
 <% end %>
 
 <!-- Datatable -->
 <div class="card datalist"
-    data-url="<%= gns_report.project_working_hours_data_backend_reports_path %>"
+    data-url="<%= gns_report.employee_working_hours_by_month_data_backend_reports_path %>"
 >
     <div class="card-header header-elements-inline">
-        <h5 class="card-title"><%= t('.project_working_hours') %></h5>
+        <h5 class="card-title"><%= t('.employee_working_hours') %></h5>
         <div class="header-elements">
             <div class="list-icons">
                 <a class="list-icons-item" data-action="collapse"></a>
@@ -56,9 +57,9 @@
                         <span class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-calendar22"></i></span>
                         </span>
-                        <input type="text" class="form-control font-weight-semibold"
-                            placeholder="<%= t('.filter_by_from_date') %>"
-                            name="from_date">
+                        <input type="text" class="form-control"
+                            placeholder="<%= t('.filter_by_from_month') %>"
+                            name="from_month">
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -66,16 +67,16 @@
                         <span class="input-group-prepend">
                             <span class="input-group-text"><i class="icon-calendar22"></i></span>
                         </span>
-                        <input type="text" class="form-control font-weight-semibold"
-                            placeholder="<%= t('.filter_by_to_date') %>"
-                            name="to_date">
+                        <input type="text" class="form-control"
+                            placeholder="<%= t('.filter_by_to_month') %>"
+                            name="to_month">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <select name="project_id" data-placeholder="<%= t('.filter_by_project') %>"
+                        <select name="employee_id" data-placeholder="<%= t('.filter_by_employee') %>"
                           class="form-control select-ajax"
-                          data-url="<%= gns_project.select2_backend_projects_path(status: [GnsProject::Project::STATUS_IN_PROGRESS, GnsProject::Project::STATUS_DONE]) %>">
+                          data-url="<%= gns_employee.select2_backend_employees_path %>">
                         </select>
                     </div>
                 </div>

@@ -12,6 +12,7 @@
 <% end %>
 
 <% content_for :page_script do %>
+    <%= javascript_include_tag '/gns_ux/assets/backend/global/js/plugins/visualization/echarts/echarts.min.js' %>
     <script>
         $(function() {
             $('input[name="from_date"]').daterangepicker({

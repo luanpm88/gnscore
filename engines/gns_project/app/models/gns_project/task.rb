@@ -245,5 +245,58 @@ module GnsProject
       # can cap nhat lai theo employee/user he thong
       GnsProject::Task.where(status: GnsProject::Task::STATUS_OPEN).where(finished: true)
     end
+    
+    # working hours by date
+    def self.working_hours_by_date(fromdate, todate)
+      from_date = fromdate.to_date
+      to_date = todate.to_date
+      tasks = self.all
+      
+      if from_date.present? and to_date.present?
+        tasks = tasks.where('gns_project_tasks.start_date <= ? and gns_project_tasks.end_date >= ?', from_date, from_date)
+                .or(tasks.where('gns_project_tasks.end_date >= ? and gns_project_tasks.start_date <= ?', to_date, to_date))
+                .or(tasks.where('gns_project_tasks.start_date >= ? and gns_project_tasks.end_date <= ?', from_date, to_date))
+      
+        total_hours = 0
+        number_of_days = 0
+        hours_per_day = 0
+        num_of_days_by_filter = 0
+        
+        tasks.each do |t|
+          hours_of_task = t.hours.present? ? t.hours : 0
+          number_of_days = (t.start_date.to_date..t.end_date.to_date).to_a.size
+          
+          hours_per_day = (hours_of_task/number_of_days).round(3)
+          
+          if t.start_date <= from_date
+            first_date = from_date
+          else
+            first_date = t.start_date
+          end
+          
+          if t.end_date >= to_date
+            last_date = to_date
+          else
+            last_date = t.end_date
+          end
+          
+          # Number of task days by filter
+          num_of_days_by_filter = (first_date.to_date..last_date.to_date).to_a.size
+          
+          # Number of task hours by filter
+          num_of_hours_by_filter = hours_per_day*num_of_days_by_filter
+          
+          if num_of_days_by_filter == number_of_days
+            num_of_hours_by_filter = hours_of_task
+          end
+          
+          total_hours += num_of_hours_by_filter
+        end
+        
+        return total_hours
+      else
+        return 0
+      end
+    end
   end
 end
