@@ -10,6 +10,10 @@
             <h1>
                 <%= t('.title') %>: <%= @employee.name %>
             </h1>
+            <a href="<%= gns_report.employee_working_hours_by_month_xlsx_backend_reports_path %>"
+                target="_blank"
+                class="btn btn-light mb-2 mr-2"
+            ><%= t('export_to_excel') %></a>
         </div>
         
         <div class="card-body pb-0">

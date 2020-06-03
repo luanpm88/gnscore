@@ -231,6 +231,40 @@ module GnsReport
       end
       
       def employee_working_hours_by_month_xlsx
+        data = YAML.load_file("tmp/user_#{current_user.id}_employee_working_hours_by_month_xlsx.yml")
+        
+        @from_month = data[:filter_from_month]
+        @to_month = data[:filter_to_month]
+        @employee_name = data[:employee_name]
+        @employee_code = data[:employee_code]
+        @total_hours = data[:total_hours]
+        @data_by_month = data[:data_by_month]
+        
+        workbook = RubyXL::Parser.parse('templates/employee_working_hours_export_template.xlsx')
+        worksheet = workbook[0]
+        
+        worksheet[0][0].change_contents("THỐNG KÊ GIỜ LÀM VIỆC CỦA NHÂN VIÊN (THEO THÁNG)")
+        if @from_month == @to_month
+          worksheet[1][0].change_contents("Thời gian: Tháng #{@from_month}")
+        else
+          worksheet[1][0].change_contents("Thời gian: Từ tháng #{@from_month} - đến tháng #{@to_month}")
+        end
+        worksheet[2][0].change_contents("Tên nhân viên: #{@employee_name}")
+        # Records
+        sum = 0
+        row_num = 6
+        @data_by_month.reverse.each_with_index do |data,index|
+          worksheet.insert_row(6)
+          worksheet[6][0].change_contents(data[:text])
+          worksheet[6][1].change_contents(data[:value])
+          row_num += 1
+        end
+        worksheet[row_num][1].change_contents(@total_hours)
+        worksheet.delete_row(5)
+        
+        send_data workbook.stream.string,
+          filename: "thong-ke-gio-lam-viec-theo-thang.xlsx",
+          disposition: 'attachment'
       end
       
       def employee_working_hours_by_year
@@ -288,6 +322,40 @@ module GnsReport
       end
       
       def employee_working_hours_by_year_xlsx
+        data = YAML.load_file("tmp/user_#{current_user.id}_employee_working_hours_by_year_xlsx.yml")
+        
+        @from_year = data[:filter_from_year]
+        @to_year = data[:filter_to_year]
+        @employee_name = data[:employee_name]
+        @employee_code = data[:employee_code]
+        @total_hours = data[:total_hours]
+        @data_by_year = data[:data_by_year]
+        
+        workbook = RubyXL::Parser.parse('templates/employee_working_hours_export_template.xlsx')
+        worksheet = workbook[0]
+        
+        worksheet[0][0].change_contents("THỐNG KÊ GIỜ LÀM VIỆC CỦA NHÂN VIÊN (THEO NĂM)")
+        if @from_year == @to_year
+          worksheet[1][0].change_contents("Thời gian: Năm #{@from_year}")
+        else
+          worksheet[1][0].change_contents("Thời gian: Từ năm #{@from_year} - đến năm #{@to_year}")
+        end
+        worksheet[2][0].change_contents("Tên nhân viên: #{@employee_name}")
+        # Records
+        sum = 0
+        row_num = 6
+        @data_by_year.reverse.each_with_index do |data,index|
+          worksheet.insert_row(6)
+          worksheet[6][0].change_contents(data[:text])
+          worksheet[6][1].change_contents(data[:value])
+          row_num += 1
+        end
+        worksheet[row_num][1].change_contents(@total_hours)
+        worksheet.delete_row(5)
+        
+        send_data workbook.stream.string,
+          filename: "thong-ke-gio-lam-viec-theo-nam.xlsx",
+          disposition: 'attachment'
       end
       
       def project_working_hours
