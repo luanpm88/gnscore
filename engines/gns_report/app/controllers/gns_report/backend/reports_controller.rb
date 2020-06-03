@@ -169,6 +169,64 @@ module GnsReport
       end
       
       def employee_working_hours_by_month_data
+        @date_1 = params[:from_month].present? ? params[:from_month].to_date : nil
+        @date_2 = params[:to_month].present? ? params[:to_month].to_date : nil
+        
+        if @date_1.present? and @date_2.present?
+          months = []
+          start_date = Date.civil(@date_1.year, @date_1.month, 1)
+          end_date = Date.civil(@date_2.year, @date_2.month, 1)
+      
+          #raise ArgumentError unless @date_1 <= @date_2
+  
+          while (start_date < end_date)
+            months << start_date
+            start_date = start_date >> 1
+          end
+          months << end_date
+          
+          # filter by employee
+          if params[:employee_id].present?
+            @employee = GnsEmployee::Employee.find(params[:employee_id])
+            
+            @tasks = GnsProject::Task.where(employee_id: @employee.id)
+                    .includes(:project)
+                    .where(gns_project_projects: {
+                        status: [
+                          GnsProject::Project::STATUS_IN_PROGRESS,
+                          GnsProject::Project::STATUS_DONE,
+                        ]
+                      }
+                    )
+            
+            if months.present?
+              @data_by_month = []
+              @total_hours = 0
+              months.each do |month|
+                from_date = month.beginning_of_month
+                to_date = month.end_of_month
+                
+                total_hours_per_month = @tasks.working_hours_by_date(from_date, to_date)
+                @data_by_month << {text: month.strftime('%m/%Y'), value: total_hours_per_month}
+                @total_hours += total_hours_per_month
+              end
+            end
+            
+            @datas = {
+              filter_from_month: @date_1.strftime('%m/%Y'),
+              filter_to_month: @date_2.strftime('%m/%Y'),
+              employee_name: @employee.name,
+              employee_code: @employee.code,
+              total_hours: @total_hours,
+              data_by_month: @data_by_month
+            }
+            
+            File.open("tmp/user_#{current_user.id}_employee_working_hours_by_month_xlsx.yml", "w+") do |f|
+              f.write(@datas.to_yaml)
+            end
+          end
+        end
+        
         render layout: nil
       end
       
@@ -179,6 +237,53 @@ module GnsReport
       end
       
       def employee_working_hours_by_year_data
+        @year_1 = params[:from_year].present? ? params[:from_year].to_i : nil
+        @year_2 = params[:to_year].present? ? params[:to_year].to_i : nil
+        
+        if @year_1.present? and @year_2.present?
+          years = [*@year_1..@year_2]
+          
+          # filter by employee
+          if params[:employee_id].present?
+            @employee = GnsEmployee::Employee.find(params[:employee_id])
+            
+            @tasks = GnsProject::Task.where(employee_id: @employee.id)
+                    .includes(:project)
+                    .where(gns_project_projects: {
+                        status: [
+                          GnsProject::Project::STATUS_IN_PROGRESS,
+                          GnsProject::Project::STATUS_DONE,
+                        ]
+                      }
+                    )
+          
+            @data_by_year = []
+            @total_hours = 0
+            
+            years.each do |y|
+              from_date = Date.civil(y).beginning_of_year
+              to_date = Date.civil(y).end_of_year
+              
+              total_hours_per_year = @tasks.working_hours_by_date(from_date, to_date)
+              @data_by_year << {text: y, value: total_hours_per_year}
+              @total_hours += total_hours_per_year
+            end
+            
+            @datas = {
+              filter_from_year: @year_1,
+              filter_to_year: @year_2,
+              employee_name: @employee.name,
+              employee_code: @employee.code,
+              total_hours: @total_hours,
+              data_by_year: @data_by_year
+            }
+            
+            File.open("tmp/user_#{current_user.id}_employee_working_hours_by_year_xlsx.yml", "w+") do |f|
+              f.write(@datas.to_yaml)
+            end
+          end
+        end
+        
         render layout: nil
       end
       
@@ -197,12 +302,6 @@ module GnsReport
           
           @tasks = @project.tasks
           
-          if @from_date.present? and @to_date.present?
-            @tasks = @tasks.where('gns_project_tasks.start_date <= ? and gns_project_tasks.end_date >= ?', @from_date, @from_date)
-                    .or(@tasks.where('gns_project_tasks.end_date >= ? and gns_project_tasks.start_date <= ?', @to_date, @to_date))
-                    .or(@tasks.where('gns_project_tasks.start_date >= ? and gns_project_tasks.end_date <= ?', @from_date, @to_date))
-          end
-          
           @employee_ids = @tasks.pluck(:employee_id).uniq
           @employees = GnsEmployee::Employee.where(id: @employee_ids)
           
@@ -213,38 +312,7 @@ module GnsReport
           @employees.each do |employee|
             tasks = @tasks.where(employee_id: employee.id)
             
-            total_hours_per_employee = 0
-            number_of_days = 0
-            hours_per_day = 0
-            num_of_days_by_filter = 0
-            tasks.each do |t|
-              number_of_days = (t.start_date.to_date..t.end_date.to_date).to_a.size
-              hours_per_day = (t.hours/number_of_days).round(3)
-              
-              if t.start_date <= @from_date
-                first_date = @from_date
-              else
-                first_date = t.start_date
-              end
-              
-              if t.end_date >= @to_date
-                last_date = @to_date
-              else
-                last_date = t.end_date
-              end
-              
-              # Number of task days by filter
-              num_of_days_by_filter = (first_date.to_date..last_date.to_date).to_a.size
-              
-              # Number of task hours by filter
-              num_of_hours_by_filter = hours_per_day*num_of_days_by_filter
-              
-              if num_of_days_by_filter == number_of_days
-                num_of_hours_by_filter = t.hours
-              end
-              
-              total_hours_per_employee += num_of_hours_by_filter
-            end
+            total_hours_per_employee = tasks.working_hours_by_date(@from_date, @to_date)
             
             @employee_names << employee.name
             @hour_data_series  << {name: employee.name, value: total_hours_per_employee}
@@ -281,8 +349,6 @@ module GnsReport
         @total_hours = data[:total_hours]
         @employee_names = data[:employee_names]
         @hour_data_series = data[:hour_data_series]
-        
-        logger.info @employees_count
         
         workbook = RubyXL::Parser.parse('templates/project_working_hours_export_template.xlsx')
         worksheet = workbook[0]

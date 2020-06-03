@@ -1,0 +1,120 @@
+<% if params[:employee_id].present? %>
+    <% if @datas.empty? %>
+        <div class="card-body">
+            <div class="alert alert-warning border-0 alert-dismissible text-center">
+                <%= t('.no_results_found') %>
+            </div>
+        </div>
+    <% else %>
+        <div class="card-header header-elements-inline">
+            <h1>
+                <%= t('.title') %>: <%= @employee.name %>
+            </h1>
+        </div>
+        
+        <div class="card-body pb-0">
+            <h5 class="font-weight-semibold"><%= t('from') %> <%= @datas[:filter_from_year] %> <%= t('to') %> <%= @datas[:filter_to_year] %></h5>
+        </div>
+        
+        <table class="table table-hover">
+            <thead>
+                <tr class="bg-info-700">
+                    <th class="text-nowrap"><%= t('.years') %></th>
+                    <th class="text-nowrap text-center"><%= t('.hours') %></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @datas[:data_by_year].each_with_index do |year,index| %>
+                    <tr>
+                        <td><%= year[:text] %></td>
+                        <td class="text-center"><%= year[:value] %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+            <tfoot>
+                <tr class="bg-info-700 font-weight-semibold">
+                    <td>
+                        <%= t('.total') %>
+                    </td>
+                    <td class="text-center"><%= @datas[:total_hours] %></td>
+                </tr>
+            </tfoot>
+        </table>
+        
+        <!-- Bar chart -->
+        <div class="card-body">
+            <h5 class="font-weight-semibold py-3"><%= t('.bar_chart_name') %></h5>
+            <div class="chart-container">
+                <div class="chart" id="c3-bar-chart"></div>
+            </div>
+            <div class="bar-chart-data" style="display: none"><%= @datas[:data_by_year].to_json.html_safe %></div>
+        </div>
+        
+        <script>
+            var BAR_CHART_DATA = JSON.parse($('.bar-chart-data').html());
+            var TEXTS = BAR_CHART_DATA.map(m => m['text']);
+            var VALUES = BAR_CHART_DATA.map(m => m['value']);
+            function C3_Charts() {
+                // Define charts elements
+                var bar_chart_element = document.getElementById('c3-bar-chart');
+        
+                // Bar chart
+                if(bar_chart_element) {
+        
+                    // Generate chart
+                    c3.generate({
+                        bindto: bar_chart_element,
+                        size: { height: 500 },
+                        padding: {
+                            top: 0,
+                            right: 50,
+                            bottom: -80,
+                            left: 50,
+                        },
+                        data: {
+                            x: 'x',
+                            columns: [
+                                ['x'].concat(TEXTS),
+                                ['Working hours'].concat(VALUES),
+                            ],
+                            type: 'bar',
+                            labels: true
+                        },
+                        bar: {
+                            width: {
+                                ratio: 0.4
+                            }
+                        },
+                        axis: {
+                            x: {
+                                type: 'category',
+                                label: 'Years',
+                                tick: {
+                                    //rotate: 75,
+                                    multiline: false
+                                },
+                                 height: 130,
+                            },
+                            y: {
+                                label: 'Hours',
+                            },
+                        },
+                        legend: {
+                            show: true
+                        }
+                    });
+                }
+            }
+            
+            // Initialize module
+            // ------------------------------
+            C3_Charts();
+        </script>
+    <% end %>
+<% else %>
+    <div class="card-body">
+        <div class="alert alert-warning border-0 alert-dismissible text-center">
+            <%= t('.must_select_filter') %>
+        </div>
+    </div>
+<% end %>
